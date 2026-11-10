@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2205,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-active-edge-body-candidate-ownership.md","sha256":"a11e133e77da550edc2e5f0462263646578c660f1183aa5faaf49c6a8eb80476","type":"member"}
 {"bytes":5586,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-advanced-corpus-residual-split.md","sha256":"49875387eeb7c620f44a57613d6b1360feec914e5afa586d72c36b01af061655","type":"member"}
 {"bytes":3106,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-aggregate-selector-compile-rejection.md","sha256":"dcd65c62f4ebf9ebb65769c20f4d022f5d82bfb46ff8f085a11f0943951ce169","type":"member"}
 {"bytes":2790,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-and-required-dependency-steps.md","sha256":"bf7c57076caa5f8e24d29bde7f9abeac85c595dd34b0494ecf87af46f3ae32a5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3221,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-presence-result-source-guards.md","sha256":"53ed39a11a67f33425eea606d2977c7d0ecbf0362c3354502d655a3d91d9369a","type":"member"}
 {"bytes":4405,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-adapter.md","sha256":"9fdf53115d7e82e9c9f04d2beeaa5d60f5aca331f483a088ca91e8424662d114","type":"member"}
 {"bytes":4508,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-no-drift-closeout.md","sha256":"01cba807c61868cad3693b082d2544137c7ce2f279397a3bc8699e0ac4b21363","type":"member"}
-{"bytes":2836,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-recurring-admission.md","sha256":"ee75429d8c81139c4a64f41a2dcdf6a02c07c279d1ba4b60127727881ae01ce9","type":"member"}

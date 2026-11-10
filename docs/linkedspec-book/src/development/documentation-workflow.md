@@ -429,7 +429,27 @@ corrupted source identities and changed committed manifests. Open bodies stay
 complete. The one-shot migration requires its own task owner and explicit source
 commit. It checks repository/volume boundaries and retained ancestry before writing,
 rejects symlink and nonregular targets, and refuses repeated original migration
-before creating a candidate. Focused preservation checks and canonical acceptance follow.
+before creating a candidate. Existing data extractions use their declared focused preservation checks and
+normal hooks. Reader, migrator or doctrine infrastructure changes require canonical
+acceptance under the commit workflow.
+
+The later Dart milestone epoch preserves all 68 IDs, 58 closed contracts and ten
+unchanged short bodies. Its entire current frontier and trailing sections remain
+unchanged at 54,718 bytes. The source shrinks from 171,451 to 106,515 bytes under
+unchanged limits. Read the
+original closed commentary with:
+
+```bash
+bash tools/run_python_project_data.sh tools/read_task_narrative.py \
+  --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --all
+```
+
+All 69 public source and node queries match exact original bytes; an independent
+readonly recovery rejects ten deliberate preservation faults. Tools, registries,
+limits and runtime behavior are unchanged. Original SDK observations and milestone
+dates remain historical, and this data migration supplies no fresh Dart parity or
+whole-project reading credit. The separate lowercase frontier/query repair remains
+owned; this source has the exact uppercase boundary.
 
 This renews the bounded current document collection. The full Git history remains
 retained, and the text reduction supplies no disk-reclamation or upload-size claim.

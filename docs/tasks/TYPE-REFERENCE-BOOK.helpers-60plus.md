@@ -2754,7 +2754,7 @@
   Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
   Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
   Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
-  Frontier: Capacity4.21 after clean selection, then independent Perl/Rust/Dart/Julia/installed Lua; each normal commit/brief0/clean handoff precedes the next.
+  Frontier: Capacity4.21 is focused-checked; after its clean landing, independent Perl/Rust/Dart/Julia/installed Lua; each normal commit/brief0/clean handoff precedes the next.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
   Status: `pending`

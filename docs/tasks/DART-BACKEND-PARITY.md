@@ -68,39 +68,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Record the exact Dart SDK/tool commands available locally, or record a real blocker if
     no Dart SDK is available; define the intended `dart/` package layout, test command, formatter
     command, and corpus-runner entrypoint before source implementation.
-  Verification: **PASS 2026-07-09.** `/opt/homebrew/bin/dart` is available; `dart --version`
-    reports Dart SDK `3.9.2 (stable)` on `macos_arm64`; `flutter` is not installed and is non-blocking
-    for this CLI/library backend. `dart --disable-analytics` needed one approved user-home write because
-    the SDK initializes `~/.dart-tool`; after that, `dart help format`, `dart help analyze`,
-    `dart help test`, `dart pub --help`, and `dart create --help` run cleanly in the workspace.
-    Package layout and commands are recorded below. No Dart package files were created.
   Commit: `DART-BACKEND-PARITY.1.1 - record Dart toolchain and layout`; retained completion note: Toolchain/layout preflight; no package files.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.1.1`.
 
 - ID: `DART-BACKEND-PARITY.1.2`
   Status: `done`
   Goal: Create the minimal Dart package scaffold and CI-facing smoke test.
   Acceptance: `dart/` has package metadata, library/test entrypoints, a no-op smoke test, documented
     commands, and no dependency on unpublished local state.
-  Verification: **PASS 2026-07-09.** `dart/` has package metadata, committed `pubspec.lock`, strict
-    analyzer options, README, public library entrypoint, CLI smoke entrypoint, corpus-runner entrypoint,
-    and a `package:test` smoke test. `dart pub get`, `dart format --set-exit-if-changed .`,
-    `dart analyze --fatal-infos --fatal-warnings`, `dart test`, `dart run bin/linkedspec_dart.dart --help`,
-    and `dart run bin/corpus_runner.dart --help` pass. Pub dependency download and analyzer state initialization
-    required approved out-of-sandbox access. Repository gates pass after Knowledge Map regeneration.
-    Parser/runtime/corpus semantics remain deferred.
   Commit: `DART-BACKEND-PARITY.1.2 - create Dart scaffold smoke package`; retained completion note: Minimal package scaffold; no parser/runtime/corpus semantics.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.1.2`.
 
 - ID: `DART-BACKEND-PARITY.1.3`
   Status: `done`
   Goal: Add corpus-fixture IO scaffolding without executing parser semantics yet.
   Acceptance: Dart can load the manifest-backed corpus directory, validate manifest shape, and detect
     missing/stale fixture directories before any `.spec` runtime is implemented.
-  Verification: **PASS 2026-07-09.** `loadCorpusFixtures(...)` loads the checked-in
-    `rust/linkedspec-runtime/tests/corpus` manifest and 99 fixtures, validates manifest format/count/case
-    names/duplicates, detects missing and stale fixture directories, requires `input.spec`, `input.txt`,
-    and `expected.json`, and parses expected JSON without executing parser semantics. Dart format, analyze,
-    tests, corpus-runner real-corpus load, and CLI help checks pass.
   Commit: `DART-BACKEND-PARITY.1.3 - add Dart corpus manifest IO scaffold`; retained completion note: Manifest IO scaffold; `.1` foundation container closes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.1.3`.
 
 - ID: `DART-BACKEND-PARITY.2`
   Status: `done`
@@ -113,58 +98,32 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     source spans, parse jobs, and function definitions.
   Acceptance: Types round-trip through JSON where needed for diagnostics/corpus tooling, and field
     names match the mdBook/compiled-state contract.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/ast/spec_ast.dart` defines data-only types for
-    `SpecFile`, `FunctionDefinition`, `SourceSpan`, `StagedParseJob`, `Rule`, `RuleHeader`, `RuleMode`,
-    body-element variants, `EdgeTarget`, and `FluentCall`. `test/spec_ast_test.dart` proves JSON
-    round-trips and Rust-equivalent `RuleMode` helper behavior. Dart format, analyze, tests, and CLI
-    smoke checks pass.
   Commit: `DART-BACKEND-PARITY.2.1 - define Dart frontend AST data types`; retained completion note: Source-level AST/data types; no parser behavior.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.2.1`.
 
 - ID: `DART-BACKEND-PARITY.2.2`
   Status: `done`
   Goal: Parse `.spec` rule paragraphs, headers, regex slots, lifecycle blocks, action/blind-call edges,
     fluent continuations, markers, comments, and block boundaries.
   Acceptance: Parser fixtures cover the formal grammar and the shipped-spec shapes used by the corpus.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/spec_parser.dart` implements `parseSpec(...)`
-    and produces the source AST data types for rule paragraphs, headers/modes, header-rest bodies, regex
-    literals, lifecycle blocks, action/blind-call edges, action-edge fluent continuations, receiver-fluent
-    `when/otherwise` blocks, split/conditional markers, comments, raw fallback lines, and nested block
-    boundaries. `test/spec_parser_test.dart` covers focused Rust-compatible parser seams, all checked-in
-    `specs/*.spec`, and corpus `input.spec` files that do not start with top-level `fn` definitions.
-    Strict validation remains `.2.3`; top-level function-shell integration remains `.2.4`.
   Commit: `DART-BACKEND-PARITY.2.2 - implement Dart spec parser`; retained completion note: Core rule parser; validation/function-shell/runtime behavior deferred.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.2.2`.
 
 - ID: `DART-BACKEND-PARITY.2.3`
   Status: `done`
   Goal: Implement frontend validation and strict syntax behavior.
   Acceptance: Validation rejects duplicate labels/functions, mixed edge families, undefined references,
     malformed regexes, malformed helper/function definitions, and strict-syntax warnings as documented.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/validation/spec_validator.dart` implements
-    `validateSpec(...)` for parsed source ASTs. It rejects missing top rules, duplicate labels/functions,
-    function registry collisions/invalid parameters, raw malformed body lines, mixed action/blind-call edge
-    families, grouped action targets without a shared block, undefined targets, out-of-range regex slots, and
-    lightweight regex structural errors. `strictSyntax: true` rejects unused rules. `test/spec_validator_test.dart`
-    covers focused failures plus non-strict validation over all checked-in `specs/*.spec` and rule-only corpus
-    `input.spec` files.
   Commit: `DART-BACKEND-PARITY.2.3 - add Dart frontend validation`; retained completion note: Source-AST validation; function-shell/runtime behavior deferred.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.2.3`.
 
 - ID: `DART-BACKEND-PARITY.2.4`
   Status: `done`
   Goal: Integrate `specs/user_function_definition.spec` as the function-definition shell owner.
   Acceptance: Dart consumes the spec-defined function-definition AST shape and does not maintain a
     competing host-language raw scanner as the semantic contract.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/user_function_definition_shell.dart`
-    adds `projectUserFunctionDefinitionAsts(...)` and `parseSpecWithUserFunctionDefinitionAsts(...)`.
-    These APIs consume the `function_definition` / `function_definition_error` node shape returned by
-    `specs/user_function_definition.spec`, validate source/body spans and staged sidecars, normalize
-    source-order `parent_ast_path` and deterministic `body_parse_job` ids, strip returned source spans
-    while preserving line layout, and attach ordered `FunctionDefinition` records before rule parsing.
-    `StagedParseJob` now preserves the function-body sidecar metadata (`version`, `function_name`,
-    `params`, `arity`, `diagnostic_owner`) during JSON round-trips. The production Dart path still
-    does not raw-scan `fn` source; it requires the spec-returned nodes as its semantic input.
-    `test/user_function_definition_shell_test.dart` covers successful projection, no-raw-scanner fallback,
-    malformed `function_definition_error` diagnostics, and sidecar drift rejection.
   Commit: `DART-BACKEND-PARITY.2.4 - integrate Dart function shell projection`; retained completion note: Spec-returned function-definition projection; `.2` frontend container closes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.2.4`.
 
 - ID: `DART-BACKEND-PARITY.3`
   Status: `done`
@@ -177,18 +136,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Calls, literals, variables, direct/nested access, shape literals, assignments, block
     values, attached control flow, receiver chains, and standalone value-drop statements are structural
     AST nodes, not text rewrites.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/action/action_ast.dart` defines typed ActionIR
-    block, statement, expression, argument, access-segment, literal, assignment, receiver-chain, block-value,
-    and structured-control data nodes with JSON projection. `dart/lib/src/action/action_parser.dart` adds
-    `parseActionBlock(...)`, `parseActionStatement(...)`, and `parseActionExpression(...)`. The parser
-    covers calls, positional/keyword arguments, primitive literals, regex literals, variables, indexed and
-    nested access, array/hash shape literals, scalar assignment, array append, hash-index assignment,
-    nested-access assignment, expression-valued blocks, attached `if`/`when`/`elseif`/`else`/`otherwise`,
-    `while`, `switch`/`case`/`default`, receiver-dot fluent chains, trailing block arguments, and standalone
-    expression statements with `drops_value = true`. Unsupported expressions stay structural as `raw_perl`
-    nodes for later validation/diagnostics rather than being rewritten as host code. `test/action_ast_parser_test.dart`
-    covers each accepted node family.
   Commit: `DART-BACKEND-PARITY.3.1 - add Dart ActionIR AST parser`; retained completion note: Typed helper/action AST parser; helper-contract mapping remains `.3.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.3.1`.
 
 - ID: `DART-BACKEND-PARITY.3.2`
   Status: `done`
@@ -196,70 +145,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Current helper/control families resolve through typed nodes; non-current helper-looking
     calls diagnose generically instead of falling back to host-language calls. The Dart variant must not
     encode non-current helper spelling tables or replacement maps.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/action/action_contracts.dart` resolves typed ActionIR
-    calls, receiver methods, structural assignments, structured controls, nested arguments, block values,
-    shapes, and access expressions into current canonical helper/control contracts. Function registry
-    validation now shares the current helper/control name table through `isKnownActionIrCallName(...)`.
-    Non-current helper-looking calls produce `unknown_helper`; `raw_perl` AST nodes stay diagnostic-only.
-    A Dart-tree non-current-spelling scan is clean.
   Commit: `DART-BACKEND-PARITY.3.2 - add Dart ActionIR contract resolver`; retained completion note: Current helper/control contract resolution; function registry uses the shared current-name table.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.3.2`.
 
 - ID: `DART-BACKEND-PARITY.3.3`
   Status: `done`
   Goal: Build the function registry and staged function-body parse-job records.
   Acceptance: Function definitions preserve params, arity, source/body spans, `body_payload`,
     `body_parse_job`, and stitched `body_ast`, with exact-arity resolution before helper fallback.
-  Verification: **PASS 2026-07-09.** Added `dart/lib/src/action/function_registry.dart` with
-    `UserFunctionRegistry`, `UserFunctionEntry`, and exact-arity call resolution over ordered
-    `FunctionDefinition` records. The registry preserves params, arity, source/body spans, `body_payload`,
-    `body_parse_job`, and optional stitched `body_ast`, and exposes staged function-body parse jobs. The ActionIR
-    contract resolver now accepts an optional registry and resolves exact-arity user calls before helper fallback;
-    wrong-arity registered calls diagnose as `user_function_arity_mismatch`. Focused registry/contract tests,
-    Dart format/analyze/test, corpus runner, CLI help, mdBook, memory, Knowledge Map, task-tree metadata, and
-    doctrine checks pass.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.3.2` could validate function names and resolve helper contracts, but Dart had
-      no reusable ordered user-function registry object and helper-contract resolution classified registered user
-      calls as ordinary unknown helpers.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `FunctionDefinition` already carried staged body sidecars in
-      `dart/lib/src/ast/spec_ast.dart`, and `.2.4` projected them from spec-returned nodes, but no Dart module
-      indexed those definitions or connected exact-arity user-call lookup to `action_contracts.dart`.
-    - [x] **FIX** — Added the registry module, exported it from the public package, and threaded an optional
-      `UserFunctionRegistry` through the ActionIR contract resolver entrypoints.
-    - [x] **ADDRESSED (verified)** — `test/function_registry_test.dart` proves ordered entries, parse-job
-      exposure, sidecar/body-AST preservation, duplicate-name rejection, exact matches, wrong arity, and missing
-      names. `test/action_contracts_test.dart` proves exact-arity user calls classify before helper fallback.
-    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, and CLI help pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`, roadmap tracker rows, architecture state, Knowledge Map facts,
-      `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.3.3 - add Dart function registry`; retained completion note: Ordered user-function registry and exact-arity resolver; compiled state remains `.3.4`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.3.3`.
 
 - ID: `DART-BACKEND-PARITY.3.4`
   Status: `done`
   Goal: Compile parsed specs into a Dart compiled-spec/interpreter model.
   Acceptance: Compiled state has ordered rules, dependency-regex data, function registry, lifecycle/action
     AST payloads, mode metadata, and descriptor projection equivalent to the mdBook model.
-  Verification: focused `dart test test/compiled_spec_test.dart`; `dart format --set-exit-if-changed .`;
-    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
-    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
-    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
-    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
-  Findings:
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: Dart had parsed `SpecFile` / `Rule` / ActionIR / function
-      registry records, but no owner under `dart/lib/src/compiler/` assembled them into the mdBook
-      `compiled_spec_state` / `compiled_dependency_regex_state` / `compiled_descriptor_state` contract.
-    - [x] **FIX** — Added `compileSpec(...)`, `CompiledSpec`, `CompiledRule`, `CompiledDependencyRegexState`,
-      and `CompiledDescriptorState`, plus public exports.
-    - [x] **ADDRESSED (verified)** — `test/compiled_spec_test.dart` proves ordered rule state, source validation
-      reuse, redefinition metadata when validation is deliberately skipped, dependency-regex derivation, mode
-      metadata, lifecycle/action `ActionBlock` payloads, registry-aware user-call contracts, and descriptor-shaped
-      JSON projection.
-    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, compiled-state model, `CHANGES.md`,
-      `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker
-      row, Knowledge Map facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.3.4 - add Dart compiled spec state`; retained completion note: Ordered compiled rule/dependency/descriptor state; runtime matching starts in `.4.1`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.3.4`.
 
 - ID: `DART-BACKEND-PARITY.4`
   Status: `done`
@@ -271,55 +174,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Implement regex matching and match-state tracking.
   Acceptance: Seek/consume modes, alternative identity, capture groups, named captures, char offsets,
     cursor position, entry/local match separation, and zero-progress detection match the contract.
-  Verification: focused `dart test test/runtime_matching_test.dart`; `dart format --set-exit-if-changed .`;
-    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
-    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
-    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
-    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
-  Findings:
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.3.4` produced compiled rule regex lists and descriptor
-      data, but Dart had no runtime owner for seek/consume matching, match registers, capture extraction, or
-      cursor/progress state. Those semantics belong below `.4.2` rule dispatch.
-    - [x] **FIX** — Added `dart/lib/src/runtime/matching.dart` with `RuntimeRegexAlternation`,
-      `RuntimeRegexMatch`, `RuntimeMatchRegisters`, `LinkedSpecParseMode`, char/code-unit offset helpers, and
-      line/column projection helpers.
-    - [x] **ADDRESSED (verified)** — `test/runtime_matching_test.dart` proves seek and consume behavior, stable
-      alternative identity, compiled-rule regex-list matching, compact capture-only groups, named captures,
-      char-offset projections over Dart code-unit spans, entry/local match separation, cursor state, and
-      zero-progress detection.
-    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.1 - add Dart runtime matching state`; retained completion note: Seek/consume regex matching and match-state primitives; rule dispatch starts in `.4.2`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.1`.
 
 - ID: `DART-BACKEND-PARITY.4.2`
   Status: `done`
   Goal: Implement rule dispatch, rule modes, recursion guards, repetition bounds, and lifecycle order.
   Acceptance: Default/AND/OR/REP families, action and blind-call edges, `I/LS/LE/E/EX/IT/LX`, `retv`,
     accumulator collection, and explicit returns match Perl/Rust parity fixtures.
-  Verification: focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`;
-    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
-    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
-    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
-    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
-  Findings:
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.4.1` could match regexes and track entry/local state, but
-      Dart still had no runtime owner that consumed `CompiledSpec` rule families, dependency refs, lifecycle
-      ActionIR payloads, child dispatch, `retv`, accumulator collection, repetition bounds, or recursion cutoffs.
-    - [x] **FIX** — Added `dart/lib/src/runtime/interpreter.dart` with `LinkedSpecRuntimeEngine`,
-      `RuntimeParseResult`, lifecycle events, runtime exceptions, compiled-rule dispatch, action-edge and
-      blind-call execution, bounded/zero-progress repetition, explicit returns, and a small dispatch-facing
-      ActionIR evaluator. Added `RuntimeRegexMatch.reindexed(...)` for single-slot AND dispatch identity and
-      exported the interpreter API from `linkedspec_dart.dart`.
-    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` proves regex repetition with lifecycle
-      accumulation, action-edge child entry handoff with fluent `.push`, blind AND sequence, OR miss through `LX`,
-      bounded OR repetition, zero-progress cutoff, and lifecycle order.
-    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker row, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.2 - add Dart runtime rule interpreter`; retained completion note: First executable compiled-rule interpreter; broader helper families remain `.4.3`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.2`.
 
 - ID: `DART-BACKEND-PARITY.4.3`
   Status: `done`
@@ -328,10 +192,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Scalars, arrays, hashes, booleans, numbers, null/undef, value blocks, mutation helpers,
     receiver chains, tree traversal helpers, capture/mark helpers, and string/number/hash/array families
     match the helper catalog.
-  Verification: `PASS 2026-07-09` through `.4.3.6`; focused Dart runtime/parser tests, Dart format/analyze/full
-    tests, corpus-runner scaffold, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata,
-    doctrine, and whitespace checks pass.
   Commit: `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3`.
 
 - ID: `DART-BACKEND-PARITY.4.3.0`
   Status: `done`
@@ -348,56 +210,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     wrappers and bare reads follow the helper catalog; scalar assignment, array append, hash-index assignment,
     nested access reads, `copy`, `array`, `hash`, `entry_*`, `match_*`, and capture position helpers have focused
     runtime tests.
-  Verification: focused `dart test test/runtime_interpreter_test.dart`; `dart format --set-exit-if-changed .`;
-    `dart analyze --fatal-infos --fatal-warnings`; full `dart test`;
-    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus`;
-    `dart run bin/corpus_runner.dart --help`; `dart run bin/linkedspec_dart.dart --help`; mdBook build;
-    memory architecture; Knowledge Map regeneration/check; task-tree metadata; doctrine; `git diff --check`.
-  Findings:
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `.4.2` intentionally kept the embedded ActionIR evaluator
-      dispatch-facing. It could return, push arrays, concatenate simple values, and read basic captures, but
-      `dart/lib/src/runtime/interpreter.dart` did not yet own hash stores, direct map reads, aggregate wrapper
-      snapshots, hash-index mutation, named-capture maps, or capture position helpers.
-    - [x] **FIX** — Added runtime hash storage and `hash(...)` / `set(hash(...), ...)`, hash-index and nested
-      assignment evaluation, map-aware indexed/nested reads, typed array/hash snapshot reads through `array(...)`,
-      `hash(...)`, and `copy(...)`, regex-literal value evaluation, and the named/map/length/start/end
-      `entry_*` / `match_*` helper family.
-    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` now proves scalar assignment, array
-      append, hash reset/mutation, typed wrapper snapshots, variable-held array/hash reads, non-numeric map
-      indexing, nested access reads, bare capture-name lookup, named capture maps, compact capture groups, and
-      char-position helper values.
-    - [x] **NO REGRESSION** — Dart format/analyze/full tests, corpus runner, CLI help, and mdBook build pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.3.1 - add Dart runtime value capture helpers`; retained completion note: Core value/store/capture helper subset.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.1`.
 
 - ID: `DART-BACKEND-PARITY.4.3.2`
   Status: `done`
   Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
   Acceptance: `cat`, trimming/case/substr/prefix/suffix/contains/matches/split scalar helpers, numeric arithmetic
     and comparison helpers/aliases/symbol callees, and simple scalar receiver chains match helper-catalog examples.
-  Verification: **PASS 2026-07-09.**
-    - [x] **ROOT CAUSE** — `.4.3.1` left the Dart runtime with only dispatch-facing helper execution. Parser and
-      ActionIR contracts recognized current string/scalar helpers, numeric aliases, symbol callees, and receiver
-      chains, but `LinkedSpecRuntimeEngine` still returned `null` for most of that pure helper surface.
-    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now canonicalizes helper names through
-      `canonicalActionHelperName(...)` and dispatches a shared pure-helper table for string/scalar helpers,
-      explicit `str_*` lexical comparisons, numeric arithmetic/reducers/comparisons, numeric word aliases,
-      arithmetic/comparison symbol callees, and compatible receiver-chain calls.
-    - [x] **ADDRESSED** — Focused runtime tests cover `trim`, `lowercase`, `replace_substr`, `rm_suffix`,
-      `substr`, `contains_substr`, `starts_with`, `ends_with`, `matches`, `split`, `coalesce`,
-      `coalesce_nonempty`, `is_defined`, `is_undefined`, `is_empty`, `is_nonempty`, `str_eq`, `str_lt`,
-      `+(...)`, `*(...)`, `num_div`, receiver `mod`, `num_clamp`, `gt`, `<=(...)`, receiver `round`,
-      `num_range`, `avg`, `median`, `min`, divide-by-zero, and non-numeric failure-to-null behavior.
-    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime interpreter tests,
-      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
-      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
-      evidence, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.3.2 - add Dart runtime string numeric helpers`; retained completion note: String/scalar and numeric helper families.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.2`.
 
 - ID: `DART-BACKEND-PARITY.4.3.3`
   Status: `done`
@@ -405,168 +227,40 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: `array`, `flat_array`, `copy`, count/select/order/membership/join/split bridges, append and
     end-mutation forms, and array receiver chains match helper-catalog examples without mutating snapshots
     unexpectedly.
-  Verification: **PASS 2026-07-09.**
-    - [x] **ROOT CAUSE** — `.4.3.2` executed string/scalar and numeric helpers, but array helper calls still
-      fell through the generic pure-helper dispatcher or unsupported fluent-method path. Bare array working
-      variables in receiver chains also evaluated as scalar variables, so `items.sorted()` could not read the
-      aggregate store.
-    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes array helpers through an array-aware
-      dispatcher, reads bare array stores in array-consuming helper slots and compatible receiver chains,
-      preserves regex delimiter/filter arguments, implements `split(array(target), ...)`, array pipelines,
-      delimiter-first `join_values`, `flat_array` / `concat_arrays`, `split_tagged_records`, and statement-only
-      `push_back` / `push_front` / `pop_back` / `pop_front`.
-    - [x] **ADDRESSED** — Focused runtime tests cover sorted/drop/first chains, reversed/take/last, contains,
-      index, drop/join, uniq/join, regex `filter_match`, `split_each`, trim/filter/lowercase pipelines,
-      `take_last`, `slice`, `flat_array`, `concat_arrays`, array numeric reducers, missing-array emptiness,
-      regex `split` bridges, statement-only end mutations, value-slot end-mutation no-op behavior, and tagged
-      record splitting. Contract tests confirm `push_back` is recognized as a current helper name.
-    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime/contract tests,
-      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
-      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
-      evidence, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.3.3 - add Dart runtime array helpers`; retained completion note: Array helper family and statement-only array end mutations.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.3`.
 
 - ID: `DART-BACKEND-PARITY.4.3.4`
   Status: `done`
   Goal: Implement hash helper family and hash receiver/mutation behavior.
   Acceptance: `hash`, `flat_hash`, `copy`, key/value views, sorted views, merge/pick/drop/rename/set-key
     behavior, direct hash-index assignment values, and hash receiver chains match helper-catalog examples.
-  Verification: **PASS 2026-07-09.**
-    - [x] **ROOT CAUSE** — `.4.3.3` executed array helpers, but hash helper calls still fell through the
-      generic pure-helper dispatcher or unsupported fluent-method path. Bare hash working variables in receiver
-      chains also evaluated as scalar variables, so `meta.sorted_keys()` could not read the aggregate store.
-    - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes hash helpers through a hash-aware
-      dispatcher, reads bare hash stores in supported hash-consuming helper slots and compatible receiver chains,
-      implements key/value views, sorted key/value arrays, key predicates, `merge_hash`, `set_key`, `rename_key`,
-      `drop_keys`, `pick_keys`, `flat_hash`, statement-form `set_key(...)`, and explicit flat-style hash
-      splicing inside `hash(...)`.
-    - [x] **ADDRESSED** — Focused runtime tests cover `sorted_keys`, `sorted_values`, `count_keys`, `has_key`,
-      `drop_keys`, `pick_keys`, `rename_key`, `set_key`, `merge_hash`, `flat_hash`, hash receiver chains,
-      direct hash-index assignment values, pure value/receiver `set_key(...)` no-mutation behavior, statement
-      mutation, the bare-overlay merge boundary, and ordinary map field values not being flattened into
-      `hash(...)`. Contract tests confirm `sorted_keys` is recognized as a current helper name.
-    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, focused runtime/contract tests,
-      `dart analyze --fatal-infos --fatal-warnings`, full `dart test`, the manifest-backed corpus runner,
-      CLI help checks, mdBook build, memory architecture, Knowledge Map, task-tree metadata, doctrine, diagnosis
-      evidence, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart handoff/status text, `CHANGES.md`, `DEVELOPMENT_NOTES.md`,
-      `LIVE_ACHIEVEMENT_STATUS.md`, `ARCHITECTURE_STATE.md`, `MEMORY.md`, roadmap tracker rows, Knowledge Map
-      facts, `docs/TASK_TREE.md`, and this task tree are updated.
   Commit: `DART-BACKEND-PARITY.4.3.4 - add Dart runtime hash helpers`; retained completion note: Hash helper family and statement/value mutation boundaries.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.4`.
 
 - ID: `DART-BACKEND-PARITY.4.3.5`
   Status: `done`
   Goal: Implement value blocks, structured action controls, and tree traversal callback helpers.
   Acceptance: Expression-valued blocks, attached/inline `if`/`when`/`switch`/`while` surfaces, receiver `.with`,
     and `walk_leaves` / `map_leaves` / `reduce_leaves` traversal helpers match current Perl/Rust contracts.
-  Verification: **PASS 2026-07-09.** Dart runtime execution now supports expression-valued blocks with
-    block-local `return(...)` / `return_undef()`, final-expression yields, and nested statement side effects;
-    attached `if` / `elseif` / `else` and `when` / `otherwise` branch chains; attached `switch` / `case` /
-    `default`; attached `while` with the deterministic iteration guard; inline lazy `if(...)` / `switch(...)`;
-    helper-form `with(value) { ... }` / `with() { ... }`; receiver `.with() { ... }` continuations; and
-    hash/array `walk_leaves`, `map_leaves`, and `reduce_leaves(initial)` receiver callbacks. Callback frames bind
-    scoped scalar `value`, `path`, `depth`, plus hash `key`, array `index`, and reduce-only `acc`, and restore
-    any outer scalar/array/hash bindings afterward. Hash traversal is sorted-key depth-first with nested hashes as
-    interiors and arrays as leaves; array traversal is depth-first by zero-based index with nested arrays as
-    interiors and hashes as leaves. Focused parser/runtime tests cover branch splitting, block-local vs rule-level
-    returns, with-block binding restoration, traversal return shapes, non-aggregate receivers, and callback-scope
-    restoration. Dart format, analyze, full test suite, corpus-loader, CLI help, mdBook, memory architecture,
-    Knowledge Map, task-tree metadata, doctrine, and whitespace checks pass.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.4.3.4` executed hash helpers but value blocks used the surrounding
-      action-block return channel, attached branch chains had no runtime gating, `with(...)` and receiver `.with()`
-      were parsed but unsupported at runtime, and tree traversal receiver callbacks had no Dart execution path.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` evaluated every
-      `ActionBlockValueExpr` through `_executeActionBlock(...)`, so `return(...)` could not be block-local.
-      `_evaluateExpression(...)` had no cases for structured control nodes or trailing-block callback helpers, and
-      `dart/lib/src/action/action_parser.dart` did not split adjacent attached branch continuations into sibling
-      statements.
-    - [x] **FIXED** — Added branch-continuation statement splitting, value-block flow evaluation, attached/inline
-      control execution, scoped `with` / receiver `.with` execution, hash/array tree traversal callbacks, scoped
-      callback variable snapshots/restoration, and targeted parser/runtime coverage.
-    - [x] **NO REGRESSION** — Focused parser/runtime tests, `dart format --set-exit-if-changed`, Dart analyze,
-      full `dart test`, corpus-loader, CLI help checks, mdBook, memory architecture, Knowledge Map, task-tree
-      metadata, doctrine, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README/CLI help, mdBook Dart handoff/status text, live docs, task-tree index,
-      roadmap trackers, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.3.5 - add Dart runtime controls and tree callbacks`; retained completion note: Value blocks, structured controls, with-blocks, and tree traversal receiver callbacks.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.5`.
 
 - ID: `DART-BACKEND-PARITY.4.3.6`
   Status: `done`
   Goal: Close helper/value no-drift for the Dart runtime slice.
   Acceptance: mdBook helper examples, Dart focused runtime tests, corpus-runner status text, live docs, and
     Knowledge Map facts agree on the helper/value boundary before `.4.4` BACKTRACK work starts.
-  Verification: **PASS 2026-07-09.** The closeout audited mdBook helper/runtime/status text, Dart package status
-    text, Knowledge Map facts, and focused Dart runtime coverage. It found and fixed one real Dart drift:
-    nested value-path assignment in `dart/lib/src/runtime/interpreter.dart` was autovivifying missing
-    intermediate containers and returning the assigned leaf value, while the Perl/Rust/helper-catalog contract
-    requires successful expression values to return the updated root and failed missing/wrong paths to return
-    `null` without mutation. Focused runtime coverage now mirrors the Rust `terse_11_4` proof: successful
-    nested writes, append-at-len, scalar-held array root assignment, gap failure, missing-intermediate failure,
-    wrong-shape failure, and unchanged roots after failure.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — Helper/value status was expected to be no-drift after `.4.3.5`, but the
-      Dart runtime still diverged from the documented nested value-path assignment contract.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` routed
-      `ActionAssignNestedAccessExpr` through `_rootForWrite(...)` / `_writeNested(...)`, which created missing
-      hash/list intermediates and padded array gaps. `ActionAssignHashIndexExpr` always mutated named hash
-      storage, so scalar-held array roots did not get the single-segment append/replace behavior that Rust and
-      the helper catalog define.
-    - [x] **FIXED** — Replaced the autovivifying path with checked root storage and explicit
-      no-autovivification assignment. Successful nested assignments return the updated root; missing/wrong
-      intermediate paths return `null` without mutation; final hash keys may be created; final array indexes may
-      replace or append exactly at len; segment index expressions evaluate before the RHS value expression; and
-      scalar-held array/hash roots are handled before named-hash fallback.
-    - [x] **ADDRESSED** — `test/runtime_interpreter_test.dart` adds
-      `executes nested value-path assignment without autovivification`, covering updated-root returns, path
-      failures, no mutation on failure, scalar-held array root writes, and quoted-key rejection on scalar-held
-      arrays.
-    - [x] **NO REGRESSION** — Focused parser/runtime tests, `dart format --set-exit-if-changed .`, Dart analyze,
-      full `dart test`, corpus-runner scaffold, CLI help checks, mdBook, memory architecture, Knowledge Map,
-      task-tree metadata, doctrine, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README, mdBook Dart status/handoff text, live docs, task-tree index, roadmap
-      trackers, architecture state, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.3.6 - close Dart helper value no drift`; retained completion note: Nested value-path assignment no-drift; `.4.3` helper/value container closes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.3.6`.
 
 - ID: `DART-BACKEND-PARITY.4.4`
   Status: `done`
   Goal: Implement cursor-rewind, parse-mode cursor behavior, and deterministic safety limits.
   Acceptance: Cursor rewinds affect only local cursor state, loops enforce documented safety, and
     deterministic order is maintained for hash views and dispatch decisions.
-  Verification: **PASS 2026-07-09, superseded by `BACKTRACK-SURFACE-RUST-ALIGNMENT` for public names and boundary
-    capture.**
-    Dart runtime execution first landed local-match and entry/initial-match cursor rewinds plus char-based
-    cursor/input helpers (`cursor_pos`, `cursor_line`,
-    `cursor_col`, `cursor_rest`, `cursor_rest_len`, `input_text`, `input_len`, `input_slice`, `input_end_pos`,
-    `input_end_line`, `input_end_col`). Existing zero-progress loop guards and deterministic sorted hash/tree
-    behavior remain covered by the runtime suite. Current public helper names are `save_cursor()` /
-    `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
-    `capture_until_boundary(rule[, ...])`.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — Dart ActionIR contracts recognized `BACKTRACK`, `IBACKTRACK`, and cursor/input
-      helper names, but runtime evaluation still returned `null` for those helper calls and could not update the
-      live cursor from action code.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` dispatched capture,
-      string, number, array, hash, control, and traversal helpers, but `_evaluateCall(...)` had no cursor/input
-      helper branch and `_RuntimeExecutionContext` had no cursor-rewind operation. `dart/lib/src/runtime/matching.dart`
-      tracked entry and local match registers but lacked a cursor-only update method that preserved those registers
-      while moving the live cursor.
-    - [x] **FIXED** — Added `RuntimeMatchRegisters.withCursorCodeUnit(...)`, runtime context cursor projection and
-      rewind methods, and char-based whole-input/current-cursor helper execution. The current public surface now
-      lives in `BACKTRACK-SURFACE-RUST-ALIGNMENT`: `save_cursor()` / `restore_cursor()`,
-      `rewind_match_start()` / `rewind_entry_start()`, and `capture_until_boundary(rule[, ...])`.
-    - [x] **ADDRESSED** — `test/runtime_interpreter_test.dart` proves direct cursor anchor rewinds, explicit
-      cursor-stack save/restore, consume-mode matching from a rewound cursor, and char-based cursor/input helper
-      values while internal Dart cursors remain code-unit based.
-    - [x] **NO REGRESSION** — Focused runtime tests, Dart format/analyze/full tests, corpus-runner scaffold,
-      CLI help checks, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
-      `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README/CLI help, mdBook runtime/status/handoff text, live docs, task-tree index,
-      roadmap trackers, architecture state, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.4 - add Dart backtrack cursor rewinds`; retained completion note: BACKTRACK/IBACKTRACK cursor rewinds and cursor/input helpers.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.4`.
 
 - ID: `DART-BACKEND-PARITY.4.5`
   Status: `done`
@@ -574,85 +268,32 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Dart exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle
     trace points, and structured errors equivalent to the documented cross-variant trace contract.
-  Verification: **PASS 2026-07-09.** `.4.5.1` added structured runtime diagnostics, `.4.5.2` added trace
-    controls/sinks/events, `.4.5.3` added runtime trace instrumentation, and `.4.5.4` closed the no-drift sweep.
-    Dart README/CLI/scaffold status, mdBook trace/status/handoff pages, live docs, task-tree index, roadmap, and
-    Knowledge Map agree that diagnostics/trace work is implemented while staged runtime and corpus parity remain
-    later leaves.
   Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5`.
 
 - ID: `DART-BACKEND-PARITY.4.5.0`
   Status: `done`
   Goal: Split the broad runtime diagnostics/trace-controls leaf into signoff-sized implementation leaves before code.
   Acceptance: Diagnostic payloads, trace controls/sinks, runtime trace instrumentation, and closeout proof are
     separately owned so no code slice must carry the whole cross-variant trace contract at once.
-  Verification: **PASS 2026-07-09.** Split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2`
-    trace levels/controls/event classes/sinks, `.4.5.3` runtime branch/lifecycle/source-boundary trace
-    instrumentation, and `.4.5.4` no-drift closeout. Memory architecture, Knowledge Map generation/check,
-    task-tree metadata, doctrine, and `git diff --check` pass. No Dart runtime behavior changed.
   Commit: `DART-BACKEND-PARITY.4.5.0 - split Dart diagnostics trace controls`; retained completion note: Diagnostics/trace leaf split before code.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5.0`.
 
 - ID: `DART-BACKEND-PARITY.4.5.1`
   Status: `done`
   Goal: Add Dart runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
   Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
     top rule, rule label, and handler/source attribution without changing successful parse output.
-  Verification: **PASS 2026-07-09.** `RuntimeDiagnostic` is exported from the Dart package and carried by
-    `RuntimeInterpreterException.diagnostic`. `LinkedSpecRuntimeEngine` now accepts optional `specName` /
-    `specPath`, preserves successful `RuntimeParseResult` output, attaches rule/top-rule/source attribution at
-    runtime failure boundaries, and keeps richer lower-level diagnostics when present. Focused runtime tests,
-    Dart format/analyze/full tests, corpus runner, CLI help, mdBook build, memory architecture, Knowledge Map,
-    task-tree metadata, doctrine, and `git diff --check` pass.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.4.5.0` split diagnostics from trace controls, and Dart runtime failures still
-      exposed only `RuntimeInterpreterException.message`, so callers had no stable structured equivalent of the
-      mdBook diagnostic fields.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` threw plain
-      `RuntimeInterpreterException` values from rule lookup and helper/action failure paths, and
-      `LinkedSpecRuntimeEngine.parse(...)` did not preserve top-rule/current-rule attribution when rethrowing.
-    - [x] **FIX** — Added `RuntimeDiagnostic`, diagnostic-carrying `RuntimeInterpreterException`, optional engine
-      `specName` / `specPath`, runtime context rule-stack attribution, rule-level diagnostic wrapping, parse-boundary
-      fallback wrapping, and a direct `rule_lookup` diagnostic for missing compiled rules.
-    - [x] **ADDRESSED (verified)** — `test/runtime_interpreter_test.dart` proves missing-rule diagnostics include
-      type/stage/owner/summary/detail/spec/top/rule/handler fields, and unsupported child action-helper failures are
-      wrapped with top-rule and child-rule attribution. The checks include `dart test test/runtime_interpreter_test.dart`.
-    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-      full `dart test`, corpus-runner scaffold, CLI help checks, mdBook build, memory architecture, Knowledge Map,
-      task-tree metadata, doctrine, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README/CLI status, public exports, mdBook diagnostics/runtime/status/handoff text,
-      live docs, roadmap tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.5.1 - add Dart runtime diagnostics`; retained completion note: Structured runtime diagnostics on Dart runtime exceptions.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5.1`.
 
 - ID: `DART-BACKEND-PARITY.4.5.2`
   Status: `done`
   Goal: Add Dart trace levels, controls, structured event classes, and stdout/routed-file/mirror sink behavior.
   Acceptance: Trace controls are default-quiet, available from normal Dart entrypoints, preserve successful parse
     results, support reset/truncate for routed files, and provide focused tests for level gating and sink routing.
-  Verification: **PASS 2026-07-09.** Added `dart/lib/src/trace/trace.dart` with ordered trace levels,
-    `LinkedSpecTraceConfig`, environment control parsing, `LinkedSpecTraceEmitter`, event/scope/decision/log/dump
-    primitives, stdout/routed-file/mirror sinks, and routed-file reset/truncate behavior. `LinkedSpecRuntimeEngine`
-    now accepts an optional trace emitter and exposes `parseWithTrace(...)` / `executeWithTrace(...)`; traced
-    runtime entrypoints preserve successful parse output and emit a parse-scope event. Focused trace tests,
-    Dart format/analyze/full tests, corpus runner, CLI help, mdBook build, memory architecture, Knowledge Map,
-    task-tree metadata, doctrine, and `git diff --check` pass.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.4.5.1` landed structured diagnostics, but Dart still had no trace control
-      objects, event classes, sink routing, environment controls, or traced runtime entrypoints.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: the Dart package exported runtime/matching/diagnostic APIs
-      only; there was no owner under `dart/lib/src/trace/`, and `LinkedSpecRuntimeEngine.parse(...)` had no trace
-      parameter or traced entrypoint equivalent to the mdBook/Rust control contract.
-    - [x] **FIX** — Added the trace module, public exports, optional runtime trace emitter plumbing,
-      `parseWithTrace(...)` / `executeWithTrace(...)`, parse-scope enter/exit events, and focused trace-control
-      coverage.
-    - [x] **ADDRESSED (verified)** — `test/trace_test.dart` proves level parsing/gating, environment config,
-      route reset, mirror sink behavior, event/scope/decision/log/dump primitives, default-quiet runtime tracing,
-      routed runtime trace output, and parse-output preservation.
-    - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-      focused trace tests, full `dart test`, corpus-runner scaffold, CLI help checks, mdBook build, memory
-      architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, public exports, mdBook trace/status/handoff text, live
-      docs, roadmap tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.5.2 - add Dart trace controls`; retained completion note: Trace controls, event classes, sinks, and traced runtime entrypoints.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5.2`.
 
 - ID: `DART-BACKEND-PARITY.4.5.3`
   Status: `done`
@@ -660,30 +301,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Traced runtime execution emits structured enter/exit scopes and decisions for rule dispatch,
     regex/blind branches, lifecycle blocks, cursor/source-boundary helpers where implemented, and dump/log events
     where relevant while untraced execution remains output-compatible.
-  Verification: **PASS 2026-07-09.** `LinkedSpecRuntimeEngine` now emits trace events through the optional
-    `LinkedSpecTraceEmitter` for parse/rule scopes, recursion cutoffs, regex match/no-match decisions,
-    action-edge and blind-call child-dispatch decisions, lifecycle block marks, cursor-control helpers, and
-    `capture_until_boundary(...)` source-boundary captures. Focused trace coverage proves those event topics while
-    comparing traced and untraced parse-result JSON for output preservation. Focused trace tests pass; broader gate
-    evidence is recorded in the verification log.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.4.5.2` proved trace controls and sinks, but runtime tracing only emitted the
-      top-level parse scope. Branch, lifecycle, dispatch, cursor, and source-boundary execution remained invisible.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: `dart/lib/src/runtime/interpreter.dart` threaded the optional
-      trace emitter into `_RuntimeExecutionContext`, but `_executeRule(...)`, `_executeRegexOnce(...)`,
-      `_executeBlindOnce(...)`, `_executeLifecycle(...)`, `_executeActionEdgeChild(...)`, and the cursor/boundary
-      helper cases did not emit events.
-    - [x] **FIX** — Added trace-only rule scopes, regex decisions, child-dispatch decisions, lifecycle marks,
-      cursor-control marks, recursion-cutoff decisions, and source-boundary capture marks. All events are behind the
-      optional trace emitter and preserve default quiet behavior.
-    - [x] **ADDRESSED (verified)** — `test/trace_test.dart` now proves runtime event coverage for regex matching,
-      lifecycle blocks, action-child dispatch, blind-child dispatch, cursor helpers, and
-      `capture_until_boundary(...)`; it also compares traced and untraced parse results.
-    - [x] **NO REGRESSION** — Focused trace tests pass; full Dart/package/book/repo checks are recorded in the
-      verification log before commit.
-    - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
-      tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.5.3 - add Dart runtime trace events`; retained completion note: Runtime branch/lifecycle/source-boundary trace instrumentation.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5.3`.
 
 - ID: `DART-BACKEND-PARITY.4.5.4`
   Status: `done`
@@ -691,26 +310,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Dart README, CLI help/status text, mdBook trace/runtime/backend-handoff pages, live docs, task-tree
     index, and Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work
     begins.
-  Verification: **PASS 2026-07-09.** Audited Dart README, CLI help/scaffold status, mdBook trace/status/handoff
-    pages, live docs, roadmap, task-tree index, and Knowledge Map facts for diagnostics/trace drift. They now agree
-    that Dart has structured runtime diagnostics, trace controls/sinks/events, and runtime trace events, does not
-    claim full backend parity, and advances to `.5.1` staged registry work. Verification covers CLI help,
-    mdBook build, Knowledge Map regeneration/check, memory architecture, task-tree metadata, doctrine, and
-    `git diff --check`.
-  Acceptance Checklist:
-    - [x] **REPRODUCE / ISSUE** — `.4.5.3` implemented runtime trace events, leaving several live status surfaces
-      intentionally pointing at `.4.5.4` for the final no-drift sweep.
-    - [x] **ROOT CAUSE (WHY + WHERE)** — WHY/WHERE: the implementation leaves updated their own status text, but
-      the `.4.5` parent, active task-tree frontier, roadmap row, README boundary, mdBook trace/status/handoff
-      paragraphs, live docs, MEMORY pointer, and Knowledge Map facts still needed a single closeout pass.
-    - [x] **FIX** — Marked `.4.5` and `.4.5.4` done, advanced the active frontier to `.5.1`, and aligned Dart
-      status text around the completed diagnostics/trace boundary and remaining staged-runtime/corpus leaves.
-    - [x] **ADDRESSED (verified)** — Focused drift scans and the standard docs/KM/doctrine gates pass.
-    - [x] **NO REGRESSION** — No runtime source changed in this leaf; CLI help, mdBook, Knowledge Map, memory
-      architecture, task-tree metadata, doctrine, and `git diff --check` pass.
-    - [x] **LOCKSTEP** — Dart README/CLI/scaffold status, mdBook trace/status/handoff text, live docs, roadmap
-      tracker, task-tree index, Knowledge Map facts, and `MEMORY.md` are updated.
   Commit: `DART-BACKEND-PARITY.4.5.4 - close Dart diagnostics trace no drift`; retained completion note: Diagnostics/trace status no-drift closeout; `.4.5` container closes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.4.5.4`.
 
 - ID: `DART-BACKEND-PARITY.5`
   Status: `done`
@@ -722,48 +323,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Implement minimal staged registry provider for function-body parse jobs.
   Acceptance: `actionir-body.spec` resolves deterministically, compiles top rule `action_block`, executes
     queued jobs in stable order, and stitches `body_ast`.
-  Verification: **PASS 2026-07-09.** `dart/lib/src/parser/staged_parser_registry.dart` adds the narrow
-    function-body staged provider. `executeStagedParseJobs(...)` validates and stable-sorts jobs by parent AST
-    path, source span, then job id; resolves `actionir-body.spec` to `builtin:actionir-body.spec`; records the
-    fixed ActionIR-body adapter digest/cache key and compiled parser shape for top rule `action_block`; executes
-    body text through the Dart ActionIR block parser; and returns staged result records. `dispatchFunctionBodyParseJobs(...)`
-    and `parseSpecWithStagedUserFunctionDefinitionAsts(...)` stitch returned `action_block` JSON into function
-    `body_ast` while preserving the neutral `body_parse_job`. Focused staged-registry tests, Dart format/analyze,
-    full Dart tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata,
-    doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.5.1 - add Dart staged function-body registry`; retained completion note: Minimal staged registry provider dispatches function-body parse jobs and stitches `body_ast`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.5.1`.
 
 - ID: `DART-BACKEND-PARITY.5.2`
   Status: `done`
   Goal: Execute registered user functions in value positions, receiver chains, and standalone discard.
   Acceptance: Exact-arity functions use fresh function-local stores, eager argument evaluation, compatible
     receiver continuation, standalone `VALUE_DROP`, and recursion diagnostics.
-  Verification: **PASS 2026-07-09.** `LinkedSpecRuntimeEngine` now resolves exact-arity
-    `UserFunctionRegistry` calls before ordinary helper fallback, evaluates arguments eagerly in the caller,
-    parses/caches function `body_source` as ActionIR value blocks, binds params into fresh function-local
-    scalar/array/hash stores, restores caller stores after return, returns final-expression or local
-    `return(...)` payloads, feeds returned values into compatible receiver chains, executes standalone calls
-    through the existing dropped-value statement path, diagnoses registered arity mismatches, and rejects direct
-    or mutual recursion with structured `user_function_call` diagnostics. Focused runtime tests, Dart
-    format/analyze/full tests, corpus runner/help, CLI help, mdBook, memory architecture, Knowledge Map,
-    task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.5.2 - execute Dart user functions`; retained completion note: Registered exact-arity user functions execute at runtime.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.5.2`.
 
 - ID: `DART-BACKEND-PARITY.5.3`
   Status: `done`
   Goal: Preserve staged parse-job and function-registry descriptor shapes.
   Acceptance: Descriptor/corpus fixtures can assert the neutral function-definition payload, parse-job,
     and stitched AST fields without Dart-specific field drift.
-  Verification: **PASS 2026-07-09.** `test/compiled_spec_test.dart` now proves the staged function descriptor
-    shape through parsed, compiled, descriptor, and runtime layers. The focused test builds source from
-    spec-returned `function_definition` nodes, dispatches `body_parse_job` records through
-    `parseSpecWithStagedUserFunctionDefinitionAsts(...)`, compiles the stitched `SpecFile`, asserts parsed
-    function order, compiled `UserFunctionRegistry.bodyParseJobs`, descriptor `body_payload`, normalized
-    `body_parse_job`, stitched `body_ast`, `meta.function_order`, `meta.function_count`, and stable runtime output
-    from the same compiled state. Focused compiled-state tests, Dart format/analyze/full tests, corpus
-    runner/help, CLI help, mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and
-    `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.5.3 - preserve Dart staged descriptor shapes`; retained completion note: Neutral staged user-function descriptor shapes are asserted through runtime output.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.5.3`.
 
 - ID: `DART-BACKEND-PARITY.6`
   Status: `done`
@@ -775,15 +352,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Bring up controlled proof fixtures.
   Acceptance: Minimal authored fixtures prove scalar output, nested arrays/hashes, rule dispatch, and
     lifecycle return shape before shipped-spec breadth.
-  Verification: **PASS 2026-07-09.** Added `executeCorpusFixtures(...)` and public
-    `CorpusExecutionResult` / `CorpusFixtureExecutionResult` records. The harness preserves manifest validation,
-    runs each fixture through Dart `parseSpec(...)`, `compileSpec(...)`, and `LinkedSpecRuntimeEngine`, compares
-    runtime output to the backend-neutral expected value wrapped one level, uses structural JSON equality, and
-    reports all fixture failures without aborting the run. Focused temporary corpus fixtures prove scalar output,
-    nested array/hash/null/boolean output, blind rule dispatch, lifecycle output shape, and mismatch reporting.
-    Focused corpus tests, Dart format/analyze/full tests, default 99-fixture corpus loader/help, CLI help,
-    mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.1 - add Dart controlled corpus execution`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.1`.
 
 - ID: `DART-BACKEND-PARITY.6.2`
   Status: `done`
@@ -799,10 +369,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Split shipped-corpus expansion into narrowly owned batches.
   Acceptance: `.6.2` has child leaves for opt-in executable runner/reporting, starter corpus batches,
     helper/control/runtime batches, and shipped-spec batches before any behavior changes are made.
-  Verification: **PASS 2026-07-09.** Split `.6.2` into child leaves `.6.2.1` through `.6.2.4` so the
-    99-fixture expansion can proceed in committed, recoverable batches without changing parser/runtime behavior in
-    the planning slice. Memory architecture, task-tree metadata, doctrine, mdBook, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.0 - split Dart corpus expansion batches`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.0`.
 
 - ID: `DART-BACKEND-PARITY.6.2.1`
   Status: `done`
@@ -810,16 +378,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Dart can execute named or safely bounded fixture subsets through the corpus runner/library, report
     pass/fail/mismatch details for every selected fixture, and keep the default 99-fixture command as a
     manifest-loader smoke while full parity is still incomplete.
-  Verification: **PASS 2026-07-09.** `executeCorpusFixtures(...)` accepts `caseNames`, `offset`, and `limit`;
-    invalid named selections, duplicate names, name-plus-window combinations, invalid offsets, and invalid limits
-    diagnose as `CorpusManifestException`. `bin/corpus_runner.dart` adds opt-in `--execute` mode with repeated
-    `--case`, `--offset`, and `--limit`, prints per-fixture `PASS` / `FAIL` lines plus a summary, returns nonzero
-    for selected fixture failures, initially rejects unbounded CLI execution while corpus parity is incomplete, and
-    keeps default `--corpus <path>` behavior as the 99-fixture manifest-loader smoke. `.6.3` later enables
-    full-manifest CLI execution after 99/99 passes. Focused corpus tests, Dart
-    format/analyze/full tests, default corpus loader/help, bounded execute smoke, unbounded execute rejection,
-    mdBook, memory architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.1 - add Dart executable corpus selection`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.1`.
 
 - ID: `DART-BACKEND-PARITY.6.2.2`
   Status: `done`
@@ -827,16 +387,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The early manifest fixtures covering proof-edge returns, autoexist behavior, scalar/array/hash
     store reads, assignment/mutation, and primitive helper surfaces either pass on Dart or each blocked fixture is
     routed to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
-  Verification: **PASS 2026-07-09.** The bounded shipped-corpus starter run
-    `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --limit 40`
-    passes. Runtime fixes covered the observed root causes: `_returned(...)` now treats any non-null returned
-    value, including empty arrays and hashes, as a successful rule match; blind child dispatch trusts the child
-    rule's `matched` bit instead of output truthiness; and marker-form `if(...)` / `elseif(...)` / `else()` /
-    `endif()` statement chains execute as grouped branches in action and value blocks. Focused runtime tests lock
-    empty aggregate returns and marker-form branch execution. Dart format/analyze/full tests, default corpus
-    loader/help, bounded 40-fixture execute smoke, CLI help, mdBook, memory architecture, Knowledge Map,
-    task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.2 - close Dart starter corpus batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.2`.
 
 - ID: `DART-BACKEND-PARITY.6.2.3`
   Status: `done`
@@ -845,19 +397,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     receiver chains, numeric/string/array/hash helpers, user-function runtime, with-blocks, and hash/array tree
     traversal either pass on Dart or each blocked fixture is routed to a narrowly owned root-cause leaf with
     Perl/Rust oracle evidence.
-  Verification: **PASS 2026-07-09.** The middle corpus window is now 25/28 green on Dart. Passing fixture groups
-    were verified with split bounded runs around the routed `fn` cases:
-    `--execute --offset 40 --limit 17`, `--execute --offset 58 --limit 2`, and
-    `--execute --offset 62 --limit 6`. Fixes covered assignment expressions inside helper arguments, plain
-    third-argument inline `if(...)` fallback values, numeric aggregate reducers over bare arrays, scalar-held
-    list/map readback through wrappers/copy, and stale scalar clearing after explicit aggregate writes. The three
-    remaining top-level `fn` fixtures (`terse_3_3_1_scalar_assignment_expressions`,
-    `terse_3_3_4_assignment_expression_closure`, and `terse_4_3_2_user_function_runtime`) still fail at
-    `parseSpec(...)` because the corpus runner has no spec-produced `function_definition` nodes; their checked-in
-    expected JSON proves the Perl/Rust oracle behavior, and the gap is routed to `.6.2.5` instead of adding a Dart
-    raw scanner. Focused parser/runtime tests, Dart format/analyze/full tests, corpus loader/help, mdBook, memory
-    architecture, Knowledge Map, task-tree metadata, doctrine, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.3 - close Dart middle corpus batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.3`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4`
   Status: `done`
@@ -868,30 +409,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The tclite, lispish, recursive top-rule, hlink, portmap, ebnf, spec.spec, regdef, tablegrep,
     simenv, VHDL/library, history, and plugin smoke fixtures either pass on Dart or each blocked fixture is routed
     to a narrowly owned root-cause leaf with Perl/Rust oracle evidence.
-  Verification: **PASS 2026-07-09.** Initial diagnostic run `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` is 2/31 green (`pplugin_empty`,
-    `tkgui_empty`). Failures cluster into Dart regex-dialect incompatibilities (POSIX classes, inline flags,
-    possessive quantifiers), missing runtime/helper surfaces (`capture_slice`, diagnostic `print`, logical `not`,
-    raw `print(...)` expression parsing), recursive/default-mode output mismatches, and residual shipped-spec smoke
-    semantics. `.6.2.4.1` removes the basic Dart regex-dialect incompatibilities; deeper PCRE structural regex
-    constructs are now split to `.6.2.4.6`. `.6.2.4.4.1` through `.6.2.4.4.6` close the non-PCRE
-    parser-smoke residual group. `.6.2.4.5` confirms the no-drift boundary: the 31-fixture window is 24/31 green,
-    current docs match that state, and the only remaining seven failures are the PCRE structural regex blockers
-    owned by `.6.2.4.6`. `.6.2.4.6` then closes those blockers with bounded structural regex matchers and
-    action-edge child-index push parity; the 31-fixture shipped-spec/parser-smoke window is now 31/31 green.
   Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.0`
   Status: `done`
   Goal: Split the shipped-spec/parser-smoke corpus batch after diagnostic execution.
   Acceptance: The 31-fixture window is measured, failure clusters are recorded, and implementation children are
     created before code changes; Dart frontier remains recoverable after the planning commit.
-  Verification: **PASS 2026-07-09.** Diagnostic corpus run `--execute --offset 68 --limit 31` reports 2 passed and
-    29 failed, with failures grouped into regex dialect translation, missing helpers/raw action parsing, recursion
-    and empty-output semantics, and residual shipped-spec smoke parity. `git diff --check`, memory architecture,
-    Knowledge Map generation/check, task-tree metadata, doctrine, and mdBook build pass. No implementation code
-    changed.
   Commit: `DART-BACKEND-PARITY.6.2.4.0 - split Dart shipped corpus smoke batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.0`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.1`
   Status: `done`
@@ -899,16 +426,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Dart parser/runtime regex compilation handles the shipped fixture patterns that currently fail
     before matching because of POSIX character classes, inline flag groups, and possessive quantifiers; any
     remaining recursive/DEFINE/`\K` PCRE structural-regex failures are routed to `.6.2.4.6`.
-  Verification: **PASS 2026-07-09.** `compileRuntimeRegex(...)` now normalizes POSIX character classes, inline
-    `i`/`m`/`s` flag groups, scoped flag groups by lifting options to Dart `RegExp`, possessive quantifier markers,
-    lower-bound `{,n}`
-    quantifiers, and Python-style named captures; helper regex compilation uses the same path. Focused
-    `runtime_matching_test.dart` and `runtime_interpreter_test.dart` locks pass, as do Dart format and analyze.
-    The diagnostic `--execute --offset 68 --limit 31` window remains 2/31 green, but the earlier POSIX/inline
-    flag/possessive FormatExceptions have moved to narrower runtime/helper/output failures. Remaining
-    `FormatException` cases are unsupported PCRE structural constructs (`\K`, `(?&name)`, `(?(DEFINE)...)`) in
-    EBNF/spec.spec smoke fixtures and are split to `.6.2.4.6`.
   Commit: `DART-BACKEND-PARITY.6.2.4.1 - bridge Dart shipped regex dialect`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.1`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.2`
   Status: `done`
@@ -917,17 +436,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     output helper behavior (`print`/`say`), logical `or`/`not`, `exit_now`, or typed parsing for current helper-form
     `print(...)` expressions; helper behavior matches the Perl/Rust contract or is routed to narrower follow-up
     evidence.
-  Verification: **PASS 2026-07-09.** Dart now executes direct anonymous capture-slice helpers
-    (`start_capture_slice`, `capture_slice`, `capture_slice_len`, `capture_slice_until_cursor`,
-    `capture_slice_until_cursor_len`, `capture_slice_pos`, `capture_slice_line`, `capture_slice_col`), logical
-    `and`/`or`/`not`, diagnostic `print`/`print_each`/`say` no-op output helpers, and terminating `exit_now`.
-    `action_parser.dart` now keeps delimiters inside quoted helper string arguments when matching call
-    parentheses, so current `print("...", "\n")` helper forms no longer fall back to raw expressions. Focused
-    parser/runtime tests, Dart format/analyze, and full Dart tests pass. The diagnostic `--execute --offset 68
-    --limit 31` window remains 2/31 green, but the missing-helper failures move to explicit
-    recursion/default-mode/output mismatches, deliberate `exit_now(...)` diagnostic branches, and the already split
-    PCRE structural regex blockers.
   Commit: `DART-BACKEND-PARITY.6.2.4.2 - bridge Dart helper action surfaces`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.2`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.3`
   Status: `done`
@@ -935,19 +445,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: Tclite, Lispish, recursive top-rule, delimiter/default-mode, and explicit diagnostic-branch fixtures
     either pass on Dart or each residual mismatch has a narrowly owned root-cause leaf with Perl/Rust oracle
     evidence.
-  Verification: **PASS 2026-07-09.** Dart now mirrors the Rust/Perl action-edge dependency model closely enough
-    for the recursive/default-mode parser-smoke cluster: compiled action edges carry `regex_index`,
-    `child_regex_index`, and `has_parent_regex`; edge-only child regexes are resolved into the parent alternation;
-    runtime dispatch executes every action edge whose `regex_index` matches the selected alternative; and
-    `set(array(name), ...)` / `set(hash(name), ...)` aggregate resets record rule-local bindings restored on rule
-    exit. Focused compiler/runtime tests pass, including self-close regex-slot reuse, indexed self-close edges,
-    recursive `sexpr` body/top-rule value parity, and caller-visible undeclared child mutations. Corpus evidence:
-    `tclite_command_subst`, `tclite_double_quote`, `top_rule_body_recursion_sexpr`,
-    `top_rule_lx_recursion_nested`, and `top_rule_lx_recursion_sequence` now pass. The 31-fixture window is now
-    7/31 green (`pplugin_empty` and `tkgui_empty` also pass). Residual Lispish failure is a recursive PCRE
-    `(?R)` pattern routed to `.6.2.4.6`; residual hlink/portmap/regdef/tablegrep/simenv/VHDL/history/library
-    mismatches are routed to `.6.2.4.4`.
   Commit: `DART-BACKEND-PARITY.6.2.4.3 - close Dart recursive dispatch semantics`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.3`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4`
   Status: `done`
@@ -958,36 +457,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     pass or are routed with precise root-cause evidence after regex/helper/recursion blockers are removed,
     including any observable semantic mismatch from Dart's normalized regex dialect bridge. EBNF/spec.spec/Lispish
     PCRE structural blockers remain owned by `.6.2.4.6`.
-  Verification: Split 2026-07-09 after the `.6.2.4.3` diagnostic window reached 7/31 green. After `.6.2.4.4.1`,
-    all five portmap fixtures and `vhdl_library_use` pass, bringing the diagnostic window to 13/31 green. After
-    `.6.2.4.4.2`, all five hlink fixtures and `tablegrep_simple_term` pass, bringing the diagnostic window to 19/31
-    green. After `.6.2.4.4.3`, `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute`
-    pass, bringing the diagnostic window to 22/31 green. After `.6.2.4.4.4`,
-    `regdef_nested_register_fields` passes and `ds_vhistory_version_entry` is routed with direct-access/oracle
-    evidence, bringing the diagnostic window to 23/31 green. After `.6.2.4.4.5`, the `ds_vhistory` residual is
-    split again with public-parser, descriptor-handler, and minimal scalar-held access evidence; the next frontier
-    is `.6.2.4.4.6` for the actual leading-newline public-parser/oracle boundary decision. After `.6.2.4.4.6`,
-    Dart mirrors the Perl public-parser leading blank/comment-line skip before the top rule, so
-    `ds_vhistory_version_entry` passes and the diagnostic window is 24/31 green. The only remaining shipped-smoke
-    failures are the seven PCRE structural regex blockers owned by `.6.2.4.6`; `.6.2.4.5` owns final no-drift
-    closeout for the completed non-PCRE residual group.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.0`
   Status: `done`
   Goal: Split residual parser-smoke parity after the recursive/default-mode bridge.
   Acceptance: The post-`.6.2.4.3` diagnostic window is classified into narrowly owned implementation leaves, with
     PCRE structural blockers left under `.6.2.4.6`.
-  Verification: **PASS 2026-07-09.** Diagnostic command `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` is 7/31 green. Passing fixtures:
-    `tclite_command_subst`, `tclite_double_quote`, `top_rule_body_recursion_sexpr`,
-    `top_rule_lx_recursion_nested`, `top_rule_lx_recursion_sequence`, `pplugin_empty`, and `tkgui_empty`.
-    Remaining failures split to `.6.2.4.4.1` for portmap/action-edge child result shape, `.6.2.4.4.2` for hlink
-    delimiter/capture semantics, `.6.2.4.4.3` for helper mutation and text-normalization surfaces, `.6.2.4.4.4`
-    for legacy structural smoke outputs, `.6.2.4.4.5` for residual closeout, and `.6.2.4.6` for PCRE structural
-    regex constructs including Lispish `(?R)`, EBNF `\K`/`(?&name)`/`(?(DEFINE)...)`, and spec.spec recursive block
-    regexes.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.0 - split Dart residual parser-smoke parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.0`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.1`
   Status: `done`
@@ -996,38 +475,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     pass on Dart or remaining mismatches are routed with Perl/Rust oracle evidence. This leaf owns scoped
     action-edge child results, passive terminal child re-search behavior, and aggregate/bare result unwrapping
     exposed by those fixtures.
-  Verification: **PASS 2026-07-09.** Dart `array(...)` now treats explicit `flat(...)`, `flat_array(...)`, and
-    `flat_hash(...)` call or fluent arguments as list-context splices, while `copy(...)` and ordinary array-valued
-    arguments stay nested. Focused runtime tests lock `array(flat_array(...))` splicing and `array(copy(...))`
-    nesting. `dart run bin/corpus_runner.dart --corpus ../rust/linkedspec-runtime/tests/corpus --execute --case
-    portmap_bare --case portmap_bit --case portmap_slice --case portmap_constant --case portmap_concatenation`
-    passes 5/5. The diagnostic `--execute --offset 68 --limit 31` window is now 13/31 green; `vhdl_library_use`
-    also passes from the same list-context splice fix. Dart format/analyze/full tests pass.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --case portmap_bare --case portmap_bit --case portmap_slice
-    --case portmap_constant --case portmap_concatenation` initially failed all five portmap fixtures with an
-    extra nested array layer, for example `["?bare:", [["foo"]]]` instead of `["?bare:", ["foo"]]`.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — Knowledge Map facts `rust-action-edge-child-return-dispatch` and
-    `rust-simple-spec-structural-owners`, plus `rg -n 'flat_array|array\\(' specs/portmap.spec
-    rust/linkedspec-runtime/src/engine.rs dart/lib/src/runtime/interpreter.dart`, showed the mechanism: Rust/Perl
-    treat explicit `flat*` calls as list-context splices inside `array(...)`, while Dart
-    `dart/lib/src/runtime/interpreter.dart` wrapped each evaluated constructor argument as one item.
-  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now detects explicit `flat`, `flat_array`, and
-    `flat_hash` call/fluent arguments before evaluation results are appended to `array(...)`, splicing lists and
-    hash key/value entries while leaving non-`flat*` aggregate values nested.
-  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
-    test/corpus_manifest_test.dart` pass; the focused portmap corpus command is FAIL->PASS with 5 passed and 0
-    failed.
-  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-    and `dart test` all PASS; the 31-fixture diagnostic run moves from 7/31 to 13/31 green.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
-    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.1 - close Dart portmap result shapes`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.1`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.2`
   Status: `done`
@@ -1035,38 +484,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: `hlink_raw_string`, `hlink_raw_escaped_brackets`, `hlink_curly_brace`, `hlink_bracket_body`, and
     `hlink_mixed_bracket_brace` pass on Dart or remaining mismatches are routed with precise delimiter/capture
     evidence.
-  Verification: **PASS 2026-07-09.** Dart `call(...)` now refreshes the runtime `retv` channel with called child
-    results, and append-style mutations now route through one helper that mutates scalar-held lists created by
-    assignments such as `items = []` before falling back to aggregate storage. This makes
-    `push(array(word_items), retv)` visible through later `array(word_items)` reads in `hlink_substitution.spec`.
-    Focused hlink execution passes all five fixtures. The diagnostic `--execute --offset 68 --limit 31` window is
-    now 19/31 green; `tablegrep_simple_term` also passes from the same scalar-held append behavior. Dart
-    format/analyze/full tests pass.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --case hlink_raw_string --case hlink_raw_escaped_brackets
-    --case hlink_curly_brace --case hlink_bracket_body --case hlink_mixed_bracket_brace` initially failed all five
-    hlink fixtures with `matched: false` at end-of-input.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `LinkedSpecTraceEmitter` diagnostics showed the child rule matched and
-    `substitute_top` ran `LE { push(array(word_items), retv) }`, but `LX` still saw `array(word_items)` as empty.
-    `word_items = []` stores a scalar-held list in `context.variables`, while Dart `push(array(...), ...)` was
-    appending to `context.arrays`; `_arrayValueFor(...)` correctly preferred the scalar-held list and hid the
-    aggregate append. `call(...)` also needed to refresh `context.retv` after child execution.
-  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now routes `push(...)` and `items += value` through
-    `_appendArrayValue(...)`, mutating scalar-held lists when present and preserving explicit aggregate storage
-    behavior otherwise. `call(...)` now sets `context.retv = child.value` before returning.
-  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
-    test/corpus_manifest_test.dart` pass; the focused hlink corpus command is FAIL->PASS with 5 passed and 0
-    failed.
-  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-    and `dart test` all PASS; the 31-fixture diagnostic run moves from 13/31 to 19/31 green.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
-    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.2 - close Dart hlink delimiter captures`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.2`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.3`
   Status: `done`
@@ -1075,39 +494,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     residual is routed with root-cause evidence. This leaf owns missing helper surfaces such as `match_line`,
     statement-form scalar regex substitution, array split mutation, and quote/text normalization visible in those
     fixtures.
-  Verification: **PASS 2026-07-09.** Dart now exposes `entry_line` / `entry_col` and `match_line` / `match_col`
-    over entry/local regex registers, executes statement-form `substr(...)` / `regex_subst(...)` scalar regex
-    mutation with helper flags, and routes explicit `split(array(target), source, delimiter)` through aggregate
-    replacement. The focused helper/text-normalization corpus command passes all three fixtures. The diagnostic
-    `--execute --offset 68 --limit 31` window is now 22/31 green. Remaining non-PCRE failures are
-    `regdef_nested_register_fields` and `ds_vhistory_version_entry`; deeper Lispish/EBNF/spec.spec PCRE
-    structural `FormatException` failures remain routed to `.6.2.4.6`.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --case simenv_multiline_value --case lib_reader_sattribute
-    --case lib_reader_cattribute` initially failed because `simenv_multiline_value` hit unsupported helper
-    `match_line`, while the `lib_reader` fixtures retained quoted group/value text and produced an empty
-    comma-split attribute list.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `docs/knowledge/rust-statement-mutation-helpers.md` and
-    `specs/lib_reader.spec` showed that `substr(scalar, pattern, replacement, flags)`,
-    `regex_subst(scalar, pattern, replacement, flags)`, and `split(array(target), scalar, delimiter)` are
-    statement-form mutations, not pure value helpers. Dart evaluated pure helper paths but did not mutate scalar
-    targets or replace the explicit split target. `specs/simenv.spec` also uses `match_line()` diagnostics.
-  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now handles statement-context `substr(...)` /
-    `regex_subst(...)` mutations, expands `$n` replacement captures, honors `g` and regex flags through the shared
-    runtime compiler, replaces explicit split targets, and exposes entry/local match start line/column helpers.
-  - [x] **ADDRESSED (verified)** — Focused Dart tests `dart test test/runtime_interpreter_test.dart
-    test/corpus_manifest_test.dart` pass; the focused helper/text-normalization corpus command is FAIL->PASS with
-    3 passed and 0 failed.
-  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-    and `dart test` all PASS; the 31-fixture diagnostic run moves from 19/31 to 22/31 green.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated; `mdbook build docs/linkedspec-book`, `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_task_tree_metadata.sh`,
-    `bash scripts/check_doctrines.sh`, and `git diff --check` pass.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.3 - close Dart helper mutation surfaces`; retained completion note: Statement-form helper mutation, explicit split replacement, and entry/local line helpers close three parser-smoke fixtures.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.3`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.4`
   Status: `done`
@@ -1117,40 +505,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     `array(flat*)` list-context splice fix, and `tablegrep_simple_term` passed under `.6.2.4.4.2` from the
     scalar-held append fix. `simenv_multiline_value`, `lib_reader_sattribute`, and `lib_reader_cattribute` passed
     under `.6.2.4.4.3` from statement helper mutation/text-normalization parity.
-  Verification: **PASS 2026-07-09.** Dart now recognizes one-argument action-edge `push(Child)` calls whose
-    argument names a rule, executes that child, refreshes `retv`, and appends the child result to the current
-    rule accumulator instead of treating the argument as the target accumulator. This closes
-    `regdef_nested_register_fields`. Focused runtime and corpus tests pass. The focused structural corpus command
-    passes `regdef_nested_register_fields` and still fails `ds_vhistory_version_entry` only on object name:
-    expected `null`, actual `/proj/foo`. Code/source evidence routes that residual to `.6.2.4.4.5`: the live spec
-    assigns `cur_object = call(object)` and reads `cur_object[1]`; Dart follows the current scalar-held
-    direct-access surface, while Rust's current `IndexedVar` implementation reads aggregate arrays and yields
-    `undef`/`null`. The diagnostic 31-fixture parser-smoke window is now 23/31 green; the seven PCRE structural
-    regex failures remain routed to `.6.2.4.6`.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — `regdef_nested_register_fields` returned `["?regdef_top:", []]` because Dart
-    appended `push(reg_def)` into the child-named accumulator instead of the current rule accumulator. The focused
-    structural corpus run also showed `ds_vhistory_version_entry` differed only at object name (`null` expected,
-    `/proj/foo` actual).
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `specs/regdef.spec` uses the documented implicit-target `push(Child)`
-    convention in `regdef_top` and `reg_def`. Dart `dart/lib/src/runtime/interpreter.dart::_callPush(...)`
-    treated one-argument action-edge pushes as target appends before checking whether the argument names a rule.
-    For `ds_vhistory`, `specs/ds_vhistory.spec` uses `cur_object[1]` after `call(object)`; Dart
-    `ActionIndexedVarExpr` reads scalar-held variables first, while Rust `Expr::IndexedVar` reads aggregate arrays.
-  - [x] **FIX** — `_callPush(...)` now routes one-argument rule-name pushes through child execution plus
-    current-rule accumulator append, preserving explicit target behavior for non-rule arguments.
-  - [x] **ADDRESSED (verified)** — Focused Dart tests lock the general `push(Child)` convention and the
-    `regdef_nested_register_fields` corpus fixture. The focused structural corpus command is FAIL->PASS for
-    `regdef_nested_register_fields`.
-  - [x] **NO REGRESSION** — `dart format --set-exit-if-changed .`, `dart analyze --fatal-infos --fatal-warnings`,
-    focused runtime/corpus tests, full `dart test`, the focused structural corpus command, CLI/help corpus-loader
-    smokes, mdBook, repository gates, and the diagnostic 31-fixture parser-smoke run pass/measure the expected
-    boundary.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.4 - close Dart legacy accumulator smoke`; retained completion note: `push(Child)` current-rule accumulator semantics close `regdef_nested_register_fields`; `ds_vhistory_version_entry` is routed with direct-access/oracle evidence.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.4`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.5`
   Status: `done`
@@ -1159,38 +515,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     evidence before `.6.2.4.5` final no-drift closeout. First residual: decide `ds_vhistory_version_entry`
     object-name parity, where the checked oracle expects `null` for `cur_object[1]` but Dart follows the current
     scalar-held direct-access contract and returns `/proj/foo`.
-  Verification: **PASS 2026-07-09.** This leaf deliberately makes no Dart runtime change. Tool-backed Perl probes
-    show the checked fixture expectation is not a simple scalar-held indexed-read contract: public
-    `LinkedSpec::get_parser("ds_vhistory")` returns a null object name for the leading-newline fixture, while the
-    direct descriptor handler for `vhistory` prints and returns `/proj/foo` for the same source. A minimal public
-    parser still returns `"name"` for ordinary scalar-held `payload[1]`, proving that globally weakening Dart
-    `ActionIndexedVarExpr` would regress valid direct-access behavior. A minimal leading-newline action-edge
-    reproduction returns null, while the same grammar/input shape without the leading-newline regex returns
-    `/proj/foo`. Dart's focused corpus run still differs at expected `null` versus actual `/proj/foo`, and Rust's
-    full `oracle_corpus_matches_perl_reference` gate passes the checked null fixture. The residual is therefore
-    split to `.6.2.4.4.6` for the leading-newline public-parser/oracle boundary rather than patched blindly.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry` still fails only at object
-    name: expected `null`, actual `/proj/foo`.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `specs/ds_vhistory.spec` assigns `cur_object = call(object)` and later
-    reads `cur_object[1]`; `call_spec_handler_subst` lowers that read to `$cur_object->[1]`. The public parser,
-    however, returns null for the leading-newline fixture while the direct descriptor handler returns `/proj/foo`.
-    Minimal probes isolate the difference to a leading-newline/start-of-input action-edge boundary, not to ordinary
-    scalar-held direct indexing.
-  - [x] **FIX / SPLIT** — Opened `.6.2.4.4.6` as the next owned leaf for the actual
-    `ds_vhistory_version_entry` leading-newline public-parser/oracle boundary. No Dart semantic weakening landed
-    in this slice.
-  - [x] **ADDRESSED (verified)** — Rust `oracle_corpus_matches_perl_reference` passes all 99 fixtures including
-    `ds_vhistory_version_entry`; Perl public-parser, direct descriptor-handler, ordinary scalar-held indexed-read,
-    and leading-newline minimal probes are recorded in this task tree and Knowledge Map.
-  - [x] **NO REGRESSION** — Documentation/task-tree split only; focused evidence commands plus mdBook, memory
-    architecture, Knowledge Map, task-tree metadata, doctrine, and whitespace gates pass.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.5 - split ds_vhistory oracle boundary`; retained completion note: Evidence-only split: public `ds_vhistory` parser leading-newline fixture returns null, direct descriptor handler returns `/proj/foo`, ordinary scalar-held indexed reads remain valid, and `.6.2.4.4.6` owns the boundary decision.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.5`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.4.6`
   Status: `done`
@@ -1199,35 +525,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     weakening ordinary scalar-held direct access, or the corpus/oracle contract is corrected with Perl, Rust, Dart,
     mdBook, and Knowledge Map lockstep. The public-parser versus descriptor-handler discrepancy must have a durable
     decision or evidence record before `.6.2.4.5`.
-  Verification: **PASS 2026-07-09.** Root cause is the Perl public parser wrapper in `perl/LinkedSpec/Runtime.pm`:
-    before invoking the top handler it resets `pos()` and skips leading blank lines and `#` comment lines. Direct
-    descriptor-handler probes bypass that wrapper, which is why they still see the leading `\nobject:` token and
-    return `/proj/foo`. Dart now mirrors the public wrapper in `LinkedSpecRuntimeEngine.parse(...)` by starting the
-    top rule after leading public-parser trivia. Focused runtime tests lock both sides of the boundary: the
-    leading-newline action-edge minimal returns null for the skipped object, while ordinary scalar-held
-    `payload[1]` still returns `"name"`. The focused `ds_vhistory_version_entry` corpus command passes, and the
-    diagnostic 31-fixture window moves to 24/31 green with only the seven PCRE structural regex blockers remaining.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — Before the fix, `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --case ds_vhistory_version_entry` failed with expected
-    `null` and actual `/proj/foo` for the object name.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `perl/LinkedSpec/Runtime.pm` wraps public parser coderefs to reset `pos()`
-    and skip leading blank/comment lines before invoking the generated top handler. The direct descriptor handler
-    bypasses that wrapper, so the same source can return `/proj/foo` under direct invocation and null under the
-    public parser. Dart had no equivalent public-parser leading-trivia skip.
-  - [x] **FIX** — `dart/lib/src/runtime/interpreter.dart` now computes the Perl-compatible public-parser start
-    cursor before `_executeRule(...)`; it skips only leading blank lines and leading `#` comment lines, preserving
-    ordinary scalar-held indexed reads and all existing action-edge dispatch behavior after the public start
-    boundary.
-  - [x] **ADDRESSED (verified)** — Focused runtime tests lock the leading-newline minimal and ordinary
-    scalar-held indexed-read boundary; `ds_vhistory_version_entry` passes through the corpus runner.
-  - [x] **NO REGRESSION** — Focused runtime/corpus tests pass, Dart format passes, and the diagnostic 31-fixture
-    parser-smoke run is 24/31 green with the remaining failures unchanged and routed to `.6.2.4.6`.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, and
-    Knowledge Map are updated.
   Commit: `DART-BACKEND-PARITY.6.2.4.4.6 - mirror public parser leading trivia`; retained completion note: Dart runtime parse entrypoint now skips leading blank/comment lines like the Perl public parser, closing `ds_vhistory_version_entry` and moving parser-smoke to 24/31 green.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.4.6`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.5`
   Status: `done`
@@ -1235,30 +534,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Acceptance: The full `.6.2.4` 31-fixture window is green on Dart or all remaining blockers are split with
     durable evidence; README, mdBook, roadmap, Knowledge Map, live docs, and task-tree status match the measured
     boundary.
-  Verification: **PASS 2026-07-09.** No Dart runtime behavior changed in this closeout leaf. The measured
-    shipped-spec/parser-smoke diagnostic window remains 24/31 green: `ds_vhistory_version_entry` now passes after
-    `.6.2.4.4.6`, and the seven remaining failures are only PCRE structural regex constructs already owned by
-    `.6.2.4.6` (`lispish_x_y`, two EBNF smoke fixtures, and four spec.spec smoke fixtures). Current-status scans
-    now agree across `dart/README.md`, mdBook status/backend-handoff chapters, roadmaps, `MEMORY.md`,
-    `LIVE_ACHIEVEMENT_STATUS.md`, `docs/TASK_TREE.md`, this task tree, and Knowledge Map cards. The implementation
-    frontier advances to `.6.2.4.6`.
-
-  ## Acceptance Checklist
-  - [x] **REPRODUCE / ISSUE** — The `.6.2.4` 31-fixture shipped-spec/parser-smoke window is no longer a mixed
-    residual: the non-PCRE leaves are closed, and the diagnostic run reports 24 passed / 7 failed.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — The remaining failures are all Dart `RegExp` rejection of PCRE structural
-    constructs: Lispish recursive `(?R)`, EBNF `\K` / recursive named subpatterns / `(?(DEFINE)...)`, and
-    spec.spec recursive block regexes. They are already owned by `.6.2.4.6`.
-  - [x] **FIX / CLOSEOUT** — Closed the no-drift leaf by aligning current docs, task-tree frontier state, roadmap
-    text, mdBook status/handoff pages, and Knowledge Map retrieval facts with the measured 24/31 boundary.
-  - [x] **ADDRESSED (verified)** — Diagnostic corpus execution shows `ds_vhistory_version_entry` passing and only
-    the seven PCRE structural fixtures failing.
-  - [x] **NO REGRESSION** — Docs-only closeout; Dart format/analyze/full tests remain green from the immediately
-    preceding runtime slice, and closeout gates pass.
-  - [x] **LOCKSTEP** — `CHANGES.md`, `DEVELOPMENT_NOTES.md`, `LIVE_ACHIEVEMENT_STATUS.md`, `MEMORY.md`,
-    `ROADMAP.md`, `ROADMAP_V2.md`, `dart/README.md`, mdBook backend/status chapters, task-tree index, this task
-    tree, and Knowledge Map are updated.
   Commit: `DART-BACKEND-PARITY.6.2.4.5 - close parser smoke no drift`; retained completion note: No-drift closeout confirms the non-PCRE parser-smoke residual group is complete and advances the frontier to `.6.2.4.6` for PCRE structural regex constructs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.5`.
 
 - ID: `DART-BACKEND-PARITY.6.2.4.6`
   Status: `done`
@@ -1267,16 +544,8 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     recursive named subpatterns such as `(?&name)`, recursive whole-pattern forms such as Lispish `(?R)`,
     `(?(DEFINE)...)`, or related conditional/recursive constructs; the solution is explicitly bounded and
     documented, not an untracked broad regex-engine replacement.
-  Verification: **PASS 2026-07-09.** Dart now recognizes the exact shipped structural PCRE pattern families that
-    block this window and routes them through bounded scanners before normal `RegExp` compilation: Lispish
-    recursive square brackets, EBNF return scalar/array/object patterns using `\K`, recursive named subpatterns,
-    and `(?(DEFINE)...)`, plus spec.spec recursive action/blind/lifecycle/function block forms. Dart also supports
-    action-edge `push(child, index)` over a child return array, preserving the `ebnf_logging_annotation` payload.
-    Focused matching/interpreter tests pass; `corpus_manifest_test.dart` locks the seven structural fixtures; the
-    diagnostic parser-smoke command `dart run bin/corpus_runner.dart --corpus
-    ../rust/linkedspec-runtime/tests/corpus --execute --offset 68 --limit 31` reports 31 passed / 0 failed; Dart
-    format/analyze/full tests and the default 99-fixture corpus loader pass.
   Commit: `DART-BACKEND-PARITY.6.2.4.6 - close Dart structural regex smoke`; retained completion note: Bounded structural regex matchers and `push(child, index)` action-edge payload extraction close the seven PCRE structural fixtures and the `.6.2.4` parser-smoke parent.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.4.6`.
 
 - ID: `DART-BACKEND-PARITY.6.2.5`
   Status: `done`
@@ -1286,40 +555,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     passes the routed fixtures `terse_3_3_1_scalar_assignment_expressions`,
     `terse_3_3_4_assignment_expression_closure`, and `terse_4_3_2_user_function_runtime`; no Dart raw scanner may
     become the semantic source of truth for `fn` definitions.
-  Verification: **PASS 2026-07-09.** Dart adds `parseUserFunctionDefinitionAsts(...)` and
-    `parseSpecWithStagedUserFunctionDefinitions(...)`, which execute `specs/user_function_definition.spec` through
-    the Dart runtime, normalize the returned node wrapper shape, and feed spec-produced `function_definition`
-    nodes through the staged shell projection. Corpus execution keeps the existing rule-only `parseSpec(...)` path
-    for rule-only fixtures and falls back to the staged function shell when rule-only parsing rejects top-level
-    `fn` source; no Dart raw `fn` scanner owns the semantic definition shape. The three routed fixtures pass by
-    name; focused parser/corpus/runtime/contract tests pass; Dart format, analyze, full tests, default 99-fixture
-    loader, and the 31-fixture parser-smoke window pass.
   Commit: `DART-BACKEND-PARITY.6.2.5 - route Dart fn corpus through spec shell`; retained completion note: Corpus execution falls back from rule-only parsing to the spec-defined user-function shell for top-level `fn` fixtures; all three routed fixtures pass.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.2.5`.
 
 - ID: `DART-BACKEND-PARITY.6.3`
   Status: `done`
   Goal: Finalize manifest drift guard and full Dart corpus gate.
   Acceptance: Dart runner rejects unsupported manifest format, mismatched counts, invalid/duplicate names,
     missing fixture dirs, stale extra dirs, and output mismatches; all current fixtures pass.
-  Verification: **PASS 2026-07-09.** Dart corpus execution now runs the full checked-in 99-fixture manifest with
-    no selector and reports 99 passed / 0 failed. CLI `--execute` without `--case`, `--offset`, or `--limit` runs
-    the full manifest in order; named and bounded selection remain available for diagnostics. Focused corpus tests
-    cover the full checked-in gate, CLI full-run mode, unsupported manifest formats, invalid and duplicate manifest
-    case names, count mismatch, missing fixture dirs, stale extra dirs, missing required fixture files, and output
-    mismatch reporting.
   Commit: `DART-BACKEND-PARITY.6.3 - close full Dart corpus gate`; retained completion note: Full Dart corpus execution is 99/99 green; CLI `--execute` without selectors runs the full manifest while drift guards remain strict.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.3`.
 
 - ID: `DART-BACKEND-PARITY.6.4`
   Status: `done`
   Goal: Wire Dart parity into the local verification story.
   Acceptance: Focused Dart test commands are documented; broader local gate integration is added only when
     reliable and not dependent on absent local SDK state.
-  Verification: **PASS 2026-07-09.** Added `tools/run_dart_local.sh` as the focused Dart gate for format,
-    analyzer, full tests, CLI help, and full 99-fixture corpus execution. `tools/run_ci_local.sh` remains
-    core-only by default and includes Dart only when `LINKEDSPEC_RUN_DART=1` is set, so absent Dart SDK state does
-    not break the canonical local gate. Root README, Dart README, and mdBook local-CI/backend-handoff/status pages
-    document the focused and opt-in commands.
   Commit: `DART-BACKEND-PARITY.6.4 - wire Dart local verification`; retained completion note: `tools/run_dart_local.sh` owns the focused Dart gate; `tools/run_ci_local.sh` includes it only under `LINKEDSPEC_RUN_DART=1`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.6.4`.
 
 - ID: `DART-BACKEND-PARITY.7`
   Status: `done`
@@ -1331,35 +584,24 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
   Goal: Document Dart backend usage, status, and parity boundaries in the mdBook.
   Acceptance: Book pages explain how to run Dart, what parity gate it satisfies, and any remaining
     limitations in variant-neutral terms.
-  Verification: **PASS 2026-07-09.** The mdBook backend handoff appendix now has explicit Dart command
-    coverage for `bash tools/run_dart_local.sh`, opt-in `LINKEDSPEC_RUN_DART=1 bash tools/run_ci_local.sh`,
-    direct `dart test`, and full corpus-runner execution. Project status and trace-status pages agree that the
-    current Dart parity boundary is interpreter-first and 99/99 corpus-green, while generated Dart source and
-    Dart-specific CLI productization remain follow-up lanes. No runtime behavior changed.
   Commit: `DART-BACKEND-PARITY.7.1 - close Dart mdBook usage status`; retained completion note: mdBook command/status/handoff docs now match the 99/99 interpreter-first Dart parity boundary and follow-up lanes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.7.1`.
 
 - ID: `DART-BACKEND-PARITY.7.2`
   Status: `done`
   Goal: Decide and optionally implement generated Dart source as a post-interpreter proof.
   Acceptance: Generated Dart source is either implemented against the already-green interpreter model or
     deliberately deferred with clear blockers; it is not the primary parity gate.
-  Verification: **PASS 2026-07-09.** Generated Dart source is deliberately deferred instead of implemented as a
-    one-slice add-on. The decision is based on the existing Rust source-emitter precedent: generated-source proof
-    needs its own split lane for a minimal emitter scaffold/compile-run harness, generated family-plan metadata,
-    direct execution by structural family, and a curated manifest-backed corpus subset. The current Dart
-    conformance gate remains the interpreter-first 99/99 corpus run; no Dart runtime behavior changed.
   Commit: `DART-BACKEND-PARITY.7.2 - defer Dart generated source proof`; retained completion note: Generated Dart source is deferred to a future split source-emitter lane with explicit proof prerequisites.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.7.2`.
 
 - ID: `DART-BACKEND-PARITY.7.3`
   Status: `done`
   Goal: Record the director directive that each LinkedSpec backend variant should have a distinct CLI.
   Acceptance: The Dart task tree and future-backlog tree record the per-variant CLI requirement, a future
     Dart-specific implementation leaf exists, and no CLI behavior changes are made in this planning slice.
-  Verification: **PASS 2026-07-09.** Added this directive record, split Dart CLI productization to `.7.4`,
-    moved final Dart no-drift closeout to `.7.5`, recorded the cross-variant obligation in
-    `FUTURE-PARITY-BACKLOG`, and added a Knowledge Map card. Memory architecture, Knowledge Map, task-tree
-    metadata, doctrine checks, mdBook build, and `git diff --check` pass. No source behavior changed.
   Commit: `DART-BACKEND-PARITY.7.3 - record variant-specific CLI requirement`; retained completion note: Docs-only split for per-variant LinkedSpec CLI productization.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.7.3`.
 
 - ID: `DART-BACKEND-PARITY.7.4`
   Status: `done`
@@ -1368,26 +610,16 @@ corpus and the mdBook contract. This tree is the Dart lane delegated by
     contract, corpus/runtime invocation path, docs, and smoke tests without replacing or conflating the Perl and
     Rust variant CLIs. Naming must be consistent with the cross-variant requirement that each backend variant has
     a distinct CLI.
-  Verification: **PASS 2026-07-09.** `dart/bin/linkedspec_dart.dart` is now the Dart-specific backend CLI. It
-    exposes `--help` and a `corpus --corpus <path> [--execute] [--case ...] [--offset ...] [--limit ...]` command
-    that routes through the existing manifest-backed Dart parser/compiler/runtime harness. `bin/corpus_runner.dart`
-    remains a corpus-focused compatibility wrapper over the same CLI implementation. Focused tests cover CLI help
-    text and selected fixture execution through the Dart-specific entrypoint, while the focused Dart gate passes
-    format, analyzer, 140 tests, CLI help, bounded Dart-specific CLI corpus smoke, and full 99-fixture corpus
-    execution.
   Commit: `DART-BACKEND-PARITY.7.4 - productize Dart-specific CLI`; retained completion note: Dart-specific CLI help and corpus command route through the shared manifest-backed runtime command implementation; corpus runner remains a compatibility wrapper.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.7.4`.
 
 - ID: `DART-BACKEND-PARITY.7.5`
   Status: `done`
   Goal: Final no-drift closeout for Dart parity.
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and
     verification commands agree that Dart reaches the accepted scoped milestone.
-  Verification: **PASS 2026-07-09.** Dart's scoped interpreter-first milestone is closed: the Dart package has a
-    variant-specific CLI, the focused Dart gate executes the 99-fixture corpus, generated Dart source is deferred
-    to a future split proof lane, and current-facing roadmap/book/live-doc/task-tree/Knowledge Map surfaces agree
-    that no active Dart frontier remains in this tree. Future backend rollout returns to
-    `FUTURE-PARITY-BACKLOG.1.2` for Julia planning; no Julia or Lua implementation begins in this closeout slice.
   Commit: `DART-BACKEND-PARITY.7.5 - close Dart parity milestone`; retained completion note: Final no-drift closeout marks the scoped interpreter-first Dart milestone complete and returns future backend rollout to the backlog tree.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.21`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree DART-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.21 --id DART-BACKEND-PARITY.7.5`.
 
 ## Current Frontier
 

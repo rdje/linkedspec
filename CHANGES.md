@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — Renew task headroom with closed Dart narrative recovery (4.21)
+
+Existing ADR0139 data migration preserves68 IDs/statuses/contracts,58 closed pointers, ten unchanged short bodies and exact metadata/prefix/full54718-byte current tail. Original171451 bytes become106515, renewing64936 under unchanged limits. Actual inputs precede migration/output bytes precede reader use; public --all/all68 ID queries match original bytes/exit0/empty stderr. First independent readonly0/ten corruptions and actual modes/commands/channels pass. No tools/registries/runtime/SDK changes or new Dart parity/reading/native-custody claim. Book/facts/task/live pointers resume independent Perl79.1 after normal focused landing.
+
 ## 2026-11-10 — Select pure Array-pipeline result guards (23.1.39)
 
 Original36 public Perl programs expose17 result gaps: ten free/later Hash-copy runtime errors and seven literal receiver compilation failures with actual ready0/unresolved1. Nineteen healthy controls and all four needed errors remain;29 descriptors are ready. Freeze unchanged36 and scoped79 contract/five independent backend owners before production. First readonly0/empty stderr/eleven effective corruptions recovers actual source/Git/modes/metadata/values/errors/warnings/absent fields and36 module-handler pairs. Correct stale helper-spine current frontier and obsolete blanket direct-pipeline-return warning; retain compact lifecycle split caveat. Public book/current pointers route to Perl79.1 after normal selection landing. No production, peer verdict or whole-feature admission.

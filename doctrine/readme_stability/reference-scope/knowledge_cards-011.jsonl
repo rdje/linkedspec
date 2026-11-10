@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1776,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-marker-short-alias-control.md","sha256":"6130642bccb787992dbaa80fa420d72b24e16c2781e2ab8545852478e4a8ffa1","type":"member"}
 {"bytes":3217,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-match-presence-is-not-an-offset-sentinel.md","sha256":"5ce44e19ac7981f547b513e7355a79cedb72e794065ebb8d3bd891fa951a1e37","type":"member"}
 {"bytes":4912,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-caught-panic-stderr-gap.md","sha256":"c603bf531cdc179978c0d84f712d6058fb297e7164ee1fbb426f805c3a1733b1","type":"member"}
 {"bytes":5675,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md","sha256":"944ae1fffdf9bbc032706aca4bba7646f4df61c8ff81d4867b7ea0121ad55020","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3262,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-authoring-quality-doctrine.md","sha256":"47a37f9954ba486ff7086d413b323fee936e4387ecc533b98b917c5a9b8fb4e8","type":"member"}
 {"bytes":2553,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-capture-mark-family-taxonomy.md","sha256":"2badbab9f11120683f51796a853b7b34c918232888a73f08121f62f5bbc742fe","type":"member"}
 {"bytes":13674,"lines":186,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-defined-user-function-definition-parser.md","sha256":"ba26432baeb821e2927cf479062e7c7daddf01c9337026428ba12718b793c48d","type":"member"}
-{"bytes":1836,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-derived-roundtrip-future-lane.md","sha256":"e46fc5677d8fa5ee5363718aa3fbc4c5f847a8a439a2db0de2d135776a402d82","type":"member"}

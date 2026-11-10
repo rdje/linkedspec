@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2836,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-recurring-admission.md","sha256":"ee75429d8c81139c4a64f41a2dcdf6a02c07c279d1ba4b60127727881ae01ce9","type":"member"}
 {"bytes":4266,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-admission.md","sha256":"9e033935069880cce48c4c4f540be20a1ef0598f9dddea1e62247d7a1ab7a16d","type":"member"}
 {"bytes":5776,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-carriers.md","sha256":"870ab8c577ab85fd92f6ea67b808c22a98b627603e4143c942918f62acb1545e","type":"member"}
 {"bytes":6033,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-dormant-red.md","sha256":"b49ab06c3323b938064c2ab8e51a6d35795f87f660148a545633198f8d014976","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4210,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-user-function-registry.md","sha256":"df8e6e043a104c3ec6104e87b3727d72a09c67e7863a3c1c02e5152db0cd10e4","type":"member"}
 {"bytes":18985,"lines":168,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md","sha256":"e81a1c91ef7ef1c74cb518f2f5bc223fa61963d0a43e695f39b5ca697ffa24af","type":"member"}
 {"bytes":5049,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-user-function-routing.md","sha256":"e7cde3d34dc46d859dce81d2dd75646d03ea63f7d48ca122e38301b4146114da","type":"member"}
-{"bytes":2363,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-runtime.md","sha256":"1db329da698a67f771604465b2f4b6d291a90b25543972954a247190848cdc6b","type":"member"}

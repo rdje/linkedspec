@@ -1,0 +1,1170 @@
+{
+  "docs/checkpoints/task-headroom-dart-2026-11-10/capture.py": {
+    "bytes": 6892,
+    "sha256": "0113441588cf2a2c422060ff136db1f06d70c6c2c464a6cf35154c8cde334843"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/migration/command.json": {
+    "bytes": 305,
+    "sha256": "2ffa11a1808f0eddf49fe0c14f0f3d27d0b3813c81bfa4f27d046b00fb798125"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/migration/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/migration/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/migration/stdout.log.gz": {
+    "bytes": 139,
+    "sha256": "39d02535f65983aee5182201787f37c5835067eb054a6d020e1a09850fa5176b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.1/command.json": {
+    "bytes": 259,
+    "sha256": "b93c66ce0d276a0755f932104beb43bc1ca9e00cd8d8d3b86b6c8f34dd5650c4"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.1/stdout.log.gz": {
+    "bytes": 636,
+    "sha256": "25ef9c2da3ca146198104512c04d49d737a1180c09d81d8926d00a2c4e1377de"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.2/command.json": {
+    "bytes": 259,
+    "sha256": "a61755b50e99a7638234b01bab290e1c203d077dab122412e6f3fd766a3914d2"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.2/stdout.log.gz": {
+    "bytes": 606,
+    "sha256": "ea56abcb9ce6c894b51da0a804ceb183f1268a9ab332654784b9df8f5b039536"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.3/command.json": {
+    "bytes": 259,
+    "sha256": "1894694f0fd1aea0dbe6f969890193235d0c0557c8b94f829a98bcc07b4a8bdd"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1.3/stdout.log.gz": {
+    "bytes": 524,
+    "sha256": "ebd267d43de68ff22eee82fe88d8544e1d9bb95ef51e3337aaf7b357af60e46a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1/command.json": {
+    "bytes": 257,
+    "sha256": "6476bd7968bfe8a769f311dc69aa703b2f2d9a4bdc90cd14164c092e24819719"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.1/stdout.log.gz": {
+    "bytes": 168,
+    "sha256": "199a47d2a482b1b06333e6c17bbe81571bb01e0b6a7ca6e42637448ac26b87ee"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.1/command.json": {
+    "bytes": 259,
+    "sha256": "9a5cde129bb879babc88020be72b02086546ed6320bcd873e25b039eb93e131e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.1/stdout.log.gz": {
+    "bytes": 562,
+    "sha256": "def60735e5fb1fc65b8ccc2ff16309b1da47294be3d1c93ac693ec90b3c1f488"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.2/command.json": {
+    "bytes": 259,
+    "sha256": "6557e9a7d669e0abd8a665fff6b5d33918cfbe158c244545b951328eee802324"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.2/stdout.log.gz": {
+    "bytes": 641,
+    "sha256": "412d5f33e05e455b6becf6332cb6a0173bc5d53825ec21f05c93d28bd89569f0"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.3/command.json": {
+    "bytes": 259,
+    "sha256": "cf5894bf66224fc31bf29dda45cc16910c36649fc8eb77b106748c50d4a2622d"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.3/stdout.log.gz": {
+    "bytes": 627,
+    "sha256": "6c83e594b2db241990a552ff46696097a3a0b123e4d54d0e5d3391870e47a5fc"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.4/command.json": {
+    "bytes": 259,
+    "sha256": "769d5e48542dd25a3194e63b3fa76043b65d9873777bb359e758817dd89b47c9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2.4/stdout.log.gz": {
+    "bytes": 778,
+    "sha256": "b488b9cd21d587469170ef8b83927e05f46154f4b5a1009c7d5324f19fc2816c"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2/command.json": {
+    "bytes": 257,
+    "sha256": "82718803486b7c6aded9779fbcebfc7c8cd5ee838653628c160ef152c37000f9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.2/stdout.log.gz": {
+    "bytes": 136,
+    "sha256": "fd1672985731e85d36b53815252577db81e30ec395948a86d8f64f928da9ea09"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.1/command.json": {
+    "bytes": 259,
+    "sha256": "fb57d4e149b10a6895dad59bf0d85c5d4f7ccab23c0b33d567ad68e9ac057966"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.1/stdout.log.gz": {
+    "bytes": 799,
+    "sha256": "38d486de5d424d185f2c5fa0b3e9655051b32ee497c7cf05a89c1d009ae72c77"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.2/command.json": {
+    "bytes": 259,
+    "sha256": "57f3756958000cfd427a2ceb7b3065ed6feddaa4c73dc6fa1aae54593a79c315"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.2/stdout.log.gz": {
+    "bytes": 607,
+    "sha256": "853e5e6d9c4cd5c52f86771e0b290228f8343907489d1f2825e22f7b8a161a14"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.3/command.json": {
+    "bytes": 259,
+    "sha256": "df96c10da5dbd078a49d3df7e27148f57011537bf09d99be35f8b482ec2c0577"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.3/stdout.log.gz": {
+    "bytes": 1266,
+    "sha256": "104d799810e582b768ba5187a335975545a77aca806c7e802d53ad74ae38a604"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.4/command.json": {
+    "bytes": 259,
+    "sha256": "608b10ebe0fd19ddbf9eb38ca3b374d3b7cce6c8e7846af211d6ac4f238bccf4"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3.4/stdout.log.gz": {
+    "bytes": 1116,
+    "sha256": "e4cb4ab971a264bd98ebf67ccdb64b35c501a8233f56d70868d9cd8335866786"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3/command.json": {
+    "bytes": 257,
+    "sha256": "39e37c36ca981e4a9f99ef5965fed8af85f743111110c6cd1fd41d26db938a19"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.3/stdout.log.gz": {
+    "bytes": 150,
+    "sha256": "187b465740eff8c309c87ac4ecbde3248d314a715f0ed7146fab3fe4979dd6dd"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.1/command.json": {
+    "bytes": 259,
+    "sha256": "8c4bb07eef7c56eb0be9799744ae5cff3575f373732f33ab56f67c25d9bdaf78"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.1/stdout.log.gz": {
+    "bytes": 1121,
+    "sha256": "1aff3abb16fa72e519de3ea1ec88f5bab49ed5274ba44c3d6761835c325e32c4"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.2/command.json": {
+    "bytes": 259,
+    "sha256": "44dce8e684348a23822e5f665b9f0d1d0145d08f27d6d09b1d7e7299beed115a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.2/stdout.log.gz": {
+    "bytes": 1275,
+    "sha256": "4190e3227da700154d24c2da9aae28cbe57f6378b2e3c19fc42c61fac48b9227"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.0/command.json": {
+    "bytes": 261,
+    "sha256": "817c49a3f3e90a833ac7b9520c304e2db46ceb288d385b40a19bdb56bae15b14"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.0/stdout.log.gz": {
+    "bytes": 370,
+    "sha256": "166ee289acbfd2138c60d07742e55401bf9cb5f48abb00c2ee50322efb04800e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.1/command.json": {
+    "bytes": 261,
+    "sha256": "0367b4992744d64826152bbb5cd9efc5d65dee6dd5b896e2cbd58c46dbae4976"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.1/stdout.log.gz": {
+    "bytes": 1303,
+    "sha256": "ccd0d9cb484679348ab8a306c758ebc46037f2d7bab59c37b9d648a02e82089a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.2/command.json": {
+    "bytes": 261,
+    "sha256": "ea29172fec34114b73cdf4365087343a107d21ebdba8823f0df66d2813730c64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.2/stdout.log.gz": {
+    "bytes": 1235,
+    "sha256": "af56bb1e503578b27fd8b290822f42d3dbb14ded3b966f411714d289d6ba08b6"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.3/command.json": {
+    "bytes": 261,
+    "sha256": "a199dd42b6ca1194a3abc59823e49c973705316c0fee0d741e3e8916e1a50105"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.3/stdout.log.gz": {
+    "bytes": 1323,
+    "sha256": "7ddf9da5680014ff177c71cdc7a2088613442bb75d2fd2feaf80105448533e81"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.4/command.json": {
+    "bytes": 261,
+    "sha256": "f3930afae911e07b60bd3dfbb7224192b4798b9a4ab26c2067eb22b6052e0c7a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.4/stdout.log.gz": {
+    "bytes": 1234,
+    "sha256": "55bc24864d7a5247f6c9a6a0bd8bb2faa6f0de0222a1ca5f0fcd85881a1cd1f9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.5/command.json": {
+    "bytes": 261,
+    "sha256": "99c1688b33ac24f12fa189197ac5ce3f60d57f04fc737e914e3dd8063f00589f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.5/stdout.log.gz": {
+    "bytes": 1566,
+    "sha256": "b58bd3105b0059e6fd50435531ca2ad7d081930ba665c5bf1dceaed3220748d0"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.6/command.json": {
+    "bytes": 261,
+    "sha256": "a42f95cfc7acbf6d3bd32785d7999e65e31d9926eeb22c1852f769a4ca9a35bb"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3.6/stdout.log.gz": {
+    "bytes": 1490,
+    "sha256": "83bd3f18b81110f8889b20d6c99396641a7029ecb2718604e84cba3e3bfbe00b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3/command.json": {
+    "bytes": 259,
+    "sha256": "d995be8d84d010e8f2f4a92a7dced07e27e0004ae6e260869d804fc971cb9fff"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.3/stdout.log.gz": {
+    "bytes": 464,
+    "sha256": "ef32d4cd1339334fffabe649d8f4ce62ca2fc9434b0d64378b039a78d2c874c6"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.4/command.json": {
+    "bytes": 259,
+    "sha256": "e3b6f3f382c814a27849f456047d69d918710b367479f159389502518ca822c9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.4/stdout.log.gz": {
+    "bytes": 1448,
+    "sha256": "519b9384e69f810f277c16394c5bd70626d7d6262474f67db625863f5d48be78"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.0/command.json": {
+    "bytes": 261,
+    "sha256": "a00069f7e6c6053adf267e2afe7eed5121391f2303f45658a3f096a9ed888f59"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.0/stdout.log.gz": {
+    "bytes": 527,
+    "sha256": "d77d8b0342b06d1a78c43d12d5a287240012431b99f8d8e9338340045d8d148b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.1/command.json": {
+    "bytes": 261,
+    "sha256": "62b1b31591b32283b76b2eb0b1dde0ffa64c7a79dd79624333914a4e38bd2685"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.1/stdout.log.gz": {
+    "bytes": 1313,
+    "sha256": "ccbfa9dcd4e6214b39cfbbdb5e570995723a03fc6835fbcc89e1eff6d3b5826b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.2/command.json": {
+    "bytes": 261,
+    "sha256": "ca2d25f558f106069f04f7dbc8d238fc9ec22cb968953333138de2125b28df6b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.2/stdout.log.gz": {
+    "bytes": 1269,
+    "sha256": "7801e447efaae8b1ec26290771c2294239092ce94742b2adb43b2e7cb6ff69fd"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.3/command.json": {
+    "bytes": 261,
+    "sha256": "3868b749229b5988fab3ff10d931ccec15c3dbbf03f01ea71e64e1044a4b8592"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.3/stdout.log.gz": {
+    "bytes": 1247,
+    "sha256": "69d9e5a7118b00f93fde4fc467ba7801b4b1a1677f43f298cf263e5b8651f592"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.4/command.json": {
+    "bytes": 261,
+    "sha256": "06389b07c98e96774a81ea0410779b9054029921469c3256e6d095a4d644a6df"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5.4/stdout.log.gz": {
+    "bytes": 1044,
+    "sha256": "4a24e2ac7f6e9980bdb6256b3b33044f5119c5c53a9423d6da1d95c3e7f83611"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5/command.json": {
+    "bytes": 259,
+    "sha256": "db08d1d047a2cab076f5ce61f472cd56f812962322431653ea506ae2b2bcca4e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4.5/stdout.log.gz": {
+    "bytes": 514,
+    "sha256": "1fb74bf118959f77a6939a112bb2ddc90664db03228b51254c13117b67d8923b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4/command.json": {
+    "bytes": 257,
+    "sha256": "08395bcbbcc016df7110d8ab0aa82671116e8922ddafb359143b1bbfcc5eebc7"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.4/stdout.log.gz": {
+    "bytes": 140,
+    "sha256": "82d52beb054a38532cd1526df8fd6bff0e5d1b08977b2e64ec3b372f74b2466e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.1/command.json": {
+    "bytes": 259,
+    "sha256": "a86c650365ee0b0dbbe40de00949e777d04093157461845f0c87714e7d0b4583"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.1/stdout.log.gz": {
+    "bytes": 741,
+    "sha256": "80ffe799c6ba2fc5c626feb966c25af8caab97d89856cf92a78019024140b436"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.2/command.json": {
+    "bytes": 259,
+    "sha256": "2f71e086636f67dc836c67558301f161bf101f9d51950e12e35db9b8c3dd1a82"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.2/stdout.log.gz": {
+    "bytes": 751,
+    "sha256": "8724bbc1c34562de3cd8a8697c653e0e11e0e6fb72a6370ea5f76370cc921ece"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.3/command.json": {
+    "bytes": 259,
+    "sha256": "2e8b0e1916918e001c1c2d3c7954c2c39279128d2dc02a980f11edaa08f0bccd"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5.3/stdout.log.gz": {
+    "bytes": 704,
+    "sha256": "c18a126c65fca860e0000632823cdae14edbaeb3e753c781cb1b01d081dab445"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5/command.json": {
+    "bytes": 257,
+    "sha256": "f6c2531376904c9650bffd19f2815dae24512623fc0dfc8bcc4439a19397de9e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.5/stdout.log.gz": {
+    "bytes": 153,
+    "sha256": "7b79348b8248b764f6aa529f0ec583ec9bf2f60df8e2e93d394e761b21a0a2b9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.1/command.json": {
+    "bytes": 259,
+    "sha256": "c681c4fe193a6a9fbe57afd3e5ece963406454ad423e7bb2729a3e97efcff7df"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.1/stdout.log.gz": {
+    "bytes": 679,
+    "sha256": "ded9061e571ec4138fe6ee5719bdaccb7b535a53ae370e9de93de85eaea9f34b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.0/command.json": {
+    "bytes": 261,
+    "sha256": "f3bb1df9320d2d3495e6afec6790a742bca5c4398019ed5e4507dfdb0ecf813b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.0/stdout.log.gz": {
+    "bytes": 448,
+    "sha256": "0a9481c304bf307b47fe5abc3c6d6733d5d4305b263a825d0a6fbefe167bafdb"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.1/command.json": {
+    "bytes": 261,
+    "sha256": "17926f27f5abd4cfbc03a0a52d66ca128b959a9dc237bc1420a4301af42e5990"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.1/stdout.log.gz": {
+    "bytes": 773,
+    "sha256": "32b7c41e708c61f3fb09aa9bce1651fdbe6da820a00e37b2e72330a683ebc039"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.2/command.json": {
+    "bytes": 261,
+    "sha256": "556c0472b139f0f57a4092a846ed61f78add5d8d5bf29c8fce7fffe21207e765"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.2/stdout.log.gz": {
+    "bytes": 810,
+    "sha256": "1fffe0b732df8c444ef90cde5cb20d70271e62ab8b9a9503d86f6ce2c71160b6"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.3/command.json": {
+    "bytes": 261,
+    "sha256": "0a3b3231b835dafb96fd87a22961418d3cfc2d348a1a9b987cfcb71a1c0a9f02"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.3/stdout.log.gz": {
+    "bytes": 964,
+    "sha256": "96132268db26db2ae8fd849025e6f9aa5a8c0c8f576b97d6c5b7d43db69fb46e"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.0/command.json": {
+    "bytes": 263,
+    "sha256": "f42e0b3319e94b74408d5fcddddc164bbe5e8fa83a6ed8eb29a668cfd8935ce0"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.0/stdout.log.gz": {
+    "bytes": 556,
+    "sha256": "04e90c2643751421e45fe096afaf86a4735999604e279e43de2a3cca2b852846"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.1/command.json": {
+    "bytes": 263,
+    "sha256": "4f4642ea155739cc531a604626645c38ceec3c866830a5f7c754c00c08fd299a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.1/stdout.log.gz": {
+    "bytes": 755,
+    "sha256": "90fed5ffd52020e1d3a0945353463e2adeee25be7daac45884d46937d2bb1e67"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.2/command.json": {
+    "bytes": 263,
+    "sha256": "caae5399cd545e80ed35089902e1181566dda8202dcefec7488b33b7157f360f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.2/stdout.log.gz": {
+    "bytes": 797,
+    "sha256": "fe7a33413348e4009e4496cd23d620405a10fcb521fd7b2650578f77b263a224"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.3/command.json": {
+    "bytes": 263,
+    "sha256": "ce52922b312195cd203606a06a5c321d3d466119987cc4bfef535817ac97d141"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.3/stdout.log.gz": {
+    "bytes": 913,
+    "sha256": "68b7cd3c5c54580bb54c8270f4c02d0d117cbe9bb828fb405282f7b23837b46a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.0/command.json": {
+    "bytes": 265,
+    "sha256": "2725bcac1d5cd597a3299d6d4d6360822fbfd324fad01085fb241204b2c3f7fa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.0/stdout.log.gz": {
+    "bytes": 712,
+    "sha256": "f97886435873762924d22ec2ed5087d914946ad6dc084bee53f3b1af74ac0e99"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.1/command.json": {
+    "bytes": 265,
+    "sha256": "a44adee35ebd3480e606b954605b3e829a1e3e55805b42ef69bdb7017c05138d"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.1/stdout.log.gz": {
+    "bytes": 1580,
+    "sha256": "c32e30ae6e6c7d989bf5f374dff3ae868c260a96365a78ff91ad9919c140a667"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.2/command.json": {
+    "bytes": 265,
+    "sha256": "0ad06e098d42223b45f006f3f2b309a9d160c9cbecd22f53ecfbe0b26750b938"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.2/stdout.log.gz": {
+    "bytes": 1604,
+    "sha256": "008ea8f0b5958a186a9e6705cf0e61e234d81a1f0f00f6dd8731aa4e432a9a73"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.3/command.json": {
+    "bytes": 265,
+    "sha256": "99549b4757e41d3fd1493f0975885c11d58dce74e6b04a28cfcb2af99fde970f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.3/stdout.log.gz": {
+    "bytes": 1711,
+    "sha256": "7a9b90359574d452dc091eb1a35a87afc690a0fb0cfe419cab6e5779f587f6d1"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.4/command.json": {
+    "bytes": 265,
+    "sha256": "dd4ac645ce07c84da960686c6728fa3e101eac22a05f0c13d6365283889699ce"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.4/stdout.log.gz": {
+    "bytes": 1776,
+    "sha256": "bb6273b17078fc79cdbbebd9a95b6ff63e078e9e6ba9d331a93ec42f94b92ffe"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.5/command.json": {
+    "bytes": 265,
+    "sha256": "0c1ee2145828dd3a19f4b1909d98b63e2c86581485a63232e2119a6a8e7f6cce"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.5/stdout.log.gz": {
+    "bytes": 1674,
+    "sha256": "ab294cbdfd812e261f8497aeac549c1858ed69870fb45cbef4acdec138ab1aca"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.6/command.json": {
+    "bytes": 265,
+    "sha256": "6b592d4db9f196568a66a970ceefab82ad06e9d41b3d92d033b703994c259f13"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4.6/stdout.log.gz": {
+    "bytes": 1566,
+    "sha256": "4e852a5c838a5842c5ede05a8578e4906d09252b6103806103182d1e20e45d23"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4/command.json": {
+    "bytes": 263,
+    "sha256": "957cc61ae10337a80a0cff4376c37a6658df69b52fce32d005f185cd67d8c2ed"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.4/stdout.log.gz": {
+    "bytes": 944,
+    "sha256": "8c0fe87c9d4ec2d2654deb009dc158834cd58659b0c07b469a23aa0b57a0e512"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.5/command.json": {
+    "bytes": 263,
+    "sha256": "d171ce889b1fabfa81bbf531902273cb3c8a6f074e66c9f0d01d75b64141c345"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.5/stdout.log.gz": {
+    "bytes": 1296,
+    "sha256": "89b9e20a5d4f10e31dd4a1803cd128e6bb50fc3e2a43b01e23fa907e8feef87b"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.6/command.json": {
+    "bytes": 263,
+    "sha256": "32a4f950c509b59fba03c308c167cf61b729c816fe038bfad6b54405feecea52"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4.6/stdout.log.gz": {
+    "bytes": 921,
+    "sha256": "1e7f5b428fce3bbeef0a659238787e3efd36e00e87ef764b8120c87eced577a0"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4/command.json": {
+    "bytes": 261,
+    "sha256": "95f86e251c67d342d0d2979a438e786c31d156fa3ea6f846061d803b897e944f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.4/stdout.log.gz": {
+    "bytes": 960,
+    "sha256": "8d9341d8f3383ef492958ea027ea5be425fce0e8b6a12691a5b0c37eec4fd91f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.5/command.json": {
+    "bytes": 261,
+    "sha256": "2989a135201fd91218eb59c750c215245ba617e10f7cb3a6478624fa2bb96dc9"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2.5/stdout.log.gz": {
+    "bytes": 781,
+    "sha256": "b9746e8fc9787fab0ad24f61c4ea41ba3373aaced015cf7ffb8196b203799cf2"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2/command.json": {
+    "bytes": 259,
+    "sha256": "7b07a498bcb6ec881cc1208c13353fb8cb43eb35b3bb8b91375e942ab4fee85d"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.2/stdout.log.gz": {
+    "bytes": 279,
+    "sha256": "970371bdf29801aa68b0ad13e3987d4fe5c7a562ff708f86009bd26f82bafc13"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.3/command.json": {
+    "bytes": 259,
+    "sha256": "1227e0fadb722930963d238eb64e199c098ca479cbd0a7a70c6dd7be3177d47a"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.3/stdout.log.gz": {
+    "bytes": 569,
+    "sha256": "3a03eb7fae0b5cbe2f2fc1eaadb74376191ed763903f959cda611ebc0c6c76cd"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.4/command.json": {
+    "bytes": 259,
+    "sha256": "b6b204f91b5a8e66c7b2533f6484191ee1d976bb923f829df5c89cc12ad9e8b3"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6.4/stdout.log.gz": {
+    "bytes": 535,
+    "sha256": "7c26846ab6fa9101cb6f295cdf5f316282def7ed3d0c474993983284f6c80e84"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6/command.json": {
+    "bytes": 257,
+    "sha256": "4805223cbe742af6f1dd04974c9dad6e12dcb185584e5ffecaeea7fed008d6a3"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.6/stdout.log.gz": {
+    "bytes": 156,
+    "sha256": "cb0933e602e86afde08d33c0910a0273bdeac6f23bd62564f2f5c14b754c27c1"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.1/command.json": {
+    "bytes": 259,
+    "sha256": "3ddc5ea7cc58aa29ce14ccd115dc2175ea6676e0395a71801bda3c99c6eef57d"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.1/stdout.log.gz": {
+    "bytes": 579,
+    "sha256": "3e63b119cdd8108446a3dedc3974026b8324cad11c192350d3e2180c1eb319fa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.2/command.json": {
+    "bytes": 259,
+    "sha256": "9e0f0fae18b9368a7bd68e619cb14fa6825f4f46cc3a4ceb4aa0ca2dfcaa552c"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.2/stdout.log.gz": {
+    "bytes": 586,
+    "sha256": "efe97197769a2f13c1321a77246139d7fae9cc1d80332fd68520d99ebc20fca1"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.3/command.json": {
+    "bytes": 259,
+    "sha256": "b2b586b3f3046ddd86e946011a3eaf0c01d6bc421c868917bd5ac3be55c44741"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.3/stdout.log.gz": {
+    "bytes": 545,
+    "sha256": "b2e87839790824ee16d801b439f924a1890791059c8003110e038e7742364a21"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.4/command.json": {
+    "bytes": 259,
+    "sha256": "fc9b0063f968b0a59e0d027f717c66e0e5c854b176191fee2e98f890ebb995ab"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.4/stdout.log.gz": {
+    "bytes": 723,
+    "sha256": "7c79c6995fca342d7ff376ff9178c62b251f9b1da17dbb81808d24f5f019d5de"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.5/command.json": {
+    "bytes": 259,
+    "sha256": "a4382ba3533202e357ea772c2241228f6ffbd955c8d79bb76b0805faea3753b3"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7.5/stdout.log.gz": {
+    "bytes": 586,
+    "sha256": "b0c68775411b0f4395527883db8c8d97d24191ea0fdc02e23613e465e83f0ca5"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7/command.json": {
+    "bytes": 257,
+    "sha256": "d5fe0e020c26daf412d82373fee706e1f0464a2f5e6c0f58d3336a170c19fc7d"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY.7/stdout.log.gz": {
+    "bytes": 162,
+    "sha256": "9e1b7b57bb45a7d206fb56ddd0567d08c5c6342b7966b08567f27d92a3df6a34"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY/command.json": {
+    "bytes": 255,
+    "sha256": "9c0e410911f2a2e48a8864c4a9173b3b6f827c5c41a9d9b5f0d91e48bcef1484"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-DART-BACKEND-PARITY/stdout.log.gz": {
+    "bytes": 266,
+    "sha256": "d54157147eff0f2953d0d917addb73ecd5337f4d8c228c49324175bfcd182aef"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-all/command.json": {
+    "bytes": 229,
+    "sha256": "309f146d88f5bc1f831ebec8a98c5bfe9f186233497679ed746df620d23599a4"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-all/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-all/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/commands/reader-all/stdout.log.gz": {
+    "bytes": 40348,
+    "sha256": "d8309cb0b6d39830c250b429ba0bc97606cea7c6c77c348f6feaaea6f1773a47"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/complete.txt": {
+    "bytes": 85,
+    "sha256": "4afbca80c72790971c406327cac9741e361026cfd2481af426e90ee344ee0f68"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/git-input-identities.json": {
+    "bytes": 976,
+    "sha256": "45b0dbdce8a6a7acd8047cc22236076c34bd3f013698ad9efe41e42a8fa7232f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/git-inputs/source-0.log.gz": {
+    "bytes": 190693,
+    "sha256": "84d7c4731e8eb12a1ce76e9b28c64d5d8be5217998772c163b66909e408ac6c4"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/git-inputs/source-1.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/inputs-before-migration-identities.json": {
+    "bytes": 23069,
+    "sha256": "49f31f398efaa519a2e74f89161a02146afbea5103e73464feeb78aadf962921"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/inputs-before-migration.tar.gz": {
+    "bytes": 3486911,
+    "sha256": "0cd39bff63fa122025615981a83095e271b6c8bd202916d0f341d266882c5a23"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/outputs-before-reader-identities.json": {
+    "bytes": 369,
+    "sha256": "7aac941568d8b7fb6f6311f1af5ff9a953ad06f9b55870781836bf76217f2df5"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/outputs-before-reader.tar.gz": {
+    "bytes": 23446,
+    "sha256": "534fe22b9e716eb5fa05ef8d10a6dda05ada033471b7e56922124293531a1d21"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/review.py": {
+    "bytes": 9839,
+    "sha256": "86081ae4bcab6a65ba289bea079aa8e15a79bd025af177ad3f97c409a7b3182f"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/run_review.py": {
+    "bytes": 1013,
+    "sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190"
+  },
+  "docs/checkpoints/task-headroom-dart-2026-11-10/seal.py": {
+    "bytes": 708,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  }
+}

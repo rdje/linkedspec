@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2363,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-runtime.md","sha256":"1db329da698a67f771604465b2f4b6d291a90b25543972954a247190848cdc6b","type":"member"}
 {"bytes":2236,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-signature-state.md","sha256":"88d085c7938815dd9b8726a11a21066151a6941bbdfac0a15e3e3605f1d087cf","type":"member"}
 {"bytes":17157,"lines":204,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md","sha256":"472f314e7daa83f3c4cfc6f284a06ec87492c21c0b1010332ebba4ae886a6179","type":"member"}
 {"bytes":29326,"lines":388,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/macos-rust-first-launch-validation-latency.md","sha256":"55f3498086fb5cfa9884329a6306837c309985bf4a634bbf7230e0bbbaba8986","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3479,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"8d15d6301567d79d1b9c037486154e8f23b35d99c9ca999272274de545752aab","type":"member"}
 {"bytes":2236,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6","path":"docs/knowledge/perl-count-logical-rejection.md","sha256":"ee128e316e65f603a8f4549d456ee48a45747fe8304b313b869690d0a68c0be3","type":"member"}
 {"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}
-{"bytes":5109,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-count-result-source-guards.md","sha256":"7888997ed6c95e20c8ab76986adb371a370805b015877fa811a8357192d6ed58","type":"member"}

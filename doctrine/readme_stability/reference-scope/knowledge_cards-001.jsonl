@@ -33,6 +33,7 @@
 {"bytes":4150,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-primary-cli-trace.md","sha256":"08a0b1ff48edbee22a8e2d06a38ec46255994dc75b90d93ae7fa279a8fee9aef","type":"member"}
 {"bytes":2164,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-set-result-guards.md","sha256":"291fbd45208106c28f9d996fc374b25385d4c8d91df6a1b234d319570bfee75c","type":"member"}
 {"bytes":2575,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-capture-endpoint-match-absence-repair.md","sha256":"944468668fff4ce90414cf0fd5fdd30fefe490b446220aed9f5161131714af78","type":"member"}
+{"bytes":2962,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.21","path":"docs/knowledge/dart-closed-task-narrative-headroom.md","sha256":"4fde3cb8c756d3f77b017ecace606b54f4c4d7c3fa5f15357273e955e9742f6e","type":"member"}
 {"bytes":5817,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-compiled-spec-state.md","sha256":"d477bbfa2197f5fa4ba8b529922c42169b44d9ed550d356b63d499fd9a90df52","type":"member"}
 {"bytes":7984,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-component-gate-sdk-compatibility.md","sha256":"5c0aae96195d4e6296d019f5ec773a57b99ffb5f9811e94fc115e2007d1c500b","type":"member"}
 {"bytes":2033,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-constructor-result-guards.md","sha256":"0590af4d3cf21dea6ade146b8c4df2b8b0ae3224454dae8d2e8882bf16cd2ba4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2733,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-pure-blind-dependency-regex-gap.md","sha256":"ad4b84528b509de4be29133582c970c6eb0a715bad9c9fa9affb15d2b8e297f0","type":"member"}
 {"bytes":2207,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-push-snapshot-result-guards.md","sha256":"629530536819d9b9b8b5e11acd9bc6932ecda9afe9b71462a9edc55198ea1b01","type":"member"}
 {"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
-{"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}

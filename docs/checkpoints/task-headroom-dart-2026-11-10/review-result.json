@@ -1,0 +1,24 @@
+{
+  "preservation": "PASS",
+  "stable_ids": 68,
+  "selected_closed": 58,
+  "unchanged_short_bodies": 10,
+  "original_bytes": 171451,
+  "current_bytes": 106515,
+  "current_text_bytes_renewed": 64936,
+  "current_tail_bytes": 54718,
+  "actual_public_queries": 69,
+  "effective_corruptions": [
+    "current contract lost",
+    "closed status changed",
+    "stable ID omitted",
+    "metadata prefix altered",
+    "full current tail truncated",
+    "wrong epoch pointer",
+    "undeclared extracted member",
+    "unselected body changed",
+    "source identity changed",
+    "actual public source output drift"
+  ],
+  "limits": "Historical finite task-data preservation; tools/limits/runtime unchanged. No new Dart host, feature/parity/native-custody/whole-project reading admission or disk-reclamation claim."
+}

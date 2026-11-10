@@ -1,0 +1,12 @@
+{
+  "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.21.json": {
+    "bytes": 1980,
+    "mode": 420,
+    "sha256": "cd5a8379654b040c340eef775b1fa47d6e536c25c1cd3d0b5018029eb08bacb6"
+  },
+  "docs/tasks/DART-BACKEND-PARITY.md": {
+    "bytes": 106515,
+    "mode": 420,
+    "sha256": "b1487e85e679e4caa6e30eb2ca87d9ba6522ab1c06541465d05ed7d223e2d349"
+  }
+}
