@@ -410,3 +410,13 @@ reverify: "Current proof: bash tools/run_python_project_data.sh docs/checkpoints
 Historical header archive: `docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.4.0-capacity/knowledge-headers.md` (repo-generated-artifact-cleanup-boundary). The complete original fact body and runtime observations are retained; the first uncommitted FlowExpr proof replays from its complete supplied bytes through the sibling replay.py.
 
 Oversized checkpoints use bounded payload chunks with physical, payload and whole-stream hashes plus original modes. Verify exact recovery and actual retained-reader use before removing duplicate originals. Logical inputs survive; physical bindings change explicitly.
+
+2026-11-10 TYPE23.4.19 observes1181 matching primary/independent metadata rows
+in eight named root/Rust/log scopes and retains every candidate. Project census
+producer bodies precede helper import and remain unchanged afterward; five
+metadata/four command-channel controls and separate readonly replay pass.
+Before shared book edits, all eight checked18.1 claims preserve214 original input
+rows at actual accepted41ba410b, without changing original logical epochs,
+observations or hashes. Complete native/OS custody remains separately owned4.2.
+Latest record: `docs/ARTIFACT_CLEANUP.md`; readonly current capture review:
+`docs/checkpoints/artifact-review-2026-11-10/channel_review.py`.

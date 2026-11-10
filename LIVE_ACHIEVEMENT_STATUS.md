@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Knowledge Map compaction23.4.18.1 has exact generator/source preservation and bounded fixture/recurring-review/source-image/callable/Phase0 prerequisites; exact staged canonical receipt governs landing. Daily artifact review4.19, precise lookup publication18.3, then independent Dart78.3 are next. Broader routing/line-warning pressure18.2 and peers/full23.4 remain separately owned.
+Daily artifact review23.4.19 completes bounded metadata/source/channel maintenance after accepted41ba410b's successful default canonical/all1035 Phase0 run. Precise lookup publication18.3, then independent Dart78.3 are next; broader routing/line-warning pressure18.2 and peers/full23.4 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.18.1. Actual22499->20789 lines/7872229->7125905 bytes; complete12237-key prefix/1710 remaining records exact. Full source bodies are retained/replayed. Focused map/fixture/factory/book checks pass; nine unsuccessful canonical attempts earn no receipt. Qualified149-source/four-runtime-successor/one-emitter-test admission and actual isolated recovery preserve134 inputs/22 controls/714 governance/all other prior denials;19 current mutations reject,191 observed artifacts close within202 declared bodies. Sixth failure exposes discarded prepared callable-index source; bounded fix passes unchanged neutral/native/fresh and six authored cases. Direct Count/Length/ownership pass; exact activation/current comparison proves one stale Count lowered-source cell, calibrated alone, and repaired18-row consumer passes with unresolved/non-ready ownership. All initial instrument failures stay explicit. Eleven scoped claims preserve older bindings. Qualified channel replay closes the command-coverage gap; exact old/current rule-copy snapshots and actual normal-helper controls replace one stale source literal, with final487 PASS. Three native custody gaps stay disclosed to4.2; old20.2/4.3 stay historical.  Phase0 seven selected groups reproduce20 source-layout failures/140, then all140 pass after finite value/effect calibration with40 distinguishing controls. Exact20-hunk inverse preserves11 prior fixture/19 image denials and adds12 stage denials; the prior logical input epoch replays without fictitious Git capture. Complete canonical and normal hooks govern landing; no whole-feature admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.19. Dated1181 primary/independent metadata rows in eight named root/Rust/log scopes agree; every candidate remains retained. Producer bodies precede helper import and stay stable afterward. Five metadata/four channel controls and separate readonly replay pass. All eight checked18.1 claims preserve214 original input rows at actual accepted41ba410b without changing original logical epochs/results/hashes; three prior native gaps remain, and the new host-observation gap is separately owned4.2. Required CHANGES rollover4929 preserves exact accepted bytes; the updated book renders and HTML is inspected. Wrong wrapper arguments reject2 before corrected0, with no product credit. Focused integrity checks/normal hooks govern landing; no new full CI or whole-feature/native admission.
 
 ## Next Action
 
-Refresh overdue daily artifact review4.19, publish the owned precise fact queries18.3, then continue independent Dart78.3 with its own unchanged37/four-route and source/arity/error acquisition. Preserve18.1's checked claims at its actual accepted Git revision before changing a bound input, including shared book/card paths. Broad routing18.2 remains after feature coverage without pass credit from its143; canonical CI does not run that whole producer. Full feature verification remains23.4.
+Activate18.3 and publish precise queries for the cap/bundle, epoch-fixture cause, historical/current review boundaries, callable/copy source oracles, logical artifact epoch and exact Phase0 inverse. Verify the already-preserved41ba410b claims rather than rebinding them. Then continue independent Dart78.3 with its own unchanged37/four-route and source/arity/error acquisition. Broad routing18.2 remains after feature coverage without pass credit from its143; full feature verification remains23.4.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.1 —1710 display lines removed, exact questions/other records/source acquisition and direct checks; canonical receipt governs landing.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — lossless duplicate-display plan, frozen source/reader inputs, seven controls/readonly replay; canonical18.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.2 —195PASS/direct290/private21RED-restored195PASS/eight controls;152 profiles/174 healthy exact; capture qualification explicit.
@@ -29,7 +30,6 @@ Refresh overdue daily artifact review4.19, publish the owned precise fact querie
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1 — Perl89PASS/direct185; private inverse15RED/restored89PASS/eight controls; independent Rust77.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.0 — source64PASS/direct93; private inverse14RED/restored64PASS; first recovery/eight controls; composition1.1 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.77.1.0 — Perl76/own48; ten main-only host reads; first recovery/eight controls PASS; source77.0 next.
 
 ## History
 

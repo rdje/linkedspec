@@ -5,7 +5,7 @@
     {
       "name": "bounded-knowledge-duplicate-display-compaction",
       "statement": "The actual 1710-fact/12237-key projection removes1710 duplicate display lines/746324 bytes, reaching20789 lines/7125905 bytes; its complete Questions prefix and all remaining fact records are byte-identical.",
-      "scope": "Frozen6cd8e784 map compared with actual current public generation; complete current source population bound across a separate qualified acquisition. Initial generator-image/output packets do not receive retroactive full input-capture credit. Finite capacity only; line rollover pressure remains owned by18.2. No cap increase, healthy/lifetime-growth, broad workflow sweep, native/transitive custody, runtime/peer or whole-feature admission claim. Source bodies belong to the exact qualified November10 epoch and are retained completely in input-epoch.json.gz, with matching acquired membership/SHA256 rows. A frozen rendering replay rederives them; later card-body currency is not claimed. The overbound inline declaration and actual rejected CI log remain retained; no record limit or gate changes.",
+      "scope": "Frozen6cd8e784 map compared with actual current public generation; complete current source population bound across a separate qualified acquisition. Initial generator-image/output packets do not receive retroactive full input-capture credit. Finite capacity only; line rollover pressure remains owned by18.2. No cap increase, healthy/lifetime-growth, broad workflow sweep, native/transitive custody, runtime/peer or whole-feature admission claim. Source bodies belong to the exact qualified November10 epoch and are retained completely in input-epoch.json.gz, with matching acquired membership/SHA256 rows. A frozen rendering replay rederives them; later card-body currency is not claimed. The overbound inline declaration and actual rejected CI log remain retained; no record limit or gate changes. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/bundle_review.py",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": ".knowledge_map.conf",
@@ -202,13 +202,14 @@
             "sha256": "ea47df2464bec0cd1d348f782c4778495204c74e70bb4c31cc7b2a8afa7eb774",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
       "name": "documented-staged-checklist-format-correction",
       "statement": "The actual staged evidence checker rejects the old checked-line future-work qualification and accepts moving it to the following line; gate bytes, statuses and every other staged task byte remain exact in the captured pair.",
-      "scope": "Two retained actual staged-checker epochs only. This applies the existing documented whole-file checklist-format constraint. First canonical attempt was deliberately terminated143 after its TASK-ACCEPTANCE failure; it earns no complete-CI or receipt credit. No gate-policy, task-status or runtime change.",
+      "scope": "Two retained actual staged-checker epochs only. This applies the existing documented whole-file checklist-format constraint. First canonical attempt was deliberately terminated143 after its TASK-ACCEPTANCE failure; it earns no complete-CI or receipt credit. No gate-policy, task-status or runtime change. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/task_format.py",
@@ -223,7 +224,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/task_format.py",
@@ -260,13 +261,14 @@
             "sha256": "8d14249d1c0b186dbf1e165ff9b52a71812e6f3e8190daa8f8015fa8d3c5cdd1",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
       "name": "catalogue-complete-epoch-fixture-source-seeding",
       "statement": "The isolated epoch fixture seeds every current source path declared by its retained catalogue, including Lua, with exact frozen file bytes; the original single-source setup reproduces the missing-Lua-file failure and the repaired consumer completes successfully.",
-      "scope": "Scoped fixture-source discovery/copying and dated actual consumer channels. Production readers, manifests, historical observations, runtime behavior and separate lowercase frontier4.17 remain unchanged. Frozen helper replay retains its complete scoped source inputs and immutable Git identities through retained manifests; no full control-program/native/archive-input closure or whole-feature admission credit. Initial direct collector attempts used a stale TYPE index and failed before retaining inner channels; their instrument is preserved without original-normal credit. Qualified before executes exact staged-old source privately with PYTHONPATH=tools and fresh real task indexes; qualified after executes the repaired production test.",
+      "scope": "Scoped fixture-source discovery/copying and dated actual consumer channels. Production readers, manifests, historical observations, runtime behavior and separate lowercase frontier4.17 remain unchanged. Frozen helper replay retains its complete scoped source inputs and immutable Git identities through retained manifests; no full control-program/native/archive-input closure or whole-feature admission credit. Initial direct collector attempts used a stale TYPE index and failed before retaining inner channels; their instrument is preserved without original-normal credit. Qualified before executes exact staged-old source privately with PYTHONPATH=tools and fresh real task indexes; qualified after executes the repaired production test. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/preserve_epoch_claim.py",
@@ -281,7 +283,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_capture.py",
@@ -358,13 +360,14 @@
             "sha256": "279550b77fc1f1bfdd7bd80ae8997ea304b29bded434654f3ed6accb3125692b",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
       "name": "recurring-factory-semantic-and-historical-source-boundaries",
       "statement": "The recurring factory reviewer accepts current-runtime execution of its unchanged authored semantic targets while retaining the original capture-only byte-preservation and exact historical source-correction oracles. Actual current native-kind and fresh-effect corruptions and an unrelated historical source edit reject.",
-      "scope": "Bounded reviewer maintenance after the fourth canonical failure, with actual old refusal/current successful reviewer channels and unchanged standalone native/fresh targets acquired before and after the correction. No runtime or target policy changes. Historical evidence stays unchanged; its original claims already bind accepted cd3b6adc3e58fb64283ae4ae4a5a37823eabd891. Conservative project-source snapshots retain observed source inputs but do not establish full native/cache/transitive/toolchain custody; that remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. Retained emitted-source execution is current compatibility, not historical runtime reproduction or whole-feature admission.",
+      "scope": "Bounded reviewer maintenance after the fourth canonical failure, with actual old refusal/current successful reviewer channels and unchanged standalone native/fresh targets acquired before and after the correction. No runtime or target policy changes. Historical evidence stays unchanged; its original claims already bind accepted cd3b6adc3e58fb64283ae4ae4a5a37823eabd891. Conservative project-source snapshots retain observed source inputs but do not establish full native/cache/transitive/toolchain custody; that remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. Retained emitted-source execution is current compatibility, not historical runtime reproduction or whole-feature admission. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boundary_review.py",
@@ -379,7 +382,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/document-pressure-restoration/book_review.py",
@@ -456,13 +459,14 @@
             "sha256": "2613480a663d26a0a86127dc9ca6b3df29a1b2a5820da3bbe2bd0fb32630a3da",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
       "name": "bounded-committed-current-image-admission",
       "statement": "The finite historical source frontier admits four exact committed runtime successors and one previously accepted Dart emitter-test image while preserving the original image table, every historical/admitted predecessor stage and Phase0 calibration. Actual isolated recovery preserves all134 recovered inputs,22 recovery controls,714 accepted governance denials and every other prior control;19 current-image mutations reject.",
-      "scope": "Exact149 historical source-hash paths from retained milestone records, compared with the actual independent recovery report. Fourteen existing effective images remain; four runtime source successors are committed at7289836f28e4873463ad1c50d354d8e66c77af8d. The sole first-image path is dart/test/source_emitter_test.dart from accepted Count73.3 commit553f9d18, with its exact historical Git predecessor. Existing exact inverses and documentation evolution remain separate. Original eighteen-only intake and four-path proof are bounded intermediates: the first direct recovery reveals the extra emitter test and earns no complete-recovery credit. Initial additional-unit ordering assertion fails before sorting the merged row map. The first recovery-comparison observer uses older pre-registration703 governance controls; preserve its source/empty stdout and qualify the baseline to accepted backend-registration714, not a product RED. Current actual producer closes191 observed artifact inputs within202 declared bodies; all are retained and hash-gated here. Completed channels are packaged after exit without original first-use capture credit. This is historical integrity/source identity, not fresh runtime/objective compatibility, feature promotion, full native/cache/transitive custody or parent23.4 admission. Subsequent fixture evolution preserves this entire uncommitted logical epoch: all231 original declared bodies/roles/modes and the complete nine-claim declaration are retained, including a nested exact unit producer (232 logical sources). Both unchanged readonly reviewers execute successfully from a same-volume provided tree using the real read-only Git object database. This is a frozen artifact epoch, not a historical Git capture at728. The first provided-root attempt omits the nested unit producer and fails before admission; its actual source/error are retained. The qualified replay seeds that already-retained body, without refreshing any old input hash.",
+      "scope": "Exact149 historical source-hash paths from retained milestone records, compared with the actual independent recovery report. Fourteen existing effective images remain; four runtime source successors are committed at7289836f28e4873463ad1c50d354d8e66c77af8d. The sole first-image path is dart/test/source_emitter_test.dart from accepted Count73.3 commit553f9d18, with its exact historical Git predecessor. Existing exact inverses and documentation evolution remain separate. Original eighteen-only intake and four-path proof are bounded intermediates: the first direct recovery reveals the extra emitter test and earns no complete-recovery credit. Initial additional-unit ordering assertion fails before sorting the merged row map. The first recovery-comparison observer uses older pre-registration703 governance controls; preserve its source/empty stdout and qualify the baseline to accepted backend-registration714, not a product RED. Current actual producer closes191 observed artifact inputs within202 declared bodies; all are retained and hash-gated here. Completed channels are packaged after exit without original first-use capture credit. This is historical integrity/source identity, not fresh runtime/objective compatibility, feature promotion, full native/cache/transitive custody or parent23.4 admission. Subsequent fixture evolution preserves this entire uncommitted logical epoch: all231 original declared bodies/roles/modes and the complete nine-claim declaration are retained, including a nested exact unit producer (232 logical sources). Both unchanged readonly reviewers execute successfully from a same-volume provided tree using the real read-only Git object database. This is a frozen artifact epoch, not a historical Git capture at728. The first provided-root attempt omits the nested unit producer and fails before admission; its actual source/error are retained. The qualified replay seeds that already-retained body, without refreshing any old input hash. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/objective_frozen_epoch_review.py",
@@ -477,7 +481,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-epoch.json.gz",
@@ -519,13 +523,14 @@
             "sha256": "ae6f51aeded751361e1479f5d3c3144c8897347e99e6ef71c320be817709e43d",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
       "name": "callable-prepared-index-and-count-snapshot-source-custody",
       "statement": "Retained public diagnostics identify discarded prepared callable-index source. Exact activation and repaired module observations agree on all18 Count excluded-source rows; only the old fixture first lowered cell is stale. The source correction changes that cell alone, retaining unsupported ownership.",
-      "scope": "Readonly replay of exact retained project-source and diagnostic artifacts, not a rerun or full custody of the native process. Complete declared parent-owned Perl/spec/conf/tablescript/ebnf source bodies remain in the frozen factory-after bundle, with captured pre-use member identities and only the explicit MethodLowering override. Initial Trace framing and wrong-module overlay attempts remain uncredited; original fixture/module/consumer and all actual channels stay retained. No malformed Count authority, broad raw-source readiness or peer/full-feature admission. The first supplement writer accidentally enumerates its own shell-redirected, then-empty output among unused checkpoint files. Preserve that declaration and empty byte stream, remove only this unused output row, and retain this qualifier; no producer/source/result hash is refreshed and no first-publication completeness credit is claimed. The prior replay command inspected the original fixture/source-fence artifacts but omitted saved direct-test channel coverage. Its declaration remains retained without first-declaration completeness credit. The qualified command additionally checks exact saved targets/exits, all original target failures, four direct passing files, calibrated18-row PASS and the six authored cases against frozen consumer bytes. Original before metadata hashes decoded channels; later packaging hashes physical gzip bytes. The initial reader assumes one domain and rejects; its exact source/empty output remain retained. Corrected explicit domains preserve every original hash. This adds artifact interpretation, not native re-execution or missing first-use custody.",
+      "scope": "Readonly replay of exact retained project-source and diagnostic artifacts, not a rerun or full custody of the native process. Complete declared parent-owned Perl/spec/conf/tablescript/ebnf source bodies remain in the frozen factory-after bundle, with captured pre-use member identities and only the explicit MethodLowering override. Initial Trace framing and wrong-module overlay attempts remain uncredited; original fixture/module/consumer and all actual channels stay retained. No malformed Count authority, broad raw-source readiness or peer/full-feature admission. The first supplement writer accidentally enumerates its own shell-redirected, then-empty output among unused checkpoint files. Preserve that declaration and empty byte stream, remove only this unused output row, and retain this qualifier; no producer/source/result hash is refreshed and no first-publication completeness credit is claimed. The prior replay command inspected the original fixture/source-fence artifacts but omitted saved direct-test channel coverage. Its declaration remains retained without first-declaration completeness credit. The qualified command additionally checks exact saved targets/exits, all original target failures, four direct passing files, calibrated18-row PASS and the six authored cases against frozen consumer bytes. Original before metadata hashes decoded channels; later packaging hashes physical gzip bytes. The initial reader assumes one domain and rejects; its exact source/empty output remain retained. Corrected explicit domains preserve every original hash. This adds artifact interpretation, not native re-execution or missing first-use custody. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/callable_channels_review.py",
@@ -540,7 +545,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "capability_conformance/callable_codeblock_contract.json",
@@ -867,7 +872,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
@@ -895,7 +901,7 @@
     {
       "name": "legacy-rule-array-copy-source-oracle-calibration",
       "statement": "The retained activation and callable-repaired modules emit identical Top.copy source. Its retained snapshot observations and the actual normal test helper match the original executable snapshot oracle for values, shallow identities, mutation isolation and one size/six element reads. The normal test changes only its literal-source assertion, adding the observational helper; every other original assertion source remains exact.",
-      "scope": "Source/diagnostic artifact comparison and actual extracted-helper interpretation at the qualified epoch. The public AST remains variable Top plus zero-operand copy; guarded emission preserves the original rule-array source snapshot. Empty/alias/lost-nesting/repeated-read programs are actual executed distinguishing controls. No production source or copy policy change, original canonical first-use custody, complete native/cache/OS/transitive closure or broad copy/feature admission. Native focused behavior has its separate durability-gap disclosure. The initial prefix-preservation refusal occurs before normal helper capture; the first test body and empty outer output survive. Restore the original blank-line prefix before qualified capture. Earlier pre-correction direct pass channels were not retained before log reuse and earn no original-channel credit.",
+      "scope": "Source/diagnostic artifact comparison and actual extracted-helper interpretation at the qualified epoch. The public AST remains variable Top plus zero-operand copy; guarded emission preserves the original rule-array source snapshot. Empty/alias/lost-nesting/repeated-read programs are actual executed distinguishing controls. No production source or copy policy change, original canonical first-use custody, complete native/cache/OS/transitive closure or broad copy/feature admission. Native focused behavior has its separate durability-gap disclosure. The initial prefix-preservation refusal occurs before normal helper capture; the first test body and empty outer output survive. Restore the original blank-line prefix before qualified capture. Earlier pre-correction direct pass channels were not retained before log reuse and earn no original-channel credit. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_review.py",
@@ -910,7 +916,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
@@ -1062,7 +1068,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {
@@ -1090,7 +1097,7 @@
     {
       "name": "phase0-value-oracle-and-exact-historical-stage-repair",
       "statement": "Twenty failing source-layout assertions are replaced by independent finite value/effect oracles. The exact inverse preserves every healthy assertion, original plan/helper and prior Phase0 image stage. The retained original/current lowerings and finite values agree; all11 original fixture denials and19 image denials remain, plus12 new exact-stage denials.",
-      "scope": "Source/diagnostic artifact interpretation for the exact seven groups from failed ninth canonical (1035 groups,7 failed). Twenty source assertions fail in current-only selected replay while120 remain healthy. Authored finite values precede activation/current observations. A title-placement error in the initial replacement template is corrected before any test edit; both initial template bodies remain. The entire prior nine-claim declaration,231 inline input bodies and nested unit source remain replayable in the companion frozen logical artifact epoch; no fictional Git capture/hash refresh. No runtime source changes follow from this calibration. Native execution is separately qualified below.",
+      "scope": "Source/diagnostic artifact interpretation for the exact seven groups from failed ninth canonical (1035 groups,7 failed). Twenty source assertions fail in current-only selected replay while120 remain healthy. Authored finite values precede activation/current observations. A title-placement error in the initial replacement template is corrected before any test edit; both initial template bodies remain. The entire prior nine-claim declaration,231 inline input bodies and nested unit source remain replayable in the companion frozen logical artifact epoch; no fictional Git capture/hash refresh. No runtime source changes follow from this calibration. Native execution is separately qualified below. Physical declared inputs are preserved at actual accepted Git capture 41ba410bbb03fe8e7e4dc1412331d069e258d70b; original statements, results, input hashes/roles and logical artifact epochs remain unchanged. This preserves the physical bundle/producer boundary without relabeling an earlier uncommitted logical epoch as a Git capture or acquiring native custody.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_review.py",
@@ -1105,7 +1112,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/calibrate_phase0_values.py",
@@ -1297,7 +1304,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b"
       }
     },
     {

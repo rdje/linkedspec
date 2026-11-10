@@ -10,6 +10,18 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.19 — Preserve accepted physical bindings before shared prose changes
+
+All eight checked18.1 claims now bind actual accepted41ba410b physical inputs;
+the complete original/qualified declarations and214 regular Git input rows are
+verified independently. This qualification does not turn an earlier uncommitted
+logical artifact epoch into a Git capture or fill native gaps. The new daily
+census captures project producer bodies before helper import and checks them
+afterward. Its declaration is authored directly; two script-composition templates
+are explicit inputs, avoiding a hidden previous-claim template dependency.
+Retained metadata/channel consistency and original native/OS custody are separate
+claims. No disposal follows from matching filename/size metadata.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.1 — Keep retrieval identity independent of duplicated display
 
 An uncommitted measured claim cannot be made historical at its activation commit

@@ -12,6 +12,18 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.19 — Refresh bounded daily artifact review
+
+The dated scanner/independent walk agree on1181 rows in eight named root/Rust/log
+scopes. All candidates remain retained; metadata grants no disposal authority.
+Project producers precede census-helper import and remain stable afterward;
+five metadata/four channel controls and separate readonly replay pass. The
+latest-only cleanup record and book route to the new capture. Before the shared
+book edit, all eight checked18.1 claims preserve214 original input bindings at
+accepted41ba410b; logical epochs/results stay unchanged and native gaps stay4.2.
+New source/channel proof is distinct from the disclosed native/OS custody gap.
+Focused checks and mandatory hooks govern this maintenance commit.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.1 — Compact duplicate Knowledge Map display
 
 Ninth full verification reaches1035 Phase0 groups and fails seven. Their selected
@@ -197,137 +209,3 @@ Canonical free-one/zero-extra first Hash-view roles now enter both Rust actual-k
 ## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.76.1 — Guard Perl Hash-view Array results
 
 Canonical free-one sorted_keys/sorted_values and zero-extra first receiver prefixes retain ordered producers inside existing actual-kind/rejection guards through copy/logical/with. Actual unchanged shared15 moves8healthy7RED to15PASS; eight healthy semantic observations and actual module/handler identities remain exact. Five own source/arity/error profiles stay. First direct4/67 exposes a pre-existing stale Length oracle; actual activation/current[null,[]] and identical emitted bodies justify exactly one expected-value correction. Qualified same four files67 PASS; source-role inverse RED/restored GREEN and eight recovery corruptions PASS. Regenerate affected Perl. Book/Knowledge/continuity agree; independent Rust76.2 next. Complete original/failed/qualified/control inputs, producers, channels and limits: docs/checkpoints/hash-view-result-guard-perl-2026-11-06/REVIEW.md. Full verification/registration/custody/isolation remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.76.0 — Retain Perl copy result rejection state
-
-Canonical free-copy results and zero-extra copy prefixes now retain existing actual-kind/rejection state through defaults, repeated copies, logical consumers and with. Legitimate null/numeric-domain null/empty and existing producer/kind/depth/signature policies remain. New12 moves7healthy5RED to12PASS; intermediate11PASS/1logical compile failure remains retained. All seven healthy semantic rows stay exact. Direct five files92 tests/final syntax and actual one-source inverse RED/restored GREEN pass; six recovery corruptions reject. Regenerate affected Perl. Evidence: docs/checkpoints/copy-result-guard-perl-2026-11-06/REVIEW.md. New canonical registration/full verification remain separately owned; view76.1 next.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.36 — Freeze Hash-view guards and own copy rejection prerequisite
-
-Full-source original16 public controls expose seven Perl Hash-view guard failures and a separate copy-oracle failure; compatible/typed/snapshot/empty-with/error controls stay healthy. Minimal unchanged-input copy6 qualifies three healthy/three failing native-fresh controls, distinguishing rejected prefixes from legitimate null. Freeze views15 by source-preserving projection and separate copy6; schedule P176.0 before view76.1/independent peers. Retain actual inputs/modules/handlers/full channels and original/qualified reviewer epochs; qualified recovery/eight corruptions pass. No production edit or peer/admission claim. Evidence: docs/checkpoints/hash-view-selection-2026-11-06/REVIEW.md.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5 — Preserve installed Lua callable CountKeys composition
-
-Both PUC5.5.1 and LuaJIT independently pass16 authored programs/four routes without production edits. Add explicit-grammar callable regression, separate source-bound host Boolean null/null/arity/error profiles and one runner group. Each direct84+126 checks passes with empty stderr; all16 original observations/module/parsed bodies per host remain exact. Eight readonly corruption controls reject. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-lua-2026-11-06/REVIEW.md. Book/Knowledge/continuity align; next remaining-family selection23.1.36 is owned. Full verification and declared5.4 remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.4 — Preserve Julia callable CountKeys composition
-
-Existing Julia behavior passes16 authored programs/four routes without runtime edits. Add an explicit-grammar regression and source-bound independent Boolean null/null, malformed-arity and needed-error profiles. Compatible Hash-function counts preserve guards, effects, snapshots and bridges. Direct strict-depwarn84+126+27 assertions and six readonly evidence-corruption controls pass; all16 original observations and module/parsed bodies stay exact. Actual inputs/full channels and limits: docs/checkpoints/key-count-callable-julia-2026-11-06/REVIEW.md. Book and continuity align; installed Lua75.6.5 is next. Full verification remains deferred.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1 — Bind Dart callable preservation to its actual grammar input
-
-Dart's existing runtime passes12 compatible/four own profiles over16 source programs/four routes; Boolean-function receivers remain null/null and full needed-error diagnostics/wrappers stay exact. Initial intake/normal/direct missed the default-loaded grammar asset and remain partial. Qualified companions capture/supply the actual grammar before SDK calls, preserving all16 observations/module/parsed bodies; qualified normal16/direct29, fatal analysis/format/safe probe path denial and six recovery corruptions pass. No runtime edit. Named Rust embedded-asset/native-cache custody remains4.2/SESSION5-owned before admission. Book/Knowledge/live/task align; parent75.6.3 closes through this child. Julia75.6.4 next, with actual grammar inputs declared before use/build; no broad suite or push.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2 — Preserve Rust function-result CountKeys behavior
-
-Independent actual16 PASS/native-restored-plan-fresh; Rust already handles the callable chains and production bytes stay unchanged. Added maintained16 and independently frozen Boolean terminal0/composed1, malformed-arity and required-error profiles; direct CountKeys25/function context4 and scoped formatting pass. Actual Cargo/source/lock/module/serialized/raw inputs retained; six recovery corruptions reject. Book/Knowledge/live/task align. P1 resource4.14 owns denied-sysctl16GiB fallback on the24GiB host and stale operating-policy card; current work uses independent monitoring, without a pressure blocker. Independent Dart75.6.3 next; full verification/custody/context/isolation remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.6.1 — Complete Perl function-result CountKeys chains
-
-Removed the function-only CountKeys guard bypass while retaining the typed function evaluator. Hash-function counts now compose through numeric/text methods and reject incompatible consumers before operands/later copy/logical/with. Independent terminal Boolean0/ready shows the former composed null/unready was a continuation defect; composed1/ready is now required. Unchanged16 groups7PASS9RED become16PASS/native/fresh; seven healthy exact, direct43/syntax and six recovery corruptions pass. Actual original/qualified/terminal/input/module/handler/raw epochs retained; portable sealing metadata qualified without rerunning product epochs. Book/Knowledge/live/task align. Regenerate emitted Perl. Independent Rust75.6.2 next; full verification/custody/context/isolation deferred.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.5 — Guard installed Lua CountKeys while preserving Count and scalar boundaries
-
-Canonical CountKeys role precedes Count permission; a separate first-step common-only exception excludes free Count ownership and preserves scalar_result/Count/index mutation rights with no new interpreter chunk locals. Both installed hosts25 groups13PASS12RED become25PASS/four routes; thirteen healthy observations and25 emitted/parsed bodies exact. New126/Count92/Length122 plus Count-length programs/loadfile checks pass per host with empty final stderr; seven recovery corruptions reject. Actual first inputs/full channels retained. Rebuild Lua apps/runtime; book/Knowledge/task/live align and old Length recovery is source-bound. Callable75.6 next; full custody/context/isolation/declared5.4/admission separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.7 — Lock down peer Count-owned source preservation
-
-Added three authored Count-to-CountKeys/source-zero programs to the Rust/Dart normals. Both existing source-permission implementations are healthy: new3 pass/four routes independently and both runtime files stay byte-identical. Each maintained25 normal passes/native-restored-plan; scoped format/Dart fatal analysis/five recovery corruptions pass. Actual first inputs/modules/full channels retained; emitted execution covers new3 only. Book/Knowledge/task/live align; installed Lua75.5 next, full custody/context/isolation/callable/admission separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.4 — guard Julia CountKeys results while preserving scalar and mutation boundaries
-
-Canonical CountKeys role precedes Count source permission; distinct first-step KeyCount permission skips common guard only, retaining scalar_result/Count permission/enumerate/call_index Array-end restrictions. Independent unchanged22 groups10PASS12RED become22PASS/four routes, ten healthy observations exact and22 emitted/parsed inputs unchanged. Final346/strict depwarn/six recovery corruptions pass with actual declared first inputs/full raw epochs. Rebuild Julia apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live align; historical Length replay source-bound. Installed Lua75.5 next, callable75.6 before broader admission; full source/context/custody/isolation/admission separate.
-
-The separate Count-owned-source check exposes two failing programs in the first candidate; exclude free Count ownership from initial KeyCount permission. Three added preservation groups now pass; maintained25 programs/current126 assertions and all346 selected assertions pass. Original22 epochs stay immutable, with six original/four extra recovery controls; P1 independent Rust/Dart75.7 precedes installed Lua75.5.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.3 — guard Dart CountKeys results while preserving source policy
-
-Canonical CountKeys role joins kind guards before Count fallback. Separate initial KeyCount permission skips only common guard, preserving scalarResult/Count consumption and receiver Boolean null. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy error/value/class profiles exact and22 emitted/parsed inputs unchanged. Final67/fatal analysis/scoped format/six corruptions pass. Actual direct pub/source/lock/config/module/full raw epochs retained. Rebuild Dart apps/runtime; book/Knowledge/task/live align and historical Length replay source-bound. Julia75.4 next; full source/context/custody/isolation/admission stay separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.2 — guard Rust CountKeys results in both fluent paths
-
-Canonical CountKeys roles join existing actual-kind guards before Count fallback in direct and trailing-with paths, preserving initial source zero versus produced results. Independent unchanged22 groups10PASS12RED become22PASS/four routes; ten healthy observations exact and actual22 emitted modules/serialized inputs unchanged. Final66/scoped format/six recovery corruptions pass, no owned warning summary. Actual declared Cargo/input/module/full raw epochs retained. Rebuild Rust apps/runtime; no source-regeneration/format change. Book/Knowledge/task/live records align; historical Length reader source boundary is explicit. Independent Dart75.3 next; full source/context/custody/isolation/admission remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.1 — retain CountKeys guards through ordinary composition
-
-Canonical free/ordinary receiver CountKeys results retain actual-kind/copy/logical/with rejection before Count fallback. Separate source ownership from later default/text routing to preserve initial zero through coalesce/cat. Corrected unchanged26 groups13PASS13RED become26PASS (25 ready/one excluded); all thirteen healthy observations exact. Six current public/emitted Number2 seeds null/host unchanged; final71/syntax/seven recovery corruptions pass. Original hypothesis/diagnostic calibration, actual first inputs/modules/carrier/full channels retained. Regenerate emitted Perl. Book/Knowledge/task/live records align; independent peers next, concrete P1 callable75.6 before broader admission.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.2 — enforce CountKeys initial source kind and literal boundary
-
-Two producer clauses require a Hash reference for computed sources and an identifier for named Hashes. Unchanged23 groups10PASS13RED become23PASS/native-fresh; ten healthy observations exact. Initial Boolean/Array zero and source-once/order/compatible continuations complete; twelve exact localized public/emitted numeric4 seed rows stay zero with host data unchanged. Final37/owner syntax and six recovery corruptions pass. Actual first inputs/modules/full raw epochs retained; regenerate emitted Perl. Catalog/examples/book/Knowledge/task/live pointers align. Perl75.1 result guards next; full admission/peers/legacy scope remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.4.13 — retain artifacts after bounded daily review
-
-Dated eight-scope review retains all1043 selected path/suffix/byte rows matching independent metadata; configured rust/target is covered. Five corruption controls and separate readonly replay pass. No removals or disposability/liveness/reclamation inference. Actual direct producers/Git-index input and all retained outputs survive with a three-leg claim. Latest-only cleanup/book/Knowledge/task/live records align. No runtime/storage/hook/CI change; P1 domain75.0.2 resumes next.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1 — lower CountKeys value-block sources through typed ownership
-
-Add CountKeys to existing typed block arguments and canonical terminal block delegation; forward original source span/method. Unchanged9 groups5PASS4RED become9PASS/native-fresh; all five healthy observations exact and only four failing module bodies change. Needed errors execute after valid loads without warnings; source-once/in-place snapshots/functions/preflight stay. New9/Count block14/Count-length5=28, syntax and five recovery controls pass. Actual first inputs/modules/full raw channels retained. Regenerate emitted Perl. Count source card stale current labels corrected from canonical nodes. Domain75.0.2 next; due daily cleanup at next clean boundary.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.75.0 — freeze key-count guards and own producer prerequisites
-
-Freeze shared22 after actual Perl Get/descriptor/substitution/emission/native/fresh intake. Retain seven healthy/twelve guard gaps from nineteen runtime-clean initial programs, plus one additional initial-source preservation control. Own mutating-block compile failure75.0.1 and Boolean/Array dereference errors75.0.2 before Perl75.1/independent peers. Exact public/full-module seeds expose main::2 read. Numeric-source seeds also expose main::4 lookup under the producer, explicitly owned by domain75.0.2. Actual first inputs/modules/full raw channels and six replay corruptions pass; no production change or peer/full-admission claim. Book/catalog caveats and task/Knowledge/live records align.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.5 — guard installed Lua Length results and produced-source ownership
-
-Canonical Length namespace member/admission precedes Count permission; no new chunk locals or scalar/Count/mutation-right/producer/schema changes. PUC5.5.1/LuaJIT independently move authored24 programs12PASS12RED to24PASS/all four routes. New122/48-failure normal becomes122/zero per host; twelve healthy observations/domain/error fields and24 emitted/parsed bodies exact. Final nearest Count92/Count-length/version/loadfile and five corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Lua apps/runtime. Bounded Length implementations complete, full admission separate; P1 key-count75.0 next.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.4 — guard Julia Length results and produced-source ownership
-
-Canonical Length role joins kind_guarded_result before Count source permission; scalar state, Count permission and enumerate/call_index mutation restrictions stay exact. Authored24 programs12PASS12RED become24PASS; new normal74PASS48FAIL becomes122PASS assertions. Twelve healthy/domain/error profiles and24 module/parsed bodies exact. Final220/strict depwarn/five readonly corruptions pass. Actual declared first inputs/full raw phases retained losslessly; rebuild Julia apps/runtime. Installed Lua74.5 next; full custody/isolation/discovery/admission separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.3 — guard Dart Length results and produced-source ownership
-
-Canonical positional free-one/zero-extra Length role joins kindGuardedSource before Count permission. Authored24 controls12PASS12RED become24PASS on native/restored/plan/emitted routes; twelve healthy observations/domains/error profiles exact. ScalarResult/common/scalar/Count permission logic/producers/signatures/schema unchanged. Actual24 module texts unchanged; rebuild Dart apps/runtime. Final45/fatal targeted analysis/full format/five readonly corruptions pass. Actual declared inputs/full raw channels retained losslessly. Independent Julia74.4 next; full custody/isolation/selection/admission remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.2 — guard Rust Length results and produced-source ownership
-
-Canonical positional free-one/zero-extra Length role now joins direct/trailing-with kind guards before Count initial fallback. Authored24 controls12PASS12RED become24PASS on native/restored/plan/compiled emitted routes; twelve healthy observations/domains exact. Actual24 module texts unchanged: rebuild Rust apps/runtime. Remove one unused test import only; final44/scoped format and five readonly corruptions pass. Actual declared Cargo inputs/producers/raw phases retained losslessly; initial inspector wrapper qualification/upstream warning ownership explicit. Independent Dart74.3 next; full native/transitive custody, canonical selection, isolation and full admission remain separate.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.6 — preserve produced Length ownership before Count fallback
-
-A remaining Length-to-Count edge misclassified produced numeric/null data as initial Count input. Admit Length ownership before selecting Count fallback; both producers and initial Count zero stay. Qualified unchanged8 groups4PASS4RED become8PASS, four healthy observations exact; existing19 Length/host controls pass. First capture omitted an untracked fixture; preserve originals/failure and explicitly qualify that gap, then capture actual fixture before the corrected RED/GREEN pair. Readonly recovery/four corruptions pass. Count parent label corrected. Independent Rust74.2 next; no broad suite/peer/full custody/admission claim.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.3.74.1 — guard Perl Length continuations and rejection
-
-Canonical ordinary Length source roles now reuse actual-kind/with guards and persistent copy/eager-logical rejection state. Unchanged19 groups9PASS10RED become19PASS, including localized empty/outer/main::4 host controls; all nine original healthy observations are exact. Direct36 Count/length/logical preservation groups pass. Legacy Length producer/Count fallback/domains/signatures/copy depth remain unchanged. Actual input archives/pre-load primary modules/raw phases and four readonly corruptions retained. Regenerate emitted Perl; independently assess Rust74.2 next. No broad suite/full admission claim.
-
-## 2026-11-06 — TYPE-REFERENCE-BOOK.1.2.23.1.35 — freeze Length source guards and own key-count gaps
-
-Freeze shared16 and bounded family74 backend children after actual Perl public diagnostics. Preserve nine healthy controls/seven target gaps, producer domains and source/copy/logical/with semantics. Corrected main::4 public carrier/full-module seeds expose a concrete host leak; key-count75 is P1 after74.5. Readonly recovery retains raw expected-error Trace output, actual supplemental modules and physical provenance without rerunning behavior; three corruptions reject. No production change, peer failure inference or full custody/admission claim.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.4.8 — assess retained artifact growth
-
-The final hook exposes the chapter-bound4.3 claim and dependent4.7 custody claim. Preserve their original40/20 input rows and all fields with only mode/revision changes at eda3c81; five corruption controls per record and both current bounded readers pass. No historical observation is refreshed. Latest director RAM guidance permits stable high-80s usage with trend monitoring and a90% ceiling.
-
-Director correction: distinguish the whole historical local store from the fixed15-commit outgoing range; the approximate11.5MB outgoing pack is director-reported. The warned blob already exists at the locally recorded origin base. The added metadata replay rejects three count/blob/scope corruptions; no new pack is generated. Mandatory normal verification still awaits the confirmed RAM window.
-
-Close the bounded read-only assessment with an exact named-blob/header/body/warning comparison, dated local pack metadata, primary host contracts and five effective corruption controls. Preserve distinctions between blob/local pack/transfer/server scopes and every historical object/claim/cache. Recommend prospective exact Git-input reuse plus the admitted payload/chunk profile; own first adoption12 after feature coverage and before new large-payload publication. No savings, server-size/supportability or new storage contract is claimed. Remaining-feature selection23.1.35 follows.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.8 — format Dart source predicates
-
-Apply only the two scheduled free-default/set predicate layouts with Dart3.13.3. Full-owner formatting has zero changes, fatal targeted analysis is clean, and four existing guard/order/snapshot controls pass on native/restored/plan routes. All outside-member bytes and predicate tokens except optional formatter commas stay exact. Actual formatter inputs/delta and direct inputs before compiled proof are retained. PNT resumes to advisory growth23.4.8; full admission remains separate.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.7 — restore long Count receiver regression
-
-The earlier Count copy dispatcher73.6.1 already resolves the exact original long source. Warmed public stages complete; one private Count-dispatch omission restores bounded stops and generated-Perl compatibility re-entry. Cold short limits also stop minimal Get controls and receive no source-scaling credit. Add the unchanged original as a twentieth fixture; four selected native/fresh copy/null/error/long groups pass with readiness/cursors/warnings intact, and first19 objects stay unchanged. Production Perl remains unchanged. Actual archives, path observations, pre-load modules, setup/AppleDouble and custody qualifications survive. P3 Dart formatting73.8 is next; general performance, registration/custody/isolation/full admission remain separate. The director requests pause after this checkpoint; P3 requires explicit resume.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5 — preserve installed Lua initial Boolean Count source fallback
-
-Apply the existing initial Count source exception at the Boolean scalar guard without new interpreter chunk locals or scalar-state/mutation-right changes. Both installed hosts independently move unchanged25 groups/four routes from21PASS4RED to25PASS (125 assertions each); nearest Count/length and copied-null index70 controls pass with empty final/direct stderr. Actual declared inputs and pre-load module/AST bodies are retained and reviewed. Three runner lines register the normal; loadfile/book checks pass. Rebuild Lua applications/runtime. All six concrete P1 Count repairs are focused-checked; P2 compiler73.7 then P3 formatting73.8 follow. Full custody/isolation/registration/declared5.4/full23.4 remain open. Supplied claim/containment policy hashes still match reviewed local records; cleanup is current. No broad suite or push.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.4 — preserve Julia initial Boolean Count source fallback
-
-Reuse the existing initial-source exception at the scalar guard; preserve scalar state, copied/produced-kind guards and the separate Array-end loop-index mutation gate. Unchanged25 source/copy groups independently move21PASS4RED to25PASS across native/restored/plan/fresh Modules (125 assertions), including function Boolean parameters. Strict depwarn, nearest Count/length and copied-null index controls pass; observed needed source errors stay exact. Actual declared source/project/test inputs and emitted modules before load are retained. Rebuild Julia apps/runtime. Installed Lua5 follows before P2 scaling73.7/P3 formatting73.8; complete custody/isolation/registration/full admission remain separate. Supplied policy hashes match the canonical startup record; cleanup is current. Director-requested pause is saved at this checkpoint; installed Lua5 requires explicit resume. Raw book/Git logs rejected for checkout identity are preserved as exact gzip evidence before retrying normal hooks. No broad suite/push.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3 — preserve Dart initial Boolean Count source fallback
-
-The existing one-step initial Count permission now also reaches the scalar guard; scalar initialization/assignments and copied/produced Boolean rejection remain unchanged. Unchanged25 root/native/restored/plan/compiled-emitted controls move22PASS3RED to25PASS, with exact observed error message/class, fatal root/fresh analysis, Count/length2/index1 and scoped/new-file format proof. Actual declared source/pub/module/lock/config inputs precede executions; full metadata/cache/native/transitive closure stays separately owned. A whole-runtime format probe exposes unrelated free-default/canonical-set layout debt; restore all probe changes from the exact tested owner, retain the delta and own P3 repair73.8 after P1s/P2. Rebuild Dart runtime/apps. Julia4/Lua5 and full admission remain open; fresh context is required for next production signoff. No broad suite or push.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2 — restore Rust Count non-array source fallback
-
-Count now matches Array directly and retains Number0 for other accepted source values. General len/length and copied/produced receiver guards stay intact. Qualified20 root/native/restored/plan/compiled-emitted controls move17PASS3RED to20PASS; current diagnostic1/length1 and final import-cleaned normal20 pass. Exact actual Cargo source/manifests/resolved locks/modules precede first runs and survive verified archival; only duplicate owned workspaces are removed. Initial absolute archive membership failure is setup, with original producer/root proof/project bytes retained and no standalone behavioral credit. Original Rust divergent fixture remains frozen; current diagnostic uses the reference target. Owned format/book checks pass. Rebuild Rust apps/runtime. Peer Boolean3/4/5, full custody/registration/isolation/admission and P2 scaling remain separate; no broad suite or push.
-
-## 2026-11-05 — TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6 — preserve Count rejection through Perl logical producers
-
-Canonical Count chains with logical links retain the existing rejection flag instead of folding a rejected prefix into ordinary null. Each logical step reuses the typed eager producer; copy/no-copy and with/no-with retain source effects while skipping later rejected operands/bodies. Unchanged14 native/fresh groups move7PASS7RED to14PASS. Valid null/zero/real Bool/eager errors/source snapshots/function scope/malformed shapes stay; direct plain-copy3/logical-method20/source-fence16 and syntax/book checks pass. Exact phase owners/normal/fixture, actual pre-load emitted modules, public lowering and raw channels are retained locally. Rust/peer source repairs, registration/full custody/isolation/admission and P2 compiler-scaling73.7 remain separate. Regenerate emitted Perl.
