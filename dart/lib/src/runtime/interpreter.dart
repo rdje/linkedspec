@@ -4088,6 +4088,22 @@ final class LinkedSpecRuntimeEngine {
             (receiver is ActionCallExpr &&
                 (canonicalActionHelperName(receiver.name) == 'copy' ||
                     canonicalActionHelperName(receiver.name) == 'with'));
+        final arrayTransformChain = _isOrdinaryArrayTransformResultChain(
+          receiver,
+          calls,
+        );
+        final preserveInitialArrayTransformSource =
+            arrayTransformChain &&
+            !kindGuardedSource &&
+            !_isOrdinaryCountResultChain(receiver, const []) &&
+            !_isOrdinaryKeyCountResultChain(receiver, const []) &&
+            !_isOrdinaryHashViewResultChain(receiver, const []) &&
+            !_isOrdinaryHashValueResultChain(receiver, const []) &&
+            !_isOrdinaryArrayTransformResultChain(receiver, const []) &&
+            _isOrdinaryArrayTransformReceiverCall(calls.first);
+        // An initial transform keeps its source fallback; its Array result
+        // owns later consumers without overriding an earlier result owner.
+        kindGuardedSource = kindGuardedSource || arrayTransformChain;
         final hashValueChain = _isOrdinaryHashValueResultChain(receiver, calls);
         final preserveInitialHashValueSource =
             hashValueChain &&
@@ -4142,6 +4158,8 @@ final class LinkedSpecRuntimeEngine {
           preserveInitialKeyCountSource: preserveInitialKeyCountSource,
           preserveInitialHashViewSource: preserveInitialHashViewSource,
           preserveInitialHashValueSource: preserveInitialHashValueSource,
+          preserveInitialArrayTransformSource:
+              preserveInitialArrayTransformSource,
         );
       case ActionBlockValueExpr(:final block):
         return _evaluateBlockValue(
@@ -6447,6 +6465,102 @@ final class LinkedSpecRuntimeEngine {
         first.args.isEmpty;
   }
 
+  bool _isOrdinaryArrayTransformOperand(ActionExpr expression) =>
+      switch (expression) {
+        ActionVariableExpr() ||
+        ActionNumberLiteralExpr() ||
+        ActionStringLiteralExpr() ||
+        ActionBooleanLiteralExpr() ||
+        ActionUndefExpr() ||
+        ActionArrayLiteralExpr() ||
+        ActionHashLiteralExpr() ||
+        ActionBlockValueExpr() ||
+        ActionCallExpr() ||
+        ActionFluentChainExpr() ||
+        ActionReceiverMutationChainExpr() ||
+        ActionIndexedVarExpr() ||
+        ActionNestedAccessExpr() ||
+        ActionValueAccessExpr() ||
+        ActionAssignScalarExpr() ||
+        ActionAssignArrayAppendExpr() ||
+        ActionAssignHashIndexExpr() ||
+        ActionAssignNestedAccessExpr() => true,
+        _ => false,
+      };
+
+  bool _isOrdinaryArrayTransformArguments(
+    String helper,
+    List<ActionArgument> args, {
+    required bool receiver,
+  }) {
+    final count = args.length + (receiver ? 1 : 0);
+    final canonicalArity = switch (helper) {
+      'take' ||
+      'take_last' ||
+      'drop_front' ||
+      'drop_back' => count == 1 || count == 2,
+      'slice' => count == 2 || count == 3,
+      'sorted' || 'reversed' => count == 1,
+      'concat_arrays' => count == 2,
+      _ => false,
+    };
+    return canonicalArity &&
+        args.every(
+          (argument) =>
+              argument is ActionPositionalArgument &&
+              _isOrdinaryArrayTransformOperand(argument.value),
+        );
+  }
+
+  bool _isOrdinaryArrayTransformReceiverCall(ActionFluentCall call) =>
+      (call.sourceMethod ?? call.method) == call.method &&
+      !call.trailingBlockArg &&
+      !call.receiverTrailingBlockArg &&
+      _isOrdinaryArrayTransformArguments(
+        call.method,
+        call.args,
+        receiver: true,
+      );
+
+  bool _isOrdinaryArrayTransformResultChain(
+    ActionExpr receiver,
+    List<ActionFluentCall> calls,
+  ) {
+    if (calls.any((call) {
+      final helper = canonicalActionHelperName(call.method);
+      return _treeTraversalHelperNames.contains(helper) ||
+          call.args.any(
+            (argument) =>
+                argument is! ActionPositionalArgument ||
+                (helper != 'with' &&
+                    !_isOrdinaryArrayTransformOperand(argument.value)),
+          ) ||
+          ((call.trailingBlockArg || call.receiverTrailingBlockArg) &&
+              helper != 'with') ||
+          !(_runtimeReceiverHelperNames.contains(helper) ||
+              const {'copy', 'with', 'and', 'or', 'not'}.contains(helper));
+    })) {
+      return false;
+    }
+    if (receiver is ActionCallExpr) {
+      if (compiledSpec.functionRegistry.hasName(receiver.name)) {
+        return false;
+      }
+      if ((receiver.sourceMethod ?? receiver.name) == receiver.name &&
+          !receiver.trailingBlockArg &&
+          _isOrdinaryArrayTransformArguments(
+            receiver.name,
+            receiver.args,
+            receiver: false,
+          )) {
+        return true;
+      }
+    }
+    return _isOrdinaryArrayTransformOperand(receiver) &&
+        calls.length > 1 &&
+        _isOrdinaryArrayTransformReceiverCall(calls.first);
+  }
+
   bool _isOrdinaryHashValueOperand(ActionExpr expression) =>
       switch (expression) {
         ActionVariableExpr() ||
@@ -6849,6 +6963,7 @@ final class LinkedSpecRuntimeEngine {
     bool preserveInitialKeyCountSource = false,
     bool preserveInitialHashViewSource = false,
     bool preserveInitialHashValueSource = false,
+    bool preserveInitialArrayTransformSource = false,
   }) {
     var scalarResult = value is bool;
     var reductionResult = false;
@@ -6856,6 +6971,7 @@ final class LinkedSpecRuntimeEngine {
     var keyCountSourcePending = preserveInitialKeyCountSource;
     var hashViewSourcePending = preserveInitialHashViewSource;
     var hashValueSourcePending = preserveInitialHashValueSource;
+    var arrayTransformSourcePending = preserveInitialArrayTransformSource;
     for (final call in calls) {
       final initialCountSource = countSourcePending;
       countSourcePending = false;
@@ -6865,6 +6981,8 @@ final class LinkedSpecRuntimeEngine {
       hashViewSourcePending = false;
       final initialHashValueSource = hashValueSourcePending;
       hashValueSourcePending = false;
+      final initialArrayTransformSource = arrayTransformSourcePending;
+      arrayTransformSourcePending = false;
       final helper = canonicalActionHelperName(call.method);
       // A legitimate null source keeps canonical has_key's key evaluation.
       // Earlier incompatible consumers return before this step.
@@ -6893,6 +7011,7 @@ final class LinkedSpecRuntimeEngine {
           !initialKeyCountSource &&
           !initialHashViewSource &&
           !initialHashValueSource &&
+          !initialArrayTransformSource &&
           helper != 'copy' &&
           helper != 'is_empty' &&
           helper != 'is_nonempty' &&

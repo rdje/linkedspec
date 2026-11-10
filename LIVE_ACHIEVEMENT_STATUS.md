@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Scoped lookup publication23.4.18.3 completes authored navigation for the existing bounded claim/epoch/factory/callable/copy/Phase0 facts. Independent Dart78.3 is next. Broader routing/line-warning pressure18.2, peers and full23.4 remain separately owned.
+Ordinary Array-transform result composition: bounded Perl, Rust and independent Dart78.3 are repaired/focused-checked. Independent Julia78.4 is next, then Lua78.5. Full feature verification23.4 and broader routing18.2 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.18.3. Exact new alias targets, every old question/order/multiplicity, complete Facts bytes and remaining projection bytes pass; only explicit authored additions and the derived total change. Four routing/counterexample controls, header176, sync, prior accepted-input preservation and final rendered book/HTML pass. Initial strict header assumption is retained as setup calibration, not a product failure. Original dates/status/evidence/reverify and original fact bytes remain; bounded proof scopes remain. Focused integrity checks/normal hooks govern landing; no new runtime/population measurement or full/native admission.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.3. Dart independently acquires unchanged37 plus104 own controls, reproduces19 guard failures, and adds only canonical result ownership with initial source/earlier-owner preservation. Unchanged141/four routes, selected direct292, exact same-path old/current19RED/141PASS, final formatted replay, candidate identity and first readonly recovery/eight corruptions pass. All122 healthy observations/108 full profiles/141 parsed-module pairs stay exact. Book and canonical facts reflect bounded behavior; broader source/context/native/admission remains open. Focused integrity/normal hooks govern landing.
 
 ## Next Action
 
-Activate independent Dart TYPE-REFERENCE-BOOK.1.2.23.3.78.3, acquiring its own original37/four-route and source/arity/error observations before deciding implementation. Do not inherit Perl/Rust verdicts. Existing18.1 checked claims remain at actual accepted41ba410b, preserved by4.19; never relabel those observations. Daily review is current at2026-11-10 with all artifacts retained. Broader routing18.2 follows feature coverage; full feature verification remains23.4.
+Activate independent Julia TYPE-REFERENCE-BOOK.1.2.23.3.78.4. Read frozen37/four-route contract and independently acquire Julia source/arity/error/earlier-owner observations before deciding a repair; no imported peer verdict. Existing18.1 checked claims stay historical at41ba410b, daily cleanup remains current, and broader routing18.2 follows feature coverage. Full23.4/final clean push require fresh exact proof after feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.1 —1710 display lines removed, exact questions/other records/source acquisition and direct checks; canonical receipt governs landing.
@@ -29,7 +30,6 @@ Activate independent Dart TYPE-REFERENCE-BOOK.1.2.23.3.78.3, acquiring its own o
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.3 — Dart89/four routes/direct151; exact private13RED/89PASS,65 own profiles/89 artifact pairs/eight controls; Julia77.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1 — Perl89PASS/direct185; private inverse15RED/restored89PASS/eight controls; independent Rust77.2 next.
 
 ## History
 

@@ -4830,3 +4830,36 @@ registration/full23.4 admission remains separate. Evidence:
 `docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md`; readonly
 `review_typed_errors.py` there recovers historical proof, not a current runtime or
 peer verdict.
+
+### Dart Array-transform result assessment
+
+Dart78.3 independently acquires the unchanged37 and104 authored Dart source/arity/
+earlier-owner controls on native, restored SpecFile, generated-plan and full
+emitted-fresh routes. Nineteen original targets evaluate incompatible Hash
+consumer operands (KV), with three later tails also running KVW/KVDW. Constructor
+rejection is already healthy. Canonical ordinary transform results now join the
+existing persistent actual-kind dispatcher; an initial receiver transform keeps
+its source policy without overriding earlier produced or copied owners.
+
+All141 targets pass on the four routes, preserving122 healthy observations and108
+complete own/error profiles. Seven initial Number/null/Hash source families yield
+empty Arrays; concat_arrays retains that source as an element. Optional defaults,
+sixteen excluded extra-arity profiles, six earlier owners, source order/snapshots,
+nested Bool/null/Number values, valid empty with and all four needed-error frames
+remain unchanged. These finite fences do not define portable input policies.
+
+The exact old/current interpreter images at one private Dart package path reproduce
+19 failures/141 passes with actual package routing and full frames checked. Selected
+direct292, scoped fatal analysis/format and the first readonly recovery with eight
+effective corruptions pass. Formatting changes layout only; the final formatted
+source has its own four-route acquisition. All141 parsed/module pairs are byte
+equal across initial and repaired acquisitions. Own source/grammar/instruments
+precede SDK use; emitted/parsed artifacts precede fresh execution; all channels
+are retained. Full native/cache/transitive/toolchain custody4.2/SESSION5, isolation,
+source/context/admission and full23.4 remain separate.
+
+Rebuild Dart applications with the updated package; emitted/serialized formats
+stay unchanged. Independent Julia78.4 is next. Evidence:
+`docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md`; its readonly
+reader recovers this historical outcome rather than declaring a future runtime
+healthy.

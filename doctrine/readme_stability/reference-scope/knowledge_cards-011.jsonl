@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2974,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mutation-testing-policy.md","sha256":"25bfa6619dc5c97a61c0871e4e5b1b2d2fe813d28d500b9aaea37e6a00622ec4","type":"member"}
 {"bytes":2503,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-capture-endpoint-presence-repair.md","sha256":"34a0b23938788a4f8650dbb735a44bbe6c4fd6f54d81ddd960f7e5a5802adf8d","type":"member"}
 {"bytes":4271,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-named-default-container-guard-gap.md","sha256":"4aab311893b0d226b31148befbb705fd67e2a87fa38cbb606af3e856588992e7","type":"member"}
 {"bytes":5692,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-direct-value-execution.md","sha256":"005d0ad1f04d06b98fe9635963bafb5b964e5221111878c886b6838cfebdf900","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6243,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-facing-aggregate-selector-retirement-inventory.md","sha256":"20a99d90c74e2cca2b6f9c120a568b374f42e07cbbdabf317af117c95837f824","type":"member"}
 {"bytes":4623,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-brainstorm-rounds-1-3.md","sha256":"9fccb7d2181ddd3cd857e44e5981e213a05e3bda2f7d5cba83358d53476e03b8","type":"member"}
 {"bytes":1640,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-terse-tree-closed.md","sha256":"dd4c41d06d718979f658dfac5898342d4eee0c1ec67f92eb71a637d6bfbd652e","type":"member"}
-{"bytes":2463,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-import-composition-contract.md","sha256":"f8147faa264c711c2f874643f37a99af5da08ac437c7d9f81f5b1f61f7bb5fb5","type":"member"}

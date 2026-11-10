@@ -1,0 +1,15 @@
+{
+  "cwd": "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/control-owner/dart",
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "pub",
+    "get",
+    "--offline",
+    "--enforce-lockfile"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

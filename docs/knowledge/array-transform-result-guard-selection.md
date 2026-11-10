@@ -9,7 +9,7 @@ answers:
   - "does an unloaded public Perl selection module have fresh_error fields"
   - "why did the Array transform selection recovery readers fail"
 date: 2026-11-07
-status: original selection frozen; bounded Perl78.1.1/Rust78.2 focused-checked; independent peer assessments remain
+status: original selection frozen; bounded Perl78.1.1/Rust78.2/Dart78.3 focused-checked; independent Julia and Lua remain
 tags: [array, transforms, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.38; docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md retains original37 ready1/raw0/fallback0/unresolved0,19 failures/18 healthy and37 actual module/handler pairs. Final strict readonly recovery0/empty stderr/nine controls passes; two prior reader failures stay explicit."
 reverify:
@@ -52,4 +52,10 @@ toolchain custody4.2/SESSION5, general isolation/context/portable/registration/
 full23.4 admission remain separate. Historical recovery is not a latest-runtime
 or peer verdict. Perl source78.0 and result78.1.1 now have bounded focused proof;
 see `docs/knowledge/perl-array-transform-result-guards.md`. Current selection
-belongs to MEMORY.md; Rust78.2 now has its own bounded outcome in `docs/knowledge/rust-array-transform-result-guards.md`; independent Dart78.3 is next.
+belongs to MEMORY.md; Rust78.2 now has its own bounded outcome in `docs/knowledge/rust-array-transform-result-guards.md`.
+
+November10 update: Dart78.3 independently reproduces19 own guard failures and
+repairs only result ownership, preserving its initial source/arity policies.
+Unchanged141/four routes, direct292/private19RED/141PASS and first readonly recovery
+pass; see `docs/knowledge/dart-array-transform-result-guards.md`. Independent
+Julia78.4 is next; this does not promote the original selection to portable admission.

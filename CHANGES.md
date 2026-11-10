@@ -12,6 +12,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — Guard ordinary Dart Array-transform results
+
+Add only canonical take/take_last/drop_front/drop_back/slice/sorted/reversed/
+concat_arrays result ownership to the existing actual-kind dispatcher. Preserve
+initial source fallback, earlier owners, optional/excluded arities, producer
+bodies and all needed errors; reject incompatible Hash consumers before effects
+and skip later copy/logical/with tails. Emitted/serialized formats are unchanged.
+Independent shared37 plus104 own controls reproduce19 failures; unchanged141 on
+four routes and direct292 now pass. Same-path exact old/current SDK19RED/141PASS,
+122 healthy observations/108 profiles/141 parsed-module pairs, final formatted
+replay, first readonly recovery/eight corruptions and candidate identity pass.
+Book, canonical facts and live/task pointers route to independent Julia78.4.
+Full native/source/context/admission and full23.4 remain separate. Evidence:
+`docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md`.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — Publish scoped lookup aliases
 
 Append precise question aliases to the existing canonical claim, epoch, factory,

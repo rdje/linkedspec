@@ -1,0 +1,990 @@
+{
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/analysis-command.json": {
+    "bytes": 260,
+    "sha256": "a09b91568e8367486b6a7f1a57e1ad03df2bc764d68496711b992dc137c92732"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/analysis-stdout.log.gz": {
+    "bytes": 85,
+    "sha256": "7a3b10788e3c03a17cc45a4ecf1ec49a91801e62e6855c5d37e302959d14b1ff"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/cases.json": {
+    "bytes": 51215,
+    "sha256": "0d730f41a3dd4f47abe325cc0fca0bacde40830194288c8b263d367b307d717a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/custody.json": {
+    "bytes": 191225,
+    "sha256": "c70ebbc36a53a459cfd47e427e1bd47f81da8cafd0befeb0dffa3ca2e519de48"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/emitted-before-first-run.tar.gz": {
+    "bytes": 35954,
+    "sha256": "571a2ab6cc04cd926a5c35c15c9dd99e74d413e34761055aef54e9a653e67ad7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-analysis-command.json": {
+    "bytes": 301,
+    "sha256": "50b2965094f0b0c6da91d524bb773bf2cf0ce27c9253ee501646a80bf65185d8"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-before-first-run.tar.gz": {
+    "bytes": 36554,
+    "sha256": "628c23c5c42395a996c8731663ae8c4e41821daa34cb7c9d6fd515b44109150b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-command.json": {
+    "bytes": 273,
+    "sha256": "487f5d797969ade2713655ccab2f8c2aef80ad991f4ea4333b049d4a89c60553"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-resolution-command.json": {
+    "bytes": 280,
+    "sha256": "30dbe496d497ca28a170f24148b6462e046e566c2b329d0dc558dc061198e56b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/fresh-stdout.log.gz": {
+    "bytes": 1072,
+    "sha256": "5493ef4d1314da99e68edc0d216f74309a71a10785aa3bb67bb7e35cdb3c6399"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/native-command.json": {
+    "bytes": 293,
+    "sha256": "9a1ac49efcb2f0209911b3b62f4a643148d2543651d256b3e1a993d0664187c6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/native-stdout.log.gz": {
+    "bytes": 6341,
+    "sha256": "0d92915dba039bfb684316a9f4a9f480f903d6578e05dafbc8433e43a76ace5e"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "243f3275ac70a9a32e11739c707ae60bfc28fecb070bc0805f5fd4da1ebe7b85"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/root-before-first-run.tar.gz": {
+    "bytes": 622097,
+    "sha256": "c8e6aa3290ef74f5128e663bfb744f1845653d230203b4e438e26f4e8dc2d144"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after-intake/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/analysis-command.json": {
+    "bytes": 363,
+    "sha256": "eafffa0fc9cc3e1951f9299425b664b3ce00c41994746da3d2bfccb2471ab89d"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/analysis-stdout.log.gz": {
+    "bytes": 117,
+    "sha256": "a67ba4add24f9dbb5c8427dd04ca5f719808552caac8aadccf71f2fea511811f"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/custody.json": {
+    "bytes": 48896,
+    "sha256": "662077c0385286f7929cd0f651e36504a5deb46db7d635b5a77c9bf775526f46"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/normal-command.json": {
+    "bytes": 285,
+    "sha256": "b1c401cc2637f00e4964c08ace0fbb5a843a25fefc508cafbe6417b5f0bfab12"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/normal-stdout.log.gz": {
+    "bytes": 4030,
+    "sha256": "751c2f87d1ee8fcfbce2d06a65ad3de520b90e25f2e858e1197260f4d1eea238"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "1cc6dc0055a2a8aec3603b20eed66eab0b40fa49eee226de9d0b580d347577f1"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/root-before-first-run.tar.gz": {
+    "bytes": 619246,
+    "sha256": "2401746b0266ce1b85e5ede660fc57d6457798f5eb1fdfa81ca288f602cb49b7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/after/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/analysis-command.json": {
+    "bytes": 363,
+    "sha256": "eafffa0fc9cc3e1951f9299425b664b3ce00c41994746da3d2bfccb2471ab89d"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/analysis-stdout.log.gz": {
+    "bytes": 117,
+    "sha256": "a67ba4add24f9dbb5c8427dd04ca5f719808552caac8aadccf71f2fea511811f"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/custody.json": {
+    "bytes": 48898,
+    "sha256": "f1b57099b1f979b0e357965ab9a7b41e6f34b8b0a382b3a32b107051156791f4"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/normal-command.json": {
+    "bytes": 285,
+    "sha256": "b1c401cc2637f00e4964c08ace0fbb5a843a25fefc508cafbe6417b5f0bfab12"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/normal-stdout.log.gz": {
+    "bytes": 4571,
+    "sha256": "050de8812b9bb4497d035697b980cf4a7af5af8816c0a947b4c36959311251f5"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "b446af952b1decf2f26ca883265fd48c3667bb73ea1cb287e9150ef51042ed70"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/root-before-first-run.tar.gz": {
+    "bytes": 618995,
+    "sha256": "f0c8a523caf0b7d5cf2aa1279eaee7de1fd177f666245d06aeeaff42250497e2"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/before/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/capture.py": {
+    "bytes": 6951,
+    "sha256": "cd0920d523b43d86c819ea53a8156150755c562948c66e1fa28f317860720381"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/cases.json": {
+    "bytes": 51215,
+    "sha256": "0d730f41a3dd4f47abe325cc0fca0bacde40830194288c8b263d367b307d717a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/analysis-command.json": {
+    "bytes": 571,
+    "sha256": "0e1154bb271320d357cbbc1b369bdec50a962453477294568ab708c96215260a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/analysis-stdout.log.gz": {
+    "bytes": 154,
+    "sha256": "4413c2c846ea7d3085af4f748a3dad0a6a843fa42543b8c18225f58a000959f4"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/custody.json": {
+    "bytes": 49587,
+    "sha256": "a81e2c177a8414b1f54fbb7647e7f40ffd5f94e993e688037cddc6465e5547a3"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/normal-command.json": {
+    "bytes": 493,
+    "sha256": "869d8b731fd77ffe4680feea915444fe6513d05db57f496f51466c8dd41dcf19"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/normal-stdout.log.gz": {
+    "bytes": 10817,
+    "sha256": "b77a16b6f28e04f48577e122652885e3499d161011269b377b3cac3a93486141"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "8023776b8162a3f62f5d2f71f1dcac08983ee722b9365dd9563f4f3a110c0029"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/root-before-first-run.tar.gz": {
+    "bytes": 622453,
+    "sha256": "d2fded744f2fb00b59265fe6cd13c01ddb789cec8c61501df9897145f054deb6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/direct/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/custody.json": {
+    "bytes": 49587,
+    "sha256": "293f8736e65c3cf54eb4c2adfa1872c8773d008991030c7d25be8a96c223d4da"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/format-command.json": {
+    "bytes": 367,
+    "sha256": "988d52cdec9ac06059e2cb39271f0dfcc02f5ab310cf7529fd43995faa602299"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/format-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/format-stdout.log.gz": {
+    "bytes": 67,
+    "sha256": "19eedadfa2eb883649b12d8b5bdcf9db50ef67670710e43537b2d5e0d319106f"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "44ae758998e403061256d15c57d2483ad4aad0d76d4e5f750e8f28df9bcd009f"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/root-before-first-run.tar.gz": {
+    "bytes": 622453,
+    "sha256": "240c9e3251ef451a9a5eafc0df72df5bb12a47fab56b4867d887bb4b6b433acc"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/format_sources.py": {
+    "bytes": 1634,
+    "sha256": "c2e8532b931eb7b96d2b8a73651ac9cd300c4ed91a201f6ab0ef22bed5825857"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/analysis-command.json": {
+    "bytes": 260,
+    "sha256": "a09b91568e8367486b6a7f1a57e1ad03df2bc764d68496711b992dc137c92732"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/analysis-stdout.log.gz": {
+    "bytes": 85,
+    "sha256": "7a3b10788e3c03a17cc45a4ecf1ec49a91801e62e6855c5d37e302959d14b1ff"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/cases.json": {
+    "bytes": 51215,
+    "sha256": "0d730f41a3dd4f47abe325cc0fca0bacde40830194288c8b263d367b307d717a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/custody.json": {
+    "bytes": 194218,
+    "sha256": "0d4bb1c1b89a0b9603b8389cdd41df59dc692396812422de093498ea37496869"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/emitted-before-first-run.tar.gz": {
+    "bytes": 36575,
+    "sha256": "6edf4dbf104fa7ffefa13dea19d80cb754db75baeba6c94f2e761ccdc14e9752"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-analysis-command.json": {
+    "bytes": 305,
+    "sha256": "c8571bd5d517dcc9c83abb4c472d51df91c8f4bafbcf9633709b8e72a295f5b3"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-before-first-run.tar.gz": {
+    "bytes": 37165,
+    "sha256": "703886aca9968dd930b41cea5731a5fc3052fa042cd7d14137ed5818c81eaa05"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-command.json": {
+    "bytes": 277,
+    "sha256": "8b4003672f008a06d0932d9f6ab84f50fc7b7e017b87f2da8eff00e0119f11aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-resolution-command.json": {
+    "bytes": 284,
+    "sha256": "3fb81574b0269dfc2060113844184a69ff12435e0a691b1bd4454b27595fa39d"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/fresh-stdout.log.gz": {
+    "bytes": 1072,
+    "sha256": "5493ef4d1314da99e68edc0d216f74309a71a10785aa3bb67bb7e35cdb3c6399"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/native-command.json": {
+    "bytes": 297,
+    "sha256": "e2813c25ab005668ab3fdcf614628589feddf749068a7cf66c89c0f95d9a8245"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/native-stdout.log.gz": {
+    "bytes": 6341,
+    "sha256": "0d92915dba039bfb684316a9f4a9f480f903d6578e05dafbc8433e43a76ace5e"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "c125bd90c71f1f8bf4f1c70ed8e0265cd600b436bcb177055095733a534950e2"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/root-before-first-run.tar.gz": {
+    "bytes": 625441,
+    "sha256": "a267f6b1c08db24371029ac749981cd4756a44dec510f64144edecdd32a33bdc"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatted-intake/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-command.json": {
+    "bytes": 317,
+    "sha256": "a3df173bbe36a1a7288b0ed998a8d8cc6fa14999f72560689d0bcf05b5b35083"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-identities.json": {
+    "bytes": 986,
+    "sha256": "777669ef6e0b8f35227c442371cc3e02b443c36123e3f8f6d598c3295016437d"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-input-0.dart.gz": {
+    "bytes": 55934,
+    "sha256": "6170fa3e8828875060a40c826c0c7c5dbe89e75ad3a1271e8d8a22e8108ca888"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-input-1.dart.gz": {
+    "bytes": 1277,
+    "sha256": "76c19e362732a8349445afd5c3b45542b66dd235aa30855092f0cb8acc762e0b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-input-2.dart.gz": {
+    "bytes": 1469,
+    "sha256": "ec9d7d57732e82afdc15f1bb62e40383f22977f04ad83febcb939361d6b12b9a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/formatter-stdout.log.gz": {
+    "bytes": 98,
+    "sha256": "109ac5aebca3df63e71ff943759d85f0d07d7913439deb279532b15a76cc28e2"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/freeze_profiles.py": {
+    "bytes": 1461,
+    "sha256": "80431f53b8cf247a16ab8fc81073acdb906b08beb56a4c65da3778a8d2700f02"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/inspect_intake.py": {
+    "bytes": 2457,
+    "sha256": "15cfd07085fca48581438ffa8077a712eea2801d6acc224e102769f1c43ecea1"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/inspection-combined.log.gz": {
+    "bytes": 812,
+    "sha256": "0c15dba122f03b09be3138dffa986ec329cab070cbaf024dc23c36206850c991"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake-failures.json": {
+    "bytes": 594,
+    "sha256": "fc165ab599883f78707125d3f9145a020a6f55d99a802e04bbf907f08d19de2c"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake-profiles.json": {
+    "bytes": 54953,
+    "sha256": "c98a9e2738faa3870e9a47659d09f84704a3dda5c40431d0071b12274b1000c0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/analysis-command.json": {
+    "bytes": 260,
+    "sha256": "a09b91568e8367486b6a7f1a57e1ad03df2bc764d68496711b992dc137c92732"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/analysis-stdout.log.gz": {
+    "bytes": 85,
+    "sha256": "7a3b10788e3c03a17cc45a4ecf1ec49a91801e62e6855c5d37e302959d14b1ff"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/cases.json": {
+    "bytes": 51215,
+    "sha256": "0d730f41a3dd4f47abe325cc0fca0bacde40830194288c8b263d367b307d717a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/custody.json": {
+    "bytes": 186887,
+    "sha256": "aa74ea49b84532a36cc981e2f5fb2bb2f814c0cef24b920a305c98f78fc999cb"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/emitted-before-first-run.tar.gz": {
+    "bytes": 35804,
+    "sha256": "0d1ed6892035127cd985f89cd4083e104746c380cd2dae705ff5b26b0aabb856"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-analysis-command.json": {
+    "bytes": 295,
+    "sha256": "5b53e0724449cdfd35db7632b46b793e6c3fc0fcc0ed0528926c7f99bffee60d"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-analysis-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "e104796b8dffab0e6d1d9f7ef66980275b6cec301ca8512e5373bfa61b07532b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-before-first-run.tar.gz": {
+    "bytes": 36410,
+    "sha256": "f6e651751ff581e11c440659bb28f435b487bb5ff8e92a0df643e565f8ac6800"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-command.json": {
+    "bytes": 267,
+    "sha256": "8e785804e1961e97de3f1c76b83eed5b324da36e6b46afae438dee751f3ace44"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-resolution-command.json": {
+    "bytes": 274,
+    "sha256": "29650cf0ff383275a6b73180b88cba5e2999d013666c65947b28cef2b22cbfc2"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-resolution-stdout.log.gz": {
+    "bytes": 116,
+    "sha256": "64f3e1dc08a36c856ff75c42ba5541fd7146cccc6cf3ea0d1fed236205d51d30"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/fresh-stdout.log.gz": {
+    "bytes": 1109,
+    "sha256": "bce4b70ec17c02a3523df12fecffafc078f97dc0cb6e301f50218a796189fab0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/native-command.json": {
+    "bytes": 287,
+    "sha256": "50129d016acd0ddb2300312625329537450cb55b5d082e50d702cf1913058d42"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/native-stdout.log.gz": {
+    "bytes": 6421,
+    "sha256": "d7d3fb76f34d04762ca6a31cb15cd3bbfdad876ee5a848cb341fc43efb306286"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/resolution-command.json": {
+    "bytes": 218,
+    "sha256": "d42afec3efe35bdadc648f3ad8085e281a201e3732eac3ca761f72aac60a96d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/resolved-before-first-run.tar.gz": {
+    "bytes": 5183,
+    "sha256": "7fd6b2edaae856baf125bd67d60c9aebdbbb68c72d7f3c42b53a243c2b4bea73"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/root-before-first-run.tar.gz": {
+    "bytes": 617581,
+    "sha256": "18433ee793063226ce0b280ba52789da2abe52efe50d8c82d7f8d6712c1f2665"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/version-command.json": {
+    "bytes": 170,
+    "sha256": "4630b30e341a793eca8805f873dcdae92f9c28b0986e9cc9bdff9a624fd4aa08"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/intake/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/normal-before-format.dart.gz": {
+    "bytes": 1277,
+    "sha256": "76c19e362732a8349445afd5c3b45542b66dd235aa30855092f0cb8acc762e0b"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/prepare.py": {
+    "bytes": 3782,
+    "sha256": "38119a9c075beb64fc9d5bf47d001f8e6f36467014f96b260c29b828e7870d30"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/prepare_private.py": {
+    "bytes": 1130,
+    "sha256": "5ae1a6edda08f681f59eeda73e8d9e197a3533aaed4717a0ef83c5af9581abfc"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-control-template.py.gz": {
+    "bytes": 2593,
+    "sha256": "78d3b88b34158ba2e485fd45308bbab71ef84adf09aecab8143f28020d62a106"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/analysis-command.json": {
+    "bytes": 404,
+    "sha256": "fbbb7233615c51244e211ede41ee55a43122e6f6d8c7e98117fc33209388a1ae"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/analysis-stdout.log.gz": {
+    "bytes": 105,
+    "sha256": "fa6c21101e35a0038d17838ca9932df9f86f9313a00fca2127323191f7d43db0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/custody.json": {
+    "bytes": 66575,
+    "sha256": "00448f880c78d681cc3250c62e68e8c0d5a890ae6059ec8c5deef3a7e5596552"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/normal-command.json": {
+    "bytes": 373,
+    "sha256": "d8fc3a799cbbba74c11ea5a80c05a0727737acfa5ba83d60944c8755681a56bc"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/normal-stdout.log.gz": {
+    "bytes": 4570,
+    "sha256": "c48bb3e3a4568f9ea95ae137cbaeb155996bd6298ce41a6d162530089057e104"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/resolution-command.json": {
+    "bytes": 306,
+    "sha256": "b6692c7790c5312cce10d776fa1911e09ce7aacc8d8e3c601260a59b06cfb56a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/resolved-before-first-run.tar.gz": {
+    "bytes": 5259,
+    "sha256": "896555f6f9db9615772a61a1954153e2243ed5a7ba74a254bd4c2627f2ffd96a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/root-before-first-run.tar.gz": {
+    "bytes": 684487,
+    "sha256": "5a0c0cf2065769219fb0a5cb05a180ed4c8ecc816170247bf651a06362a61626"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/version-command.json": {
+    "bytes": 258,
+    "sha256": "eeb304785ae700ed1dc5b1de499a525cc50b521ffb2b80f39adf2d7d54e72494"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-inverse/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/activation.txt": {
+    "bytes": 41,
+    "sha256": "a56a123136f012bdf450bf157a4ae8c982395a3a17c832da31e43d36c2593882"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/analysis-command.json": {
+    "bytes": 404,
+    "sha256": "fbbb7233615c51244e211ede41ee55a43122e6f6d8c7e98117fc33209388a1ae"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/analysis-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/analysis-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/analysis-stdout.log.gz": {
+    "bytes": 105,
+    "sha256": "fa6c21101e35a0038d17838ca9932df9f86f9313a00fca2127323191f7d43db0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/custody.json": {
+    "bytes": 66577,
+    "sha256": "555e711c0c9dac475b8c2528ce12af896ad56a8cce27a101e5256730712c3c1a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/normal-command.json": {
+    "bytes": 373,
+    "sha256": "d8fc3a799cbbba74c11ea5a80c05a0727737acfa5ba83d60944c8755681a56bc"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/normal-stdout.log.gz": {
+    "bytes": 4033,
+    "sha256": "273d0559bedeebfe44f3c0ced5139cf55bac05ddffeebc482d24d87fa2d4b737"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/resolution-command.json": {
+    "bytes": 306,
+    "sha256": "b6692c7790c5312cce10d776fa1911e09ce7aacc8d8e3c601260a59b06cfb56a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/resolution-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/resolution-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/resolution-stdout.log.gz": {
+    "bytes": 71,
+    "sha256": "8e98af7c397f2e3538138a918aeb034c64f2d29a1bd9b17769b3fd50697d8fd6"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/resolved-before-first-run.tar.gz": {
+    "bytes": 5259,
+    "sha256": "9ef42dde760d6b046acf8e0e895d91d57135caa968846a4d47311001e4ad5216"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/root-before-first-run.tar.gz": {
+    "bytes": 684820,
+    "sha256": "174c4e786f5ffbc8823fcc658e894763c143b46c630ea704f95109360ffcd48a"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/version-command.json": {
+    "bytes": 258,
+    "sha256": "eeb304785ae700ed1dc5b1de499a525cc50b521ffb2b80f39adf2d7d54e72494"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private-restored/version-stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "d56682e04d7f2503a9f07b7e4ea66a5fe11a5aef10dcd45940a54e7e63aad9d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/private_control.py": {
+    "bytes": 6601,
+    "sha256": "615b6b9c21a1879f40abe60be8f55e03bb99169a5b78a3c5c746459c5f337a43"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/producer-change.patch.gz": {
+    "bytes": 1777,
+    "sha256": "0ee5e27b967d1f8cc80ce3bc02c33f7910263c36f057b363aad1f9a0e5d175dd"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/profile-sources.json": {
+    "bytes": 35224,
+    "sha256": "414dc366156fc6fcd7f099f7828199cd4d5f7dd38d1e27bc4c10186083d33c11"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/review.py": {
+    "bytes": 14943,
+    "sha256": "f4fc369b62986a92a7f9641489e2867d1065e7f1616d24f1e9aef7984b298c71"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/run_review.py": {
+    "bytes": 1014,
+    "sha256": "ebb3a2292a104b814b750e2243bf2c820b4c42a1470829ff11ac3f39990b8edf"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/seal.py": {
+    "bytes": 1003,
+    "sha256": "64a7565003efb9589a2711dac501cf16ba75c6c5dcd51390f162a4d0828c58af"
+  }
+}

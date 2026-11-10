@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8749,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/guarded-ast-change-history-capacity.md","sha256":"4bb8cc5c47862a4ba3f035bf18fd06879452dcf705c8dd7dca37528d6b4ecd38","type":"member"}
 {"bytes":12531,"lines":253,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/handler-ir-design.md","sha256":"d1138cc4b8873598140f23dbd1cba6f2456f5322ed72d4a733af675b2150d294","type":"member"}
 {"bytes":2364,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-helper-odd-arity-current-behavior.md","sha256":"f98964865a50e8378b37cff64a042c209d0053d1193fad1c687f82380180cc73","type":"member"}
 {"bytes":2551,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hash-literal-colon-methodlowering-source-fallback.md","sha256":"9a9899938788f9cab88149d783fbc172d8975908c634c0e1973c3ffb52c5bf89","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6181,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-package-readme-reading.md","sha256":"cffc90ce92d2c40bc5e6cf07311194b69f15585f9eb84bd09ab2b018b5534fbd","type":"member"}
 {"bytes":9364,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-parser-member-suffix-loss.md","sha256":"5ded33c3a4f4b8b3f6c969a35e76f39dc488f5d0b617b55510eacc87f1b71fc5","type":"member"}
 {"bytes":3392,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-presence-result-source-guards.md","sha256":"0048d94e7d9083c54d88514516350159ebd80e0dad391b7501c69dc892026888","type":"member"}
-{"bytes":4097,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-primary-cli-arguments-resolution-loading.md","sha256":"b0d040014759ebcce88d73756af81443714a62f9d46062c93b88f2ca4350c83e","type":"member"}

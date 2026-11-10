@@ -1,0 +1,24 @@
+{
+  "shared": 37,
+  "own_controls": 104,
+  "total": 141,
+  "original_failures": 19,
+  "preserved": 122,
+  "profiles": 108,
+  "four_routes": "PASS",
+  "direct_tests": 292,
+  "private_inverse": 19,
+  "private_restored": 141,
+  "artifact_pairs": 141,
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "original failure hidden",
+    "consumer operands admitted",
+    "later body admitted",
+    "needed error masked",
+    "source fallback normalized",
+    "Boolean replaced by Number",
+    "excluded profile omitted",
+    "actual module drift"
+  ]
+}

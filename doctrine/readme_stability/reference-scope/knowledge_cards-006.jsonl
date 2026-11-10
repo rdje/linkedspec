@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4829,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-recomposition.md","sha256":"6f6e49084d307df63c4d92ce4451dea6083368749f22a14c9c6b7cafba24920b","type":"member"}
 {"bytes":9090,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-project-data-ssd-storage.md","sha256":"69cf477446d686e1d865d5f51586ca64df4417f5eb8ad53106e232fa7aa06889","type":"member"}
 {"bytes":2165,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-pure-split-bridge.md","sha256":"67b43679cd2858dbecb52f25b8b639985fea6cf0dfb8d1ae6738dd2261582de0","type":"member"}
 {"bytes":2281,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-push-snapshot-result-guards.md","sha256":"5b0300638a70d141f61a5b54f54d0f0f789231d81f43a0f91bc3596bc995b04a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":17157,"lines":204,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-wire-cli-recognition-reading-and-finite-state-gap.md","sha256":"472f314e7daa83f3c4cfc6f284a06ec87492c21c0b1010332ebba4ae886a6179","type":"member"}
 {"bytes":29326,"lines":388,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/macos-rust-first-launch-validation-latency.md","sha256":"55f3498086fb5cfa9884329a6306837c309985bf4a634bbf7230e0bbbaba8986","type":"member"}
 {"bytes":3219,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-function-scope-contract-conflict.md","sha256":"1b41fe3f2a65a449335d468f05392f620f49fa7b47548c6f657e9d7c8e7e5a5e","type":"member"}
-{"bytes":6317,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-dart-runtime.md","sha256":"48c56718870d18c96ec81417c2bccab88b9e83e9ef6a9f5f6e5c6cf2a74ce76c","type":"member"}

@@ -1,4 +1,5 @@
-{"member_count":47,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":48,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2426,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-method-lowering.md","sha256":"d7718467a2ee9b9b563d0d3468ac5cd3434f5fd3c9fa5321ad88aede1cd53311","type":"member"}
 {"bytes":4558,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-pipeline-decisions.md","sha256":"4d919f441f9032e2ca09828a064e5539794bcc239e6137054fd9de6b6e9dd377","type":"member"}
 {"bytes":2696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-backend-parity-split.md","sha256":"dc11575830d8bcb1175b9856abc93dcdf31ffb62e38d7a97fa005f84791df340","type":"member"}
 {"bytes":3520,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-cli-control.md","sha256":"221646ffa91fdd1e025bc83efffcba0dcc7441d474026804cc81635ecf61059c","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":20499,"lines":313,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-next-engineering-history-capacity.md","sha256":"802349c8350496c962556fe83e282308c76335a40708a83f0a8130949c4576ee","type":"member"}
 {"bytes":14648,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-second-history-capacity-blocker.md","sha256":"764e4c01f60556957ead97d2f32655bd2f133ec0a7099a707d0faf653925f327","type":"member"}
 {"bytes":2603,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-receiver-string-bridge-guards.md","sha256":"6f08847af48c871ed82f525d210922c472d61ab4e726cda82b119945716e9291","type":"member"}
 {"bytes":8526,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-recognition-effect-integration-gap.md","sha256":"6c550d60366c2e9abcd71396f62daa7e27fb345a03bdc318b95ea94bb8242196","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5702,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/github-size-safe-publication.md","sha256":"0ef25efa8f29ff99fef6e205609891dc8e0682047f2c9f22306d08eb4ddea7e8","type":"member"}
 {"bytes":2087,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/governed-capture-helpers-missing-shared-inventory.md","sha256":"a86b37bcce7c3c5cf95e1d5a9f8f027fdeecebd3266b4a30914340b3ade7c69c","type":"member"}
 {"bytes":3427,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/grouped-edge-book-child-return-drift.md","sha256":"39f7b54a953ced79a47722da0a27002d1690d79b0711008b9fbdfec28450aebc","type":"member"}
-{"bytes":8749,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/guarded-ast-change-history-capacity.md","sha256":"4bb8cc5c47862a4ba3f035bf18fd06879452dcf705c8dd7dca37528d6b4ecd38","type":"member"}

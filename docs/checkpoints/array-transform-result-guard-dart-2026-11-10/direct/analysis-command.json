@@ -1,0 +1,21 @@
+{
+  "cwd": "dart",
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "analyze",
+    "--fatal-infos",
+    "--fatal-warnings",
+    "lib/src/runtime/interpreter.dart",
+    "test/array_transform_result_guard_composition_test.dart",
+    "test/with_hash_results_test.dart",
+    "test/hash_value_result_guard_composition_test.dart",
+    "test/hash_view_result_guard_composition_test.dart",
+    "test/constructor_result_composition_test.dart",
+    "tool/probe_array_transform_results.dart"
+  ],
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

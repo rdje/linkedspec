@@ -1,0 +1,12 @@
+{
+  "candidate": "PASS",
+  "actual_direct_inputs": [
+    "dart/lib/src/runtime/interpreter.dart",
+    "dart/test/array_transform_result_guard_composition_test.dart",
+    "dart/tool/probe_array_transform_results.dart",
+    "tests/fixtures/array_transform_result_guard_cases.json",
+    "tests/fixtures/array_transform_result_guard_dart_profiles.json",
+    "specs/user_function_definition.spec"
+  ],
+  "producer_sha256": "20418b5b5fce34514c11744e17b8e8116bcedff62d515190cdb128dc8c4903ad"
+}

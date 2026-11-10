@@ -1,0 +1,21 @@
+{
+  "before": {
+    "dart/lib/src/runtime/interpreter.dart": {
+      "sha256": "c4dfffe0c585bc5c7171524b300ff3bed86d4168789472999e7cebedd42cf84d",
+      "archive": "formatter-input-0.dart.gz"
+    },
+    "dart/test/array_transform_result_guard_composition_test.dart": {
+      "sha256": "6ab14c5773af42c63bee144e0e3b5cbe3be02d1a4abba468ff0f4278923e890b",
+      "archive": "formatter-input-1.dart.gz"
+    },
+    "dart/tool/probe_array_transform_results.dart": {
+      "sha256": "bfb3f49c058cffa8af05cf6acdd91bf62d7e40ce7e8eff6fce07d40330c5398c",
+      "archive": "formatter-input-2.dart.gz"
+    }
+  },
+  "after": {
+    "dart/lib/src/runtime/interpreter.dart": "af03e295448e1ad21f6be9dd362ed32668e09e230533231cedb1efc83aa1d3fe",
+    "dart/test/array_transform_result_guard_composition_test.dart": "6ab14c5773af42c63bee144e0e3b5cbe3be02d1a4abba468ff0f4278923e890b",
+    "dart/tool/probe_array_transform_results.dart": "bfb3f49c058cffa8af05cf6acdd91bf62d7e40ce7e8eff6fce07d40330c5398c"
+  }
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1651,"lines":23,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-bound-commit-authoring.md","sha256":"ba0f6b3d69125fbf2148ccc5c27b673185579711263cf70a89a04b5ff1d911b4","type":"member"}
 {"bytes":4796,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-capability-guide-drift.md","sha256":"619d55d7064ee65959a14bedbaf8f4cb7999b0d2568bd0616837fb926a9d4bc8","type":"member"}
 {"bytes":2869,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-current-boundary-policy-drift.md","sha256":"7354fe7e55c10ecccbab67201a19263a439ff8c96344fd3423e1d23d873cfb70","type":"member"}
 {"bytes":12544,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-neutral-contract.md","sha256":"baf1548b3f68a79816318e97be4aad95c5c87ee09272e97775323866cad7f077","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4912,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-caught-panic-stderr-gap.md","sha256":"c603bf531cdc179978c0d84f712d6058fb297e7164ee1fbb426f805c3a1733b1","type":"member"}
 {"bytes":5675,"lines":93,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mcp-final-eof-byte-limit-gap.md","sha256":"944ae1fffdf9bbc032706aca4bba7646f4df61c8ff81d4867b7ea0121ad55020","type":"member"}
 {"bytes":5146,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-minimum-miss-and-live-progress.md","sha256":"aff85c4c14ea7f3d0776b0601345fd5cc61a131e8e612fe51440698ce31fd9a9","type":"member"}
-{"bytes":2974,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mutation-testing-policy.md","sha256":"25bfa6619dc5c97a61c0871e4e5b1b2d2fe813d28d500b9aaea37e6a00622ec4","type":"member"}

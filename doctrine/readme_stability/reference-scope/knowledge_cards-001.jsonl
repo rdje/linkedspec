@@ -16,6 +16,7 @@
 {"bytes":2912,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-and-required-dependency-steps.md","sha256":"e3cc04f4af97ad532e1470bad6125aedf60ce4f5e1c791b84fe0e2f8b47e5b77","type":"member"}
 {"bytes":3000,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-arithmetic-result-source-guards.md","sha256":"a479ff90047b785a54b0214bf47b717b2f045bc5e61ab503ec8b3e9c6c26628c","type":"member"}
 {"bytes":1918,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-array-flat-list-context-splice.md","sha256":"f868d869789367d8b3b21edc933ac503678e9841f12b6219d6155d7854436151","type":"member"}
+{"bytes":4321,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.3","path":"docs/knowledge/dart-array-transform-result-guards.md","sha256":"d0a576604f0af3802c97df8867db9c84b04176e438a7f7e692dedd19c67435ce","type":"member"}
 {"bytes":5840,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-attached-switch-body-omission.md","sha256":"b76e880b383867a58f7fd741064510c55263a70d4e1e8e2f560a8b45f4b6081b","type":"member"}
 {"bytes":2075,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-backend-interpreter-first-plan.md","sha256":"22d152c75a9c8ad7151dc4f838bec6308155edef5d831582a9b6e27f60d4174c","type":"member"}
 {"bytes":5120,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-backend-scaffold-package.md","sha256":"82cf8c480260395f3ed2ec7e53f72a6caed2db81ff4f43afd84ac423614f3f03","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}
 {"bytes":19250,"lines":308,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-engineering-history-capacity-blocker.md","sha256":"23f844e476bf18ba67ae08075cd578be62ec86d56df38dbc53709bf42ded9840","type":"member"}
 {"bytes":12763,"lines":198,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-history-capacity-blocker.md","sha256":"5be25e9b4c91f23046632009cdb7ce917aec011209906beec3b7f8f1e4cac0ad","type":"member"}
-{"bytes":20499,"lines":313,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-next-engineering-history-capacity.md","sha256":"802349c8350496c962556fe83e282308c76335a40708a83f0a8130949c4576ee","type":"member"}
