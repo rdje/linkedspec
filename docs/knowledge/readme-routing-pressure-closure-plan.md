@@ -91,3 +91,12 @@ from focused feature checks or refresh budgets to admit this state. New CHANGES
 headings must include an ISO date; current heading/local writer recurrence is
 corrected, with historical repair still owned. Original August acceptance stays
 historical, not a new healthy epoch.
+
+November10 implementation18.1 keeps the complete question index and all other
+projected metadata/anchors byte-exact while omitting only the repeated per-fact
+answers display. Canonical cards retain their complete authored lists. The
+source-bound actual old/new public-generator observations and readonly
+preservation/control review are in
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation.py`; its live
+claim requires the accepted Git inputs after later map growth. Existing map
+limits, freshness, locality and atomic-publication controls remain authoritative.

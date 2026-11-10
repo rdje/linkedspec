@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "prove",
+    "-Iperl",
+    "t/callable_codeblock_literal_contract.t"
+  ],
+  "cwd": ".",
+  "observed_exit": 1,
+  "channels": {
+    "stdout": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-before-stdout.log.gz",
+      "sha256": "cee77486ad1d8ea120dbf636a4c50035699cf5dca11f438ff2c3be23f84a1a80"
+    },
+    "stderr": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-before-stderr.log.gz",
+      "sha256": "3659047f980ecef9552073c12ab54432e2d7a6b5f21bab6977424cdd9c4b79da"
+    }
+  },
+  "qualification": "Channels packaged after observed exit; no original first-use or complete native custody credit."
+}

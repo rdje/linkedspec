@@ -5785,6 +5785,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
   }
 
   my $receiver_expr;
+  my $prepared_callable_index_receiver = 0;
   $receiver_expr = $lower_ast_value_node->($receiver, { bare_scalar_read => 1 })
    if ($receiver->{kind} // '') eq 'call' && $receiver->{trailing_block_arg};
   $receiver_expr = $lower_ast_scalar_assignment_value_node->($receiver)
@@ -5814,6 +5815,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
       if (@segments && defined(pos($suffix)) && pos($suffix) == length($suffix)) {
        $receiver_expr = 'do { require LinkedSpec::CodeblockRuntime; '
         .'LinkedSpec::CodeblockRuntime::read_path('.$call_expr.', ['.join(', ', @segments).']) }';
+       $prepared_callable_index_receiver = 1;
       }
      } else {
       $receiver_expr = '('.$call_expr.')'.($suffix // '');
@@ -6397,8 +6399,8 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !_ordinary_free_count_result_source($receiver);
   $emitted_result_chain ||= $ordinary_count_result_chain;
   if ($logical_receiver || $emitted_result_chain) {
-   # The compatibility callable-result path was already lowered above.
-   # Re-reading its raw AST source would emit invalid Perl such as pick()[0].
+   # Keep prepared callable-index receivers through guarded value methods.
+   # Count also retains its existing raw receiver compatibility path.
    my $current_expr;
    if ($initial_collection_prefix) {
     # Lower exactly the first receiver step through its original producer.
@@ -6410,7 +6412,7 @@ my $lower_numeric_array_reducer_source_expr = sub {
    } else {
     $current_expr = $logical_receiver
      ? $lower_ast_logical_call_node->($receiver)
-     : (($receiver->{kind} // '') eq 'raw_perl' && $ordinary_count_result_chain
+     : (($receiver->{kind} // '') eq 'raw_perl' && ($ordinary_count_result_chain || $prepared_callable_index_receiver)
        ? $receiver_expr
        : $lower_ast_value_node->($receiver, { bare_scalar_read => 1 }));
    }

@@ -109,6 +109,12 @@ required fields, list association, unique IDs and synchronization. A freshly
 generated map alone does not prove that its source headers are valid. This list
 association check does not constitute a complete YAML parser or field-type validator.
 
+The Questions section displays each distinct question route once. The Facts
+section keeps stable ID anchors, titles, dates, status, source links and
+evidence/reverify metadata; it does not repeat each source card's `answers`
+list. Authored answer order and repeated entries remain in the canonical card.
+Question keys and card paths stay directly grep-able in the generated map.
+
 ### Evidence and reverify values
 
 Both fields support a scalar, an inline list, or a block list. Nonempty list items

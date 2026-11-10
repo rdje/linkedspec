@@ -314,6 +314,45 @@ subtest 'neutral fixture executes with dynamic caller context' => sub {
     }
 };
 
+subtest 'indexed callable results retain lowering through value receivers' => sub {
+    my @cases = (
+        ['count-array', '["a", "b"]', 'count()', 2],
+        ['length-array', '["a", "b"]', 'length()', 2],
+        ['length-empty', '[]', 'length()', 0],
+        ['length-string', '"abc"', 'length()', 3],
+        ['length-null', 'undef', 'length()', undef],
+        ['uppercase-string', '"ab"', 'uppercase()', 'AB'],
+    );
+    my $serial = 0;
+    for my $case (@cases) {
+        my ($name, $payload, $method, $value) = @$case;
+        my $spec = join "\n",
+            'Top::',
+            ' I {',
+            '   trace = "";',
+            '   getter = {|| trace = cat(trace, "C"); return({ "items" : ' . $payload . ' }) };',
+            '   result = getter()["items"].' . $method . ';',
+            '   return([result, trace])',
+            ' }',
+            '';
+        my $expected = [$value, 'C'];
+        is_deeply(run_spec($spec, 'x'), $expected,
+            "$name executes the callable once and preserves its selected result");
+        my $generated = LinkedSpec::emit_generated_source(
+            \$spec, source_identity => 'indexed-callable-value-receiver.spec',
+        );
+        my $package = 'LinkedSpec::IndexedCallableValueGenerated' . $serial++;
+        my $loaded = eval "package $package; $generated; 1";
+        ok($loaded, "$name emitted source loads") or diag($@);
+        if ($loaded) {
+            no strict 'refs';
+            my $input = 'x';
+            is_deeply(&{"${package}::Execute"}(\$input), $expected,
+                "$name independent emitted execution preserves selection and effects");
+        }
+    }
+};
+
 subtest 'standalone discard and static callable precedence remain exact' => sub {
     my $discard_spec = join "\n",
         'Top::',

@@ -52,6 +52,10 @@ yourself re-deriving one. **No migration project.**
 
 ## How a future agent uses it
 
+The Questions section contains the lookup keys; Facts retains stable ID anchors
+and dated verification metadata. Each card owns its authored answers list, so
+the map does not display that list a second time.
+
 1. Open `KNOWLEDGE_MAP.md`. 2. Find the question. 3. Follow the one pointer; trust the dated
 fact or run its `reverify` command. 4. Only investigate if the fact genuinely is not there —
 then write a card so it never has to be investigated again.

@@ -174,6 +174,21 @@ Use the current Knowledge card's readonly entrypoint when documents have changed
 it should preserve and check the accepted publication separately. Updating a
 command must not refresh an earlier observation or silently change its boundary.
 
+Recurring CI can also check current runtime compatibility against unchanged
+semantic expectations, as the native and fresh factory probes do. Keep historical
+byte-preservation and source-calibration checks tied to their frozen epochs.
+Current compatibility must still reject changed values, kinds and effects;
+it does not require later feature implementations to reproduce old source bytes.
+
+The historical objective audit separately admits exact committed source images.
+Keep the original image table and earlier inverse checks; a successor record names
+the accepted commit, path and SHA-256 of later source while retaining its old
+predecessor oracle. A first-image record retains the exact historical predecessor,
+as for the Dart emitter test changed by Count73.3. Unknown historical members,
+noncommit revisions, symbolic file modes and unreviewed current bytes reject.
+Fixture calibration keeps its own boundary. Source identity admission does not
+advance the original runtime observations; feature tests own current behavior.
+
 ### Pipeline scope proof
 
 The pipeline extension uses the already selected factory-capture suite, so the
@@ -848,6 +863,9 @@ control and the existing mutation contract before choosing the expected value.
 Retain rejected expectations and actual failures. When internal emitted text
 changes, execute the relevant AST-derived values while preserving poisoned-source
 denials and trace checks.
+For a rule aggregate copy, compare snapshot values, distinct outer storage,
+shared nested containers and the original array-read trace. These checks preserve
+the contract when emitted temporaries change.
 
 Historical audits keep the original executable source hashes when test
 representations evolve. Give each reviewed delta an owning task and an exact
@@ -888,6 +906,17 @@ byte count and original mode. Copy and verify first, use the retained reader in 
 explicit original source context, then remove only the verified duplicate originals.
 Keep rejected attempts distinct. Record the physical input migration while preserving
 every original logical identity; an uncommitted draft has no historical Git revision.
+
+An exact emitted-source snapshot can lag an accepted lowering implementation.
+Before calibrating it, compare the exact committed activation module with the
+candidate through the same public AST/lowering probes. Verify the module actually
+loaded: facade initialization can prepend its own SDK root ahead of a private
+overlay. A rejected image-identity check earns no baseline credit. Retain every
+original fixture byte, change only the demonstrated stale source field, and keep
+AST/errors/warnings, unresolved-helper ownership and non-ready metadata unchanged.
+Equal legacy runtime values do not admit an unsupported expression. A diagnostic
+collector must also preserve Trace prefixes separately from its complete JSON
+frame; a framing failure is not a behavioral RED.
 
 ### Canonical execution prerequisites on macOS
 

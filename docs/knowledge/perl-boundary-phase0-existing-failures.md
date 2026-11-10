@@ -206,3 +206,15 @@ are retained in perl-phase0-after-projection-intake.json.gz. This closes the
 current diagnostic loop for that exact subset; parent45/full Phase0/canonical
 source-context/portable admission remain open. Next feature selection23.1.11
 resumes; no exhaustive suite is run for this checkpoint.
+
+2026-11-10 TYPE23.4.18.1 full canonical later reaches1035 groups and identifies
+seven groups with20 source-layout assertion failures, separate from the dated
+TYPE45.25 population. Current-only selected replay reproduces those20/140;
+pre-authored finite value/effect oracles agree across actual activation/current
+lowerings. Only the20 assertions change, preserving every healthy source byte,
+helper and plan; selected140 then pass with empty stderr. Exact20-hunk inversion
+restores committed7289836f Phase0 bytes before the older six-hunk/image recovery
+stages. All11 prior fixture/19 image denials remain, plus12 new exact-stage
+denials. Production is unchanged by this calibration. Readonly current review:
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_review.py`.
+This finite repair is distinct from full canonical completion and native custody.

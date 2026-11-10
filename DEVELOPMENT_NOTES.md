@@ -10,6 +10,99 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.1 — Keep retrieval identity independent of duplicated display
+
+An uncommitted measured claim cannot be made historical at its activation commit
+when that revision lacks its new producers. Preserve its full logical artifact
+epoch and original declaration instead, then execute the unchanged reviewers in
+a supplied same-volume tree. Nested producer packets count toward replay closure:
+the first supplied-tree replay omitted the nested unit and failed; qualified seeding
+uses its already-retained bytes. Twenty Phase0 assertion repairs now use authored
+finite value/effect oracles, retaining every healthy byte through an exact inverse
+before the older six-assertion calibration. Both source epochs agree; native
+custody and the full gate remain separately bounded. See phase0_review.py.
+
+Canonical cards retain authored answer order/repeats; Questions remains byte-exact
+and Facts retains every other field/anchor. Legacy projection comparison still
+rejects answer reorder/removal; compact fixtures reject reintroduced duplicate
+fields. Actual generation and independently retained original-line walking agree.
+The later complete source-bound acquisition is distinct from initial producer/
+output packets; it earns no retroactive original input-capture credit. Existing
+historical tool users retain the original instrument in the planning package.
+The selected broad workflow-routing producer proved to recurse through all
+doctrines; its deliberate143 is uncredited and deferred18.2. Exact generator-only
+outside-cwd and hostile/symlink output tests cover this unchanged initializer.
+Capacity is finite and still above line-rollover warning;18.2 owns reassessment.
+The first canonical attempt exposes the already documented whole-file checked-line
+placeholder predicate on selection38's older future-work qualification. Move that
+qualification off the checked line, preserving status and evidence. Real staged
+before/after packets retain reject1/accept0; the deliberate CI143 earns no receipt.
+The next canonical run passes nine doctrines but rejects the422243-byte inline
+claim at the existing128KiB bound. Preserve that record/log, retain every qualified
+source body against its prior acquired hash, and declare the complete frozen input
+bundle/instruments in the bounded record. Frozen replay and missing/altered-body
+controls preserve granularity; no later live-card freshness or limit increase.
+All10 doctrines then pass; the epoch mutation fixture fails because its copied
+catalogue includes Lua4.16 while its current-source setup seeds only selected20.2.
+Derive sources through each validated manifest before the controlled mutations.
+Qualified old/new consumer observations and frozen exact-file/missing/changed-body
+controls distinguish the setup repair. Initial observers hit an unrefreshed TYPE
+index and retain no inner channels; give them no original-normal credit. Older20.2
+observations retain their actual accepted5801970b inputs and results; its current
+readonly recipe needs that Git boundary. No production reader/frontier policy moves.
+The next canonical run exposes a distinct historical/current replay boundary:
+factory_evidence requires today's lowering bytes to match its November4 capture,
+although all unchanged public targets pass on current code. Preserve historical
+intake/after source equality, execute current compatibility against original
+semantic expectations, and replay source calibration from its frozen after-image.
+Original claims already use accepted cd3b6adc3. Actual harmful semantic results
+and an unrelated historical source edit still reject; old captures stay exact.
+Fifth canonical exposes current-source image drift. Add closed successor and
+first-image layers instead of changing the original table's global activation,
+which Phase0 calibration still needs. Four runtime images keep their original
+admitted predecessors; the Dart Count73.3 emitter test keeps its historical source.
+The initial eighteen-only review misses that test; qualified complete149-source
+inspection and actual recovery close it. Sorting merged rows fixes the new unit's
+first assertion. Compare prior controls with backend-registration714 rather than
+older703; preserve both initial instruments and all old observations. All19 image
+denials/134 recovery inputs/22 controls/714 governance denials remain effective;
+202 declared bodies retain191 observed artifacts. Source identity is not current
+runtime, native custody or whole-feature admission. Older4.3 is historical atf6295bc8.
+Preserve the new live claim at its accepted Git revision before later map/card
+changes. Canonical infrastructure landing remains mandatory; full23.4 is separate.
+Sixth canonical's callable failure shares the earlier Count receiver mechanism:
+the compatibility path has lowered call/index to read_path, but guarded Length
+re-reads raw AST and emits authored DSL. Preserve only complete successfully
+prepared callable-index expressions, leaving the existing Count disjunct intact.
+The original neutral fixture and native/fresh six-case consumer pass. One Count
+source-fence snapshot still fails: exact activation/current modules produce the
+same18 rows, with only the original first lowered cell stale. Correct that cell
+alone; native/emitted/descriptor observations remain identical and Count stays
+unresolved/non-ready. The first overlay loaded current code because the facade
+prepended its root; its SHA check rejects, so no old-image credit. Explicit early
+module loading verifies the real activation image. Original Trace framing failure
+also remains distinct. Source packets/controls are retained; native input closure
+remains4.2/SESSION5. The repaired source-fence test passes; exact CI governs landing.
+The supplementary native claim originally names artifact readers that omit its
+separate saved direct-test channels. Retain that declaration and qualify its command
+with the exact-target/exit/failure/PASS/frozen-case reader. The first reader assumes
+physical gzip hashes for the old before record, which actually names decoded bytes;
+preserve that rejected instrument and distinguish the two explicit original domains.
+No hash refresh or native re-execution follows. Five channel/case corruptions reject.
+Verified seventh CI tree is stopped143 with no live residue after all10 doctrines,
+historical recovery and initial native checks. Complete canonical must restart.
+Eighth canonical's scalar-copy failure is a literal-source oracle, not a failing
+value or identity assertion. Exact activation/current modules already wrap the
+legacy rule-array snapshot in guarded ordinary copy. The independent executable
+snapshot and actual extracted normal helper agree on values, distinct outer/
+shared nested references, mutation isolation and one size/six element reads.
+Four executed source faults and four saved-channel faults distinguish the oracle.
+Only the literal-source assertion changes; all other original assertion bytes and
+probe remain exact. Prefix review restores an original blank line before capture;
+the first test body/empty output and unretained first-pass channel limitation are
+explicit. Final487 channels are complete; production sources are unchanged. The
+nine-claim record preserves all prior seven objects and native gaps remain4.2.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — Preserve lookup identity before compacting its display
 
 The complete Questions section already contains every projected question/key/path/date/

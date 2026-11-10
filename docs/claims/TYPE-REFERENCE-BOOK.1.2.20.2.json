@@ -5,7 +5,7 @@
     {
       "name": "source-bound-later-narrative-epoch",
       "statement": "The later source epoch renews380979 current-task bytes while retaining83 IDs, all CORE fields and11 complete open/unselected bodies; actual focused reader/preservation checks pass and22 named corruption cases reject.",
-      "scope": "The fixed659f19d748dd PERL-PRIVATE-FACTORY-CAPTURE source and the retained final direct-artifact/producer observation. Metadata date refresh does not alter node bodies. Complete accepted source is retained as a Git blob under an ancestor commit; current text capacity is distinct from Git disk or transfer size. Legacy three-archive API/preservation controls remain. Explicit later epochs currently cover unpartitioned trees only. Final collection observation12204983/12582912 is dated before later continuity edits; exact canonical/normal-hook gates independently enforce the resulting candidate. The changed-committed-manifest control explicitly models a prior Git manifest boundary in a local fixture, not an invented prior commit. Preparatory capacity selection leaves five legacy inline-header files unclassified; no global optimality, complete historical audit, temporary scheduling, concurrent-adversarial guarantee, transitive OS/Python/Git/CI producer closure or runtime feature admission is claimed. Writer boundary refusals use physical repository-local symlinks and explicitly modeled nested-repository, device and ancestor metadata; no other repository is initialized or touched. The original one-time mode refuses an existing archive before candidate creation.",
+      "scope": "The fixed659f19d748dd PERL-PRIVATE-FACTORY-CAPTURE source and the retained final direct-artifact/producer observation. Metadata date refresh does not alter node bodies. Complete accepted source is retained as a Git blob under an ancestor commit; current text capacity is distinct from Git disk or transfer size. Legacy three-archive API/preservation controls remain. Explicit later epochs currently cover unpartitioned trees only. Final collection observation12204983/12582912 is dated before later continuity edits; exact canonical/normal-hook gates independently enforce the resulting candidate. The changed-committed-manifest control explicitly models a prior Git manifest boundary in a local fixture, not an invented prior commit. Preparatory capacity selection leaves five legacy inline-header files unclassified; no global optimality, complete historical audit, temporary scheduling, concurrent-adversarial guarantee, transitive OS/Python/Git/CI producer closure or runtime feature admission is claimed. Writer boundary refusals use physical repository-local symlinks and explicitly modeled nested-repository, device and ancestor metadata; no other repository is initialized or touched. The original one-time mode refuses an existing archive before candidate creation. Historical producer/input capture is preserved at 5801970b4d311e97b5764d16a2573a4094144e49; original commands require that accepted source epoch. The later catalogue-aware test-fixture repair belongs to TYPE-REFERENCE-BOOK.1.2.23.4.18.1; original statements, results and input hashes are unchanged.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-budget-renewal-2026-11-04/review.py; bash tools/run_python_project_data.sh tools/test_task_narrative.py. review.py --record is completed one-shot capture; default reviews retained dated data without migration.",
@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/task-budget-renewal-2026-11-04/cli_probe.py",
@@ -157,7 +157,8 @@
             "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "5801970b4d311e97b5764d16a2573a4094144e49"
       }
     }
   ]

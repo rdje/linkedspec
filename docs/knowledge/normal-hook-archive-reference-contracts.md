@@ -61,3 +61,33 @@ before staging. A completed active leaf is supported by the memory contract when
 it retains no in-flight work and does not schedule its own landing again. Merely
 passing `--owner` cannot override a different worktree active_work_unit. Source:
 `tools/reference_scope.py` Snapshot.selected_owner/build.
+
+2026-11-10 — The epoch mutation fixture must seed every current source named by
+its copied retained-manifest catalogue. Selecting one older epoch as the mutation
+subject does not limit verify_epochs to that epoch. Lua4.16 exposed the incomplete
+setup as a missing fixture LUA-BACKEND-PARITY.md even though production epoch
+verification passed. TYPE23.4.18.1 derives every source through the validated
+manifest owner, preserves the exact-old failure/repaired consumer, and checks
+frozen copied membership/bytes with missing/altered-source controls. See
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_review.py`.
+The earlier20.2 source observation is historical at accepted5801970b4d311e97b5764d16a2573a4094144e49;
+restore that epoch for its original producer/current-namespace recipe. No production
+reader or separately owned lowercase frontier4.17 behavior changes in this repair.
+
+Recurring evidence review must distinguish historical byte preservation from
+current semantic compatibility. The November4 factory capsule preserves its
+original intake/after production bytes and original native records. Requiring
+today's MethodLowering.pm to equal that snapshot incorrectly rejects later
+feature changes before executing the unchanged compatibility oracle. TYPE23.4.18.1
+retains that actual refusal and proves the unchanged native/fresh targets already
+pass before correcting the reviewer. Current execution still checks original
+values, kinds and effects; its historical source-calibration companion replays
+the frozen single-correction image. Actual wrong-native-kind, missing-fresh-effect
+and unrelated-historical-source-edit controls reject. Original claims already
+bind accepted cd3b6adc3e58fb64283ae4ae4a5a37823eabd891; no hashes or observations
+are refreshed. Source-only snapshots are not full native/transitive custody.
+Readonly route: `docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boundary_review.py`.
+
+Historical objective source-image admission is a separate boundary from those
+factory compatibility probes. The canonical explanation and November10 exact
+successor/first-image repair live in [[three-objective-language-readiness]].

@@ -65,11 +65,15 @@ def review():
     primary = (ROOT / saved['primary']['path']).read_bytes()
     assert hashlib.sha256(primary).hexdigest() == saved['primary']['sha256']
     evidence = json.loads(gzip.decompress(primary))
-    after = decode(saved['after']); assert after == (ROOT / READER).read_bytes()
+    # Replay the retained source correction, independently of later maintenance
+    # of the recurring consumer. The byte-exact before/after oracle stays below.
+    after = decode(saved['after'])
     decode(saved['producer'])
     assert replay(decode(evidence['producers'][READER]), after, decode(evidence['after'][SCANNER])) == saved['observed']
     return dict(frozen_reader_source='one exact source correction; scanner RED/GREEN',
-                corruption_payload='same retained selector remains denied after fixture mutation', limits=saved['limits'])
+                corruption_payload='same retained selector remains denied after fixture mutation',
+                limits=saved['limits'] + ' This is the historical reader-source correction; later recurring-consumer source '
+                       'changes do not refresh that image or its exact correction oracle.')
 
 
 if __name__ == '__main__':

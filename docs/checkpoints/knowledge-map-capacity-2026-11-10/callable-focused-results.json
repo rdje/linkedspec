@@ -1,0 +1,54 @@
+{
+  "first-five-file": {
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "prove",
+      "-Iperl",
+      "t/callable_codeblock_literal_contract.t",
+      "t/count_result_guard_composition.t",
+      "t/count_result_guard_source_fences.t",
+      "t/length_result_guard_composition.t",
+      "t/length_count_source_ownership.t"
+    ],
+    "cwd": ".",
+    "observed_exit": 1,
+    "channels": {
+      "stdout": {
+        "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-first-after-stdout.log.gz",
+        "sha256": "ab1ee34e1b6c7c4068a77c3b376bc367b76a8eaa6fac00d29ac73872a60a5f31"
+      },
+      "stderr": {
+        "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-first-after-stderr.log.gz",
+        "sha256": "2369abe70859a77f5dba46ba1dad9e915ad87c43daf8ad1978bd80643745b256"
+      }
+    },
+    "qualification": "Exact channels packaged after the observed completed process. No original first-use or complete native input-closure credit."
+  },
+  "calibrated-source-fence": {
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "prove",
+      "-Iperl",
+      "t/count_result_guard_source_fences.t"
+    ],
+    "cwd": ".",
+    "observed_exit": 0,
+    "channels": {
+      "stdout": {
+        "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-final-stdout.log.gz",
+        "sha256": "db382abb154a5c9af051a34917e4ed3050922e75f00bcfd7777db2e97c8f00d7"
+      },
+      "stderr": {
+        "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-final-stderr.log.gz",
+        "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+      }
+    },
+    "qualification": "Exact channels packaged after the observed completed process. No original first-use or complete native input-closure credit."
+  }
+}

@@ -503,7 +503,7 @@
     {
       "name": "task-evidence-ci-historical-inverse",
       "statement": "The historical auditor admits only the exact new three-script CI registration before reversing its older insertions; every original runner byte remains required, and eleven independently constructed registration faults reject.",
-      "scope": "Exact current CI source inverse and eleven registration-corruption controls. The full isolated historical recovery result is retained with200 actual input images; its714 governance denials are historical evidence-integrity checks, not fresh runtime executions, new runtime admission, or transitive OS/toolchain closure.",
+      "scope": "Exact current CI source inverse and eleven registration-corruption controls. The full isolated historical recovery result is retained with200 actual input images; its714 governance denials are historical evidence-integrity checks, not fresh runtime executions, new runtime admission, or transitive OS/toolchain closure. Historical audit-producer capture is preserved at f6295bc8fc76e7c6049f28397049f527fe8133d7; its original commands require that accepted input epoch. Later exact successor-image admission belongs to TYPE-REFERENCE-BOOK.1.2.23.4.18.1. Original statements, results and input hashes are unchanged.",
       "rederive": {
         "status": "checked",
         "command": "bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py; bash tools/run_python_project_data.sh docs/checkpoints/task-acceptance-backend-scope/capture_registration.py (--record is the one-shot retention mode)",
@@ -518,7 +518,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py",
@@ -570,7 +570,8 @@
             "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
             "role": "producer"
           }
-        ]
+        ],
+        "revision": "f6295bc8fc76e7c6049f28397049f527fe8133d7"
       }
     }
   ]

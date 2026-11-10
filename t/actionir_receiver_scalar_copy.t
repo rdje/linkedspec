@@ -3,6 +3,44 @@ use warnings;
 use Test::More;
 use JSON::PP ();
 
+use Scalar::Util qw(refaddr);
+
+{
+ package ReceiverScalarCopySnapshotArray;
+ sub TIEARRAY { my ($class, $items, $trace) = @_; bless {items => $items, trace => $trace}, $class }
+ sub FETCHSIZE { my ($self) = @_; push @{$self->{trace}}, ['size']; scalar @{$self->{items}} }
+ sub FETCH { my ($self, $index) = @_; push @{$self->{trace}}, ['fetch', $index]; $self->{items}[$index] }
+}
+
+# Compare executable snapshot behavior, including source reads, rather than
+# fixing the temporary layout of the guarded ordinary-copy emitter.
+sub rule_snapshot_observation {
+ my ($source) = @_;
+ my $json = JSON::PP->new->canonical;
+ my $nested = [1];
+ my $hash = {nested => $nested};
+ my $array = [2];
+ my $items = [0, '', undef, $hash, $array, JSON::PP::false];
+ my @trace;
+ our @Top;
+ local @Top;
+ tie @Top, 'ReceiverScalarCopySnapshotArray', $items, \@trace;
+ my $run = eval 'sub { '.$source.' }';
+ die $@ unless $run;
+ my $value = $run->();
+ my $source_trace = [@trace];
+ my $before = $json->decode($json->encode($value));
+ my $outer_distinct = refaddr($value) != refaddr(\@Top) ? 1 : 0;
+ my $hash_shared = ref($value->[3]) eq 'HASH' && refaddr($value->[3]) == refaddr($hash) ? 1 : 0;
+ my $array_shared = ref($value->[4]) eq 'ARRAY' && refaddr($value->[4]) == refaddr($array) ? 1 : 0;
+ $items->[0] = 9;
+ $nested->[0] = 7;
+ return {before => $before, outer_distinct => $outer_distinct, hash_shared => $hash_shared,
+  array_shared => $array_shared, first_after_source_change => $value->[0],
+  nested_after_shared_change => ref($value->[3]) eq 'HASH' ? $value->[3]{nested}[0] : undef,
+  source_trace => $source_trace};
+}
+
 do './t/actionir_receiver_scalar_copy_probe.pl' or die $@ || $!;
 my $observed = ReceiverScalarCopyProbe::observations();
 diag('RECEIVER_COPY_OBSERVATIONS '.JSON::PP->new->canonical->encode($observed));
@@ -26,7 +64,9 @@ ok(!defined($observed->{live_error}), 'live structured runtime error remains cle
 is_deeply($observed->{typed_value}, {k => 'v'}, 'typed AST receiver preserves hash value');
 ok($observed->{typed_calls} > 0, 'typed AST override was actually used');
 unlike($observed->{typed_source}, qr/__poison_/, 'typed AST ignores all poisoned source fields');
-is($observed->{legacy_source}, 'return [@Top]', 'legacy rule aggregate array snapshot remains exact');
+is_deeply(rule_snapshot_observation($observed->{legacy_source}),
+ rule_snapshot_observation('return [@Top]'),
+ 'legacy rule aggregate copy preserves snapshot values, shallow identity and source reads');
 like($observed->{wrong_arity_source}, qr/LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:copy/,
  'receiver copy still rejects an extra argument');
 my $legacy_loaded=do './t/actionir_legacy_hash_kind_probe.pl';

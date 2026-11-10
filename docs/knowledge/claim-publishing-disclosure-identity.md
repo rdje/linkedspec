@@ -39,3 +39,17 @@ published-producer, deliberate-control and alignment auditing remain under
 `SESSION-STARTUP-READING.5`, and diagnostic-path repair `.29` precedes its closeout.
 Original historical callable evidence is unchanged; source preservation `.4.0` is
 not a fresh historical runtime pass or whole-project policy completion.
+
+2026-11-10 — The record itself is limited to128KiB by the local contract and
+actual strict JSON reader. Large finite input populations can use a tracked
+hash-bound bundle containing every source body and a complete member/hash
+manifest. The selected reviewer must verify all members and bytes, reproduce
+the frozen producer output, and reject missing/altered inputs; a small claim
+points to that bundle and its actual instruments. A manifest of names alone
+cannot substitute for recoverable input bodies. Frozen replay establishes its
+named capture epoch, not freshness of later live source prose. TYPE23.4.18.1
+retains the original oversized declaration/actual rejection and the complete
+qualified source epoch under
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/`; `bundle_review.py` is readonly.
+The declaration/schema gate still never executes recorded commands or raises its
+bound to accommodate an input list.

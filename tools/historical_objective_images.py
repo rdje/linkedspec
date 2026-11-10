@@ -110,3 +110,98 @@ class ImageAdmissions:
             else:raise ValueError('source image corruption admitted: '+name)
         self.verify(sources,read)
         return rejected
+
+
+class SuccessorImageAdmissions:
+    """Admit exact later committed images without moving predecessor oracles."""
+
+    def __init__(self,baseline,successors,protected=()):
+        self.baseline=baseline;self.successors=successors
+        self.data=baseline.data;self.rows=baseline.rows
+        require(set(successors.rows)<=set(baseline.rows),'successor image outside baseline population')
+        require(not set(successors.rows)&set(protected),'successor image crosses protected calibration')
+        for name,row in successors.rows.items():
+            old=baseline.rows[name]
+            require(row['historical_sha256']==old['historical_sha256'],
+                    'successor historical boundary mismatch: '+name)
+            require(row['prior_revision']==baseline.data['activation_commit'] and
+                    row['prior_sha256']==old['current_sha256'],
+                    'successor predecessor image mismatch: '+name)
+            require(row['current_sha256']!=row['prior_sha256'],'redundant successor image: '+name)
+
+    def image(self,*args):return self.baseline.image(*args)
+
+    def predecessor(self,*args):return self.baseline.predecessor(*args)
+
+    def read_predecessor(self,*args):return self.baseline.read_predecessor(*args)
+
+    def verify(self,sources,read):
+        def baseline_stage(name):
+            if name in self.successors.rows:
+                row=self.rows[name]
+                return self.image(self.data['activation_commit'],name,row['current_sha256'])
+            return read(name)
+        self.baseline.verify(sources,baseline_stage)
+        self.successors.verify(sources,read)
+        return self.report()
+
+    def report(self):
+        result=self.baseline.report()
+        for row in result:
+            name=row['path']
+            if name not in self.successors.rows:continue
+            row.update(previous_current_sha256=row['current_sha256'],
+                       previous_image_owner=row['owner'],previous_activation_commit=row['activation_commit'],
+                       current_sha256=self.successors.rows[name]['current_sha256'],
+                       owner=self.successors.data['owner'],activation_commit=self.successors.data['activation_commit'],
+                       source_stage='exact committed successor image; original predecessor checks remain historical')
+        return result
+
+    def falsify(self,sources,read):
+        rejected=[]
+        for name in self.rows:
+            def corrupted(path):
+                value=read(path)
+                return value+b'\nUNREVIEWED_SOURCE_IMAGE\n' if path==name else value
+            try:self.verify(sources,corrupted)
+            except ValueError as error:
+                require(str(error)=='unreviewed current source image: '+name,'unrelated successor image rejection')
+                rejected.append(name)
+            else:raise ValueError('successor image corruption admitted: '+name)
+        self.verify(sources,read)
+        return rejected
+
+
+class AdditionalImageAdmissions:
+    """Add named first admissions from exact historical committed predecessors."""
+
+    def __init__(self,baseline,additional):
+        self.baseline=baseline;self.additional=additional;self.data=baseline.data
+        require(not set(additional.rows)&set(baseline.rows),'additional image already admitted')
+        for name,row in additional.rows.items():
+            require(row['prior_sha256']==row['historical_sha256'],
+                    'additional predecessor is not historical: '+name)
+        self.rows=dict(sorted({**baseline.rows,**additional.rows}.items()))
+
+    def image(self,*args):return self.baseline.image(*args)
+
+    def predecessor(self,name,current):
+        return (self.additional if name in self.additional.rows else self.baseline).predecessor(name,current)
+
+    def read_predecessor(self,name,read):
+        return (self.additional if name in self.additional.rows else self.baseline).read_predecessor(name,read)
+
+    def verify(self,sources,read):
+        require(set(self.additional.rows)<=set(sources),'additional image outside historical source population')
+        self.baseline.verify(sources,read)
+        self.additional.verify(sources,read)
+        return self.report()
+
+    def report(self):
+        extra=self.additional.report()
+        for row in extra:
+            row['source_stage']='exact committed first image; original historical predecessor retained'
+        return sorted(self.baseline.report()+extra,key=lambda row:row['path'])
+
+    def falsify(self,sources,read):
+        return ImageAdmissions.falsify(self,sources,read)

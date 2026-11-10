@@ -701,6 +701,26 @@ count = collector("p", "a", "b")["items"].length()
 # count == 2
 ```
 
+A selected callable result can continue into a value receiver. The call executes
+once, then the receiver operates on the selected value:
+
+```text
+trace = ""
+getter = {|| trace = cat(trace, "C"); return({ "items" : ["a", "b"] }) }
+size = getter()["items"].length()
+# size == 2; trace == "C"
+
+text_getter = {|| return({ "items" : "ab" }) }
+upper = text_getter()["items"].uppercase()
+# upper == "AB"
+```
+
+On Perl, the same indexed-result Length path returns0 for an empty array,3
+for `"abc"`, and `undef` for a selected `undef`. Native execution and independently
+loaded generated source preserve these values and caller effects. Array Count
+continues to use its existing selected-result behavior. This repair introduces
+no new callable syntax or general raw-source readiness.
+
 Perl, Rust, Dart, Julia, and Lua report exact arity, keyword-call, bound-non-codeblock, unknown-body-helper, and active-recursion failures as typed runtime details. A governed helper/control or registered user function still wins over a same-named variable. Explicit construction, `cb(...)` invocation, and generic contextual final-block spellings are current on all five backends. Five-backend callable recurring/public admission is complete under `.11.8.4`; Lua construction/invocation/emitted identity remain owned by `.11.8.1-.3`, and lexical capture remains outside v1.
 
 Hash receiver trailing blocks also support deterministic tree traversal. A hash tree has a hash root. Nested hash values are interior nodes; all non-hash values, including arrays, are leaves. `walk_leaves() { ... }` visits each leaf for side effects and returns the original hash tree. `map_leaves() { ... }` returns a new hash tree with each leaf replaced by the block result. `reduce_leaves(initial) { ... }` folds leaves into an accumulator and returns the final accumulator. Traversal is stable sorted-key depth-first order. The block gets scoped scalar bindings: `value` for the current leaf, `key` for the current key, `path` for an array of path segments from the root, `depth` for the number of path segments (so a root leaf has depth 1), and `acc` for `reduce_leaves` only. Those scoped bindings are restored after each callback.

@@ -89,7 +89,12 @@ CURRENT_IMAGE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.11'
 CURRENT_IMAGE_TABLE = 'tests/language-readiness/current-source-images.json.gz'
 CURRENT_IMAGE_TABLE_SHA256 = '1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310'
 CURRENT_IMAGE_HELPER = 'tools/historical_objective_images.py'
-IMAGE_EVOLUTION_INPUTS = (CURRENT_IMAGE_TABLE, CURRENT_IMAGE_HELPER)
+CURRENT_SUCCESSOR_OWNER = 'TYPE-REFERENCE-BOOK.1.2.23.4.18.1'
+CURRENT_SUCCESSOR_TABLE = 'tests/language-readiness/current-source-successors.json.gz'
+CURRENT_SUCCESSOR_SHA256 = 'f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af'
+ADDITIONAL_IMAGE_TABLE = 'tests/language-readiness/additional-source-images.json.gz'
+ADDITIONAL_IMAGE_SHA256 = '33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e'
+IMAGE_EVOLUTION_INPUTS = (CURRENT_IMAGE_TABLE, CURRENT_IMAGE_HELPER, CURRENT_SUCCESSOR_TABLE, ADDITIONAL_IMAGE_TABLE)
 STORAGE_INVENTORY_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.19'
 STORAGE_INVENTORY_TABLE = 'tests/language-readiness/perl-storage-inventory-evolution.json.gz'
 STORAGE_INVENTORY_TABLE_SHA256 = '99e0726f0a51a06d4e2d86e030ee9385ba83bac85f03c0656396f266f4dbe164'
@@ -97,6 +102,11 @@ PHASE0_FIXTURE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.21'
 PHASE0_FIXTURE = 't/phase0_regression.t'
 PHASE0_FIXTURE_TABLE = 'tests/language-readiness/phase0-fixture-calibration.json.gz'
 PHASE0_FIXTURE_SHA256 = '4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e'
+PHASE0_VALUE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.23.4.18.1'
+PHASE0_VALUE_TABLE = 'tests/language-readiness/phase0-value-calibration.json.gz'
+PHASE0_VALUE_SHA256 = '83a26ab17b802e800a44650b59e07d794a804bdf3d752936870c15f8e00b199c'
+PHASE0_VALUE_ACTIVATION = '7289836f28e4873463ad1c50d354d8e66c77af8d'
+PHASE0_VALUE_BEFORE = 'c2d8dca7786c285e99b81802755aeb9d4563b0e62a55e0801e203d1e637d1d80'
 _IMAGE_MODULE = None
 
 
@@ -108,7 +118,12 @@ def current_image_admissions(read):
         spec.loader.exec_module(_IMAGE_MODULE)
     images = _IMAGE_MODULE.ImageAdmissions(read(CURRENT_IMAGE_TABLE), CURRENT_IMAGE_TABLE_SHA256, git)
     require(images.data['owner'] == CURRENT_IMAGE_OWNER, 'current image admission owner mismatch')
-    return images
+    successors = _IMAGE_MODULE.ImageAdmissions(read(CURRENT_SUCCESSOR_TABLE), CURRENT_SUCCESSOR_SHA256, git)
+    require(successors.data['owner'] == CURRENT_SUCCESSOR_OWNER, 'successor image admission owner mismatch')
+    layered = _IMAGE_MODULE.SuccessorImageAdmissions(images, successors, protected=(PHASE0_FIXTURE,))
+    additional = _IMAGE_MODULE.ImageAdmissions(read(ADDITIONAL_IMAGE_TABLE), ADDITIONAL_IMAGE_SHA256, git)
+    require(additional.data['owner'] == CURRENT_SUCCESSOR_OWNER, 'additional image admission owner mismatch')
+    return _IMAGE_MODULE.AdditionalImageAdmissions(layered, additional)
 
 
 COMPILER_SCAN_BEFORE = b"    local *LinkedSpec::ActionIR::Scanner::scan_contract_ir_events = sub {\n"
@@ -1107,7 +1122,54 @@ def verify_rust_numeric_evolution(source, contents, historical_hash, read=None):
             "scope": "exact numeric source image; original historical and signed-selector results unchanged; fresh runtime/readiness compatibility is separately retained"}
 
 
+def phase0_value_fixture_reader(read, images, expected_table=PHASE0_VALUE_SHA256):
+    """Invert exactly twenty value-oracle assertions before all prior stages."""
+    raw = read(PHASE0_VALUE_TABLE)
+    require(digest(raw) == expected_table, 'unreviewed Phase0 value table')
+    require(len(raw) <= 32768, 'Phase0 value table bound')
+    data = _IMAGE_MODULE.strict_json(gzip.decompress(raw))
+    require(isinstance(data, dict) and set(data) == {
+        'schema_version', 'owner', 'path', 'activation_commit',
+        'before_sha256', 'after_sha256', 'hunks'}, 'Phase0 value table schema')
+    require(type(data['schema_version']) is int and data['schema_version'] == 1,
+            'Phase0 value table version')
+    require(data['owner'] == PHASE0_VALUE_OWNER and data['path'] == PHASE0_FIXTURE,
+            'Phase0 value owner or path')
+    require(data['activation_commit'] == PHASE0_VALUE_ACTIVATION and
+            data['before_sha256'] == PHASE0_VALUE_BEFORE, 'Phase0 value committed boundary')
+    committed = images.image(data['activation_commit'], PHASE0_FIXTURE, data['before_sha256'])
+    actual = read(PHASE0_FIXTURE)
+    require(digest(actual) == data['after_sha256'], 'unreviewed current Phase0 value fixture')
+    hunks = data['hunks']
+    require(isinstance(hunks, list) and len(hunks) == 20, 'Phase0 value hunk population')
+    restored = actual
+    for hunk in hunks:
+        require(isinstance(hunk, dict) and set(hunk) == {'before', 'after'} and
+                all(isinstance(hunk[k], str) and hunk[k] for k in hunk) and
+                hunk['before'] != hunk['after'], 'Phase0 value hunk schema')
+        old, new = hunk['before'].encode(), hunk['after'].encode()
+        require(restored.count(new) == 1 and committed.count(old) == 1,
+                'Phase0 value hunk anchor')
+        restored = restored.replace(new, old, 1)
+    require(restored == committed, 'Phase0 value inverse mismatch')
+    def prior_stage(name):
+        return restored if name == PHASE0_FIXTURE else read(name)
+    return prior_stage, dict(owner=PHASE0_VALUE_OWNER, path=PHASE0_FIXTURE,
+        activation_commit=data['activation_commit'], preserved_committed_sha256=digest(committed),
+        actual_current_sha256=digest(actual), table_sha256=digest(raw), exact_assertion_edits=20,
+        scope='Finite value/effect oracle calibration; every prior fixture/image stage remains; no historical runtime result change')
+
+
 def phase0_fixture_reader(read, images, expected_table=PHASE0_FIXTURE_SHA256):
+    prior, value_evolution = phase0_value_fixture_reader(read, images)
+    effective, previous = _prior_phase0_fixture_reader(prior, images, expected_table)
+    return effective, dict(previous, value_calibration=value_evolution,
+        prior_fixture_sha256=previous['actual_current_sha256'],
+        actual_current_sha256=value_evolution['actual_current_sha256'],
+        source_stage='actual current value fixture; twenty-assertion inverse, then prior six-assertion inverse and committed image admission')
+
+
+def _prior_phase0_fixture_reader(read, images, expected_table=PHASE0_FIXTURE_SHA256):
     """Restore only the owned six-assertion fixture edit, before image admission.
 
     The returned view is an explicit committed activation stage. Actual current
@@ -1152,24 +1214,25 @@ def phase0_fixture_reader(read, images, expected_table=PHASE0_FIXTURE_SHA256):
 
 
 def falsify_phase0_fixture(images):
-    raw = read_relative(PHASE0_FIXTURE_TABLE)
+    read, _ = phase0_value_fixture_reader(read_relative, images)
+    raw = read(PHASE0_FIXTURE_TABLE)
     data = _IMAGE_MODULE.strict_json(gzip.decompress(raw))
     rejected = []
     def reject(label, reader, expected, table_sha=PHASE0_FIXTURE_SHA256):
         try:
-            phase0_fixture_reader(reader, images, table_sha)
+            _prior_phase0_fixture_reader(reader, images, table_sha)
         except ValueError as error:
             require(str(error) == expected, 'unrelated Phase0 fixture rejection: ' + label)
             rejected.append(label)
         else:
             raise ValueError('Phase0 fixture corruption admitted: ' + label)
-    for label, value in (('source-appended', read_relative(PHASE0_FIXTURE) + b'# unreviewed\n'),
+    for label, value in (('source-appended', read(PHASE0_FIXTURE) + b'# unreviewed\n'),
                          ('source-missing', b''),
                          ('prior-committed-stage', images.image(data['activation_commit'],
                             PHASE0_FIXTURE, data['before_sha256']))):
-        reject(label, lambda name: value if name == PHASE0_FIXTURE else read_relative(name),
+        reject(label, lambda name: value if name == PHASE0_FIXTURE else read(name),
                'unreviewed current Phase0 fixture')
-    reject('table-bytes', lambda name: raw + b' ' if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+    reject('table-bytes', lambda name: raw + b' ' if name == PHASE0_FIXTURE_TABLE else read(name),
            'unreviewed Phase0 fixture table')
     for label, field, value, expected in (
             ('owner', 'owner', 'TYPE-REFERENCE-BOOK.1.2.20.1.11', 'Phase0 fixture owner or path'),
@@ -1181,13 +1244,53 @@ def falsify_phase0_fixture(images):
         changed = dict(data)
         changed[field] = value
         candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
-        reject(label, lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+        reject(label, lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read(name),
                expected, digest(candidate))
     changed = json.loads(json.dumps(data))
     changed['hunks'][0]['before'] += '# unreviewed'
     candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
-    reject('hunk-rebinding', lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read_relative(name),
+    reject('hunk-rebinding', lambda name: candidate if name == PHASE0_FIXTURE_TABLE else read(name),
            'Phase0 fixture hunk anchor', digest(candidate))
+    return rejected
+
+
+def falsify_phase0_value_fixture(images):
+    raw = read_relative(PHASE0_VALUE_TABLE)
+    data = _IMAGE_MODULE.strict_json(gzip.decompress(raw))
+    rejected = []
+    def reject(label, reader, expected, table_sha=PHASE0_VALUE_SHA256):
+        try:
+            phase0_value_fixture_reader(reader, images, table_sha)
+        except ValueError as error:
+            require(str(error) == expected, 'unrelated Phase0 value rejection: ' + label)
+            rejected.append(label)
+        else:
+            raise ValueError('Phase0 value corruption admitted: ' + label)
+    for label, value in (('source-appended', read_relative(PHASE0_FIXTURE) + b'# unreviewed\n'),
+                         ('source-missing', b''),
+                         ('prior-committed-stage', images.image(PHASE0_VALUE_ACTIVATION,
+                            PHASE0_FIXTURE, PHASE0_VALUE_BEFORE))):
+        reject(label, lambda name: value if name == PHASE0_FIXTURE else read_relative(name),
+               'unreviewed current Phase0 value fixture')
+    reject('table-bytes', lambda name: raw + b' ' if name == PHASE0_VALUE_TABLE else read_relative(name),
+           'unreviewed Phase0 value table')
+    for label, field, value, expected in (
+            ('owner', 'owner', PHASE0_FIXTURE_OWNER, 'Phase0 value owner or path'),
+            ('path', 'path', '../outside', 'Phase0 value owner or path'),
+            ('revision', 'activation_commit', '0' * 40, 'Phase0 value committed boundary'),
+            ('before-hash', 'before_sha256', '0' * 64, 'Phase0 value committed boundary'),
+            ('after-hash', 'after_sha256', '0' * 64, 'unreviewed current Phase0 value fixture'),
+            ('hunk-omission', 'hunks', data['hunks'][:-1], 'Phase0 value hunk population')):
+        changed = dict(data); changed[field] = value
+        candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
+        reject(label, lambda name: candidate if name == PHASE0_VALUE_TABLE else read_relative(name),
+               expected, digest(candidate))
+    for label, change in (('hunk-rebinding', lambda rows: rows[0].update(before=rows[0]['before'] + '# unreviewed')),
+                          ('hunk-duplicate', lambda rows: rows.__setitem__(1, dict(rows[0])))):
+        changed = json.loads(json.dumps(data)); change(changed['hunks'])
+        candidate = gzip.compress(json.dumps(changed, sort_keys=True).encode(), mtime=0)
+        reject(label, lambda name: candidate if name == PHASE0_VALUE_TABLE else read_relative(name),
+               'Phase0 value hunk anchor', digest(candidate))
     return rejected
 
 
@@ -1763,7 +1866,8 @@ def falsify(report):
             "numeric_support_mutations_rejected": support_controls,
             "storage_inventory_mutations_rejected": storage_controls,
             "current_image_mutations_rejected": images.falsify(report["latest_source_inputs"], fixture_read),
-            "phase0_fixture_mutations_rejected": falsify_phase0_fixture(images)}
+            "phase0_fixture_mutations_rejected": falsify_phase0_fixture(images),
+            "phase0_value_fixture_mutations_rejected": falsify_phase0_value_fixture(images)}
 
 
 def verify_summary(report, text):

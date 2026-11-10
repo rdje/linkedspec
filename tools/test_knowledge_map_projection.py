@@ -42,7 +42,7 @@ def projection(text):
             if key in fields:
                 raise ValueError("duplicate field")
             fields[key] = value
-        if title is None or not {"answers", "date", "source"} <= fields.keys():
+        if title is None or not {"date", "source"} <= fields.keys():
             raise ValueError("missing required fact metadata")
         facts[identity] = {"title": title, "fields": fields}
         order.append(identity)
@@ -61,7 +61,13 @@ def controls(reference, candidate):
         "title": re.sub(r"(?m)^_(.+)_$", r"_CORRUPTED \1_", candidate, count=1),
     }
     for field in ("answers", "date", "evidence", "reverify", "source"):
-        mutations[field] = candidate.replace("**" + field + ":** ", "**" + field + ":** CORRUPTED ", 1)
+        marker = "**" + field + ":** "
+        if field == "answers" and not re.search(r"(?m)^- \*\*answers:\*\* ", candidate):
+            # Adding the former duplicated display is still a format change;
+            # legacy maps retain exact answers-field comparison below.
+            mutations[field] = re.sub(r"(?m)^(_.+_)$", r"\1\n- **answers:** CORRUPTED", candidate, count=1)
+        else:
+            mutations[field] = candidate.replace(marker, marker + "CORRUPTED ", 1)
     rejected = []
     for name, changed in mutations.items():
         if changed == candidate:
@@ -120,7 +126,6 @@ Canonical body.
             tick = chr(96)
             path = str(source.relative_to(ROOT))
             expected = {"title": "_Projection sample_", "fields": {
-                "answers": "z question | a question | a question",
                 "date": "2026-11-01 · **status:** current",
                 "evidence": f"{tick}first.md{tick} · {tick}second.md{tick}",
                 "reverify": f"{tick}printf first{tick} · {tick}printf second{tick}",
@@ -133,6 +138,28 @@ Canonical body.
                 for q in ("a question", "z question")]
             if questions != expected_questions:
                 raise ValueError("fixture routes or list pointer changed")
+            # Preserve the historical parser/comparison behavior. The old
+            # display contains authored ordering and repeated keys; changes to
+            # either remain visible to historical callers of compare().
+            legacy_answers = "z question | a question | a question"
+            legacy = after.replace(
+                "_Projection sample_\n",
+                "_Projection sample_\n- **answers:** " + legacy_answers + "\n")
+            legacy_expected = json.loads(json.dumps(expected))
+            legacy_expected["fields"]["answers"] = legacy_answers
+            if projection(legacy)["facts"] != {"projection-sample": legacy_expected}:
+                raise ValueError("legacy fixture metadata differs from authored oracle")
+            controls(legacy, legacy)
+            for changed in (
+                legacy.replace(legacy_answers, "a question | z question | a question"),
+                legacy.replace(legacy_answers, "z question | a question"),
+            ):
+                try:
+                    compare(legacy, changed)
+                except ValueError:
+                    pass
+                else:
+                    raise ValueError("legacy answer order or repetition changed silently")
             before = after
     rejected = controls(before, after)
     parsed = projection(after)

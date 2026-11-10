@@ -1,0 +1,59 @@
+{
+  "commands": {
+    "before": {
+      "argv": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_selected.pl",
+        "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-names.json",
+        ".linkedspec-data/phase0-selected-before-seen.json"
+      ],
+      "cwd": ".",
+      "exit": 7,
+      "channels": {
+        "stdout.log": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before.stdout.log.gz",
+          "decoded_sha256": "7315ab1093ff664ca73141572c00496a8fd64d74488abc8808ffa403834437d5"
+        },
+        "stderr.log": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before.stderr.log.gz",
+          "decoded_sha256": "f746acd9e24c0bb37aad2afb35cb091562bd6d190649ac205f37a94901b9b732"
+        },
+        "seen.json": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before-seen.json.gz",
+          "decoded_sha256": "0cef1193ea66f7b35564077f8222d61af87067910d4c14e6264881e66e2a22ca"
+        }
+      }
+    },
+    "after": {
+      "argv": [
+        "bash",
+        "tools/project_data_run.sh",
+        "perl",
+        "-Iperl",
+        "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_selected.pl",
+        "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-names.json",
+        ".linkedspec-data/phase0-selected-after-seen.json"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "channels": {
+        "stdout.log": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after.stdout.log.gz",
+          "decoded_sha256": "f7dd2c7e212fa76458e7e986deda611a4a6b1945f28792ced6f64d07d805dace"
+        },
+        "stderr.log": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after.stderr.log.gz",
+          "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "seen.json": {
+          "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after-seen.json.gz",
+          "decoded_sha256": "0cef1193ea66f7b35564077f8222d61af87067910d4c14e6264881e66e2a22ca"
+        }
+      }
+    }
+  },
+  "limits": "Completed command channels retained after exit; no original first-use or full native/cache custody credit."
+}

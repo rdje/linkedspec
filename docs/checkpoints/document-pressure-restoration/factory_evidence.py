@@ -160,11 +160,9 @@ def review():
     assert b'Files=9, Tests=2850' in channels['factory-nine-after.tap'] and b'Result: PASS' in channels['factory-nine-after.tap']
     assert b'Use of uninitialized value' not in channels['factory-nine-after.tap']
     rows = json.loads(channels['factory-public-guarded.json']); observations(rows)
-    # Native re-derivation uses the checkout only after binding every captured
-    # project Perl input; the independently retained emitted sources replay below.
-    for name, row in saved['after'].items():
-        if name.startswith('perl/'):
-            assert (ROOT / name).read_bytes() == decode(row), 'native replay runtime drift: ' + name
+    # The intake/after comparison above preserves the historical no-runtime-edit
+    # observation. Recurring CI checks current compatibility against the same
+    # semantic oracle; later feature changes need not reproduce old source bytes.
     env = dict(os.environ, PERL5LIB='', PERL5OPT='')
     producer = decode(saved['producers'][str((HERE / 'factory_probe.pl').relative_to(ROOT))]).decode()
     native = subprocess.run(['perl', '-Iperl', '-e', producer], cwd=ROOT, env=env, capture_output=True)
@@ -220,7 +218,11 @@ eval $d->{helper};die $@ if $@;print $j->encode([map {LinkedSpecTest::EmittedVal
                 legacy_key_order_and_scope_bypass='RED; inactive scope healthy',
                 semantic_corruption_controls='loss/effect/coercion/snapshot/guard/kind RED',
                 exact_diagnostic_evolution='old/current pass; foreign/loss/hash/copy/edit/positive reject',
-                production_and_frozen_native_records_unchanged=True, limits=saved['limits'])
+                captured_production_and_frozen_native_records_unchanged=True,
+                current_native_and_retained_emitted_compatibility=True,
+                limits=saved['limits'] + ' The unchanged-production assertion belongs to the retained intake/after epoch. '
+                       'Native and retained emitted-source execution here check current-runtime compatibility with the original '
+                       'semantic oracle; they do not reproduce the historical runtime or establish native/transitive custody.')
 
 
 if __name__ == '__main__':

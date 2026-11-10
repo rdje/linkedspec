@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "prove",
+    "-Iperl",
+    "t/actionir_receiver_scalar_copy.t"
+  ],
+  "cwd": ".",
+  "observed_exit": 0,
+  "digest_domain": "physical-gzip",
+  "channels": {
+    "stdout": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-focused-stdout.log.gz",
+      "sha256": "27f15f4f0190c1f901f41710e3987d7f7429a7a985cf071914b2250905bca467"
+    },
+    "stderr": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-focused-stderr.log.gz",
+      "sha256": "4c2b51ff170b9196b9cfca016e5012feb8683c08c6dcca5b1c8b3fb8e0e39c71"
+    }
+  },
+  "limits": "Final completed487-assertion consumer after the blank-only prefix preservation correction. Channels packaged after observed exit; no original first-use/native custody credit. Earlier pre-correction pass channels were not retained before log reuse and receive no original-channel credit."
+}

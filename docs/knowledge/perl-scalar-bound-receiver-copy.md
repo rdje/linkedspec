@@ -76,6 +76,22 @@ operand execution order, container depth, callable origins or deferred grammar.
 Existing interpreted paths1.3 require independent assessment; canonical admission23.4
 and explicit new Perl fixture registration remain open.
 
+November10 canonical restoration23.4.18.1 supersedes only the literal-source
+rule-array assertion above. Public AST still has variable `Top` and zero-operand
+copy; guarded ordinary-copy emission retains `[@Top]` as its source snapshot.
+Exact activation7289836f and callable-repaired MethodLowering images produce the
+same source and the same snapshot observations. The old `return [@Top]` literal
+is an independent executable oracle: values, distinct outer storage, shared
+nested Hash/Array references, root mutation isolation and all tied-array reads
+match. Actual empty/alias/lost-nesting/repeated-read programs differ, including
+when executed through the normal test's extracted helper. Replace that one
+source-string assertion with the executable comparison; all other original
+assertion source and the original probe remain unchanged. Focused487 passes.
+No production lowering or copy policy changes. The original test, failed CI
+and qualified source/diagnostic artifacts survive in the November10 capacity
+checkpoint; scalar_copy_review.py is readonly. Complete native/cache/transitive
+custody remains4.2/SESSION5, separate from this finite source-oracle repair.
+
 Existing interpreted-context1.3 is independently preserved by
  t/value_copy_interpreted.t public native/fresh checks without runtime edits.
 CodeblockRuntime::_eval_call already sends valid free copy to _copy_value:

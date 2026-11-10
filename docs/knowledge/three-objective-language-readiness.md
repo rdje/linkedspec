@@ -126,3 +126,40 @@ governance controls and all seven storage-source/data denials. The sixth isolate
 188 observed/199 declared inputs; per-source control comparison preserves every older population. Its source
 is `docs/checkpoints/document-pressure-restoration/objective-recovery-execution-preflight.json.gz`. This is
 historical integrity, not fresh runtime or broad compatibility admission.
+
+## Later committed source images
+
+November10 TYPE23.4.18.1 preserves the original eighteen-entry table and adds two
+closed, hash-gated layers. Four exact runtime successors at accepted7289836f keep
+their original admitted predecessor oracles. One first-image entry admits the
+Dart emitter test changed by accepted Count73.3/553f9d18, retaining its exact
+historical Git source. Phase0 still uses its original activation/calibration;
+changing the original global activation would break that boundary. No runtime
+implementation changes or generic drift exemptions follow.
+
+The first eighteen-only intake/four-runtime proof misses the emitter test; actual
+isolated recovery refuses it. The qualified inventory compares all149 historical
+source paths with the separate actual recovery report. Original inverses still
+handle the other executable changes; documentation evolution remains separate.
+Merged first-image rows are sorted after the initial unit assertion exposes an
+ordering omission. Legacy/successor/first-image controls and all19 current-image
+mutations reject invalid paths, lineage, commits, modes and current bytes.
+
+Actual isolated recovery retains134 original inputs,22 recovery controls,714
+governance denials and every other prior control. It closes191 observed artifact
+inputs within202 declared bodies; the claim binds all of them. The initial
+comparison observer incorrectly selects the older703-control pre-registration
+epoch; its source/empty stdout survive, and the corrected observer uses accepted
+backend-registration4.3. Original4.3 observation inputs are preserved at actual
+acceptedf6295bc8 with no statement/result/hash refresh. Completed channels are
+packaged after exit without first-use custody credit. This is source identity
+and historical integrity, not fresh objective/runtime or full native admission.
+The prior complete149-source capture now replays through
+`docs/checkpoints/knowledge-map-capacity-2026-11-10/objective_frozen_epoch_review.py`:
+the entire original declaration/231 inline inputs plus nested unit producer are
+retained as a logical artifact epoch. Both unchanged reviewers execute there;
+no uncommitted producer is misrepresented as a historical Git capture. Current
+Phase020-assertion evolution is separately closed by sibling `phase0_review.py`:
+its exact inverse precedes every prior six-hunk/image stage and all prior denials,
+adding12 new exact-stage denials. The older direct reviewers require their supplied
+epoch; no frozen source identity is a fresh runtime/objective admission.

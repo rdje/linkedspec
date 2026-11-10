@@ -1,0 +1,22 @@
+{
+  "command": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/document-pressure-restoration/review.py"
+  ],
+  "cwd": ".",
+  "observed_exit": 0,
+  "channels": {
+    "stdout": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-dependent-stdout.log.gz",
+      "sha256": "d43572ed549e440d88c2db139159aa5be2f385af284bfda5b8666c6310ee7334",
+      "bytes": 11859
+    },
+    "stderr": {
+      "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-dependent-stderr.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "qualification": "Channel packaging after the observed successful command; no original input-acquisition or complete native-custody credit."
+}

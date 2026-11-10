@@ -16183,8 +16183,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts drop_front(projected-array-expression) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, rest_keys, drop_front(sorted_keys(pick_keys(meta, "kind", "source", "stage"))))}),
-        q{$rest_keys = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > 1 ? [@{$__ls_tail}[1 .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, rest_keys, drop_front(sorted_keys(pick_keys(meta, "kind", "source", "stage"))))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["source","stage"],"warnings":[]}#,
         'assign helper accepts drop_front(projected-array-expression) array source lowering'
     );
     is(
@@ -16198,8 +16201,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts drop_front(projected-array-expression, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, rest_keys, drop_front(sorted_keys(pick_keys(meta, "kind", "source", "stage")), skip_count))}),
-        q{$rest_keys = do { my $__ls_tail = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = $skip_count; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, rest_keys, drop_front(sorted_keys(pick_keys(meta, "kind", "source", "stage")), skip_count))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["source","stage"],"warnings":[]}#,
         'assign helper accepts drop_front(projected-array-expression, scalar-count) array source lowering'
     );
     is(
@@ -16207,9 +16213,12 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{(do { my $__ls_count = do { my $__ls_tail = [sort keys %meta]; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 2; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\A-?\d+\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_front(..., count) composes inside count(...) and numeric flow comparisons'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(meta), 1).first())}),
-        qr/\$__ls_first.*\$__ls_tail.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(drop_front(sorted_keys(meta), 1).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"source","warnings":[]}#,
         'drop_front(..., count) remains a real array-valued helper for projected index reads'
     );
     is(
@@ -16223,8 +16232,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts take(projected-array-expression, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, first_keys, take(sorted_keys(pick_keys(meta, "kind", "source", "stage")), take_count))}),
-        q{$first_keys = do { my $__ls_take = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = $take_count; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, first_keys, take(sorted_keys(pick_keys(meta, "kind", "source", "stage")), take_count))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["kind","source"],"warnings":[]}#,
         'assign helper accepts take(projected-array-expression, scalar-count) array source lowering'
     );
     is(
@@ -16232,9 +16244,12 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{(do { my $__ls_count = do { my $__ls_take = [sort keys %meta]; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 2; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\A-?\d+\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take(..., count) composes inside count(...) and numeric flow comparisons'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(take(sorted_keys(meta), 2).first())}),
-        qr/\$__ls_first.*\$__ls_take.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(take(sorted_keys(meta), 2).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"kind","warnings":[]}#,
         'take(..., count) remains a real array-valued helper for projected index reads'
     );
     is(
@@ -16248,8 +16263,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts slice(projected-array-expression, start, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, middle_keys, slice(sorted_keys(pick_keys(meta, "kind", "source", "stage")), start_idx, slice_count))}),
-        q{$middle_keys = do { my $__ls_slice = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = $start_idx; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = $slice_count; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, middle_keys, slice(sorted_keys(pick_keys(meta, "kind", "source", "stage")), start_idx, slice_count))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["source"],"warnings":[]}#,
         'assign helper accepts slice(projected-array-expression, scalar-start, scalar-count) array source lowering'
     );
     is(
@@ -16257,9 +16275,12 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{(do { my $__ls_count = do { my $__ls_slice = [sort keys %meta]; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\A-?\d+\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 2; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\A-?\d+\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'slice(..., start, count) composes inside count(...) and numeric flow comparisons'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(slice(sorted_keys(meta), 1, 1).first())}),
-        qr/\$__ls_first.*\$__ls_slice.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(slice(sorted_keys(meta), 1, 1).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"source","warnings":[]}#,
         'slice(..., start, count) remains a real array-valued helper for projected index reads'
     );
     is(
@@ -16273,8 +16294,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts take_last(projected-array-expression, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, last_keys, take_last(sorted_keys(pick_keys(meta, "kind", "source", "stage")), take_last_count))}),
-        q{$last_keys = do { my $__ls_take_last = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = $take_last_count; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, last_keys, take_last(sorted_keys(pick_keys(meta, "kind", "source", "stage")), take_last_count))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["source","stage"],"warnings":[]}#,
         'assign helper accepts take_last(projected-array-expression, scalar-count) array source lowering'
     );
     is(
@@ -16282,9 +16306,12 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{(do { my $__ls_count = do { my $__ls_take_last = [sort keys %meta]; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 2; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\A-?\d+\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'take_last(..., count) composes inside count(...) and numeric flow comparisons'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(take_last(sorted_keys(meta), 1).first())}),
-        qr/\$__ls_first.*\$__ls_take_last.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(take_last(sorted_keys(meta), 1).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"source","warnings":[]}#,
         'take_last(..., count) remains a real array-valued helper for projected index reads'
     );
     is(
@@ -16298,8 +16325,11 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         'return(payload) accepts drop_back(projected-array-expression, literal-count) lowering'
     );
     is(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, leading_keys, drop_back(sorted_keys(pick_keys(meta, "kind", "source", "stage")), drop_count))}),
-        q{$leading_keys = do { my $__ls_drop_last = do { my $__ls_sorted_keys = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source", "stage") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; defined($__ls_sorted_keys) ? [sort keys %{$__ls_sorted_keys}] : [] }; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = $drop_count; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, leading_keys, drop_back(sorted_keys(pick_keys(meta, "kind", "source", "stage")), drop_count))}),
+            q#my %meta=(kind=>"token",source=>"fixture",stage=>"parsed"); my ($rest_keys,$first_keys,$middle_keys,$last_keys,$leading_keys,$first_key); my $skip_count=1; my $take_count=2; my $start_idx=1; my $slice_count=1; my $take_last_count=2; my $drop_count=1;#,
+        ),
+        q#{"value":["kind","source"],"warnings":[]}#,
         'assign helper accepts drop_back(projected-array-expression, scalar-count) array source lowering'
     );
     is(
@@ -16307,9 +16337,12 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{(do { my $__ls_count = do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 } > 0)},
         'drop_back(..., count) composes inside count(...) and numeric flow comparisons'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(drop_back(sorted_keys(meta), 1).first())}),
-        qr/\$__ls_first.*\$__ls_drop_last.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(drop_back(sorted_keys(meta), 1).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"kind","warnings":[]}#,
         'drop_back(..., count) remains a real array-valued helper for projected index reads'
     );
     is(
@@ -16322,19 +16355,28 @@ my ($total, $scaled, $floor_value, $bucket, $bounded);};
         q{return do { my $__ls_drop_last = [sort keys %meta]; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 2; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\A-?\d+\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } }},
         'drop_back(..., count) canonical lowering'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{set(Top, first_key, sorted_keys(meta).first())}),
-        qr/^\$first_key = do \{ my \$__ls_first = \[sort keys %meta\].*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{set(Top, first_key, sorted_keys(meta).first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"kind","warnings":[]}#,
         'set helper accepts projected array source lowering'
     );
-    like(
-        LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(meta, hash("kind", "NODE")).pick_keys("kind").sorted_values().first())}),
-        qr/\$__ls_first.*\$__ls_sorted_values.*\$__ls_pick_source = \{%meta,.*\$__ls_merge_hash.*\$__ls_first->\[0\]/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::call_spec_handler_subst('Top', q{return(merge_hash(meta, hash("kind", "NODE")).pick_keys("kind").sorted_values().first())}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":"NODE","warnings":[]}#,
         'return(payload) accepts projected hash field lowering'
     );
-    like(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(sorted_keys(meta).first(), "kind")}),
-        qr/\$__ls_str_cmp_lhs = do \{ my \$__ls_first = \[sort keys %meta\].*\$__ls_first->\[0\].*\$__ls_str_cmp_rhs = "kind"/s,
+    is(
+        evaluate_lowered_json(
+            LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr(q{str_eq(sorted_keys(meta).first(), "kind")}),
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":1,"warnings":[]}#,
         'projected array reads compose inside flow comparisons'
     );
     is(
@@ -36338,8 +36380,11 @@ subtest 'emit_context_lowers_aggregate_expression_emptiness_flow_helpers' => sub
         'is_empty(...) treats array-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
     );
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(pick_keys(meta, "kind"))'),
-        'do { my $__ls_empty_hash = do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }; (!defined($__ls_empty_hash) || !scalar(keys %{$__ls_empty_hash})) }',
+        evaluate_lowered_json(
+            q#return [0 + (# . LinkedSpec::RuleIR::EmitContext::_lower_flow_composite_expr('is_empty(pick_keys(meta, "kind"))') . q#), {%meta}];#,
+            q#my %meta=(kind=>"token",source=>"fixture"); my $first_key;#,
+        ),
+        q#{"value":[0,{"kind":"token","source":"fixture"}],"warnings":[]}#,
         'is_empty(...) treats hash-valued helper expressions as aggregate emptiness rather than Perl reference truthiness'
     );
 
@@ -37690,8 +37735,11 @@ subtest 'emit_context_lowers_rename_key_value_helpers' => sub {
     require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rename_key(meta, "old_stage", "stage")'),
-        'do { my $__ls_rename_key_source = \%meta; if (defined($__ls_rename_key_source)) { my %__ls_rename_key = %{$__ls_rename_key_source}; if (exists $__ls_rename_key{"old_stage"}) { my $__ls_rename_key_value = delete $__ls_rename_key{"old_stage"}; $__ls_rename_key{"stage"} = $__ls_rename_key_value; } \%__ls_rename_key } else { {} } }',
+        evaluate_lowered_json(
+            q#return [# . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('rename_key(meta, "old_stage", "stage")') . q#, {%meta}];#,
+            q#my %meta=(kind=>"token",old_stage=>"draft");#,
+        ),
+        q#{"value":[{"kind":"token","stage":"draft"},{"kind":"token","old_stage":"draft"}],"warnings":[]}#,
         'rename_key(...) lowers working hashes into a pure single-key rename hashref expression'
     );
     is(
@@ -37808,8 +37856,11 @@ subtest 'emit_context_lowers_drop_keys_value_helpers' => sub {
     require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('drop_keys(meta, "debug", "span")'),
-        'do { my $__ls_drop_source = \%meta; if (defined($__ls_drop_source)) { my %__ls_drop = %{$__ls_drop_source}; my @__ls_drop_keys = (do { my @__ls_evaluated_values = ("debug"); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ("span"); @__ls_evaluated_values }); delete @__ls_drop{@__ls_drop_keys}; \%__ls_drop } else { {} } }',
+        evaluate_lowered_json(
+            q#return [# . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('drop_keys(meta, "debug", "span")') . q#, {%meta}];#,
+            q#my %meta=(kind=>"token",debug=>1,span=>[2]);#,
+        ),
+        q#{"value":[{"kind":"token"},{"debug":1,"kind":"token","span":[2]}],"warnings":[]}#,
         'drop_keys(...) lowers working hashes into a pure filtered hashref expression'
     );
     is(
@@ -37933,8 +37984,11 @@ subtest 'emit_context_lowers_pick_keys_value_helpers' => sub {
     require LinkedSpec::RuleIR::EmitContext;
 
     is(
-        LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('pick_keys(meta, "kind", "source")'),
-        'do { my $__ls_pick_source = \%meta; if (defined($__ls_pick_source)) { my %__ls_pick; foreach my $__ls_pick_key ("kind", "source") { $__ls_pick{$__ls_pick_key} = $__ls_pick_source->{$__ls_pick_key} if exists $__ls_pick_source->{$__ls_pick_key}; } \%__ls_pick } else { {} } }',
+        evaluate_lowered_json(
+            q#return [# . LinkedSpec::RuleIR::EmitContext::_lower_method_value_expr('pick_keys(meta, "kind", "source")') . q#, {%meta}];#,
+            q#my %meta=(kind=>"token",source=>"fixture",debug=>1);#,
+        ),
+        q#{"value":[{"kind":"token","source":"fixture"},{"debug":1,"kind":"token","source":"fixture"}],"warnings":[]}#,
         'pick_keys(...) lowers working hashes into a pure projected hashref expression'
     );
     is(
@@ -39453,9 +39507,12 @@ subtest 'emit_context_lowers_fluent_if_else_and_branch_statements' => sub {
         'Top',
         'if(str_eq(foo_arr.drop_front(idx).first(), foo_hash.pick_keys(key).sorted_values().first())); say("shape"); endif()'
     );
-    like(
-        $indexed_scalar_if,
-        qr/__ls_str_cmp_lhs\s*=\s*do \{ my \$__ls_first = do \{ my \$__ls_tail_skip = \$idx;.*\@foo_arr.*__ls_str_cmp_rhs\s*=\s*do \{ my \$__ls_first = do \{ my \$__ls_sorted_values = do \{ my \$__ls_pick_source = \\%foo_hash;.*__ls_str_cmp_lhs\s+eq\s+\$__ls_str_cmp_rhs/s,
+    is(
+        evaluate_lowered_json(
+            q## . LinkedSpec::call_spec_handler_subst('Top', 'if(str_eq(foo_arr.drop_front(idx).first(), foo_hash.pick_keys(key).sorted_values().first())); say("shape"); endif()') . q#; return \@seen;#,
+            q#require LinkedSpec::RuntimeDiagnosticOutput; my @foo_arr=("skip","match","tail"); my %foo_hash=(kind=>"match",other=>"noise"); my $idx=1; my $key="kind"; my @seen; my $descr={}; $descr->{LinkedSpec::RuntimeDiagnosticOutput::sink_slot_name()}=sub {push @seen,$_[0]{message}};#,
+        ),
+        q#{"value":["shape\n"],"warnings":[]}#,
         'direct array/hash index expressions lower into array/hash entry access'
     );
     like(
@@ -47964,9 +48021,14 @@ subtest 'spec_format_terse_3_3_3_mutation_assignment_expression_values' => sub {
             q{my $items=[1,2]; my $value=3;}),
         q#{"value":[3,[1,2,3],[1,2]],"warnings":[]}#,
         'array append feeds Count once, updates its working binding and preserves the earlier snapshot');
-    like($L->('return((meta[key] = value).count_keys())'),
-        qr/^return do \{ my \$__ls_count_keys = do \{.*BindingRuntime::nested_write/s,
-        'nested-write assignment expression can feed a hash receiver chain');
+    is(
+        evaluate_lowered_json(
+            q#my $before=$meta; my $result=(sub { # . LinkedSpec::call_spec_handler_subst('Top', 'return((meta[key] = value).count_keys())') . q# })->(); return [$result,$meta,$before];#,
+            q#my $meta={kind=>"token"}; my $key="stage"; my $value="payload"; my %__ls_binding_presence;#,
+        ),
+        q#{"value":[2,{"kind":"token","stage":"payload"},{"kind":"token"}],"warnings":[]}#,
+        'nested-write assignment expression can feed a hash receiver chain'
+    );
 
     my $spec = "Top::\n"
              . " /x/ -> Done { set(value, \"ok\"); set(key, \"stage\"); return(array(items += value, copy(items), meta[key] = value, copy(meta), (items += \"x\").count(), (meta[\"last\"] = value).count_keys())) }\n"

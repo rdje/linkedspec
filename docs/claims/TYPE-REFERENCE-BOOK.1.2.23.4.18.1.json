@@ -1,0 +1,1326 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+  "claims": [
+    {
+      "name": "bounded-knowledge-duplicate-display-compaction",
+      "statement": "The actual 1710-fact/12237-key projection removes1710 duplicate display lines/746324 bytes, reaching20789 lines/7125905 bytes; its complete Questions prefix and all remaining fact records are byte-identical.",
+      "scope": "Frozen6cd8e784 map compared with actual current public generation; complete current source population bound across a separate qualified acquisition. Initial generator-image/output packets do not receive retroactive full input-capture credit. Finite capacity only; line rollover pressure remains owned by18.2. No cap increase, healthy/lifetime-growth, broad workflow sweep, native/transitive custody, runtime/peer or whole-feature admission claim. Source bodies belong to the exact qualified November10 epoch and are retained completely in input-epoch.json.gz, with matching acquired membership/SHA256 rows. A frozen rendering replay rederives them; later card-body currency is not claimed. The overbound inline declaration and actual rejected CI log remain retained; no record limit or gate changes.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/bundle_review.py",
+        "granularity": "Every original question/retained-record byte; every raw source body and acquired member/SHA256 in the qualified epoch; exact archived renderer replay with separately retained production-generation observations.",
+        "result": "{\"after_bytes\": 7125905, \"after_lines\": 20789, \"before_bytes\": 7872229, \"before_lines\": 22499, \"map_sha256\": \"b35cad57160bda890af41e2a64d1f6bec5b4486c94c9623b94cee9c502961b4d\", \"question_and_remaining_records\": \"byte-identical\", \"rejected_controls\": [\"question\", \"source\", \"anchor\", \"restored-duplicate\"], \"removed_lines\": 1710, \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Removing a question, changing retained metadata/anchors, or restoring the old duplicate display can pass the capacity-preservation oracle.",
+        "oracle": "Frozen original-line walk independent of AWK emission; current complete source population unchanged across actual generation; independent authored projection fixture plus strict legacy ordering/repetition comparison.",
+        "red_control": "Actual before-generator output and restored-duplicate, question, source and anchor corruptions reject. Retained planning review rejects seven metadata/key deletions; current fixture rejects seven corruptions and legacy answer order/repetition changes. Healthy readonly implementation/acquisition/generator-only outside-cwd observations pass. Frozen input omission and altered renderer bytes reject; the unchanged strict JSON reader rejects the original inline claim at its existing bound."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": ".knowledge_map.conf",
+            "sha256": "91a22f7704d1aa374d38ebe2c0f65e724a1befb4be1a0db63671e7a0aadf711a",
+            "role": "input"
+          },
+          {
+            "path": "KNOWLEDGE_MAP.md",
+            "sha256": "b35cad57160bda890af41e2a64d1f6bec5b4486c94c9623b94cee9c502961b4d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/VALIDATION.md",
+            "sha256": "d8910aa2265169bbd593ca4b7829a2c7b269bbe10c10c50bd34b1aaa64a7905b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/acquire.py",
+            "sha256": "0bd1f047906c440f6ee4cc8802b80ce9c0c4ce0a50bad92112e5ae1c5552c097",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/acquisition-result.json",
+            "sha256": "77f75990afd79405e88c4b81fff2af828671e8165c2c3b0994fa704bc13e0a83",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/after-generation.json",
+            "sha256": "7d22974fc33d812e72cf72587ba39c76cc8945451b06895270369c519e45ed9c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/baseline.json.gz",
+            "sha256": "2dbcc1041913481b476b543dbd032b94e5a6591983d9faa29ef3b1926b031bf6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/before-generation.json",
+            "sha256": "b232def8a78f52271a054ddf7be3cff5175a4a6898158a9fd4c97ffe56e578c0",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/current-generation.json",
+            "sha256": "f785dbf541a4fe74a1cf26c0451082c70a386ad9161b866be634ebe20f85e625",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-result.json",
+            "sha256": "d99d29c9890f942e3dcbf9c5d7f788bac26fa47c8194c4540a1fda68ba2bcb4b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation.py",
+            "sha256": "2ab6d9f1c026fe50b5e4f779f2a0b75ebdc74f5abb38c17e68a52cc415277a34",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/projection-result.json",
+            "sha256": "9fa15c70d943eccd48393dd9c04572b21130ac434d53649d07b86ccec174716a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_implementation.py",
+            "sha256": "4207df2fd9dea102ad0684f67b19d74b0ee99201a9c03f01ebe9112c3e278711",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/review.py",
+            "sha256": "26834b9394d71f1b95c3b9b32c1c16e46c43c9d9106fdbfe15f9da809266616f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/routing-result.json",
+            "sha256": "aafb62c2049cd298cb9bd3d2bc29507366bf4bd1f6b2afcb130fd53e7c0629ab",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/routing.py",
+            "sha256": "5308a477b2a5b4ef3d0e3fddabf5ea41f8aaefd27b104aa7b9c09c6047721e9e",
+            "role": "producer"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+            "sha256": "6a5dd2e18e432e50b372c9629ebe38ddc7a2bb9ceb852e7873e47bb1fdbf7c75",
+            "role": "input"
+          },
+          {
+            "path": "knowledge-map/scripts/check_knowledge_map.sh",
+            "sha256": "753ba902389121abdee187e5f6dcb11ab1845fb9b43741ac5884d4feba8a0d73",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/gen_knowledge_map.sh",
+            "sha256": "22dd291a01e14a011e6a634193ba50fcfc627a02e843befded64f517eb808f4c",
+            "role": "producer"
+          },
+          {
+            "path": "knowledge-map/scripts/knowledge_map.conf",
+            "sha256": "48ae2897460c62de080523715ad808af71e991b0fa6c36615d437129b5d4756c",
+            "role": "input"
+          },
+          {
+            "path": "t/knowledge_map_header_lists.t",
+            "sha256": "2836c3eb5427ff18bf5782c95ea1dfbea634d12f4953fd5327fc55a3ed4f9076",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_knowledge_map_atomic_output.py",
+            "sha256": "5da73c08626726830771c79ccb13f28c12b61a1d67804c8b9d2c294798ab9716",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_knowledge_map_projection.py",
+            "sha256": "87c2dff6f401967662f6ba5be15fe4f7123ca6e5d57eb998a065a0e47c39f0de",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_tool_project_data_storage.sh",
+            "sha256": "284ebf3ffc3894399274a634323a3ac9b86230d0f9bda3b9cd4f9e12d8e0cf60",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/input-epoch.json.gz",
+            "sha256": "fa3b334ffdfca8a609c03b879edfac388abe113257f3ffe85229f6788f3963de",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/input-retention-result.json",
+            "sha256": "dc4b8a8735c8e554cdeff46445c0a690939cbe1bd31d7c626a31ece006b384f2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/freeze_inputs.py",
+            "sha256": "1f4fb331a2dbe4d3b3530779e1e660e2671386ac86356517014f8b4bef1c50e1",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/bundle_review.py",
+            "sha256": "c671f53f8a8a27f9b7e36ec5fd00fb435c0a47f0ec47f1611f6512c28e8ca0bc",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/bundle-result.json",
+            "sha256": "e27c9a390405da10901c2326a458491ef6dd5546e807afd7add9f35966eaa310",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-overbound-claim.json.gz",
+            "sha256": "0001e60ac134d62c3434739655db72c40dc15350a6f27b4c91e42730a5e8c83e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-second.log.gz",
+            "sha256": "d85bcc72a7d117f0212ad28fa269447eafd10a647d51c38f187567fadcf6f71d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/bound_record.py",
+            "sha256": "3c938ec01157bc9673b08af5475f2b1ad8202160950f9694b6fc87c6da33b51f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/record_review.py",
+            "sha256": "ea47df2464bec0cd1d348f782c4778495204c74e70bb4c31cc7b2a8afa7eb774",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "documented-staged-checklist-format-correction",
+      "statement": "The actual staged evidence checker rejects the old checked-line future-work qualification and accepts moving it to the following line; gate bytes, statuses and every other staged task byte remain exact in the captured pair.",
+      "scope": "Two retained actual staged-checker epochs only. This applies the existing documented whole-file checklist-format constraint. First canonical attempt was deliberately terminated143 after its TASK-ACCEPTANCE failure; it earns no complete-CI or receipt credit. No gate-policy, task-status or runtime change.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/task_format.py",
+        "granularity": "Complete captured staged task files, actual gate/instrument sources, staged path lists and actual exit/stdout/stderr; exact single qualification relocation.",
+        "result": "{\"after\": 0, \"before\": 1, \"result\": \"PASS\", \"scope\": \"exact staged checklist-format correction; gate and statuses unchanged\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The older completed checked-line qualification can pass unchanged, or correcting it requires a gate or task-status change.",
+        "oracle": "Unchanged actual staged evidence checker plus independent full captured task-byte comparison against the sole documented relocation.",
+        "red_control": "Real unchanged staged checker exit1 with the governing checklist diagnostic; corrected staged checker exit0 with the complete-evidence diagnostic. All other task/gate/instrument bytes are equal across the pair."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/task_format.py",
+            "sha256": "89349bc338d69c0dd69f455c1319f8b9a11dd2c6f28fb6e83bbdef99628fff1f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/task-format-before.json.gz",
+            "sha256": "9d6f90fe0eb2574e82a2014f0e4e07b154177f8eb796d5972d2f1128efcd3d47",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/task-format-after.json.gz",
+            "sha256": "1898315412e4dcc8124f623e915966b6cbddd2864e139447a1acfdceea9cc4d8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/task-format-result.json",
+            "sha256": "081c1014cfac4099281fff537c85e862068b6c831a7389db683d0a5454ca5d8e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-first.log.gz",
+            "sha256": "8afd7dec96acf8aaac8d11027a4f0c76824bc5c3162d5946ce3b5a83bfe6e941",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-original-claim.json.gz",
+            "sha256": "74f75acfeac34c10cfd2d17bda83ccb09d9c4d5624cad0523056a4b51453a248",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/qualify_task_format.py",
+            "sha256": "8d14249d1c0b186dbf1e165ff9b52a71812e6f3e8190daa8f8015fa8d3c5cdd1",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "catalogue-complete-epoch-fixture-source-seeding",
+      "statement": "The isolated epoch fixture seeds every current source path declared by its retained catalogue, including Lua, with exact frozen file bytes; the original single-source setup reproduces the missing-Lua-file failure and the repaired consumer completes successfully.",
+      "scope": "Scoped fixture-source discovery/copying and dated actual consumer channels. Production readers, manifests, historical observations, runtime behavior and separate lowercase frontier4.17 remain unchanged. Frozen helper replay retains its complete scoped source inputs and immutable Git identities through retained manifests; no full control-program/native/archive-input closure or whole-feature admission credit. Initial direct collector attempts used a stale TYPE index and failed before retaining inner channels; their instrument is preserved without original-normal credit. Qualified before executes exact staged-old source privately with PYTHONPATH=tools and fresh real task indexes; qualified after executes the repaired production test.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/preserve_epoch_claim.py",
+        "granularity": "Every frozen catalogue source path and copied file body; actual original/candidate producer images and consumer channels; all original20.2 declared input hashes verified at its accepted capture.",
+        "result": "{\"candidate_consumer\": \"exit0/empty stderr\", \"limits\": \"Frozen helper/current-source population and actual dated consumer channels; no full control-program/native/archive-input closure credit or lowercase boundary repair.\", \"original_consumer\": \"missing Lua fixture source\", \"rejected_controls\": [\"missing-source\", \"changed-source\"], \"result\": \"PASS\", \"scoped_source_population\": \"all retained manifest source paths copied byte-exact\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Seeding only the selected older epoch can satisfy verification of the whole retained catalogue, or omitted/changed copied source files can pass the fixture oracle.",
+        "oracle": "Actual original consumer FileNotFoundError versus repaired exit0; independent frozen expected-file map compared with output membership/bytes after the archived actual helper runs.",
+        "red_control": "Actual old staged producer reproduces missing docs/tasks/LUA-BACKEND-PARITY.md. Missing-source and changed-source mutations reject; healthy frozen replay and repaired full consumer pass with empty stderr. Older20.2 producer matches the exact retained original; only its selected durability mode/revision and explicit historical scope change."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_capture.py",
+            "sha256": "f3f72723eede41185dbb4439a4ce7963f6a72f1c1dad63f2260ccdb86bf070d3",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-fixture-capture-original.py.gz",
+            "sha256": "dfdf7d8ecb8c93fc31741b0ca36fc2a58093f3734988647bd025618b517a5eb6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-fixture-qualified-before.json.gz",
+            "sha256": "6795c49cced75a83416946df6fb2c43226bce35dda19a39cd9b0a5ff0e224b3e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-fixture-qualified-after.json.gz",
+            "sha256": "7e1373450300bd21b0994e1ab6bcf7a98aa9d049ee8671b87fca65dfa3f3fe6a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch_fixture_review.py",
+            "sha256": "c9be0fc8e2e934280e2baf9a5cd02ba5fd2bdc68804603875059a9abd636a3c2",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-fixture-review-result.json",
+            "sha256": "3290b121b316748c376a520540d6f68a487a5d46a401d1e17487cbaec296738e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-fixture-original-claim.json.gz",
+            "sha256": "a17d57c1b949b563f8edd99d1804cd08832eb246a3b12becc601c380388be236",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/preserve_epoch_claim.py",
+            "sha256": "9665d8a36574131e070b0a072ab461229da2b7b7ff709aaa05b3d902bfdba7e5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/epoch-claim-preservation-result.json",
+            "sha256": "6e6e1bc1c3558e50f44e636e7619c25fc37189fb607c954c5dd7e1c7b19799ca",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-third.log.gz",
+            "sha256": "af8187fc88616c2cfd7140068086a363895e93628f2f2708708c24662a6a9736",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-pre-epoch-claim.json.gz",
+            "sha256": "309e75967c4d864063bec0bb8b62d9b65d7785d61fff194d5795692417cdd72f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_epoch_fixture.py",
+            "sha256": "092a41135eb15403e351fcf5239367f74b29c9911b733cffc03d15ab2aa5d87c",
+            "role": "producer"
+          },
+          {
+            "path": "tools/test_task_narrative.py",
+            "sha256": "b1218c7b8f4dbffbb3d27a71d6eccc25ac43d3f9159685654822d1a751cd86bd",
+            "role": "producer"
+          },
+          {
+            "path": "tools/task_narrative.py",
+            "sha256": "4e5e7d88f1d3a6eed8dbd69aeb39feab8268ede07f3aa509cc92644d6ea42ce5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.2.json",
+            "sha256": "279550b77fc1f1bfdd7bd80ae8997ea304b29bded434654f3ed6accb3125692b",
+            "role": "input"
+          }
+        ]
+      }
+    },
+    {
+      "name": "recurring-factory-semantic-and-historical-source-boundaries",
+      "statement": "The recurring factory reviewer accepts current-runtime execution of its unchanged authored semantic targets while retaining the original capture-only byte-preservation and exact historical source-correction oracles. Actual current native-kind and fresh-effect corruptions and an unrelated historical source edit reject.",
+      "scope": "Bounded reviewer maintenance after the fourth canonical failure, with actual old refusal/current successful reviewer channels and unchanged standalone native/fresh targets acquired before and after the correction. No runtime or target policy changes. Historical evidence stays unchanged; its original claims already bind accepted cd3b6adc3e58fb64283ae4ae4a5a37823eabd891. Conservative project-source snapshots retain observed source inputs but do not establish full native/cache/transitive/toolchain custody; that remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. Retained emitted-source execution is current compatibility, not historical runtime reproduction or whole-feature admission.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boundary_review.py",
+        "granularity": "Unchanged named public programs and native/fresh effects/kinds; original/candidate actual consumer channels; exact historical reader correction and three reason-sensitive denials.",
+        "result": "{\"corrected_reviewer_exits\": {\"factory_evidence.py\": 0, \"factory_reviewer_calibration.py\": 0}, \"limits\": \"Finite unchanged authored compatibility targets and retained source/calibration replay only. Conservative parent-owned project-source snapshot is not complete native/cache/transitive/toolchain custody; that remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. Historical captures and runtime policies are unchanged.\", \"original_runtime_drift_refusal\": 1, \"rejected_controls\": [\"native-kind\", \"fresh-effect\", \"unrelated-historical-source-edit\"], \"result\": \"PASS\", \"unchanged_current_semantics\": true}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Current source evolution must fail a historical byte comparison even when the original semantic oracle passes, or separating the boundaries lets semantic/historical corruption pass.",
+        "oracle": "Original unchanged compatibility targets already pass on current source before repair; old consumer refuses only the captured-runtime byte mismatch. Actual corrected consumer still invokes the semantic oracle, while frozen calibration still requires the exact original source correction.",
+        "red_control": "Original consumer exits1 on MethodLowering source drift; corrected reviewers exit0 with empty stderr. Actual corrected consumer rejects native-kind and fresh-effect injected child results at its native semantic oracle. Frozen calibration rejects an unrelated historical source edit with its exact unreviewed-reviewer-edit diagnostic."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/book_review.py",
+            "sha256": "ca44df1777c92f624abab78c545531eb1aacc728b48afedc900a74adaefe52ab",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/factory-evidence.json.gz",
+            "sha256": "0ec48f5685b1c35691dbf612408434d8eee72c09cb5b24af24be9be7e3061a86",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/factory-reviewer-source-calibration.json.gz",
+            "sha256": "94fdba1751a6c3fef484305bb3c9d1df0fd16ec1b0186e672f7e64e6d66fc220",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/factory_evidence.py",
+            "sha256": "daadb25e42c9b2b00ee5ec05fff73807001a32c40a41436e06a264c53c4386c8",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/factory_probe.pl",
+            "sha256": "908357156d85a44cb1df1fe70b0455d5f64d9465a5dab468e324cad003aa2b00",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/factory_reviewer_calibration.py",
+            "sha256": "926723cd96b49b8e269d10776791c97926f6ebadfe1bb4a9bd6f76907e9ddf13",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/document-pressure-restoration/objective-recovery-selector-literals.json.gz",
+            "sha256": "1e55a65109f2cdb9cdfbd33a28ec5ee08574e7173b9c8dc10a9e6d7cc013cbc3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-fourth.log.gz",
+            "sha256": "bcaaa8d5b0a4feece9195a4fde8424537fd50eee6799396302e5361d914e7db5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-after.json.gz",
+            "sha256": "64f8d59bc9a597dd8c2e8331f76bb3bee9b4ad8424117ba471c45e716eadbbf5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-before.json.gz",
+            "sha256": "05bd4d898137340077b2af64b738161d82618fe2556faf4e352649fecf62c2c7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-review-result.json",
+            "sha256": "6adaaefe7ecb73e4378e6a8e59b6a7f086801b23cce55473376332720f75d4d1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boundary.py",
+            "sha256": "8b2eab1cd28094fcdf894fb5687953b2b1f17e7b1883a3c30aa81087e4cfbc90",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boundary_review.py",
+            "sha256": "13736c92dddcbd0d590b67aebcd70130a189ae9556b0a53d3231f36857415434",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-pre-factory-claim.json.gz",
+            "sha256": "c2c561e950a3ed07a149f65be1421517a2e1a6487d989e2587206f4128e28883",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_factory_boundary.py",
+            "sha256": "2613480a663d26a0a86127dc9ca6b3df29a1b2a5820da3bbe2bd0fb32630a3da",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bounded-committed-current-image-admission",
+      "statement": "The finite historical source frontier admits four exact committed runtime successors and one previously accepted Dart emitter-test image while preserving the original image table, every historical/admitted predecessor stage and Phase0 calibration. Actual isolated recovery preserves all134 recovered inputs,22 recovery controls,714 accepted governance denials and every other prior control;19 current-image mutations reject.",
+      "scope": "Exact149 historical source-hash paths from retained milestone records, compared with the actual independent recovery report. Fourteen existing effective images remain; four runtime source successors are committed at7289836f28e4873463ad1c50d354d8e66c77af8d. The sole first-image path is dart/test/source_emitter_test.dart from accepted Count73.3 commit553f9d18, with its exact historical Git predecessor. Existing exact inverses and documentation evolution remain separate. Original eighteen-only intake and four-path proof are bounded intermediates: the first direct recovery reveals the extra emitter test and earns no complete-recovery credit. Initial additional-unit ordering assertion fails before sorting the merged row map. The first recovery-comparison observer uses older pre-registration703 governance controls; preserve its source/empty stdout and qualify the baseline to accepted backend-registration714, not a product RED. Current actual producer closes191 observed artifact inputs within202 declared bodies; all are retained and hash-gated here. Completed channels are packaged after exit without original first-use capture credit. This is historical integrity/source identity, not fresh runtime/objective compatibility, feature promotion, full native/cache/transitive custody or parent23.4 admission. Subsequent fixture evolution preserves this entire uncommitted logical epoch: all231 original declared bodies/roles/modes and the complete nine-claim declaration are retained, including a nested exact unit producer (232 logical sources). Both unchanged readonly reviewers execute successfully from a same-volume provided tree using the real read-only Git object database. This is a frozen artifact epoch, not a historical Git capture at728. The first provided-root attempt omits the nested unit producer and fails before admission; its actual source/error are retained. The qualified replay seeds that already-retained body, without refreshing any old input hash.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/objective_frozen_epoch_review.py",
+        "granularity": "Every finite historical source path and admitted current/predecessor byte identity; actual isolated recovery population, prior control records and reported artifact input bodies; exact older claim preservation at acceptedf6295bc8.",
+        "result": "{\"images\": {\"current_image_denials\": [\"dart/lib/src/action/action_parser.dart\", \"dart/lib/src/compiler/compiled_spec.dart\", \"dart/lib/src/runtime/interpreter.dart\", \"dart/test/source_emitter_test.dart\", \"julia/src/action/ActionParser.jl\", \"julia/src/compiler/CompiledSpec.jl\", \"julia/src/runtime/Interpreter.jl\", \"lua/src/linkedspec/action_parser.lua\", \"lua/src/linkedspec/compiled_spec.lua\", \"lua/src/linkedspec/interpreter.lua\", \"lua/src/linkedspec/recognition_transaction_runtime.lua\", \"lua/src/linkedspec/source_emitter.lua\", \"perl/LinkedSpec/ActionIR/Contracts.pm\", \"perl/LinkedSpec/Compiler.pm\", \"rust/linkedspec-core/src/expr.rs\", \"rust/linkedspec-runtime/src/engine.rs\", \"rust/linkedspec-runtime/src/recognition_transaction.rs\", \"rust/linkedspec-runtime/src/runtime.rs\", \"t/phase0_regression.t\"], \"exact_initial_paths\": [\"dart/test/source_emitter_test.dart\"], \"exact_successor_paths\": [\"dart/lib/src/runtime/interpreter.dart\", \"julia/src/runtime/Interpreter.jl\", \"lua/src/linkedspec/interpreter.lua\", \"rust/linkedspec-runtime/src/engine.rs\"], \"focused_unit\": \"legacy/successor/initial controls PASS with empty stderr\", \"limits\": \"Complete finite historical source-hash population from the retained milestone records; effective Phase0 adapter and existing exact inverse classifications. Source identity only, not new runtime/objective compatibility or full native/transitive custody.\", \"original_predecessor_stages_preserved\": true, \"protected_phase0\": true, \"rejected_controls\": [\"wrong-successor-predecessor\", \"wrong-initial-predecessor\", \"foreign-historical-member\", \"noncommit-current-image\", \"successor-table-byte\", \"initial-table-byte\"], \"result\": \"PASS\"}, \"recovery\": {\"complete_finite_source_population\": true, \"current_image_denials\": [\"dart/lib/src/action/action_parser.dart\", \"dart/lib/src/compiler/compiled_spec.dart\", \"dart/lib/src/runtime/interpreter.dart\", \"dart/test/source_emitter_test.dart\", \"julia/src/action/ActionParser.jl\", \"julia/src/compiler/CompiledSpec.jl\", \"julia/src/runtime/Interpreter.jl\", \"lua/src/linkedspec/action_parser.lua\", \"lua/src/linkedspec/compiled_spec.lua\", \"lua/src/linkedspec/interpreter.lua\", \"lua/src/linkedspec/recognition_transaction_runtime.lua\", \"lua/src/linkedspec/source_emitter.lua\", \"perl/LinkedSpec/ActionIR/Contracts.pm\", \"perl/LinkedSpec/Compiler.pm\", \"rust/linkedspec-core/src/expr.rs\", \"rust/linkedspec-runtime/src/engine.rs\", \"rust/linkedspec-runtime/src/recognition_transaction.rs\", \"rust/linkedspec-runtime/src/runtime.rs\", \"t/phase0_regression.t\"], \"declared_inputs\": 202, \"limits\": \"Historical recovery integrity and exact committed source identities only; no fresh runtime/objective compatibility, feature promotion or full native/transitive custody. Completed actual command channels are packaged after exit; no retroactive first-use capture credit.\", \"observed_inputs\": 191, \"original_recovery_and_prior_controls_preserved\": true, \"rejected_controls\": [\"missing-source\", \"wrong-historical-sha\"], \"result\": \"PASS\"}} Frozen logical epoch replay: PASS, both unchanged reviewers; 231 inline/232 logical sources; no source write."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Source evolution can bypass historical/member/commit guards, replace old predecessor oracles, or silently drop a historical source/control while appearing to pass recovery.",
+        "oracle": "Unchanged original table and archived original ImageAdmissions producer recover every prior stage; the separate actual isolated consumer supplies the complete source population and accepted backend-registration epoch supplies prior recovery/control records.",
+        "red_control": "Actual canonical current-image refusal and the first direct non-table emitter-test refusal remain retained. Qualified actual source mutations reject on all19 paths; wrong successor/initial predecessor, foreign member, noncommit revision and both table-byte controls reject. Missing source and altered historical SHA reject against the actual complete source report. Legacy/successor/first-image mode/lineage/guard controls and the complete isolated producer pass with empty stderr; original recovery/controls stay exact."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-epoch.json.gz",
+            "sha256": "3147cb08e3ab67d41832a566da93b477ebc6a72735aedbe5393ad6cdea900fd8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-epoch-result.json",
+            "sha256": "acbdb5588ad98dd53728512243cd98ea8ce779478c81c6eee6c76484e4f2494a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective_frozen_epoch_review.py",
+            "sha256": "231b3aebd2cdef5f002de7d8de4276a0180ee22f2d5cdc1254699d52a8681318",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/freeze_objective_epoch.py",
+            "sha256": "b6e477006638001e33586fd20bf669be8315c2aeb4b390be6f238558a51ed127",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/qualify_objective_epoch.py",
+            "sha256": "45193d5d1f2f64a9291d1c63f15d91dc861506478107a2761cc70351fa3566b2",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-review-result.json",
+            "sha256": "6ccf11aae8bda80167ba3a50051c465f959555c8a1699d4af94690422ea3d25e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-first-review.py.gz",
+            "sha256": "01e20c7b6c9d98aa584643b88b184f41cf77aa5962fb34ce309d551bd912af93",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frozen-first-stderr.log.gz",
+            "sha256": "ae6f51aeded751361e1479f5d3c3144c8897347e99e6ef71c320be817709e43d",
+            "role": "input"
+          }
+        ]
+      }
+    },
+    {
+      "name": "callable-prepared-index-and-count-snapshot-source-custody",
+      "statement": "Retained public diagnostics identify discarded prepared callable-index source. Exact activation and repaired module observations agree on all18 Count excluded-source rows; only the old fixture first lowered cell is stale. The source correction changes that cell alone, retaining unsupported ownership.",
+      "scope": "Readonly replay of exact retained project-source and diagnostic artifacts, not a rerun or full custody of the native process. Complete declared parent-owned Perl/spec/conf/tablescript/ebnf source bodies remain in the frozen factory-after bundle, with captured pre-use member identities and only the explicit MethodLowering override. Initial Trace framing and wrong-module overlay attempts remain uncredited; original fixture/module/consumer and all actual channels stay retained. No malformed Count authority, broad raw-source readiness or peer/full-feature admission. The first supplement writer accidentally enumerates its own shell-redirected, then-empty output among unused checkpoint files. Preserve that declaration and empty byte stream, remove only this unused output row, and retain this qualifier; no producer/source/result hash is refreshed and no first-publication completeness credit is claimed. The prior replay command inspected the original fixture/source-fence artifacts but omitted saved direct-test channel coverage. Its declaration remains retained without first-declaration completeness credit. The qualified command additionally checks exact saved targets/exits, all original target failures, four direct passing files, calibrated18-row PASS and the six authored cases against frozen consumer bytes. Original before metadata hashes decoded channels; later packaging hashes physical gzip bytes. The initial reader assumes one domain and rejects; its exact source/empty output remain retained. Corrected explicit domains preserve every original hash. This adds artifact interpretation, not native re-execution or missing first-use custody.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/callable_channels_review.py",
+        "granularity": "Every retained source packet/member, actual loaded module SHA, original Git fixture/module byte, all18 AST/lowered/diagnostic rows, excluded generated/native/metadata artifact fields, and the one changed fixture cell.",
+        "result": "{\"limits\": \"Retained project-source and diagnostic-artifact identity plus finite unchanged fixture observations. Original outer JSON parse fails on Trace; qualified framing preserves all bytes. No original first-use or full native/cache/transitive input-closure credit; TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5 owns it.\", \"original_native_and_emitted_refusal\": true, \"rejected_controls\": [\"native-value\", \"fresh-effect\", \"old-emitted-source\", \"missing-producer-image\"], \"repaired_native_and_fresh_match\": true, \"result\": \"PASS\", \"source_change\": [\"perl/LinkedSpec/ActionIR/MethodLowering.pm\"], \"unchanged_fixture_and_metadata\": true}\n{\"changed_cells\": [[0, \"lowered\"]], \"excluded_native_emitted_and_metadata\": \"identical; Count remains unresolved/non-ready\", \"limits\": \"Finite retained source/diagnostic comparison. Initial overlay loaded current module and failed its identity check; no activation credit. Shared SDK/cache/OS/transitive closure remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5.\", \"rejected_controls\": [\"old-snapshot\", \"extra-cell\", \"unsupported-owner\"], \"result\": \"PASS\", \"same_activation_and_repaired_rows\": 18}\nQualified direct-channel coverage: {\"authored_cases\": [\"count-array\", \"length-array\", \"length-empty\", \"length-string\", \"length-null\", \"uppercase-string\"], \"calibrated_source_fences\": 18, \"direct_passing_files\": [\"t/callable_codeblock_literal_contract.t\", \"t/count_result_guard_composition.t\", \"t/length_result_guard_composition.t\", \"t/length_count_source_ownership.t\"], \"limits\": \"Readonly retained command/channel and frozen-consumer evidence. Nonverbose completed test results are interpreted against the exact authored consumer. Post-exit packaging remains qualified; no re-execution of the historical native epoch or complete runtime/cache/OS/transitive custody credit.\", \"original_failure_targets\": [\"length-array\", \"length-empty\", \"length-string\", \"length-null\", \"uppercase-string\"], \"rejected_controls\": [\"missing-pass\", \"wrong-target\", \"wrong-exit\", \"missing-original-failure\", \"missing-authored-case\"], \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Old emitted source, altered values/effects, missing producer bytes, the old snapshot or another changed fixture cell could pass.",
+        "oracle": "Actual committed activation module and original fixture, original neutral contract, independent public AST query, exact full-row comparison and retained SDK native/fresh channels.",
+        "red_control": "Readonly reviews reject native-value, fresh-effect, old-emitted-source, missing-producer-image, old-snapshot, extra-cell and unsupported-owner corruptions. Healthy retained source/diagnostic replay passes; first overlay is disqualified by its loaded-module SHA. The added channel reader rejects missing-pass, wrong-target, wrong-exit, missing-original-failure and missing-authored-case corruptions."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "capability_conformance/callable_codeblock_contract.json",
+            "sha256": "1651e42e0e24e2476dcaffa1f4bd63888bddaa3a845ddaf329be7392c0bfe67e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/calibrate_count_fence.py",
+            "sha256": "97244577a75cf2bf741c219fbab599a95535b4252a6a259cfe55ab79530a866c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-channel-retention-result.json",
+            "sha256": "e87f8099f8ae0bad1f6aaf2bd56daa9e4c8da3c64631596f81aeddc97a23f396",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-channels-initial-empty-output.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-channels-initial-review.py.gz",
+            "sha256": "7aa216a0af7c633703b2bead64b2f6d201dd576fa1d86cfabd48189cd2df2dc7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-channels-review-result.json",
+            "sha256": "0dbad18725170f9c98bca9eadd2adb3ccb95222d848f3e2db4317a0ff98ec558",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-focused-results.json",
+            "sha256": "7965661f280e771c4cf93b84ae1b82e5aa04a3282e7999ef3898365af7e2bdf3",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-publication-empty-output.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable-test-original.t.gz",
+            "sha256": "825d29e0535a414aac827c00e920816c72b24fe2102eab23fd3882d4cb33d1c8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/callable_channels_review.py",
+            "sha256": "a22506fc96a93e6e8cc906e3f3937e40f83c4966ce4623b32d3cd37029946a4c",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-seventh-stop-result.json",
+            "sha256": "1803702f7c71569caf9f5c83835cf04e0656731ca7f3322e7566b2fb51b99b74",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-seventh-stop.json.gz",
+            "sha256": "2fa32fa97333347e96993e4acb8b5ab3586f72d61794938e749c0d0cf6118067",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-seventh.log.gz",
+            "sha256": "9bd156402e1c7508d49a0ea3312f7f04c292783bce2aa3a6df8efa4b1ed7c10a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-sixth.log.gz",
+            "sha256": "28dc257f3d99a4a08d99fbc3d6db84d317769fe7eb0a06b1a26a734b96dd4b5f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-ast-query.json.gz",
+            "sha256": "db6d89e5e4411db76cdf84e05441419537cbc34e9feb83b832a78da37c143e23",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-before-result.json.empty.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-before.json.gz",
+            "sha256": "43d2702840a910f1db0dad4366c8f772f4bd375ac07b286a43fad3d2903ab638",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-before-stderr.log.gz",
+            "sha256": "712a9d02a9c80c29f3ce46956ffe80a8bb6be4b8c4e7031223bc6ba35c4a9dd8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-before-stdout.log.gz",
+            "sha256": "be9c57be87949561c2c650196325f5154dec261e2c1be58a1c1c77888330432a",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-before.json",
+            "sha256": "a65d5228f9d972b623d83c6b3ac93fdeb6887c98bb105bcbe7899c962d67cd70",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-first-after-stderr.log.gz",
+            "sha256": "2369abe70859a77f5dba46ba1dad9e915ad87c43daf8ad1978bd80643745b256",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-focused-first-after-stdout.log.gz",
+            "sha256": "ab1ee34e1b6c7c4068a77c3b376bc367b76a8eaa6fac00d29ac73872a60a5f31",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-method-before.pm.gz",
+            "sha256": "ce71a44a578ed29da92eae7920036d9f425041dac0c5690982687627b35531d2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-qualified-after-result.json",
+            "sha256": "6370b8edfe942d0293ce24a8727f7ef05ae5355e1885e7ee13bfec4fa545832f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-qualified-after.json.gz",
+            "sha256": "e9ac4ad9eab9e7c11f93e0fea4a0a145dd4a97881e85df215365c1a1c1e626f9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-qualified-before-result.json",
+            "sha256": "ffe424e16f16fe233178fb1a12638f20fdb21a0f39f41bf94855f66902906359",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-qualified-before.json.gz",
+            "sha256": "e8a0d3ca3507bbde0092ce11ee280d27df84fa16a9ea0da23805b0a4793d3115",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-review-result.json",
+            "sha256": "1392bf602795fae2275128848b781c3e2f97a228e2b0223c4ca81814ffac7f03",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_capture.py",
+            "sha256": "56c42ab45289dfffc000d22894c60263c874bc9948d94b955a3454b38043c616",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_capture_qualified.py",
+            "sha256": "1cc0bd913d74f230da52d01064bed3b8f0bb33101613f470a1e368bcf5c1bd8d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_probe.pl",
+            "sha256": "ca70d10ff4c94f77265b03a917c0794e3c11b4bcf19460882e70661ca3479e69",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_review.py",
+            "sha256": "0afe2b3b51512eb054f8b6881f0d8c185bae71ba63345e83a745ff8901378ba5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-calibration-result.json",
+            "sha256": "1449f82b591249c0b13d07d8e2c0556da82427e96670b2174b3c7ade8de875af",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-capture-original.py.gz",
+            "sha256": "7a09da1f01d378350b4c64adaf837e8cfff363eae75459654c24ec7d910b8931",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-capture-result.json.empty.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-final-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-final-stdout.log.gz",
+            "sha256": "db382abb154a5c9af051a34917e4ed3050922e75f00bcfd7777db2e97c8f00d7",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-intake.json.gz",
+            "sha256": "a0a3386bed6c64add444945f42d267793007afe37da4c596908107380e7d8d9b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-original.json.gz",
+            "sha256": "f24f3a6ff1022cefdb62f85a2c1a5047e4e1af0440d4f219732656924b114045",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-qualified-result.json",
+            "sha256": "35960da596502d8ef97adb044b575e602d42c27064a94d65453bc506ed1b629d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-qualified.json.gz",
+            "sha256": "afad7500225b8435fe7902eb56dcf58c7f64ef1cdf3ffa5d61eff49129712801",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count-fence-review-result.json",
+            "sha256": "387e51afdb846c351641aa77e3a8edec055469f737d531b5671148738c707007",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_capture.py",
+            "sha256": "a6a54fda4521e4a9bfcfab2465648982225b3c0ecbcc8627cfc7df272e445965",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_probe.pl",
+            "sha256": "b834efb9207ce966e9e5cf5fdfe22ddf34bdd24fb261b067708a12252e8c9c2a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_review.py",
+            "sha256": "654d86343e3741a70cebc3ecc0c550fde84b64302a35ef613602ea7e7f9476bf",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-after.json.gz",
+            "sha256": "64f8d59bc9a597dd8c2e8331f76bb3bee9b4ad8424117ba471c45e716eadbbf5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-overdeclared-callable-claim.json.gz",
+            "sha256": "c9d309500c1e7a8cfbc19e27d9878ee81097624703148cbd7a5a0ba43aabde3c",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-pre-callable-replay-claim.json.gz",
+            "sha256": "8c643e83c6006bef548fee83dc1fde1c0aeb3369f45bce0bef7dfad7f2993082",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/package_callable_channels.py",
+            "sha256": "306c1a77b450e7097506f96990fa19e3f1c20b28e5287445fa5c3fd6fbda8b10",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_callable_repair.py",
+            "sha256": "797f4ab17d778bcd0447c7e819b6624ff7164b56f0fb0996ff5eb7ed83750f8d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/qualify_callable_publication.py",
+            "sha256": "c3a0bc5877d6438300cafcb6b1804dcdbcb6dca3edc6c3ffbb5e61a1f93b480d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/qualify_callable_replay.py",
+            "sha256": "ead00c1dd28f742aeac1b87b8f6b2d29982e90bc6a1d3f62fefe1f8a59a5bfa7",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/stop_seventh.py",
+            "sha256": "0630132fc8f12be4b4a6ceecab8cea89cd5b88c96f24c2dd782641f5b3b09ec8",
+            "role": "producer"
+          },
+          {
+            "path": "docs/knowledge/perl-count-result-source-guards.md",
+            "sha256": "754021efe1e6a3fed790a0c23b7085110af643ce72e3b935fd525cf5b5d8060d",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/dsl/values-containers-and-flow-helpers.md",
+            "sha256": "24361724a9f5710655c432a4f07aa4ba388c6973fedfd6b32f4392c068e59f79",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "dfca55cb0549df74df6be4640677e0cb057c5df2b8b542f9ee53885a1bb1a0ae",
+            "role": "producer"
+          },
+          {
+            "path": "t/callable_codeblock_literal_contract.t",
+            "sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+            "role": "producer"
+          },
+          {
+            "path": "t/count_result_guard_composition.t",
+            "sha256": "f4dcdbee9e21c99fbdc5857172cd955dc20a8597182273fc47bd37683b16760f",
+            "role": "producer"
+          },
+          {
+            "path": "t/count_result_guard_source_fences.t",
+            "sha256": "63630df59b1f4f9d426eb264ab220817f0ccfaf7f946b6b1a0f75a06ae718618",
+            "role": "producer"
+          },
+          {
+            "path": "t/length_count_source_ownership.t",
+            "sha256": "9dd71515ca4fc5a7ea6cec1bad138779b23b2b21d0c33bb86b12a5e650270ee8",
+            "role": "producer"
+          },
+          {
+            "path": "t/length_result_guard_composition.t",
+            "sha256": "e54cef89dd3a1a2641ac28b4bf893922410a18ae63f0725bd0550327b1fd3d23",
+            "role": "producer"
+          },
+          {
+            "path": "tests/fixtures/count_result_guard_excluded_ast.json",
+            "sha256": "8cdcfa9d4ee092c95a7eade0a7b84c91b8a5c3f630ad784e2e20fd7ba17245b8",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "callable-indexed-value-focused-behavior-with-custody-gap",
+      "statement": "The unchanged neutral callable fixture and six authored indexed-result cases pass in native and independently loaded generated Perl after the repair; the original implementation fails the neutral fixture and five target cases while healthy Count passes. Direct Count/Length composition and ownership pass; after the one-cell calibration, the18-row source-fence test passes.",
+      "scope": "Finite authored assertions and retained actual command channels only. The first five-file run exits1 solely at the stale source-fence snapshot, with the other four files passing; the calibrated source-fence rerun exits0. Post-exit packaging grants no original acquisition credit. The source-artifact claim retains project bytes/instruments/channels; shared native/cache/OS/transitive inputs are incomplete and do not earn complete native custody or full canonical/feature admission. The prior replay command inspected the original fixture/source-fence artifacts but omitted saved direct-test channel coverage. Its declaration remains retained without first-declaration completeness credit. The qualified command additionally checks exact saved targets/exits, all original target failures, four direct passing files, calibrated18-row PASS and the six authored cases against frozen consumer bytes. Original before metadata hashes decoded channels; later packaging hashes physical gzip bytes. The initial reader assumes one domain and rejects; its exact source/empty output remain retained. Corrected explicit domains preserve every original hash. This adds artifact interpretation, not native re-execution or missing first-use custody.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/count_fence_review.py && bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/callable_channels_review.py",
+        "granularity": "Exact retained unchanged-fixture native/fresh observations, six authored assertions in the existing consumer and observed direct-dependent test channels; diagnostic replay does not re-execute the historical native epoch.",
+        "result": "Qualified unchanged fixture native/fresh matches; original callable consumer plus new cases PASS. Direct five-file run: four files pass, source-fence single stale lowered cell fails. Final calibrated18-row source-fence consumer: exit0/PASS. Exact channels are retained in callable-focused-results.json and named gzip streams.\nQualified direct-channel coverage: {\"authored_cases\": [\"count-array\", \"length-array\", \"length-empty\", \"length-string\", \"length-null\", \"uppercase-string\"], \"calibrated_source_fences\": 18, \"direct_passing_files\": [\"t/callable_codeblock_literal_contract.t\", \"t/count_result_guard_composition.t\", \"t/length_result_guard_composition.t\", \"t/length_count_source_ownership.t\"], \"limits\": \"Readonly retained command/channel and frozen-consumer evidence. Nonverbose completed test results are interpreted against the exact authored consumer. Post-exit packaging remains qualified; no re-execution of the historical native epoch or complete runtime/cache/OS/transitive custody credit.\", \"original_failure_targets\": [\"length-array\", \"length-empty\", \"length-string\", \"length-null\", \"uppercase-string\"], \"rejected_controls\": [\"missing-pass\", \"wrong-target\", \"wrong-exit\", \"missing-original-failure\", \"missing-authored-case\"], \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The original implementation can load the unchanged emitted callable fixture, or a double call/wrong selected result is accepted.",
+        "oracle": "Unchanged neutral contract plus independent emitted execution and authored expected value/caller-effect pairs; healthy Count control.",
+        "red_control": "Original qualified native result is undef and emitted loading fails with invalid callable/index source. Old-module direct callable consumer exits1; Count remains healthy and the five Length/String targets fail. Corrupt retained native value/fresh effect/old emitted source reject."
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Project-source bodies and actual diagnostic/test artifacts are retained by the companion source-custody claim. Complete shared Perl/native runtime, cache, OS/toolchain and transitive first-use input closure is not acquired by these probes; post-exit channel packaging cannot repair that missing leg.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2"
+      }
+    },
+    {
+      "name": "legacy-rule-array-copy-source-oracle-calibration",
+      "statement": "The retained activation and callable-repaired modules emit identical Top.copy source. Its retained snapshot observations and the actual normal test helper match the original executable snapshot oracle for values, shallow identities, mutation isolation and one size/six element reads. The normal test changes only its literal-source assertion, adding the observational helper; every other original assertion source remains exact.",
+      "scope": "Source/diagnostic artifact comparison and actual extracted-helper interpretation at the qualified epoch. The public AST remains variable Top plus zero-operand copy; guarded emission preserves the original rule-array source snapshot. Empty/alias/lost-nesting/repeated-read programs are actual executed distinguishing controls. No production source or copy policy change, original canonical first-use custody, complete native/cache/OS/transitive closure or broad copy/feature admission. Native focused behavior has its separate durability-gap disclosure. The initial prefix-preservation refusal occurs before normal helper capture; the first test body and empty outer output survive. Restore the original blank-line prefix before qualified capture. Earlier pre-correction direct pass channels were not retained before log reuse and earn no original-channel credit.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_review.py",
+        "granularity": "Every retained project-source packet/member, exact original Git test/module, all source/AST/snapshot fields, every actual test-helper outcome and other original assertion bytes; exact final focused command/channel artifact and14-value/identity frame.",
+        "result": "{\"activation_and_repaired_source\": \"identical\", \"actual_test_helper_matches_independent_oracle\": true, \"focused_assertions\": 487, \"limits\": \"Qualified retained project-source/diagnostic artifact comparison plus the actual extracted test helper. Original canonical first-use and complete native/cache/OS/transitive custody remain4.2/SESSION5. No runtime production change, broad copy or feature admission.\", \"original_other_assertion_source\": \"unchanged\", \"rejected_channel_controls\": [\"wrong-exit\", \"missing-pass\", \"missing-native-frame\", \"changed-native-identity\"], \"rejected_executable_controls\": [\"alias\", \"empty\", \"lost_nested\", \"repeated\"], \"result\": \"PASS\", \"snapshot_fields\": {\"array_shared\": 1, \"before\": [0, \"\", null, {\"nested\": [1]}, [2], false], \"first_after_source_change\": 0, \"hash_shared\": 1, \"nested_after_shared_change\": 7, \"outer_distinct\": 1, \"source_trace\": [[\"size\"], [\"fetch\", 0], [\"fetch\", 1], [\"fetch\", 2], [\"fetch\", 3], [\"fetch\", 4], [\"fetch\", 5]]}}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An empty snapshot, alias of original storage, lost nested references, repeated source reads or a false focused PASS could satisfy the repaired oracle.",
+        "oracle": "Original literal Perl array snapshot executed independently with tied source storage and shallow identity/mutation observations. The actual test helper is extracted from the current consumer before interpreter use. Complete original observation and focused command channels are independent retained inputs.",
+        "red_control": "Both exact module observations and the actual normal helper reject executed empty, alias, lost_nested and repeated programs. Actual source/helper outputs agree with the original oracle. Wrong-exit, missing-pass, missing-native-frame and changed-native-identity artifact corruptions reject; original assertion-tail changes and project-source drift reject."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
+            "sha256": "c086f46ae36b5ee58902de82cc5384fc77f91ece5282c98323e919cf5ed11e78",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/canonical-eighth.log.gz",
+            "sha256": "2d2772299b5ed0db6e72a8f6214a9811ea75c0b7ed7eb2ece3d6edd9002c3ed6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/codeblock-method-before.pm.gz",
+            "sha256": "ce71a44a578ed29da92eae7920036d9f425041dac0c5690982687627b35531d2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-after.json.gz",
+            "sha256": "64f8d59bc9a597dd8c2e8331f76bb3bee9b4ad8424117ba471c45e716eadbbf5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-pre-scalar-copy-claim.json.gz",
+            "sha256": "a65135612c98eee94ee4f9da05818f9abffb3f59041ae1f325961056f15c988e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/package_scalar_copy.py",
+            "sha256": "8b72dd5b1d227ff7825e65d5af5fb2b5c814a9719f7fb8d3cd80bc651cde3e12",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_scalar_copy.py",
+            "sha256": "07dd93da43edb6ccf728a542cef4b3082e6c7459c0cc59c013edbb547136bcba",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-capture-result.json",
+            "sha256": "35960da596502d8ef97adb044b575e602d42c27064a94d65453bc506ed1b629d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-focused-result.json",
+            "sha256": "0f55ac2aba8b0cab8ad74e3929bbb4cf878bfed863cf6c716a407b9be4d0c36f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-focused-stderr.log.gz",
+            "sha256": "4c2b51ff170b9196b9cfca016e5012feb8683c08c6dcca5b1c8b3fb8e0e39c71",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-focused-stdout.log.gz",
+            "sha256": "27f15f4f0190c1f901f41710e3987d7f7429a7a985cf071914b2250905bca467",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-normal-oracle.json.gz",
+            "sha256": "21807b76d7f93362c221072c4a25aac24badebf2d1c1f6c8692d4aaf146e77ad",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-original.t.gz",
+            "sha256": "3406257e8d87b5ede4486b457cc8b5be99cde8cc597e648890aed82090a488e1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-prefix-empty-output.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-prefix-first.t.gz",
+            "sha256": "f6b4a25b66e39863127a34eb22e551233b11d32ba6d5af9b164cc3f258fd6538",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-qualified.json.gz",
+            "sha256": "314948a0e6e926918112771dd766099795c1e881728fd7890cc26a9126b6e61e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-retention-result.json",
+            "sha256": "4f2d1b1e2713fd7ed2320caac3b90626da9ac2bbb73d8bba4bce663ceda1bbc8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar-copy-review-result.json",
+            "sha256": "6bbfc7b5b671a85e7a3df094924d9568af2274838420a77407f2e1b8f03737a4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_capture.py",
+            "sha256": "9b4f06c297e58194709ec5c9257d66c5acfe62f3ceb3ef38cb3adb599c7e19f5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_probe.pl",
+            "sha256": "6e66d76df22ffdd5bda1e5ab336bd71425373890d9d6c1e99be6dd5dd7e28e41",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_review.py",
+            "sha256": "d4d9967a96f4f0d21650d020d5d01d5abb627d2219fa9f104f7591435251dd6d",
+            "role": "producer"
+          },
+          {
+            "path": "docs/knowledge/perl-scalar-bound-receiver-copy.md",
+            "sha256": "c9475298313367d78f030badc7b9f79b9a9e5d1b0770c8217e84c71f9ac97f8a",
+            "role": "input"
+          },
+          {
+            "path": "docs/linkedspec-book/src/development/documentation-workflow.md",
+            "sha256": "dcc234779696af0d81da931787566dab830a494ff1937019aba71e47efd39872",
+            "role": "input"
+          },
+          {
+            "path": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+            "sha256": "dfca55cb0549df74df6be4640677e0cb057c5df2b8b542f9ee53885a1bb1a0ae",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_legacy_hash_kind_probe.pl",
+            "sha256": "16fbcf4f397ef2c032fd73bf5abb38d36dc2fbac0b82a61cda75f2ee3733075e",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_receiver_scalar_copy.t",
+            "sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d",
+            "role": "producer"
+          },
+          {
+            "path": "t/actionir_receiver_scalar_copy_probe.pl",
+            "sha256": "74aeb01dcb361501c682cecabadb8259bf20d25e6dcf1c55d63957acb4d2903d",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "legacy-rule-array-copy-focused-consumer-with-custody-gap",
+      "statement": "The final scalar receiver-copy consumer passes all487 assertions after replacing only the stale literal-source assertion with executable snapshot/identity/source-read comparison. Original live/generated14 values, shallow identity, poisoned AST source, arity and legacy callback controls remain passing.",
+      "scope": "Exact final focused command and retained native/generated observation frame, following the independent old/current source calibration. The first canonical copy run fails only its literal-source assertion, with486 others passing. This is a finite test-oracle repair, with unchanged runtime production. Earlier direct pass streams were not retained before log reuse; only the final captured487 result receives current channel credit. No full canonical receipt, whole copy-family or complete native input-closure claim.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/scalar_copy_review.py",
+        "granularity": "Every final command target/exit/full stdout/stderr frame and the original14 values/identity fields, plus actual extracted-helper counterexamples; this replays evidence and the helper rather than the historical whole native epoch.",
+        "result": "Final exact t/actionir_receiver_scalar_copy.t: exit0/487 assertions/PASS. Full physical-gzip channels and decoded observation frame checked by scalar_copy_review.py; qualified original/candidate source equality and eight executable/channel controls pass."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Wrong copy depth, aliasing, repeated array reads or missing native results can pass the calibrated consumer.",
+        "oracle": "Original executable array snapshot, actual normal helper and unchanged scalar-copy native/generated value and identity controls.",
+        "red_control": "Empty/alias/lost-nesting/repeated programs differ in both independent and actual normal helper runs. Wrong-exit, missing-pass, missing-native-frame and changed-native-identity controls reject; healthy retained artifacts pass. The original literal assertion fails in canonical CI."
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Project-source bodies, producers and exact diagnostic/focused channels are retained by the companion source-oracle claim. Complete shared Perl/native runtime, cache, OS/toolchain and transitive first-use closure is not acquired; post-exit packaging and supplied snapshots do not repair that missing native leg.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2"
+      }
+    },
+    {
+      "name": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "statement": "Twenty failing source-layout assertions are replaced by independent finite value/effect oracles. The exact inverse preserves every healthy assertion, original plan/helper and prior Phase0 image stage. The retained original/current lowerings and finite values agree; all11 original fixture denials and19 image denials remain, plus12 new exact-stage denials.",
+      "scope": "Source/diagnostic artifact interpretation for the exact seven groups from failed ninth canonical (1035 groups,7 failed). Twenty source assertions fail in current-only selected replay while120 remain healthy. Authored finite values precede activation/current observations. A title-placement error in the initial replacement template is corrected before any test edit; both initial template bodies remain. The entire prior nine-claim declaration,231 inline input bodies and nested unit source remain replayable in the companion frozen logical artifact epoch; no fictional Git capture/hash refresh. No runtime source changes follow from this calibration. Native execution is separately qualified below.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_review.py",
+        "granularity": "All20 exact assertion replacements/inverse anchors, original source plans and helper; complete retained activation/current source/diagnostic records; every11 prior/12 new fixture denial and19 current image denial; both exact selected command channels.",
+        "result": "{\"exact_original_assertion_inverse\": true, \"finite_cases\": 20, \"healthy_source_and_plans_preserved\": true, \"historical_images\": 19, \"limits\": \"Finite20 source/value/effect cases and executable wrong-value/warning controls. No original canonical first-use or complete native/cache/OS/transitive custody credit;4.2/SESSION5 own that closure.\", \"new_phase0_controls\": [\"source-appended\", \"source-missing\", \"prior-committed-stage\", \"table-bytes\", \"owner\", \"path\", \"revision\", \"before-hash\", \"after-hash\", \"hunk-omission\", \"hunk-rebinding\", \"hunk-duplicate\"], \"observed_wrong_value_and_warning_controls\": 40, \"original_phase0_controls\": [\"source-appended\", \"source-missing\", \"prior-committed-stage\", \"table-bytes\", \"owner\", \"path\", \"revision\", \"before-hash\", \"after-hash\", \"hunk-omission\", \"hunk-rebinding\"], \"rejected_channel_controls\": [\"wrong-exit\", \"missing-command\"], \"result\": \"PASS\", \"selected\": {\"after\": {\"assertions\": 140, \"exit\": 0, \"failed_assertions\": 0}, \"before\": {\"assertions\": 140, \"exit\": 7, \"failed_assertions\": 20}}, \"unchanged_activation_current_source_values\": true}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Source nesting alone defines behavior, or fixture calibration permits unrelated drift and discarded historical stages/results.",
+        "oracle": "Pre-authored finite operation values, preserved source aggregates, diagnostic sink and mutation snapshots; unchanged committed7289836f protected test plus every older exact image/calibration and original full command channels.",
+        "red_control": "Original selected20 source assertions fail; actual activation/current finite values agree, while40 executed wrong-value/warning controls distinguish failures. Original11 fixture controls remain exact; new12 source/table/owner/path/revision/hash/hunk controls reject, all19 image mutations reject. Wrong-exit/missing-command channel controls reject; healthy inverse/recovery images and selected140 channels pass."
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/calibrate_phase0_values.py",
+            "sha256": "810fa3cd4e212ba30b337388f5855d2be6bae5c4f733ca0cdafc250f8475ba4f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/factory-boundary-after.json.gz",
+            "sha256": "64f8d59bc9a597dd8c2e8331f76bb3bee9b4ad8424117ba471c45e716eadbbf5",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/implementation-pre-phase0-claim.json.gz",
+            "sha256": "d43952a64cef3f6a53d53a9d8e3cb5a83736199490704fc2c25a59d830ed6cbb",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-current-recovery.stdout.log.gz",
+            "sha256": "0cf3f3e39691bdf4b566087a77a04ea0bd8cd36f82efbf35f936247117f71090",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-frontier-intake.json.gz",
+            "sha256": "e632214b8b110e0652454ef84c170f67d415328cb46c1461981b8202e581f6be",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/objective-image-intake.json.gz",
+            "sha256": "885faf0987ed6cab4d356572ddf1a17a6969c4ce4737cf028c1c406d581b208b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/package_phase0.py",
+            "sha256": "211f9485602bfc87108725a456d8a3119884ab586486097863add1cd71107825",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-before.t.gz",
+            "sha256": "a99fe05d49f6e70e0cfbd581eb0f77c7443d9cccb833013468c031eb0eab2cf4",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-final-review-result.json",
+            "sha256": "f4b740f1daab198095e8317c7f3663c3b8a8c008ab2b49fc3699a0d0b790a330",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-oracle-cases.json",
+            "sha256": "806f490e921e519319a61b51feb2b3283505958f92bee2418518998e894e5348",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-oracle-cases.json.initial.gz",
+            "sha256": "798f0af7c15ca060a9b273cc955e7ebde1983fbe41e2cab3238f61d80dde9a44",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after-seen.json.gz",
+            "sha256": "ad3b40bb9b579331315ec028ba440608b1cfae5db22572c194c0b58cb878e432",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after.stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-after.stdout.log.gz",
+            "sha256": "5d3923d5bb4b95408ddb0f29cdadc3a6becc4691f86c06c19bbbea58dd61fd6d",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before-seen.json.gz",
+            "sha256": "ad3b40bb9b579331315ec028ba440608b1cfae5db22572c194c0b58cb878e432",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before.stderr.log.gz",
+            "sha256": "7a0f24a81a96e71422e3ecc95c957d4f8ff46c84f97916f87ceab1c9a125bd76",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-before.stdout.log.gz",
+            "sha256": "f5af49a33a3cb73fcf663b1f5ccdf2af15d682148db96a6226216924caa23a60",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-channels.json",
+            "sha256": "b594275a973b7a3cd7fca49af3f46d5e0dc88716dc835242e5948ef4618e119b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-selected-names.json",
+            "sha256": "109a9f4db9c53b1d68e5e8a30d245a568b457cab923eb7d47aed104343a5cc8b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0-values-qualified.json.gz",
+            "sha256": "bdfc7e95b0a904b4f25b2553b7f018e9738ea982aec788100184ce696faaa254",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_oracle_cases.py",
+            "sha256": "04f8f7ec988830fa02e5fa9ad02abc48125ca7b3b29c6872304beedd09274e64",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_oracle_cases.py.initial.gz",
+            "sha256": "a0360c0797763b022b02f94857d301996f0e8bf6318c801d7abf93c0258e35d2",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_review.py",
+            "sha256": "a89f64a4e6068f3b0c5bfde9ebf6adbd5213bcc8dc95adbd914384db220a2f7f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_selected.pl",
+            "sha256": "a6a9f0eaca77eb0e4fc7f359a48bf47610d908a4635cb2c2f6b437a81309f0db",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_value_capture.py",
+            "sha256": "0874c0df1e1533e592dd1eb5009664bd54c9c2a1036d0f0ed25ebec3cf4a13e5",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_value_probe.pl",
+            "sha256": "63f73b30d2508d54e98f77365ec54b88476ac9fd4ef6efe8d50a73113c97175a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/knowledge-map-capacity-2026-11-10/publish_phase0.py",
+            "sha256": "7be797a661473541330bf042351aaf0e4c42198bca9e0637effe316153f716e7",
+            "role": "producer"
+          },
+          {
+            "path": "t/phase0_regression.t",
+            "sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d",
+            "role": "producer"
+          },
+          {
+            "path": "tests/language-readiness/additional-source-images.json.gz",
+            "sha256": "33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/current-source-images.json.gz",
+            "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/current-source-successors.json.gz",
+            "sha256": "f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/phase0-fixture-calibration.json.gz",
+            "sha256": "4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/phase0-value-calibration.json.gz",
+            "sha256": "83a26ab17b802e800a44650b59e07d794a804bdf3d752936870c15f8e00b199c",
+            "role": "input"
+          },
+          {
+            "path": "tests/language-readiness/verify_objectives.py",
+            "sha256": "95751aab02261dbe6076c27dfdc7aa9f2a213cadc832029375bde410c2fbb8de",
+            "role": "producer"
+          },
+          {
+            "path": "tools/historical_objective_images.py",
+            "sha256": "96317a5b533cdd3731b49bdb5884acfae2ec1ad230bf97a48624f2b209058c22",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "phase0-seven-selected-groups-with-native-custody-gap",
+      "statement": "The seven selected Phase0 groups pass all140 nested assertions, with complete8-result TAP including shared discovery and empty stderr, after only20 assertion calibrations. Exact activation/current lowered values agree on all20 finite fixtures.",
+      "scope": "Actual current-only selected exit7/20 failures of140 before and exit0/140 passing after. All seven names are seen exactly once, no selected skips/todos; the full1035-group ninth run remains failed and no canonical receipt is inferred. This is a finite diagnostic/test repair, not whole-feature admission or complete native input closure.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/knowledge-map-capacity-2026-11-10/phase0_review.py",
+        "granularity": "Each selected name/argv/exit/raw channel and all140 nested assertions; retained finite20 value/effect observations, rather than recreation of the original complete native epoch.",
+        "result": "{\"exact_original_assertion_inverse\": true, \"finite_cases\": 20, \"healthy_source_and_plans_preserved\": true, \"historical_images\": 19, \"limits\": \"Finite20 source/value/effect cases and executable wrong-value/warning controls. No original canonical first-use or complete native/cache/OS/transitive custody credit;4.2/SESSION5 own that closure.\", \"new_phase0_controls\": [\"source-appended\", \"source-missing\", \"prior-committed-stage\", \"table-bytes\", \"owner\", \"path\", \"revision\", \"before-hash\", \"after-hash\", \"hunk-omission\", \"hunk-rebinding\", \"hunk-duplicate\"], \"observed_wrong_value_and_warning_controls\": 40, \"original_phase0_controls\": [\"source-appended\", \"source-missing\", \"prior-committed-stage\", \"table-bytes\", \"owner\", \"path\", \"revision\", \"before-hash\", \"after-hash\", \"hunk-omission\", \"hunk-rebinding\"], \"rejected_channel_controls\": [\"wrong-exit\", \"missing-command\"], \"result\": \"PASS\", \"selected\": {\"after\": {\"assertions\": 140, \"exit\": 0, \"failed_assertions\": 0}, \"before\": {\"assertions\": 140, \"exit\": 7, \"failed_assertions\": 20}}, \"unchanged_activation_current_source_values\": true}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Source nesting alone defines behavior, or fixture calibration permits unrelated drift and discarded historical stages/results.",
+        "oracle": "Pre-authored finite operation values, preserved source aggregates, diagnostic sink and mutation snapshots; unchanged committed7289836f protected test plus every older exact image/calibration and original full command channels.",
+        "red_control": "Original selected20 source assertions fail; actual activation/current finite values agree, while40 executed wrong-value/warning controls distinguish failures. Original11 fixture controls remain exact; new12 source/table/owner/path/revision/hash/hunk controls reject, all19 image mutations reject. Wrong-exit/missing-command channel controls reject; healthy inverse/recovery images and selected140 channels pass."
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "Companion source claim retains complete project producer/input bodies and exact diagnostic channels. Shared Perl/native runtime, cache, OS/toolchain and transitive first-use closure are not acquired; post-exit packaging cannot supply that missing native leg.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2"
+      }
+    }
+  ]
+}

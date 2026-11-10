@@ -12,6 +12,80 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.1 — Compact duplicate Knowledge Map display
+
+Ninth full verification reaches1035 Phase0 groups and fails seven. Their selected
+replay reproduces20 obsolete source-layout assertions; independent finite values,
+source preservation, branch output and mutation snapshots agree for activation
+and repaired lowering. Only those20 assertions change; all140 selected assertions
+then pass. Exact20-hunk inversion preserves the original protected test before all
+older recovery stages, with11 prior/19 image denials plus12 new denials. Claim5's
+entire logical source epoch remains replayable without inventing a Git capture.
+Eleven bounded claims disclose three native custody gaps; full canonical still
+governs landing. Production is unchanged by this Phase0 test calibration.
+
+The generator omits only repeated per-fact answers displays. All12237 question
+routes and remaining1710 fact records are byte-exact against the original;
+1710 lines/746324 bytes are removed, reaching20789 lines/7125905 bytes under
+unchanged limits. Actual old output rejects the compact oracle; current/legacy
+fixtures, metadata/header176, atomic/storage/capability/sync and generator-only
+outside-cwd checks pass. Complete current source inputs are unchanged across a
+separate qualified generation. Book guidance renders under its existing line
+bound. Exact staged canonical receipt and normal hooks govern landing. The
+unfinished broad routing run143 has no PASS;18.2 retains that sweep/line-warning
+pressure after feature coverage. No full-feature/native-custody admission.
+Evidence: docs/checkpoints/knowledge-map-capacity-2026-11-10/VALIDATION.md.
+First canonical attempt stops143 after a documented older checklist-format
+constraint. Moving only its future-work qualification to a following line gives
+actual staged reject1/accept0 with gate/status/other task bytes exact; the complete
+candidate must be rerun and no first-attempt receipt is claimed.
+The next attempt rejects only the overbound inline claim. Its complete acquired
+source epoch is now retained in a hash-bound byte bundle and re-rendered, with
+missing/altered input denials; the small record retains the original observations.
+Original oversized declaration/log remain exact; the128KiB limit is unchanged.
+Canonical next passes all10 doctrines, then exposes an existing epoch test fixture
+that copies the complete catalogue but only one current source. Seed each validated
+manifest source, including Lua; exact-old consumer reproduces the missing file,
+repaired consumer/frozen file oracle pass. Preserve20.2 at its accepted5801970b
+source epoch with only mode/revision/scope qualification. Production readers and
+the separate lowercase boundary repair remain unchanged; full CI must restart.
+Fourth canonical passes those controls, then finds a recurring factory reviewer
+requiring current Perl bytes to equal its historical capture. Unchanged public
+native/fresh targets already pass. Keep captured byte preservation and exact
+source calibration historical; current compatibility keeps the original semantic
+oracle. Both corrected reviewers pass; native-kind/fresh-effect/historical-edit
+controls reject. Original capsules/claims stay unchanged. Full CI must restart.
+Fifth canonical reaches historical recovery, which rejects later committed source
+images. Preserve the original table and admit four exact runtime successors plus
+the accepted Count73.3 Dart emitter test with its historical predecessor. Qualified
+149-path/19-denial proof and actual recovery retain134 inputs/22 controls/714
+governance denials;191 observed inputs close within202 declared bodies. Initial
+four-only intake, row-order assertion and older-baseline comparison remain explicit.
+Original4.3 inputs are preserved at acceptedf6295bc8; no runtime/result promotion.
+Sixth canonical exposes invalid emitted Perl for indexed callable results followed
+by Length. Retain a complete prepared callable-index receiver in the existing
+guard bridge, preserving Count's prior path. The unchanged neutral native/fresh
+fixture and six authored value/effect cases pass. Direct Count/Length composition
+and ownership pass. Exact activation/current comparison proves one excluded Count
+snapshot cell was already stale: calibrate only its lowered source, preserving
+all18 AST/diagnostic rows and unresolved/non-ready Count ownership. The repaired
+source-fence consumer passes. Retained source/diagnostic controls reject; shared
+native/cache/transitive custody remains4.2/SESSION5. Full canonical must restart.
+Proof review then catches a replay-command coverage gap for the saved direct-test
+channels. Preserve that declaration; a readonly reviewer now checks exact targets,
+exits, original failure titles, four passing files, calibrated18-row PASS and six
+frozen authored cases, with five effective denials. Explicit decoded/physical
+channel-hash domains preserve all original identities. Seventh CI is deliberately
+stopped143 after all10 doctrines/recovery/initial native checks; no receipt credit.
+Eighth canonical clears the repaired callable40, signed selectors and later
+contracts, then rejects one scalar-copy source literal among487 assertions.
+Exact activation/current source and executable snapshot observations agree.
+Replace only that literal assertion with value, shallow identity, mutation and
+array-read comparison; preserve every other assertion/probe. The actual test
+helper rejects empty/alias/lost-nesting/repeated reads; final487 passes and four
+channel faults reject. Production is unchanged. Nine scoped claims preserve all
+older bindings and disclose both native custody gaps to4.2; full CI must restart.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — Plan lossless Knowledge Map compaction
 
 Resumed PNT at clean6cd8e784 and committed the capacity plan before generator changes.

@@ -122,6 +122,17 @@ def controls():
     print('task-narrative: corruption/missing/symlink/rogue/range/duplicate/stale-index controls PASS')
 
 
+def copy_epoch_current_sources(fixture):
+    # verify_epochs checks the complete retained catalogue, including epochs
+    # added after this test's selected mutation subject.
+    for manifest in sorted((ROOT / subject.EPOCH_DIRECTORY).iterdir()):
+        row, _ = subject.epoch_source(manifest.stem)
+        source = row['source_path']
+        destination = fixture / source
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / source, destination)
+
+
 def epoch_controls():
     epoch = 'TYPE-REFERENCE-BOOK.1.2.20.2'
     row, source = subject.epoch_source(epoch)
@@ -168,9 +179,8 @@ def epoch_controls():
     with tempfile.TemporaryDirectory(dir=ROOT / '.linkedspec-data/normal-hook-restoration') as temporary:
         fixture = Path(temporary)
         shutil.copytree(ROOT / subject.EPOCH_DIRECTORY, fixture / subject.EPOCH_DIRECTORY)
+        copy_epoch_current_sources(fixture)
         current = fixture / row['source_path']
-        current.parent.mkdir(parents=True, exist_ok=True)
-        current.write_bytes(actual)
         original_git = subject.git
         # Files come from the controlled fixture; Git identities/pathspecs come
         # from the actual repository root, independently of the fixture cwd.

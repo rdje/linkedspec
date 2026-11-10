@@ -1217,7 +1217,7 @@ To re-enable hosted CI later, restore the `push` and `pull_request` triggers in 
 - runs the focused runner/trace suites and all 66 primary CLI cases under default and POSIX option environments,
 - runs the main phase0 regression suite,
 - runs `scripts/check_memory_architecture.sh` to verify layer integrity, activation freshness, bounded shape, and task-status-consistent clean handoffs with active/clean twins plus destructive mutations,
-- runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity (derived map matches source cards, no stale entries),
+- runs `knowledge-map/scripts/check_knowledge_map.sh` to verify Knowledge Map integrity: Questions lists each lookup route once; Facts retains stable anchors and dated verification metadata; canonical cards retain authored answer lists; regeneration must match exactly,
 - runs `scripts/check_task_tree_metadata.sh` through the doctrine driver; completed trees cannot advertise live
   frontier rows; pending nodes cannot claim activation/foreign commits; exact current IDs are globally unique
   except in registered immutable history; ten current-ID mutations and four status/evidence fixtures lock it,

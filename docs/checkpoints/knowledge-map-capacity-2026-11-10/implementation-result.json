@@ -1,0 +1,1 @@
+{"after_bytes": 7125905, "after_lines": 20789, "before_bytes": 7872229, "before_lines": 22499, "map_sha256": "b35cad57160bda890af41e2a64d1f6bec5b4486c94c9623b94cee9c502961b4d", "question_and_remaining_records": "byte-identical", "rejected_controls": ["question", "source", "anchor", "restored-duplicate"], "removed_lines": 1710, "result": "PASS"}

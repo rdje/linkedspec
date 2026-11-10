@@ -1,0 +1,1 @@
+{"all_source_bodies": "exact qualified epoch", "limits": "Frozen rendering replay; production initialization/publication/locality were acquired separately. No later live-source freshness or full native custody credit.", "map_sha256": "b35cad57160bda890af41e2a64d1f6bec5b4486c94c9623b94cee9c502961b4d", "rejected_controls": ["missing-input", "altered-producer"], "result": "PASS"}

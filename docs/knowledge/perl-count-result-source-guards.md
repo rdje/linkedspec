@@ -48,3 +48,25 @@ results before emitted loading and reports its actual load error. The signed
 suite and directly affected Count guard/source-fence checks pass. Original
 observations stay historical; this bounded repair adds no general raw-source,
 pure-source readiness, copy-family or portable admission.
+
+Canonical restoration23.4.18.1 finds the same prepared-receiver loss through
+Length and uppercase. `collector("p", "a", "b")["items"].length()` already
+has a complete lowered callable-index path, but the guarded value bridge
+re-reads its intentional raw AST and emits invalid `collector(...)["items"]`
+as Perl. Mark only successfully prepared complete index paths and reuse their
+existing `CodeblockRuntime::read_path` expression. Keep Count's existing raw
+compatibility disjunct. The unchanged neutral callable fixture then passes in
+native and standalone execution; authored Array/empty/String/null Length,
+String uppercase and healthy Count cases retain one caller effect.
+
+The direct Count source-fence consumer also exposes a stale source-layout cell
+for `count().take(1).with(){return("x")}`. Exact activation7289836f and repaired
+MethodLowering images produce identical18 rows and identical excluded-program
+native/emitted/metadata observations. Only row0's `lowered` field differs from
+the old fixture. Calibrate that field alone, retaining the original fixture;
+AST, warnings, errors and all other rows remain exact. The excluded expression
+still has unresolved helper `count` and non-ready ActionIR. Its observed legacy
+value is not new Count authority. `count_fence_review.py` and
+`codeblock_review.py` in the November10 capacity checkpoint retain source/diagnostic
+proof and effective corruption controls. Initial JSON framing and overlay-load
+attempts remain uncredited; shared native/cache/transitive custody remains4.2/SESSION5.
