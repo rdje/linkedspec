@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2790,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-and-required-dependency-steps.md","sha256":"bf7c57076caa5f8e24d29bde7f9abeac85c595dd34b0494ecf87af46f3ae32a5","type":"member"}
 {"bytes":2795,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-arithmetic-result-source-guards.md","sha256":"cb9ba738804fbea7f529c0df1899192e067db5461e9a75fe566ec671230b0619","type":"member"}
 {"bytes":1654,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-array-split-mutation.md","sha256":"7441fd6d84185128e0994ef3d653f1cc2cba51e1846765a214bfb284a1274e4c","type":"member"}
 {"bytes":16127,"lines":284,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md","sha256":"1d2a8f87ba97959cf3ef112a5120f1fe09725a27a47926a11485bc82ab783487","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4266,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-admission.md","sha256":"9e033935069880cce48c4c4f540be20a1ef0598f9dddea1e62247d7a1ab7a16d","type":"member"}
 {"bytes":5776,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-carriers.md","sha256":"870ab8c577ab85fd92f6ea67b808c22a98b627603e4143c942918f62acb1545e","type":"member"}
 {"bytes":6033,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-dormant-red.md","sha256":"b49ab06c3323b938064c2ab8e51a6d35795f87f660148a545633198f8d014976","type":"member"}
-{"bytes":5839,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-progressive-span-dispatch-private-authority.md","sha256":"37b907f52b32486379de7e7f2c49edc6da50e428a52d1ef11a0dae2288f9105e","type":"member"}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Ordinary Array-transform result composition: bounded Perl, Rust and independent Dart78.3 are repaired/focused-checked. Independent Julia78.4 is next, then Lua78.5. Full feature verification23.4 and broader routing18.2 remain separately owned.
+Ordinary Array-transform composition: bounded Perl/Rust/Dart/Julia are repaired/focused-checked. P1 Dart additional-direct input qualification23.4.20 is next, then independent Lua78.5. Broader routing18.2 and full feature verification23.4 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.3. Dart independently acquires unchanged37 plus104 own controls, reproduces19 guard failures, and adds only canonical result ownership with initial source/earlier-owner preservation. Unchanged141/four routes, selected direct292, exact same-path old/current19RED/141PASS, final formatted replay, candidate identity and first readonly recovery/eight corruptions pass. All122 healthy observations/108 full profiles/141 parsed-module pairs stay exact. Book and canonical facts reflect bounded behavior; broader source/context/native/admission remains open. Focused integrity/normal hooks govern landing.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.4. Independent Julia156/four-route observations find19 guard failures; canonical result ownership preserves all137 healthy observations/123 profiles and156 byte-equal parsed/module pairs. Normal827PASS76FAIL to903PASS; direct1728, exact same-path uncached19RED/156PASS, first readonly0/empty stderr/nine corruptions and every actual current direct-input identity pass. All nineteen needed errors, source/arity/earlier-owner policies and producer/scalar/mutation bodies stay exact. Book and canonical facts reflect bounded behavior; focused integrity/normal hooks govern landing.
 
 ## Next Action
 
-Activate independent Julia TYPE-REFERENCE-BOOK.1.2.23.3.78.4. Read frozen37/four-route contract and independently acquire Julia source/arity/error/earlier-owner observations before deciding a repair; no imported peer verdict. Existing18.1 checked claims stay historical at41ba410b, daily cleanup remains current, and broader routing18.2 follows feature coverage. Full23.4/final clean push require fresh exact proof after feature coverage.
+Activate P1 TYPE-REFERENCE-BOOK.1.2.23.4.20 after this clean Julia handoff. Qualify/reacquire the exact additional Dart direct292 external fixture closure; preserve original proof and distinguish its missing explicit bindings from any qualified new epoch. Own Dart141/four-route/inverse remains bound; no runtime failure is inferred. Then independently assess Lua78.5. Full23.4/final clean push require fresh exact proof after feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
@@ -29,7 +30,6 @@ Activate independent Julia TYPE-REFERENCE-BOOK.1.2.23.3.78.4. Read frozen37/four
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.4 — Julia89/four routes510PASS/direct825, exact private13RED/89PASS, qualified readonly/eight controls; partial/version correction explicit; Lua77.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.3 — Dart89/four routes/direct151; exact private13RED/89PASS,65 own profiles/89 artifact pairs/eight controls; Julia77.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
 
 ## History
 

@@ -10,6 +10,27 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.4 — Bind result ownership and all selected test inputs separately
+
+Julia's own19 failures retain Arrays through set_key with KV/later KVW/KVDW.
+Only canonical eight-transform free results/receiver prefixes join persistent
+kind guards, with one initial-source permission excluding earlier owners. Keep
+scalar_result and enumerate/call_index mutation policy byte-exact. Existing
+single compiled contextual with is admitted; no general callback/deferred domain
+is added. Source has70 insertions and normal runner one include. Own119 fences
+include15 extra needed-source/count/start/concat errors. Julia's free sorted/
+reversed extra operands evaluate A, unlike Dart; preserve the observed SAKW.
+First readonly recovery/nine controls pass, including missing direct input.
+The current direct capsule binds all older selected fixture reads before use.
+That prospective review reveals prior Dart direct292's missing explicit external
+with/Hash fixture bindings; own141/four-route/inverse stays bound. P1 task4.20
+owns precise qualification/reacquisition after this clean Julia leaf, before Lua.
+Do not turn current hashes or older Git existence into actual historical first-use
+identity. All original Dart artifacts/readers stay untouched; appended explanation
+and current book/fact status disclose the limit. Full native/cache custody remains
+4.2/SESSION5. First repaired Julia stderr is successful package precompilation;
+version comes from actual invocations, never the manifest creation version.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — Keep initial Array sources separate from produced results
 
 Dart's original transforms feed Arrays into set_key without persistent kind

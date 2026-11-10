@@ -60,3 +60,16 @@ Native SDK/cache/transitive/toolchain/OS custody remains4.2/SESSION5. Fresh emit
 programs use the same host runtime; no general isolation, unassessed contextual
 role, registration, Julia/Lua outcome or full23.4 admission is inferred. Rebuild
 Dart applications with the updated package. Next: independent Julia78.4.
+
+## Additional direct-test input qualification
+
+Prospective Julia78.4 input review finds that the additional direct292 tests read
+older with/Hash fixtures outside dart which are not explicitly bound in this
+packet's direct root inventory. The actual292 passing stream is retained; own141
+sources/profiles/grammar/four-route artifacts/private inverse remain bound. Older
+fixtures exist in Git, but that alone does not establish the actual first-use
+identity missing from this packet. P1 task23.4.20 owns precise original-input
+investigation/qualification or fresh unchanged direct292 acquisition after clean
+Julia78.4 and before Lua78.5. Preserve every original input/archive/stream/reader;
+do not refresh historical hashes or infer a runtime failure. This appended
+explanation qualifies custody of the additional tests, without rewriting proof.

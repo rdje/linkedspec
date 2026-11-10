@@ -9,7 +9,7 @@ answers:
   - "does an unloaded public Perl selection module have fresh_error fields"
   - "why did the Array transform selection recovery readers fail"
 date: 2026-11-07
-status: original selection frozen; bounded Perl78.1.1/Rust78.2/Dart78.3 focused-checked; independent Julia and Lua remain
+status: original selection frozen; bounded Perl/Rust/Dart/Julia focused-checked; Dart input qualification4.20 then Lua remain
 tags: [array, transforms, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.38; docs/checkpoints/array-transform-result-selection-2026-11-07/REVIEW.md retains original37 ready1/raw0/fallback0/unresolved0,19 failures/18 healthy and37 actual module/handler pairs. Final strict readonly recovery0/empty stderr/nine controls passes; two prior reader failures stay explicit."
 reverify:
@@ -59,3 +59,12 @@ repairs only result ownership, preserving its initial source/arity policies.
 Unchanged141/four routes, direct292/private19RED/141PASS and first readonly recovery
 pass; see `docs/knowledge/dart-array-transform-result-guards.md`. Independent
 Julia78.4 is next; this does not promote the original selection to portable admission.
+
+Later November10 update: Julia78.4 independently reproduces19 own failures and
+repairs canonical result ownership; unchanged156/four routes903PASS, direct1728,
+private19RED/156PASS,123 full profiles and first readonly/nine controls pass.
+See `docs/knowledge/julia-array-transform-result-guards.md`. Its prospective
+closure review also identifies the prior Dart additional-direct explicit fixture
+binding gap, owned by P1 task23.4.20 after clean Julia landing and before Lua78.5.
+Own Dart141/four-route/inverse inputs remain bound; do not infer a runtime failure
+or retrospective first-use credit. Current selection remains in MEMORY.md.

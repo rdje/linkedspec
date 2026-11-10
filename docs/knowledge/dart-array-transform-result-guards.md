@@ -8,8 +8,10 @@ answers:
   - "does Dart concat_arrays preserve a scalar or Hash first source"
   - "do Dart Array-transform guards preserve needed errors and earlier result owners"
   - "how does the Dart Array-transform private old current source inverse work"
+  - "why does the Dart Array-transform direct292 packet need external fixture input qualification"
+  - "which task owns missing Dart additional direct-test fixture bindings"
 date: 2026-11-10
-status: Dart78.3 bounded guards focused-checked; independent Julia and Lua/full admission remain
+status: Dart78.3 bounded guards focused-checked; additional direct-input qualification4.20 pending
 tags: [dart, array, transform, results, guards, source, arity]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.78.3; docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md retains unchanged37 plus104 own controls,19 original failures/122 healthy,141/four routes PASS, private19RED/141PASS, direct292,108 exact profiles/141 parsed-module pairs, first readonly0/empty stderr/eight corruptions PASS."
 reverify:
@@ -55,3 +57,12 @@ Full native/cache/transitive/toolchain custody4.2/SESSION5, general isolation,
 broader source/context/registration and full23.4 remain separate. Julia78.4 owns
 its own independent next assessment. Related: [[array-transform-result-guard-selection]],
 [[dart-hash-value-result-guards]], [[rust-array-transform-result-guards]].
+
+November10 prospective Julia review qualification: the direct292 stream remains
+a passing observation, but this packet's direct root inventory does not explicitly
+bind the older with/Hash fixtures outside dart. Own141 inputs/profiles/grammar,
+four-route artifacts and the same-path inverse remain bound. P1 task23.4.20 owns
+the exact original-input investigation/qualification or fresh finite direct292
+acquisition after Julia78.4, before Lua78.5. Existing Git fixtures do not by
+themselves establish actual first-use identity; do not rewrite original evidence
+or infer a Dart runtime defect. Source-policy and bounded own141 outcomes stand.

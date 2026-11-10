@@ -38,6 +38,7 @@
 {"bytes":3611,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-and-required-dependency-steps.md","sha256":"ef2ebd5508e602e8b3ec66082a791159019f960d1230b0f1867b899008728b92","type":"member"}
 {"bytes":3257,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-anonymous-capture-boundary-helpers.md","sha256":"76cf8f526e10aa2b84abd7a4e8f74825271edfa851cd2c7e0447e858174db339","type":"member"}
 {"bytes":2939,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-arithmetic-result-source-guards.md","sha256":"f30758bd0bfdca210756db46c6d6f1e63cf44600fc44d9aaa08ef0e5ac39edfd","type":"member"}
+{"bytes":4948,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.4","path":"docs/knowledge/julia-array-transform-result-guards.md","sha256":"a1ca5f851b7d438310542b8d70c9350c52b646d67abec56bfc665d3ba48c2729","type":"member"}
 {"bytes":13722,"lines":254,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-attached-switch-body-omission.md","sha256":"e4386a9341e9579f1981898a85a0c045d56a645d074ec337f3462496e3d5b1d5","type":"member"}
 {"bytes":2468,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-backend-interpreter-first-plan.md","sha256":"b204ef5ce3af8df088a7f95f4c6db32e5fad4024c4db97a2bcb8d5a08e2a6035","type":"member"}
 {"bytes":2204,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-backend-scaffold-package.md","sha256":"64f632b802b8448c3100836bf9f2d92ef9d1de3b2e3de7863fb84ade6ffaf0d4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2874,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-ordinary-repetition-minimum-misses.md","sha256":"07c64bb427adb34fef3bb4019a2738f91e69103cc009612672d6286d13cd17fc","type":"member"}
 {"bytes":6181,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-package-readme-reading.md","sha256":"cffc90ce92d2c40bc5e6cf07311194b69f15585f9eb84bd09ab2b018b5534fbd","type":"member"}
 {"bytes":9364,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-parser-member-suffix-loss.md","sha256":"5ded33c3a4f4b8b3f6c969a35e76f39dc488f5d0b617b55510eacc87f1b71fc5","type":"member"}
-{"bytes":3392,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-presence-result-source-guards.md","sha256":"0048d94e7d9083c54d88514516350159ebd80e0dad391b7501c69dc892026888","type":"member"}

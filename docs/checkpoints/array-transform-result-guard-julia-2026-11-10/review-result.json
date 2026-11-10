@@ -1,0 +1,27 @@
+{
+  "shared": 37,
+  "own_controls": 119,
+  "total": 156,
+  "original_failures": 19,
+  "preserved": 137,
+  "profiles": 123,
+  "needed_errors": 19,
+  "four_routes": "PASS",
+  "normal_checks": 903,
+  "direct_checks": 1728,
+  "private_inverse": 19,
+  "private_restored": 156,
+  "artifact_pairs": 156,
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "original failure hidden",
+    "consumer operands admitted",
+    "later body admitted",
+    "needed operand error masked",
+    "source fallback normalized",
+    "Boolean replaced by Number",
+    "excluded profile omitted",
+    "actual module drift",
+    "direct fixture binding omitted"
+  ]
+}

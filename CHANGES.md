@@ -12,6 +12,22 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.4 — Guard ordinary Julia Array-transform results
+
+Add canonical eight-transform result ownership with one initial-source permission
+before existing Hash/view/size roles. Preserve source producers, scalar_result,
+call_index mutation, optional/excluded arities and all needed errors. Register one
+normal include; emitted/parsed formats stay unchanged. Independent156/four routes
+move827PASS76FAIL to903PASS; selected direct1728, exact same-path uncached19RED/
+156PASS,137 healthy observations/123 full profiles/156 artifact pairs, first
+readonly/nine corruptions and every current direct-input identity pass. Actual
+version bytes govern recovery; successful precompilation stderr stays retained.
+Book/canonical facts/live/task pointers align. Prospective input review also owns
+prior Dart additional-direct fixture binding qualification as P1 task23.4.20,
+after this clean leaf and before Lua78.5; original Dart141 proof remains bound.
+Full source/context/native/admission and full23.4 remain separate. Evidence:
+`docs/checkpoints/array-transform-result-guard-julia-2026-11-10/REVIEW.md`.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — Guard ordinary Dart Array-transform results
 
 Add only canonical take/take_last/drop_front/drop_back/slice/sorted/reversed/

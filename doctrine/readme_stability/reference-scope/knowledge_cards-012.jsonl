@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1640,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-format-terse-tree-closed.md","sha256":"dd4c41d06d718979f658dfac5898342d4eee0c1ec67f92eb71a637d6bfbd652e","type":"member"}
 {"bytes":2463,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-import-composition-contract.md","sha256":"f8147faa264c711c2f874643f37a99af5da08ac437c7d9f81f5b1f61f7bb5fb5","type":"member"}
 {"bytes":5361,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-closure-contract-plan.md","sha256":"6fd65365caef9990d682c37aa0f9e256282e8b2a54877f62fc83019d0faee543","type":"member"}
 {"bytes":5836,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-readiness-grammar-foundations.md","sha256":"01774c66e4a9ba8c9660afa59a26bdbe241e1bff189e29455ba325dce352317d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":15320,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-is-ordinary-rule-entered-first.md","sha256":"cad47d04617a6b2f5ed747fa107369312b61ee4f644a33ba0a786c3010b84e43","type":"member"}
 {"bytes":6056,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-reads-own-match-with-match-family.md","sha256":"9a9e654f58396a79a69f9950ac0063bd4fd0b8207c20a1ff9246ae765a190d5c","type":"member"}
 {"bytes":15167,"lines":161,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/top-rule-recursion-forward-progress-guard.md","sha256":"be10e1b9716f40ba3012728c6f76095e54ba72bfb5b81a448e56f127e762cd6c","type":"member"}
-{"bytes":5970,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/trace-actionir-compact-lowerers.md","sha256":"d4dbbca6b8fa7cd77732a38b1747a72a8bc446abab3196b8ddc645061f2b8274","type":"member"}

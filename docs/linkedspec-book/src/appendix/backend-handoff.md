@@ -4859,7 +4859,57 @@ are retained. Full native/cache/transitive/toolchain custody4.2/SESSION5, isolat
 source/context/admission and full23.4 remain separate.
 
 Rebuild Dart applications with the updated package; emitted/serialized formats
-stay unchanged. Independent Julia78.4 is next. Evidence:
+stay unchanged. Julia78.4 has its independent outcome below. Evidence:
 `docs/checkpoints/array-transform-result-guard-dart-2026-11-10/REVIEW.md`; its readonly
 reader recovers this historical outcome rather than declaring a future runtime
 healthy.
+
+Julia's prospective fixture review identifies one limit in that Dart packet:
+the additional direct292 test stream is retained, but its root inventory omits
+explicit bindings for older with/Hash test fixtures outside dart. Own141 inputs,
+four-route artifacts and the private inverse remain bound. P1 task23.4.20 owns
+the finite original-input investigation/qualification or fresh reacquisition;
+older Git fixtures do not automatically establish actual first-use identity.
+No Dart runtime failure follows. Original proof remains unchanged apart from
+this explicit explanatory qualification.
+
+### Julia Array-transform result assessment
+
+Julia78.4 independently acquires unchanged37 plus119 authored own controls on
+native, restored SpecFile, generated-plan and full emitted-fresh routes. The
+original nineteen guard gaps retain Arrays through set_key with KV and later
+KVW/KVDW, while constructor rejection already works. Canonical result ownership
+now joins the existing persistent guard. One initial-transform permission excludes
+earlier retained/constructor/copy/size/view/Hash/Array-result owners. Only the
+already compiled single contextual with operand is admitted; deferred literals,
+other callbacks, aliases, traversal and broader contexts gain no authority.
+
+The unchanged156 suite moves from827PASS/76FAIL to903PASS, preserving137 healthy
+observations and123 full own/error profiles. Seven initial Number/null/Hash source
+families yield empty Array/count0W; concat_arrays preserves its source element/
+count2W. Ten optional forms, sixteen excluded extra-arity profiles and six earlier
+owners retain their policies. Julia's free sorted/reversed extras evaluate A;
+Dart's corresponding free extras skip it. Fifteen additional source/count/start/
+concat-operand error controls and the original four errors retain full native/
+generated framing. These finite fences define no portable input or arity policy.
+
+Selected direct1728 passes, with explicit external fixture bindings captured before
+use. Exact old/current interpreters at one private package path, compiled modules
+disabled and actual module path checked, reproduce19RED/156PASS and all original/
+repaired frames. All156 parsed/emitted pairs remain byte equal across six epochs.
+The first readonly recovery returns0/empty stderr and rejects nine corruptions,
+including an omitted direct fixture binding. Every declared current direct input
+also matches its actual captured identity. Version coherence derives from actual
+invocations, not the manifest creation version. The first repaired package run's
+stderr reports successful precompilation; selected direct/current-private stderr
+is empty. No output is suppressed.
+
+The source adds70 guard/classifier lines and one normal-runner include; producer
+bodies, scalar_result and enumerate/call_index mutation policy remain unchanged.
+Rebuild Julia applications/runtime; emitted/parsed format stays unchanged. Full
+native/cache/transitive/toolchain custody4.2/SESSION5, isolation, source/context/
+registration and full23.4 remain separate. Next: Dart input qualification23.4.20,
+then independent Lua78.5. Evidence:
+`docs/checkpoints/array-transform-result-guard-julia-2026-11-10/REVIEW.md`; its readonly
+reader recovers this historical finite result rather than declaring a future
+runtime or peer healthy.

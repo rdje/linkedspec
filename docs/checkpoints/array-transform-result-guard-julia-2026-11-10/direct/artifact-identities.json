@@ -1,0 +1,1562 @@
+{
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/concat_arrays_compatible.jl": {
+    "bytes": 5063,
+    "mode": 420,
+    "sha256": "05c3ca30a01fc5e6cf49847a42312133282db0c71f9782b0ed68b91fdf63be3f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/concat_arrays_free_hash_guard.jl": {
+    "bytes": 5403,
+    "mode": 420,
+    "sha256": "cf540ca63c38aed41136a2104034d5a46b716ff84d6c93dc9c3afc4a3f27b691"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/concat_arrays_receiver_hash_guard.jl": {
+    "bytes": 5411,
+    "mode": 420,
+    "sha256": "aa6cd7aa8c7627dbd89a08f03f65c9fa291bff50a4151c4d1001bb922ecc8842"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/constructor_array_guard.jl": {
+    "bytes": 5601,
+    "mode": 420,
+    "sha256": "66f672ac343da57fd92a8af8036b6ad9b227977e7add7c334204172167c69617"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_back_compatible.jl": {
+    "bytes": 5007,
+    "mode": 420,
+    "sha256": "65f2415eeb43bcb69d010dc982fb433a49fc7d1b8b0cb0514b6542731f5c26d4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_back_free_hash_guard.jl": {
+    "bytes": 5371,
+    "mode": 420,
+    "sha256": "b90f8d1a5f5e24070aed1d28e032c3f2437adcdfadbe928f8d613902338d7f5f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_back_receiver_hash_guard.jl": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "6ac81074e1127e68eb2dc12174d841a784ce6948eda6d4917c973f9e9167c304"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_front_compatible.jl": {
+    "bytes": 5021,
+    "mode": 420,
+    "sha256": "7c81c97f24d87009f9b7c5ebc01cca9a0e64493966f32312d11aba01116f3327"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_front_free_hash_guard.jl": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "60db3381ac31cdeea5b5ab26c510d0b95f82e6b483aa5925a3441070deb47e33"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/drop_front_receiver_hash_guard.jl": {
+    "bytes": 5387,
+    "mode": 420,
+    "sha256": "c846b01a8bbe0d459f78190d4e5a8ea0309393763c9ff307c405348ff4ab0057"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/explicit_selected_bridges.jl": {
+    "bytes": 5545,
+    "mode": 420,
+    "sha256": "f7ab7e2ad625c0b598babc8e121e781244c99554b5b3c6da2a4fe8f28ffc2f78"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_concat_arrays_free.jl": {
+    "bytes": 5903,
+    "mode": 420,
+    "sha256": "1a1b5192de7950db02858ecf8bb352bd52d3419ddff5966e0b20c8c272d5a7e5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_concat_arrays_receiver.jl": {
+    "bytes": 5911,
+    "mode": 420,
+    "sha256": "8fe3f3c1970b402a46892405004dbc981cfb66dbd9425ae1c36b91ff91fef22f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_drop_back_free.jl": {
+    "bytes": 5805,
+    "mode": 420,
+    "sha256": "cc70c6b8c1d7f1fd9c9f9ad47f7938d35a68937ba759f1ed1c2bd9bb54981fb7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_drop_back_receiver.jl": {
+    "bytes": 5813,
+    "mode": 420,
+    "sha256": "4651c60f856753106c0699751736fece5d21e2822325ad2d70eae04747b69c1f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_drop_front_free.jl": {
+    "bytes": 5813,
+    "mode": 420,
+    "sha256": "328d1af84a72f9dee11c54b8043d501531edf6db529d8bd3edfaea11fbfc0f6a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_drop_front_receiver.jl": {
+    "bytes": 5821,
+    "mode": 420,
+    "sha256": "6f0e36f281f9bfe03277b741b239bca6c167924e4eaac8ef1326db860b980fd3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_reversed_free.jl": {
+    "bytes": 5785,
+    "mode": 420,
+    "sha256": "8d2ba9836e409366ddc23c1235ace5e8704070cc687ca02d2c907e7e12dd9272"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_reversed_receiver.jl": {
+    "bytes": 5793,
+    "mode": 420,
+    "sha256": "ae933d7bf90c1b3fd7da3e04af650b9ff9626a8facd5940c0368ac1ef63cbf46"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_slice_free.jl": {
+    "bytes": 5785,
+    "mode": 420,
+    "sha256": "848e4591fe8c1b71e6c61cd511ff9be08c1f2ea8406a3b637cfb2e985a54eb44"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_slice_receiver.jl": {
+    "bytes": 5793,
+    "mode": 420,
+    "sha256": "83844476dfb9b0994a50885c771757bf6a56412b72db28fba699ffeaaea18195"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_sorted_free.jl": {
+    "bytes": 5769,
+    "mode": 420,
+    "sha256": "636e94a9770da9becada64212c685d9472ac00acbe6fbcd6f44754a3d04b7192"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_sorted_receiver.jl": {
+    "bytes": 5777,
+    "mode": 420,
+    "sha256": "a8b81f08d6e03d220f5dd28a0c549b10713b760deeb3ed8bf7fcf0b3264484e6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_take_free.jl": {
+    "bytes": 5765,
+    "mode": 420,
+    "sha256": "4da21915522b2da068912c7aaefdef1360675db42d1c42717ca577d7262ec359"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_take_last_free.jl": {
+    "bytes": 5805,
+    "mode": 420,
+    "sha256": "9d2641649db40349b17a16e020725bd153a33d0fc554ecdbe16662d08eeb30d2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_take_last_receiver.jl": {
+    "bytes": 5813,
+    "mode": 420,
+    "sha256": "528b6884d9df6f6a0a284eedd328343c9331dbd9f604fa668767c9ca3c4bb0e2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/extra_take_receiver.jl": {
+    "bytes": 5773,
+    "mode": 420,
+    "sha256": "322b5fd08a23d3df892786d1dc40fedf46f6505c00894ded943c21853a3709b9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_concat_arrays_free.jl": {
+    "bytes": 4849,
+    "mode": 420,
+    "sha256": "53434b87ae74983d5295dcba0ddeff1698c32e2cb4ff5fc71e26a2e95a6fe618"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_concat_arrays_receiver.jl": {
+    "bytes": 4857,
+    "mode": 420,
+    "sha256": "87720d501ddc2ef75b26683352913664b28b9a0832d14df96150a8ed698d1810"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_concat_arrays_with.jl": {
+    "bytes": 5329,
+    "mode": 420,
+    "sha256": "640ef4d2237b6f4471fb92d3577ff34f43e24200d79bde6430bdd2a9d1cc0789"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_back_free.jl": {
+    "bytes": 4751,
+    "mode": 420,
+    "sha256": "15cedd85adb550902f7968b9dd098a1322b2d882246997e78bedeb764ff6f596"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_back_receiver.jl": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "977a00b2b2529577f2067276ba8706ee065d1ccc69d48b10007472688538078b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_back_with.jl": {
+    "bytes": 5231,
+    "mode": 420,
+    "sha256": "e79bf60c5068322436aee918824e2bf9d77e6289ba9451e8767581f4f29b8631"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_front_free.jl": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "13db5817b4e98d75056caab02585e9c350420b660342ddc0f8817613bcc6b189"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_front_receiver.jl": {
+    "bytes": 4767,
+    "mode": 420,
+    "sha256": "20bb49c1e271fe415c831bd5cdf51788b1362142931340952993ee134a884d45"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_drop_front_with.jl": {
+    "bytes": 5239,
+    "mode": 420,
+    "sha256": "f66acf7d583cfdd20075955f01d8bb93267c75ac9cf0cc22b59524160634de99"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_reversed_free.jl": {
+    "bytes": 4731,
+    "mode": 420,
+    "sha256": "44cd6ad83571f92749f093ad80303cf455c5d803280148b57781ae8cc0d48029"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_reversed_receiver.jl": {
+    "bytes": 4745,
+    "mode": 420,
+    "sha256": "0b6e2197745837a1e3a99becf32a866650860e7d4fa8734c939c23a2b6b692d3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_reversed_with.jl": {
+    "bytes": 5217,
+    "mode": 420,
+    "sha256": "dc44d374afa6b38a306b6d399bfe9056cad3983f3f3d581ebd3e960d79772472"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_slice_free.jl": {
+    "bytes": 4731,
+    "mode": 420,
+    "sha256": "e63ee5e658561ee9db6fff2ca3fcb0141b3580f861de497b84a56b4b10952fc4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_slice_receiver.jl": {
+    "bytes": 4739,
+    "mode": 420,
+    "sha256": "f1fc73b581b638879ceadfeabf32aea204a3142b1b8945d7c3e47ca17e51e37c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_slice_with.jl": {
+    "bytes": 5211,
+    "mode": 420,
+    "sha256": "2a9c0ac7066469a594a4b62d2476d16d7c670fd10be02a5123f8ef9e97d6eef6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_sorted_free.jl": {
+    "bytes": 4715,
+    "mode": 420,
+    "sha256": "15bdbb1fe4b8a1e0bfad0e476db3a9a8be317e6984059b3d052a8a1bfc06e99a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_sorted_receiver.jl": {
+    "bytes": 4729,
+    "mode": 420,
+    "sha256": "251e44053d52cbde24f30620d7246737b09180e93bfdf6e2f76f288ca5eb346a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_sorted_with.jl": {
+    "bytes": 5201,
+    "mode": 420,
+    "sha256": "ce04497ac20d52ef0d18c85a204101b7d8af5b58bb63a5405b0e4cae20461c0f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_free.jl": {
+    "bytes": 4711,
+    "mode": 420,
+    "sha256": "dfbb2d573d86d0a07d8c3640eb49bbb9ac98cd882978b1fb276c43552e9254b1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_last_free.jl": {
+    "bytes": 4751,
+    "mode": 420,
+    "sha256": "63bb48d98f17b72d487602961495c58da8b1a27e785393fd41ca5cde6e01d958"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_last_receiver.jl": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "63286715e815b4e263a534c74fe40849cb772fc1af7ba7568635501ba960a85e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_last_with.jl": {
+    "bytes": 5231,
+    "mode": 420,
+    "sha256": "9e5ef379d6efdc1bffe0eb6d3663eb2411148cfd34c94a4295064f96f33ede37"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_receiver.jl": {
+    "bytes": 4719,
+    "mode": 420,
+    "sha256": "83a2b14453cc6f05179e0de8ddeed112878aa28e17dd3812b23c81dea44cad29"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_hash_take_with.jl": {
+    "bytes": 5191,
+    "mode": 420,
+    "sha256": "79511769615891e18d1aa97f61bfb19f2354d149dfb6a567926406d5f3efc726"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_concat_arrays_free.jl": {
+    "bytes": 4825,
+    "mode": 420,
+    "sha256": "4cb46088a10c49bed40abef3ad2de9f6e0c2978d6a5c85f9fd015697f6aa9755"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_concat_arrays_receiver.jl": {
+    "bytes": 4833,
+    "mode": 420,
+    "sha256": "be149d2abe21d8475694006d398b5954221f283f66499c8ecb8cca74424138d3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_concat_arrays_with.jl": {
+    "bytes": 5305,
+    "mode": 420,
+    "sha256": "7fd9f588dda7e89f6bb184b21d47dbf5f869e271043c89843e8f05eae2ee1a92"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_back_free.jl": {
+    "bytes": 4727,
+    "mode": 420,
+    "sha256": "717cd5409f2d9c194839074b348ba8b8b20399d961ca89cdf3959611f2c8c153"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_back_receiver.jl": {
+    "bytes": 4735,
+    "mode": 420,
+    "sha256": "7b9e24bd1aa49d481b2c32b89d21d756497bb3c11f7a5914a7c8513eb85769e7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_back_with.jl": {
+    "bytes": 5207,
+    "mode": 420,
+    "sha256": "f08b378c642918ecefcb4ef855d5b2cd0067017cb1709e38e3a71fb5eda52363"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_front_free.jl": {
+    "bytes": 4735,
+    "mode": 420,
+    "sha256": "1835a5128092f2aa40c4ae5b9eb9a679317c34b006ec233466ea339eb65ebebb"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_front_receiver.jl": {
+    "bytes": 4743,
+    "mode": 420,
+    "sha256": "71246c9882295ba96aa5201ba6fb03bf361324cba26ad1b4af9f2109dfbe31c2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_drop_front_with.jl": {
+    "bytes": 5215,
+    "mode": 420,
+    "sha256": "49d41c409b4067e530924241e949d9274dd87148047cfb4016b8775e2e3d13b6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_reversed_free.jl": {
+    "bytes": 4707,
+    "mode": 420,
+    "sha256": "4c38b396c35a8e0dd60a50c39433fac5476ac83dc4d36049731513265ccbcbd1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_reversed_receiver.jl": {
+    "bytes": 4721,
+    "mode": 420,
+    "sha256": "fd79cd47234f39186094b00680684c23c07705d4ec1af6ee20e2cb5641f9d9fb"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_reversed_with.jl": {
+    "bytes": 5193,
+    "mode": 420,
+    "sha256": "8861aea01aa7581d570b3b00952274296ac5ef21815d5bd01e1c774e4ff51256"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_slice_free.jl": {
+    "bytes": 4707,
+    "mode": 420,
+    "sha256": "de42e3c9d0ea0247503d1fb8df4894c42d4176be13a43f6b480cfcdb49b45ba5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_slice_receiver.jl": {
+    "bytes": 4715,
+    "mode": 420,
+    "sha256": "d607bb54ed738672238cab404903c7a2c8c7c24c51f2d9ee4f439e64d5633a14"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_slice_with.jl": {
+    "bytes": 5187,
+    "mode": 420,
+    "sha256": "280d65aa39fb27fbbed9cb19f99e81edcd8c11abae4d1e89b83c7d4b95e975f6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_sorted_free.jl": {
+    "bytes": 4691,
+    "mode": 420,
+    "sha256": "084154e3fd8383bb618c5b094fde6a9e0889749dcf0a7267066b48c54fbea5e0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_sorted_receiver.jl": {
+    "bytes": 4705,
+    "mode": 420,
+    "sha256": "3bb5a36578d976cb2dec29ba8732993b77e32083b6e0c7d26fdf35a4f1a519ee"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_sorted_with.jl": {
+    "bytes": 5177,
+    "mode": 420,
+    "sha256": "7a0214e969f973785d836eec76fd71c32419a50a6a35245bb74e01a3a8b89ce4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_free.jl": {
+    "bytes": 4687,
+    "mode": 420,
+    "sha256": "6e38a9fce2f0be3efb6e52d13998598891d2f3c71db18ad2e91a5078c06ab4f9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_last_free.jl": {
+    "bytes": 4727,
+    "mode": 420,
+    "sha256": "7cde9c711707cedaab64eea7128766b93596a80efd5c5a3528806f270fa43fd5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_last_receiver.jl": {
+    "bytes": 4735,
+    "mode": 420,
+    "sha256": "73a36ae8a5e3097e426995bf3feb58691e84bbcfa83235d3e891ceee67e3e366"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_last_with.jl": {
+    "bytes": 5207,
+    "mode": 420,
+    "sha256": "03995a6a0245bcbca6f8e96b15afa18ed063c4c5eea611cec5c7a0d21f23bf0d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_receiver.jl": {
+    "bytes": 4695,
+    "mode": 420,
+    "sha256": "fd141ad660cac660c75be6908f76dc40519e031f02a369b15d3f875b8367c7d3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_null_take_with.jl": {
+    "bytes": 5167,
+    "mode": 420,
+    "sha256": "3332f185bdfeecadd1cc0ddb2c80aa7ee1c42f2f48bff0d1df29db9c90a33691"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_concat_arrays_free.jl": {
+    "bytes": 4805,
+    "mode": 420,
+    "sha256": "b709926a1272167bb7e477363a74c4a430d86d667e6597cb5d48a41f80aad804"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_concat_arrays_receiver.jl": {
+    "bytes": 4813,
+    "mode": 420,
+    "sha256": "73baee956b5b12d30a471f4db37541a8bbaa24fe7957093336276507405f1232"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_concat_arrays_with.jl": {
+    "bytes": 5285,
+    "mode": 420,
+    "sha256": "5c26cc8183c3ad0d163d5056885029362ae4822276a210739ec1ad9236e190ef"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_back_free.jl": {
+    "bytes": 4707,
+    "mode": 420,
+    "sha256": "6942950667f89d39095cbd8b331bc788fc9258f671370698fdf0273453d97486"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_back_receiver.jl": {
+    "bytes": 4715,
+    "mode": 420,
+    "sha256": "c9224db9c56c52b93a85451966b2b9316f6cc245ade2e83cfd2df02f6327c1f3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_back_with.jl": {
+    "bytes": 5187,
+    "mode": 420,
+    "sha256": "cebd11c71cc5b8203c449f0b3a8b15c1ed7deeaf4161a9316f26213dbce2395e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_front_free.jl": {
+    "bytes": 4715,
+    "mode": 420,
+    "sha256": "09e61dbed0c03c564307b49608b294d76beff7652f946000b00d02882bcf7392"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_front_receiver.jl": {
+    "bytes": 4723,
+    "mode": 420,
+    "sha256": "d0306cb445a73fda3985e09f5d7ac0bcba14a7afbb27eae50541e51e4d03f0b0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_drop_front_with.jl": {
+    "bytes": 5195,
+    "mode": 420,
+    "sha256": "00fdc79587ee405cb802c6dc57f14472e32222c22fda032e8389ebb6cddaf708"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_reversed_free.jl": {
+    "bytes": 4687,
+    "mode": 420,
+    "sha256": "1a8b2109c60b5cee2424bc8d76506c87080565c09de3b2f652cedadebece0e7e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_reversed_receiver.jl": {
+    "bytes": 4701,
+    "mode": 420,
+    "sha256": "807ed5b5f6fe105c1597382c9764b0f76eabfbc863771bfe7aec6210826181f3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_reversed_with.jl": {
+    "bytes": 5173,
+    "mode": 420,
+    "sha256": "2c3b51b43d72e9a4f648c535ca781213544d77a4a7d7e1aae55eb578b88ebddb"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_slice_free.jl": {
+    "bytes": 4687,
+    "mode": 420,
+    "sha256": "175a2d3d2b0728d42f525ae043f323998c27e9cd38fc76b9be92353b925dd5e4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_slice_receiver.jl": {
+    "bytes": 4695,
+    "mode": 420,
+    "sha256": "ad443157826ef0354f8b60bf4aa768320bd65f2dbb833a51e334d080bb6b950c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_slice_with.jl": {
+    "bytes": 5167,
+    "mode": 420,
+    "sha256": "37b462c62d086199bd9560d11b8c71fb70884b91a11f151478eada272245ef5b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_sorted_free.jl": {
+    "bytes": 4671,
+    "mode": 420,
+    "sha256": "764b018bc8bd2207c2d9485a3b673a9f7da86607365d8f924dedd1a280af3a8d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_sorted_receiver.jl": {
+    "bytes": 4685,
+    "mode": 420,
+    "sha256": "0e1382878fb5b527c33f5a2af3d28df888aefc15bc3a723defafd18f330221ea"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_sorted_with.jl": {
+    "bytes": 5157,
+    "mode": 420,
+    "sha256": "e228e8ac990ba27dea1d2f7f9bcfd9feea5084cb7e15d25f13571b1e613b95c3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_free.jl": {
+    "bytes": 4667,
+    "mode": 420,
+    "sha256": "de218d0fe6278e7b6eca57cdba761d34a1036e651211e4241498504b13b32cae"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_last_free.jl": {
+    "bytes": 4707,
+    "mode": 420,
+    "sha256": "fb5975552d38a27a4241670eaadab78b796814bbb1b86be53bb8c489f255d665"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_last_receiver.jl": {
+    "bytes": 4715,
+    "mode": 420,
+    "sha256": "3910155d9324f90940deaf52a5f4a6f29cbcf2cdd2dfd74d9429683a3e8c3000"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_last_with.jl": {
+    "bytes": 5187,
+    "mode": 420,
+    "sha256": "fac5b3b8578ac90bf68a6363db1caae959c1d1b5ad8993b0b3aef25f883686a7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_receiver.jl": {
+    "bytes": 4675,
+    "mode": 420,
+    "sha256": "9c556a66d024f10e009966c31e3a836641be0b5dfe4779681faf607f88d624d9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/initial_number_take_with.jl": {
+    "bytes": 5147,
+    "mode": 420,
+    "sha256": "3adf07c22c764264cf88e83ec6c9c43c9ff0f41fd8dbc78ba279c8a5b25bdc82"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_concat_arrays_second_free.jl": {
+    "bytes": 5169,
+    "mode": 420,
+    "sha256": "4dd936c45dbe444b0d28d8b6f1af8cb83a84a4272280fa6993dc6f0ec0346cab"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_concat_arrays_source_free.jl": {
+    "bytes": 5289,
+    "mode": 420,
+    "sha256": "b6b60854c2b16726794f824d5664f79a7971a0d001d78aa59a4241af94424ca1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_count_error_composed.jl": {
+    "bytes": 5471,
+    "mode": 420,
+    "sha256": "cde9b0d3a79fd71741134f56efb7337124c902e51a64ff6524ec4f684726340d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_count_error_terminal.jl": {
+    "bytes": 4877,
+    "mode": 420,
+    "sha256": "9baf99a7eb5b71e134d37d87c2e9f93f868d56171166f20cf7b3418c4a55bf84"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_drop_back_count_free.jl": {
+    "bytes": 5189,
+    "mode": 420,
+    "sha256": "11b6b012fb4485c945e031a281d1743947348084375970964bdf8f8b02b32656"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_drop_back_source_free.jl": {
+    "bytes": 5191,
+    "mode": 420,
+    "sha256": "7bd1e76f15de774316c361ed223df40c29cc4bbddc64ba75463eabd75efce873"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_drop_front_count_free.jl": {
+    "bytes": 5197,
+    "mode": 420,
+    "sha256": "9ab3cf3f2d1f169a12ebca80b9929ea30c7635328144cd8eb174b2557ac76721"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_drop_front_source_free.jl": {
+    "bytes": 5199,
+    "mode": 420,
+    "sha256": "f2d48e6deb31bbbf823a0f6ee5b813f7ccd9d744614e6d310c883b529595decc"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_reversed_source_free.jl": {
+    "bytes": 5171,
+    "mode": 420,
+    "sha256": "0bc24521d8ae84bd2625d149dd5fde388ca301a16723fb7454a5b5b910d3c98e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_reversed_source_receiver.jl": {
+    "bytes": 5131,
+    "mode": 420,
+    "sha256": "20f402b7757ce549f19501c38faa7d473da012acee30d7e6e6d87e9623a1bebd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_slice_count_free.jl": {
+    "bytes": 5169,
+    "mode": 420,
+    "sha256": "a43444c0ae8b403fdd8774b9e221ff40f8ef6708a7a26e049c85cce6b1225a40"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_slice_count_receiver.jl": {
+    "bytes": 5177,
+    "mode": 420,
+    "sha256": "a9ae0d638f5af91da450c2f12c370a7fca653d48d47b6cb353040ec8cf51c8a4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_slice_source_free.jl": {
+    "bytes": 5171,
+    "mode": 420,
+    "sha256": "03c29f5f1630a9a720e1149c91ac14ebdd6e9d82a83923469e7fc50e2afafb67"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_slice_start_free.jl": {
+    "bytes": 5169,
+    "mode": 420,
+    "sha256": "005fe456d32b9af0626402ef485e1e6b56fcf1d61c2d6bc230280723275b756e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_sorted_source_free.jl": {
+    "bytes": 5155,
+    "mode": 420,
+    "sha256": "da2904bc266d6d9671f542d368c3dfeeb0631d16a84bd0497b95e2e58585b38c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_source_error_composed.jl": {
+    "bytes": 5473,
+    "mode": 420,
+    "sha256": "04bcb3d08162c3420817e20eea71f5a573526d298f19a0967503c10e479ce6e0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_source_error_terminal.jl": {
+    "bytes": 4879,
+    "mode": 420,
+    "sha256": "940feab89416d2befbc22701a6935475c42b362bb34595a40051448493983219"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_take_last_count_free.jl": {
+    "bytes": 5189,
+    "mode": 420,
+    "sha256": "eb924b2602c88fba18a170cd59c327b1f6df845932411c02dbb022c95febc4a0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/needed_take_last_source_free.jl": {
+    "bytes": 5191,
+    "mode": 420,
+    "sha256": "f180bca1ac762f7b8c35d77c7089d9cb52148053a65ea98a6818c950c68c26f3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/nested_kinds_and_source.jl": {
+    "bytes": 5031,
+    "mode": 420,
+    "sha256": "18002ce86e70fe070ffbe75f05877845b4670e5424a51ab12d611e3de73317c7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_drop_back_free.jl": {
+    "bytes": 5223,
+    "mode": 420,
+    "sha256": "f5c7b933a4b46d3a1626742c4dd40813cc70b89f2cda1a15bcb5c2775dc931b8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_drop_back_receiver.jl": {
+    "bytes": 5237,
+    "mode": 420,
+    "sha256": "2372c164cf1fcae1fd29c4332a741deadc9af9ccb6bead9eda36a7ba6774f226"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_drop_front_free.jl": {
+    "bytes": 5231,
+    "mode": 420,
+    "sha256": "e781298f27020e00bee3beded9f123bfb4d3e9f99a7983e4d42c5745423814d1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_drop_front_receiver.jl": {
+    "bytes": 5245,
+    "mode": 420,
+    "sha256": "937daec808d6d5231272df4ef67dddc593dd13f95086847a8cda7205183df6b8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_slice_free.jl": {
+    "bytes": 5203,
+    "mode": 420,
+    "sha256": "7eb5d990f5437778002659e4683145bdfd0de13c1b48e7c58b7cc9c33cc9314d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_slice_receiver.jl": {
+    "bytes": 5211,
+    "mode": 420,
+    "sha256": "5a67ed3471556bc7aaa2ba3c55a2cb961025da17c18ae787013d77bd000a9308"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_take_free.jl": {
+    "bytes": 5183,
+    "mode": 420,
+    "sha256": "9c4ae31beb4b5d962f9acd686b2964590890f359c9a3d12698f30881f2af7a65"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_take_last_free.jl": {
+    "bytes": 5223,
+    "mode": 420,
+    "sha256": "a5ccbbe5490f7740ba9a513a2137d2672d57a528fdf394aa7d2b9ccf523dea11"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_take_last_receiver.jl": {
+    "bytes": 5237,
+    "mode": 420,
+    "sha256": "934dd1d99018a8dd53239a1219787e9ef9f6bf6d6bec0eed2edf73d20df54aca"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/optional_take_receiver.jl": {
+    "bytes": 5197,
+    "mode": 420,
+    "sha256": "c20ef2149443454d5f82fdded483e9337fabb7f4d52ad4c33637a4ebf1b38dfd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_array.jl": {
+    "bytes": 5529,
+    "mode": 420,
+    "sha256": "26ec0072d88041a43364679e6a070cd69229a9c009da1facd3c1ad09273161e7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_copy.jl": {
+    "bytes": 5521,
+    "mode": 420,
+    "sha256": "98c687dbfef153f879f5931e4d8b57a5c0dab96ef1203d3c880db0fc79af5759"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_count.jl": {
+    "bytes": 5547,
+    "mode": 420,
+    "sha256": "b31fcb9ae9583094b4bcdeb42a77c18bf7a6622ffb222c4edb7e76f221379aae"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_key_count.jl": {
+    "bytes": 5621,
+    "mode": 420,
+    "sha256": "486703ec942d7833a6334e24aa8a89c5495ac15a757ac56aa82a7f1e4fab7b41"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_length.jl": {
+    "bytes": 5579,
+    "mode": 420,
+    "sha256": "a24fcfd3ca32b0238e89af13af40e50e901fd05f6d4da81885fc20d78b212902"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/prior_view.jl": {
+    "bytes": 5611,
+    "mode": 420,
+    "sha256": "83d4d6d171c43b8701b1c1ef6b4b92b91949f4b85c2958d8827525c1d8bb710f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/reverse_copy_later_with.jl": {
+    "bytes": 5619,
+    "mode": 420,
+    "sha256": "b3a25929ae156457b15175ea4a2fc1b4edf2a1a84d37083443bea093f9473773"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/reversed_compatible.jl": {
+    "bytes": 4975,
+    "mode": 420,
+    "sha256": "1fa82fa0d89749e20f808a64debfa3dbba6fee54e52aeabfad83ed7279ed33d5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/reversed_free_hash_guard.jl": {
+    "bytes": 5351,
+    "mode": 420,
+    "sha256": "c9808babc1cf897683234caca7be229833c96c047cbce4f75845e669da9cfc6a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/reversed_receiver_hash_guard.jl": {
+    "bytes": 5365,
+    "mode": 420,
+    "sha256": "c97fab3e8079bd2b42fbb739d215bf0b26f28d2866f829ebef3d5935bf5f27b7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/slice_compatible.jl": {
+    "bytes": 4975,
+    "mode": 420,
+    "sha256": "97339ee1f9ab7956810d1bb50c7095113b60c58bf5a775f5d5052264b62f90d2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/slice_free_hash_guard.jl": {
+    "bytes": 5351,
+    "mode": 420,
+    "sha256": "b9ee1d624016463472281ce2a5ea991405c4968fa87fba5e49b26865d7afc50d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/slice_receiver_hash_guard.jl": {
+    "bytes": 5359,
+    "mode": 420,
+    "sha256": "4ff0e62255b17d3e84e22ce126f2e0be1a1219f99d78dca8a5083f81516d50eb"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/sort_logical_later_with.jl": {
+    "bytes": 5775,
+    "mode": 420,
+    "sha256": "60d499a215cc314c7b93218481fb64a7d8f907e74bd6b4b686acf8e36b82c03c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/sorted_compatible.jl": {
+    "bytes": 4947,
+    "mode": 420,
+    "sha256": "a940716c8b70008070a7f9d214a49012ce41d7cfa9d15cd48367820d59c4579e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/sorted_free_hash_guard.jl": {
+    "bytes": 5335,
+    "mode": 420,
+    "sha256": "b2fb99a7fcba343d69ad0b68e8b7e7da15a3824f787dd417a26825bbd37ae11d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/sorted_receiver_hash_guard.jl": {
+    "bytes": 5349,
+    "mode": 420,
+    "sha256": "98a37ed8a94e63035b06723510e5f156957eac6c212dc03767e23e335bf86505"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/source_once.jl": {
+    "bytes": 5175,
+    "mode": 420,
+    "sha256": "f20ae15947d29771b0ec0cc3ce78915cf154284ad340719d3b148cf9af9a2988"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/source_snapshot.jl": {
+    "bytes": 5057,
+    "mode": 420,
+    "sha256": "82f1834d5b0ae26b660312010914c3305eff3500b6ee646f0a325cbac2ad88c2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_compatible.jl": {
+    "bytes": 4937,
+    "mode": 420,
+    "sha256": "0e6e4f6bfaaa08721a689017b4fe31cc20754614d901f7cab5fbb952504d5446"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_free_hash_guard.jl": {
+    "bytes": 5331,
+    "mode": 420,
+    "sha256": "5646c0c8eed9fa00234035a42367932866b552b31d57b8500665bf9bb7bdfb42"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_last_compatible.jl": {
+    "bytes": 5007,
+    "mode": 420,
+    "sha256": "38d16eae1a1264949d62e6cc9c388375c46b6b4c1d08b22f4720f23bef6bdaad"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_last_free_hash_guard.jl": {
+    "bytes": 5371,
+    "mode": 420,
+    "sha256": "0526b973a16f7bc4b27c0c72f1abce3cc1cee8b41a80a528bfb0b734727e5ffe"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_last_receiver_hash_guard.jl": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "65ed7e1ad5d0f1dd4f910f2ccf76a7b78e686a78005ac98338a81308024ee588"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_later_with.jl": {
+    "bytes": 5549,
+    "mode": 420,
+    "sha256": "2407efb6d87b32f176aae1b2fe1a8ac08ee98798b679db8c4cc55b1c4a2eb33d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/take_receiver_hash_guard.jl": {
+    "bytes": 5339,
+    "mode": 420,
+    "sha256": "8bd9094fdb1489b5e51d68cbd7bd8fb7c8d4947055c7d8dd25ba0059c7bce3f2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/emitted/valid_empty_with.jl": {
+    "bytes": 5185,
+    "mode": 420,
+    "sha256": "8568d532111de5fd7145aef97b324bcc9f988bde86eda2cb564718a3b5b0d9cd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/concat_arrays_compatible.json": {
+    "bytes": 470,
+    "mode": 420,
+    "sha256": "bdabcd786cfb566e48b01c90b3589ba2cd2bd49f892ce36376f81cb2242ce7e8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/concat_arrays_free_hash_guard.json": {
+    "bytes": 635,
+    "mode": 420,
+    "sha256": "114f8f468ac8ffff987eb24fa817bf9cda677f0fd4e8fac9abf22346fc6587df"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/concat_arrays_receiver_hash_guard.json": {
+    "bytes": 635,
+    "mode": 420,
+    "sha256": "79d26c029e9d16872e74a7557c6e0e90153f16620c9e17a662cff7552ea0dce7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/constructor_array_guard.json": {
+    "bytes": 740,
+    "mode": 420,
+    "sha256": "8f6b23c7f8265d8a12b035d46c38393d2d44bb3f46602c109e90509d792ad926"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_back_compatible.json": {
+    "bytes": 446,
+    "mode": 420,
+    "sha256": "7abe74a0b4dcb67c1494aaaf074eaa23ed77a3bf11cf4a07d08a69034f1001d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_back_free_hash_guard.json": {
+    "bytes": 623,
+    "mode": 420,
+    "sha256": "e7e72beb35517a69063b5632deb7de8fec660258a78ce3b10feb02cef49e56ce"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_back_receiver_hash_guard.json": {
+    "bytes": 623,
+    "mode": 420,
+    "sha256": "41ea03041da639f0e6badb68ed3d763d7a083372276a570438caf06cdadad824"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_front_compatible.json": {
+    "bytes": 452,
+    "mode": 420,
+    "sha256": "2ae0235a13728989d3776d075dcdf479f1472f813a050e8318743e5718dd35a5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_front_free_hash_guard.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "c1b20f28b09d0556dad448cff8557e306e9db35fca770d9b77bf754622bd9359"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/drop_front_receiver_hash_guard.json": {
+    "bytes": 626,
+    "mode": 420,
+    "sha256": "87bb3d404fac85744447092745e5fcbf5a7a0bb690f5369e14e82669db63d44f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/explicit_selected_bridges.json": {
+    "bytes": 710,
+    "mode": 420,
+    "sha256": "8beb0e8b6150320070c2ba8534e6419f1f93e5516bb681f405e7b85b45f1178d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_concat_arrays_free.json": {
+    "bytes": 890,
+    "mode": 420,
+    "sha256": "7e8fc92880694eef2e9e2d5d1d661842ea692ebf1147de661dbf97d458fb49fe"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_concat_arrays_receiver.json": {
+    "bytes": 890,
+    "mode": 420,
+    "sha256": "008e8ffddbf397021f3dbc5419af35aeac721bdfe92ae92878107ecc81ed0fa4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_drop_back_free.json": {
+    "bytes": 845,
+    "mode": 420,
+    "sha256": "efdb3c0eaaa3aee8cd20ef7d009ee942d9d4d73fe08f5f17971a7472cc2f476a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_drop_back_receiver.json": {
+    "bytes": 845,
+    "mode": 420,
+    "sha256": "ca2c2fedf66232d8d602273dafe3db43b75a14990c00129bd0894b7585af4a18"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_drop_front_free.json": {
+    "bytes": 848,
+    "mode": 420,
+    "sha256": "47aa19b000dd6b73afad47b04ec4b05bf4f4a4df2263a4c365967e9c2007815d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_drop_front_receiver.json": {
+    "bytes": 848,
+    "mode": 420,
+    "sha256": "78b918c7601b7786fcf8730c8700c9caba6bba3ff8ea9332037225df19df0b58"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_reversed_free.json": {
+    "bytes": 836,
+    "mode": 420,
+    "sha256": "0fef4dae3a3faf1c947807f6e5e00ab36230fa2c5408b6b51fabcdef48eba5bd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_reversed_receiver.json": {
+    "bytes": 836,
+    "mode": 420,
+    "sha256": "ecaf2a08b85598ef01d21ef145e952fd7ea9ac7671411bd4fd64fe1330844f83"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_slice_free.json": {
+    "bytes": 839,
+    "mode": 420,
+    "sha256": "390b00a2ca9a9a7fc6622c395a1d729a76ee8ad350aedd423c80cd601abddfbd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_slice_receiver.json": {
+    "bytes": 839,
+    "mode": 420,
+    "sha256": "3cd9f1b16c0cfa806664db24a4825a9a7d188828183621717f8e680741b73519"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_sorted_free.json": {
+    "bytes": 830,
+    "mode": 420,
+    "sha256": "1e407f84b0a509fbcd8dab545acd9009d3651f10dd20d90357069dd608e49090"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_sorted_receiver.json": {
+    "bytes": 830,
+    "mode": 420,
+    "sha256": "8e690682972704fc3c6f7f8bc32a68ed07606d4915d231d88be932cc75379fde"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_take_free.json": {
+    "bytes": 830,
+    "mode": 420,
+    "sha256": "58054a81e11bf884578a1526cbaad6eaa5b5658287cc9d42306ca79e7591fdc9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_take_last_free.json": {
+    "bytes": 845,
+    "mode": 420,
+    "sha256": "edee6419cf3901bb285cd2e29615ab7e6265a8a43151e82b8a77fef64e50ec84"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_take_last_receiver.json": {
+    "bytes": 845,
+    "mode": 420,
+    "sha256": "896f488fb780749c068566c1022caf717787629353612e44550c25618a9c09b2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/extra_take_receiver.json": {
+    "bytes": 830,
+    "mode": 420,
+    "sha256": "5016f1f2ac2617d87bd38bb4543657c1998ca8ad20b5155e27fd31bca72574ac"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_concat_arrays_free.json": {
+    "bytes": 356,
+    "mode": 420,
+    "sha256": "133eac77b373a34ace43842509009559d0577fa58afb15c75d593f6dd030ac77"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_concat_arrays_receiver.json": {
+    "bytes": 356,
+    "mode": 420,
+    "sha256": "e7ae211765f0f6beb1656e4adfed7f7b96dd617af45e6a18015800d355d3d796"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_concat_arrays_with.json": {
+    "bytes": 596,
+    "mode": 420,
+    "sha256": "aca7ee2fe2646ea17de407f92a09cb1fe522af2867b521e36521995bbeac6f3b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_back_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "6a4298c1d16d298d5b13ff9552e7f30f85dd071989ea739a93efefdcfb034743"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_back_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "ea125277ab63d6f0ae2e53b56443314191802ce5bcce5c470e166fc023caa11e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_back_with.json": {
+    "bytes": 551,
+    "mode": 420,
+    "sha256": "68d12b5c7142299495da79b35a42ad26bebe8a474a138518ff791f9d33993fb7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_front_free.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "3c9a56db1fccf00caecc5d45aa3b6c400bc83d30059e194fac6d26d4e37e34ca"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_front_receiver.json": {
+    "bytes": 314,
+    "mode": 420,
+    "sha256": "81e325917a7eee1a51fdded3782ef644d199c782dacf20ce4a53901b2121f554"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_drop_front_with.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "48266511ab31cb58e6435ad5b3a2a17cf5d799ec7f822dc4a01421d26a36790f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_reversed_free.json": {
+    "bytes": 302,
+    "mode": 420,
+    "sha256": "e526a82b3998d0144fef6a11ca572ee79f6a6987017dc8f1e5ca06aebed831b8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_reversed_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "7a71894690c729f2a9a7a4d78fffb6dbbf7b0dbf37f3530148c4c38d932f5c5b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_reversed_with.json": {
+    "bytes": 545,
+    "mode": 420,
+    "sha256": "8ba941f4330827b685f62d42486f43ea94d3e2145abc2a493d5e4299b6533cde"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_slice_free.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "53274521d9edebbd2617bb0d38387e2141398ec46f0878197c449b5f8e4eaf8f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_slice_receiver.json": {
+    "bytes": 305,
+    "mode": 420,
+    "sha256": "15051900aa6520a12b7433c45bb66242d5c8cb513a2c882fdb67d6f04aa3a97f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_slice_with.json": {
+    "bytes": 545,
+    "mode": 420,
+    "sha256": "695ac8675a2dfe7c96e92534970652e0aafff535d3b2c78d3e38b85e5a518455"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_sorted_free.json": {
+    "bytes": 296,
+    "mode": 420,
+    "sha256": "c5552e1e715d2eb9992e2ebc1fe3c47d633f80843d280875b5fb38301acd41aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_sorted_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "800c23229a1925a1274378ce0764bb55d285ee31e73ce79bc5f932a9fafa9622"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_sorted_with.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "de28f0ec5790bdd4bcbf02cf47b0ffdf3333be2ac84ffdd954f325f56eb44326"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_free.json": {
+    "bytes": 296,
+    "mode": 420,
+    "sha256": "cec61b69a4ce226232e4db8331ee915b9342f06ecb59ea35497da5d6b651e2b1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_last_free.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "99d8e2e4a7f125eee64c1a043d1e2e4968605a803fc5af4f04ddad4034242f0b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_last_receiver.json": {
+    "bytes": 311,
+    "mode": 420,
+    "sha256": "d190835c4854f19cea2739ad2543d934e2773e6d2f70b0cad067eab3521bd67c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_last_with.json": {
+    "bytes": 551,
+    "mode": 420,
+    "sha256": "bf92857e71d6bb17c6ca005670ffdb2bdf60fc355cb192460d48c84587efee0b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_receiver.json": {
+    "bytes": 296,
+    "mode": 420,
+    "sha256": "4cd3a737e18dd6d75541e3351a4e3f4802dafb7fb21d28e66b44ae7dc225fa46"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_hash_take_with.json": {
+    "bytes": 536,
+    "mode": 420,
+    "sha256": "f82404109fb83066a5804ab7beda5fb992184bfc5519a824dc948659e78d52da"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_concat_arrays_free.json": {
+    "bytes": 344,
+    "mode": 420,
+    "sha256": "2f2894d76d66b97a80c7a1bbab43e1ddca71b2cc9be253771e6f638689559a4c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_concat_arrays_receiver.json": {
+    "bytes": 344,
+    "mode": 420,
+    "sha256": "70b3a3083c999c61f7e561057af14f843f1194a94b4eb067ac5932190b909f9d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_concat_arrays_with.json": {
+    "bytes": 584,
+    "mode": 420,
+    "sha256": "660167b87be8a87df79fb8a8494346e930ee3a7af17e2c3a70b0dbf496bde603"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_back_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "be9867f88eebd7f7db4795f1a11605544fdb7f959e19c0a6d5d4225d7d1e03d1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_back_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "b212210bb2a437e328353189e14d7c43ec7670b63f2c67be01971c1478e90ac8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_back_with.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "f1f0f88d1cbd26862bc69e49f5c4e04ae379551714afba4fc0d199f740188a27"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_front_free.json": {
+    "bytes": 302,
+    "mode": 420,
+    "sha256": "bf1a827a9a1ab49990e351a7dffcdbb79bf34df578e8d71c29c7bd008411bcf1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_front_receiver.json": {
+    "bytes": 302,
+    "mode": 420,
+    "sha256": "94add4c4844e50e95bf4aaa40626f3ebbeb78d8645e727ffb054af7a047a3688"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_drop_front_with.json": {
+    "bytes": 542,
+    "mode": 420,
+    "sha256": "6a03409eab5c8ad3e717ba03a8976613c074daa5b3dd1a581a8b32938ac44537"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_reversed_free.json": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "0cc3f94f14f7ad2c5b3c86d19a3975514496a0ca055a948c343a6fa4b6567a8b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_reversed_receiver.json": {
+    "bytes": 293,
+    "mode": 420,
+    "sha256": "a024d41bc15913559c830aa3a14591f2c2e36a05fe4f14f89236da0e1bc3ef47"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_reversed_with.json": {
+    "bytes": 533,
+    "mode": 420,
+    "sha256": "7cfa9c422c3fa4b18c1a4b7089498c46f275be5283b5ff9cbb7e0d2bae3ebec3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_slice_free.json": {
+    "bytes": 293,
+    "mode": 420,
+    "sha256": "54dbb271311d827722e51659d6882768d875cebca0dc52603363ff85c057384e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_slice_receiver.json": {
+    "bytes": 293,
+    "mode": 420,
+    "sha256": "b9fc394ee36cd0e67e40814c68785f87b06cdeb3aecccbb02c322be904635dc8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_slice_with.json": {
+    "bytes": 533,
+    "mode": 420,
+    "sha256": "2159e795f5ac78ab82d1e426ade3397de034e31c47175c9ab7510c700d6e3939"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_sorted_free.json": {
+    "bytes": 284,
+    "mode": 420,
+    "sha256": "413a9b9011b1f0fdc6c811a353f8906d9306aca09bd84153ad6555036f2a8f42"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_sorted_receiver.json": {
+    "bytes": 287,
+    "mode": 420,
+    "sha256": "2898c4160711c5dea0a6aec8e68be2d4a8746b0ef5df599d46ff069bbdc4aa79"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_sorted_with.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "d4d4e45c45b59c034803c48abfd98c51cabdca1835f80106c63a86b442238307"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_free.json": {
+    "bytes": 284,
+    "mode": 420,
+    "sha256": "f9bff19b0b83b66d4dee98f8481709d73bee03a881668596e23212803cfccffe"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_last_free.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "a39c9716cb9870d069d4e317b772f4c003835f448a3ab8db507b796d26069b91"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_last_receiver.json": {
+    "bytes": 299,
+    "mode": 420,
+    "sha256": "73d3482c1f4250a1d2997949964c8af456807f132e7a244e28710d2e0c071fe4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_last_with.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "85f8433614d85fbc28846a8190e4334090ef88d9bc07f73727f9576862657c1b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_receiver.json": {
+    "bytes": 284,
+    "mode": 420,
+    "sha256": "2a1df81e61956c5bb8712911fae499de5785d67777f95edc04bdd9a80b4b65d0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_null_take_with.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "46b4f450dbca357a858249674448fe73b05b1f427ff80cb237ea4bb2d6e3e924"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_concat_arrays_free.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "1badaba307d47d6b72bdcf42de1a748b8e54d69a6e3c464ded0aed0e5ab22826"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_concat_arrays_receiver.json": {
+    "bytes": 332,
+    "mode": 420,
+    "sha256": "d2676a560b9967458ed4efe62d2cb380a370dd8899141debd7547127792e39d3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_concat_arrays_with.json": {
+    "bytes": 572,
+    "mode": 420,
+    "sha256": "3398b4d448addd38b190a89146b56ea93ae004c64bf8023e93dbdfbd4741b6a0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_back_free.json": {
+    "bytes": 287,
+    "mode": 420,
+    "sha256": "ebf69c379b02436094f0e272dd7ab34a31230e168cd48b3bfd3739757f951d24"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_back_receiver.json": {
+    "bytes": 287,
+    "mode": 420,
+    "sha256": "b7faade603f72ebf147e009e9391e557271f57f133ae67ac6991a4662199bb25"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_back_with.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "7400c9413e8bf61298e780be752f864d6f267c6bb25a0a2ae7af6cf33728f465"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_front_free.json": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "ca2a9a77c575943a0e4301b24abe7d82afcf8722c33adfd60adfa72efac1cc95"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_front_receiver.json": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "ae1d47a65159276c9eda485e83aa2c318a6b71c7d90857998c15f096238a7730"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_drop_front_with.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "ee9d49a5097b53eb96112407bda307ae34a365643138f70aba06ddfddfed9299"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_reversed_free.json": {
+    "bytes": 278,
+    "mode": 420,
+    "sha256": "d8f6c98e70ed0c2ef08cae67d37f638b1be9e2e2f703cd4f3b7b62206ab1b9b3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_reversed_receiver.json": {
+    "bytes": 281,
+    "mode": 420,
+    "sha256": "0ba62dfd89472af2b871ba5e328903d0f59fa0728df4efd8f644e96446f5512c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_reversed_with.json": {
+    "bytes": 521,
+    "mode": 420,
+    "sha256": "1f6ba2597f7c389293b1f89ba614f30c5a1c588687bec715cffeecee95f1c154"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_slice_free.json": {
+    "bytes": 281,
+    "mode": 420,
+    "sha256": "aab1859479a9569d2dd8e394e3aaccfa929a5ce575c32288c657c6a9f5422773"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_slice_receiver.json": {
+    "bytes": 281,
+    "mode": 420,
+    "sha256": "8e51bd3288dc10dbf4b47843de14510698f794726b9cd1eae7ff2c34d13dc5a3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_slice_with.json": {
+    "bytes": 521,
+    "mode": 420,
+    "sha256": "a45d1e39994776df605e6cdf52a4b1b7f57b8b936583cefc4f553670780e9400"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_sorted_free.json": {
+    "bytes": 272,
+    "mode": 420,
+    "sha256": "eb1e46f6dc159af9885fd973326bf3dc1fdbccf6c21924849f033310b8e26358"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_sorted_receiver.json": {
+    "bytes": 275,
+    "mode": 420,
+    "sha256": "b5e0f93aee9c0a3266dcf960c4a3212c93415ac7521c67cd9d41aacd9fbe838c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_sorted_with.json": {
+    "bytes": 515,
+    "mode": 420,
+    "sha256": "455744e2ed197bde4a9ec08f2923f52270978445d5f7927fb0a977380c549e27"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_free.json": {
+    "bytes": 272,
+    "mode": 420,
+    "sha256": "a0ed2d165e8a7d084b79351d1a20b15add5fc2327f321c6513af59de17c1d91c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_last_free.json": {
+    "bytes": 287,
+    "mode": 420,
+    "sha256": "2bd0626d84d71946ea422d3a49baea3c50f10b1de648d41d6da760823b84f8e3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_last_receiver.json": {
+    "bytes": 287,
+    "mode": 420,
+    "sha256": "364adfa45246038591f697ff5f297d9b32105b4f97fac6eb3dfe32e5ab232344"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_last_with.json": {
+    "bytes": 527,
+    "mode": 420,
+    "sha256": "7a55db2b0b7292cc42df7eaa55138be0d339e2276c5903bba5946836cc8b3e0f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_receiver.json": {
+    "bytes": 272,
+    "mode": 420,
+    "sha256": "13b4348e75d180ba1bfa73559a39dc86041aa8cd04ec6c89e9a6fc78658676e2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/initial_number_take_with.json": {
+    "bytes": 512,
+    "mode": 420,
+    "sha256": "14aab98b10b802549e60e50315de682b35c8843808924959a4556894725eb869"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_concat_arrays_second_free.json": {
+    "bytes": 515,
+    "mode": 420,
+    "sha256": "5a8c44a77fd4d8544d40b465bc7599fd640e08018c3e2929c2a686ad8896e5b3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_concat_arrays_source_free.json": {
+    "bytes": 575,
+    "mode": 420,
+    "sha256": "9b481dc0fd50bb68e90ebbaa9802909cf290831b6976fe18dadef40e7d81c17e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_count_error_composed.json": {
+    "bytes": 671,
+    "mode": 420,
+    "sha256": "7d0107a2c33ffdca4f8564eb08643b9296a8edd63bbb72a97066f8a60379cb25"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_count_error_terminal.json": {
+    "bytes": 374,
+    "mode": 420,
+    "sha256": "cd5f9272e38cc483feb524443dd9a28575501ed97f3a60a606416dda5396f602"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_drop_back_count_free.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "05533756439abbf8094d05bb26d0f4d825e0067af318be5241366815246a68e6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_drop_back_source_free.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "55d05e419a3797f37ce262cd2d05cfef38e7a720ce6549b3ee57b670fb4db296"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_drop_front_count_free.json": {
+    "bytes": 533,
+    "mode": 420,
+    "sha256": "713f85dac8a2bdf765d72c52601b28446d343cc3eab709ebd71262d4ac610353"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_drop_front_source_free.json": {
+    "bytes": 533,
+    "mode": 420,
+    "sha256": "0d47ff37b7c1eddd2f8a6b25d317649ecfc40950538c6bb9b0e8880d888fb5b8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_reversed_source_free.json": {
+    "bytes": 521,
+    "mode": 420,
+    "sha256": "2febff21b9366b56a70ca4b6f9db4d5e1c377dc91618359e07dbf2a9f3c3b077"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_reversed_source_receiver.json": {
+    "bytes": 497,
+    "mode": 420,
+    "sha256": "25d36edb29e481577ff5deee99d34e5f2ef277ad76150c7f47fc6abefe8e6120"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_slice_count_free.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "07896a538c2981fb1bec4f6824608cd96ad0d9cf1c3407b79918b9327862fed5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_slice_count_receiver.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "b48feac244c5ccd85b78569274c5d785ac757992eef3acdd1d26aaad8563a8eb"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_slice_source_free.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "4b0a8acc923b68674c9daf6e14145367cd5b6da1152f11901a96adba1a096fb5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_slice_start_free.json": {
+    "bytes": 524,
+    "mode": 420,
+    "sha256": "957d064733217b8bccbbfa6cf34f5f4bab83250f6067a9625f386cdf7eec860c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_sorted_source_free.json": {
+    "bytes": 515,
+    "mode": 420,
+    "sha256": "a3a6875b5d5bd96bd9e5f7c75aa7a5412e913594e76d7f9c5458b90963d3cb8e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_source_error_composed.json": {
+    "bytes": 671,
+    "mode": 420,
+    "sha256": "4b8006c5afef67945e217c0ee6e5d32f76eb1fada40bb80520f3ec6e458920ea"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_source_error_terminal.json": {
+    "bytes": 374,
+    "mode": 420,
+    "sha256": "3590fa3de3863fcf955593dfe990a99c653a147707be97d0cbedb0b64c00294a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_take_last_count_free.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "dde79fac7c5212b68eea330b290a3f68b47f74459a32d76f74413593c38aeb66"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/needed_take_last_source_free.json": {
+    "bytes": 530,
+    "mode": 420,
+    "sha256": "e1664a7da05fb2d7129d41a9d0c8e606bc61e3322fff1ca19aec3fb3058d100b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/nested_kinds_and_source.json": {
+    "bytes": 455,
+    "mode": 420,
+    "sha256": "78e5476307f809f0b7acac9d85b14b5e5210f52a97d5828fed502f1d994c746d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_drop_back_free.json": {
+    "bytes": 551,
+    "mode": 420,
+    "sha256": "465a67fd4129e25ccc98973efb883848f4e94dfd07cc5c7e77a7bd426c35a0e7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_drop_back_receiver.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "94874e00fe326f2c7cea8f28c2ad7848f7fee4e38f49b1245ba681fba877ae6b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_drop_front_free.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "43f3a9f339875a38f9e99ca11d084e9bd88289d3591cf635a7f0173ceac3a039"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_drop_front_receiver.json": {
+    "bytes": 557,
+    "mode": 420,
+    "sha256": "5526527ec01ad053901f243c6a754e860379305a9d96bacbe8b12a1012af2145"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_slice_free.json": {
+    "bytes": 545,
+    "mode": 420,
+    "sha256": "9e333451d4eb4c4c04f37db93899c62b12047c4692f2e008a4bc658a97a25195"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_slice_receiver.json": {
+    "bytes": 545,
+    "mode": 420,
+    "sha256": "e1c6801abedf520ccf990971f7d878adeb8cbfb3cfebf94ec78e56214087b856"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_take_free.json": {
+    "bytes": 536,
+    "mode": 420,
+    "sha256": "a36d0eb83247a0a279a40a55d0cfefca758409922ac05073d4d46381f9b08c50"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_take_last_free.json": {
+    "bytes": 551,
+    "mode": 420,
+    "sha256": "04b6a4a204fc8f6dfd33227af71e05380f09eeec642eacaa5a127a3711f15e8c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_take_last_receiver.json": {
+    "bytes": 554,
+    "mode": 420,
+    "sha256": "1b72c250c7f77dc47d6c4d45a883cd3f675c8448d267f18571bc4b5ccfb8d097"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/optional_take_receiver.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "dcc8d2043ec51230502ba3e09df384fb821e104d0e241b4a0a6d8066a55596cd"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_array.json": {
+    "bytes": 716,
+    "mode": 420,
+    "sha256": "31146166f58cf30a899efaea0ce546cbf733cceb2886d2754b094fb74d55df0f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_copy.json": {
+    "bytes": 713,
+    "mode": 420,
+    "sha256": "a0812fa8e788828f32c11fe99cbb36d1914f4b654bc9fa5a4b3faa7b108ff1ff"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_count.json": {
+    "bytes": 725,
+    "mode": 420,
+    "sha256": "feec36e7257918544fd03c7d55a6cbb77e7d24c5a85c52469e016d48e1f89fb0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_key_count.json": {
+    "bytes": 758,
+    "mode": 420,
+    "sha256": "bb2bb91980f2e98252b8eddc2f6ffd71260fd8963f06469468564d5fd76518db"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_length.json": {
+    "bytes": 740,
+    "mode": 420,
+    "sha256": "719b30def2b4bb6cd2890619d31c86e49dbfd3a063c2b3236ec72832ec605324"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/prior_view.json": {
+    "bytes": 758,
+    "mode": 420,
+    "sha256": "2f09b974229d865827fd03cbf902bbdf2ac194ad2a2a39825ce52de9c2696c5f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/reverse_copy_later_with.json": {
+    "bytes": 749,
+    "mode": 420,
+    "sha256": "f801d1d22234b8c0aafcba50a71f0bbf6d5c811831bb579822227977a6e24446"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/reversed_compatible.json": {
+    "bytes": 431,
+    "mode": 420,
+    "sha256": "28c15031782216267b794a415bb9f5eb2fffe3be5c4ba82684d598eab2e8ab26"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/reversed_free_hash_guard.json": {
+    "bytes": 614,
+    "mode": 420,
+    "sha256": "27382da2c830c479a4ae85e20b80e26ce6a0acc8272961f43b25d8b680f27150"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/reversed_receiver_hash_guard.json": {
+    "bytes": 617,
+    "mode": 420,
+    "sha256": "c046f4f5c07adfa6ccf280f9e29b9577607a02cdefabbfd79acd27a7c14865d5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/slice_compatible.json": {
+    "bytes": 434,
+    "mode": 420,
+    "sha256": "ad4b0915dd799fe50c38130bf0c1c59596be7f481c6b63afc04746a872693f5c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/slice_free_hash_guard.json": {
+    "bytes": 617,
+    "mode": 420,
+    "sha256": "fc846de03687f45221800c98d8a8e31cb61388f717dcb4feb793395c8311b3ee"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/slice_receiver_hash_guard.json": {
+    "bytes": 617,
+    "mode": 420,
+    "sha256": "e5def19ba4916b82c147ed6c00159787846672961b8cbd709031418186a4673f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/sort_logical_later_with.json": {
+    "bytes": 827,
+    "mode": 420,
+    "sha256": "ebdb251868693bcf92db35c4d166e85b7fab2dc12a250f1b888b54e3b192b3b2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/sorted_compatible.json": {
+    "bytes": 419,
+    "mode": 420,
+    "sha256": "e2ff69caea4aea92084681cb1e0ce8e1380ec81ce023ef390fd9f0da1d74d681"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/sorted_free_hash_guard.json": {
+    "bytes": 608,
+    "mode": 420,
+    "sha256": "16ecf958a8cfd6fb13e5ee9384c7a6af2c9eb5dd1c63ff3f50321b8bea768ec4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/sorted_receiver_hash_guard.json": {
+    "bytes": 611,
+    "mode": 420,
+    "sha256": "5fd9b4658cebac43dfc1f6a62910137ba2474480d55f841b3df07b8c6f72fb45"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/source_once.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "bc9bbd677c58508d470d1c228b775ee9a4c182d3258362973c769233cd42a424"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/source_snapshot.json": {
+    "bytes": 476,
+    "mode": 420,
+    "sha256": "b14462e2b6c86b0dbfa0fb8043497edc08ec0f9f86fb4b5a77aafbafe9234f7d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_compatible.json": {
+    "bytes": 416,
+    "mode": 420,
+    "sha256": "2d0283679c9584a271e58cf59bc5c267237a8ffaa95df4726d8255a849a28bdc"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_free_hash_guard.json": {
+    "bytes": 608,
+    "mode": 420,
+    "sha256": "a00563b0e63d9f7412ad68035b243b7f0ac62a7ff34bfb535e96f447b220547e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_last_compatible.json": {
+    "bytes": 446,
+    "mode": 420,
+    "sha256": "d426542299f2efe0ab1d49741ad86f096b14497aaf4f8cfef99493d26df8bc0f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_last_free_hash_guard.json": {
+    "bytes": 623,
+    "mode": 420,
+    "sha256": "b9e9d323ec3606a341d8fc8136ff10b9a3586f20510f7f90c4c24110c7684e2f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_last_receiver_hash_guard.json": {
+    "bytes": 623,
+    "mode": 420,
+    "sha256": "8a88ad834cdaf02626828617414c5fb79943a61f401b3c3c7d33b36d7fd63cca"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_later_with.json": {
+    "bytes": 722,
+    "mode": 420,
+    "sha256": "b69558c52649b5a4b3e8c2002369248473560bb1a024acbd32df40a4f40e3854"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/take_receiver_hash_guard.json": {
+    "bytes": 608,
+    "mode": 420,
+    "sha256": "e2e56213ccf5d921174ee0af25646058fca74d62cbdd21d089f3e98461f1c515"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/parsed/valid_empty_with.json": {
+    "bytes": 539,
+    "mode": 420,
+    "sha256": "90a757188751d6a413a24b270b962bb88e2c92bda1d32a25da87338acc6ab227"
+  }
+}

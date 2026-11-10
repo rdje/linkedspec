@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=docs/checkpoints/array-transform-result-guard-julia-2026-11-10/control-owner/julia",
+    "--compiled-modules=no",
+    "--startup-file=no",
+    "--history-file=no",
+    "--depwarn=error",
+    "-e",
+    "using LinkedSpecJulia,JSON3,Test; println(\"ARRAY_TRANSFORM_JULIA_OWNER \",relpath(pathof(LinkedSpecJulia),pwd())); include(ARGS[1])",
+    "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/control-owner/julia/test/array_transform_result_guard_composition_test.jl"
+  ],
+  "cwd": ".",
+  "environment": {
+    "JULIA_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "JULIA_PKG_PRECOMPILE_AUTO": "0",
+    "LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored"
+  }
+}

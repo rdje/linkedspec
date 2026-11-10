@@ -1,6 +1,6 @@
 # ROADMAP V2
 
-Current Array frontier: bounded Perl78.1.1, independent Rust78.2 and Dart78.3 are repaired/focused-checked. Dart141/four routes/direct292/private19RED-restored141PASS/first readonly eight controls preserve own policies. Independent Julia78.4 is next under full PNT, followed by Lua78.5; full23.4 remains separate. Knowledge Map infrastructure41ba410b/canonical and daily4.19/aliases18.3 are committed; broader routing18.2 follows feature coverage.
+Current Array frontier: bounded Perl78.1.1, independent Rust78.2/Dart78.3/Julia78.4 are repaired/focused-checked. Julia156/four routes903PASS/direct1728/private19RED-restored156PASS/first readonly nine controls preserve own policies and complete selected fixture bindings. P1 Dart additional-direct input qualification23.4.20 is next, then independent Lua78.5 under full PNT; own Dart141 proof remains bound. Full23.4 and broader routing18.2 remain separate.
 
 November5 frontier: Count P1/compiler73.7/Dart formatting73.8 are committed with focused proof. Growth assessment23.4.8 and the outgoing-scope correction are focused-checked; the fixed pre-landing range has15 commits and the director reports about11.5MB outgoing. The whole local store includes published history and the warned blob already exists at the origin base. Director authorizes RAM-window retry; normal hooks govern landing before selection23.1.35. Prospective input reuse4.12 remains separate. Canonical4683555e is the last published checkpoint.
 

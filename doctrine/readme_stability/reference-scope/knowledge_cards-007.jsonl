@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3219,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-function-scope-contract-conflict.md","sha256":"1b41fe3f2a65a449335d468f05392f620f49fa7b47548c6f657e9d7c8e7e5a5e","type":"member"}
 {"bytes":6317,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-dart-runtime.md","sha256":"48c56718870d18c96ec81417c2bccab88b9e83e9ef6a9f5f6e5c6cf2a74ce76c","type":"member"}
 {"bytes":7466,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-julia-runtime.md","sha256":"8532856277de595c2c07d389272acb0c16ca890ca266c56da9da7f9cc58fecd7","type":"member"}
 {"bytes":5453,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/map-leaves-mutation-lua-runtime.md","sha256":"a3810243b04dc05183fe1c047bd20874215865d5d1e2999c80ecef232cddf9db","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5360,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-family-source-acceptance.md","sha256":"be227aced36e67445a65bd97f1391b1d532d1ebc39d0bf31ac4f4bf9660adc99","type":"member"}
 {"bytes":5142,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-dedicated-producer-source-diagnosis.md","sha256":"4627df3cb92a47d44fe28e84ba89b7df2790fc7dedf67cfe9e1bbe7a49ecce08","type":"member"}
 {"bytes":8369,"lines":117,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-deferred-control-and-metadata-prerequisites.md","sha256":"81e533f411750236414f36c4ff6ed1e7bb96c415c760ba43406498dc5d9bfd08","type":"member"}
-{"bytes":6173,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-deferred-function-bridge-design.md","sha256":"16fe30c7154b4aba7584e8817c4e1cdc01508322b70fd3577485f9967cb20052","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7669,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-authority.md","sha256":"2c24ae7365be1670d3d38801b69497706c8ef98f3fcead40a22691450a9ae0a3","type":"member"}
 {"bytes":7052,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-carriers.md","sha256":"2f1c41689335e2fba107e8cb7ba82a9037cfcec7b37ccf2991ebde88d76a8704","type":"member"}
 {"bytes":5234,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-progressive-span-dispatch-dormant-red.md","sha256":"dd2afb41a0cec2b455201c25509e1ee6fee078b6313cc3c1639160dc5c2b4ff2","type":"member"}
 {"bytes":4899,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-project-data-ssd-storage.md","sha256":"095cd14dd2ed6781230bb9ed1c1f575327b1e393b71d260ce859e73385228285","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7520,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-stability-policy.md","sha256":"d67a87ef72fd688122bf97bf902d344bdd09af4590fbbfbde24803b9c37a11b9","type":"member"}
 {"bytes":1823,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/readme-test-input-layout-drift.md","sha256":"b3edb04f4921ff80b108e4ef9427c8c44a9649b192c5b9ab8bc0326f95197836","type":"member"}
 {"bytes":4285,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/receiver-string-bridge-guard-gap.md","sha256":"22fd3ab9478011c2bca9aeddcee469567a148fd95bb5fec5bce090f002a9f626","type":"member"}
-{"bytes":4979,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/recognition-transaction-book-sequence-drift.md","sha256":"d868f14d8c568572580742edb8a07bb82922f260feb237811c77aa198c06448c","type":"member"}

@@ -1,0 +1,386 @@
+{
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/actual-emitted-parsed.tar.gz": {
+    "bytes": 28278,
+    "sha256": "df5fed38497e35e50bcac58ec8ede783120927780fad24c09f2fe1df0869bee5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/artifact-identities.json": {
+    "bytes": 73359,
+    "sha256": "645e6b011267996ee3992f5ac053a277f9935ee71d4a8cdd7ac97ac5bd589037"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/input-identities.json": {
+    "bytes": 79127,
+    "sha256": "454afae1da6b5f2c9889a9b4ef4a37b32bc83aaa1796a4b51004c11f8339c5fe"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/inputs-before-first-run.tar.gz": {
+    "bytes": 794848,
+    "sha256": "8f4ba0687c1b80536afba4fe0b640cabe00d550224d5a0007b4f8a8643a288ba"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/normal-command.json": {
+    "bytes": 655,
+    "sha256": "fbf96bd43c27221eb68724b32d3de61ea58102e9164fabe7bb232291e4502354"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/normal-stderr.log.gz": {
+    "bytes": 131,
+    "sha256": "1fc7e56c16b7fa721f31806fb6227b5aa5f94a34c609ed8d32d49b1c25c33cb9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/normal-stdout.log.gz": {
+    "bytes": 3405,
+    "sha256": "e3a33c871f621e3cb712bb6e78d5ea5ec8308754d3bd91a0950bbcbaf06984a1"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/after/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/actual-emitted-parsed.tar.gz": {
+    "bytes": 28180,
+    "sha256": "43384143c3d436c2995fa0bd1a91168990a1a5ffac108e257628a268838057a9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/artifact-identities.json": {
+    "bytes": 73671,
+    "sha256": "d9fc195bd6cd1f5cf4fd7b2b7b6602ade7eaa760a7b0cc7b39e98ce76a52faf3"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/input-identities.json": {
+    "bytes": 79127,
+    "sha256": "4a2d977a61a02d3b8363a00408d65301ec1c26b57f08a45d401a9ee3f7867a9b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/inputs-before-first-run.tar.gz": {
+    "bytes": 794511,
+    "sha256": "16182a6060c24ae678fedd084cab2d4e136ee757eee1fab38d814de8864117b5"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/normal-command.json": {
+    "bytes": 656,
+    "sha256": "4ab5b236b2e6c4b11066f4d09650097dc9031cc50478962efe092cab81dc685d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/normal-stderr.log.gz": {
+    "bytes": 189,
+    "sha256": "fd6f4f716b2510cd6ff6b7d2913d9c6e33abcf8fd2b2261a688e33b79a2e8e77"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/normal-stdout.log.gz": {
+    "bytes": 4431,
+    "sha256": "4723db42ffe84e27f88d03ea00f373986d161e64e74a000115192f5a35f447a2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/before/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/capture.py": {
+    "bytes": 3082,
+    "sha256": "2b7bb3c65372435771f6e8cfef59d173b1e813b34b2d4a6ac1f9f02ae0c3cfd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/cases.json": {
+    "bytes": 57416,
+    "sha256": "972735877fb04154ee81253d832a6c392865bf00ac502e01ee6f9731ff505075"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/check_candidate.py": {
+    "bytes": 843,
+    "sha256": "e909b972ddcb030b51bcd3fc2a2a40144dbc97b4a4f074b47c1b3b3a4e6b342d"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/actual-emitted-parsed.tar.gz": {
+    "bytes": 28253,
+    "sha256": "b2a2cbfe8c53d587cef78d8f18883913cdd82a56e5abe253e5b425aeeda51665"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/artifact-identities.json": {
+    "bytes": 73671,
+    "sha256": "d87c164851d5737ae0451ab8ffdfddd5a7d3b0389adb4e74acb34c8160f8a690"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/input-identities.json": {
+    "bytes": 79338,
+    "sha256": "6a6229d31f47bd44a0e80332c60f7c1a525b9004ef399e91c11bd393d626ced4"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 796411,
+    "sha256": "fe0288bb6e7aeafc8de7e20ff56ee1c6c995f5ffa56828330a2d3fea465561d7"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/normal-command.json": {
+    "bytes": 880,
+    "sha256": "73ed7ec541390d17bc0ed4ce32be586541f290a1ab17e523660ebd02809933a2"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/normal-stdout.log.gz": {
+    "bytes": 8086,
+    "sha256": "6258bb1d70fcff42382bc114fc1af9bdd425c709833a4163cec0b4dfee9a269b"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/direct/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/freeze_profiles.py": {
+    "bytes": 1386,
+    "sha256": "d1ba422c886a062ca06020fac1a6a183a5bdcedd2b0004664cf1dc0194a164a8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/host-memory-preflight.log.gz": {
+    "bytes": 468,
+    "sha256": "4f7349ec06c1705ba368111fb920a205c1231b4367ff339f73609d04ad4b92a6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/inspect_intake.py": {
+    "bytes": 2093,
+    "sha256": "f646f5af7f61f2c35399233cb9ad5c2de4af29ed33a2875493c16a84c141ee74"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/inspection-combined.log.gz": {
+    "bytes": 1062,
+    "sha256": "37889523f3e919e0314c5685db08481e17715a8d68ee7ef1e3c62054a94fa0c0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake-failures.json": {
+    "bytes": 594,
+    "sha256": "fc165ab599883f78707125d3f9145a020a6f55d99a802e04bbf907f08d19de2c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake-profiles.json": {
+    "bytes": 72305,
+    "sha256": "09cd230b31d3a8eda9889bd429fac34e822f63cb36813bea76a9a8ad8a89b4ef"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/actual-emitted-parsed.tar.gz": {
+    "bytes": 28283,
+    "sha256": "f65a472dddcbeb949b3e870a0e6bf25ff7efcbc1c761f400c2b222a025074b01"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/artifact-identities.json": {
+    "bytes": 73671,
+    "sha256": "7997cd45361e9b434e8df0c220d47bbbd1daebbefb146fc70eb312fd30dc7ae6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/input-identities.json": {
+    "bytes": 78323,
+    "sha256": "b18cfe087c7a8aa6bcfd590fcdb63ae73977d3293c873fad06148308d37bc457"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 790053,
+    "sha256": "44b5016e29861620ebe50d5007f22129615071b4edb091e553feb234bacde45f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/normal-command.json": {
+    "bytes": 531,
+    "sha256": "dda4240378ab4bda1810b439c7f715c791db14552ee54e50e7aeb890e50034a6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/normal-stdout.log.gz": {
+    "bytes": 7261,
+    "sha256": "1ad849a116a6201bc53eb2f286ef863ce1e59904dec2186f21a78e1826254389"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/intake/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/observer.jl": {
+    "bytes": 3521,
+    "sha256": "f9a7e2ca2cd7f308e18bb99e99df3fdb8b320a3ee8e71949629638bce19c435a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/prepare.py": {
+    "bytes": 5228,
+    "sha256": "d4336d1f09e4251796528ee249ac18b2755e12f4c2f6ed38dcdb62155d4e2ba0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/actual-emitted-parsed.tar.gz": {
+    "bytes": 27628,
+    "sha256": "0799e75ae3c8d63a91dfd1b04e0585816c7a1a39496d73b8e4f7e48c82789775"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/artifact-identities.json": {
+    "bytes": 76479,
+    "sha256": "22127803462090357342edc94e1fbaf6a45c5562adb8455d97ccc974b71ee8a0"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/input-identities.json": {
+    "bytes": 51974,
+    "sha256": "2cfeb59cc41eed6b7f3998a7b3498a41ce63a64392e075edac515f4a43f4d3d9"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 668940,
+    "sha256": "03f435b8d86001abbed7766faf0fb43438448958a9d208da94341265d5f3bd5e"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/normal-command.json": {
+    "bytes": 828,
+    "sha256": "5e9634537389d055d78bec5aa343ff7db093d497ddde65fa5532b9fe7fa423b6"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/normal-stderr.log.gz": {
+    "bytes": 230,
+    "sha256": "4a60eabf9ad15c3b13a8f62f9253511db8f068029a23bd97da42a3aceb45cd88"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/normal-stdout.log.gz": {
+    "bytes": 4624,
+    "sha256": "559f60ff5c85f0771b8b07817c869c1797a35de03521da5030340b2e7ab1f9ec"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/version-command.json": {
+    "bytes": 551,
+    "sha256": "fed04039c0ea38f53de3d8822c452e4a56a30486bb2c74600be907e0559c6861"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-inverse/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/activation.txt": {
+    "bytes": 41,
+    "sha256": "ad63b9bb565bddb66c6414e27bc9bdc84e2720220ed4938f186be90d747a8fd8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/actual-emitted-parsed.tar.gz": {
+    "bytes": 27552,
+    "sha256": "95108e52d8fa352d1e332fd8e9178ecb9937639e207c54c3d980b06e2d8497ed"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/artifact-identities.json": {
+    "bytes": 76791,
+    "sha256": "e766988a302a9e012a6dfd7b1f03933341af7e37d587d012927be924b2fb4945"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/input-identities.json": {
+    "bytes": 51973,
+    "sha256": "3d2054c5069a30bc853f915b0257973b6f8d8c62d13ba01abea469ba113a223c"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/inputs-before-first-run.tar.gz": {
+    "bytes": 668248,
+    "sha256": "7157421864eedc4a8cf939fa93e5777491f62c1e3e51081289da5b7e4238a81f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/normal-command.json": {
+    "bytes": 829,
+    "sha256": "cb10b9d48c84f9d5e2f6034b31d3cdbe2f3145f0f4ad243ce79e89b19a922aee"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/normal-stdout.log.gz": {
+    "bytes": 3462,
+    "sha256": "b616a858dae9a68f61e9c6f1f70989e9c407c2b1f5cdcd15346d218ebb9ea975"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/version-command.json": {
+    "bytes": 552,
+    "sha256": "7edb37ccee13ce226aca055044ad260a0f2159054e7c7a4490b740c1603231f8"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private-restored/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/private_control.py": {
+    "bytes": 4141,
+    "sha256": "9db8fc6fc93da1b4799d6b97125de1f9fdc578a5d2cf2767299e39f1500c4d13"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/producer-change.patch.gz": {
+    "bytes": 1883,
+    "sha256": "d625b5e02dcddf7ec072c847dd5aa959d3f425514bc9aee94b939fb96cf7e429"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/profile-sources.json": {
+    "bytes": 41425,
+    "sha256": "16aa6409e1b3a79ec77d5f63a3c24b970e1ad6c8e45e8c6f351c838ecd96a26a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/proof_io.py": {
+    "bytes": 3498,
+    "sha256": "ec207817bee7251c342363988d7b2fdbf5d18fe28bf855f151597588ee046d7f"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/review.py": {
+    "bytes": 14635,
+    "sha256": "b0e690fa0d330dc1ba58e3b50a5746584b9e7a64445fdfa24d6887bd82cd4eda"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/run_review.py": {
+    "bytes": 1016,
+    "sha256": "5fa6552bfce3c553f8815355b1464c288f64196754ead09c4755998bf67aad3a"
+  },
+  "docs/checkpoints/array-transform-result-guard-julia-2026-11-10/seal.py": {
+    "bytes": 1005,
+    "sha256": "e93bcacd198a4918ee69d2bb2da875971bf7e76b334df664ef6307b19aa55c56"
+  }
+}
