@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — Publish scoped lookup aliases
+
+Append precise question aliases to the existing canonical claim, epoch, factory,
+callable/copy and Phase0 facts. Preserve original answers/order, every old route,
+Facts bytes and all remaining projection bytes except the derived question total.
+One append-only fact note explains that header rule; book navigation examples
+render correctly. Exact routing/preservation and four corruption controls pass,
+along with the direct header fixture, sync and existing accepted-input replay.
+The initial checker rejects only the expected total update; its source/empty
+result/authored input/header diff remain without product failure credit.
+This is authored navigation over existing proof, with no new runtime or population
+measurement or wider admission. Independent Dart78.3 follows the focused commit.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.19 — Refresh bounded daily artifact review
 
 The dated scanner/independent walk agree on1181 rows in eight named root/Rust/log

@@ -12,6 +12,8 @@ answers:
   - "does deferred Perl copy support primitive values or receiver methods"
   - "does ordinary Perl shallow copy describe interpreted copy depth"
   - "why does copied null count_keys return null while direct count_keys returns zero"
+  - "why should Top copy be checked with an executable snapshot oracle"
+  - "how does rule array copy preserve shallow identity and once-only reads"
 date: 2026-10-30
 status: accepted public repair at770cffcc; original proof requires its accepted Git input state
 tags: [perl, actionir, ast, copy, containers, receivers]

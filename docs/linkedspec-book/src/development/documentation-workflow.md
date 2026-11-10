@@ -358,6 +358,22 @@ required fields, list association, unique IDs and map synchronization. The
 constrained format and its limits are documented in
 `knowledge-map/KNOWLEDGE_MAP_ARCHITECTURE.md`.
 
+### Scoped question aliases
+
+Precise question aliases lead to the existing canonical fact and its recorded
+evidence boundary. Search the problem words, then read that card before choosing
+a verification command. For example:
+
+```bash
+rg -n '128KiB|twenty assertion inverse' KNOWLEDGE_MAP.md
+```
+
+Adding aliases updates the derived question-total header while preserving the
+existing routes and fact entries. Historical commands use their declared Git
+capture or supplied logical artifact epoch. A frozen input bundle retains that
+named epoch; its replay and the current implementation's verification have their
+own scope. The alias examples point to already recorded bounded proof.
+
 
 ### Evidence and verification lists
 

@@ -10,6 +10,17 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — Keep alias navigation separate from evidence scope
+
+Aliases append to canonical answers; dates, statuses, evidence and verification
+instructions retain their bytes. The compact projection omits duplicated answers
+in Facts, so all Facts bytes stay exact. Its question-total header still derives
+from the complete question rows, including aliases/repeats. A restoration check
+must derive that total, then reverse only the authored rows and compare every
+remaining map byte. The initial overly strict header assumption and exact diff
+are retained; the corrected check rejects stale totals as well as lost routes,
+wrong targets and changed facts. Existing historical/finite proof scopes remain.
+
 ## 2026-11-10 — TYPE-REFERENCE-BOOK.1.2.23.4.19 — Preserve accepted physical bindings before shared prose changes
 
 All eight checked18.1 claims now bind actual accepted41ba410b physical inputs;

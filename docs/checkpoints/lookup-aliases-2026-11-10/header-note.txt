@@ -1,0 +1,9 @@
+
+2026-11-10 — Alias-only navigation edits also update the derived question-total
+header: the generator counts question rows, including authored aliases and
+repeats, independently of fact rows. Preserve every original route and Facts
+byte; derive the expected header total from the complete question rows rather
+than retaining an older total or changing a threshold. Exact readonly routing
+review: `docs/checkpoints/lookup-aliases-2026-11-10/review.py` at this accepted
+lookup source epoch. This describes deterministic projection, not fresh runtime
+or wider evidence admission.

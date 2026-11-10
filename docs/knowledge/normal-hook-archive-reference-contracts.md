@@ -8,6 +8,10 @@ answers:
   - "how can closed task narratives be reconstructed exactly"
   - "does claim caching preserve staged snapshot checks"
   - "why does reference scope update reject a finished leaf when memory names the next leaf"
+  - "why must the task narrative epoch fixture seed every retained source"
+  - "why did the epoch fixture miss LUA-BACKEND-PARITY.md"
+  - "how does recurring factory review separate current semantics from historical source bytes"
+  - "why does adding lookup aliases change the Knowledge Map question total"
 date: 2026-11-04
 status: accepted
 tags: [doctrine, history, tasks, knowledge-map, claim-verification]
@@ -91,3 +95,12 @@ Readonly route: `docs/checkpoints/knowledge-map-capacity-2026-11-10/factory_boun
 Historical objective source-image admission is a separate boundary from those
 factory compatibility probes. The canonical explanation and November10 exact
 successor/first-image repair live in [[three-objective-language-readiness]].
+
+2026-11-10 — Alias-only navigation edits also update the derived question-total
+header: the generator counts question rows, including authored aliases and
+repeats, independently of fact rows. Preserve every original route and Facts
+byte; derive the expected header total from the complete question rows rather
+than retaining an older total or changing a threshold. Exact readonly routing
+review: `docs/checkpoints/lookup-aliases-2026-11-10/review.py` at this accepted
+lookup source epoch. This describes deterministic projection, not fresh runtime
+or wider evidence admission.

@@ -5,6 +5,9 @@ answers:
   - "is Phase0 green after the emitted Perl boundary catalog repair"
   - "did the Perl boundary catalog change introduce the current Phase0 failures"
   - "who owns the 28 Phase0 failures retained with TYPE37"
+  - "why did seven Phase0 groups fail on source layouts after focused feature changes"
+  - "how does the twenty assertion inverse preserve older Phase0 calibration"
+  - "where are the finite Phase0 value and effect oracles retained"
 date: 2026-10-30
 status: original selected28 GREEN at TYPE45.25; full-suite/canonical admission remains open
 tags: [perl, phase0, regression, ownership]

@@ -7,6 +7,9 @@ answers:
   - "does the Perl Count guard repair change copied-null source behavior"
   - "why did Perl Count emit invalid pick call bracket source"
   - "how does Count preserve callable-result indexed receivers"
+  - "why did indexed callable Length and uppercase emit invalid Perl"
+  - "how are prepared callable index receivers preserved outside Count"
+  - "why is the malformed Count source fence not new Count authority"
 date: 2026-11-02
 status: targeted-checked; full admission and copy assessment separate
 tags: [perl, count, guards, source, copy, composition]

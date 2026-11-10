@@ -16,6 +16,10 @@ answers:
   - "how does count first preserve historical Phase0 evidence"
   - "why did historical artifact recovery reject the changed Compiler image"
   - "how are current source images separated from historical objective falsifiers"
+  - "how are exact committed source successors admitted without replacing earlier images"
+  - "why does historical recovery need the accepted Dart emitter test image"
+  - "how can an uncommitted objective claim replay without a fictitious Git capture"
+  - "where is the frozen objective input epoch replayed"
 date: 2026-11-02
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]

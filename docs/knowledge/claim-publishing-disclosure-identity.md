@@ -8,6 +8,9 @@ answers:
   - "may a claim checker execute recorded commands"
   - "who owns the broader claim verification adoption audit"
   - "how are live and historical claim input identities distinguished"
+  - "why does the claim gate reject records larger than 128KiB"
+  - "how can a bounded claim retain every producer and input body"
+  - "does a frozen claim bundle prove current source freshness"
 date: 2026-10-02
 status: bounded working-rule and infrastructure adoption; broader audit open
 tags: [claims, doctrine, verification, durability]

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Daily artifact review23.4.19 completes bounded metadata/source/channel maintenance after accepted41ba410b's successful default canonical/all1035 Phase0 run. Precise lookup publication18.3, then independent Dart78.3 are next; broader routing/line-warning pressure18.2 and peers/full23.4 remain separately owned.
+Scoped lookup publication23.4.18.3 completes authored navigation for the existing bounded claim/epoch/factory/callable/copy/Phase0 facts. Independent Dart78.3 is next. Broader routing/line-warning pressure18.2, peers and full23.4 remain separately owned.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.19. Dated1181 primary/independent metadata rows in eight named root/Rust/log scopes agree; every candidate remains retained. Producer bodies precede helper import and stay stable afterward. Five metadata/four channel controls and separate readonly replay pass. All eight checked18.1 claims preserve214 original input rows at actual accepted41ba410b without changing original logical epochs/results/hashes; three prior native gaps remain, and the new host-observation gap is separately owned4.2. Required CHANGES rollover4929 preserves exact accepted bytes; the updated book renders and HTML is inspected. Wrong wrapper arguments reject2 before corrected0, with no product credit. Focused integrity checks/normal hooks govern landing; no new full CI or whole-feature/native admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.18.3. Exact new alias targets, every old question/order/multiplicity, complete Facts bytes and remaining projection bytes pass; only explicit authored additions and the derived total change. Four routing/counterexample controls, header176, sync, prior accepted-input preservation and final rendered book/HTML pass. Initial strict header assumption is retained as setup calibration, not a product failure. Original dates/status/evidence/reverify and original fact bytes remain; bounded proof scopes remain. Focused integrity checks/normal hooks govern landing; no new runtime/population measurement or full/native admission.
 
 ## Next Action
 
-Activate18.3 and publish precise queries for the cap/bundle, epoch-fixture cause, historical/current review boundaries, callable/copy source oracles, logical artifact epoch and exact Phase0 inverse. Verify the already-preserved41ba410b claims rather than rebinding them. Then continue independent Dart78.3 with its own unchanged37/four-route and source/arity/error acquisition. Broad routing18.2 remains after feature coverage without pass credit from its143; full feature verification remains23.4.
+Activate independent Dart TYPE-REFERENCE-BOOK.1.2.23.3.78.3, acquiring its own original37/four-route and source/arity/error observations before deciding implementation. Do not inherit Perl/Rust verdicts. Existing18.1 checked claims remain at actual accepted41ba410b, preserved by4.19; never relabel those observations. Daily review is current at2026-11-10 with all artifacts retained. Broader routing18.2 follows feature coverage; full feature verification remains23.4.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.1 —1710 display lines removed, exact questions/other records/source acquisition and direct checks; canonical receipt governs landing.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — lossless duplicate-display plan, frozen source/reader inputs, seven controls/readonly replay; canonical18.1 next.
@@ -29,7 +30,6 @@ Activate18.3 and publish precise queries for the cap/bundle, epoch-fixture cause
 - TYPE-REFERENCE-BOOK.1.2.23.4.15 — bounded1157-row daily review/five controls/readonly replay; zero removals, protected artifacts retained; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.2 — Rust89/four routes/direct141; qualified13RED/89PASS/nine controls; compiler-failure/help-input qualification explicit; Dart77.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.77.1.1 — Perl89PASS/direct185; private inverse15RED/restored89PASS/eight controls; independent Rust77.2 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.77.0 — source64PASS/direct93; private inverse14RED/restored64PASS; first recovery/eight controls; composition1.1 next.
 
 ## History
 
