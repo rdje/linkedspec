@@ -1,0 +1,43 @@
+{
+  "initial_policy_fences": 104,
+  "initial_source_compatibility": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed"
+  ],
+  "limits": "Dart-only cold/terminal contrasts precede production. Three initial-source continuations are separate compatibility, never portable input/product-RED credit. Boolean receiver-null/free-empty and all first-producer/error policies remain exact.",
+  "preserved": 281,
+  "programs": 312,
+  "shared_healthy": 26,
+  "shared_profiles": 7,
+  "supported_targets": [
+    "concat_arrays_receiver_hash_guard",
+    "drop_back_receiver_hash_guard",
+    "drop_front_receiver_hash_guard",
+    "drop_logical_later_with",
+    "own_optional_drop_back_receiver_composed",
+    "own_optional_drop_front_receiver_composed",
+    "own_optional_slice_receiver_composed",
+    "own_optional_take_last_receiver_composed",
+    "own_optional_take_receiver_composed",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "own_source_before_rejection",
+    "positive_concat_arrays_receiver_composed",
+    "positive_drop_back_receiver_composed",
+    "positive_drop_front_receiver_composed",
+    "positive_reversed_receiver_composed",
+    "positive_slice_receiver_composed",
+    "positive_sorted_receiver_composed",
+    "positive_take_last_receiver_composed",
+    "positive_take_receiver_composed",
+    "reverse_copy_later_with",
+    "reversed_receiver_hash_guard",
+    "slice_receiver_hash_guard",
+    "sorted_receiver_hash_guard",
+    "source_effect_before_rejection",
+    "take_last_receiver_hash_guard",
+    "take_later_with",
+    "take_receiver_hash_guard"
+  ]
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4787,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-env-initializer.md","sha256":"ce81e01bf59e45a3dba99b2043dc8ca296025e48fb3f256a5cd1541a39b555af","type":"member"}
 {"bytes":3950,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-final-residue-proof.md","sha256":"5b43533ecbeb4155a64b772a929f6de1506428386b86362c2e4cd21372cf598f","type":"member"}
 {"bytes":9580,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-liveness-permission-denial.md","sha256":"9640df9621f87948fe89b558f5703b9a1aeebe1687d8c93026f83dd1182ae5e8","type":"member"}
 {"bytes":4939,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-migration-reconciliation.md","sha256":"e52276c5fe1be9ce67362de7a4475f46aea35fffd4d81ea8c346198cbdb10a8a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4782,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-family-plan.md","sha256":"f7cb2262d3cdd6fa900c2931445c9c920a582facae918ff60947b8f913050ae0","type":"member"}
 {"bytes":4349,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-full-manifest-classification.md","sha256":"3bdb46eb0b43a861c7e13bfde61514bb0919879fb88f09f53c4256b33a6d0c0b","type":"member"}
 {"bytes":3233,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-literal-encoding-gap.md","sha256":"15b220d76f67d6865a3f261916aabde71f68146b0b5c7342d6b9241cb6abccca","type":"member"}
-{"bytes":3109,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-metadata-errors.md","sha256":"1f579c434dc8db92459fb961e83a176704e3d1ed3d66194362d84d617c0a6389","type":"member"}

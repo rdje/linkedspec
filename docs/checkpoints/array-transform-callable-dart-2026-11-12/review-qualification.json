@@ -1,0 +1,9 @@
+{
+  "original_exit": 1,
+  "original_source_sha256": "2b8c98937c96fc3c37a303d0cb46f2b1f8560adcb1a1dd4fc8880eba6196987e",
+  "original_stderr_sha256": "1386526568074dae343f9335aaf3c782f2f1e3dd6791c4cbccb4877e6b26fb1f",
+  "qualified_source_sha256": "d2fc6e13e61429b2276f9e1254892a43cb88a230c71696bad5d5fb80e441c8ff",
+  "root_cause": "Raw bytes passed to strict JSON value comparator by one corruption control; TypeError escaped the expected assertion/value/key failures.",
+  "repair": "Only that control now uses a raw-byte equality assertion. Original sealed reader, failed run, SDK epochs, profiles and production repair remain exact.",
+  "scope": "No acquisition replay, rebaseline, suppression or product change; qualified first full reader remains pending."
+}

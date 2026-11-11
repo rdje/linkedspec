@@ -1,0 +1,33 @@
+{
+  "repaired": "PASS",
+  "programs": 312,
+  "routes": 4,
+  "supported_targets": 28,
+  "separate_initial_compatibility": 3,
+  "preserved": 281,
+  "initial_policies_exact": 104,
+  "actual_parsed_module_pairs_exact": 312,
+  "complete_native_fresh_stderr": {
+    "intake": {
+      "native-stderr.log.gz": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fresh-stderr.log.gz": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "after": {
+      "native-stderr.log.gz": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "fresh-stderr.log.gz": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "limits": "Dart-only finite full-wire result/source proof. Private old/current/direct and independent historical recovery remain separate checks; no peer or portable initial-input policy follows."
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15362,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-api-mcp-direction.md","sha256":"4cb2622a4acf7c31ddef5f32df2c59f9741c1d838c6a523ba40212d1973e9195","type":"member"}
 {"bytes":3820,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-generated-plan-authority.md","sha256":"b7fdbbfa13a2abe576b7a79d210161fc5b6fbaff5e25c8a394471ed0307f9da1","type":"member"}
 {"bytes":5624,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-neutral-contract.md","sha256":"caf96320a04aeb2c94ca7d646daa6981ff658f8e8ce2d40bd3c52d977352a0a2","type":"member"}
 {"bytes":4414,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-public-no-drift.md","sha256":"04af4c4c1c02a3f654bcda8bf5ac95fb1c0fce87f3d47b20f3d7112b88f074de","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3374,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-expression-valued-block-seams.md","sha256":"e799dc80fc98cdcfc2955f84b648f4dc57cf3e30c52c8eaf98a5d33f407b32bd","type":"member"}
 {"bytes":4232,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-remaining-fluent-continuation-split.md","sha256":"efc3e8028f2395d8b06c9d3ed0a4314727bae637e4f38528e25c146f66793520","type":"member"}
 {"bytes":2204,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-rhs-shape-target-kind-parity.md","sha256":"6d56523bb7aa80b2f2f06994206760d66bcb3023b18cbb28a733f29bc09ff170","type":"member"}
-{"bytes":2919,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-scalar-bare-read-parity.md","sha256":"92305c0bfd16150ebe93c8dcd33490a7526a98dd393cea1d4d222a226ae375de","type":"member"}

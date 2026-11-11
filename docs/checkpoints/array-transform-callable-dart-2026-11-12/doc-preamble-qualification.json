@@ -1,0 +1,10 @@
+{
+  "observed_check_exit": 255,
+  "observed_combined_tool_output": "change_history current preamble omits its history manifest",
+  "original_separated_channels": "not retained by the direct exec tool call",
+  "root_cause": "Draft insertion searched for an unanchored ## token and matched its inline preamble example.",
+  "repair": "Restore exact clean-base preamble and all old records; insert the same new record only at the first line-anchored header.",
+  "original_sha256": "ac94f59664a45642327af0991a74b4941649d353098a17f118cb1c66b79ebfe8",
+  "draft_sha256": "66511dab9a8df231c220f06ab66e24d3503fe57327e68c909d1220201ffe5bf0",
+  "repaired_sha256": "6dfec3468696a068e5d31ba76991997ece5e68bf340fdea9a63d215f45781d25"
+}

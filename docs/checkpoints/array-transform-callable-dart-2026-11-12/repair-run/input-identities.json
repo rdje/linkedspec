@@ -1,0 +1,47 @@
+{
+  "dart/lib/src/runtime/interpreter.dart": {
+    "bytes": 384300,
+    "mode": 420,
+    "sha256": "596a5cca77e1c8b4b6e1354083c2d94590385b6a5f3f2e2c79558ec9253d7ca5"
+  },
+  "dart/test/array_transform_callable_result_guard_composition_test.dart": {
+    "bytes": 4062,
+    "mode": 420,
+    "sha256": "2d98da40f737d67efded2113d896e30f7347cc8688913dab54fb2076701c51b3"
+  },
+  "dart/tool/callable_array_transform_observation.dart": {
+    "bytes": 612,
+    "mode": 420,
+    "sha256": "12ae4a5dff3b05a355f30fda45008abf89c635aa0ff3f64a85aa332db107f1b7"
+  },
+  "dart/tool/probe_callable_array_transform_results.dart": {
+    "bytes": 4283,
+    "mode": 420,
+    "sha256": "5628063c4b42d6c78005c382cca39e078d217ec57436217508e8848e79c12043"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/owner-before.dart.gz": {
+    "bytes": 56369,
+    "mode": 420,
+    "sha256": "420d2905b6fbbf1cb218d59c226524b0a9a48e8f59e4a3f50a6879952dcfd76a"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/repair.py": {
+    "bytes": 1795,
+    "mode": 420,
+    "sha256": "738a8c27279485ac9e35153c4bb5dc2a17df74421fbfa981aa1ab9b65fb011fb"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/run_repair.py": {
+    "bytes": 3083,
+    "mode": 420,
+    "sha256": "21033329488cd726304a890d92554cfc8667ea91cc5f8bff3b781af17e62cb38"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

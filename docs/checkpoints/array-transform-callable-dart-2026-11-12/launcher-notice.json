@@ -1,0 +1,13 @@
+{
+  "known_notice": "retained",
+  "layer": "outer managed wrapper for the Python after-comparator",
+  "actual_comparator_exit": 0,
+  "bytes": 83,
+  "sha256": "b1d76801fd8db9cf2aa51499f1f2d18c197273b1a7b216d42d923f10286e1880",
+  "observed_child_pid": 93882,
+  "original_final_pgid": "uncaptured",
+  "raw_channel": "launches/check-after/stderr.log.gz",
+  "repair_owner": "SESSION-STARTUP-READING.7",
+  "schedule": "Existing P1 establishment/denied-liveness repair after feature coverage and before admission",
+  "scope": "All four actual Dart native/fresh stderr channels remain empty. This recurrence establishes neither original group identity nor lifecycle/isolation correctness or timing cause. No suppression, runtime change, recover or purge."
+}

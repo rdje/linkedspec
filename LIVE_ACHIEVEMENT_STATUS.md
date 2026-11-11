@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Bounded Perl and independently acquired Rust callable Array-transform implementations are focused-checked. Independent Dart78.6.3 is next; complete source/context/portable admission remains full23.4.
+Full PNT continues. Bounded Perl/Rust/Dart callable Array-transform implementations are focused-checked; independent Julia78.6.4 is next. Complete source/context/portable admission remains full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2. Independent312/four routes;20 supported targets/three separate initial-source compatibility movements/289 full records and96 initial producer/first-with policies exact. Original20RED/292PASS and failures retained; qualified same-path23RED-current312/direct701/first full readonly0/23 controls/current825. Only one classifier changes5/4; actual launcher notice stays explicit.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3. Independent312/four routes,28 supported targets/three separate initial-source compatibility/281 preserved and104 initial policies exact. Original/private31RED-current312/direct647/qualified readonly24/current510 pass; source4/4 only. Original reader1 and exact outer launcher notice stay retained.
 
 ## Next Action
 
-Activate independent Dart78.6.3 from clean Git, reading its public integration and own transform/pipeline contracts. Acquire own shared45/initial/optional/excluded/function-signature/error/order/snapshot/terminal questions before repair; retain parsed/native/emitted inputs before relevant use and full observed error maps. No imported Rust verdict or initial/stderr policy. Open concat42 follows bounded78.6; full23.4/native/registration/formatter/declared5.4 remain open.
+Activate independent Julia78.6.4 from clean Dart, reading its public integration and own transform/pipeline/function contracts. Acquire source-only shared45 plus own initial/optional/excluded/signature/error/order/snapshot/terminal observations before repair. No peer policy/verdict. Installed Lua and open concat42 follow; full23.4/native/registration/historical4.24/formatter/declared5.4 stay open.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.27 —45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/readonly ten controls/current identities; Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
@@ -29,7 +30,6 @@ Activate independent Dart78.6.3 from clean Git, reading its public integration a
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1 —125PASS/private18RED-current125/direct72/readonly eleven/current121;178 preserves169 projections/nine arity changes;25 result gaps remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.23 — Julia75 IDs/61 closed pointers/14 unselected bodies/full232573-byte tail exact;15377 task bytes renewed/76 queries/readonly ten controls; Perl arity next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0 —178+terminal18/all196 pairs/84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls; arity prerequisite next.
-- TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
 
 ## History
 

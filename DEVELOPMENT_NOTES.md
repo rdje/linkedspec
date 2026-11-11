@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 — Preserve Dart producer policy independently of later guards
+
+The registered-function exclusion in _isOrdinaryArrayTransformResultChain bypasses actual-kind result ownership. Canonical first-transform prefixes now reach existing guards while unregistered free-helper identity and signature-before-arguments invocation stay unchanged (4/4 source delta). Independent312 observations support28 repairs plus three separate initial-source continuation movements;281 complete records and104 initial policies remain exact. Dart Boolean receiver take yields null/skip-with, while free take yields[]/runs-with; peer input policies are not an oracle.
+
+Full available class/error/error_json/source/stage fields survive across native/restored/plan/fresh routes. New parsed bytes precede compile/restore, and emitted bytes precede fresh use;624 pairs/1248 normal/nine traced inputs remain archived. The first sealed reader1 fails only because a raw-byte negative control calls the JSON comparator; a separate qualified reader changes that control to byte equality and passes24. Original instruments/channels remain. Current510 is activation/pre-staging only. Known after-comparator outer launcher83-byte warning is retained under SESSION7, without lifecycle/PGID credit; all Dart native/fresh stderr is empty. Direct647/private31-current312 pass. Full native4.2/SESSION5/historical4.24/registration/full23.4 remain separately owned. See the Dart packet REVIEW.md and new Knowledge card.
+
 ## 2026-11-11 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 — Initial producer policy differs from a later rejected continuation
 
 Rust's function exclusion in is_ordinary_array_transform_result_chain bypasses persistent trailing-with result guards. Admit only canonical first transforms, retaining unregistered free-helper identity and existing signature checks. The unchanged index0 fallback runs the actual producer; its Array then owns later Hash rejection. Five insertions/four deletions suffice.

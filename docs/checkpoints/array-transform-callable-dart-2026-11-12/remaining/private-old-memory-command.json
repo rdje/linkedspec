@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": "."
+}

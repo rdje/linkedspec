@@ -1,0 +1,167 @@
+{
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/INTAKE.md": {
+    "bytes": 2262,
+    "mode": 420,
+    "sha256": "eb93dafdd85f58ef0507d8f8fe639508d3dd187b96c05b333b17e98e8503ffb0"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/capture_intake.py": {
+    "bytes": 5551,
+    "mode": 420,
+    "sha256": "99e72c7b534cbbdf88a0488be57db4de44741a5964f08817b7cfc97601182942"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/capture_trace.py": {
+    "bytes": 4614,
+    "mode": 420,
+    "sha256": "19bb836b257da861afe99dd563869cedbb05c2177a8c525bf2764cfcc11d5850"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json": {
+    "bytes": 155300,
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/format_tools.py": {
+    "bytes": 3076,
+    "mode": 420,
+    "sha256": "e0cbcce87e5579c0ca3cc8af269776c7e7cac218c52971acbca76944a982a242"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/format_trace.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "0223b9375ffc234f6453b0f59a24351aa1b24299f038d8a2c50431b6b3a3f14c"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/inspect_intake.py": {
+    "bytes": 3671,
+    "mode": 420,
+    "sha256": "4bdc11d9be73baa00c811a354841c8f0b642885d804848af6e15c133dfafd55b"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/intake-assessment.json": {
+    "bytes": 636336,
+    "mode": 420,
+    "sha256": "d5d38f8b6fffbfbc374210cd86721a4b2519f89636f9e478f4ccbab6e9eb3765"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/own-questions.json": {
+    "bytes": 133963,
+    "mode": 420,
+    "sha256": "ab40c5e88dd82990fd6fff17d6b5f5c5cf48e213a0703315840ea28221430873"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/prepare.py": {
+    "bytes": 4508,
+    "mode": 420,
+    "sha256": "f6cdfceb08c43f59c44f40dd37dee6306b3588323a462d36072fc96da7f645a4"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/prepare_trace.py": {
+    "bytes": 2551,
+    "mode": 420,
+    "sha256": "7b14227fa3a0715dc5aee21d58dd16803ddf4b79e88f91f41dc0f11dba14a06b"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-0.gz": {
+    "bytes": 924,
+    "mode": 420,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-1.gz": {
+    "bytes": 1482,
+    "mode": 420,
+    "sha256": "e7fcb1cd4d4298c51c5d72b17950e0fdffff6545902579edd9714fa019f40a39"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-10.gz": {
+    "bytes": 1244,
+    "mode": 420,
+    "sha256": "91d72b4ade2151d02ca5d1376be0763be783333deefb25b9686e3349f6d89206"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-11.gz": {
+    "bytes": 6264,
+    "mode": 420,
+    "sha256": "cd1242db23037608d4a4e1fc0294dec70a69d5619c6f59cd3e8d607db2c0f5cb"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-12.gz": {
+    "bytes": 425,
+    "mode": 420,
+    "sha256": "8dad86cbae30d35aebe6208f97d1553440db7656c38ed96b2725f297deb9f662"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-13.gz": {
+    "bytes": 956,
+    "mode": 420,
+    "sha256": "1e280dbcb05e7ae1b560fae595d6bc4adc46c36fbd85f7add45e096c2e0d1a64"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-14.gz": {
+    "bytes": 659,
+    "mode": 420,
+    "sha256": "c588503f6bf752eff12a748b0a4cebb5eafacac148161316eae2bd7d36bec14b"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-15.gz": {
+    "bytes": 940,
+    "mode": 420,
+    "sha256": "8948e3b1830a212b83d55cca3c88c240b49f93f572b77fc9a003c9544e15dfcf"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-16.gz": {
+    "bytes": 1448,
+    "mode": 420,
+    "sha256": "3e5d89283fb92a286d03d354b7461d65ffafdce59b4613f6e91a57908e1c1fff"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-17.gz": {
+    "bytes": 6325,
+    "mode": 420,
+    "sha256": "df42d69047424e12c5ebebd7ad072359b5889983a141dcaf9432e1357ddf5b41"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-2.gz": {
+    "bytes": 307,
+    "mode": 420,
+    "sha256": "9bd65271506bb1b2e95618a4075b6a9fd682445007fcdc8bd774e5b716933a71"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-3.gz": {
+    "bytes": 1540,
+    "mode": 420,
+    "sha256": "b9546d5b63d57ce90590254306bbc812fb98e9ffefbf383873adc6b1359eef3d"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-4.gz": {
+    "bytes": 960,
+    "mode": 420,
+    "sha256": "1eeea5c0c71f4e476e8cf13824a2fce9c5e42ca31974d90947c905d81c6aa3a0"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-5.gz": {
+    "bytes": 2181,
+    "mode": 420,
+    "sha256": "45ee0cc6f72ed3bcdd5d94f101bebce6174006ef0f95a2c80b395ce259ea0dd1"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-6.gz": {
+    "bytes": 3161,
+    "mode": 420,
+    "sha256": "fa0279952c9da54f2c2699567df5d5a27caca7fe87f535a3835555ccb8170381"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-7.gz": {
+    "bytes": 2759,
+    "mode": 420,
+    "sha256": "4e6aaa6d075cad1c49dce4fab18f43f81141bf20122513cce2b65ea1b828ce89"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-8.gz": {
+    "bytes": 1947,
+    "mode": 420,
+    "sha256": "799866da17991f4da7e4d65088b05bfc944b8206d61dbff9258852626a2bf30a"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-9.gz": {
+    "bytes": 861,
+    "mode": 420,
+    "sha256": "015b0122b47e7479ed2c2bba7570b84e0e28a3fa4537bc195a3b63ddb65c5e1a"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/template-identities.json": {
+    "bytes": 4892,
+    "mode": 420,
+    "sha256": "ae0d22b8d87af681fd25db61519ff37a06ddfbcb55e6b43c0701a603c7a1e900"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

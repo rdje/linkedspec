@@ -8,6 +8,8 @@ October19 artifact review: REPO-HYGIENE.19 retains metadata and public compiler-
 
 # ROADMAP
 
+November12 current fluent frontier: Independent Dart78.6.3 is implemented with focused312/four routes,28 supported targets/three separate initial-source compatibility continuations/281 preserved and104 initial policies exact. Same-path31RED-current312/direct647/qualified readonly24/current510 pass; original reader1 and exact outer launcher notice remain retained. Perl/Rust callable-transform slices are committed. Independent Julia78.6.4 is next, then installed Lua; open concat42 follows bounded78.6. Full23.4/native/source/context/registration/SESSION7/formatter/declared5.4 stay separate.
+
 November6 Length74: selection23.1.35 preserves existing producer domains and freezes ordinary source/result guards. Perl74.1/74.6, Rust74.2, Dart74.3, Julia74.4 and installed Lua74.5 are implemented with independent focused checks. All bounded Length implementations are complete; full admission remains separate.
 
 P1 key-count75.0 freezes the22-program target and owns two newly isolated Perl producer prerequisites: typed mutating-block source75.0.1 is now focused-checked; non-Hash/numeric-source zero-domain75.0.2 is next. These precede Perl75.1 and independent Rust/Dart/Julia/installed Lua75.2-.5 before unrelated selection/full admission. Actual producer/guard/main::2 evidence and qualifications: docs/checkpoints/key-count-selection-2026-11-06/REVIEW.md. No domain/consumer repair or peer verdict is implied.

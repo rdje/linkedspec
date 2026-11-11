@@ -12,6 +12,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 — Dart callable Array-transform result guards
+
+- Four interpreter insertions/four deletions admit canonical first transforms from registered-function results to existing guards; invocation/producers/signatures/formats remain unchanged.
+- Independent312/four routes freeze28 targets, three separate initial-source compatibility continuations and281 preserved records. All104 initial policies/full error maps remain exact. Original/private31RED-current312 and direct312+141+194=647 pass.
+- Qualified historical reader0/empty stderr/24 controls/current510;624 parsed-module pairs/1248 normal inputs/nine trace inputs recover. Original reader1 (JSON comparator received bytes) and its separate one-control correction remain exact.642 archive-verified plain duplicates retired; no proof removed.
+- Book examples/backend/Knowledge/task/live state align. Exact outer launcher83-byte notice remains SESSION7-owned; actual Dart native/fresh stderr empty, PGID uncaptured. Full23.4/native/historical4.24/registration remain separate; Julia next. Evidence: docs/checkpoints/array-transform-callable-dart-2026-11-12/REVIEW.md.
+
 ## 2026-11-11 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 — Rust callable Array-transform result guards
 
 - Reuse existing producer/signature paths and persistent actual-kind guards for registered-function first-transform prefixes. Only engine.rs changes: five insertions/four deletions; helper bodies and serialized/emitted formats remain unchanged.

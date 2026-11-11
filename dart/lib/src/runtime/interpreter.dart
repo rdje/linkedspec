@@ -6652,11 +6652,11 @@ final class LinkedSpecRuntimeEngine {
     })) {
       return false;
     }
+    // Function evaluation keeps invocation checks and source effects. A following
+    // canonical transform owns result guards without becoming a free helper call.
     if (receiver is ActionCallExpr) {
-      if (compiledSpec.functionRegistry.hasName(receiver.name)) {
-        return false;
-      }
-      if ((receiver.sourceMethod ?? receiver.name) == receiver.name &&
+      if (!compiledSpec.functionRegistry.hasName(receiver.name) &&
+          (receiver.sourceMethod ?? receiver.name) == receiver.name &&
           !receiver.trailingBlockArg &&
           _isOrdinaryArrayTransformArguments(
             receiver.name,

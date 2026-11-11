@@ -1,0 +1,12 @@
+{
+  "original": "PASS",
+  "programs": 312,
+  "supported_RED": 28,
+  "separate_initial_compatibility_RED": 3,
+  "preservation_PASS": 281,
+  "full_cold_records_exact": 312,
+  "parsed_inputs_exact": 312,
+  "traced_native_records_inputs_exact": 9,
+  "production": "unchanged",
+  "limits": "Original finite full-wire/first-input reproduction; no peer verdict or portable initial-input admission."
+}

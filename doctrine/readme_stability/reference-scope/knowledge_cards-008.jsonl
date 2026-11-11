@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2960,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-capture-slice-delimiter-seek-boundary.md","sha256":"a448dbc16227f14d91e34544efc624ed3397b5f2dce4c0bb0f3156338e847fa5","type":"member"}
 {"bytes":3470,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md","sha256":"9141a3c3f4f56903229bf37f5e6cb6bf38d96619ba7a7ae0c93b4f20a84e8d1b","type":"member"}
 {"bytes":6591,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-composition-dispatch-gap.md","sha256":"f2280f1bfff1e02364b99aa9098df6a72d29ef1f686fe8d0dce36e2bb77db3f3","type":"member"}
 {"bytes":5252,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-push-composition.md","sha256":"56ae8e36bd252c345eebaea1b6668b6afc5767af03c3c30a1e031a3a84634035","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
 {"bytes":2622,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-string-result-kinds.md","sha256":"07743a905ac3ea277b3d69e5befc246dd7c2f2719cfddac4368d7572374ef4b0","type":"member"}
 {"bytes":1939,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-ordered-zero-width-continuation.md","sha256":"abb5207b282c998375cbba1e8f85650cfb6e7c5d1903bd1f4ebdc5bfd6e3b4aa","type":"member"}
-{"bytes":5264,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-original-event-input-grants.md","sha256":"bfc866945dbbc82b8fda1e7b37d62598ccd20c8d490c9e1a12d62b0f555426ce","type":"member"}

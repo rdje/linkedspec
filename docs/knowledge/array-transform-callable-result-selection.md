@@ -7,7 +7,7 @@ answers:
   - "can a correct callable take with value still have an unready descriptor"
   - "why is a literal Array not the established constructor guard oracle"
 date: 2026-11-11
-status: qualified selection41 frozen; bounded Perl/Rust focused-checked; independent Dart next
+status: qualified selection41 frozen; bounded Perl/Rust/Dart focused-checked; independent Julia next
 tags: [functions, arrays, transforms, guards, readiness, qualification]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.41; original44/separate45 retain13 supported targets/25 healthy/seven profiles,44 full records/source pairs exact,89 actual pairs/178 artifacts, first readonly0/empty stderr/fifteen controls and current128 named identities."
 reverify: "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-selection-2026-11-11/review.py"
@@ -53,4 +53,4 @@ implemented with focused312, separate readiness qualification and recovery;
 unactivated strict-marker proposal1.1 is superseded by the signature
 inventory, without production changes. Original selection populations stay dated.
 
-Independent Rust78.6.2 is now focused-checked: [[rust-callable-array-transform-result-guards]] records20 supported targets/three separate initial-source continuation movements/289 preserved, with original failures and actual launcher notice retained. Its96 initial producer/first-with policies remain exact; Dart/Julia/installed Lua acquire their own policies next.
+Independent Rust78.6.2 is now focused-checked: [[rust-callable-array-transform-result-guards]] records20 supported targets/three separate initial-source continuation movements/289 preserved, with original failures and actual launcher notice retained. Its96 initial producer/first-with policies remain exact; Independent Dart78.6.3 is now focused-checked: [[dart-callable-array-transform-result-guards]] records28 targets/three separate initial-source compatibility/281 preserved/104 initial policies exact, private31-current312/direct647/qualified readonly24/current510, with original reader1 and launcher notice retained. Julia/installed Lua acquire their own policies next.

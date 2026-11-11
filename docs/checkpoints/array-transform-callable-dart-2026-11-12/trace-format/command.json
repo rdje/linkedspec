@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "tool/trace_callable_array_transform_results.dart"
+  ],
+  "cwd": "dart",
+  "environment": {}
+}

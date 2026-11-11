@@ -1,0 +1,17 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-dart-2026-11-12/check_current.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/array-transform-callable-dart-2026-11-12/check_current.py": "b04b4d98dc7887616c762fb1fe51196e15e57a42d0a421b74fb1cd67e22680a5",
+    "docs/checkpoints/array-transform-callable-dart-2026-11-12/capture_current.py": "4717b63f6c8e8c40bfa0807562a828aaf21a3210cd07bd6a66d30c7ddc257465",
+    "docs/checkpoints/array-transform-callable-dart-2026-11-12/direct/custody.json": "b78deb83011cb0c7022d8d8b1e7b079e916e9152daa7831bdd9f3a747a2fb63b"
+  }
+}
