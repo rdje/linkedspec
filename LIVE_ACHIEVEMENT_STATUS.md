@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues after all bounded ordinary79/callable79.6 backend lanes have focused results and daily cleanup4.26 is verified. Parent/full23.4 admission remains open. Authoritative remaining-feature assessment23.1.41 is next.
+Full PNT continues with frozen callable Array-transform78.6 after selection41. All bounded ordinary79/callable79.6 lanes have focused results; parent/full23.4 admission remains open. Independent Perl78.6.1.0 policy intake is next, before production.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.26. Dated eight-scope census/replay matches1,235 metadata rows. Four completed owned combined logs retain124,012 content bytes/modes; independent predelete use passes, exact plain duplicates are removed and residue is absent. Separate readonly0/empty stderr/fourteen effective controls pass. All other artifacts/caches/proof/repositories stay protected; no physical-reclamation or complete native/OS claim.
+TYPE-REFERENCE-BOOK.1.2.23.1.41. Original44/qualified45 retain13 supported targets/25 healthy/seven policy profiles; all44 original full records/module/handler bodies exact,89 actual pairs/178 artifacts, first readonly0/empty stderr/fifteen controls/current128 identities pass. One unsupported literal-constructor expectation remains original without product-RED credit; inventory1.2.1.3.1 owns initial policy. Frozen78.6 has independent owners, no production edit or peer verdict.
 
 ## Next Action
 
-Activate23.1.41 from clean Git. Reconcile the authoritative operation inventory with remaining agreed features and deferred verification, repair its two stale current pointers and missing parent child link, then select a bounded next owner without inferring completeness. Assess unassessed registered-function compositions through public tools before production. Full native/source/context/registration/formatter/declared5.4/historical4.24/safe-launcher/routing owners remain open.
+Activate Perl78.6.1.0 from clean Git and re-acquire shared45 plus own initial/first-with/optional/excess/fixed-final-rest signature/needed-error/earlier-owner fences before production. Preserve every full public error/field absence/source pair; split source/arity prerequisites before result repair. Independent Rust/Dart/Julia/installed Lua follow one focused commit per lane. Initial-literal inventory/full native/source/context/registration/formatter/declared5.4/historical4.24/safe-launcher/routing owners remain open.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.41 — Original44/qualified45;13 supported targets/25 healthy/seven profiles/89 pairs/readonly fifteen controls/current128; frozen78.6/Perl intake next, literal policy separately owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.26 —1,235 dated metadata rows; four exact combined logs/124,012 content bytes/modes archived before duplicate retirement; readonly0/fourteen controls; assessment41 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5 — Each194/four routes1164PASS/private19RED-current194/175 full records/direct2254/1353 pairs/eight qualified traces/readonly18/current500; daily4.26 then selection41.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
@@ -29,7 +30,6 @@ Activate23.1.41 from clean Git. Reconcile the authoritative operation inventory 
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.4 —173/four routes/1006 assertions/private19RED-current173PASS/direct1921;154 healthy/173 pairs exact; first readonly eleven controls; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.3 —173/four routes/private19RED-current173PASS/direct318;154 healthy records/173 artifact pairs exact; first readonly eleven controls; independent Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.2 —173/four routes/private11RED-current173PASS/direct374;162 healthy records/173 artifact pairs/warnings exact; first readonly nine controls; independent Dart next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1 —244PASS/private18RED-restored244PASS/direct384; first readonly thirteen controls;225 exact projections/one descriptor advance; independent Rust next.
 
 ## History
 

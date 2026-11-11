@@ -1,0 +1,27 @@
+{
+  "original_questions": 44,
+  "qualified_questions": 45,
+  "unsupported_expectation": "constructor_rejection_oracle",
+  "original_preserved": true,
+  "changed_expectation_fields": [
+    "expected removed",
+    "profile_only true"
+  ],
+  "reason": "The established oracle uses array(...). The original literal Array initial wrong-Hash-consumer policy is not admitted by the selected produced-result contract; preserve its actual wrapped host error as a profile, with inventory owner TYPE-REFERENCE-BOOK.1.2.1.3.1.",
+  "oracle_template": "tests/fixtures/array_transform_result_guard_cases.json",
+  "oracle_sha256": "5be0d5ca5336aabe77b373ab59f5a1bd05310c569030a0a78fbd1690143d575e",
+  "actual_source_templates": {
+    "docs/checkpoints/array-transform-callable-selection-2026-11-11/observer.pl": {
+      "bytes": 3496,
+      "sha256": "fb6075d2fa5a5148cafeca5cf885790e6f6634daa742693c65deb2a77a67d19d"
+    },
+    "docs/checkpoints/array-transform-callable-selection-2026-11-11/capture.py": {
+      "bytes": 4476,
+      "sha256": "5cbe46b9b7ad90cb78b6bbf95d67f93a442eb8d6c81b0c5444621812843ea1a3"
+    },
+    "docs/checkpoints/array-transform-callable-selection-2026-11-11/inspect.py": {
+      "bytes": 3849,
+      "sha256": "a877d4261829ccc1b814cc7c6006ebfafcce8dd0cb7ee2d25208bec64fca91f6"
+    }
+  }
+}

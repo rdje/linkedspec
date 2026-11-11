@@ -9,7 +9,7 @@ answers:
   - "which callable pipeline selection fixture is safe for Lua"
   - "how was the original callable pipeline pattern assumption qualified"
 date: 2026-11-11
-status: qualified selection23.1.40 frozen; callable79.6 owned; no production repair yet
+status: historical selection23.1.40 qualified; all five bounded callable79.6 lanes focused-checked; full admission open
 tags: [perl, functions, array, pipeline, guards, readiness, qualification]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.40; docs/checkpoints/array-pipeline-callable-selection-2026-11-11/REVIEW.md retains original39/separate41/shared safe37,16 targets/25 healthy including five readiness-only targets, original37 full records/artifact pairs exact, all39/41 source pairs, first readonly0/empty stderr/thirteen controls and current source/grammar/instrument identity PASS."
 reverify:
@@ -24,7 +24,7 @@ explicitly excludes registered-function receiver calls before common guards.
 The existing function MVP allows compatible receiver composition; this is a
 bounded implementation gap, not new syntax or a function-registration failure.
 
-Qualified41 has16 targets: eleven execution/error failures and five matching
+Qualified41 at that capture has16 targets: eleven execution/error failures and five matching
 value/error cases with unresolved metadata. The latter are trim_later_with,
 three initial-kind compositions and invalid_range_receiver_composed. Five selected
 action-rewriter fields distinguish readiness from execution. A correct null or
@@ -38,7 +38,7 @@ original sources/observations/assessment remain unchanged and receive no product
 RED credit. Separate41 keeps exact original37 supported questions and adds four
 balanced invalid-range literal controls. All37 full observed records/source pairs
 are exact after physical artifact path-prefix adjustment. Initial Number/null/
-Hash terminal pairs observe[[],[]]; this is current Perl, not a peer source policy.
+Hash terminal pairs observe[[],[]] at that capture; this is not a peer source policy.
 
 Safe shared37 excludes every malformed native pattern. Perl-specific41 must not
 be run on unsafe Lua; native formatter repair remains LUA-STARTUP-READING.2.3 and
@@ -60,4 +60,7 @@ Related: [[array-pipeline-result-guard-selection]], [[terse-user-defined-functio
 November11 erratum/supersession: the selected metadata map has five named fields;
 sealed historical six-field prose is unchanged and carries no extra field claim.
 [[perl-callable-pipeline-result-guards]] closes the bounded Perl result gap after
-[[perl-callable-pipeline-first-call-arity]]; independent peers remain pending.
+[[perl-callable-pipeline-first-call-arity]]. Current bounded Rust79.6.2/Dart79.6.3/
+Julia79.6.4/installed Lua79.6.5 also have focused results under their own recorded
+policies; current family status belongs to docs/tasks/TYPE-REFERENCE-BOOK.md.
+Original selection observations stay historical; full23.4 admission remains open.

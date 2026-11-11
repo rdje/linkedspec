@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4694,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-source-provenance-diagnosis.md","sha256":"1cc7d554752fc7c28744448280968fbb9c30ac9fcdc763d5f6d8fb08ef67b914","type":"member"}
 {"bytes":3447,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-split-source-metadata.md","sha256":"e11de0d89de222dfbbc014bb0ff21d3ca144a7fd2178a38eed17fa7d201ca6ee","type":"member"}
 {"bytes":4921,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-statement-source-provenance.md","sha256":"26653193b0334f9060343f5e18d380bcfa89b40361ac5977889f81f38efa08a1","type":"member"}
 {"bytes":3674,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-conformance-audit.md","sha256":"8320a13faf642a67e182e2487275169c605ced334bab74a128be1db185891595","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3950,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-final-residue-proof.md","sha256":"5b43533ecbeb4155a64b772a929f6de1506428386b86362c2e4cd21372cf598f","type":"member"}
 {"bytes":9580,"lines":135,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-liveness-permission-denial.md","sha256":"9640df9621f87948fe89b558f5703b9a1aeebe1687d8c93026f83dd1182ae5e8","type":"member"}
 {"bytes":4939,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-migration-reconciliation.md","sha256":"e52276c5fe1be9ce67362de7a4475f46aea35fffd4d81ea8c346198cbdb10a8a","type":"member"}
-{"bytes":4507,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-obsolete-rust-objects.md","sha256":"c92e37425bd18ddbd596574065ef3172ff571e3bd054d3a947f12a16d3bf098f","type":"member"}

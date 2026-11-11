@@ -1,0 +1,8 @@
+{
+  "kind": "retained actual exec_command observation, not a replay",
+  "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-selection-2026-11-11/qualify.py",
+  "cwd": ".",
+  "exit_code": 0,
+  "combined_output": "{\"next\": \"separate actual qualified acquisition\", \"original_questions\": 44, \"original_sources_unchanged\": true, \"qualified_questions\": 45, \"result\": \"PASS\"}\n",
+  "limits": "This source/fixture-composition invocation used exec_command directly. Its returned combined output and actual exit are retained here; standalone stdout/stderr were not separately acquired. Subsequent qualified runtime/inspection/review commands retain their own complete separate channels. No original missing channel is reconstructed."
+}

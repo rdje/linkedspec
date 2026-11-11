@@ -1354,6 +1354,48 @@ admission remain open. Dart's additional direct tests now have a separate qualif
 original six omitted first-use identities stay unknown; its own Array-transform
 cases and inverse remain bound.
 
+### Registered-function Array transforms: selected repair
+
+A pure registered function can return the Array consumed by these transforms.
+Compatible free and receiver forms already work on the recorded Perl routes:
+
+```text
+fn supply(seed) {return(seed)}
+
+Value:: I {
+ return([take(supply(["head","tail"]),1),
+         supply(["head","tail"]).take(1)])
+}
+```
+
+Both members are `["head"]`. The existing guarded free wrapper also rejects an
+incompatible later Hash consumer before its operands; this returns `[null, ""]`:
+
+```text
+fn supply(seed) {return(seed)}
+
+Value:: I {
+ order="";
+ out=take(supply(["head","tail"]),1).set_key(
+   {order=cat(order,"K");"k"}, {order=cat(order,"V");1});
+ return([out,order]);
+}
+```
+
+The corresponding receiver prefix `supply(...).take(1).set_key(...)` still fails
+compilation on the recorded Perl implementation. The selected repair covers
+the eight transform names above, later copy/logical/with rejection, needed errors
+and source effects. One `supply(...).take(...).set_key(...).with(){...}` form already returns
+null/no effects while remaining unresolved in descriptor readiness, so a matching
+value is insufficient. Family78.6 begins with independent Perl policy intake;
+each other backend is assessed separately before any fix or support claim.
+
+Initial wrong-input policy remains separate from produced-result guards. The
+established constructor contrast uses `array(...)`; a direct literal Array with
+an incompatible Hash consumer currently raises a wrapped host error on Perl.
+Receiver inventory1.2.1.3.1 owns that policy question. No universal wrong-input
+normalization, function signature change or complete portable admission follows.
+
 ## Hash helpers
 
 Hash helpers return scalar information about an object or a new hash/array value derived from it.

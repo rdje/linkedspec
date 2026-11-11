@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6951,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-condition-truthiness-drift.md","sha256":"301f6357f60558247e52608f90f98ecde9ad48c4dc2ea72f8695a5d758e9adb5","type":"member"}
 {"bytes":7544,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-diagnostic-output-drift.md","sha256":"236df8fb490b2861619e7dfa099a753998d0e64d46f7ccf47557ee0d4244a043","type":"member"}
 {"bytes":5938,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-scalar-numeric-drift.md","sha256":"2517f3e1ee6fd441a8406467be9fb5ee8044110189f0734a28ee7faff8bf2651","type":"member"}
 {"bytes":2470,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-switch-scalar-comparison-drift.md","sha256":"6027353d70f8e3775b741cc3ceaa901a6a824866254b469da814cb8e61abb055","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4918,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-admission.md","sha256":"a220a5c1c50619931d6583614688002119e10c0e6df97360c46966f7f2625249","type":"member"}
 {"bytes":10388,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-authority.md","sha256":"c0d14b4e0934eb65306de739db4ad39f9f6911d75ac3e950ca9f60a90c4d8b95","type":"member"}
 {"bytes":6830,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-carriers.md","sha256":"4ed82974a0ce6f7995e99ae14d627893a629a917babb62865ce092c369c28d3c","type":"member"}
-{"bytes":4701,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-dormant-red.md","sha256":"62d00db807308fc22420066c8d375dfb2f44ef5dd9483589f104d11c325d6928","type":"member"}

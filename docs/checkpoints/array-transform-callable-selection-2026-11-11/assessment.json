@@ -1,0 +1,296 @@
+{
+  "rows": {
+    "concat_arrays_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "concat_arrays_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "concat_arrays_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "constructor_rejection_oracle": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unexpected-error",
+        "fresh:value"
+      ]
+    },
+    "drop_back_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_back_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_back_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "drop_front_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_front_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_front_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "drop_logical_later_with": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "initial_hash_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_hash_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_null_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_null_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_number_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_number_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "needed_count_composed": {
+      "classification": "target",
+      "failures": [
+        "native:needed-error",
+        "fresh:unavailable"
+      ]
+    },
+    "needed_count_terminal": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "needed_source_composed": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "needed_source_terminal": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "nested_kinds": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reverse_copy_later_with": {
+      "classification": "target",
+      "failures": [
+        "readiness",
+        "native:value",
+        "fresh:value"
+      ]
+    },
+    "reversed_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reversed_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reversed_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "selected_hash_bridge": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "sorted_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "sorted_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "sorted_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "source_effect_before_rejection": {
+      "classification": "target",
+      "failures": [
+        "readiness",
+        "native:value",
+        "fresh:value"
+      ]
+    },
+    "source_once": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "source_snapshot": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "take_later_with": {
+      "classification": "target",
+      "failures": [
+        "readiness"
+      ]
+    },
+    "take_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "valid_empty_with": {
+      "classification": "healthy",
+      "failures": []
+    }
+  },
+  "summary": {
+    "healthy": [
+      "take_compatible",
+      "take_free_hash_guard",
+      "take_last_compatible",
+      "take_last_free_hash_guard",
+      "drop_front_compatible",
+      "drop_front_free_hash_guard",
+      "drop_back_compatible",
+      "drop_back_free_hash_guard",
+      "slice_compatible",
+      "slice_free_hash_guard",
+      "sorted_compatible",
+      "sorted_free_hash_guard",
+      "reversed_compatible",
+      "reversed_free_hash_guard",
+      "concat_arrays_compatible",
+      "concat_arrays_free_hash_guard",
+      "source_once",
+      "source_snapshot",
+      "valid_empty_with",
+      "nested_kinds",
+      "selected_hash_bridge",
+      "needed_source_terminal",
+      "needed_source_composed",
+      "needed_count_terminal"
+    ],
+    "metadata_fields": [
+      "canonical_action_ir_fallback_count",
+      "language_agnostic_action_ir_ready",
+      "raw_perl_dependency_count",
+      "unresolved_helper_count",
+      "unresolved_helpers"
+    ],
+    "profile": [
+      "initial_number_terminal",
+      "initial_number_composed",
+      "initial_null_terminal",
+      "initial_null_composed",
+      "initial_hash_terminal",
+      "initial_hash_composed"
+    ],
+    "readiness_only": [
+      "take_later_with"
+    ],
+    "target": [
+      "take_receiver_hash_guard",
+      "take_last_receiver_hash_guard",
+      "drop_front_receiver_hash_guard",
+      "drop_back_receiver_hash_guard",
+      "slice_receiver_hash_guard",
+      "sorted_receiver_hash_guard",
+      "reversed_receiver_hash_guard",
+      "concat_arrays_receiver_hash_guard",
+      "take_later_with",
+      "reverse_copy_later_with",
+      "drop_logical_later_with",
+      "needed_count_composed",
+      "constructor_rejection_oracle",
+      "source_effect_before_rejection"
+    ]
+  }
+}

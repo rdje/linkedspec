@@ -2538,12 +2538,12 @@
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78`
   Status: `active` / all bounded backend outcomes focused-checked; full23.4 remains separate
-  Children: `.78.0`, `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`.
+  Children: `.78.0`, `.78.1`, `.78.2`, `.78.3`, `.78.4`, `.78.5`, `.78.6`.
   Goal: Preserve selected ordinary Array-valued slice/order/concat results through current actual-kind consumers and rejection continuations.
   Dependencies: Completed selection23.1.38, frozen array_transform_result_guard_cases.json and array-transform-result-guard-composition.md; existing constructor/view/Hash-result guards and initial-source lesson76.6/77.
   Reproduction/impact: Original Perl37 all ready1/raw0/fallback0/unresolved0 have19 failures: eleven free/later programs raise Not a HASH reference, eight literal receiver programs retain raw DSL and fail handler/module compilation. Eighteen healthy controls and all actual original artifacts retained. No peer defect inferred.
   Acceptance: Only take/take_last/drop_front/drop_back (existing source[,n]/[n]), slice source/start[,n], sorted/reversed free-one/zero-extra and concat_arrays free-two/receiver-one. Each backend independently acquires unchanged37 and own initial Number/null/Hash, optional/excluded-arity and needed-error fences before production. Preserve first producer source/errors and earlier produced/selected/copied guards separately; source once/snapshots/order/count/start coercion/sort/copy depth/splices and statement/operator/end mutation stay. Compatible Array/selected String/Hash bridges and valid empty with retain semantics; incompatible Hash consumers reject before operands, skipping later copy/logical/with. No other transforms/list-splice/alias/keyword/unknown/traversal/non-with trailing/deferred/callback/unassessed function-receiver promotion. Full23.4 remains separate.
-  Frontier: Bounded Perl source78.0/result78.1.1, independent Rust78.2/Dart78.3/Julia78.4 and installed Lua78.5 are repaired/focused-checked. Qualified Dart additional-direct23.4.20 preserves its original first-use limit. All bounded78 backend outcomes now exist; full23.4/declared5.4 remain separate. After clean Lua landing, selection23.1.39 reconciles the next roadmap requirement before any new implementation or deferred verification. Each next owner completes its normal commit before switching.
+  Frontier: Bounded Perl source78.0/result78.1.1, independent Rust78.2/Dart78.3/Julia78.4 and installed Lua78.5 are repaired/focused-checked. Qualified Dart additional-direct23.4.20 preserves its original first-use limit. All bounded ordinary78 backend outcomes now exist; full23.4/declared5.4 remain separate. Later ordinary79/callable79.6 outcomes are recorded; remaining-feature selection23.1.41 now owns unassessed registered-function composition and the next bounded owner before implementation or deferred verification. Each next owner completes its normal commit before switching.
 
   Backend proof contract: Before production acquire unchanged37 on each leaf's named public routes and each affected producer's own initial Number/null/Hash, existing optional operand, excluded-arity/needed-error and earlier-owner fences. Preserve all healthy semantics and actual producer/input policies; repair only demonstrated canonical result guard gaps under frozen78. Retain actual first SDK/grammar/instrument/artifact inputs/full channels, unchanged-target RED/GREEN and distinguishing inverse/readonly recovery where a repair is needed. If already healthy, retain that outcome without speculative edits. Update smallest new/direct-dependent normal and public book. No broad source/domain/context/depth/coercion/mutation/native custody or admission claim.
   Focused execution: Smallest finite new targets and directly affected producer/source normals; owned syntax/format or precise local runner include, inverse/recovery/book/Knowledge/history/memory/diff and mandatory hooks. No broad suite.
@@ -3090,3 +3090,66 @@
   - [x] **NO REGRESSION** —158 full projections/28 malformed helper-function signatures exact; direct6+66+244+125/syntax and940 pairs/1876 API artifacts retained.
   - [x] **LOCKSTEP** — Book/Knowledge/roadmap/live/task/index/scope/MEMORY align; focused gates and normal clean landing precede Rust79.6.2. Full23.4 remains separate.
   Landing whitespace correction: Staged diff check exits2 for a blank line at EOF in the sealed reader. Exact first-reader bytes survive as first-review.py.gz with original first-use inputs/output/seal unchanged; qualified reader resolves only that historical alias and freezes its own inputs before repeat. No SDK/normal/oracle changes. Qualified actual reader0/empty stderr/same14 controls passes; exact failure/provenance: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/LANDING.md.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6`
+  Status: `in_progress` / frozen selection; no production repair yet
+  Children: `.78.6.1`, `.78.6.2`, `.78.6.3`, `.78.6.4`, `.78.6.5`.
+  Goal: Preserve existing registered-function Array-transform receiver/result composition.
+  Dependencies: Qualified selection23.1.41/shared45; normal clean selection landing before production.
+  Acceptance: Apply docs/checkpoints/type-operation-inventory/array-transform-callable-result-guard-composition.md in full. Preserve existing function/producer/signature/error/arity/context policies and independent source-before-use acquisition. Qualified Perl45 exposes13 supported targets/25 healthy/seven profiles, including one readiness-only failure; no peer verdict or initial-literal policy promotion.
+  Schedule: Perl independent policy intake78.6.1.0 first, then bounded source/arity/result repairs as evidence requires; independent Rust/Dart/Julia/installed Lua afterward, each focused commit before the next. Full23.4/final push follows coverage.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1`
+  Status: `pending`
+  Children: `.78.6.1.0`; implementation/prerequisite leaves split after intake.
+  Goal: Independently acquire and repair Perl registered-function Array-transform composition.
+  Dependencies: Frozen78.6/shared45 and clean23.1.41.
+  Acceptance: Parent78.6 contract in full on public Get/descriptor/handler/native/full emitted-fresh routes. Source-once/needed-error/readiness and initial/excluded/signature fences precede production; preserve malformed signature rejection and constructor/literal distinction. No generic callable, invalid-input or context expansion.
+  Planned verification: Focused own public intake/new/direct-dependent normals, unchanged-target same-path old/current loaded-owner proof, readonly controls/current identities and normal commit per child.
+  Planned canonical trigger: Full23.4/final push after coverage.
+  Planned claim verification: Finite authored controls; actual children declare their measurement boundary.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0`
+  Status: `pending`
+  Goal: Acquire current Perl canonical source/optional/excluded/function-signature policies before new transform result guards.
+  Dependencies: Clean23.1.41; frozen78.6/qualified45 with original44 qualification retained.
+  Acceptance: Re-acquire shared45, then each selected producer's own initial Number/null/Hash terminal/first-with and optional/default/excess forms, fixed/final-rest valid/invalid function calls, source once/snapshot/needed source/count errors and earlier-owner guards. Retain every full public error field/metadata/field absence/module-handler body and first-use source inputs. Isolate any source/first-call prerequisite into a bounded child before result implementation. Profiles are not portable policy or semantic PASS; initial-literal1.2.1.3.1 stays separate. Distinct caller/parameter names avoid shadowing32. No production edits in intake.
+  Planned verification: Focused finite public source-bound acquisition, independent recovery/corruptions/current identities, docs/book/task/index/history/memory and normal commit before implementation.
+  Planned canonical trigger: Full23.4/final clean push; actual policy/infrastructure movement separately owned.
+  Planned claim verification: Finite authored deterministic intake, no population/completeness/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2`
+  Status: `pending`
+  Goal: Independently acquire and repair Rust registered-function Array-transform result guards.
+  Dependencies: Frozen78.6/shared45 and preceding clean owner.
+  Acceptance: Parent78.6 contract and own initial/optional/excluded/function-signature/error fences before production on native/restored/plan/full emitted-fresh routes. No imported Perl failure, source policy or error framing. Preserve formats and source/product custody; split prerequisites when required.
+  Planned verification: Focused own new/direct-dependent normal, exact loaded-owner inverse if repaired, readonly/current identities/docs/normal commit.
+  Planned canonical trigger: Full23.4/final clean push after coverage.
+  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3`
+  Status: `pending`
+  Goal: Independently acquire and repair Dart registered-function Array-transform result guards.
+  Dependencies: Frozen78.6/shared45 and preceding clean owner.
+  Acceptance: Parent78.6 contract and own initial/optional/excluded/function-signature/error fences before production on native/restored/plan/full emitted-fresh routes; no peer policy/verdict. Parsed inputs precede compile/restore and full available error maps survive. Preserve formats and split prerequisites when required.
+  Planned verification: Focused own new/direct-dependent normal, exact loaded-owner inverse if repaired, readonly/current identities/docs/normal commit.
+  Planned canonical trigger: Full23.4/final clean push after coverage.
+  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4`
+  Status: `pending`
+  Goal: Independently acquire and repair Julia registered-function Array-transform result guards.
+  Dependencies: Frozen78.6/shared45 and preceding clean owner.
+  Acceptance: Parent78.6 contract and own initial/optional/excluded/function-signature/error fences before production on native/restored/plan/full emitted-fresh routes; no peer policy/verdict. Parsed inputs precede compile/restore and full available errors survive. Preserve formats and split prerequisites when required.
+  Planned verification: Focused own new/direct-dependent normal, exact loaded-owner inverse if repaired, readonly/current identities/docs/normal commit.
+  Planned canonical trigger: Full23.4/final clean push after coverage.
+  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5`
+  Status: `pending`
+  Goal: Independently acquire and repair installed Lua registered-function Array-transform result guards.
+  Dependencies: Frozen78.6/shared45 and preceding clean owner.
+  Acceptance: Parent78.6 contract and own initial/optional/excluded/function-signature/error fences on each actual host before production/native/restored/plan/full emitted-fresh routes; no peer verdict/policy. Retain native bodies before loading, parsed inputs before compile/restore and full public errors/outer native fields. No chunk locals/unsafe full runner/malformed native patterns/declared5.4 inference. Preserve formats and split prerequisites when required.
+  Planned verification: Focused own new/direct-dependent normal and syntax, exact loaded-owner inverse if repaired, readonly/current identities/docs/normal commit.
+  Planned canonical trigger: Full23.4/final clean push after coverage.
+  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
