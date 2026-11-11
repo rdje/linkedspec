@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4154,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.0","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"710cfa713e3c12d734e5ec6ef64adbaf7a6440094d3e862c8f36a53e4ada0dd1","type":"member"}
 {"bytes":3479,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-copy-rejection.md","sha256":"8d15d6301567d79d1b9c037486154e8f23b35d99c9ca999272274de545752aab","type":"member"}
 {"bytes":2236,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6","path":"docs/knowledge/perl-count-logical-rejection.md","sha256":"ee128e316e65f603a8f4549d456ee48a45747fe8304b313b869690d0a68c0be3","type":"member"}
 {"bytes":3354,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.7","path":"docs/knowledge/perl-count-receiver-compilation.md","sha256":"9ff84cf949601d675a474d06c11f4d5e9c0c154944afecf3241a042ccbd87384","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2722,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-crash-recovery.md","sha256":"a7b66659e5ecb4b8be7f158faf3ef9214d5000ef80eabaf7ea701cd94470e26a","type":"member"}
 {"bytes":3705,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-foundation.md","sha256":"ac5ad3ae725746b6cc8c03b95e14f476bbc83b3ec48340507accc7468eacaeef","type":"member"}
 {"bytes":5914,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-input-authority-selection.md","sha256":"f8a6c46c069285205aca94b532bafff300cc3e22343ffd3bcfa7066289004cfb","type":"member"}
-{"bytes":5119,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-argument-authority.md","sha256":"808b229a506659f115d2d39ae2388a7841f32ca32390433aeaa37f4441f2057f","type":"member"}

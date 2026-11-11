@@ -1861,7 +1861,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 ### Pipeline continuations: selected repair
 
 The seven pure pipeline helpers above return transformed Arrays while preserving
-source bindings. Ordinary Perl, Rust and Dart results now retain their actual kind through
+source bindings. Ordinary Perl, Rust, Dart and Julia results now retain their actual kind through
 subsequent methods, copy, logical operations and immediate `with`:
 
 ```text
@@ -1874,7 +1874,7 @@ uniq(["head","head"]).set_key("k",1)           # null
 
 An incompatible Hash consumer returns null before evaluating its operands.
 Rejection persists through later copy, logical operands and `with` bodies. For
-example, this program returns `[null,""]` in Perl, Rust and Dart:
+example, this program returns `[null,""]` in Perl, Rust, Dart and Julia:
 
 ```text
 order="";
@@ -1893,8 +1893,8 @@ their rejection, and valid empty Arrays enter `with` normally.
 This bounded Perl repair covers canonical `split_each`, `trim_each`,
 `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq` and `filter_match`.
 Initial producer fallback, excluded arities, regex/Unicode, copy/mutation and
-standalone writeback keep their existing policies. Julia and Lua are
-assessed independently; full source/context/portable admission remains open.
+standalone writeback keep their existing policies. Installed Lua is assessed
+independently; full source/context/portable admission remains open.
 
 Rust covers the same seven canonical producers on native execution, restored
 compiled specifications, generated plans and compiled emitted modules. Its
@@ -1917,6 +1917,16 @@ An invalid-range `filter_match` still quietly returns `[]` on Dart; a following
 arguments retain their previous unevaluated behavior, while the acquired receiver
 extras keep their effects; neither form gains canonical authority. Rebuild Dart
 applications for these runtime guards; emitted and serialized formats stay stable.
+
+Julia covers these canonical results on native execution, restored specifications,
+generated plans and fresh emitted modules. Initial Number/null/Hash sources keep
+their empty Arrays and immediate `with` behavior. Both free and receiver excess
+arguments retain their acquired evaluation effects. Required source/delimiter
+errors keep their original diagnostics. Terminal invalid-range `filter_match`
+still quietly returns `[]`; an incompatible Hash continuation now returns null
+before operands, coalesce and later bodies. Existing contextual `with` remains
+supported; deferred callback authority is unchanged. Rebuild Julia applications
+for these runtime guards; parsed and emitted formats remain stable.
 
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty

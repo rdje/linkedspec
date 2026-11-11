@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3377,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-ast-parser.md","sha256":"c0aa3fe802fd0cb71b140b1c6cc62715d21f68b063e9a02884d2f05075f082bb","type":"member"}
 {"bytes":2709,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-contract-resolver.md","sha256":"f280c66ffeb7312bfcf4468416cbbf38fdc830b80956e057e23cebc76bf8d044","type":"member"}
 {"bytes":2205,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-active-edge-body-candidate-ownership.md","sha256":"a11e133e77da550edc2e5f0462263646578c660f1183aa5faaf49c6a8eb80476","type":"member"}
 {"bytes":5586,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-advanced-corpus-residual-split.md","sha256":"49875387eeb7c620f44a57613d6b1360feec914e5afa586d72c36b01af061655","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":14145,"lines":192,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-validation-function-registry-reading.md","sha256":"5e59c4b63c08ea470080e8e382d56205d6750b06538592926a665343da5ca513","type":"member"}
 {"bytes":14667,"lines":238,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-parser-authority-reading-and-member-omission.md","sha256":"5291a6a9760de9b62d8c344588e31a770b3c65f849300ac9bd6402c38634b657","type":"member"}
 {"bytes":3221,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-presence-result-source-guards.md","sha256":"53ed39a11a67f33425eea606d2977c7d0ecbf0362c3354502d655a3d91d9369a","type":"member"}
-{"bytes":4405,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-adapter.md","sha256":"9fdf53115d7e82e9c9f04d2beeaa5d60f5aca331f483a088ca91e8424662d114","type":"member"}

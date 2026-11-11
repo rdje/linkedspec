@@ -1,0 +1,37 @@
+{
+  "docs/checkpoints/array-pipeline-result-guard-julia-2026-11-11/capture.py": {
+    "bytes": 8516,
+    "mode": 420,
+    "sha256": "0b37fb90bcef2a239afebdcb0d93b0b1ad03de65b8c37100a435fae71c6a6f8e"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-julia-2026-11-11/run_direct.py": {
+    "bytes": 2408,
+    "mode": 420,
+    "sha256": "a8464274e2a19744d3233aa520308e52d9ebf8e716050414713003f3cc1c3699"
+  },
+  "julia/src/parser/UserFunctionDefinitionParser.jl": {
+    "bytes": 8201,
+    "mode": 420,
+    "sha256": "c6266a06de921fc42af5876b195cb6d054855076aca5f4cb15f8ef238371b838"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

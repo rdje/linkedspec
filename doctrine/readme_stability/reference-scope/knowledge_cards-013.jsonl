@@ -1,4 +1,5 @@
-{"member_count":57,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":58,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2972,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-standalone-discard-hardening.md","sha256":"68a4a873a1d5437a710d4c1db5b7993d1eb2045893fae878d1d15946ee884fef","type":"member"}
 {"bytes":3795,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-value-call-execution.md","sha256":"cc8a88ed6b5767bf748a6d971e1ff7ffb921273708c0914c0f72c996492a7a34","type":"member"}
 {"bytes":3682,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-when-otherwise-alias-seams.md","sha256":"07586f525c8d1df85adfe51e0f78271a7e09981f0b65d9f080ccfe50417f47a1","type":"member"}
 {"bytes":1803,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/text-to-ast-backend-doctrine.md","sha256":"d1d926ca9b4c5bfa2422d1562f27cef0e6c0b57f60c136f6e4ee40857685a6ad","type":"member"}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Julia pure-pipeline results (79.4)
+
+Canonical seven-helper results enter the existing actual-kind guard after original first-producer permission. Independent173/shared36+own137 moves930PASS76FAIL to1006PASS/four routes; private19RED/current173PASS, direct1921 and first readonly0/empty stderr/eleven corruptions pass. All154 healthy records/173 parsed-module pairs stay exact across six epochs. Preserve Julia's quiet invalid-regex fallback, free/receiver SXKW exclusions, missing forms, required error projections, contextual with, scalar_result/index policy and producers/formats. Actual SDK1.12.7, selected fixtures/default grammar and pre-load parsed/emitted products are retained; current SDK inputs match. One runner include registers the normal. Book/Knowledge/task/live/roadmap pointers route to installed Lua79.5 after normal focused landing; full admission remains separate.
+
 ## 2026-11-11 — Guard Dart pure-pipeline results (79.3)
 
 Canonical seven-helper Array results enter the existing persistent actual-kind guard, preserving first-producer permission and rejecting wrong Hash consumers before operands/later work. Independent173/shared36+own137 moves19RED/154PASS to173PASS on all four routes; private19RED/current173PASS, direct318 and first readonly0/empty stderr/eleven corruptions pass.154 healthy records/173 parsed-module pairs stay exact. Preserve Dart's quiet invalid-regex fallback, distinct free/receiver excess-argument effects, missing forms, required diagnostic objects, earlier owners and Boolean boundary. Complete own/new/selected external fixtures/default grammar and relative routing precede SDK use; current SDK identities match. Book/Knowledge/task/live/roadmap pointers route to independent Julia79.4 after normal focused landing; full admission remains separate.

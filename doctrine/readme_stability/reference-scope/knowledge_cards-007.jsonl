@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":18985,"lines":168,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md","sha256":"e81a1c91ef7ef1c74cb518f2f5bc223fa61963d0a43e695f39b5ca697ffa24af","type":"member"}
 {"bytes":5049,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-user-function-routing.md","sha256":"e7cde3d34dc46d859dce81d2dd75646d03ea63f7d48ca122e38301b4146114da","type":"member"}
 {"bytes":2363,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-runtime.md","sha256":"1db329da698a67f771604465b2f4b6d291a90b25543972954a247190848cdc6b","type":"member"}
 {"bytes":2236,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-variadic-v2-signature-state.md","sha256":"88d085c7938815dd9b8726a11a21066151a6941bbdfac0a15e3e3605f1d087cf","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
 {"bytes":3150,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-index-rejection.md","sha256":"2434156c325d4b3bca374079a494c9d33f24c27b914422b64611fbbbbd5473a6","type":"member"}
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
-{"bytes":4154,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.0","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"710cfa713e3c12d734e5ec6ef64adbaf7a6440094d3e862c8f36a53e4ada0dd1","type":"member"}

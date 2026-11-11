@@ -1,0 +1,33 @@
+{
+  "cases": 173,
+  "shared": 36,
+  "own": 137,
+  "profiles": 141,
+  "red": [
+    "split_each_free_hash_guard",
+    "split_each_receiver_hash_guard",
+    "trim_each_free_hash_guard",
+    "trim_each_receiver_hash_guard",
+    "filter_nonempty_free_hash_guard",
+    "filter_nonempty_receiver_hash_guard",
+    "lowercase_each_free_hash_guard",
+    "lowercase_each_receiver_hash_guard",
+    "uppercase_each_free_hash_guard",
+    "uppercase_each_receiver_hash_guard",
+    "uniq_free_hash_guard",
+    "uniq_receiver_hash_guard",
+    "filter_match_free_hash_guard",
+    "filter_match_receiver_hash_guard",
+    "trim_later_with",
+    "uniq_copy_later_with",
+    "lower_logical_later_with",
+    "invalid_range_free_composed",
+    "invalid_range_receiver_composed"
+  ],
+  "healthy": 154,
+  "own_targets": [
+    "invalid_range_free_composed",
+    "invalid_range_receiver_composed"
+  ],
+  "scope": "Finite independently observed Julia preservation/repair controls; not population or performance measurement"
+}

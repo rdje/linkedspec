@@ -1,0 +1,21 @@
+{
+  "anchor": "julia/src/parser",
+  "nearer": [
+    {
+      "path": "julia/src/parser/specs/user_function_definition.spec",
+      "exists": false
+    },
+    {
+      "path": "julia/src/specs/user_function_definition.spec",
+      "exists": false
+    },
+    {
+      "path": "julia/specs/user_function_definition.spec",
+      "exists": false
+    }
+  ],
+  "selected": "specs/user_function_definition.spec",
+  "selected_sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae",
+  "search_owner": "julia/src/parser/UserFunctionDefinitionParser.jl",
+  "search_owner_sha256": "c6266a06de921fc42af5876b195cb6d054855076aca5f4cb15f8ef238371b838"
+}

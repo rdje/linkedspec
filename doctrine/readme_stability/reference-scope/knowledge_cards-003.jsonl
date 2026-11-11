@@ -42,6 +42,7 @@
 {"bytes":3611,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-and-required-dependency-steps.md","sha256":"ef2ebd5508e602e8b3ec66082a791159019f960d1230b0f1867b899008728b92","type":"member"}
 {"bytes":3257,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-anonymous-capture-boundary-helpers.md","sha256":"76cf8f526e10aa2b84abd7a4e8f74825271edfa851cd2c7e0447e858174db339","type":"member"}
 {"bytes":2939,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-arithmetic-result-source-guards.md","sha256":"f30758bd0bfdca210756db46c6d6f1e63cf44600fc44d9aaa08ef0e5ac39edfd","type":"member"}
+{"bytes":4483,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.4","path":"docs/knowledge/julia-array-pipeline-result-guards.md","sha256":"cf70223378d543f2c4e74abb9387b28218ef610b36466bc19769b5b4e44c10f6","type":"member"}
 {"bytes":4948,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.4","path":"docs/knowledge/julia-array-transform-result-guards.md","sha256":"a1ca5f851b7d438310542b8d70c9350c52b646d67abec56bfc665d3ba48c2729","type":"member"}
 {"bytes":13722,"lines":254,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-attached-switch-body-omission.md","sha256":"e4386a9341e9579f1981898a85a0c045d56a645d074ec337f3462496e3d5b1d5","type":"member"}
 {"bytes":2468,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-backend-interpreter-first-plan.md","sha256":"b204ef5ce3af8df088a7f95f4c6db32e5fad4024c4db97a2bcb8d5a08e2a6035","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4285,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-spec-resolution.md","sha256":"b01047b2d290c7ba3d4e8c4e8b4f0cf963c125b997b6a628cf1cdba9d0b23560","type":"member"}
 {"bytes":3973,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-return-and-pure-observation-gaps.md","sha256":"e83048e5b44eb67c80b7dc8b49e0322edf6449f4be38319c9d7874946f67e35b","type":"member"}
 {"bytes":15360,"lines":272,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md","sha256":"a3eaa1a2688c4657b2d80a55e3f57960032e65826cab8b13a6e21c7c9228b9d9","type":"member"}
-{"bytes":2340,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-nullable-match-state-preserves-absence.md","sha256":"901068df4f6bbd5207027e6f2b118f5b01a86d1e4d8e61e98286b12dfe15b2ce","type":"member"}

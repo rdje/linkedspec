@@ -4986,13 +4986,13 @@ custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4
 full23.4 remain separate. Evidence:
 `docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.
 
-### Perl, Rust and Dart pure-pipeline result guards
+### Perl, Rust, Dart and Julia pure-pipeline result guards
 
-Perl79.1.1, Rust79.2 and Dart79.3 guard canonical results of all seven pure pipeline helpers before incompatible consumers.
+Perl79.1.1, Rust79.2, Dart79.3 and Julia79.4 guard canonical results of all seven pure pipeline helpers before incompatible consumers.
 Initial producers, Perl source79.0's Number fence and earlier owners retain their original policies.
 The [pipeline reference](../dsl/value-container-flow-helper-reference.md) gives tested value/effect examples.
-Perl244/private18RED-restored244/direct384 passes; Rust173/private11RED-current173/direct374/nine readonly controls and Dart173/private19RED-current173/direct318/eleven controls pass on four routes.
-Perl preserves225 full projections/one descriptor advance; Rust preserves162 records/eleven targets and Dart154 records/nineteen targets.
-Perl retains240 actual source pairs/four syntax exclusions per normal; Rust and Dart retain173 serialized-or-parsed/module pairs per observer epoch.
-Regenerate older Perl and rebuild Rust/Dart. Independent Julia79.4 follows Dart's focused landing; full source/context/native admission stays open.
-Evidence: `docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/REVIEW.md`.
+Perl244/private18RED/direct384; Rust173/private11RED/direct374/nine controls; Dart173/private19RED/direct318/eleven controls; Julia173(1006 assertions)/private19RED/direct1921/eleven controls all pass repaired routes.
+Perl preserves225 full projections/one descriptor advance; Rust162 records/eleven targets; Dart and Julia154 records/nineteen targets each.
+Perl retains240 actual source pairs/four syntax exclusions per normal; Rust/Dart/Julia retain173 serialized-or-parsed/module pairs per acquired epoch.
+Regenerate older Perl and rebuild Rust/Dart/Julia. Installed Lua79.5 follows Julia's focused landing; full source/context/native admission stays open.
+Evidence: `docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-julia-2026-11-11/REVIEW.md`.
