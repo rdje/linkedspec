@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5914,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-input-authority-selection.md","sha256":"f8a6c46c069285205aca94b532bafff300cc3e22343ffd3bcfa7066289004cfb","type":"member"}
 {"bytes":5119,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-argument-authority.md","sha256":"808b229a506659f115d2d39ae2388a7841f32ca32390433aeaa37f4441f2057f","type":"member"}
 {"bytes":4497,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-input-captures.md","sha256":"54de0be495b33b34ae572c7101e880c79ddd2cef409de14eb753eb4dde86a81b","type":"member"}
 {"bytes":4281,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-original-occurrence-handoff.md","sha256":"5b08e2d1bd4540ef369939c9753907c925efc4d6aea63c7782c9195254a2c3f9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2536,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ptchange-spaced-input-shell-read-defect.md","sha256":"8137594dd642ebed2e2eee3d72c01509420f7586c4dfd2467c13b3bc2547dca7","type":"member"}
 {"bytes":6473,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-call-inventory-independent-coverage.md","sha256":"4a1cf009578bd752640791994c43afc0afdf18a2937e3e4d44869002f72e4fde","type":"member"}
 {"bytes":2778,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-readme-gitlink-claim-alias.md","sha256":"e3ac90796810cf55c8c73b7067e320ace64616d96a9017978401bcce2b83125f","type":"member"}
-{"bytes":4897,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-receiver-arity-calibration.md","sha256":"c62783ddfdccafe6935c879271faabce5e538ec45783a1a7a45b77f598e2fc9e","type":"member"}

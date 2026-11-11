@@ -1861,7 +1861,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 ### Pipeline continuations: selected repair
 
 The seven pure pipeline helpers above return transformed Arrays while preserving
-source bindings. Ordinary Perl, Rust, Dart and Julia results now retain their actual kind through
+source bindings. Ordinary Perl, Rust, Dart, Julia and installed Lua results now retain their actual kind through
 subsequent methods, copy, logical operations and immediate `with`:
 
 ```text
@@ -1874,7 +1874,7 @@ uniq(["head","head"]).set_key("k",1)           # null
 
 An incompatible Hash consumer returns null before evaluating its operands.
 Rejection persists through later copy, logical operands and `with` bodies. For
-example, this program returns `[null,""]` in Perl, Rust, Dart and Julia:
+example, this program returns `[null,""]` in Perl, Rust, Dart, Julia and installed Lua:
 
 ```text
 order="";
@@ -1893,8 +1893,8 @@ their rejection, and valid empty Arrays enter `with` normally.
 This bounded Perl repair covers canonical `split_each`, `trim_each`,
 `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq` and `filter_match`.
 Initial producer fallback, excluded arities, regex/Unicode, copy/mutation and
-standalone writeback keep their existing policies. Installed Lua is assessed
-independently; full source/context/portable admission remains open.
+standalone writeback keep their existing policies. Each backend is assessed independently; full source/context/portable admission
+remains open.
 
 Rust covers the same seven canonical producers on native execution, restored
 compiled specifications, generated plans and compiled emitted modules. Its
@@ -1927,6 +1927,18 @@ still quietly returns `[]`; an incompatible Hash continuation now returns null
 before operands, coalesce and later bodies. Existing contextual `with` remains
 supported; deferred callback authority is unchanged. Rebuild Julia applications
 for these runtime guards; parsed and emitted formats remain stable.
+
+Installed Lua (PUC5.5.1 and LuaJIT) also guards these seven canonical results on
+native execution, restored specifications, generated plans and fresh emitted
+modules. Initial Number/null/Hash inputs retain empty Arrays and enter immediate
+`with`; acquired excess arguments retain their effects. Required source,
+delimiter and computed pattern-operand errors propagate before consumers. For
+example, `filter_match(["head"],{items="bad";items+=1;"^head"})` still reports the
+binding-kind error; a later `.set_key("k",1).coalesce("masked")` cannot hide it.
+The known native malformed-regex diagnostic defect remains separately owned;
+these safe checks use valid pattern text. Earlier guarded prefixes, source
+snapshots, nested kinds and standalone writeback stay intact. Reload applications
+with the updated Lua SDK; declared PUC5.4 and full native admission remain open.
 
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty

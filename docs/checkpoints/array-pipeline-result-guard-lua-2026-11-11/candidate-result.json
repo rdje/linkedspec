@@ -1,0 +1,5 @@
+{
+  "candidate": "PASS",
+  "actual_direct_input_metadata": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/direct/input-identities.json",
+  "producer_sha256": "e909b972ddcb030b51bcd3fc2a2a40144dbc97b4a4f074b47c1b3b3a4e6b342d"
+}

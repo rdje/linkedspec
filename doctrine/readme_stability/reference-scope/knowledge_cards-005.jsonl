@@ -6,6 +6,7 @@
 {"bytes":3106,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-aggregate-selector-compile-rejection.md","sha256":"dcd65c62f4ebf9ebb65769c20f4d022f5d82bfb46ff8f085a11f0943951ce169","type":"member"}
 {"bytes":2790,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-and-required-dependency-steps.md","sha256":"bf7c57076caa5f8e24d29bde7f9abeac85c595dd34b0494ecf87af46f3ae32a5","type":"member"}
 {"bytes":2795,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-arithmetic-result-source-guards.md","sha256":"cb9ba738804fbea7f529c0df1899192e067db5461e9a75fe566ec671230b0619","type":"member"}
+{"bytes":4141,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.5","path":"docs/knowledge/lua-array-pipeline-result-guards.md","sha256":"7f1bf6cb04a8869d968ee416e346d8cdc8cc669356e115f4fe650af9312303e4","type":"member"}
 {"bytes":1654,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-array-split-mutation.md","sha256":"7441fd6d84185128e0994ef3d653f1cc2cba51e1846765a214bfb284a1274e4c","type":"member"}
 {"bytes":4174,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.5","path":"docs/knowledge/lua-array-transform-result-guards.md","sha256":"49882fa10fcd73835547cbb988b12af26b2b42da759659baf2d53aa026efdb81","type":"member"}
 {"bytes":16127,"lines":284,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-authority-compiled-reading-and-nested-step-gap.md","sha256":"1d2a8f87ba97959cf3ef112a5120f1fe09725a27a47926a11485bc82ab783487","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":13552,"lines":188,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md","sha256":"7a0c3d84e9fdfe2482ab31366cdf738b4f284aa9e757d6a96c40d60e4355fcd5","type":"member"}
 {"bytes":14145,"lines":192,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-validation-function-registry-reading.md","sha256":"5e59c4b63c08ea470080e8e382d56205d6750b06538592926a665343da5ca513","type":"member"}
 {"bytes":14667,"lines":238,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-parser-authority-reading-and-member-omission.md","sha256":"5291a6a9760de9b62d8c344588e31a770b3c65f849300ac9bd6402c38634b657","type":"member"}
-{"bytes":3221,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-presence-result-source-guards.md","sha256":"53ed39a11a67f33425eea606d2977c7d0ecbf0362c3354502d655a3d91d9369a","type":"member"}

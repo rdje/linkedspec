@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/observer.lua": {
+    "bytes": 4030,
+    "sha256": "f9e127522b5f9cdf7f95cd3fa85715918bb937d96a9d74f9eb78ece3287a3c5d"
+  },
+  "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/proof_io.py": {
+    "bytes": 3822,
+    "sha256": "afbc432f1aff8a705c72df7640c4c12eb627d5d499eb83e15aecd301ec73b158"
+  },
+  "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/capture.py": {
+    "bytes": 5960,
+    "sha256": "411a6a96257963e351ab2dd5f5115875d69f8e30775d72d14a2e5fd8680af365"
+  },
+  "docs/checkpoints/array-transform-result-guard-lua-2026-11-10/freeze_profiles.py": {
+    "bytes": 2618,
+    "sha256": "8065c773a60a2028a81492ddff9c3ab5750e9da6c7a663cb9eb2d6a7fd3457dd"
+  },
+  "lua/test/array_transform_result_guard_composition_test.lua": {
+    "bytes": 4836,
+    "sha256": "b684edb6358015a7b288ec1f45d7f6f7986bc6ac5fddb2d76f194195618b0e0a"
+  }
+}

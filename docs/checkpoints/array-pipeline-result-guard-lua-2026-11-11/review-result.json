@@ -1,0 +1,81 @@
+{
+  "per_host": {
+    "puc": {
+      "version": "Lua 5.5.1  Copyright (C) 1994-2026 Lua.org, PUC-Rio",
+      "programs": 173,
+      "shared": 36,
+      "own_controls": 137,
+      "profiles": 141,
+      "original_failures": 17,
+      "preserved": 156,
+      "needed_errors": 24,
+      "normal_checks": 1006,
+      "before_failures": 68,
+      "after_failures": 0,
+      "direct_counted_checks": 1921,
+      "copy_observations": 12,
+      "private_inverse": 17,
+      "private_restored": 173,
+      "artifact_pairs": 173
+    },
+    "luajit": {
+      "version": "LuaJIT 2.1.1788460057 -- Copyright (C) 2005-2026 Mike Pall. https://luajit.org/",
+      "programs": 173,
+      "shared": 36,
+      "own_controls": 137,
+      "profiles": 141,
+      "original_failures": 17,
+      "preserved": 156,
+      "needed_errors": 24,
+      "normal_checks": 1006,
+      "before_failures": 68,
+      "after_failures": 0,
+      "direct_counted_checks": 1921,
+      "copy_observations": 12,
+      "private_inverse": 17,
+      "private_restored": 173,
+      "artifact_pairs": 173
+    }
+  },
+  "actual_native_products": {
+    "intake": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "before": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "after": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "direct": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "inverse": {
+      "puc": 3,
+      "luajit": 3
+    },
+    "restored": {
+      "puc": 3,
+      "luajit": 3
+    }
+  },
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "hidden PUC original failure",
+    "LuaJIT consumer effects",
+    "PUC later body",
+    "LuaJIT needed error masked",
+    "PUC initial source normalized",
+    "LuaJIT Bool to Number",
+    "PUC excluded excess effects skipped",
+    "PUC excluded profile omitted",
+    "actual LuaJIT module drift",
+    "direct fixture binding omitted",
+    "producer/scalar policy changed"
+  ],
+  "limits": "Installed hosts only; fresh modules share runtime/process. Native malformed patterns excluded under LUA-STARTUP-READING.2.3; safe DSL pattern operands use valid regex text. Full native/cache/transitive/toolchain custody4.2/SESSION5, declared5.4, registration/context/isolation/full23.4 remain separate."
+}

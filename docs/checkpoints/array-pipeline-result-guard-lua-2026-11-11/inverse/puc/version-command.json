@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-v"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/control-owner/lua/src/?.lua;docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/control-owner/lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/inverse/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/inverse/puc",
+    "LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/control-owner/"
+  }
+}

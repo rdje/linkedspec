@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1344,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/six-variant-unicode-17-case-parity.md","sha256":"69a880919afc9db79fb64cde9c191edfc6444fea2c4fe6394156c803e7639ccd","type":"member"}
 {"bytes":3421,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sparse-and-outgoing-edge-sequence-gap.md","sha256":"0f7d8bd9dafc9443b95935110939b5f0b6224b9622a877c1c900544a12012be0","type":"member"}
 {"bytes":6099,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-arithmetic-call-surface-ground-truth.md","sha256":"3021beab11eb8e283328a77ea98e10741227ff64cff2efe53c8ede90d97a779f","type":"member"}
 {"bytes":3262,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-authoring-quality-doctrine.md","sha256":"47a37f9954ba486ff7086d413b323fee936e4387ecc533b98b917c5a9b8fb4e8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6760,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-defined-functions-mvp-contract.md","sha256":"3fcfd70aa8bec094d8701a3f63cc38bdb964ff92a0b032d8661ef35b270d609d","type":"member"}
 {"bytes":2918,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-extension-deferrals.md","sha256":"93b5195630948f1adc328661e97b4a01c7592a1ea3baf1795aa6bcad141db272","type":"member"}
 {"bytes":5103,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-implementation-inventory.md","sha256":"b8d1d1e112c74c7656ea781dbaff614214fe01df809f8e994d392a0e4a02790b","type":"member"}
-{"bytes":5405,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-registry-seam.md","sha256":"8c482a8ce837b11aaf1c26b6f7ed67abaffabddb78ecc3433e4e66a27652f9b7","type":"member"}

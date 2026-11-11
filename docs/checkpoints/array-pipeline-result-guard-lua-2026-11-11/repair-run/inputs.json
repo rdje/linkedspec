@@ -1,0 +1,47 @@
+{
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/owner-before.lua.gz": {
+    "bytes": 44241,
+    "mode": 420,
+    "sha256": "7c5d63b5f5b886a18bf06699cb39d1b3b2f3edbfabe3bf7778346ebda719a94a"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/repair.py": {
+    "bytes": 6412,
+    "mode": 420,
+    "sha256": "81af0f2cb51a528d3bdf383400643b58d49f5b89321de7c44eebe29d1e6f46eb"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/run_repair.py": {
+    "bytes": 1715,
+    "mode": 420,
+    "sha256": "e0b84614393eca8625df9f85750b20247ce28d5c799a0f39ffffe72e553f53bf"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/runner-before.lua.gz": {
+    "bytes": 80180,
+    "mode": 420,
+    "sha256": "3c5b4f79477e5a45f8500b47199f3e7ac004a511056c8abd5cb25bc9ab22d31d"
+  },
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 276595,
+    "mode": 420,
+    "sha256": "3ac82ef03d9dcd915be4d00ec332188157d55cc9cc0ee3443d35f0e3d9f25a1e"
+  },
+  "lua/test/run.lua": {
+    "bytes": 406155,
+    "mode": 420,
+    "sha256": "03bef4bd2357048f494cca9f9f31b1cbc8004e261bc37424d6e55b737e97334f"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

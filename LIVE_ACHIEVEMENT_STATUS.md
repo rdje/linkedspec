@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Pure-pipeline79: bounded Perl source/result, Rust, Dart and Julia results are focused-checked. Independent installed Lua79.5 follows normal clean Julia landing. All bounded78/headroom4.21 are committed. Full feature/source/context/native admission remains open.
+All bounded pure-pipeline79 backend outcomes are focused-checked on their recorded routes/hosts. Full feature/source/context/native admission remains open; remaining-feature selection23.1 resumes next.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.4. Canonical seven-helper Arrays retain actual-kind guards with original first-source permission and contextual with. Independent173/four routes/1006 assertions/private19RED-current173PASS/direct1921 and first readonly0/empty stderr/eleven corruptions pass.154 healthy records/173 pairs remain exact across six epochs; producer/scalar/index scope and actual SDK/default-grammar/source inputs match. Executable1.12.7 and actual precompile stderr retained.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.5. Each installed PUC5.5.1/LuaJIT173/four routes passes1006 checks; private17RED/current173PASS, direct1921 and first readonly0/empty stderr/eleven controls pass.156 healthy records/173 pairs stay exact across six epochs; current direct/native/grammar inputs match. No new chunk locals or producer/scalar/index changes. Safe DSL pattern errors use valid regex text; native formatter/declared5.4 stay separate.
 
 ## Next Action
 
-After normal hooks/post-pointer/brief0/clean Git, activate independent TYPE-REFERENCE-BOOK.1.2.23.3.79.5. Acquire each installed Lua ABI's own source/arity/error/earlier-owner policies, preserve shared36 and retain actual native products before loading. Repair only observed result gaps without new chunk locals; complete focused checks/docs/normal commit. Declared5.4/full native/source/context/registration/full23.4 remain separate.
+After normal hooks/post-pointer/brief0/clean Git, resume remaining-feature selection TYPE-REFERENCE-BOOK.1.2.23.1 using inventory and canonical facts, defining the next bounded leaf before changes. Routing18.2/query4.17/full23.4 stay deferred until agreed feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.4 —173/four routes/1006 assertions/private19RED-current173PASS/direct1921;154 healthy/173 pairs exact; first readonly eleven controls; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.3 —173/four routes/private19RED-current173PASS/direct318;154 healthy records/173 artifact pairs exact; first readonly eleven controls; independent Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.2 —173/four routes/private11RED-current173PASS/direct374;162 healthy records/173 artifact pairs/warnings exact; first readonly nine controls; independent Dart next.
@@ -29,7 +30,6 @@ After normal hooks/post-pointer/brief0/clean Git, activate independent TYPE-REFE
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.1 —1710 display lines removed, exact questions/other records/source acquisition and direct checks; canonical receipt governs landing.
-- TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — lossless duplicate-display plan, frozen source/reader inputs, seven controls/readonly replay; canonical18.1 next.
 
 ## History
 
