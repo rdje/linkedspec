@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3402,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-uniform-binding-runtime.md","sha256":"cff9d3c6a430b1cb0aaeeb48fbe7f4aef285529a39da2bc0c6a1ccef9bf983bc","type":"member"}
 {"bytes":3117,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unknown-runtime-helper-diagnostic-gap.md","sha256":"043b65fbaf3bfa096cdc8734af86a9b36925be38b5fc6573bde5cb3e40c9d23f","type":"member"}
 {"bytes":4210,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-user-function-registry.md","sha256":"df8e6e043a104c3ec6104e87b3727d72a09c67e7863a3c1c02e5152db0cd10e4","type":"member"}
 {"bytes":18985,"lines":168,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-validator-staged-prefix-reading-and-array-gaps.md","sha256":"e81a1c91ef7ef1c74cb518f2f5bc223fa61963d0a43e695f39b5ca697ffa24af","type":"member"}
@@ -108,6 +109,7 @@
 {"bytes":4265,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"ecc968d38c4632366a01c2c6bca2e52b21f903edbdeaa19d812aaafdad96ecb9","type":"member"}
 {"bytes":3520,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-marker-conditional-execution.md","sha256":"6cb5c77bd8e8d01e918609bfd0562050ebe23635497bfaa4fa253cbbc0131c9b","type":"member"}
 {"bytes":3094,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-null-return-execution.md","sha256":"b12c799a952629dfc5e50d7a49948eaa3497b06cda08982da8d6c078a86ad69a","type":"member"}
+{"bytes":3234,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0","path":"docs/knowledge/perl-callable-pipeline-intake-and-arity.md","sha256":"e020e26aa8919621efafe68895a3ce06c832b425f529179032e3c150ac172a0b","type":"member"}
 {"bytes":3696,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-replay-instrument-recovery.md","sha256":"98edbe7275d3bbf18cd3f560caad7c74b510c3d0378eeac2756af5b7200b5f12","type":"member"}
 {"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}
 {"bytes":3577,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-value-conditional-execution.md","sha256":"56723591803ef22d72727d902f27843081cab835a32d9f8c4de949be577392f0","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2466,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-constructor-result-guards.md","sha256":"c08f126eeda92992f268a0f6280ab1156f78c3a201b727dfdba52540ed1cf1ed","type":"member"}
 {"bytes":5010,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-constructor-capture.md","sha256":"d4495eb02813656375014266fbd989d7a7df352db469c9bde6798cccb0169596","type":"member"}
 {"bytes":5302,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-dependency-capture.md","sha256":"b6e96532c1a1193512f107d8df9d29373527eed7fb8c63ebbab114e09aaa659f","type":"member"}
-{"bytes":3891,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-factory-historical-inverse.md","sha256":"e7717e0acd22bcca7795f8bc780126b6409d76ec59fd6aa05aad92c5b3e8e41c","type":"member"}
-{"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}

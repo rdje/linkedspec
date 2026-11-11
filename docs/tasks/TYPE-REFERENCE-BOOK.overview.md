@@ -2692,3 +2692,12 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   - [x] **LOCKSTEP** — Book/current workaround, Knowledge, helper/root/task/index/frontier, roadmap and change/engineering/live/MEMORY align; rendering/continuity/normal hooks required before landing.
 
   Landing checks: Book render0/actual HTML contains the callable-limit/workaround paragraph; memory/handoff, both bounded histories and whitespace pass. Knowledge1723/12337 keys and reference scope1925 members/17 pages are synchronized. Normal hooks/post-pointer/brief0/clean Git still govern landing; no broad suite or push.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.22`
+  Status: `pending` / P1 import-isolation infrastructure follow-up after feature coverage
+  Goal: Make live/new Python recovery launchers immune to checkpoint standard-library name shadowing while preserving required sibling imports and historical source identities.
+  Dependencies: Perl intake79.6.1.0's retained unsafe/safe import and traceback controls; agreed feature coverage before broad infrastructure admission. Current reader already uses -P/cleared PYTHONPATH safely.
+  Acceptance: Reproduce traceback/_colorize/dataclasses/local inspect side effects through published launch paths; preserve all historic producers/inputs rather than renaming sealed files in place. Qualify a project-local safe launcher or equivalent that supports required explicit sibling modules and physical stdlib origin aliases, retains project cache locality and does not preload arbitrary side-effecting stdlib modules. Add meaningful RED/positive controls and doctrine/launcher integration only under canonical tier; no silent command or custody promotion for old records.
+  Planned verification: Canonical infrastructure boundary after focused launcher/import/locality/compatibility controls; complete required canonical gate before landing/push.
+  Planned claim verification: Declare finite setup/launcher evidence and every missing native/toolchain leg at activation.
+  Schedule: After feature coverage and before full23.4 evidence/admission; do not block the now isolated current reader or pivot away from active feature repairs.

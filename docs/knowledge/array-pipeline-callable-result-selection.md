@@ -54,5 +54,5 @@ diagnostic only. Fresh packages share the Perl process. First readonly/thirteen
 corruptions and current source/grammar/instrument identity pass. Historical input
 recovery is independent of the latest SDK. Full native/cache/transitive/toolchain
 custody4.2/SESSION5, source/context/isolation/registration/declared5.4/full23.4
-remain open. Next: Perl79.6.1 after normal clean selection landing.
+remain open. Perl intake79.6.1.0 now separates P1 arity79.6.1.1 before result79.6.1.2; see [[perl-callable-pipeline-intake-and-arity]].
 Related: [[array-pipeline-result-guard-selection]], [[terse-user-defined-functions-mvp-contract]].

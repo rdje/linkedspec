@@ -20,7 +20,7 @@
 {"bytes":34542,"lines":504,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/archogen-rust-lispish-integration.md","sha256":"4ed7bb435b765cfdd98278e1b67b2bc7934e66e926e26238059f0b379888b0c0","type":"member"}
 {"bytes":3433,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-contains-result-handoff.md","sha256":"a99073d875f72cb6b89426e6957987888d893b931f147046acbf44b9e35c3c1c","type":"member"}
 {"bytes":2945,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-helper-return-shape-caveats.md","sha256":"29dedf6a9d767e54cbca3e97c5024f16340a04b8587686d2dce56f3ede020bc6","type":"member"}
-{"bytes":4169,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.40","path":"docs/knowledge/array-pipeline-callable-result-selection.md","sha256":"e945dc538ecb1d83a858e116013faf74625bac983c4f73f764ae182ee1bb2e4a","type":"member"}
+{"bytes":4237,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0","path":"docs/knowledge/array-pipeline-callable-result-selection.md","sha256":"4b996cefd9d5edfbcea6a710504c27a12c179e49e7e2bd72a59220f55bfc1d57","type":"member"}
 {"bytes":8185,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.40","path":"docs/knowledge/array-pipeline-result-guard-selection.md","sha256":"3c05cc6a18a8e9f45abeac16228018e0b14998f290a6dbf6d8103a2751b93209","type":"member"}
 {"bytes":6290,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.5","path":"docs/knowledge/array-transform-result-guard-selection.md","sha256":"913a29cd0babbbb72ac081df046763bc32ae0a3dc84342e1a48aee3546fa858b","type":"member"}
 {"bytes":9652,"lines":147,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-tree-traversal-contract.md","sha256":"647203a478e2690c6461128eefd45774d07d0c590fe17d5dcc2f740ff8c1869e","type":"member"}
@@ -90,6 +90,7 @@
 {"bytes":2308,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/change-history-twenty-seventh-member-capacity.md","sha256":"d6e7f71ceb3385cefc648feecae91d8269b0676068208fb09e8baed04fd57436","type":"member"}
 {"bytes":2505,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/change-history-twenty-sixth-member-capacity.md","sha256":"b297202fe1eb31655576d9eb9b99b27ec9800ef918313eebf27bb8106b8bd908","type":"member"}
 {"bytes":2955,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/change-history-twenty-third-member-capacity.md","sha256":"9e5543849de97e2feb0e470c913851a206155f506e90aec0a623bab68c4d5296","type":"member"}
+{"bytes":2552,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0","path":"docs/knowledge/checkpoint-python-import-shadowing.md","sha256":"0b89bf44e22544a762979e4dae8d078c665960a820d2ff8888011ad73cf22985","type":"member"}
 {"bytes":4029,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/claim-publishing-disclosure-identity.md","sha256":"d163cd29222cd0795531884a1cc80aa6508afb4ea60bb5e1961b86570055a269","type":"member"}
 {"bytes":2525,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/claim-verification-index-snapshot.md","sha256":"9813ce0b27a615c2751dc0ae6fff27cd220f54269ea4843ff2654809017a8ab4","type":"member"}
 {"bytes":2757,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/codeblock-matches-checkpoint-input-closure.md","sha256":"2641dddfe8fdc26164bdb999da8e8ba3f52b762693aef4a3cfee74461cb68a3b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}
 {"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}
 {"bytes":6951,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-condition-truthiness-drift.md","sha256":"301f6357f60558247e52608f90f98ecde9ad48c4dc2ea72f8695a5d758e9adb5","type":"member"}
-{"bytes":7544,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-diagnostic-output-drift.md","sha256":"236df8fb490b2861619e7dfa099a753998d0e64d46f7ccf47557ee0d4244a043","type":"member"}

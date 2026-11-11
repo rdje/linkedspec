@@ -1,4 +1,6 @@
-{"member_count":60,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":62,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6760,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-defined-functions-mvp-contract.md","sha256":"3fcfd70aa8bec094d8701a3f63cc38bdb964ff92a0b032d8661ef35b270d609d","type":"member"}
+{"bytes":2918,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-extension-deferrals.md","sha256":"93b5195630948f1adc328661e97b4a01c7592a1ea3baf1795aa6bcad141db272","type":"member"}
 {"bytes":5103,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-implementation-inventory.md","sha256":"b8d1d1e112c74c7656ea781dbaff614214fe01df809f8e994d392a0e4a02790b","type":"member"}
 {"bytes":5405,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-registry-seam.md","sha256":"8c482a8ce837b11aaf1c26b6f7ed67abaffabddb78ecc3433e4e66a27652f9b7","type":"member"}
 {"bytes":2972,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-standalone-discard-hardening.md","sha256":"68a4a873a1d5437a710d4c1db5b7993d1eb2045893fae878d1d15946ee884fef","type":"member"}

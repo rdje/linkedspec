@@ -2921,13 +2921,16 @@
   Schedule: Perl then independent Rust, Dart, Julia and installed Lua, committing each focused lane before the next; full23.4/final push after coverage. Native malformed Perl-only controls must never enter the shared Lua producer.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1`
-  Status: `pending`
+  Status: `in_progress`
+  Children: `.79.6.1.0`, `.79.6.1.1`, `.79.6.1.2`.
   Goal: Independently acquire/repair Perl registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Perl-specific41 and readiness-only targets remain distinct from shared37; retain original39 qualification.
-  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
-  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
-  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+  Planned verification: Focused callable public probes, exact old/current loaded owner, direct normals, readonly recovery/corruptions, docs and normal hooks; each child declares its actual tier.
+  Planned canonical trigger: Full23.4/final clean push after coverage.
+  Planned claim verification: Finite authored controls; each child declares its claim boundary.
+  Activation: Clean237a738b; frozen79.6/shared37/Perl41, original39 qualification, book, actual handlers and source predicate reviewed before independent acquisition. Distinct caller/parameter names avoid separately owned shadowing32. No production edit before intake.
+  Frontier: Intake child0 retains original178/terminal18. Nine malformed receiver arities are compiler defects, not producer policies. P1 child1 precedes result/readiness child2; commit cleanly between children. Canonical evidence and full constraints: docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2`
   Status: `pending`
@@ -2964,3 +2967,43 @@
   Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
   Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
   Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0`
+  Status: `completed` / immutable intake with qualified recovery
+  Goal: Freeze independent Perl callable intake and own arity prerequisites before production.
+  Dependencies: Clean237a738b/frozen79.6; parent owned acquisition before subdivision.
+  Acceptance: Original178/qualified41+own137, terminal/with/function-arity/error/pattern/earlier-owner policies, terminal-arity discriminators and first inputs/all actual pairs retained; independent recovery, current identity and documentation before clean handoff. No production edit.
+  Verification tier: `focused`
+  Focused checks: Public Get/descriptor/native/emitted-fresh178 plus terminal18; source-root proof, readonly/corruptions/current identities; book/Knowledge/task/history/memory/diff/normal hooks.
+  Canonical trigger: none: Ordinary finite intake; full23.4/final push after coverage.
+  Claim verification: none: Finite authored source/arity distinctions, no population/performance measurement.
+  Activation: Parent's clean237a738b and original before-use instrument bytes remain exact.
+  Outcome: All196 actual module/handler pairs retained.42 terminal[]/42 first-with[0,W];25 supported result targets,128 preservation records/four function-signature fences/three pattern boundaries/eighteen arity observations stay distinct. Nine function forms reject safely; paired receivers falsely ready (seven compile/two private-helper runtime failures). P1 child1 precedes result child2; no production repair or peer verdict.
+  Recovery: Qualified-recovery2 actual reader0/empty stderr/twelve effective corruptions and current identities pass. Misnamed child64/outer1 and lexical stdlib-path oracle1 both fail before reader execution; full originals remain. Import audit explains traceback/_colorize/dataclasses/local inspect side effects. Safe -P/cleared PYTHONPATH isolates this standalone reader; physical path resolution handles Homebrew aliases. Broader launcher compatibility4.22 follows coverage.
+  Evidence: docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md is canonical for policies, source locations, complete failures/recovery, limitations and commands. Formats/source/grammar/APIs unchanged; native/cache/transitive/toolchain4.2/SESSION5/shadowing32/context/isolation/registration/declared5.4/full23.4 stay open.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public178+terminal18 retain25 supported targets and nine false-ready receiver arities.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Failed private pipeline normalization retains host source; registered receiver exclusion bypasses result guards. Same-backend free forms distinguish arity rejection.
+  - [x] **FIX** — Intake/recovery frozen and both repair children owned; no code-defect closure claimed.
+  - [x] **ADDRESSED (verified)** — Qualified reader0/twelve controls/current input identities; all196 pairs recover without latest SDK.
+  - [x] **NO REGRESSION** — Perl/specs activation-exact; producer/kind/error observations preserved, defective arities not accepted as policy.
+  - [x] **LOCKSTEP** — Book/Knowledge/live/roadmap/task/index/MEMORY route to P1 arity; normal hooks govern landing.
+  Landing correction: First staged candidate fails task pressure by4413 bytes and duplicate actual verification owners after subdivision. Exact candidate/task snapshots/full hook log retained under INTAKE containment; owned hook processes terminated, exit unavailable after recovery (no PASS). Parent becomes planning-only; deduplicate only new prose into INTAKE without changing old tasks or caps. Scope updater's rejected -P sibling-import launch is also retained there; use its published wrapper.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1`
+  Status: `pending` / P1 prerequisite before callable prefix result repair
+  Goal: Reject malformed Perl pipeline signatures without emitting undefined private helper calls or falsely ready descriptors.
+  Dependencies: Clean intake79.6.1.0 and its terminal-arity controls/current contract/source mechanism; preserve original178 and supported callable targets.
+  Acceptance: Own source/arity diagnosis and published signature rejection, reuse existing supported diagnostics/guarding without new helper or portable wrong-arity policy. No undefined __array_value helper survives malformed source. Preserve source-before-effects/optional-scope compatibility/current valid producer behavior, source/format/function/callback boundaries and all supported41 result targets. Minimal meaningful RED/GREEN/direct checks, same-path old/current source control, input/artifact recovery/current identity, docs and normal commit.
+  Planned verification: Focused malformed terminal/composed arity controls plus canonical direct-dependent pipelines; mandatory source/format/docs/hook checks.
+  Planned canonical trigger: Full23.4/final clean push after coverage; any new authority separately owned.
+  Planned claim verification: none: Finite authored arity/self-containment controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2`
+  Status: `pending`
+  Goal: Repair independently confirmed Perl callable pipeline result/readiness gaps after the arity prerequisite.
+  Dependencies: Clean79.6.1.1; re-acquire unchanged178 against that source image and own actual metadata-only or error-provenance movements before production.
+  Acceptance: Full79.6 contract and parent79.6.1 requirements. Preserve initial terminal/with and nonliteral pattern normalization, function-arity rejection/earlier owners/scalar/index/mutation/formats; supported chains need correct execution and full-source readiness. Own private exact old/current module control and focused new/direct normals/recovery/docs before independent Rust79.6.2.
+  Planned verification: Parent79.6 focused checks with every actual source/new fixture/default grammar/normal/private input bound before use.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored result/preservation controls, no population/performance measurement.

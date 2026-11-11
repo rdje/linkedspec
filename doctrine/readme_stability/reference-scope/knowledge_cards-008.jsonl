@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3891,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-factory-historical-inverse.md","sha256":"e7717e0acd22bcca7795f8bc780126b6409d76ec59fd6aa05aad92c5b3e8e41c","type":"member"}
+{"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
 {"bytes":3150,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-index-rejection.md","sha256":"2434156c325d4b3bca374079a494c9d33f24c27b914422b64611fbbbbd5473a6","type":"member"}
 {"bytes":3088,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-presence-rejection.md","sha256":"18e7d7b67c3089d746a0c5987fc59f1047dbad3ba51f17eba5a7f3601dbd1e87","type":"member"}
 {"bytes":4154,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.0","path":"docs/knowledge/perl-copy-result-rejection-gap.md","sha256":"710cfa713e3c12d734e5ec6ef64adbaf7a6440094d3e862c8f36a53e4ada0dd1","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2534,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-strict-arguments.md","sha256":"16d1d73c7a27914dc66047b4b3220ec1493f23edeb10465ea056531157b655d4","type":"member"}
 {"bytes":3256,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-success-conformance.md","sha256":"e0c5cb0fabee6610d956ed3d3456654174ee4cc6e076580499c80b934af6a0fb","type":"member"}
 {"bytes":4634,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-ast-constructions.md","sha256":"93a2dd20d989173a4178d8697ed30bc231635ea5c81f2f7c75ae962c0b30b7a0","type":"member"}
-{"bytes":3949,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-ast-input-frames.md","sha256":"df7bd74f207cce1d04cc4c7311bc93c842f6287bfd4f14f0be812e73cf625f5c","type":"member"}
-{"bytes":2722,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-crash-recovery.md","sha256":"a7b66659e5ecb4b8be7f158faf3ef9214d5000ef80eabaf7ea701cd94470e26a","type":"member"}

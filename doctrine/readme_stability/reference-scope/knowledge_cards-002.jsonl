@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2733,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-pure-blind-dependency-regex-gap.md","sha256":"ad4b84528b509de4be29133582c970c6eb0a715bad9c9fa9affb15d2b8e297f0","type":"member"}
 {"bytes":2207,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-push-snapshot-result-guards.md","sha256":"629530536819d9b9b8b5e11acd9bc6932ecda9afe9b71462a9edc55198ea1b01","type":"member"}
 {"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
 {"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":19119,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-neutral-contract.md","sha256":"bf842211b5ee2994c5836d9bb741adbb57215e80e8da5b51cd9188ae363aefaa","type":"member"}
 {"bytes":4540,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-recomposition.md","sha256":"a17f5f7f51195960e86473227a71251d8a6de246704141c2e12f286738afc553","type":"member"}
 {"bytes":13894,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-contract-v1.md","sha256":"cbdba9150c9d8879467794b29cbd365a4c528d8bc17e0dfa16a2793748ef02f8","type":"member"}
-{"bytes":8583,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-parity-audit.md","sha256":"c3c2888677c1d0ea557319353e3539b5412327fcacfea91bb5e3b93e9d79e4de","type":"member"}

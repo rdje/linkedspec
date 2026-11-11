@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7544,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-diagnostic-output-drift.md","sha256":"236df8fb490b2861619e7dfa099a753998d0e64d46f7ccf47557ee0d4244a043","type":"member"}
 {"bytes":5938,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-scalar-numeric-drift.md","sha256":"2517f3e1ee6fd441a8406467be9fb5ee8044110189f0734a28ee7faff8bf2651","type":"member"}
 {"bytes":2470,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-switch-scalar-comparison-drift.md","sha256":"6027353d70f8e3775b741cc3ceaa901a6a824866254b469da814cb8e61abb055","type":"member"}
 {"bytes":4211,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/current-call-name-inventory-does-not-prove-runtime-semantics.md","sha256":"498824476e6e67bf0446f0ec2efc63f020c0eefbf753137bb81ff653a7757828","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4701,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-dormant-red.md","sha256":"62d00db807308fc22420066c8d375dfb2f44ef5dd9483589f104d11c325d6928","type":"member"}
 {"bytes":8985,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-project-data-ssd-storage.md","sha256":"c9df6669e9d5e6bfaa71171c57cefdd884ba15f5fd929eeeba3e803f0b1af190","type":"member"}
 {"bytes":3819,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-public-facade-startup-reading.md","sha256":"fbc43f7985457fdc4917065d4c10a0e4b23b0e5af93b85c01809a131917572ab","type":"member"}
-{"bytes":2733,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-pure-blind-dependency-regex-gap.md","sha256":"ad4b84528b509de4be29133582c970c6eb0a715bad9c9fa9affb15d2b8e297f0","type":"member"}

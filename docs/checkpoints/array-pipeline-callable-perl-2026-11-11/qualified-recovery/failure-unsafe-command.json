@@ -1,0 +1,13 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-v",
+    "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/recovery_path_probe.py",
+    "fail"
+  ]
+}

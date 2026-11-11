@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded ordinary pure-pipeline79 outcomes are focused-checked. Qualified callable selection23.1.40 freezes safe shared37 and independent backend79.6 lanes; full feature/source/context/native admission remains open.
+Callable79.6 Perl lane is split into committed intake, P1 arity fence and result/readiness repair, followed by independent peers. All bounded ordinary79 outcomes are focused-checked; full feature/source/context/native admission remains open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.1.40. Original39 includes two unsupported eager-pattern expectations, preserved without product-RED credit. Separate41 retains exact supported37 records/artifact pairs and exposes16 qualified Perl targets/25 healthy, including five readiness-only failures. All39/41 actual source pairs/full observed errors/channels survive. First readonly0/empty stderr/thirteen controls/current source identities pass. No production edit or peer verdict.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0. Original178/own137 plus terminal18 retain all196 actual source pairs and84 terminal/first-with policies.25 supported result targets and nine false-ready receiver arities stay owned; nine matching function forms are the rejection oracle. Qualified-recovery2 actual reader0/empty stderr/twelve controls/current identities pass. Original setup64 and lexical path-oracle1 failures remain nonpassing before reader execution; safe import/failure controls explain and avoid checkpoint inspect.py side effects. No production changes.
 
 ## Next Action
 
-After normal hooks/post-pointer/brief0/clean Git, activate Perl79.6.1. Acquire own source/first-with/arity/needed-error/earlier-owner policies from frozen callable contract/shared safe37/Perl41 before minimal prefix/readiness repair. Independent peers follow their own clean lanes; malformed Perl literals never enter Lua. Broad routing/query/full23.4 follow coverage.
+After normal hooks/post-pointer/brief0/clean Git, activate P1 arity79.6.1.1. Reject malformed callable receiver pipeline shapes using the existing function-form oracle; preserve valid source policies/current178 and25 result targets. Re-acquire/result79.6.1.2 follows its clean commit, then Rust79.6.2. Safe-launcher4.22 and full admission follow feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0 —178+terminal18/all196 pairs/84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls; arity prerequisite next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.4 —173/four routes/1006 assertions/private19RED-current173PASS/direct1921;154 healthy/173 pairs exact; first readonly eleven controls; installed Lua next.
@@ -29,7 +30,6 @@ After normal hooks/post-pointer/brief0/clean Git, activate Perl79.6.1. Acquire o
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
 
 ## History
 

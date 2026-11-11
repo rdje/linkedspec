@@ -1965,6 +1965,15 @@ verdict. Computed DSL blocks are not an admitted eager Perl `filter_match` patte
 contract; use the documented regex operand syntax. Native Lua malformed-pattern
 handling and declared PUC5.4 admission remain separately qualified.
 
+Malformed callable receiver pipeline signatures also have a tracked Perl arity
+fence defect: excess arguments can leave DSL in generated handlers, and missing
+`split_each`/`filter_match` operands can call an undefined private helper despite
+a ready descriptor. Corresponding function forms already reject without effects.
+Use canonical receiver arities: no authored arguments for `trim_each`,
+`filter_nonempty`, `lowercase_each`, `uppercase_each` and `uniq`, and one delimiter
+or regex operand for `split_each`/`filter_match`. The arity prerequisite is owned
+before the callable continuation repair; malformed calls gain no supported API.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and

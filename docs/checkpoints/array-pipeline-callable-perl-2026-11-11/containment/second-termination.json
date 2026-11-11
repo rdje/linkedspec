@@ -1,0 +1,11 @@
+{
+  "outer_exit": 143,
+  "claim_check": "interrupted; no PASS",
+  "first_process_capture": {
+    "archive": "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/containment/stopped-processes.json.gz",
+    "bytes": 1279,
+    "sha256": "f905527d245cc8bf9fc8419bff933401260f9df16839136eb5927490e1c57773"
+  },
+  "failure": "plaintext current-checkout paths in raw process commands; exact bytes retained compressed",
+  "source_unchanged": true
+}

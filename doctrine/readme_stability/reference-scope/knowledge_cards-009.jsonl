@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3949,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-ast-input-frames.md","sha256":"df7bd74f207cce1d04cc4c7311bc93c842f6287bfd4f14f0be812e73cf625f5c","type":"member"}
+{"bytes":2722,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-crash-recovery.md","sha256":"a7b66659e5ecb4b8be7f158faf3ef9214d5000ef80eabaf7ea701cd94470e26a","type":"member"}
 {"bytes":3705,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-foundation.md","sha256":"ac5ad3ae725746b6cc8c03b95e14f476bbc83b3ec48340507accc7468eacaeef","type":"member"}
 {"bytes":5914,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-input-authority-selection.md","sha256":"f8a6c46c069285205aca94b532bafff300cc3e22343ffd3bcfa7066289004cfb","type":"member"}
 {"bytes":5119,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-argument-authority.md","sha256":"808b229a506659f115d2d39ae2388a7841f32ca32390433aeaa37f4441f2057f","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":4265,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-storage-locality-doctrine.md","sha256":"3d19114a42e7b24ca0feac22aec45667f7a983b488fcf225f9846c55aaa7b4dc","type":"member"}
 {"bytes":4536,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-workflow-routing.md","sha256":"327a4b7dc166b66de7aeae3c289d3e639477ef4d6669b50ba425f912ebc47d39","type":"member"}
 {"bytes":7508,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-root-evidence-filesystem-modes.md","sha256":"19b14a3607756d7954592e71a1826cb1f12e9465606331b1ff3aa5d96218ff84","type":"member"}
-{"bytes":2536,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ptchange-spaced-input-shell-read-defect.md","sha256":"8137594dd642ebed2e2eee3d72c01509420f7586c4dfd2467c13b3bc2547dca7","type":"member"}
-{"bytes":6473,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-call-inventory-independent-coverage.md","sha256":"4a1cf009578bd752640791994c43afc0afdf18a2937e3e4d44869002f72e4fde","type":"member"}

@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2536,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ptchange-spaced-input-shell-read-defect.md","sha256":"8137594dd642ebed2e2eee3d72c01509420f7586c4dfd2467c13b3bc2547dca7","type":"member"}
+{"bytes":6473,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-call-inventory-independent-coverage.md","sha256":"4a1cf009578bd752640791994c43afc0afdf18a2937e3e4d44869002f72e4fde","type":"member"}
 {"bytes":2778,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-readme-gitlink-claim-alias.md","sha256":"e3ac90796810cf55c8c73b7067e320ace64616d96a9017978401bcce2b83125f","type":"member"}
 {"bytes":4897,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-receiver-arity-calibration.md","sha256":"c62783ddfdccafe6935c879271faabce5e538ec45783a1a7a45b77f598e2fc9e","type":"member"}
 {"bytes":6715,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-zero-argument-calls.md","sha256":"cc241c8e5bf87d06eb4eed62cf235c72206988169c105afbd0a8bb6c430270b0","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":5385,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-large-number-conversion-defect.md","sha256":"3e5a8cb1fc069e6de50d1fe8766e1f4dbbc8a814f6345fe82475db4a15255644","type":"member"}
 {"bytes":3202,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-leading-input-trivia-boundary.md","sha256":"29e9abff9a3c7721c9612913f2bf72f9e60de941fcb8fb57bbdcccde835ceec7","type":"member"}
 {"bytes":4920,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-legacy-shipped-spec-oracle-smokes.md","sha256":"42324792ec6c09ef3e563e0390927e7de9cfcfba35a766c968bfa3972b629e3d","type":"member"}
-{"bytes":3727,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"108bdc17f192fa9d6daf4f87f42c3f7ef1f2277dd903af75aaa5f3883452a801","type":"member"}
-{"bytes":2797,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lexical-result-source-guards.md","sha256":"6d38d89a947d7930d792fd428d00e28b1af01e44f3543c80a9ae74ba70e412ab","type":"member"}

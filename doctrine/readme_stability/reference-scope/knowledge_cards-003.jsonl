@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8583,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-parity-audit.md","sha256":"c3c2888677c1d0ea557319353e3539b5412327fcacfea91bb5e3b93e9d79e4de","type":"member"}
 {"bytes":3593,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-perl-rust-baseline-admitted.md","sha256":"127f55bdc3c242ace50d462edbcec89410b674ebacd1b52f59b13c258f7cf2df","type":"member"}
 {"bytes":4517,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generic-trailing-codeblock-argument-correction.md","sha256":"aaee5c296afee746b7a3d41fadf993cd1d2fc0ba2745255559dee48b577ad874","type":"member"}
 {"bytes":5702,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/github-size-safe-publication.md","sha256":"0ef25efa8f29ff99fef6e205609891dc8e0682047f2c9f22306d08eb4ddea7e8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2603,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-named-capture-take-origin-repair.md","sha256":"17f0a212c6da7f619090eed7a0036ea8ac944d6691f3d5d15aa270e426b9ac71","type":"member"}
 {"bytes":5398,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-mcp-server-plan.md","sha256":"d0e205b0cba450adeb7abd9b9a70a3ad6d54297163f8f98b122c84633c6ba20a","type":"member"}
 {"bytes":4285,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-spec-resolution.md","sha256":"b01047b2d290c7ba3d4e8c4e8b4f0cf963c125b997b6a628cf1cdba9d0b23560","type":"member"}
-{"bytes":3973,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-return-and-pure-observation-gaps.md","sha256":"e83048e5b44eb67c80b7dc8b49e0322edf6449f4be38319c9d7874946f67e35b","type":"member"}

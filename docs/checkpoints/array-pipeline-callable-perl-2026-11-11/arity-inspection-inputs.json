@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/run_inspect_arity.py": {
+    "bytes": 1593,
+    "sha256": "eb5b9e9bf15ddfff222389ce73d6879f4bc640b5bf9ee7d1030df51c0866df83",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/inspect_arity.py": {
+    "bytes": 1467,
+    "sha256": "be3a12946276fb452896f4a80bed07b5c654ecdc020c0c801ad366265f61ff3a",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/arity-cases.json": {
+    "bytes": 8663,
+    "sha256": "90624607259b248ff1d2a02b94049ef42e678725ba638cfa1b0879fbdff680b8",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/arity/observer-stdout.log.gz": {
+    "bytes": 15980,
+    "sha256": "24a4077ddb8e55d6d01f5f16b4f176fc656e78b2f4abc15975294d710440787b",
+    "mode": 420
+  }
+}

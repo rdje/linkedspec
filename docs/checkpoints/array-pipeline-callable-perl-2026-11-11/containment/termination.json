@@ -1,0 +1,6 @@
+{
+  "signal_requested": "SIGTERM for exact discovered owned process tree",
+  "follow_up": "No matching commit or claim-verification processes remain; HEAD unchanged at237a738b",
+  "outer_exit": "Unavailable after session recovery; no143 or PASS claimed",
+  "hook_log_sha256": "ac9b02d41aaa3af11de919bfbca7176025a54656aa022a2c8de500203b739dd7"
+}

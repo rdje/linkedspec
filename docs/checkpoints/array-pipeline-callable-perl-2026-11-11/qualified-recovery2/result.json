@@ -1,0 +1,33 @@
+{
+  "original_programs": 178,
+  "unchanged_qualified": 41,
+  "own_questions": 137,
+  "terminal_arity_programs": 18,
+  "actual_pairs": 196,
+  "terminal_and_first_with_preserved": 84,
+  "supported_result_targets": 25,
+  "preservation": 128,
+  "function_signature_fences": 4,
+  "pattern_producer_boundaries": 3,
+  "original_arity_observations": 18,
+  "terminal_receiver_arity_defects": 9,
+  "terminal_free_rejection_oracles": 9,
+  "extra_receiver_compile_failures": 7,
+  "missing_receiver_private_helper_errors": 2,
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "first with suppressed",
+    "producer effect loss hidden",
+    "function arity admitted",
+    "computed pattern body executed",
+    "Bool to Number",
+    "numeric kind normalized",
+    "false ready failure hidden",
+    "invented fresh after failed load",
+    "private helper leak hidden",
+    "free rejection effects",
+    "policy case omitted",
+    "actual handler drift"
+  ],
+  "limits": "No production change or defect closure. Nine false-ready arity receivers are not accepted policies; free-form rejections are the same-backend oracle. Six metadata fields/full observed errors and artifacts; same-process fresh modules. Native/cache/transitive/toolchain4.2/SESSION5, shadowing32/context/isolation/registration/declared5.4/full23.4 remain separate."
+}

@@ -1,0 +1,22 @@
+{
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "archive": "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/containment/staged-task-0.gz",
+    "bytes": 608904,
+    "sha256": "c0933ef7abe9dd09d1b42ed059eae48d69175da36fe30f7406ce5290490b1855"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+    "archive": "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/containment/staged-task-1.gz",
+    "bytes": 1294,
+    "sha256": "007a43359e68c57e548029244f43bd79f6795e5061915a97620e835e178fb62f"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "archive": "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/containment/staged-task-2.gz",
+    "bytes": 18332,
+    "sha256": "b1726202c115df58ce24710eaeccbadf9790b8224afa44d891ff8f2f0d271fc1"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "archive": "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/containment/staged-task-3.gz",
+    "bytes": 472411,
+    "sha256": "881b0fff91d91e171c3e1638675b08fa57c505240ad7d1d220ffcc616edbdef9"
+  }
+}
