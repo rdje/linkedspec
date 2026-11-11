@@ -2933,13 +2933,24 @@
   Frontier: Intake0, first-call arity1 and callable result2 are completed with focused proof. Result188/private30RED-current188 preserves signature/pattern/error boundaries; canonical packet: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/REVIEW.md. Independent Rust79.6.2 follows the clean result commit; parent79.6/full23.4 stay open.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2`
-  Status: `pending`
+  Status: `completed` / bounded callable guards focused-checked
   Goal: Independently acquire/repair Rust registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
-  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
-  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
-  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+  Verification tier: `focused`
+  Focused checks: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+  Activation: Clean7e99813d1a88b748cf310992a4ef6ffadf7e978f/all10/post-pointer/brief0/clean. Frozen79.6/safe37, current reference, Rust pipeline/CountKeys facts and public four-route/trace contracts reviewed before independent acquisition. Source/instrument/product identities precede use; distinct caller/parameter names avoid shadowing32. Published RGX integration/opaque outputs only; no source/dependency edits before intake.
+  Outcome:194/four routes pass eight supported targets/three separate pattern compatibility changes, preserving183 full observations and raw warnings. Exact same-path private old/current reproduces11RED/194PASS with all records matching public images. Source predicate repair is five insertions/four deletions; free-helper identity/signature validation/producers/formats stay.388 actual source pairs/776 capture-mode normal inputs/seven traced inputs retained. Direct383/rehearsal/apply/scoped rustfmt/first readonly0-empty stderr/thirteen controls/current793 identity pass. Evidence: docs/checkpoints/array-pipeline-callable-rust-2026-11-11/REVIEW.md.
+  Owned finding: Actual archived ordinary observer restores before persistence (line32 versus34); current observer/capture normal fix ordering, live Knowledge/book wording is qualified, originals unchanged. P1 inherited-claim audit4.24 follows coverage before admission. First static audit1/raw stderr not separately captured remains explicit; qualified static audit2 and readonly legacy-order rejection pass. Canonical detail: RESTORE_ORDER.md in the evidence packet.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Independent194/four routes plus seven source-bound trace probes; recurring normal reproduces exact eight supported/three compatibility RED,183PASS and all194 cold records.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Registered-receiver denial in is_ordinary_array_pipeline_result_chain leaves trailing-with execution without persistent kind ownership; traces retain lifecycle/results, not finer expression events.
+  - [x] **FIX** — Validated function sources reach only the canonical first-pipeline check; free-helper names remain unregistered and invocation/signature/producer semantics stay intact.
+  - [x] **ADDRESSED (verified)** —194/four routes/private11RED-current194, readonly thirteen controls/current793 identities; new serialized inputs persist/readback before restore.
+  - [x] **NO REGRESSION** —183 full records/warnings and194 corresponding source pairs exact; direct194+173+16 pass; invalid signatures/initial sources/needed errors/snapshots/earlier owners stay.
+  - [x] **LOCKSTEP** — Book/Knowledge/task/index/live/roadmap/MEMORY align; focused docs/gates and normal clean commit precede Dart79.6.3. Full23.4/native/context admission and historical4.24 remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3`
   Status: `pending`

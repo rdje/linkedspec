@@ -1,0 +1,7 @@
+[LOW][enter] -> rust_runtime:engine:execute_value input_bytes=1 input_chars=1 entry_rule=<default>
+[LOW][decision]   rust_runtime:engine:entry_rule taken=1 reason=label=Value basis=first_authored_marker input_bytes=1
+[LOW][enter]   -> rust_runtime:engine:rule label=Value entry_regex_idx=0 pos=0
+[MEDIUM][decision]     rust_runtime:engine:lifecycle_block taken=1 reason=rule=Value phase=I pos=0
+[MEDIUM][decision]     rust_runtime:engine:lifecycle_block_result taken=1 reason=rule=Value phase=I pos=0
+[LOW][exit]   <- rust_runtime:engine:rule status=ok value_kind=array label=Value pos=0
+[LOW][exit] <- rust_runtime:engine:execute_value status=ok output=["ran","SKVW"]

@@ -1,0 +1,28 @@
+{
+  "recovery": "PASS",
+  "programs": 194,
+  "routes": 4,
+  "supported_targets": 8,
+  "separate_pattern_compatibility": 3,
+  "preserved": 183,
+  "actual_serialized_module_pairs": 388,
+  "normal_serialized_inputs": 776,
+  "traced_serialized_inputs": 7,
+  "direct_groups": 383,
+  "effective_corruptions": [
+    "actual old later-with result is RED",
+    "late with executes",
+    "source effect lost",
+    "initial empty source skips valid with",
+    "function signature error masked",
+    "required source error masked",
+    "existing pattern producer effect skipped",
+    "Boolean becomes Number",
+    "missing fresh case",
+    "emitted input changed",
+    "unrelated source edit",
+    "old private image called repaired",
+    "historical restore-before-persist promoted"
+  ],
+  "limits": "Finite authored semantic/source-order evidence; three pattern compatibility changes grant no dynamic-pattern admission. New capture order retained; historical first-use gap4.24/raw audit stderr missing remain explicit. Other direct normals have semantic/source proof, not new serialized-before-use credit. Full native/cache/transitive/toolchain4.2/SESSION5/source/context/isolation/registration/declared5.4/full23.4 remain open."
+}

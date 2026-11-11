@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "rustc",
+    "-Vv"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1",
+    "LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE": "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/after"
+  }
+}

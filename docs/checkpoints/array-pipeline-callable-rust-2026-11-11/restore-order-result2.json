@@ -1,0 +1,11 @@
+{
+  "historical_observer": "docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/intake/native/src/main.rs",
+  "retained_archive": "docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/intake/native-source-inputs.tar.gz",
+  "bytes": 4113,
+  "mode": 420,
+  "sha256": "96c50a0ca865074b5da66fbe56a2f6a75b95dccfe896e3d3962fa118948c6ab6",
+  "restore_line": 32,
+  "persist_line": 34,
+  "finding": "Original observer restores the in-memory serialized value before persisting it. Later exact recovery is actual; first-use serialized-input retention is not established.",
+  "repair": "Current callable instrument must persist and read back bytes before restoration; historical wording and audit remain separately owned before admission."
+}

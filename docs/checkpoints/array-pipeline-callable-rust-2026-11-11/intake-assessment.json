@@ -1,0 +1,3718 @@
+{
+  "programs": 194,
+  "observed": 194,
+  "serialized_inputs": 194,
+  "fresh": 194,
+  "shared_healthy": [
+    "split_each_compatible",
+    "split_each_free_hash_guard",
+    "split_each_receiver_hash_guard",
+    "trim_each_compatible",
+    "trim_each_free_hash_guard",
+    "trim_each_receiver_hash_guard",
+    "filter_nonempty_compatible",
+    "filter_nonempty_free_hash_guard",
+    "filter_nonempty_receiver_hash_guard",
+    "lowercase_each_compatible",
+    "lowercase_each_free_hash_guard",
+    "lowercase_each_receiver_hash_guard",
+    "uppercase_each_compatible",
+    "uppercase_each_free_hash_guard",
+    "uppercase_each_receiver_hash_guard",
+    "uniq_compatible",
+    "uniq_free_hash_guard",
+    "uniq_receiver_hash_guard",
+    "filter_match_compatible",
+    "filter_match_free_hash_guard",
+    "filter_match_receiver_hash_guard",
+    "source_once",
+    "source_snapshot",
+    "valid_empty_with",
+    "needed_source_terminal",
+    "needed_source_composed",
+    "needed_delimiter_terminal",
+    "needed_delimiter_composed"
+  ],
+  "shared_differences": {
+    "trim_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "uniq_copy_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "lower_logical_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      }
+    },
+    "initial_number_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_null_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_hash_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    }
+  },
+  "shared_profiles": {
+    "initial_number_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    },
+    "initial_null_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    },
+    "initial_hash_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    }
+  },
+  "own_groups": {
+    "initial-source": {
+      "initial_number_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      }
+    },
+    "initial-source-with": {
+      "initial_number_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      }
+    },
+    "excluded-extra-arity": {
+      "extra_split_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_split_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_trim_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_trim_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_nonempty_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_nonempty_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_lowercase_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_lowercase_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uppercase_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uppercase_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uniq_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uniq_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_match_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_match_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      }
+    },
+    "needed-source-error": {
+      "needed_source_split_each_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_split_each_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_trim_each_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_trim_each_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_filter_nonempty_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_filter_nonempty_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_lowercase_each_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_lowercase_each_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_uppercase_each_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_uppercase_each_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_uniq_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_uniq_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_filter_match_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_source_filter_match_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      }
+    },
+    "excluded-missing-arity": {
+      "missing_split_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_trim_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_filter_nonempty_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_lowercase_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_uppercase_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_uniq_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_filter_match_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_split_each_free": {
+        "native": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_split_each_receiver": {
+        "native": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "",
+              "h",
+              "e",
+              "a",
+              "d",
+              ""
+            ],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_filter_match_free": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_filter_match_receiver": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            "W"
+          ]
+        }
+      }
+    },
+    "earlier-owner": {
+      "prior_count": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_key_count": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_length": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_hash": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_copy": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_view": {
+        "native": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        }
+      }
+    },
+    "needed-delimiter-error": {
+      "needed_delimiter_free": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "needed_delimiter_receiver": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      }
+    },
+    "regex-error-policy": {
+      "invalid_range_free_terminal": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "invalid_range_free_composed": {
+        "native": {
+          "value": null
+        },
+        "plan": {
+          "value": null
+        },
+        "restored": {
+          "value": null
+        },
+        "fresh": {
+          "value": null
+        }
+      },
+      "invalid_range_receiver_terminal": {
+        "native": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "invalid_range_receiver_composed": {
+        "native": {
+          "value": null
+        },
+        "plan": {
+          "value": null
+        },
+        "restored": {
+          "value": null
+        },
+        "fresh": {
+          "value": null
+        }
+      }
+    },
+    "nested-kinds": {
+      "nested_scalar_kinds": {
+        "native": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        }
+      }
+    },
+    "numeric-kind": {
+      "numeric_array_source": {
+        "native": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      }
+    },
+    "function-signature-valid": {
+      "own_signature_variadic_empty_terminal": {
+        "native": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            ""
+          ]
+        }
+      },
+      "own_signature_variadic_empty_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        }
+      },
+      "own_signature_variadic_multi_terminal": {
+        "native": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        }
+      },
+      "own_signature_variadic_multi_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        }
+      }
+    },
+    "function-signature-invalid-signature": {
+      "own_signature_fixed_missing_terminal": {
+        "native": {
+          "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        }
+      },
+      "own_signature_fixed_missing_composed": {
+        "native": {
+          "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+        }
+      },
+      "own_signature_fixed_extra_terminal": {
+        "native": {
+          "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        }
+      },
+      "own_signature_fixed_extra_composed": {
+        "native": {
+          "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+        }
+      },
+      "own_signature_variadic_missing_terminal": {
+        "native": {
+          "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        }
+      },
+      "own_signature_variadic_missing_composed": {
+        "native": {
+          "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "restored": {
+          "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+        }
+      }
+    },
+    "pattern-boundary": {
+      "own_pattern_string_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        }
+      },
+      "own_pattern_string_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        }
+      },
+      "own_pattern_variable_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        }
+      },
+      "own_pattern_variable_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        }
+      },
+      "own_pattern_block_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        }
+      },
+      "own_pattern_block_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        }
+      }
+    },
+    "pattern-error-boundary": {
+      "own_pattern_error_free_terminal": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "own_pattern_error_free_composed": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "own_pattern_error_receiver_terminal": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "own_pattern_error_receiver_composed": {
+        "native": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "plan": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "restored": {
+          "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        },
+        "fresh": {
+          "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      }
+    }
+  }
+}

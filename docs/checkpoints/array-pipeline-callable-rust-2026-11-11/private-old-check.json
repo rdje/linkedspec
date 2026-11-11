@@ -1,0 +1,9 @@
+{
+  "private_image": "private-old",
+  "matching_public": "intake",
+  "complete_records": 194,
+  "serialized_inputs": 194,
+  "failures": 11,
+  "same_control_path": "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/control-owner/rust/linkedspec-runtime/src/engine.rs",
+  "owner_sha256": "8ca589b7926709901bcf3783618b367e35be23b2ec04b2891630ab37ac8f795f"
+}

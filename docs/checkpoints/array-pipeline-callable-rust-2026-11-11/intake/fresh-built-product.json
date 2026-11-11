@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/array-pipeline-callable-rust-fresh",
+  "bytes": 53794688,
+  "sha256": "fe9c41a0ca11b00097bb5bca58bf474ee855fffb81dfaec38f1ffea8f58bf69d",
+  "mode": 493,
+  "scope": "Unstripped build-product identity only; complete upstream native/toolchain custody remains4.2. The actual executed copy below is retained after strip -S."
+}

@@ -1,0 +1,23 @@
+{
+  "baseline": "PASS",
+  "normal_groups": 194,
+  "actual_normal_exit": 101,
+  "supported_RED": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed",
+    "lower_logical_later_with",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "trim_later_with",
+    "uniq_copy_later_with"
+  ],
+  "separate_compatibility_RED": [
+    "own_pattern_block_composed",
+    "own_pattern_string_composed",
+    "own_pattern_variable_composed"
+  ],
+  "cold_full_route_records_preserved": 194,
+  "normal_serialized_inputs": 194,
+  "current_production": "unchanged before repair"
+}

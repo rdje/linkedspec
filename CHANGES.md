@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Rust callable pipeline results through later blocks (79.6.2)
+
+Five runtime insertions/four deletions let valid registered sources reach canonical first-pipeline guards, retaining free-helper identity and existing invocation/signature/producer/format policies.194/four routes/private11RED-current194 covers eight supported targets/three separate pattern compatibility changes/183 exact records;388 source pairs/776 normal inputs/seven trace inputs/direct383/scoped format/first readonly13 controls/current793 identities pass. New captures retain serialized bytes before restore; historical ordinary claims are qualified and P1 audit4.24 precedes admission. Original packets stay exact. Book/Knowledge/task/live/roadmap/MEMORY align; rebuild Rust. Evidence: docs/checkpoints/array-pipeline-callable-rust-2026-11-11/REVIEW.md.
+
 ## 2026-11-11 — Preserve Perl callable pipeline results and readiness (79.6.1.2)
 
 Fifteen compiler insertions/two deletions admit valid registered-function sources through existing signature/terminal/result guards, preserving invalid calls and pattern normalization.188 groups/private30RED-current188 cover27 supported targets/three separate readiness movements/158 preserved projections;940 actual source pairs survive. Qualified direct6+66+244+125/syntax/1876 artifacts and first readonly0-fourteen controls/current121 identities pass. First direct review-input stability failure stays retained without complete PASS credit. Book/Knowledge/task/live/roadmap/MEMORY align; regenerate older Perl modules. Independent Rust follows clean landing. Evidence: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/REVIEW.md.

@@ -1,0 +1,29 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "test",
+    "--manifest-path",
+    "rust/Cargo.toml",
+    "--locked",
+    "--offline",
+    "-j",
+    "1",
+    "-p",
+    "linkedspec-runtime",
+    "--no-run",
+    "--message-format=json",
+    "--test",
+    "array_pipeline_callable_result_guard_composition",
+    "--test",
+    "array_pipeline_result_guard_composition",
+    "--test",
+    "key_count_callable_result_guard_composition"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1",
+    "LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE": "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/direct"
+  }
+}

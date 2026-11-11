@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/array-pipeline-callable-rust-native",
+  "bytes": 54487624,
+  "sha256": "38b8bbc4554cae2413b93fe164e80fac714b03e62d7790ab3bc308b2fbfbb606",
+  "mode": 493,
+  "scope": "Unstripped identity only; executed stripped copy retained before use. Complete native/toolchain/OS/transitive custody remains4.2."
+}

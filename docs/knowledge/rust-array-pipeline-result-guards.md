@@ -2,6 +2,7 @@
 id: rust-array-pipeline-result-guards
 title: Rust pure Array pipelines retain guards after their original producer
 answers:
+  - "were Rust pipeline serialized bytes retained before their first restoration"
   - "why does Rust trim_each set_key still run Hash operands"
   - "which Rust paths own split_each trim_each filter_nonempty lowercase_each uppercase_each uniq filter_match result guards"
   - "does Rust preserve pipeline initial Number null Hash source behavior"
@@ -14,6 +15,7 @@ status: bounded Rust79.2 focused-checked; independent peers/full admission separ
 tags: [rust, arrays, pipeline, guards, source, arity, custody]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.79.2; array-pipeline-result-guard-rust-2026-11-11/REVIEW.md retains independent173/shared36+own137,141 frozen profiles,eleven original targets/162 exact preservation controls,173 serialized/module pairs per observer epoch,private11RED/current173PASS,direct374 and first readonly0/empty stderr/nine corruptions."
 reverify:
+  - "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-pipeline-callable-rust-2026-11-11/audit_restore_order2.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/review.py"
   - "bash tools/run_cargo_local.sh test --manifest-path rust/Cargo.toml --locked --offline -j 1 -p linkedspec-runtime --test array_pipeline_result_guard_composition --test array_transform_result_guard_composition --test value_copy -- --test-threads=1"
 ---
@@ -48,7 +50,10 @@ matching the existing receiver guard, rather than returning the unguarded Array.
 This is no new regex-error contract for another backend.
 
 Actual own SDK/grammars/help/new untracked include fixtures precede builds;
-serialized/module inputs precede use. Actual owned executable copies are stripped
+module files precede fresh compilation/use. Serialized values are retained after
+the first in-memory restoration; historical before-restoration persistence is not
+established. See callable79.6.2 RESTORE_ORDER.md and P1 audit4.24, scheduled before
+admission. Original instruments/outputs remain unchanged. Actual owned copies are stripped
 with strip -S, archived with modes, then executed. Unstripped products retain
 identities only. Full native/cache/transitive/toolchain/OS custody4.2/SESSION5,
 general source/context/registration and full23.4 admission remain separate.

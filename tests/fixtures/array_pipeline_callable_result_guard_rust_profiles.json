@@ -1,0 +1,6548 @@
+{
+  "extra_filter_match_free": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply({order=cat(order,\"S\");[\"head:tail\"]}),/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply({order=cat(order,\"S\");[\"head:tail\"]}),/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_filter_match_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_filter_nonempty_free": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_filter_nonempty_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_filter_nonempty_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_lowercase_each_free": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_lowercase_each_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_lowercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_split_each_free": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_split_each_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_trim_each_free": {
+    "case": {
+      "body": "order=\"\";out=trim_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_trim_each_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_trim_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_uniq_free": {
+    "case": {
+      "body": "order=\"\";out=uniq(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_uniq_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_uniq_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_uppercase_each_free": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each(supply({order=cat(order,\"S\");[\"head:tail\"]}),{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "extra_uppercase_each_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "id": "extra_uppercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-extra-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head:tail\"]}).uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_match_compatible": {
+    "case": {
+      "body": "return([filter_match(supply([\"head\",\"other\"]),/^h/),supply([\"head\",\"other\"]).filter_match(/^h/)])",
+      "expected": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "id": "filter_match_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([filter_match(supply([\"head\",\"other\"]),/^h/),supply([\"head\",\"other\"]).filter_match(/^h/)])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_match_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply([\"head\",\"other\"]),/^h/).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "filter_match_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply([\"head\",\"other\"]),/^h/).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_match_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\",\"other\"]).filter_match(/^h/).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "filter_match_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"other\"]).filter_match(/^h/).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_nonempty_compatible": {
+    "case": {
+      "body": "return([filter_nonempty(supply([\"head\",\"\",\"tail\"])),supply([\"head\",\"\",\"tail\"]).filter_nonempty()])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "id": "filter_nonempty_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([filter_nonempty(supply([\"head\",\"\",\"tail\"])),supply([\"head\",\"\",\"tail\"]).filter_nonempty()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_nonempty_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty(supply([\"head\",\"\",\"tail\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "filter_nonempty_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty(supply([\"head\",\"\",\"tail\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "filter_nonempty_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\",\"\",\"tail\"]).filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "filter_nonempty_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"\",\"tail\"]).filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_composed": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "initial_hash_composed",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "initial_hash_filter_match_free": {
+    "case": {
+      "body": "return(filter_match(supply({\"k\":\"head\"}),/^head/))",
+      "id": "initial_hash_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_match(supply({\"k\":\"head\"}),/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_match_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply({\"k\":\"head\"}),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_filter_match_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply({\"k\":\"head\"}),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_match_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).filter_match(/^head/))",
+      "id": "initial_hash_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).filter_match(/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_match_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_filter_match_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_nonempty_free": {
+    "case": {
+      "body": "return(filter_nonempty(supply({\"k\":\"head\"})))",
+      "id": "initial_hash_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_nonempty(supply({\"k\":\"head\"})))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_nonempty_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_filter_nonempty_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_nonempty_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).filter_nonempty())",
+      "id": "initial_hash_filter_nonempty_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).filter_nonempty())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_filter_nonempty_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_filter_nonempty_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_lowercase_each_free": {
+    "case": {
+      "body": "return(lowercase_each(supply({\"k\":\"head\"})))",
+      "id": "initial_hash_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(lowercase_each(supply({\"k\":\"head\"})))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_lowercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_lowercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_lowercase_each_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).lowercase_each())",
+      "id": "initial_hash_lowercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).lowercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_lowercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_lowercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_split_each_free": {
+    "case": {
+      "body": "return(split_each(supply({\"k\":\"head\"}),\":\"))",
+      "id": "initial_hash_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(split_each(supply({\"k\":\"head\"}),\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_split_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply({\"k\":\"head\"}),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_split_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply({\"k\":\"head\"}),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_split_each_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).split_each(\":\"))",
+      "id": "initial_hash_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).split_each(\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_split_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_split_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_terminal": {
+    "case": {
+      "body": "return([trim_each(supply({\"k\":\"head\"})),supply({\"k\":\"head\"}).trim_each()])",
+      "id": "initial_hash_terminal",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([trim_each(supply({\"k\":\"head\"})),supply({\"k\":\"head\"}).trim_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_trim_each_free": {
+    "case": {
+      "body": "return(trim_each(supply({\"k\":\"head\"})))",
+      "id": "initial_hash_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(trim_each(supply({\"k\":\"head\"})))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_trim_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=trim_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_trim_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_trim_each_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).trim_each())",
+      "id": "initial_hash_trim_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).trim_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_trim_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_trim_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uniq_free": {
+    "case": {
+      "body": "return(uniq(supply({\"k\":\"head\"})))",
+      "id": "initial_hash_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uniq(supply({\"k\":\"head\"})))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uniq_free_with": {
+    "case": {
+      "body": "order=\"\";out=uniq(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_uniq_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uniq_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).uniq())",
+      "id": "initial_hash_uniq_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).uniq())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uniq_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_uniq_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uppercase_each_free": {
+    "case": {
+      "body": "return(uppercase_each(supply({\"k\":\"head\"})))",
+      "id": "initial_hash_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uppercase_each(supply({\"k\":\"head\"})))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uppercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_uppercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each(supply({\"k\":\"head\"})).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uppercase_each_receiver": {
+    "case": {
+      "body": "return(supply({\"k\":\"head\"}).uppercase_each())",
+      "id": "initial_hash_uppercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply({\"k\":\"head\"}).uppercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_hash_uppercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply({\"k\":\"head\"}).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_hash_uppercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"k\":\"head\"}).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_composed": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "initial_null_composed",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "initial_null_filter_match_free": {
+    "case": {
+      "body": "return(filter_match(supply(undef),/^head/))",
+      "id": "initial_null_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_match(supply(undef),/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_match_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply(undef),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_filter_match_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply(undef),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_match_receiver": {
+    "case": {
+      "body": "return(supply(undef).filter_match(/^head/))",
+      "id": "initial_null_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).filter_match(/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_match_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_filter_match_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_nonempty_free": {
+    "case": {
+      "body": "return(filter_nonempty(supply(undef)))",
+      "id": "initial_null_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_nonempty(supply(undef)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_nonempty_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_filter_nonempty_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_nonempty_receiver": {
+    "case": {
+      "body": "return(supply(undef).filter_nonempty())",
+      "id": "initial_null_filter_nonempty_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).filter_nonempty())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_filter_nonempty_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_filter_nonempty_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_lowercase_each_free": {
+    "case": {
+      "body": "return(lowercase_each(supply(undef)))",
+      "id": "initial_null_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(lowercase_each(supply(undef)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_lowercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_lowercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_lowercase_each_receiver": {
+    "case": {
+      "body": "return(supply(undef).lowercase_each())",
+      "id": "initial_null_lowercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).lowercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_lowercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_lowercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_split_each_free": {
+    "case": {
+      "body": "return(split_each(supply(undef),\":\"))",
+      "id": "initial_null_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(split_each(supply(undef),\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_split_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply(undef),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_split_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply(undef),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_split_each_receiver": {
+    "case": {
+      "body": "return(supply(undef).split_each(\":\"))",
+      "id": "initial_null_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).split_each(\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_split_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_split_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_terminal": {
+    "case": {
+      "body": "return([trim_each(supply(undef)),supply(undef).trim_each()])",
+      "id": "initial_null_terminal",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([trim_each(supply(undef)),supply(undef).trim_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_trim_each_free": {
+    "case": {
+      "body": "return(trim_each(supply(undef)))",
+      "id": "initial_null_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(trim_each(supply(undef)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_trim_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=trim_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_trim_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_trim_each_receiver": {
+    "case": {
+      "body": "return(supply(undef).trim_each())",
+      "id": "initial_null_trim_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).trim_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_trim_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_trim_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_uniq_free": {
+    "case": {
+      "body": "return(uniq(supply(undef)))",
+      "id": "initial_null_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uniq(supply(undef)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_uniq_free_with": {
+    "case": {
+      "body": "order=\"\";out=uniq(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_uniq_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_uniq_receiver": {
+    "case": {
+      "body": "return(supply(undef).uniq())",
+      "id": "initial_null_uniq_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).uniq())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_uniq_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_uniq_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_uppercase_each_free": {
+    "case": {
+      "body": "return(uppercase_each(supply(undef)))",
+      "id": "initial_null_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uppercase_each(supply(undef)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_uppercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_uppercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each(supply(undef)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_null_uppercase_each_receiver": {
+    "case": {
+      "body": "return(supply(undef).uppercase_each())",
+      "id": "initial_null_uppercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(undef).uppercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_null_uppercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(undef).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_null_uppercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(undef).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_composed": {
+    "case": {
+      "body": "order=\"\";out=supply(3).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "initial_number_composed",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "initial_number_filter_match_free": {
+    "case": {
+      "body": "return(filter_match(supply(3),/^head/))",
+      "id": "initial_number_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_match(supply(3),/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_match_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply(3),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_filter_match_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply(3),/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_match_receiver": {
+    "case": {
+      "body": "return(supply(3).filter_match(/^head/))",
+      "id": "initial_number_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).filter_match(/^head/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_match_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_filter_match_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_nonempty_free": {
+    "case": {
+      "body": "return(filter_nonempty(supply(3)))",
+      "id": "initial_number_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(filter_nonempty(supply(3)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_nonempty_free_with": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_filter_nonempty_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_nonempty_receiver": {
+    "case": {
+      "body": "return(supply(3).filter_nonempty())",
+      "id": "initial_number_filter_nonempty_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).filter_nonempty())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_filter_nonempty_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_filter_nonempty_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_lowercase_each_free": {
+    "case": {
+      "body": "return(lowercase_each(supply(3)))",
+      "id": "initial_number_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(lowercase_each(supply(3)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_lowercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_lowercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_lowercase_each_receiver": {
+    "case": {
+      "body": "return(supply(3).lowercase_each())",
+      "id": "initial_number_lowercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).lowercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_lowercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_lowercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_split_each_free": {
+    "case": {
+      "body": "return(split_each(supply(3),\":\"))",
+      "id": "initial_number_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(split_each(supply(3),\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_split_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply(3),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_split_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply(3),\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_split_each_receiver": {
+    "case": {
+      "body": "return(supply(3).split_each(\":\"))",
+      "id": "initial_number_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).split_each(\":\"))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_split_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_split_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_terminal": {
+    "case": {
+      "body": "return([trim_each(supply(3)),supply(3).trim_each()])",
+      "id": "initial_number_terminal",
+      "input": "x",
+      "profile_only": true,
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([trim_each(supply(3)),supply(3).trim_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        []
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_trim_each_free": {
+    "case": {
+      "body": "return(trim_each(supply(3)))",
+      "id": "initial_number_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(trim_each(supply(3)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_trim_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=trim_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_trim_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_trim_each_receiver": {
+    "case": {
+      "body": "return(supply(3).trim_each())",
+      "id": "initial_number_trim_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).trim_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_trim_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_trim_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_uniq_free": {
+    "case": {
+      "body": "return(uniq(supply(3)))",
+      "id": "initial_number_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uniq(supply(3)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_uniq_free_with": {
+    "case": {
+      "body": "order=\"\";out=uniq(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_uniq_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_uniq_receiver": {
+    "case": {
+      "body": "return(supply(3).uniq())",
+      "id": "initial_number_uniq_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).uniq())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_uniq_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_uniq_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_uppercase_each_free": {
+    "case": {
+      "body": "return(uppercase_each(supply(3)))",
+      "id": "initial_number_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(uppercase_each(supply(3)))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_uppercase_each_free_with": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_uppercase_each_free_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each(supply(3)).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "initial_number_uppercase_each_receiver": {
+    "case": {
+      "body": "return(supply(3).uppercase_each())",
+      "id": "initial_number_uppercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return(supply(3).uppercase_each())}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "initial_number_uppercase_each_receiver_with": {
+    "case": {
+      "body": "order=\"\";out=supply(3).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "id": "initial_number_uppercase_each_receiver_with",
+      "input": "x",
+      "profile_only": true,
+      "question": "initial-source-with",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(3).uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "invalid_range_free_composed": {
+    "case": {
+      "body": "order=\"\";return(filter_match(supply([\"head\"]),/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "invalid_range_free_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "regex-error-policy",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(filter_match(supply([\"head\"]),/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "value": null
+    },
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "role": "preservation"
+  },
+  "invalid_range_free_terminal": {
+    "case": {
+      "body": "order=\"\";return(filter_match(supply([\"head\"]),/[z-a]/))",
+      "id": "invalid_range_free_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "regex-error-policy",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(filter_match(supply([\"head\"]),/[z-a]/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "invalid_range_receiver_composed": {
+    "case": {
+      "body": "order=\"\";return(supply([\"head\"]).filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "invalid_range_receiver_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "regex-error-policy",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply([\"head\"]).filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "value": null
+    },
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "restored": {
+      "value": null
+    },
+    "role": "preservation"
+  },
+  "invalid_range_receiver_terminal": {
+    "case": {
+      "body": "order=\"\";return(supply([\"head\"]).filter_match(/[z-a]/))",
+      "id": "invalid_range_receiver_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "regex-error-policy",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply([\"head\"]).filter_match(/[z-a]/))}\n"
+    },
+    "fresh": {
+      "value": []
+    },
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "restored": {
+      "value": []
+    },
+    "role": "preservation"
+  },
+  "lower_logical_later_with": {
+    "case": {
+      "body": "order=\"\";out=supply([\"TAIL\"]).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "lower_logical_later_with",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"TAIL\"]).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "lowercase_each_compatible": {
+    "case": {
+      "body": "return([lowercase_each(supply([\"HEAD\",\"TAIL\"])),supply([\"HEAD\",\"TAIL\"]).lowercase_each()])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "id": "lowercase_each_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([lowercase_each(supply([\"HEAD\",\"TAIL\"])),supply([\"HEAD\",\"TAIL\"]).lowercase_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "lowercase_each_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each(supply([\"HEAD\",\"TAIL\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "lowercase_each_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each(supply([\"HEAD\",\"TAIL\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "lowercase_each_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"HEAD\",\"TAIL\"]).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "lowercase_each_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"HEAD\",\"TAIL\"]).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_filter_match_free": {
+    "case": {
+      "body": "order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_filter_nonempty_free": {
+    "case": {
+      "body": "order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_lowercase_each_free": {
+    "case": {
+      "body": "order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_operand_filter_match_free": {
+    "case": {
+      "body": "order=\"\";out=filter_match(supply([\"head\"])).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_operand_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=filter_match(supply([\"head\"])).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_operand_filter_match_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\"]).filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_operand_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\"]).filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_operand_split_each_free": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply([\"head\"])).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_operand_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply([\"head\"])).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_operand_split_each_receiver": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\"]).split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_operand_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\"]).split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "",
+          "h",
+          "e",
+          "a",
+          "d",
+          ""
+        ],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_split_each_free": {
+    "case": {
+      "body": "order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_trim_each_free": {
+    "case": {
+      "body": "order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_uniq_free": {
+    "case": {
+      "body": "order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "missing_uppercase_each_free": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "missing_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "excluded-missing-arity",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "needed_delimiter_composed": {
+    "case": {
+      "body": "order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+      "expected_error": "binding_kind_mismatch",
+      "id": "needed_delimiter_composed",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_delimiter_free": {
+    "case": {
+      "body": "order=\"\";return(split_each(supply([\"head:tail\"]),{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_delimiter_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-delimiter-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(split_each(supply([\"head:tail\"]),{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_delimiter_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_delimiter_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-delimiter-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_delimiter_terminal": {
+    "case": {
+      "body": "order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}))",
+      "expected_error": "binding_kind_mismatch",
+      "id": "needed_delimiter_terminal",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply([\"head:tail\"]).split_each({items=\"bad\";items+=1;\":\"}))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_composed": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+      "expected_error": "binding_kind_mismatch",
+      "id": "needed_source_composed",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_filter_match_free": {
+    "case": {
+      "body": "order=\"\";return(filter_match(supply({items=\"bad\";items+=1;[\"head\"]}),/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_filter_match_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(filter_match(supply({items=\"bad\";items+=1;[\"head\"]}),/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_filter_match_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_filter_match_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_filter_nonempty_free": {
+    "case": {
+      "body": "order=\"\";return(filter_nonempty(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_filter_nonempty_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(filter_nonempty(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_filter_nonempty_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_filter_nonempty_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_lowercase_each_free": {
+    "case": {
+      "body": "order=\"\";return(lowercase_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_lowercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(lowercase_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_lowercase_each_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_lowercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_split_each_free": {
+    "case": {
+      "body": "order=\"\";return(split_each(supply({items=\"bad\";items+=1;[\"head\"]}),\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_split_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(split_each(supply({items=\"bad\";items+=1;[\"head\"]}),\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_split_each_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_split_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_terminal": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each())",
+      "expected_error": "binding_kind_mismatch",
+      "id": "needed_source_terminal",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each())}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_trim_each_free": {
+    "case": {
+      "body": "order=\"\";return(trim_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_trim_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(trim_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_trim_each_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_trim_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_uniq_free": {
+    "case": {
+      "body": "order=\"\";return(uniq(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_uniq_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(uniq(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_uniq_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_uniq_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_uppercase_each_free": {
+    "case": {
+      "body": "order=\"\";return(uppercase_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_uppercase_each_free",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(uppercase_each(supply({items=\"bad\";items+=1;[\"head\"]})).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "needed_source_uppercase_each_receiver": {
+    "case": {
+      "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+      "id": "needed_source_uppercase_each_receiver",
+      "input": "x",
+      "profile_only": true,
+      "question": "needed-source-error",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\"]}).uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "nested_scalar_kinds": {
+    "case": {
+      "body": "source=[false,0,undef,\"0\",\"\"];out=uniq(supply(source));return([out,source])",
+      "id": "nested_scalar_kinds",
+      "input": "x",
+      "profile_only": true,
+      "question": "nested-kinds",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {source=[false,0,undef,\"0\",\"\"];out=uniq(supply(source));return([out,source])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "numeric_array_source": {
+    "case": {
+      "body": "source=[3];return([trim_each(supply(source)),filter_nonempty(supply(source)),uniq(supply(source)),source])",
+      "id": "numeric_array_source",
+      "input": "x",
+      "profile_only": true,
+      "question": "numeric-kind",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {source=[3];return([trim_each(supply(source)),filter_nonempty(supply(source)),uniq(supply(source)),source])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "own_pattern_block_composed": {
+    "case": {
+      "id": "own_pattern_block_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match({order=cat(order,\"P\");\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        "P"
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        "P"
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        "P"
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        "P"
+      ]
+    },
+    "role": "pattern-compatibility"
+  },
+  "own_pattern_block_terminal": {
+    "case": {
+      "id": "own_pattern_block_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match({order=cat(order,\"P\");\"^head\"});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        "P"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        "P"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        "P"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        "P"
+      ]
+    },
+    "role": "preservation"
+  },
+  "own_pattern_error_free_composed": {
+    "case": {
+      "id": "own_pattern_error_free_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-error-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=filter_match(supply([\"head\"]),{items=\"bad\";items+=1;\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\");return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "own_pattern_error_free_terminal": {
+    "case": {
+      "id": "own_pattern_error_free_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-error-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=filter_match(supply([\"head\"]),{items=\"bad\";items+=1;\"^head\"});return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "own_pattern_error_receiver_composed": {
+    "case": {
+      "id": "own_pattern_error_receiver_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-error-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\"]).filter_match({items=\"bad\";items+=1;\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\");return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "own_pattern_error_receiver_terminal": {
+    "case": {
+      "id": "own_pattern_error_receiver_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-error-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\"]).filter_match({items=\"bad\";items+=1;\"^head\"});return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "native": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "role": "preservation"
+  },
+  "own_pattern_string_composed": {
+    "case": {
+      "id": "own_pattern_string_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(\"^head\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "pattern-compatibility"
+  },
+  "own_pattern_string_terminal": {
+    "case": {
+      "id": "own_pattern_string_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(\"^head\");return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "own_pattern_variable_composed": {
+    "case": {
+      "id": "own_pattern_variable_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(needle).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "pattern-compatibility"
+  },
+  "own_pattern_variable_terminal": {
+    "case": {
+      "id": "own_pattern_variable_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "pattern-boundary",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(needle);return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head"
+        ],
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "own_signature_fixed_extra_composed": {
+    "case": {
+      "body": "order=\"\";out=pair(\"head\",\"tail\",{order=cat(order,\"X\");\"extra\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "form": "composed",
+      "id": "own_signature_fixed_extra_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair(\"head\",\"tail\",{order=cat(order,\"X\");\"extra\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_fixed_extra_terminal": {
+    "case": {
+      "body": "order=\"\";out=pair(\"head\",\"tail\",{order=cat(order,\"X\");\"extra\"}).trim_each();return([out,order])",
+      "form": "terminal",
+      "id": "own_signature_fixed_extra_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair(\"head\",\"tail\",{order=cat(order,\"X\");\"extra\"}).trim_each();return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'pair' expects 2 argument(s), got 3 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_fixed_missing_composed": {
+    "case": {
+      "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "form": "composed",
+      "id": "own_signature_fixed_missing_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_fixed_missing_terminal": {
+    "case": {
+      "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each();return([out,order])",
+      "form": "terminal",
+      "id": "own_signature_fixed_missing_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each();return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'pair' expects 2 argument(s), got 1 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_variadic_empty_composed": {
+    "case": {
+      "body": "order=\"\";out=all_values().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "form": "composed",
+      "id": "own_signature_variadic_empty_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-valid",
+      "rule": "Value",
+      "source": "fn all_values(...values) {return(values)}\n\nValue:: I {order=\"\";out=all_values().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "own_signature_variadic_empty_terminal": {
+    "case": {
+      "body": "order=\"\";out=all_values().trim_each();return([out,order])",
+      "form": "terminal",
+      "id": "own_signature_variadic_empty_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-valid",
+      "rule": "Value",
+      "source": "fn all_values(...values) {return(values)}\n\nValue:: I {order=\"\";out=all_values().trim_each();return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "own_signature_variadic_missing_composed": {
+    "case": {
+      "body": "order=\"\";out=collect().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "form": "composed",
+      "id": "own_signature_variadic_missing_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn collect(head,...rest) {return([head])}\n\nValue:: I {order=\"\";out=collect().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_variadic_missing_terminal": {
+    "case": {
+      "body": "order=\"\";out=collect().trim_each();return([out,order])",
+      "form": "terminal",
+      "id": "own_signature_variadic_missing_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-invalid-signature",
+      "rule": "Value",
+      "source": "fn collect(head,...rest) {return([head])}\n\nValue:: I {order=\"\";out=collect().trim_each();return([out,order])}\n"
+    },
+    "fresh": {
+      "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "native": {
+      "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "plan": {
+      "error": "Generated Rust parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "restored": {
+      "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule 'Value'"
+    },
+    "role": "preservation"
+  },
+  "own_signature_variadic_multi_composed": {
+    "case": {
+      "body": "order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "form": "composed",
+      "id": "own_signature_variadic_multi_composed",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-valid",
+      "rule": "Value",
+      "source": "fn all_values(...values) {return(values)}\n\nValue:: I {order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "role": "supported-target"
+  },
+  "own_signature_variadic_multi_terminal": {
+    "case": {
+      "body": "order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each();return([out,order])",
+      "form": "terminal",
+      "id": "own_signature_variadic_multi_terminal",
+      "input": "x",
+      "profile_only": true,
+      "question": "function-signature-valid",
+      "rule": "Value",
+      "source": "fn all_values(...values) {return(values)}\n\nValue:: I {order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each();return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_copy": {
+    "case": {
+      "body": "order=\"\";out=copy(supply(3)).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_copy",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=copy(supply(3)).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_count": {
+    "case": {
+      "body": "order=\"\";out=supply([1]).count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_count",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([1]).count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_hash": {
+    "case": {
+      "body": "order=\"\";out=set_key(supply({}),\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_hash",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=set_key(supply({}),\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_key_count": {
+    "case": {
+      "body": "order=\"\";out=supply({\"a\":1}).count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_key_count",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({\"a\":1}).count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_length": {
+    "case": {
+      "body": "order=\"\";out=supply(\"abc\").length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_length",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply(\"abc\").length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "prior_view": {
+    "case": {
+      "body": "order=\"\";out=sorted_keys(supply({\"a\":1})).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+      "id": "prior_view",
+      "input": "x",
+      "profile_only": true,
+      "question": "earlier-owner",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=sorted_keys(supply({\"a\":1})).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "role": "preservation"
+  },
+  "source_once": {
+    "case": {
+      "body": "order=\"\";out=supply({order=cat(order,\"S\");[\" tail \"]}).trim_each().last().uppercase();return([out,order])",
+      "expected": [
+        "TAIL",
+        "S"
+      ],
+      "id": "source_once",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\" tail \"]}).trim_each().last().uppercase();return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        "TAIL",
+        "S"
+      ]
+    },
+    "native": {
+      "value": [
+        "TAIL",
+        "S"
+      ]
+    },
+    "plan": {
+      "value": [
+        "TAIL",
+        "S"
+      ]
+    },
+    "restored": {
+      "value": [
+        "TAIL",
+        "S"
+      ]
+    },
+    "role": "preservation"
+  },
+  "source_snapshot": {
+    "case": {
+      "body": "items=[\"head:tail\"];out=supply(items).split_each({items=[\"changed\"];\":\"});return([out,items])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "id": "source_snapshot",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {items=[\"head:tail\"];out=supply(items).split_each({items=[\"changed\"];\":\"});return([out,items])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "split_each_compatible": {
+    "case": {
+      "body": "return([split_each(supply([\"head:tail\"]),\":\"),supply([\"head:tail\"]).split_each(\":\")])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "id": "split_each_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([split_each(supply([\"head:tail\"]),\":\"),supply([\"head:tail\"]).split_each(\":\")])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "split_each_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=split_each(supply([\"head:tail\"]),\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "split_each_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=split_each(supply([\"head:tail\"]),\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "split_each_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head:tail\"]).split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "split_each_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head:tail\"]).split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "trim_each_compatible": {
+    "case": {
+      "body": "return([trim_each(supply([\" head \",\" tail \"])),supply([\" head \",\" tail \"]).trim_each()])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "id": "trim_each_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([trim_each(supply([\" head \",\" tail \"])),supply([\" head \",\" tail \"]).trim_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "trim_each_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=trim_each(supply([\" head \",\" tail \"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "trim_each_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=trim_each(supply([\" head \",\" tail \"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "trim_each_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\" head \",\" tail \"]).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "trim_each_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\" head \",\" tail \"]).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "trim_later_with": {
+    "case": {
+      "body": "order=\"\";out=supply([\" tail \"]).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "trim_later_with",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\" tail \"]).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "uniq_compatible": {
+    "case": {
+      "body": "return([uniq(supply([\"head\",\"tail\",\"head\"])),supply([\"head\",\"tail\",\"head\"]).uniq()])",
+      "expected": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "id": "uniq_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([uniq(supply([\"head\",\"tail\",\"head\"])),supply([\"head\",\"tail\",\"head\"]).uniq()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "uniq_copy_later_with": {
+    "case": {
+      "body": "order=\"\";out=supply([\"tail\",\"tail\"]).uniq().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "uniq_copy_later_with",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"tail\",\"tail\"]).uniq().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "supported-target"
+  },
+  "uniq_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=uniq(supply([\"head\",\"tail\",\"head\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "uniq_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uniq(supply([\"head\",\"tail\",\"head\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "uniq_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\",\"tail\",\"head\"]).uniq().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "uniq_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\",\"head\"]).uniq().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "uppercase_each_compatible": {
+    "case": {
+      "body": "return([uppercase_each(supply([\"head\",\"tail\"])),supply([\"head\",\"tail\"]).uppercase_each()])",
+      "expected": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ],
+      "id": "uppercase_each_compatible",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {return([uppercase_each(supply([\"head\",\"tail\"])),supply([\"head\",\"tail\"]).uppercase_each()])}\n"
+    },
+    "fresh": {
+      "value": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ]
+    },
+    "native": {
+      "value": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ]
+    },
+    "restored": {
+      "value": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ]
+    },
+    "role": "preservation"
+  },
+  "uppercase_each_free_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=uppercase_each(supply([\"head\",\"tail\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "uppercase_each_free_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=uppercase_each(supply([\"head\",\"tail\"])).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "uppercase_each_receiver_hash_guard": {
+    "case": {
+      "body": "order=\"\";out=supply([\"head\",\"tail\"]).uppercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])",
+      "expected": [
+        null,
+        ""
+      ],
+      "id": "uppercase_each_receiver_hash_guard",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).uppercase_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1});return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "role": "preservation"
+  },
+  "valid_empty_with": {
+    "case": {
+      "body": "order=\"\";out=supply([\"\"]).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+      "expected": [
+        0,
+        "W"
+      ],
+      "id": "valid_empty_with",
+      "input": "x",
+      "rule": "Value",
+      "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"\"]).filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+    },
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "role": "preservation"
+  }
+}

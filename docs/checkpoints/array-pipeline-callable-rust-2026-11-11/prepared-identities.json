@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/capture_intake.py": {
+    "bytes": 7479,
+    "sha256": "0709fd526a66c44ebd6fb0f28537d232a26e9e57bb4689d7bafe037e98510cb8"
+  },
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/observer.rs": {
+    "bytes": 4351,
+    "sha256": "354aea165d0182a1acfbcb523078dec0791e40228d94a22dccc67b9e20829fc3"
+  },
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/pattern-sources.json": {
+    "bytes": 3744,
+    "sha256": "27338cd53304c9a2660e1cbbdfb13c811b5af419d763789bcdbb155a367594c9"
+  },
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/prepare.py": {
+    "bytes": 4675,
+    "sha256": "543b7525f9efef6146e1cefa20922ea76189946954ae5022cf1801181485ba30"
+  },
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/profile-sources.json": {
+    "bytes": 60982,
+    "sha256": "45b8c5d5fc405a60f8a171c11977d5653ea05c4c89080173d5a980090b38d53f"
+  },
+  "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/signature-sources.json": {
+    "bytes": 5709,
+    "sha256": "a8d1dfe69e1fb198b576cd8097e5af5e5c323d36233eb8369bac96c4cc87bc2f"
+  }
+}

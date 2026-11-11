@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4241,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-source-ceiling-boundary.md","sha256":"dfd69ee4858798625bc2212c102695b128f4b85c8ccacc8fca112ea3df7ab831","type":"member"}
 {"bytes":14703,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-design.md","sha256":"e7bac80a9de1cec446fc5494a60e5253f7bb0e62158c3fbae7c6a65534409780","type":"member"}
 {"bytes":3069,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-entry-prefix-validation.md","sha256":"35a2d3071da04997e183d7bcb75950da8259d8eadad7607ca4705d8fef4999f2","type":"member"}
 {"bytes":2388,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/shared-host-ram-budget.md","sha256":"8278098261274805f1781d7666cd88faf5a699816c35a1e7cf93aec4f8672e1d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4432,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-comparison-bridge-contract.md","sha256":"2236db2f6df34b0cb5024ff5debb9754d810c82ca0de1aec7b18cd315816eebb","type":"member"}
 {"bytes":2810,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-method-surface-verified.md","sha256":"9e82aa7a7b3dc2b6a58ff9db6bc4d5b0ceee722f493b13e448ddf00612a71ce3","type":"member"}
 {"bytes":9658,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-receiver-value-chains.md","sha256":"0af31151577230cad923986076e7c040efff42d0ab5e4b5c218f5f179694db25","type":"member"}
-{"bytes":6856,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-trailing-block-argument-mvp.md","sha256":"45dfdaf8e3afbc13877ee602d1909f9b39838292db69ec401aaf34d7ae260b5a","type":"member"}

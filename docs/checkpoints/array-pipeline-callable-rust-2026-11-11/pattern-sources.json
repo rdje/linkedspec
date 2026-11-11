@@ -1,0 +1,82 @@
+[
+  {
+    "id": "own_pattern_string_terminal",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(\"^head\");return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_string_composed",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(\"^head\").set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_variable_terminal",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(needle);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_variable_composed",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match(needle).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_block_terminal",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match({order=cat(order,\"P\");\"^head\"});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_block_composed",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\",\"tail\"]).filter_match({order=cat(order,\"P\");\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-boundary"
+  },
+  {
+    "id": "own_pattern_error_free_terminal",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=filter_match(supply([\"head\"]),{items=\"bad\";items+=1;\"^head\"});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-error-boundary"
+  },
+  {
+    "id": "own_pattern_error_free_composed",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=filter_match(supply([\"head\"]),{items=\"bad\";items+=1;\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\");return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-error-boundary"
+  },
+  {
+    "id": "own_pattern_error_receiver_terminal",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\"]).filter_match({items=\"bad\";items+=1;\"^head\"});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-error-boundary"
+  },
+  {
+    "id": "own_pattern_error_receiver_composed",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";needle=\"^head\";out=supply([\"head\"]).filter_match({items=\"bad\";items+=1;\"^head\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\");return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "pattern-error-boundary"
+  }
+]

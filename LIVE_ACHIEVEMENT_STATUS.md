@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues callable79.6. Perl arity/result79.6.1 is implemented with focused checks; independent Rust79.6.2 is next. Ordinary79 remains focused-checked; full source/context/native admission stays open.
+Full PNT continues callable79.6. Perl79.6.1 and Rust79.6.2 are implemented with focused checks; independent Dart79.6.3 is next. Full source/context/native admission remains open, including historical-input audit4.24.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2. Signature-valid Perl function pipeline sources reuse exact terminal producers and result guards.188 groups/private30RED-current188 cover27 supported targets, three separate pattern compatibility readiness movements and158 preserved projections.940 source pairs/qualified direct441 with1876 API artifacts/syntax/first readonly0-fourteen controls/current121 identities pass. Original direct review-input stability failure remains explicit without complete PASS credit. Invalid function/helper signatures, errors and pattern normalization stay exact.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2. Five runtime insertions/four deletions admit registered source prefixes to canonical pipeline guards while preserving invocation/producers/formats.194/four routes/private11RED-current194 cover eight supported targets/three separate pattern compatibility changes/183 preserved.388 source pairs/776 normal inputs/seven trace inputs/direct383/scoped rustfmt/first readonly13 controls/current793 identities pass. Historical restore-before-persist wording is qualified, new captures repair order and P1 audit4.24 precedes admission; original packets stay exact.
 
 ## Next Action
 
-Activate independent Rust79.6.2 from clean Git; acquire safe shared37 and own source/signature/arity/error/earlier-owner policies before production. Preserve actual Rust SDK routes and source/artifact inputs, implement only confirmed gaps, run focused direct/recovery/docs checks and commit. Other peers follow; full23.4/safe-launcher4.22/routing18.2 remain after coverage.
+Activate independent Dart79.6.3 from clean Git. Acquire safe shared37 and actual Dart producer/signature/error/arity/earlier-owner policies on its public SDK routes before source edits. Implement only confirmed gaps, retain exact old/current source controls and focused direct/recovery/docs proof, then commit. Julia/Lua follow. Full23.4/historical4.24/safe-launcher4.22/routing18.2 remain after coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2 —194/four routes/private11RED-current194/183 preserved/direct383/readonly13/current793; historical source-order4.24 qualified; Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2 —188PASS/private30RED-current188/27 targets+three readiness/158 preserved/940 pairs/direct441/readonly14/current121; Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1 —125PASS/private18RED-current125/direct72/readonly eleven/current121;178 preserves169 projections/nine arity changes;25 result gaps remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.23 — Julia75 IDs/61 closed pointers/14 unselected bodies/full232573-byte tail exact;15377 task bytes renewed/76 queries/readonly ten controls; Perl arity next.
@@ -29,7 +30,6 @@ Activate independent Rust79.6.2 from clean Git; acquire safe shared37 and own so
 - TYPE-REFERENCE-BOOK.1.2.23.4.21 —68 IDs/58 closed pointers/ten short bodies/full54718-byte tail exact,64936 bytes renewed/69 public queries/readonly ten controls; Perl79.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.39 — pure-pipeline36/17 failures19 healthy,29 ready/seven unresolved receivers,36 module-handler pairs/first readonly eleven controls; family79/Perl79.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.5 — each installed host156/four routes903PASS/direct1713 plus with controls/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine corruptions; selection39 next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.20 — qualified unchanged292, original missing-six binding RED/new PASS, all11 streams/source preservation/first readonly eight controls; Lua78.5 next.
 
 ## History
 

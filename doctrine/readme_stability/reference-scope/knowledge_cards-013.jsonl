@@ -1,4 +1,5 @@
-{"member_count":65,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":66,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6856,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-trailing-block-argument-mvp.md","sha256":"45dfdaf8e3afbc13877ee602d1909f9b39838292db69ec401aaf34d7ae260b5a","type":"member"}
 {"bytes":2416,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-backlog.md","sha256":"10de801c61d6f5b470c2576bcd89099647bf1b51db32a08f69355ccf645b17c1","type":"member"}
 {"bytes":3097,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-closed.md","sha256":"40704e9f952ef6912fff0d2d6bac1da20542d85cdea157cd1bb5ff22401826e7","type":"member"}
 {"bytes":5575,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-inventory.md","sha256":"b93da1dcd1133f1881b94b3b0151e0205c45b47b7f7c51556bc47b908901034c","type":"member"}

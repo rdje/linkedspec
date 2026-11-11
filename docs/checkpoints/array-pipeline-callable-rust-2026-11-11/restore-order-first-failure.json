@@ -1,0 +1,14 @@
+{
+  "actual_exit": 1,
+  "command": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/audit_restore_order.py"
+  ],
+  "reason": "Audit assumed one archive owner; root and native-source both retain the same observer. Original empty result and source remain; qualify both equal identities before selecting the last packet.",
+  "stderr_capture": "Original stderr was returned by exec tool; no separate raw file was captured. No first-audit PASS claim."
+}

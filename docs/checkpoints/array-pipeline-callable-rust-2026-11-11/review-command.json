@@ -1,0 +1,17 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/review.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/review.py": "cad21369762705616bb76c2aba16e5aa71b4859236231724c75ca41029d0b530",
+    "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/record_review.py": "a52bd9c540996066e7c0dced71775856607662b19cb0f8b104de165555bb5006",
+    "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/sealed-identities.json": "16becb496dbf7b785182d40a6055720168bb02c36681a9ccc2210254b5246ded"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/callable-pipeline-trace-rust",
+  "bytes": 53745392,
+  "sha256": "27a5f284b405b6ed4f625722e22b711a5624b17e81e3e700101564491307b6cb",
+  "mode": 493,
+  "scope": "Unstripped build-product identity only; complete upstream native/toolchain custody remains4.2. The actual executed copy below is retained after strip -S."
+}

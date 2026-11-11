@@ -1,0 +1,12 @@
+{
+  "public_routes": "PASS",
+  "programs": 194,
+  "routes": 4,
+  "roles": {
+    "preservation": 183,
+    "supported-target": 8,
+    "pattern-compatibility": 3
+  },
+  "raw_runtime_stderr": "exact before/after; producer warnings preserved",
+  "limits": "Three compatibility changes do not admit dynamic pattern sources; full admission remains separate."
+}

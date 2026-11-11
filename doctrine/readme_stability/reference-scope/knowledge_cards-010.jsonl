@@ -59,7 +59,7 @@
 {"bytes":3484,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-aggregate-selector-compile-rejection.md","sha256":"9968e38e2b2fef176f429f19445938d139e7c0abaf83299ff1d5b5f188275f93","type":"member"}
 {"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
-{"bytes":4296,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.2","path":"docs/knowledge/rust-array-pipeline-result-guards.md","sha256":"057ac9aa45699d03834e9295f7daf6f878ed79d7051c0853d9b6742b81501884","type":"member"}
+{"bytes":4779,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2","path":"docs/knowledge/rust-array-pipeline-result-guards.md","sha256":"706f45d63aab5cb31f14048a7731d843e1775e2de71484127e14c8bc66b9cc78","type":"member"}
 {"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
 {"bytes":3766,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.2","path":"docs/knowledge/rust-array-transform-result-guards.md","sha256":"ecdc63bac037b582f7772db7efda649b001e173f49f3325805ebcbba438821e3","type":"member"}
 {"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}
@@ -73,6 +73,7 @@
 {"bytes":6575,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-codeblock-literal-state.md","sha256":"0f331db9cb0aa3579c8d1a0c37f53cdb93300be1b61b6e1be4c4558ecae53bbe","type":"member"}
 {"bytes":4288,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/rust-callable-key-count-preservation.md","sha256":"9aeec75b384aed8a7cc592ae8e19ed99d8697889a4bbba25011c7b8bc91815f5","type":"member"}
 {"bytes":3717,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-named-mark-scope-gap.md","sha256":"a1d6eccc01f5d11fe40d54cc28c7d1ce317489380bb6d6a25b47f64d8a2f7083","type":"member"}
+{"bytes":3782,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2","path":"docs/knowledge/rust-callable-pipeline-result-guards.md","sha256":"d9999ec4b220800f8e4eb21dadfa9848889951dbc209e0898778a8eeec5ff785","type":"member"}
 {"bytes":4965,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-canonical-primary-cli-trace.md","sha256":"655ccae44aadf93b90b26ebed81f372649612f8bcd269725a855e6c9c828217f","type":"member"}
 {"bytes":2574,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-canonical-set-result-guards.md","sha256":"5bfb6596e9d90e02798eff5b65417902a3e9ba42e8960ba6849a12512f308bb6","type":"member"}
 {"bytes":2934,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-capture-endpoint-match-presence-repair.md","sha256":"b005e8f031a470c5df31fb6a7f843e73b74d12fb7dc5b3c5374fc2a8eaff224b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
 {"bytes":3589,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-index-source-guards.md","sha256":"56c43f8233d90e753c85202a4e98be40e82c0eebd631faea66bbe5db419fd639","type":"member"}
-{"bytes":3319,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/rust-key-count-result-guards.md","sha256":"11af538631dbc444f5caf0914e80a31dba84e755875e9e9de330b48245f73cd4","type":"member"}

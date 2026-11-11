@@ -1,0 +1,20 @@
+{
+  "programs": 194,
+  "supported_targets": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed",
+    "lower_logical_later_with",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "trim_later_with",
+    "uniq_copy_later_with"
+  ],
+  "compatibility": [
+    "own_pattern_block_composed",
+    "own_pattern_string_composed",
+    "own_pattern_variable_composed"
+  ],
+  "preserved": 183,
+  "limits": "Three pattern compatibility changes grant no new dynamic-pattern authority; existing terminal P effects survive."
+}

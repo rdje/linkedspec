@@ -1988,6 +1988,30 @@ Canonical receiver arities remain zero for `trim_each`, `filter_nonempty`,
 `split_each`/`filter_match`. Terminal function forms provide the rejection oracle;
 malformed composed function forms remain unadmitted. Regenerate older emitted Perl.
 
+Rust now preserves callable pipeline guards through later `with`, copying and
+logical continuations too. Its original producer still runs once, and a rejected
+Hash consumer skips its operands and later bodies. For example, this valid
+variadic call returns `[null,"S"]`:
+
+```text
+fn all_values(...values) {return(values)}
+Value:: I {
+  order="";
+  out=all_values({order=cat(order,"S");" head "}," tail ").trim_each().set_key(
+    {order=cat(order,"K");"k"}, {order=cat(order,"V");1}
+  ).with(){order=cat(order,"W");return("ran")};
+  return([out,order]);
+}
+```
+
+Valid empty function results still enter an immediate `with`; a later incompatible
+consumer has a separate rejection boundary. Existing fixed/rest arity errors and
+required source/delimiter/pattern errors propagate before consumer work, retaining
+Rust's native/restored text and generated-parser wrapper. Noncanonical pattern
+observations retain their existing producers without broader pattern admission;
+use the documented regex operands. Rebuild Rust applications. Serialized/emitted
+formats, pure function scope and other backends' independent qualifications stay.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and
