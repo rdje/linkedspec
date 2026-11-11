@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_assess_qualified.py": {
+    "bytes": 1667,
+    "sha256": "3889813135148775fe84880d09ba5ab6a2884b3283b6c5e5261d65149e32f45a",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assess_qualified.py": {
+    "bytes": 3356,
+    "sha256": "c6c99ed2df94da72e74adb4a1949e8e5866b2a99f572d56e0dba65f9035b8cef",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-cases.json": {
+    "bytes": 19840,
+    "sha256": "32686fdc5bb58f6f7229f8079927d1fd30f4d206b0d08587d25ae427b62f2e36",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/observer-stdout.log.gz": {
+    "bytes": 31270,
+    "sha256": "42cf55d8f55748a7d010a8c36ed56c90bf6a10c9bec04da3f9e996d1f8872e96",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-stdout.log.gz": {
+    "bytes": 30571,
+    "sha256": "b5a3e2fd18ae2a1cde9773365833541e7625100bf61a596eb45f4cc0a1c88a8f",
+    "mode": 420
+  }
+}

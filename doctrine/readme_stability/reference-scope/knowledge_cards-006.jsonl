@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14667,"lines":238,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-parser-authority-reading-and-member-omission.md","sha256":"5291a6a9760de9b62d8c344588e31a770b3c65f849300ac9bd6402c38634b657","type":"member"}
 {"bytes":3221,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-presence-result-source-guards.md","sha256":"53ed39a11a67f33425eea606d2977c7d0ecbf0362c3354502d655a3d91d9369a","type":"member"}
 {"bytes":4405,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-adapter.md","sha256":"9fdf53115d7e82e9c9f04d2beeaa5d60f5aca331f483a088ca91e8424662d114","type":"member"}
 {"bytes":4508,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-primary-cli-no-drift-closeout.md","sha256":"01cba807c61868cad3693b082d2544137c7ce2f279397a3bc8699e0ac4b21363","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11881,"lines":119,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-upper-completion-reading.md","sha256":"8c3254cfc8039552901a734dd4308f8ba00d19a35e4e866909fd9aceed0dce49","type":"member"}
 {"bytes":20002,"lines":212,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-write-failure-state-consumer-reading.md","sha256":"01eeb4456bf8aceb2af779c28ce5d2b341c4de1f17ffcf00eb32f5ccb517cb5a","type":"member"}
 {"bytes":3402,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-uniform-binding-runtime.md","sha256":"cff9d3c6a430b1cb0aaeeb48fbe7f4aef285529a39da2bc0c6a1ccef9bf983bc","type":"member"}
-{"bytes":3117,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unknown-runtime-helper-diagnostic-gap.md","sha256":"043b65fbaf3bfa096cdc8734af86a9b36925be38b5fc6573bde5cb3e40c9d23f","type":"member"}

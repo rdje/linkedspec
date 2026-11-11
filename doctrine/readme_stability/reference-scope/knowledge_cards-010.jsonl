@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2778,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-readme-gitlink-claim-alias.md","sha256":"e3ac90796810cf55c8c73b7067e320ace64616d96a9017978401bcce2b83125f","type":"member"}
 {"bytes":4897,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-receiver-arity-calibration.md","sha256":"c62783ddfdccafe6935c879271faabce5e538ec45783a1a7a45b77f598e2fc9e","type":"member"}
 {"bytes":6715,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-zero-argument-calls.md","sha256":"cc241c8e5bf87d06eb4eed62cf235c72206988169c105afbd0a8bb6c430270b0","type":"member"}
 {"bytes":2723,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/python-replay-traceback-source-binding.md","sha256":"7fd6e4a7cc6d1ac2c147eca0d7126f0008da2d2b7067dd9d12b4289fdaecbed7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4920,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-legacy-shipped-spec-oracle-smokes.md","sha256":"42324792ec6c09ef3e563e0390927e7de9cfcfba35a766c968bfa3972b629e3d","type":"member"}
 {"bytes":3727,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"108bdc17f192fa9d6daf4f87f42c3f7ef1f2277dd903af75aaa5f3883452a801","type":"member"}
 {"bytes":2797,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lexical-result-source-guards.md","sha256":"6d38d89a947d7930d792fd428d00e28b1af01e44f3543c80a9ae74ba70e412ab","type":"member"}
-{"bytes":2365,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lifecycle-i-return-dispatch-parity.md","sha256":"0acad5ea98416724010ca5f740288199ba5f487beec9e285ed63c0855f8ea45a","type":"member"}

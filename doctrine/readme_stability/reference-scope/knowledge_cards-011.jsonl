@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2365,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lifecycle-i-return-dispatch-parity.md","sha256":"0acad5ea98416724010ca5f740288199ba5f487beec9e285ed63c0855f8ea45a","type":"member"}
 {"bytes":2412,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-match-writer-presence-repair.md","sha256":"eca4ce770d9e329c86a9dad60d8e023e1a6af4495c6d40ec7cd6f8d5b0eab3d1","type":"member"}
 {"bytes":5620,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-verification-gate.md","sha256":"ee46666addbb47b94a37134a2582b6282b750a80a4bfaad6736d91f599c1836d","type":"member"}
 {"bytes":5242,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-logical-helper-neutral-runtime.md","sha256":"1c8d57ea4a6dba6ad44708415f3c7df2d3961124878fe9a3e0d201d2925eb101","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2388,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/shared-host-ram-budget.md","sha256":"8278098261274805f1781d7666cd88faf5a699816c35a1e7cf93aec4f8672e1d","type":"member"}
 {"bytes":1948,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/short-wrapper-alias-retirement-policy.md","sha256":"1e7869aef2373a7ad165b8fe9ae83e32c84227444d99ee23f8a53773e75f855b","type":"member"}
 {"bytes":4672,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/simenv-variable-dispatch-mismatch.md","sha256":"4687335776d8d9e699559fb611cf53b3bead6feb27ac591ae34c2689fee1873f","type":"member"}
-{"bytes":3648,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/single-quoted-action-strings-variant-contract.md","sha256":"647376592e9322f8678f5cc2f7cd36cdd25187f48db0157f15e07526ed3f5870","type":"member"}

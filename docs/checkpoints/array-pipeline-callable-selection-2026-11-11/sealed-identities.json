@@ -1,0 +1,926 @@
+{
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assess.py": {
+    "bytes": 2400,
+    "sha256": "27d8c929d528c921dd5c19de97077c3b5ddc39060fb89dd5e2465b9f255da44b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assess_qualified.py": {
+    "bytes": 3356,
+    "sha256": "c6c99ed2df94da72e74adb4a1949e8e5866b2a99f572d56e0dba65f9035b8cef"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assessment-command.json": {
+    "bytes": 164,
+    "sha256": "6b0e3ed7e11d5a450d9df04d5350b4c1f52ef0bb4c2c521a14d591c25525821e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assessment-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assessment-inputs.json": {
+    "bytes": 834,
+    "sha256": "04d6feef4cb86b979773347e667713f7af01c83f33d60d304dbe1625bfb667b2"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assessment-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/assessment-stdout.log.gz": {
+    "bytes": 1154,
+    "sha256": "f96923d9840f6bb1176a1abf4a0e532e3d55c08790f3fc1630587a57f62c9698"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/capture.py": {
+    "bytes": 3922,
+    "sha256": "46d64f30df13501495f226694bfdbc8c84166fa4e6c56e5630c976438acfabf6"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/capture_qualified.py": {
+    "bytes": 4156,
+    "sha256": "4d781e3c6044733e822378550e2d517ff91e50d709a610604ad9294a58126b02"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/cases.json": {
+    "bytes": 19070,
+    "sha256": "0fb5d2284b49012d86d24066ec4b2d5260611c12983fde759467a1e2fe5060e4"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/check_current.py": {
+    "bytes": 2766,
+    "sha256": "ec5968888faffb96445fe10e610c86ff9986686c79862f1a65d1f25247475792"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/helpers-before.md.gz": {
+    "bytes": 4151,
+    "sha256": "21b2d1679aa0283a4fd13a67b3c4a62a6501318465ab3f1534e1154ddf8b3cc5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspect.py": {
+    "bytes": 998,
+    "sha256": "4dc1d4db6907e0fed69689d114a0a3ac6f261fec67d910f22b41128ccf538a4f"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspection-command.json": {
+    "bytes": 165,
+    "sha256": "f22a975593c77db6a08de38ec0897ca0552398a84a816038c04b5db22c4ba37c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspection-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspection-inputs.json": {
+    "bytes": 835,
+    "sha256": "92e86fa14a52ff34c15db3289b22262874c5e70670915c144c243ebba59bc8fe"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspection-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspection-stdout.log.gz": {
+    "bytes": 1843,
+    "sha256": "e69c4771f713afa108e8b71f978878af3825d02ff54b3688ff12c7c8c01a2fe1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "cd9b0d52a76c592cdd8452e58ff330f66c4602753a7b2fbe7a77d53dce047d81"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/complete.txt": {
+    "bytes": 66,
+    "sha256": "e86d042abe41885745a00a901a14c80fbe073544f6c072c482cc8f30c0ced9b6"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_compatible.handler.pl.gz": {
+    "bytes": 2527,
+    "sha256": "61a31eeb1c0b636e889fc558a2c2c8c2b62c7c7b553e1846cf4563ad0db37b76"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_compatible.pm.gz": {
+    "bytes": 2540,
+    "sha256": "f9d85fc202ebe33a3b2e0ff204d60956f1fb6d7ff5b3f455e0132cd355bd6209"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_free_hash_guard.handler.pl.gz": {
+    "bytes": 2906,
+    "sha256": "2e244cc99742f63f5b485c1e7dfad646aabd436ac9d9aad8ea64378e19049058"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_free_hash_guard.pm.gz": {
+    "bytes": 2919,
+    "sha256": "f6e6c97e327857ee4d85ed38d442d926a97b8da595c01cc15b5224e341abeb3c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2452,
+    "sha256": "617f7a1eacfc36aaeef00e16f59c711f148d97f9a20c247b5a61524b7c14bd7b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_receiver_hash_guard.pm.gz": {
+    "bytes": 2468,
+    "sha256": "b42113a78b3f74147c530985c897038136f6249cbf735e6a1d6e5077520f6105"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_compatible.handler.pl.gz": {
+    "bytes": 2527,
+    "sha256": "eb6e0c36889ed35e06adcda0e7769349fbe48374bdc720b6b679ead3411868ae"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_compatible.pm.gz": {
+    "bytes": 2539,
+    "sha256": "b00acedf00dc869e492f6657eb2fa3695cb2f2c252266df9b5bc3a921bce7715"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_free_hash_guard.handler.pl.gz": {
+    "bytes": 2905,
+    "sha256": "82b1c5c479d8d2df0d085723470da1c7027b7730ca7b29aa5546ae1b8489025b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_free_hash_guard.pm.gz": {
+    "bytes": 2917,
+    "sha256": "d79614804b65c2ce810fd5f3516c0cec6b684e18ff2743705d32b35696f94ce3"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2453,
+    "sha256": "78fe40b97eca77b476f22da8b6f7bf7ec6626a5bb514673d02975980f384bf6c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_receiver_hash_guard.pm.gz": {
+    "bytes": 2468,
+    "sha256": "921ad45b1e1312818df9ae77d9054bde3313c748464ebb9f0ebcd60215d3bcf3"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "74ada91ac1ab85768012d558c38cf49b2867e5218b9ac51b844c02e62af8a664"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "c3ffbc1793c7bd128518bf9f20d0553da00554cce5bd462da60b0c207f92ff08"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_terminal.handler.pl.gz": {
+    "bytes": 2543,
+    "sha256": "1ca86cb20e16e8499345b705e46edbc4924aa0f240a5c9f4544ea8ff747e1811"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_terminal.pm.gz": {
+    "bytes": 2554,
+    "sha256": "973dabc9b2c191d6ddf7fc656b212e346ac4ab67ecd194a2823e2b3e1b105fc9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "3dc9d568d41d2f86d128999780f1b2a16d15b1f26738b21596675341391ee334"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "dea35b6e86bd0c6c69382fea12b665c00deef942492dda4dbe31d7d455a33cd7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_terminal.handler.pl.gz": {
+    "bytes": 2514,
+    "sha256": "eab0f18c87f49762285e930247ae3416b44bce8152fb5cd78785d4cf07f1db73"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_terminal.pm.gz": {
+    "bytes": 2525,
+    "sha256": "77b941870f199295e6727de4297df2fc3c94fbab8148ee5512fb5abd57e7f8a9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "3648a01123c3693879b69ccd81d63ad80a78ed1048277c86f8a3046b42baddbf"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "8b3d521856d1741e14be22c12202e63daf2925d2ce08ea1c142e026a937f475e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_terminal.handler.pl.gz": {
+    "bytes": 2517,
+    "sha256": "e08e33e21580db1ec3b433566dd79f6f627055fa11d27fe4e77e9084bfbd052d"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_terminal.pm.gz": {
+    "bytes": 2529,
+    "sha256": "b66d6b3f6dbdae0862af24708deb433f4586490b613929dafc2c19a2cba821b8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/input-identities.json": {
+    "bytes": 23998,
+    "sha256": "99d0a006cebce37e086c41f1310459a6fd28daa64240185faff89a52ed166a4b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 625173,
+    "sha256": "59dd65e10ac55884df9f783c9eb12382797f7f5d4561d974f155ef227b5b8da9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lower_logical_later_with.handler.pl.gz": {
+    "bytes": 2476,
+    "sha256": "8b1db6ac4eff0e5eab4deb2d6906e70a8a1fedd0471710d58a51ffea6b644cae"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lower_logical_later_with.pm.gz": {
+    "bytes": 2492,
+    "sha256": "8e71e082ca5116232fccaa559bb06fac0ed448d46a70fde734ea414ddaa375e8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_compatible.handler.pl.gz": {
+    "bytes": 2523,
+    "sha256": "838e0de60c45aa47a60b3d8eedaa24a33d52b5c932f2cc3c6aa88fa8dd84185e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_compatible.pm.gz": {
+    "bytes": 2534,
+    "sha256": "b20870e1044305ebe11040c45094abb8c01b85a79100e67e82a2689f077bfd05"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2899,
+    "sha256": "e29bc6b951f5c3a6272d1043219c02153476bc7e8ad14ad37142d5e7cc60f623"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_free_hash_guard.pm.gz": {
+    "bytes": 2910,
+    "sha256": "d07524b47d52c306ec47e946db076d5f09b684ae49c087dd5cb431e7b1daded7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2455,
+    "sha256": "ec0ac042934ee4c25f8adfdcd7e3c4182f50455d58c9884d16e5cb29f64883e6"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2470,
+    "sha256": "664402b43c7b7ac7ba2d05cdfdd43cbe5e0b22ffe55ee46320507858169fbb86"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_composed.handler.pl.gz": {
+    "bytes": 2432,
+    "sha256": "1f6d82d75acb94b234decc06264b1013f23aab7ce4572757ded78fad613767e4"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_composed.pm.gz": {
+    "bytes": 2446,
+    "sha256": "e9aef157fc532fa0e0c7d3a97e5341cf720c78468fceef70cff37b5fe81bd975"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_terminal.handler.pl.gz": {
+    "bytes": 2610,
+    "sha256": "53115eef4be7d4eb9fc4cbeb5a470c63ddf3293232f547a2aeed877e483a122e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_terminal.pm.gz": {
+    "bytes": 2622,
+    "sha256": "d8b56f21095639a01bdff85f0a2204b5b0a142bcda089c96b7a92dc81aa1c6cf"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_composed.handler.pl.gz": {
+    "bytes": 2427,
+    "sha256": "45b1fe3a2a805b9b20c1d63d152597f702e66001f5b277330284c9c920f6f182"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_composed.pm.gz": {
+    "bytes": 2443,
+    "sha256": "eefab0d2e46e3ceed2ee76c0236bd3f7096ee244f5fd7453733d2a894452d1a4"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_terminal.handler.pl.gz": {
+    "bytes": 2563,
+    "sha256": "c8911741f81dc6aa5f0caf02c7d266d30a0e6740557e19e62e1aaae3f9a7dbd8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_terminal.pm.gz": {
+    "bytes": 2575,
+    "sha256": "9050d2d23d6f87a6402b74a852196374fd0b11f181c87c096fdacd6bc36395fd"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_composed.handler.pl.gz": {
+    "bytes": 2423,
+    "sha256": "c03504fda1e42b647307e974524586b4780708421892c053e903aab2479edb42"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_composed.pm.gz": {
+    "bytes": 2439,
+    "sha256": "a52e78a7c261160980d069cf6b46a8fa40e2b50cb896893dca814cfdcbd12d0e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_terminal.handler.pl.gz": {
+    "bytes": 2596,
+    "sha256": "99b16bc7599eb9ff57ddd49a5b57c0c0dca9eaff783eda110cc8a3dcc979617c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_terminal.pm.gz": {
+    "bytes": 2608,
+    "sha256": "6f41ee259e758e0c728d5bd6c47672eb3e052d810b214be6a02e6d9e86c40d87"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-command.json": {
+    "bytes": 369,
+    "sha256": "7b8da62f08291fd90ae604513ca8d370315e1ee34f643af7c15557cfedc24155"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-stdout.log.gz": {
+    "bytes": 30571,
+    "sha256": "b5a3e2fd18ae2a1cde9773365833541e7625100bf61a596eb45f4cc0a1c88a8f"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_once.handler.pl.gz": {
+    "bytes": 2833,
+    "sha256": "7b8444bad653d255d97c3c6ee9dddcf3e757fdc4827efd4eaf5a3c643b48d9f1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_once.pm.gz": {
+    "bytes": 2844,
+    "sha256": "66e9730de24724fcc62e0444a5457b8ed6554279780829cac619852a09220afc"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_snapshot.handler.pl.gz": {
+    "bytes": 2602,
+    "sha256": "7d85e111f048682a1fd5bdc20e804d91f2f0252f505f4835fe8e419b1defabe5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_snapshot.pm.gz": {
+    "bytes": 2613,
+    "sha256": "0d3b3bcbdbb46d93c554730b3ea24082af5470fb67535b1b44d058d21c8e14a5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_compatible.handler.pl.gz": {
+    "bytes": 2512,
+    "sha256": "662c9e3b24abf37bbcf6d3dea5e1672a955b77f9c661f287a1edf9c964f8f1aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_compatible.pm.gz": {
+    "bytes": 2524,
+    "sha256": "09ce7eb59135523273b6c33fda7b4cb7149c6e0cd1bcc6923ec2e46a277ba252"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "a78bdad1fe1e5f2f7cbc0829630a500159d23d15d353c39ffb17fe2a4850da8b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_free_hash_guard.pm.gz": {
+    "bytes": 2906,
+    "sha256": "2fa4150dbafcb1e1b6f58197ce3333bc640173d227e7ff186b43a48e1cbe31a5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2449,
+    "sha256": "29ab1b259bb43856d0b8174fb50a87f9ca0b1d28138484717354fd1f18f0e3c5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2464,
+    "sha256": "741591f90d0c80adeb6c14931b9b3ce400decf1ca6a976f9b93f90415a83ba33"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_compatible.handler.pl.gz": {
+    "bytes": 2537,
+    "sha256": "de48b2d171244cf6c64ddfa4decc7c3424045246406c5e97342b8f075fc428ea"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_compatible.pm.gz": {
+    "bytes": 2548,
+    "sha256": "5bde9b048e2aeb92fe7e876e02fd062ceda1a7ac48cda00c9ea9f52823969b1b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2913,
+    "sha256": "83b0caef661861edb1bea2ded20adef450fc20b3cd39a5e90e917f781d61f8ea"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_free_hash_guard.pm.gz": {
+    "bytes": 2924,
+    "sha256": "a2a711dd132b31a0f6960655bc962c85a409936707da92a0a79deefb9c80bc8a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2451,
+    "sha256": "ca6bcca856a1a7a922543b73abcda112724029151a54d8f08bbed88a862d7e52"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2465,
+    "sha256": "737caf73fe533870e1e82396a35b7be94900cc8a7dee54f2ec0a5370199389c7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_later_with.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "1f539e9bce9fc2681ed01266c617fc59852637cfbde0a06de24a65ca9a7f473a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_later_with.pm.gz": {
+    "bytes": 2455,
+    "sha256": "0f450fffd8a5b3ec801f51448532b6ad26761114534d50a377dce360cef8d8c1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_compatible.handler.pl.gz": {
+    "bytes": 2573,
+    "sha256": "9edf7ba45e17f3021f0ac67d6de7399c27b43dc5dd4eb6b6d64e6f00551893a2"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_compatible.pm.gz": {
+    "bytes": 2585,
+    "sha256": "894cb1a58ccd6dedef1258a219d657a4381425e07f39312585e0d7a49242c4bb"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_copy_later_with.handler.pl.gz": {
+    "bytes": 2683,
+    "sha256": "e09d97309f55ba7cb0f96a9a73a2194a1ffccf041a3a70eab2a664314519dafc"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_copy_later_with.pm.gz": {
+    "bytes": 2699,
+    "sha256": "c10cc40ea28bc56f925eb88cf9eaeec648a89e9afd95b7d4b42f9596aac1754c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_free_hash_guard.handler.pl.gz": {
+    "bytes": 2945,
+    "sha256": "f9d281c10d85968e40393e112c42ff2b3ba3e195381141fcff9f15d22439381c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_free_hash_guard.pm.gz": {
+    "bytes": 2957,
+    "sha256": "3cda61ecd98ca002eccfa8624d9efc8a698e6ba5c31b1325fc6cf9b1e434eaf8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2448,
+    "sha256": "1fd06f1db011fe0a233d073605a8fdc21cc0a71f5a93dafa87e19e099c1f2254"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_receiver_hash_guard.pm.gz": {
+    "bytes": 2462,
+    "sha256": "6fed0c1b9a29c8ee089230b4dcbf567aa0a94af823758209224861c73210f5c6"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_compatible.handler.pl.gz": {
+    "bytes": 2519,
+    "sha256": "1775ca21baa62323569a3ce113ac90fe8596a46823fa99795666d3176c9e1c54"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_compatible.pm.gz": {
+    "bytes": 2532,
+    "sha256": "321d686eab3f6f7c483e582a0b68889a2cb14886f33e7d9e69923fcc45ee5b29"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2897,
+    "sha256": "9686cf981667a9f06f0d7fb2b97e792b874b0410a51f930c487da58dbb52d328"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_free_hash_guard.pm.gz": {
+    "bytes": 2908,
+    "sha256": "f741858535ab44806852f40d07514890ed6209c35f13ce57dcf6c5a4673232a5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2451,
+    "sha256": "5a57b2dc4c22b9c44568d54ce483f9d35059e1ecaf614db2bb758d3cd800ff10"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2466,
+    "sha256": "566a428737619668726d60997deac19fa75e0313ccb69f0c5c09bcb56930cc9f"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/valid_empty_with.handler.pl.gz": {
+    "bytes": 2802,
+    "sha256": "0f7b22451300c159717bf164ca7eb1098a3438c5723a4cfcd09f7d6b2816f3cd"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/valid_empty_with.pm.gz": {
+    "bytes": 2812,
+    "sha256": "675297ef6a44063cbaa47bcd2f1c89c1bb1278e5f2abd547a02593aea1dd2d57"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/version-command.json": {
+    "bytes": 128,
+    "sha256": "b7d70de89118a4096ceb641850f727e96b8b46736efc3d051fd43026dd6afb59"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/version-stdout.log.gz": {
+    "bytes": 1461,
+    "sha256": "a8d908f9adfd205da05d362304d1cf213147cfedae57b9758e98172389ce942b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/observations.json": {
+    "bytes": 184121,
+    "sha256": "0f1860e7e29608a3c99e7da29332446424983da6c77976046787b76546f1b9d9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/observer-template-0.gz": {
+    "bytes": 1491,
+    "sha256": "48baf24a1f1d073b8936b9e7def06bb50f8b84c38b95614937d04dd1e85defbc"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/observer-template-1.gz": {
+    "bytes": 1634,
+    "sha256": "21fc83df363e02b355c58ca8b14f5610594f649850f90c73cfbd63a1341317c0"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/observer.pl": {
+    "bytes": 3490,
+    "sha256": "8595207fa908bb7a1a9aba2646b8ec99283163699fc027edfc65f0314a9b789b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/pointer-repair.json": {
+    "bytes": 1654,
+    "sha256": "fdb775ccd3ee1bf25012e1423cab61589562ee136111e4d99a2a45fb3064c2d0"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/prepare.py": {
+    "bytes": 6973,
+    "sha256": "e850e4a795a27fd9628b9e6a67ac01888455bd5da7ad48fdee82bf4a1c7fa31c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualification.json": {
+    "bytes": 1807,
+    "sha256": "7ecc16229af1de07ac3922e456fa38ca4d09fa13fe4f33717efea4cddf288c59"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-assessment-command.json": {
+    "bytes": 174,
+    "sha256": "9f2fee7d6fe96ee22d6a18e986bdd9cd1094424c43a73c479653961ad79ead4e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-assessment-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-assessment-inputs.json": {
+    "bytes": 1089,
+    "sha256": "c1392f4b3b8a9438860db692e238235b06f75ca35e4691419b8e807756dbb913"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-assessment-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-assessment-stdout.log.gz": {
+    "bytes": 1194,
+    "sha256": "26b6304f32c2dfe94a907a63a8f2471f693608949e69b892572a4cd2603ef8e3"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-cases.json": {
+    "bytes": 19840,
+    "sha256": "32686fdc5bb58f6f7229f8079927d1fd30f4d206b0d08587d25ae427b62f2e36"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-current-command.json": {
+    "bytes": 370,
+    "sha256": "8a9ddceedc5c1ea925d7db5ffe354e490f75be93a988358a538918d9b05f59dd"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-current-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-current-result.json": {
+    "bytes": 5800,
+    "sha256": "b925f9b470e9561b4f341db338eeb6da4483c236bebd6efcb128acc8c14ef473"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-current-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified-current-stdout.log.gz": {
+    "bytes": 1222,
+    "sha256": "5039fed4bfe0bd5d798be8e1fd76298bffd722cc333a034e149c671b23fc93a1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/activation.txt": {
+    "bytes": 41,
+    "sha256": "cd9b0d52a76c592cdd8452e58ff330f66c4602753a7b2fbe7a77d53dce047d81"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/complete.txt": {
+    "bytes": 67,
+    "sha256": "94d027f465b726c0a2b88ca0b35cf8df9ddb07ef1ecb0ab44f294d8e172a957a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_compatible.handler.pl.gz": {
+    "bytes": 2527,
+    "sha256": "f114d47824c330b0cbc716e2d02ce84aec01c72f88dd1edc6e8712417b9c7798"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_compatible.pm.gz": {
+    "bytes": 2540,
+    "sha256": "ae95d53feee53b4820f975428a88418e800b0263c6515ce9fc2634de205afc0b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_free_hash_guard.handler.pl.gz": {
+    "bytes": 2906,
+    "sha256": "969630e07260b9033c4d4e821451104a59683fa6cadf32b39e6ca93bcc290802"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_free_hash_guard.pm.gz": {
+    "bytes": 2919,
+    "sha256": "f3175119b64ed0a17556a369e9e7a8169abff5a2142d33d850b3fe4d2de99603"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2452,
+    "sha256": "3a9fb9f2e47e7ed7c48ce2f2f39ec6bae3ce085625071156719443bd13baf407"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_receiver_hash_guard.pm.gz": {
+    "bytes": 2468,
+    "sha256": "7d3c7eb9fe1b4d881e4f473219920f80712c9413e5281873c944501c5abbbb17"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_compatible.handler.pl.gz": {
+    "bytes": 2527,
+    "sha256": "effccefa4d29e1149ad4af6251ce88e8cceefd5be77cf93f10c9bd0ade796589"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_compatible.pm.gz": {
+    "bytes": 2539,
+    "sha256": "c54967e9cc457f8d00511acd58c9a31385838877ea6711cb849fe782a742c695"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_free_hash_guard.handler.pl.gz": {
+    "bytes": 2905,
+    "sha256": "b790f8dda17f45a26dc8eb0634e3989a59beee8e7641e2685f9950cae056ce18"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_free_hash_guard.pm.gz": {
+    "bytes": 2917,
+    "sha256": "08ef9caf47507e59f17cc5ae9357cbd3e3ff3c95b2b6e1623158d89a64e67632"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2453,
+    "sha256": "3cf6597152b34393d7a580abffe68585f3c8ba75b3152b9d0b6909769f1ded6c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_receiver_hash_guard.pm.gz": {
+    "bytes": 2468,
+    "sha256": "be78ca354687e01ca50222f8e7c1e711025a92512c869f9277373e75b74f3b22"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "1bc36954bb174e8f2cb8c8a73db6d24df2641793a9880612f927d8c464c8c2b7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "7e2422b9189184429c71d46cdb1073f771437ccd0234d5d21423390d853dbfc1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_terminal.handler.pl.gz": {
+    "bytes": 2543,
+    "sha256": "7556aa4c8ca0c8c1243ece249b4d1af63b4fa0f7b12ace99b2ad4bf0be420151"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_terminal.pm.gz": {
+    "bytes": 2554,
+    "sha256": "d82bb12fa47202b24e3f68dcdb852850f8860c2567e0b45d56436662e1b9cf6c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "d6091cfa9ebcf08d899423125f92f102ce3bd77d09b350f3aca4837d051632de"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "63895148c629cb21e559e3da457acb2d6bb2e8d69805289e9b68f455d6e8f42e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_terminal.handler.pl.gz": {
+    "bytes": 2514,
+    "sha256": "cbfdd639f1cfaadc64217692ea1833efb485a60872606666b50ecb2577ec042d"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_terminal.pm.gz": {
+    "bytes": 2525,
+    "sha256": "0e5f47b9137e419a6e32ce03a425d129197cc7ed77c9c57e34925ea9f5c65b6c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_composed.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "5c0fcf2ddf1f69c80ac40e2b2ebe89615b5a746c22cc538d93c731dd807b70d1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_composed.pm.gz": {
+    "bytes": 2455,
+    "sha256": "6635ddefc3bca196813453e6e1f92accff354969652f4898a130228235393cff"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_terminal.handler.pl.gz": {
+    "bytes": 2517,
+    "sha256": "cf824afc2e5a3aa1e9268be1b9ecdab7ceaa382b3558360b06b2cabf2a4123f2"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_terminal.pm.gz": {
+    "bytes": 2529,
+    "sha256": "385c4960a7fccef761003a9a17bd9d2174f9d1a576464fff13cb2745259aca31"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/input-identities.json": {
+    "bytes": 25491,
+    "sha256": "eb70ead376e674229f07ffa46c44a09aee5d70e1f636c592316562100da1a5aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/inputs-before-first-run.tar.gz": {
+    "bytes": 664248,
+    "sha256": "e12a9bc947095f7cf4620f672ad7f1c89b689b2fe95cea31f08807a59741fb94"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_composed.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "7ac57785bae8c6d06d693baac7930ace751c6ea8698da95a8e45c3f34b999cb7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_composed.pm.gz": {
+    "bytes": 2907,
+    "sha256": "3fc0a2aa7c7061a835d2cb853e44523c4111222d221c94945806ff959220a403"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_terminal.handler.pl.gz": {
+    "bytes": 2533,
+    "sha256": "e40724b05cb266b7f65c2196590020c182fd41d55d201fc5d45fe17de9014691"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_terminal.pm.gz": {
+    "bytes": 2544,
+    "sha256": "b0782362ff14fb818a728e891b6e03fda333a46e516659692e7bffa1c8867476"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_composed.handler.pl.gz": {
+    "bytes": 2412,
+    "sha256": "2d1d644e682bdd3149f40251be2ecc8f0d0a3151a63721fcbba66e10edc0735b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_composed.pm.gz": {
+    "bytes": 2426,
+    "sha256": "9eced205f23051b052985b748d307bcef61da5098f4f7a01ad56d0975aaec180"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_terminal.handler.pl.gz": {
+    "bytes": 2533,
+    "sha256": "f3ac248d3d13fa525b7a3ee7ffe19f944568d1193d6e65d42baa6bf291121c9e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_terminal.pm.gz": {
+    "bytes": 2544,
+    "sha256": "bc2eff44df848f6678e66094b2dffa4513d03d8a2fc9586a94f098ed6da5a9a6"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lower_logical_later_with.handler.pl.gz": {
+    "bytes": 2476,
+    "sha256": "4da0673e96fff7d35d8577055b2d6447f63970af261e90ed5ebd7097c44ada13"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lower_logical_later_with.pm.gz": {
+    "bytes": 2492,
+    "sha256": "2f0b0f775277d88260fe4fc222805e8c66d0cf87338cd613c010742cfe4ba28a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_compatible.handler.pl.gz": {
+    "bytes": 2523,
+    "sha256": "bf80927f4aa177d12a51c923f9c7683e2e44299bbefe48e2429f23624eafbc6e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_compatible.pm.gz": {
+    "bytes": 2534,
+    "sha256": "6dd540d2636e4c5af35887b924825866c731e6968a9c7ee1add5ee1c96e00942"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2899,
+    "sha256": "3ad3f919a3270d8d574837d01711c3ccf45c61891f969ebeed8ea9c04d5ddd02"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_free_hash_guard.pm.gz": {
+    "bytes": 2910,
+    "sha256": "5e6676f7c636688eed7a6bfa17cdc3189a4de1b9c9079befeafa61f97c6aa765"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2455,
+    "sha256": "1dfd9eeac26f065155d2898925c11cf80f95f171cca9f19f53b5fec44e1e47c4"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2470,
+    "sha256": "22071269bef87d5b9ff003949c4d0bcf33c79fc926820a2f442292480991b490"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_composed.handler.pl.gz": {
+    "bytes": 2432,
+    "sha256": "9e6f7095133eaed7565f4fcfe99a5b15bca8e13343a8ea84b22922c545d283df"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_composed.pm.gz": {
+    "bytes": 2446,
+    "sha256": "fc0c4ae4a1c6765a9f740e2dc375605ee2b6630b9767c31c17e311ff083f17bb"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_terminal.handler.pl.gz": {
+    "bytes": 2610,
+    "sha256": "d0195ce353b444e9a914eb3ef38aaeaf3c999b364c96c9dbfdabb82ce45eb301"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_terminal.pm.gz": {
+    "bytes": 2622,
+    "sha256": "5c654c557a7cf003f485ec87a8e4edbcb941cf2c754dd072f7c9bb3d58a51e92"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_composed.handler.pl.gz": {
+    "bytes": 2423,
+    "sha256": "6d6a06f56a6e596dd1851eb7ec0f92f353cc69c70c629c40c29ef3fcc83404dd"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_composed.pm.gz": {
+    "bytes": 2439,
+    "sha256": "8f394af8937ca0bbd2757ac9336351653c8efedbd3d4278cfc7b0f223bd864d9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_terminal.handler.pl.gz": {
+    "bytes": 2596,
+    "sha256": "f73bb1d348b4ebb357f11cd51159db842864c2e0a4324b46b6ad61e2107fdd44"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_terminal.pm.gz": {
+    "bytes": 2608,
+    "sha256": "7fffbcfb84ccb0b2c2c008ae942c30990247c13d91cbe4e8a790e1a35eb74b05"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/observer-command.json": {
+    "bytes": 392,
+    "sha256": "29895d17a15c2287daaf97793f2623b3af0707211e303aa9f86eee6e874dfda5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/observer-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/observer-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/observer-stdout.log.gz": {
+    "bytes": 31270,
+    "sha256": "42cf55d8f55748a7d010a8c36ed56c90bf6a10c9bec04da3f9e996d1f8872e96"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_once.handler.pl.gz": {
+    "bytes": 2833,
+    "sha256": "bc10deb3f7c701944dae3e3ab2a5c7d33ba70a90b87e4f986aed0d5333ff4ea5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_once.pm.gz": {
+    "bytes": 2844,
+    "sha256": "31755f42fa87e37ea74e9e3f06f74389c90fe0942e296b6e443edf01af8d48c4"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_snapshot.handler.pl.gz": {
+    "bytes": 2602,
+    "sha256": "0ae8087ea8fea790dbdaf3a9fabecb54af98616928f8d73e1f58181cd5f8c848"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_snapshot.pm.gz": {
+    "bytes": 2613,
+    "sha256": "05f0c7fcf0286ef9ec25109e3ccd63a554099ace60b50cf8f501a560c5bf3bc7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_compatible.handler.pl.gz": {
+    "bytes": 2512,
+    "sha256": "ab34ab4debe6f05e60dbe78e47c861132c6338ae2594f635470c79c34e240b19"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_compatible.pm.gz": {
+    "bytes": 2524,
+    "sha256": "86a297031422efd76729d7c38e148750c8b6823f7d3b63122eccc8ed70298d4e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2895,
+    "sha256": "8e9700490f3c536fc822771743862b0eeed584c5222536b22e4aef0e82c79d73"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_free_hash_guard.pm.gz": {
+    "bytes": 2906,
+    "sha256": "78438cd16bdd5368079be51841efa5b3821002db9874ae3487bf036dca28aa33"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2449,
+    "sha256": "bc078ed726f150e1464f5c7002d08de141a39b3bdc8d32d5b914eb8c0eaeed4c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2464,
+    "sha256": "ec971b770cc903fe4e085cf2c405b4ffb17a47cc23e3305ff2b3e10897ff8f53"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_compatible.handler.pl.gz": {
+    "bytes": 2537,
+    "sha256": "50858cd5491cec5273886b5d305e7b24d7db783389f6fd9e7ff8fc87f8944632"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_compatible.pm.gz": {
+    "bytes": 2548,
+    "sha256": "8eacb3dd7284f885927b62276b7446a3d41838b144e9aaa0061650abff33dc67"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2913,
+    "sha256": "5fa17fa4df9ec720ed1fde5bd75cbdd1b3f31fa176a04d103cd1c3bd1dfbf4d9"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_free_hash_guard.pm.gz": {
+    "bytes": 2924,
+    "sha256": "e57e7ecc4fca85fd8238cb4315e3009df95f70fbc934c62bcb7dc22188d95c5e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2451,
+    "sha256": "89c110e8bb12d6a611bf26dc563c822b4469ad9be91d7e13eec4d5f5c0770b6d"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2465,
+    "sha256": "9f62166e7d60d70b783dc2b327806d8b29158992628db51d8f7a3d09e5089725"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_later_with.handler.pl.gz": {
+    "bytes": 2440,
+    "sha256": "5bb5e317b522dc2dfbe3972ba00611acf28c95825759be7af6a935126f4d3fda"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_later_with.pm.gz": {
+    "bytes": 2455,
+    "sha256": "4091c3aea04ec17aa95efcdcf1695cc74b6c01d5836e6c81926be69691322a5c"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_compatible.handler.pl.gz": {
+    "bytes": 2573,
+    "sha256": "be93b86c7981c40def339527b04b8c58180b107311e4a3e8f9a4b113b492e82e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_compatible.pm.gz": {
+    "bytes": 2585,
+    "sha256": "56db64262c4c50216d5bd4033dd38b4c4a3be571800429835c21b383dffe2d4e"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_copy_later_with.handler.pl.gz": {
+    "bytes": 2683,
+    "sha256": "da9043d1cadc7872444ae5f0e0e58b47b9a48931ca00bd133eb529129897e798"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_copy_later_with.pm.gz": {
+    "bytes": 2699,
+    "sha256": "5fd912515c90ca71dbd2e22c047bdaf26c8ac2c33b87c7da5d10c21db1488902"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_free_hash_guard.handler.pl.gz": {
+    "bytes": 2945,
+    "sha256": "3f9e2e351b31ffb4388ed823d9bb9a52b0a0984215651124643abc0e74e7a6c7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_free_hash_guard.pm.gz": {
+    "bytes": 2957,
+    "sha256": "520d993c718d59a2cfdc3a95adb278a03fe323d0dce555c6cadcef5654680bd2"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2448,
+    "sha256": "30f1290003c2f163f8670022f7439ebda25f3712c86c16cc1f7d21c7a79d25a5"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_receiver_hash_guard.pm.gz": {
+    "bytes": 2462,
+    "sha256": "308705653f6808bb7c404b304fd8cefbdabde38a15811f083aa498327bcf2be1"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_compatible.handler.pl.gz": {
+    "bytes": 2519,
+    "sha256": "ffb8e5bae5fe1d846deec437f7e6c16bc195ec9bf607780459d7b6c740cc2e17"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_compatible.pm.gz": {
+    "bytes": 2532,
+    "sha256": "de9b0f4d2ae9efce5fcfd0e99e110bd9645f35cb1fac5db2a6ad83ce803debc7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_free_hash_guard.handler.pl.gz": {
+    "bytes": 2897,
+    "sha256": "3a46e63b470e1d0c549687433f342cc4ab7d4882de4f7982e43498d2a33496bf"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_free_hash_guard.pm.gz": {
+    "bytes": 2908,
+    "sha256": "601f68199f072f0f3805bfda2c1d9a6790d4070a3709b924e4040040a4af108f"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_receiver_hash_guard.handler.pl.gz": {
+    "bytes": 2451,
+    "sha256": "64a48c35cf5d473b6aa8a7bcc51782aca6e5e54e2e2afe460ff79dc95b553cfb"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_receiver_hash_guard.pm.gz": {
+    "bytes": 2466,
+    "sha256": "53230f5bf549a44aeb8211da7869e4675fb4b9e5ef440a079f99a6746e471cd8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/valid_empty_with.handler.pl.gz": {
+    "bytes": 2802,
+    "sha256": "f1f4a77d6b52e1d850280d0270a26c8458f0c179a3f652bc85857aee7d92e238"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/valid_empty_with.pm.gz": {
+    "bytes": 2812,
+    "sha256": "dc034e31382ffdd3e1abc0a250a11bd29d84af712c9a1d741da9c08ff43061e7"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/version-command.json": {
+    "bytes": 128,
+    "sha256": "b7d70de89118a4096ceb641850f727e96b8b46736efc3d051fd43026dd6afb59"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/version-stdout.log.gz": {
+    "bytes": 1461,
+    "sha256": "a8d908f9adfd205da05d362304d1cf213147cfedae57b9758e98172389ce942b"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified_observer.pl": {
+    "bytes": 3500,
+    "sha256": "4fed22d9a87edc79a0592cef1ea321a9abb947c7c1266a8e52a611cecda7f30d"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualify.py": {
+    "bytes": 2019,
+    "sha256": "156715271fd835b3f546228c1b02a72950e11d87985be68933501548799d60f8"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/review.py": {
+    "bytes": 14763,
+    "sha256": "a1b86dcc2248eebb06695fedb737e32da19a6389a8e86b656f82af084726fb80"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_assess.py": {
+    "bytes": 1544,
+    "sha256": "4d3a0a9626b6845c96d1ef4af94cd9cbfcfd9fe9fcc759a288aba82d7d5b086f"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_assess_qualified.py": {
+    "bytes": 1667,
+    "sha256": "3889813135148775fe84880d09ba5ab6a2884b3283b6c5e5261d65149e32f45a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_inspect.py": {
+    "bytes": 1546,
+    "sha256": "6d8f22944cfe0c9ecdfbdaf9cf9947e04451fa463d26b456559d63ab95e8be8a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_review.py": {
+    "bytes": 1013,
+    "sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/seal.py": {
+    "bytes": 1746,
+    "sha256": "70a2c4549a019206faa9aa6c13e24c1f6d418149198149a0055c65a14aa41a7a"
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/template-identities.json": {
+    "bytes": 378,
+    "sha256": "31f281a6f7b0d259e8bb8a2d4cc1e11d40219032d43286a29a8a4fb3567c9fb3"
+  },
+  "tests/fixtures/array_pipeline_callable_perl_selection_cases.json": {
+    "bytes": 19840,
+    "sha256": "32686fdc5bb58f6f7229f8079927d1fd30f4d206b0d08587d25ae427b62f2e36"
+  },
+  "tests/fixtures/array_pipeline_callable_result_guard_cases.json": {
+    "bytes": 18136,
+    "sha256": "a1176548d06d83920e7f6ff5b5bf3f8e5c71034051876b2ec9f42d1b18f99403"
+  }
+}

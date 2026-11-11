@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/run_inspect.py": {
+    "bytes": 1546,
+    "sha256": "6d8f22944cfe0c9ecdfbdaf9cf9947e04451fa463d26b456559d63ab95e8be8a",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/inspect.py": {
+    "bytes": 998,
+    "sha256": "4dc1d4db6907e0fed69689d114a0a3ac6f261fec67d910f22b41128ccf538a4f",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/cases.json": {
+    "bytes": 19070,
+    "sha256": "0fb5d2284b49012d86d24066ec4b2d5260611c12983fde759467a1e2fe5060e4",
+    "mode": 420
+  },
+  "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/observer-stdout.log.gz": {
+    "bytes": 30571,
+    "sha256": "b5a3e2fd18ae2a1cde9773365833541e7625100bf61a596eb45f4cc0a1c88a8f",
+    "mode": 420
+  }
+}

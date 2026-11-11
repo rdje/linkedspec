@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-All bounded pure-pipeline79 backend outcomes are focused-checked on their recorded routes/hosts. Full feature/source/context/native admission remains open; remaining-feature selection23.1 resumes next.
+All bounded ordinary pure-pipeline79 outcomes are focused-checked. Qualified callable selection23.1.40 freezes safe shared37 and independent backend79.6 lanes; full feature/source/context/native admission remains open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.5. Each installed PUC5.5.1/LuaJIT173/four routes passes1006 checks; private17RED/current173PASS, direct1921 and first readonly0/empty stderr/eleven controls pass.156 healthy records/173 pairs stay exact across six epochs; current direct/native/grammar inputs match. No new chunk locals or producer/scalar/index changes. Safe DSL pattern errors use valid regex text; native formatter/declared5.4 stay separate.
+TYPE-REFERENCE-BOOK.1.2.23.1.40. Original39 includes two unsupported eager-pattern expectations, preserved without product-RED credit. Separate41 retains exact supported37 records/artifact pairs and exposes16 qualified Perl targets/25 healthy, including five readiness-only failures. All39/41 actual source pairs/full observed errors/channels survive. First readonly0/empty stderr/thirteen controls/current source identities pass. No production edit or peer verdict.
 
 ## Next Action
 
-After normal hooks/post-pointer/brief0/clean Git, resume remaining-feature selection TYPE-REFERENCE-BOOK.1.2.23.1 using inventory and canonical facts, defining the next bounded leaf before changes. Routing18.2/query4.17/full23.4 stay deferred until agreed feature coverage.
+After normal hooks/post-pointer/brief0/clean Git, activate Perl79.6.1. Acquire own source/first-with/arity/needed-error/earlier-owner policies from frozen callable contract/shared safe37/Perl41 before minimal prefix/readiness repair. Independent peers follow their own clean lanes; malformed Perl literals never enter Lua. Broad routing/query/full23.4 follow coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.4 —173/four routes/1006 assertions/private19RED-current173PASS/direct1921;154 healthy/173 pairs exact; first readonly eleven controls; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.3 —173/four routes/private19RED-current173PASS/direct318;154 healthy records/173 artifact pairs exact; first readonly eleven controls; independent Julia next.
@@ -29,7 +30,6 @@ After normal hooks/post-pointer/brief0/clean Git, resume remaining-feature selec
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.19 —1181/eight-scope metadata agreement, five/four controls, zero removals; accepted214-row/eight-claim preservation and focused proof.
-- TYPE-REFERENCE-BOOK.1.2.23.4.18.1 —1710 display lines removed, exact questions/other records/source acquisition and direct checks; canonical receipt governs landing.
 
 ## History
 

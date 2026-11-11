@@ -1,0 +1,32 @@
+{
+  "original_programs": 39,
+  "original_unsupported_pattern_expectations": 2,
+  "qualified_programs": 41,
+  "shared_safe_programs": 37,
+  "qualified_targets": 16,
+  "execution_error_failures": 11,
+  "readiness_only_failures": 5,
+  "healthy": 25,
+  "original_supported_observations_and_pairs_exact": 37,
+  "original_artifact_pairs": 39,
+  "qualified_artifact_pairs": 41,
+  "source_grammar": "activation-exact",
+  "source_qualification": "original39 retained; two unsupported eager-pattern expectations replaced only in separate41",
+  "recovery": "PASS",
+  "effective_corruptions": [
+    "correct value hides unready with",
+    "receiver compile error hidden",
+    "invented fresh after failed load",
+    "consumer effects accepted",
+    "copy later body hidden",
+    "needed source error masked",
+    "full error field lost",
+    "source evaluated twice",
+    "initial terminal normalized",
+    "literal pattern error hidden",
+    "healthy case omitted",
+    "actual handler drift",
+    "authored target changed"
+  ],
+  "limits": "Six action-rewriter metadata fields; full observed error/value/warning/absent-field records. Context-free substitution is not a full-source registry oracle. Same-process fresh modules; native/cache/transitive/toolchain custody4.2/SESSION5, shadowing32, source/context/isolation/registration/declared5.4/full23.4 remain separate. Perl41 malformed literals are not the shared safe37 and must not run on unsafe Lua."
+}

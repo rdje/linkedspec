@@ -1,0 +1,3704 @@
+{
+  "intake": {
+    "filter_match_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11027,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_compatible.handler.pl.gz",
+        "sha256": "368a645d4ce7b9739d85ed0da658d74930b60d8c58ea2a2fa852706fed608a2b"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11057,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_compatible.pm.gz",
+        "sha256": "aa6c3a6296d1ea3f91586ab0d60bbe2b789b589969b52154fa6062f644d796bd"
+      },
+      "native": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && $__ls_array_pipeline_candidate =~ /^h/ } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_match_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12239,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_free_hash_guard.handler.pl.gz",
+        "sha256": "1e2efbc7167b92b99e22da3b113c70a8f17cbeae6b81cc173f6100ef1ffae559"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12269,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_free_hash_guard.pm.gz",
+        "sha256": "611a0730e901713511a801d027bdbd2b9bc5452fa0444987c034a35dacfa3969"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_match_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9796,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_receiver_hash_guard.handler.pl.gz",
+        "sha256": "0610a0013c2c5fd086fb03ca4c3e82d603473d3dde794fb98a9376295d37dd31"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 25041) line 55, at EOF\nsyntax error at (eval 25041) line 55, near \";\"k\"\"\nsyntax error at (eval 25041) line 55, near \";1\"\nsyntax error at (eval 25041) line 55, near \") }\"\nsyntax error at (eval 25041) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_match"
+        ]
+      },
+      "module_input": {
+        "bytes": 9826,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_match_receiver_hash_guard.pm.gz",
+        "sha256": "20c83d29ee59be976c41cfb8b1caf01268af48c3a94ab24b391270f44de4dab5"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n"
+      ]
+    },
+    "filter_nonempty_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11155,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_compatible.handler.pl.gz",
+        "sha256": "37ea8a95c6622c0962936742d1c90b6fea5e83a713e99b37d2c0c8f160707541"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11185,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_compatible.pm.gz",
+        "sha256": "44cc3d3a09b225c4ff3df48f88c4202b00503ee9c75701a6088ba737a6ed3302"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && length($__ls_array_pipeline_candidate) } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_nonempty_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12303,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_free_hash_guard.handler.pl.gz",
+        "sha256": "969efab7fba5416bba7c3f790225d742fdda115bcd7ac5b0f26a292c6ed121cd"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12333,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_free_hash_guard.pm.gz",
+        "sha256": "d7d459e9b2fc7042adeb49d3448ea8d1bbb528a1a097cf2f0a55a0102221fc78"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_nonempty_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9797,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_receiver_hash_guard.handler.pl.gz",
+        "sha256": "88c0b4d5be67e5c726ceaf124a9504645d8b8314bf2293981e1537fd8b927450"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 18141) line 55, at EOF\nsyntax error at (eval 18141) line 55, near \";\"k\"\"\nsyntax error at (eval 18141) line 55, near \";1\"\nsyntax error at (eval 18141) line 55, near \") }\"\nsyntax error at (eval 18141) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_nonempty"
+        ]
+      },
+      "module_input": {
+        "bytes": 9827,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/filter_nonempty_receiver_hash_guard.pm.gz",
+        "sha256": "23b0e4c10ccd3121da0a4faa7f27468d4d3c83558e6087d76e4bb57cc076adcc"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n"
+      ]
+    },
+    "initial_hash_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_hash_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11029,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_terminal.handler.pl.gz",
+        "sha256": "726b6419a55983ee301cc5d4bd54e2206234663e974eff45ffb6cfc2773eaaf7"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11059,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_hash_terminal.pm.gz",
+        "sha256": "a81f0119872e25d24432c330c5007b3b186494dbd01454023f6822302cee3ce3"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_null_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_null_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10763,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_terminal.handler.pl.gz",
+        "sha256": "af75e8b5048a9efaca0162d852dc122d4792316804768ec3ba1817d0180bad06"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_null_terminal.pm.gz",
+        "sha256": "d8f58150567b94babaae73624d0ebef1d5cc3a696453b12c61af124df6617511"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_number_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_number_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10755,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_terminal.handler.pl.gz",
+        "sha256": "2717127bbda458830a23d9894ae443d72377d4b64db06037d308a13aeb3ac7af"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10785,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/initial_number_terminal.pm.gz",
+        "sha256": "4521382a3f66426327c9fa132efba214c4380192d31319bd8a4fb9037302bf76"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lower_logical_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9861,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lower_logical_later_with.handler.pl.gz",
+        "sha256": "9077936e8670f2d6f9cc9e4e78a4199cc2016d164558efc726752268a9aaaabb"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 26820) line 55, at EOF\nsyntax error at (eval 26820) line 55, near \";\"k\"\"\nsyntax error at (eval 26820) line 55, near \";1\"\nsyntax error at (eval 26820) line 55, near \"true}\"\nsyntax error at (eval 26820) line 55, near \"\"ran\"}\"\nsyntax error at (eval 26820) line 55, near \") }\"\nsyntax error at (eval 26820) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "lowercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9891,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lower_logical_later_with.pm.gz",
+        "sha256": "4ae2b1e2b5587f70e4b5bb47b8a11b0f6069414b0c5d01644dab2d583b95ada9"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"true}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"ran\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); push @{$__ls_logical_values}, scalar(do { $order = do { my @__ls_cat_parts = ($order, \"D\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"true\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n"
+      ]
+    },
+    "lowercase_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10915,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_compatible.handler.pl.gz",
+        "sha256": "5784e1c1d0e1ef615dddbbc28825e04a3eacce919f0586ab684f2239df5458e6"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10945,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_compatible.pm.gz",
+        "sha256": "c8732aca6350223e4297b51f698d446de6af30d84fa3566e88f61ccbb25a5564"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::lowercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lowercase_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12183,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_free_hash_guard.handler.pl.gz",
+        "sha256": "ea3654b13d01e74e25d609af1641a0e4f5926930a6b931d5b8d49283caf5a0d8"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_free_hash_guard.pm.gz",
+        "sha256": "70fa56526c7a235c29dc85928f0acaba002612e3e720bdc2171ae610574eaa75"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lowercase_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "40d6ab36213fbad9f354cef08c187c83f39fa3c38780ba6c9e864f93acbb9962"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 19863) line 55, at EOF\nsyntax error at (eval 19863) line 55, near \";\"k\"\"\nsyntax error at (eval 19863) line 55, near \";1\"\nsyntax error at (eval 19863) line 55, near \") }\"\nsyntax error at (eval 19863) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "lowercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9823,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/lowercase_each_receiver_hash_guard.pm.gz",
+        "sha256": "a73c187686cb05fd969d31b050599eb9d87f9f4667ad7396926a56566ef04c82"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n"
+      ]
+    },
+    "needed_delimiter_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9634,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_composed.handler.pl.gz",
+        "sha256": "fb43135149d2dedf67855736701bec0480172e7161ea1c0d39047162af7d62be"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 30829) line 55, at EOF\nsyntax error at (eval 30829) line 55, near \";items\"\nsyntax error at (eval 30829) line 55, near \"})\"\nsyntax error at (eval 30829) line 55, near \"\"k\"}\"\nsyntax error at (eval 30829) line 55, near \"1}\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9664,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_composed.pm.gz",
+        "sha256": "0ed9f5f1c1901728b09f3c0f40fd2023d54d80b6f0c9e2df6ee75466a446857c"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"1}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n"
+      ]
+    },
+    "needed_delimiter_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-callable-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "handler_input": {
+        "bytes": 10417,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_terminal.handler.pl.gz",
+        "sha256": "b522f8568bc254888c3d8c5d4d8c6eefd9a3dc377b3f9fd92f782cbfb75de555"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10447,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_delimiter_terminal.pm.gz",
+        "sha256": "1f0d9368532c8338e6c39e0dc1c51e9c594c179e5120228acbf27ad373b0fc72"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "needed_pattern_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9632,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_composed.handler.pl.gz",
+        "sha256": "74514116cd700aad11ac62fef1acdb91011bf104271cbec4018e4161d506270f"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 31989) line 55, at EOF\nsyntax error at (eval 31989) line 55, near \";items\"\nsyntax error at (eval 31989) line 55, near \"})\"\nsyntax error at (eval 31989) line 55, near \"\"k\"}\"\nsyntax error at (eval 31989) line 55, near \"1}\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_match"
+        ]
+      },
+      "module_input": {
+        "bytes": 9662,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_composed.pm.gz",
+        "sha256": "1dc06db3659562beeacb588befb9c361c8957fbac69dd10b45a79fb822d71a89"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"1}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 31989) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 31989) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 31989) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 31989) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 31989) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 31989) line 55.\n"
+      ]
+    },
+    "needed_pattern_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10225,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_terminal.handler.pl.gz",
+        "sha256": "f4b89005f8bd9c0985bbbd9cd111919610c910291ad76288c5f633de25ebb608"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10255,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_pattern_terminal.pm.gz",
+        "sha256": "87ba7e343fe2b81c6819b55e52be2342f8609b6e8811f68a4af19de7308f194d"
+      },
+      "native": [],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "needed_source_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9625,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_composed.handler.pl.gz",
+        "sha256": "31deb8e43c737d9127cbad4259cf54c10febd083ec832b8066da3c0b47ea916f"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 29669) line 55, at EOF\nsyntax error at (eval 29669) line 55, near \";items\"\nsyntax error at (eval 29669) line 55, near \"})\"\nsyntax error at (eval 29669) line 55, near \"\"k\"}\"\nsyntax error at (eval 29669) line 55, near \"1}\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "trim_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9655,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_composed.pm.gz",
+        "sha256": "664052508fe7630117d367ea361ff456d1156791766b57de56ab31c9d1cce050"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"1}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n"
+      ]
+    },
+    "needed_source_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-callable-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "handler_input": {
+        "bytes": 10385,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_terminal.handler.pl.gz",
+        "sha256": "42415425342c05be90e9695a5495f4d4ff8594f596bccb9e3d06626d775c8ee7"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10415,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/needed_source_terminal.pm.gz",
+        "sha256": "1ef38ddd7ac7613d002d7a433f5c5fff76ddd4a1f84dd6e27bac48473130bf80"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "source_once": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "TAIL",
+        "S"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11314,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_once.handler.pl.gz",
+        "sha256": "ae81241d2b9a67942d96a4453c7bddde31550d64d256a7cf912b0999859c8873"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11344,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_once.pm.gz",
+        "sha256": "5133b0635e741b013b01a28ee9feaf108a89fa5df0464db9449ead1e7164c986"
+      },
+      "native": [
+        "TAIL",
+        "S"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "source_snapshot": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10574,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_snapshot.handler.pl.gz",
+        "sha256": "7f74d779623ad78e1e4735ddc40a6a45116764a6cdb096ca713904875df8f943"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10604,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/source_snapshot.pm.gz",
+        "sha256": "3ea9280289261f9688bd0a0b84b65cd07a6c526574914003746bd0ffd359d597"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$items = [do { my @__ls_evaluated_values = (\"head:tail\"); @__ls_evaluated_values }];$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($items); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10723,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_compatible.handler.pl.gz",
+        "sha256": "752880758df2b07d870687695e423212a906108a949f51027f014aea1d013724"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10753,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_compatible.pm.gz",
+        "sha256": "32cc8ba12705635ff864b01324697a6a93b0c3d3e4677678b0836f0580b4c836"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { split /\\:/, (defined($_) ? $_ : '') } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12087,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_free_hash_guard.handler.pl.gz",
+        "sha256": "d3a790385d1e1acb479262b22024df38a303056d0d55ed1bb5df4a2842572596"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12117,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_free_hash_guard.pm.gz",
+        "sha256": "88e72daabdff5edb482560642ff81e494205eac79ffe7f0dabce7c2159fb4c9e"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "4b4345d93f6eb25a58317d12daa3f34698cbaf99d346657c2843aef96eb1d7ee"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 14685) line 55, at EOF\nsyntax error at (eval 14685) line 55, near \";\"k\"\"\nsyntax error at (eval 14685) line 55, near \";1\"\nsyntax error at (eval 14685) line 55, near \") }\"\nsyntax error at (eval 14685) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/split_each_receiver_hash_guard.pm.gz",
+        "sha256": "b1e71d5388a9e3bf6e20efc60029c9fcd2426e94fa8dc946a5fe6572e953f95f"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n"
+      ]
+    },
+    "trim_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11037,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_compatible.handler.pl.gz",
+        "sha256": "54c65e4d6fbb5b48ca5fe449fe963a17a26eeac46f24b78fec3ff7b69ad61c09"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11067,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_compatible.pm.gz",
+        "sha256": "aa9806dede39a812fc1267c4922523ce033535107bce5982e78866f147ef4c46"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "trim_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12244,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_free_hash_guard.handler.pl.gz",
+        "sha256": "80b2dbd71c36e62f6ae18698e7e2e608d572288ecdc810f0cbd377c0bed462bc"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12274,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_free_hash_guard.pm.gz",
+        "sha256": "6d8051b13e1c460179a39c6df9375fc044d15286ee9255cfee4d7e660361216b"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "trim_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9792,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "d555b0643a474bddd39634e9ad3835239fab9f5038ed38224e3101529e34caa2"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 16407) line 55, at EOF\nsyntax error at (eval 16407) line 55, near \";\"k\"\"\nsyntax error at (eval 16407) line 55, near \";1\"\nsyntax error at (eval 16407) line 55, near \") }\"\nsyntax error at (eval 16407) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "trim_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9822,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_each_receiver_hash_guard.pm.gz",
+        "sha256": "f339b47f85debed25b3b72fcb26952fc2d44d27d86403248bf92723eddf21973"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n"
+      ]
+    },
+    "trim_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_later_with.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/trim_later_with.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11419,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_compatible.handler.pl.gz",
+        "sha256": "18de2f7da5d32f0ee07185b645af22a0153978b6d1f2897f8d08b1046a06c6e5"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11449,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_compatible.pm.gz",
+        "sha256": "95d1487874b6826fddb1a63d3061a738dcd9b63b5bebc017ff64bba95ca332c5"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_candidate = $_; my $__ls_array_pipeline_key = defined($__ls_array_pipeline_candidate) ? \"S$__ls_array_pipeline_candidate\" : \"U\"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_copy_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10657,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_copy_later_with.handler.pl.gz",
+        "sha256": "e3a07d2aa95ef44e92e5bb6a2d09ae6ae0ca01cc6cfb2dd4918bc6204d4d92e3"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "copy"
+        ]
+      },
+      "module_input": {
+        "bytes": 10687,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_copy_later_with.pm.gz",
+        "sha256": "7cda25a8b66099276bb96d401c93d8177f17666a20e1074a3a838e9f0888b996"
+      },
+      "native": [
+        "ran",
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_copy_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; ref($__ls_copy_value) eq 'ARRAY' ? [@{$__ls_copy_value}] : ref($__ls_copy_value) eq 'HASH' ? { %{$__ls_copy_value} } : !ref($__ls_copy_value) ? $__ls_copy_value : do { require JSON::PP; JSON::PP::is_bool($__ls_copy_value) ? $__ls_copy_value : [] } }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12435,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_free_hash_guard.handler.pl.gz",
+        "sha256": "450e8e3db865c0355cf5e8270067851a8d31b21625f18f5235ecbae91660bdbb"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12465,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_free_hash_guard.pm.gz",
+        "sha256": "eb314855b0ddfbb97a65b4b3b9ee9279e6f52737935daefb0ad0a4811179d979"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_receiver_hash_guard.handler.pl.gz",
+        "sha256": "4fdcf8c2512d96327a38f1d2e92f364fc9594944db95c8a50dfb3e370b5e60b9"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 23319) line 55, at EOF\nsyntax error at (eval 23319) line 55, near \";\"k\"\"\nsyntax error at (eval 23319) line 55, near \";1\"\nsyntax error at (eval 23319) line 55, near \") }\"\nsyntax error at (eval 23319) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uniq"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uniq_receiver_hash_guard.pm.gz",
+        "sha256": "49b85f0908395e4321d2d4fca739852a230e59021777ab02fda13a167162c313"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n"
+      ]
+    },
+    "uppercase_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10915,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_compatible.handler.pl.gz",
+        "sha256": "17ebba7985e1d7a07d457a3482923e0f4213230c1c9fa8f50f511ac765f68e5c"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10945,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_compatible.pm.gz",
+        "sha256": "b232570bff3cf0af442357d88ef926c9f0c82b9075683fb00507783476a211ae"
+      },
+      "native": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::uppercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uppercase_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12183,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_free_hash_guard.handler.pl.gz",
+        "sha256": "486af49b085dbc3b26e25cff2dbd5dc945f33d52c414a857648a0bcd364e8d84"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_free_hash_guard.pm.gz",
+        "sha256": "dda5e58c4048c1b40533e2f1ca1c716975e7d4dc76cbe023a18110bbbdbf589a"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uppercase_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "3b03c7e84eb56609502082659a1b0da96069a0f63207c4ec1699bd5d0247c9fb"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 21585) line 55, at EOF\nsyntax error at (eval 21585) line 55, near \";\"k\"\"\nsyntax error at (eval 21585) line 55, near \";1\"\nsyntax error at (eval 21585) line 55, near \") }\"\nsyntax error at (eval 21585) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uppercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9823,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/uppercase_each_receiver_hash_guard.pm.gz",
+        "sha256": "31fd276295afb36f3bd4d69e1ec17911eb5d80b3f03b1ff8f0e73ea3b0999eb1"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n"
+      ]
+    },
+    "valid_empty_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/valid_empty_with.handler.pl.gz",
+        "sha256": "48bc68665710471efb954cb368df727946fa4fd836d234352ad1ff6ccf8a4e23"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11243,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/intake/valid_empty_with.pm.gz",
+        "sha256": "46538cc36f7a92ce6065017c4db8f3b2a02befaacff8e9aea2013c3c35566306"
+      },
+      "native": [
+        0,
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { my $__ls_selected_default = do { my $__ls_scalar_source = $value; $__ls_scalar_source }; 1 ? (do { my $__ls_count = $__ls_selected_default; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }) : undef } } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  "qualified": {
+    "filter_match_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11027,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_compatible.handler.pl.gz",
+        "sha256": "368a645d4ce7b9739d85ed0da658d74930b60d8c58ea2a2fa852706fed608a2b"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11057,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_compatible.pm.gz",
+        "sha256": "aa6c3a6296d1ea3f91586ab0d60bbe2b789b589969b52154fa6062f644d796bd"
+      },
+      "native": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && $__ls_array_pipeline_candidate =~ /^h/ } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_match_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12239,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_free_hash_guard.handler.pl.gz",
+        "sha256": "1e2efbc7167b92b99e22da3b113c70a8f17cbeae6b81cc173f6100ef1ffae559"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12269,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_free_hash_guard.pm.gz",
+        "sha256": "611a0730e901713511a801d027bdbd2b9bc5452fa0444987c034a35dacfa3969"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_match_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9796,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_receiver_hash_guard.handler.pl.gz",
+        "sha256": "0610a0013c2c5fd086fb03ca4c3e82d603473d3dde794fb98a9376295d37dd31"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 25041) line 55, at EOF\nsyntax error at (eval 25041) line 55, near \";\"k\"\"\nsyntax error at (eval 25041) line 55, near \";1\"\nsyntax error at (eval 25041) line 55, near \") }\"\nsyntax error at (eval 25041) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_match"
+        ]
+      },
+      "module_input": {
+        "bytes": 9826,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_match_receiver_hash_guard.pm.gz",
+        "sha256": "20c83d29ee59be976c41cfb8b1caf01268af48c3a94ab24b391270f44de4dab5"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 25041) line 55.\n"
+      ]
+    },
+    "filter_nonempty_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11155,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_compatible.handler.pl.gz",
+        "sha256": "37ea8a95c6622c0962936742d1c90b6fea5e83a713e99b37d2c0c8f160707541"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11185,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_compatible.pm.gz",
+        "sha256": "44cc3d3a09b225c4ff3df48f88c4202b00503ee9c75701a6088ba737a6ed3302"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && length($__ls_array_pipeline_candidate) } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_nonempty_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12303,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_free_hash_guard.handler.pl.gz",
+        "sha256": "969efab7fba5416bba7c3f790225d742fdda115bcd7ac5b0f26a292c6ed121cd"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12333,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_free_hash_guard.pm.gz",
+        "sha256": "d7d459e9b2fc7042adeb49d3448ea8d1bbb528a1a097cf2f0a55a0102221fc78"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "filter_nonempty_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9797,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_receiver_hash_guard.handler.pl.gz",
+        "sha256": "88c0b4d5be67e5c726ceaf124a9504645d8b8314bf2293981e1537fd8b927450"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 18141) line 55, at EOF\nsyntax error at (eval 18141) line 55, near \";\"k\"\"\nsyntax error at (eval 18141) line 55, near \";1\"\nsyntax error at (eval 18141) line 55, near \") }\"\nsyntax error at (eval 18141) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_nonempty"
+        ]
+      },
+      "module_input": {
+        "bytes": 9827,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/filter_nonempty_receiver_hash_guard.pm.gz",
+        "sha256": "23b0e4c10ccd3121da0a4faa7f27468d4d3c83558e6087d76e4bb57cc076adcc"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 18141) line 55.\n"
+      ]
+    },
+    "initial_hash_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_hash_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11029,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_terminal.handler.pl.gz",
+        "sha256": "726b6419a55983ee301cc5d4bd54e2206234663e974eff45ffb6cfc2773eaaf7"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11059,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_hash_terminal.pm.gz",
+        "sha256": "a81f0119872e25d24432c330c5007b3b186494dbd01454023f6822302cee3ce3"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_null_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_null_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10763,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_terminal.handler.pl.gz",
+        "sha256": "af75e8b5048a9efaca0162d852dc122d4792316804768ec3ba1817d0180bad06"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_null_terminal.pm.gz",
+        "sha256": "d8f58150567b94babaae73624d0ebef1d5cc3a696453b12c61af124df6617511"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_number_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_composed.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_composed.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "initial_number_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [],
+        []
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10755,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_terminal.handler.pl.gz",
+        "sha256": "2717127bbda458830a23d9894ae443d72377d4b64db06037d308a13aeb3ac7af"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10785,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/initial_number_terminal.pm.gz",
+        "sha256": "4521382a3f66426327c9fa132efba214c4380192d31319bd8a4fb9037302bf76"
+      },
+      "native": [
+        [],
+        []
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "invalid_range_free_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 12195,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_composed.handler.pl.gz",
+        "sha256": "7239f100e04c498c9df4a8b7c9f5f9f596e118e47a997eda6346ff7c74790d24"
+      },
+      "load_error": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at (eval 35409) line 54.\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12225,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_composed.pm.gz",
+        "sha256": "07d45e7fd45f1131a4d516f1545d8e974df1b10034f1b5e59f493fe012e5484a"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at LinkedSpec::generated_handler:Value:<none> line 27.\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "invalid_range_free_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 10180,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_terminal.handler.pl.gz",
+        "sha256": "5c687cd59ff5b141e4fc442be8fd4accb40c6bc76bbf433fddddf23e1e5d96ec"
+      },
+      "load_error": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at (eval 34829) line 54.\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10210,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_free_terminal.pm.gz",
+        "sha256": "ddd815c9db1a06b09ba00f75f576f82e5eaa1b6f6b4e25e6c92001b2de3e170d"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at LinkedSpec::generated_handler:Value:<none> line 27.\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [grep { my $__ls_array_pipeline_candidate = $_; defined($__ls_array_pipeline_candidate) && $__ls_array_pipeline_candidate =~ /[z-a]/ } @{$__ls_array_pipeline_source}] : [] }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "invalid_range_receiver_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9601,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_composed.handler.pl.gz",
+        "sha256": "8aaccb3328961777cbf2783729e87e1d0c77e984f4aa7e5fdcdf44641f808050"
+      },
+      "load_error": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at (eval 36545) line 54.\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "filter_match"
+        ]
+      },
+      "module_input": {
+        "bytes": 9631,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_composed.pm.gz",
+        "sha256": "ea520dfd6157091f7b0c0b28f97f3f89f859bfae1b34282fb2ff5554fe835255"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at LinkedSpec::generated_handler:Value:<none> line 27.\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "invalid_range_receiver_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 10180,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_terminal.handler.pl.gz",
+        "sha256": "5c687cd59ff5b141e4fc442be8fd4accb40c6bc76bbf433fddddf23e1e5d96ec"
+      },
+      "load_error": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at (eval 35965) line 54.\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10210,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/invalid_range_receiver_terminal.pm.gz",
+        "sha256": "ddd815c9db1a06b09ba00f75f576f82e5eaa1b6f6b4e25e6c92001b2de3e170d"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Invalid [] range \"z-a\" in regex; marked by <-- HERE in m/[z-a <-- HERE ]/ at LinkedSpec::generated_handler:Value:<none> line 27.\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lower_logical_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9861,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lower_logical_later_with.handler.pl.gz",
+        "sha256": "9077936e8670f2d6f9cc9e4e78a4199cc2016d164558efc726752268a9aaaabb"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 26820) line 55, at EOF\nsyntax error at (eval 26820) line 55, near \";\"k\"\"\nsyntax error at (eval 26820) line 55, near \";1\"\nsyntax error at (eval 26820) line 55, near \"true}\"\nsyntax error at (eval 26820) line 55, near \"\"ran\"}\"\nsyntax error at (eval 26820) line 55, near \") }\"\nsyntax error at (eval 26820) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "lowercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9891,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lower_logical_later_with.pm.gz",
+        "sha256": "4ae2b1e2b5587f70e4b5bb47b8a11b0f6069414b0c5d01644dab2d583b95ada9"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"true}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"ran\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); push @{$__ls_logical_values}, scalar(do { $order = do { my @__ls_cat_parts = ($order, \"D\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"true\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 26820) line 55.\n"
+      ]
+    },
+    "lowercase_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10915,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_compatible.handler.pl.gz",
+        "sha256": "5784e1c1d0e1ef615dddbbc28825e04a3eacce919f0586ab684f2239df5458e6"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10945,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_compatible.pm.gz",
+        "sha256": "c8732aca6350223e4297b51f698d446de6af30d84fa3566e88f61ccbb25a5564"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::lowercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lowercase_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12183,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_free_hash_guard.handler.pl.gz",
+        "sha256": "ea3654b13d01e74e25d609af1641a0e4f5926930a6b931d5b8d49283caf5a0d8"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_free_hash_guard.pm.gz",
+        "sha256": "70fa56526c7a235c29dc85928f0acaba002612e3e720bdc2171ae610574eaa75"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "lowercase_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "40d6ab36213fbad9f354cef08c187c83f39fa3c38780ba6c9e864f93acbb9962"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 19863) line 55, at EOF\nsyntax error at (eval 19863) line 55, near \";\"k\"\"\nsyntax error at (eval 19863) line 55, near \";1\"\nsyntax error at (eval 19863) line 55, near \") }\"\nsyntax error at (eval 19863) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "lowercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9823,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/lowercase_each_receiver_hash_guard.pm.gz",
+        "sha256": "a73c187686cb05fd969d31b050599eb9d87f9f4667ad7396926a56566ef04c82"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 19863) line 55.\n"
+      ]
+    },
+    "needed_delimiter_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9634,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_composed.handler.pl.gz",
+        "sha256": "fb43135149d2dedf67855736701bec0480172e7161ea1c0d39047162af7d62be"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 30829) line 55, at EOF\nsyntax error at (eval 30829) line 55, near \";items\"\nsyntax error at (eval 30829) line 55, near \"})\"\nsyntax error at (eval 30829) line 55, near \"\"k\"}\"\nsyntax error at (eval 30829) line 55, near \"1}\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9664,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_composed.pm.gz",
+        "sha256": "0ed9f5f1c1901728b09f3c0f40fd2023d54d80b6f0c9e2df6ee75466a446857c"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"1}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 30829) line 55.\n"
+      ]
+    },
+    "needed_delimiter_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-callable-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "handler_input": {
+        "bytes": 10417,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_terminal.handler.pl.gz",
+        "sha256": "b522f8568bc254888c3d8c5d4d8c6eefd9a3dc377b3f9fd92f782cbfb75de555"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10447,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_delimiter_terminal.pm.gz",
+        "sha256": "1f0d9368532c8338e6c39e0dc1c51e9c594c179e5120228acbf27ad373b0fc72"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "needed_source_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9625,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_composed.handler.pl.gz",
+        "sha256": "31deb8e43c737d9127cbad4259cf54c10febd083ec832b8066da3c0b47ea916f"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 29669) line 55, at EOF\nsyntax error at (eval 29669) line 55, near \";items\"\nsyntax error at (eval 29669) line 55, near \"})\"\nsyntax error at (eval 29669) line 55, near \"\"k\"}\"\nsyntax error at (eval 29669) line 55, near \"1}\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "trim_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9655,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_composed.pm.gz",
+        "sha256": "664052508fe7630117d367ea361ff456d1156791766b57de56ab31c9d1cce050"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";items\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"})\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"\"k\"}\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \"1}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"items\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"items\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 29669) line 55.\n"
+      ]
+    },
+    "needed_source_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": null,
+      "fresh_cursor": 0,
+      "fresh_error": {
+        "code": "generated_execution_failed",
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_family": "default",
+        "rule_label": "Value",
+        "source_identity": "array-pipeline-callable-selection.spec",
+        "stage": "execute_generated",
+        "summary": "Generated parser execution failed",
+        "type": "generated_source_error"
+      },
+      "handler_input": {
+        "bytes": 10385,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_terminal.handler.pl.gz",
+        "sha256": "42415425342c05be90e9695a5495f4d4ff8594f596bccb9e3d06626d775c8ee7"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10415,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/needed_source_terminal.pm.gz",
+        "sha256": "1ef38ddd7ac7613d002d7a433f5c5fff76ddd4a1f84dd6e27bac48473130bf80"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_eval",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_eval",
+        "summary": "Rule handler execution failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";return do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "source_once": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "TAIL",
+        "S"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11314,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_once.handler.pl.gz",
+        "sha256": "ae81241d2b9a67942d96a4453c7bddde31550d64d256a7cf912b0999859c8873"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11344,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_once.pm.gz",
+        "sha256": "5133b0635e741b013b01a28ee9feaf108a89fa5df0464db9449ead1e7164c986"
+      },
+      "native": [
+        "TAIL",
+        "S"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "source_snapshot": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10574,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_snapshot.handler.pl.gz",
+        "sha256": "7f74d779623ad78e1e4735ddc40a6a45116764a6cdb096ca713904875df8f943"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10604,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/source_snapshot.pm.gz",
+        "sha256": "3ea9280289261f9688bd0a0b84b65cd07a6c526574914003746bd0ffd359d597"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "changed"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$items = [do { my @__ls_evaluated_values = (\"head:tail\"); @__ls_evaluated_values }];$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($items); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10723,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_compatible.handler.pl.gz",
+        "sha256": "752880758df2b07d870687695e423212a906108a949f51027f014aea1d013724"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10753,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_compatible.pm.gz",
+        "sha256": "32cc8ba12705635ff864b01324697a6a93b0c3d3e4677678b0836f0580b4c836"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { split /\\:/, (defined($_) ? $_ : '') } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12087,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_free_hash_guard.handler.pl.gz",
+        "sha256": "d3a790385d1e1acb479262b22024df38a303056d0d55ed1bb5df4a2842572596"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12117,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_free_hash_guard.pm.gz",
+        "sha256": "88e72daabdff5edb482560642ff81e494205eac79ffe7f0dabce7c2159fb4c9e"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "split_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "4b4345d93f6eb25a58317d12daa3f34698cbaf99d346657c2843aef96eb1d7ee"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 14685) line 55, at EOF\nsyntax error at (eval 14685) line 55, near \";\"k\"\"\nsyntax error at (eval 14685) line 55, near \";1\"\nsyntax error at (eval 14685) line 55, near \") }\"\nsyntax error at (eval 14685) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "split_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/split_each_receiver_hash_guard.pm.gz",
+        "sha256": "b1e71d5388a9e3bf6e20efc60029c9fcd2426e94fa8dc946a5fe6572e953f95f"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 14685) line 55.\n"
+      ]
+    },
+    "trim_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11037,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_compatible.handler.pl.gz",
+        "sha256": "54c65e4d6fbb5b48ca5fe449fe963a17a26eeac46f24b78fec3ff7b69ad61c09"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11067,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_compatible.pm.gz",
+        "sha256": "aa9806dede39a812fc1267c4922523ce033535107bce5982e78866f147ef4c46"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { my $__ls_array_pipeline_item = defined($_) ? $_ : ''; $__ls_array_pipeline_item =~ s/^\\s+|\\s+$//g; $__ls_array_pipeline_item } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "trim_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12244,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_free_hash_guard.handler.pl.gz",
+        "sha256": "80b2dbd71c36e62f6ae18698e7e2e608d572288ecdc810f0cbd377c0bed462bc"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12274,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_free_hash_guard.pm.gz",
+        "sha256": "6d8051b13e1c460179a39c6df9375fc044d15286ee9255cfee4d7e660361216b"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "trim_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9792,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "d555b0643a474bddd39634e9ad3835239fab9f5038ed38224e3101529e34caa2"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 16407) line 55, at EOF\nsyntax error at (eval 16407) line 55, near \";\"k\"\"\nsyntax error at (eval 16407) line 55, near \";1\"\nsyntax error at (eval 16407) line 55, near \") }\"\nsyntax error at (eval 16407) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "trim_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9822,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_each_receiver_hash_guard.pm.gz",
+        "sha256": "f339b47f85debed25b3b72fcb26952fc2d44d27d86403248bf92723eddf21973"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 16407) line 55.\n"
+      ]
+    },
+    "trim_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_later_with.handler.pl.gz",
+        "sha256": "7821c73c5d5595c441798093597fe5c34a683c1d8c3276a5b3e71c36b563b6b0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "with"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/trim_later_with.pm.gz",
+        "sha256": "7c93619837ff94100088123319e99a5b1bfec5ccff3c4a693a9163f578d99c9c"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11419,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_compatible.handler.pl.gz",
+        "sha256": "18de2f7da5d32f0ee07185b645af22a0153978b6d1f2897f8d08b1046a06c6e5"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11449,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_compatible.pm.gz",
+        "sha256": "95d1487874b6826fddb1a63d3061a738dcd9b63b5bebc017ff64bba95ca332c5"
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; if (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') { my %__ls_array_pipeline_seen; [grep { my $__ls_array_pipeline_candidate = $_; my $__ls_array_pipeline_key = defined($__ls_array_pipeline_candidate) ? \"S$__ls_array_pipeline_candidate\" : \"U\"; !$__ls_array_pipeline_seen{$__ls_array_pipeline_key}++ } @{$__ls_array_pipeline_source}] } else { [] } }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_copy_later_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        "ran",
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10657,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_copy_later_with.handler.pl.gz",
+        "sha256": "e3a07d2aa95ef44e92e5bb6a2d09ae6ae0ca01cc6cfb2dd4918bc6204d4d92e3"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "copy"
+        ]
+      },
+      "module_input": {
+        "bytes": 10687,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_copy_later_with.pm.gz",
+        "sha256": "7cda25a8b66099276bb96d401c93d8177f17666a20e1074a3a838e9f0888b996"
+      },
+      "native": [
+        "ran",
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_copy_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; ref($__ls_copy_value) eq 'ARRAY' ? [@{$__ls_copy_value}] : ref($__ls_copy_value) eq 'HASH' ? { %{$__ls_copy_value} } : !ref($__ls_copy_value) ? $__ls_copy_value : do { require JSON::PP; JSON::PP::is_bool($__ls_copy_value) ? $__ls_copy_value : [] } }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12435,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_free_hash_guard.handler.pl.gz",
+        "sha256": "450e8e3db865c0355cf5e8270067851a8d31b21625f18f5235ecbae91660bdbb"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12465,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_free_hash_guard.pm.gz",
+        "sha256": "eb314855b0ddfbb97a65b4b3b9ee9279e6f52737935daefb0ad0a4811179d979"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uniq_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9790,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_receiver_hash_guard.handler.pl.gz",
+        "sha256": "4fdcf8c2512d96327a38f1d2e92f364fc9594944db95c8a50dfb3e370b5e60b9"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 23319) line 55, at EOF\nsyntax error at (eval 23319) line 55, near \";\"k\"\"\nsyntax error at (eval 23319) line 55, near \";1\"\nsyntax error at (eval 23319) line 55, near \") }\"\nsyntax error at (eval 23319) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uniq"
+        ]
+      },
+      "module_input": {
+        "bytes": 9820,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uniq_receiver_hash_guard.pm.gz",
+        "sha256": "49b85f0908395e4321d2d4fca739852a230e59021777ab02fda13a167162c313"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 23319) line 55.\n"
+      ]
+    },
+    "uppercase_each_compatible": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10915,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_compatible.handler.pl.gz",
+        "sha256": "17ebba7985e1d7a07d457a3482923e0f4213230c1c9fa8f50f511ac765f68e5c"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 10945,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_compatible.pm.gz",
+        "sha256": "b232570bff3cf0af442357d88ef926c9f0c82b9075683fb00507783476a211ae"
+      },
+      "native": [
+        [
+          "HEAD",
+          "TAIL"
+        ],
+        [
+          "HEAD",
+          "TAIL"
+        ]
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "return [do { my @__ls_evaluated_values = (do { my $__ls_array_pipeline_source = do { my $__ls_array_value_source = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; (defined($__ls_array_value_source) && ref($__ls_array_value_source) eq 'ARRAY') ? [@{$__ls_array_value_source}] : [] }; (defined($__ls_array_pipeline_source) && ref($__ls_array_pipeline_source) eq 'ARRAY') ? [map { defined($_) ? LinkedSpec::UnicodeCaseMapping::uppercase($_) : undef } @{$__ls_array_pipeline_source}] : [] }); @__ls_evaluated_values }, do { my @__ls_evaluated_values = (do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uppercase_each_free_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 12183,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_free_hash_guard.handler.pl.gz",
+        "sha256": "486af49b085dbc3b26e25cff2dbd5dc945f33d52c414a857648a0bcd364e8d84"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 12213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_free_hash_guard.pm.gz",
+        "sha256": "dda5e58c4048c1b40533e2f1ca1c716975e7d4dc76cbe023a18110bbbdbf589a"
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "uppercase_each_receiver_hash_guard": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "handler_input": {
+        "bytes": 9793,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_receiver_hash_guard.handler.pl.gz",
+        "sha256": "3b03c7e84eb56609502082659a1b0da96069a0f63207c4ec1699bd5d0247c9fb"
+      },
+      "load_error": "Can't modify constant item in scalar assignment at (eval 21585) line 55, at EOF\nsyntax error at (eval 21585) line 55, near \";\"k\"\"\nsyntax error at (eval 21585) line 55, near \";1\"\nsyntax error at (eval 21585) line 55, near \") }\"\nsyntax error at (eval 21585) line 56, near \";\n }\"\n",
+      "loaded": 0,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "uppercase_each"
+        ]
+      },
+      "module_input": {
+        "bytes": 9823,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/uppercase_each_receiver_hash_guard.pm.gz",
+        "sha256": "31fd276295afb36f3bd4d69e1ec17911eb5d80b3f03b1ff8f0e73ea3b0999eb1"
+      },
+      "native": null,
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": {
+        "detail": "Can't modify constant item in scalar assignment at LinkedSpec::generated_handler:Value:<none> line 28, at EOF\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";\"k\"\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \";1\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 28, near \") }\"\nsyntax error at LinkedSpec::generated_handler:Value:<none> line 29, near \";\n}\"\n",
+        "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+        "handler_variant": "<none>",
+        "owner_stage": "runtime_handler:rule_handler_compile",
+        "rule_label": "Value",
+        "spec_name": "",
+        "spec_path": "",
+        "stage": "rule_handler_compile",
+        "summary": "Rule handler compilation failed",
+        "top_rule": "Value",
+        "type": "runtime_handler"
+      },
+      "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": [
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n",
+        "Unquoted string \"order\" may clash with future reserved word at (eval 21585) line 55.\n"
+      ]
+    },
+    "valid_empty_with": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        0,
+        "W"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 11213,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/valid_empty_with.handler.pl.gz",
+        "sha256": "48bc68665710471efb954cb368df727946fa4fd836d234352ad1ff6ccf8a4e23"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "module_input": {
+        "bytes": 11243,
+        "path": "docs/checkpoints/array-pipeline-callable-selection-2026-11-11/qualified/valid_empty_with.pm.gz",
+        "sha256": "46538cc36f7a92ce6065017c4db8f3b2a02befaacff8e9aea2013c3c35566306"
+      },
+      "native": [
+        0,
+        "W"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { my $__ls_selected_default = do { my $__ls_scalar_source = $value; $__ls_scalar_source }; 1 ? (do { my $__ls_count = $__ls_selected_default; ref($__ls_count) eq 'ARRAY' ? scalar(@{$__ls_count}) : 0 }) : undef } } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    }
+  }
+}

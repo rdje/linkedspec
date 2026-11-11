@@ -2748,13 +2748,13 @@
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79`
   Status: `in_progress` / independent ordinary pure-pipeline result guards
-  Children: `.79.0`, `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`.
+  Children: `.79.0`, `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`, `.79.6`.
   Goal: Preserve seven ordinary pure-pipeline Array results through actual-kind consumers.
   Dependencies: Completed selection23.1.39; unchanged tests/fixtures/array_pipeline_result_guard_cases.json.
   Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
   Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
   Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
-  Frontier: Perl preflight79.1.0/source79.0/result79.1.1, Rust79.2, Dart79.3 and Julia79.4 are focused-checked; clean Julia landing precedes installed Lua79.5; commit/brief0/clean Git precedes each next owner. Parent/full admission closeout remains23.4 after coverage.
+  Frontier: All bounded ordinary79 backend outcomes are focused-checked. Selection23.1.40 freezes callable79.6 independently; clean selection landing precedes Perl79.6.1. Commit/brief0/clean Git precedes each next owner; parent/full admission closeout remains23.4 after coverage.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
   Status: `active` / source acquisition precedes production
@@ -2911,3 +2911,56 @@
   Outcome: Only shared named-Array shortcut gains existing numeric predicate (two insertions/one deletion); literal Numbers use original computed actual-Array fallback. New166 groups move14RED/152PASS to166PASS; same private loaded path reproduces14RED and qualified166PASS. All184 original records retain policies except intended14 reads; original36/17 defects19 preserved and additional receiver-error target retain exact records/artifact pairs. Source/delimiter/pattern errors, excluded arities, earlier owners, host snapshots and kinds stay exact. Direct195 passes with actual public API source/handler/module capture and complete selected input closure. First readonly1 is retained; first qualified readonly0/empty stderr/twelve reason-sensitive corruptions and scoped current SDK-input identities pass. Every original preparation failure remains explicit. Evidence: docs/checkpoints/array-pipeline-source-perl-2026-11-10/REVIEW.md.
   Documentation/next: Book/reference/Knowledge/live/roadmap record the source fence and regenerate-Perl guidance, preserving18 result/error-forwarding targets. Normal focused syntax/book/Knowledge/history/task/index/scope/memory/diff/hooks landing precedes result79.1.1. Full native/cache/transitive/toolchain/OS custody4.2/SESSION5, general source/context/isolation/registration/declared5.4/full23.4 remain separate. Fresh context is useful after this long run; committed source leaf and result79.1.1 are sufficient to resume without conversation state.
   Landing correction: Initial normal commit fails DOCUMENT-HISTORY because a nonraw Python replacement inserts byte02 and removes the live Next Action heading. Preserve exact staged live bytes/full hook log; terminate only the owned failed commit tree with actual143 and no interrupted-check PASS. Rebuild fixed live sections explicitly, retain exact History/recent rows, check changed live text for controls, run focused document-history gate and normal corrected staging/scope/memory/hooks workflow. No source or SDK result changes.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6`
+  Status: `in_progress` / frozen callable pipeline successor; no implementation yet
+  Children: `.79.6.1`, `.79.6.2`, `.79.6.3`, `.79.6.4`, `.79.6.5`.
+  Goal: Preserve existing registered-function pipeline receiver/result composition.
+  Dependencies: Qualified selection23.1.40/shared safe37; normal clean selection landing before production.
+  Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-callable-result-guard-composition.md in full. Keep source/signature/error/metadata/arity/context exclusions, independent peer acquisition and custody/admission limits. Current qualified Perl41 has16 targets/25 healthy, including five readiness-only failures; no peer verdict.
+  Schedule: Perl then independent Rust, Dart, Julia and installed Lua, committing each focused lane before the next; full23.4/final push after coverage. Native malformed Perl-only controls must never enter the shared Lua producer.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1`
+  Status: `pending`
+  Goal: Independently acquire/repair Perl registered-function pipeline receiver result guards.
+  Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Perl-specific41 and readiness-only targets remain distinct from shared37; retain original39 qualification.
+  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2`
+  Status: `pending`
+  Goal: Independently acquire/repair Rust registered-function pipeline receiver result guards.
+  Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3`
+  Status: `pending`
+  Goal: Independently acquire/repair Dart registered-function pipeline receiver result guards.
+  Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4`
+  Status: `pending`
+  Goal: Independently acquire/repair Julia registered-function pipeline receiver result guards.
+  Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5`
+  Status: `pending`
+  Goal: Independently acquire/repair installed Lua registered-function pipeline receiver result guards.
+  Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
+  Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
+  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
+  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.

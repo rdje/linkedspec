@@ -1940,6 +1940,31 @@ these safe checks use valid pattern text. Earlier guarded prefixes, source
 snapshots, nested kinds and standalone writeback stay intact. Reload applications
 with the updated Lua SDK; declared PUC5.4 and full native admission remain open.
 
+Registered-function pipeline receivers have a separately owned Perl gap. A
+terminal receiver can work while a longer chain retains unresolved DSL or an
+unsupported `with` marker; matching returned values do not establish compiler
+readiness. Until that repair lands, use the ordinary free-helper wrapper when
+feeding a function result into a pipeline. This tested form returns `[null,""]`:
+
+```text
+fn supply(seed) {return(seed)}
+Value:: I {
+  order="";
+  out=trim_each(supply([" head "," tail "])).set_key(
+    {order=cat(order,"K");"k"}, {order=cat(order,"V");1}
+  );
+  return([out,order]);
+}
+```
+
+The equivalent `supply(...).trim_each().set_key(...)` continuation remains an
+owned repair on Perl. Required source/delimiter errors and literal regex errors
+must retain their original provenance; the existing function syntax, pure local
+scope and exact arity remain unchanged. This finite Perl finding is not a peer
+verdict. Computed DSL blocks are not an admitted eager Perl `filter_match` pattern
+contract; use the documented regex operand syntax. Native Lua malformed-pattern
+handling and declared PUC5.4 admission remain separately qualified.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and

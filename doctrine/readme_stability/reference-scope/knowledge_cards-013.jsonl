@@ -1,4 +1,5 @@
-{"member_count":59,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":60,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5103,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-implementation-inventory.md","sha256":"b8d1d1e112c74c7656ea781dbaff614214fe01df809f8e994d392a0e4a02790b","type":"member"}
 {"bytes":5405,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-registry-seam.md","sha256":"8c482a8ce837b11aaf1c26b6f7ed67abaffabddb78ecc3433e4e66a27652f9b7","type":"member"}
 {"bytes":2972,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-standalone-discard-hardening.md","sha256":"68a4a873a1d5437a710d4c1db5b7993d1eb2045893fae878d1d15946ee884fef","type":"member"}
 {"bytes":3795,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-value-call-execution.md","sha256":"cc8a88ed6b5767bf748a6d971e1ff7ffb921273708c0914c0f72c996492a7a34","type":"member"}

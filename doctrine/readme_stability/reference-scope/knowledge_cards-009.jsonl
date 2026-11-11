@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3705,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-foundation.md","sha256":"ac5ad3ae725746b6cc8c03b95e14f476bbc83b3ec48340507accc7468eacaeef","type":"member"}
 {"bytes":5914,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-input-authority-selection.md","sha256":"f8a6c46c069285205aca94b532bafff300cc3e22343ffd3bcfa7066289004cfb","type":"member"}
 {"bytes":5119,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-argument-authority.md","sha256":"808b229a506659f115d2d39ae2388a7841f32ca32390433aeaa37f4441f2057f","type":"member"}
 {"bytes":4497,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-method-input-captures.md","sha256":"54de0be495b33b34ae572c7101e880c79ddd2cef409de14eb753eb4dde86a81b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7508,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-root-evidence-filesystem-modes.md","sha256":"19b14a3607756d7954592e71a1826cb1f12e9465606331b1ff3aa5d96218ff84","type":"member"}
 {"bytes":2536,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ptchange-spaced-input-shell-read-defect.md","sha256":"8137594dd642ebed2e2eee3d72c01509420f7586c4dfd2467c13b3bc2547dca7","type":"member"}
 {"bytes":6473,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-call-inventory-independent-coverage.md","sha256":"4a1cf009578bd752640791994c43afc0afdf18a2937e3e4d44869002f72e4fde","type":"member"}
-{"bytes":2778,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-readme-gitlink-claim-alias.md","sha256":"e3ac90796810cf55c8c73b7067e320ace64616d96a9017978401bcce2b83125f","type":"member"}

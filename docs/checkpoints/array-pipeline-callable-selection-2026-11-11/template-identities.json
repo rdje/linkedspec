@@ -1,0 +1,10 @@
+{
+  "docs/checkpoints/array-pipeline-result-selection-2026-11-10/observer.pl": {
+    "bytes": 3374,
+    "sha256": "dad511c23a72229e7642f9f44b6022a920cae5653953676a10fec115a2087d32"
+  },
+  "docs/checkpoints/array-pipeline-composition-perl-2026-11-10/observer_prefix.pl": {
+    "bytes": 3878,
+    "sha256": "2498349813d38170e2f05819a7e98958e9b957a82eee2e479f666fc946f9f30c"
+  }
+}
