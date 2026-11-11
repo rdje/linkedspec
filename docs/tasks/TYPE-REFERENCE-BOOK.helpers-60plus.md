@@ -3100,7 +3100,7 @@
   Schedule: Perl independent policy intake78.6.1.0 first, then bounded source/arity/result repairs as evidence requires; independent Rust/Dart/Julia/installed Lua afterward, each focused commit before the next. Full23.4/final push follows coverage.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1`
-  Status: `in_progress`
+  Status: `completed` / bounded Perl implementation; full admission separate
   Children: `.78.6.1.0`, `.78.6.1.1`, `.78.6.1.2`.
   Goal: Independently acquire and repair Perl registered-function Array-transform composition.
   Dependencies: Frozen78.6/shared45 and clean23.1.41.
@@ -3184,10 +3184,21 @@
   Planned claim verification: Qualitative supersession only; no production or measured population change.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Repair supported Perl registered-function Array-transform result/readiness guards while preserving acquired excluded-shape policies.
   Dependencies: Clean78.6.1.0 and frozen78.6; freshly reacquire original240/terminal48 against that committed SDK before production. Unactivated1.1 is superseded, not a prerequisite.
   Acceptance: Preserve original helper/producer/initial sorted-reversed typed errors/null and concat fallback policies, exact fixed/rest unresolved rejection and complete public errors/field absence. Own canonical Array results through Hash rejection/copy/logical/with/source effects and required source/count error propagation; preserve valid empty Arrays and metadata readiness. Use valid-function signature gating and the actual terminal producer, never replace receiver errors with a free-helper fallback. Keep open-arity concat/initial-literal policy1.2.1.3.1 separate. Retain new/direct-dependent normals, exact loaded-owner inverse, independent recovery/corruptions/current identity and book/docs/normal commit before Rust78.6.2.
-  Planned verification: Focused current own intake/new/direct-dependent normals/syntax, exact old-current preservation and source-bound recovery; no broad matrix.
-  Planned canonical trigger: Full23.4/final clean push after coverage; any policy/infrastructure change separately owned.
-  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
+  Verification tier: `focused`
+  Focused checks: LinkedSpec Get/descriptor/dump/native/fresh312; old/current; direct400/syntax; readonly17/current165; REVIEW.md.
+  Canonical trigger: Full23.4/final clean push after coverage; policy/infrastructure separately owned.
+  Claim verification: none: Finite authored controls; no completeness/performance/portable-domain measurement.
+  Activation: Clean09bad87aa/all10/brief0; complete progression and scope retained in REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Get probes; complete312/43 supported RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Get retains DSL; MethodLowering5762 excludes functions.
+  - [x] **FIX** —15/two signature-valid terminal-producer/result guards.
+  - [x] **ADDRESSED (verified)** — Qualified312; old46 (43+three metadata)/current312.
+  - [x] **NO REGRESSION** —266 exact/three readiness; direct400; full errors/source policies.
+  - [x] **LOCKSTEP** — Book/Knowledge/live/resume/index/history/scope; normal hooks before Rust.
+  Outcome:1872 pairs/2008 API artifacts, qualified recovery17/current165; original after3/reader1 preserved. Native4.2/full23.4 remain open.
+  Narrative: docs/checkpoints/array-transform-callable-result-perl-2026-11-11/REVIEW.md; exact pre-route task/log/patch in landing-pressure/.

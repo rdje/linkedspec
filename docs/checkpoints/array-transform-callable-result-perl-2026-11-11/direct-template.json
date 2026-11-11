@@ -1,0 +1,22 @@
+{
+  "source": "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/direct_runner_qualified.pl",
+  "sha256": "ecd7529b0e9a205bbe8b57b94fe3505a9aa3d6a83f7e5da8e81a7a587b70b243",
+  "changes": [
+    [
+      "($test eq 't/array_pipeline_value_contract.t' || $test eq 't/variadic_user_function_contract.t' || $test eq 't/array_pipeline_result_guard_composition.t' || $test eq 't/array_pipeline_callable_arity.t')",
+      "($test eq 't/array_transform_result_guard_composition.t' || $test eq 't/array_pipeline_callable_result_guard_composition.t')"
+    ],
+    [
+      "LINKEDSPEC_CALLABLE_PIPELINE_RESULT_CAPTURE",
+      "LINKEDSPEC_CALLABLE_TRANSFORM_DIRECT_CAPTURE"
+    ],
+    [
+      "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/direct_qualified",
+      "docs/checkpoints/array-transform-callable-result-perl-2026-11-11/direct"
+    ],
+    [
+      "CALLABLE_PIPELINE_RESULT_DIRECT_ARTIFACT",
+      "CALLABLE_ARRAY_TRANSFORM_DIRECT_ARTIFACT"
+    ]
+  ]
+}

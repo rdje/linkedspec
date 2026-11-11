@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues with callable Array-transform78.6. Independent Perl policy intake78.6.1.0 is focused-checked; valid result repair78.6.1.2 is next after fresh preflight. Proposed1.1 is superseded by contextual signature inventory, with no production change. Parent/full23.4 admission remains open.
+Full PNT continues with callable Array-transform78.6. Bounded Perl78.6.1.2 is implemented with focused proof; independent Rust78.6.2 follows clean landing. Initial/excluded source policies remain, with three explicit metadata-only movements; parent/full23.4 admission is open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0. Original240/terminal48 retain288 actual pairs/576 artifacts,35 valid result targets/74 healthy intents/253 protected observations. All28 terminal needed errors propagate; first readonly0/empty stderr/thirteen controls/current126 identities pass. Source and excluded null/invalid-signature policies preserved; no production edit. Open concat/receiver diagnostics/literal policy remain owned.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2. Qualified312 groups:43 supported targets/three compatibility readiness movements/266 full observations preserved. Original288 bodies/records and sixteen positive producers pass before15/two implementation. Same-path old46 (43+three metadata)/current312, direct212+188/2008 artifacts,1872 pairs, qualified readonly17/current165 pass. First after3/reader1 and source-mode qualification remain intact; no chmod or portable input-policy claim.
 
 ## Next Action
 
-Activate result78.6.1.2 from clean Git: refresh original240/terminal48 and positive source-once/second-operand-order controls before any production edit. Preserve actual terminal producers, fixed/rest rejection, initial errors/fallbacks and excluded null shapes;1.1 is superseded, not a prerequisite. Split a demonstrated producer gap if needed, then focused result/direct-dependent normal, exact old/current proof, recovery/docs/normal commit before Rust78.6.2. Wider concat selection42/receiver diagnostics/literal policy/full admission remain open.
+From clean Git, own bounded closed-task commentary headroom renewal under TYPE-REFERENCE-BOOK.1.2.23.4 through approved ADR0139 epochs before independent Rust78.6.2. Read its public integration/contracts and prior own transform/pipeline facts; freshly acquire shared45 and Rust initial/optional/excluded/function-signature/error/source-order/snapshot policies before selecting a bounded repair. Preserve native/restored/plan/emitted formats and custody; do not inherit Perl verdicts. Open concat42 follows bounded78.6; broad verification/full23.4/native/registration/formatter/declared5.4 remain separate.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0 —240+terminal48/288 pairs/35 valid targets/74 healthy intents/253 protected; readonly thirteen controls/current126; proposed marker change withdrawn, result1.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.41 — Original44/qualified45;13 supported targets/25 healthy/seven profiles/89 pairs/readonly fifteen controls/current128; frozen78.6/Perl intake next, literal policy separately owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.26 —1,235 dated metadata rows; four exact combined logs/124,012 content bytes/modes archived before duplicate retirement; readonly0/fourteen controls; assessment41 next.
@@ -29,7 +30,6 @@ Activate result78.6.1.2 from clean Git: refresh original240/terminal48 and posit
 - TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.4 —173/four routes/1006 assertions/private19RED-current173PASS/direct1921;154 healthy/173 pairs exact; first readonly eleven controls; installed Lua next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.3 —173/four routes/private19RED-current173PASS/direct318;154 healthy records/173 artifact pairs exact; first readonly eleven controls; independent Julia next.
 
 ## History
 

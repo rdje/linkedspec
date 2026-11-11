@@ -1,0 +1,388 @@
+[
+  {
+    "id": "positive_take_free_terminal",
+    "body": "order=\"\";out=take(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "take"
+  },
+  {
+    "id": "positive_take_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take({order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take({order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "take"
+  },
+  {
+    "id": "positive_take_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "take"
+  },
+  {
+    "id": "positive_take_last_free_terminal",
+    "body": "order=\"\";out=take_last(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take_last(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "c"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "take_last"
+  },
+  {
+    "id": "positive_take_last_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take_last({order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take_last({order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "c"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "take_last"
+  },
+  {
+    "id": "positive_take_last_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take_last({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).take_last({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "take_last"
+  },
+  {
+    "id": "positive_drop_front_free_terminal",
+    "body": "order=\"\";out=drop_front(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_front(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a",
+        "c"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "drop_front"
+  },
+  {
+    "id": "positive_drop_front_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_front({order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_front({order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a",
+        "c"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "drop_front"
+  },
+  {
+    "id": "positive_drop_front_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_front({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_front({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "drop_front"
+  },
+  {
+    "id": "positive_drop_back_free_terminal",
+    "body": "order=\"\";out=drop_back(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_back(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b",
+        "a"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "drop_back"
+  },
+  {
+    "id": "positive_drop_back_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_back({order=cat(order,\"N\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_back({order=cat(order,\"N\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b",
+        "a"
+      ],
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "drop_back"
+  },
+  {
+    "id": "positive_drop_back_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_back({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).drop_back({order=cat(order,\"N\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "SN"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "drop_back"
+  },
+  {
+    "id": "positive_slice_free_terminal",
+    "body": "order=\"\";out=slice(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1},{order=cat(order,\"C\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"N\");1},{order=cat(order,\"C\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a"
+      ],
+      "SNC"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "slice"
+  },
+  {
+    "id": "positive_slice_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).slice({order=cat(order,\"N\");1},{order=cat(order,\"C\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).slice({order=cat(order,\"N\");1},{order=cat(order,\"C\");1});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a"
+      ],
+      "SNC"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "slice"
+  },
+  {
+    "id": "positive_slice_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).slice({order=cat(order,\"N\");1},{order=cat(order,\"C\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).slice({order=cat(order,\"N\");1},{order=cat(order,\"C\");1}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "SNC"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "slice"
+  },
+  {
+    "id": "positive_sorted_free_terminal",
+    "body": "order=\"\";out=sorted(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=sorted(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}));return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a",
+        "b",
+        "c"
+      ],
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "sorted"
+  },
+  {
+    "id": "positive_sorted_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).sorted();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).sorted();return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "a",
+        "b",
+        "c"
+      ],
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "sorted"
+  },
+  {
+    "id": "positive_sorted_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).sorted().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).sorted().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "sorted"
+  },
+  {
+    "id": "positive_reversed_free_terminal",
+    "body": "order=\"\";out=reversed(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=reversed(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}));return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "c",
+        "a",
+        "b"
+      ],
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "reversed"
+  },
+  {
+    "id": "positive_reversed_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).reversed();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).reversed();return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "c",
+        "a",
+        "b"
+      ],
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "reversed"
+  },
+  {
+    "id": "positive_reversed_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).reversed().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).reversed().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "S"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "reversed"
+  },
+  {
+    "id": "positive_concat_arrays_free_terminal",
+    "body": "order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"T\");[\"d\"]});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}),{order=cat(order,\"T\");[\"d\"]});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b",
+        "a",
+        "c",
+        "d"
+      ],
+      "ST"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "free_terminal",
+    "method": "concat_arrays"
+  },
+  {
+    "id": "positive_concat_arrays_receiver_terminal",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).concat_arrays({order=cat(order,\"T\");[\"d\"]});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).concat_arrays({order=cat(order,\"T\");[\"d\"]});return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      [
+        "b",
+        "a",
+        "c",
+        "d"
+      ],
+      "ST"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_terminal",
+    "method": "concat_arrays"
+  },
+  {
+    "id": "positive_concat_arrays_receiver_composed",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).concat_arrays({order=cat(order,\"T\");[\"d\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"b\",\"a\",\"c\"]}).concat_arrays({order=cat(order,\"T\");[\"d\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "rule": "Value",
+    "input": "x",
+    "expected": [
+      null,
+      "ST"
+    ],
+    "question": "positive-source-once-and-operand-order",
+    "form": "receiver_composed",
+    "method": "concat_arrays"
+  }
+]

@@ -1354,7 +1354,7 @@ admission remain open. Dart's additional direct tests now have a separate qualif
 original six omitted first-use identities stay unknown; its own Array-transform
 cases and inverse remain bound.
 
-### Registered-function Array transforms: selected repair
+### Registered-function Array transforms in Perl
 
 A pure registered function can return the Array consumed by these transforms.
 Compatible free and receiver forms already work on the recorded Perl routes:
@@ -1382,21 +1382,38 @@ Value:: I {
 }
 ```
 
-The corresponding receiver prefix `supply(...).take(1).set_key(...)` still fails
-compilation on the recorded Perl implementation. The selected repair covers
-the eight transform names above, later copy/logical/with rejection, needed errors
-and source effects. One `supply(...).take(...).set_key(...).with(){...}` form already returns
-null/no effects while remaining unresolved in descriptor readiness, so a matching
-value is insufficient. Independent Perl policy intake is now frozen;35 valid
-result/readiness targets await repair78.6.1.2. Each other backend is assessed
-separately before any fix or support claim.
+The corresponding receiver prefix now uses the same result-kind guards on Perl.
+This covers the eight transform names above, later copy/logical/with rejection,
+needed errors and source effects. Source and required operands run once before
+result rejection; rejected Hash operands and later work remain skipped:
+
+```text
+fn supply(seed) {return(seed)}
+
+Value:: I {
+ order="";
+ out=supply({order=cat(order,"S");["b","a","c"]}).take({order=cat(order,"N");1}).set_key(
+   {order=cat(order,"K");"k"},{order=cat(order,"V");1}
+ ).copy().and({order=cat(order,"D");true}).with(){order=cat(order,"W");return("ran")};
+ return([out,order]);
+}
+```
+
+This returns `[null,"SN"]`. Valid empty Array results still enter `with`.
+Valid fixed or final-rest function signatures remain required; malformed calls
+retain their existing rejection and do not become valid empty Arrays. Descriptor
+readiness is checked independently of values, including matching null results.
+Regenerate previously emitted Perl modules to receive the guards. The bounded
+Perl implementation has passing focused normals, independent old/current controls
+and historical recovery. Each other backend is assessed separately before
+any fix or support claim; complete portable admission remains separate.
 
 The recorded Perl initial-input policies differ by context. A registered function
 returning Number/Hash input to receiver `sorted` or `reversed` raises a typed
 array-binding error; the corresponding free helper returns an empty Array. Null
 keeps its empty behavior. These compatibility observations do not expand portable
-input authority: portable programs supply Arrays. The repair must reuse the
-original terminal producer and preserve its errors and argument order.
+input authority: portable programs supply Arrays. Errors and argument order
+follow the existing terminal operation.
 
 Excluded argument shapes also keep their current behavior. Some receiver shapes
 fold directly to null before effects while free helper forms are unresolved;

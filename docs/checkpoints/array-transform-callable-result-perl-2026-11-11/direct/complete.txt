@@ -1,0 +1,1 @@
+Two selected original normals and changed-owner/new-normal syntax complete; actual API modules/dumps retained.

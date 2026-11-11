@@ -1,0 +1,33 @@
+{
+  "originals": {
+    "tests/fixtures/array_transform_callable_result_guard_perl_cases.json": {
+      "alias": "qualification-original-array_transform_callable_result_guard_perl_cases.json.gz",
+      "bytes": 440176,
+      "sha256": "f394070e34b017489b6b2e5de8aaaf53d48ffe9e0f208db9e41d895182e2660e"
+    },
+    "t/array_transform_callable_result_guard_composition.t": {
+      "alias": "qualification-original-array_transform_callable_result_guard_composition.t.gz",
+      "bytes": 5258,
+      "sha256": "cf26463ab876ce25d0812c8a89922c5f68645f5220d14de93db2ae42365804b6"
+    },
+    "docs/checkpoints/array-transform-callable-result-perl-2026-11-11/capture.py": {
+      "alias": "qualification-original-capture.py.gz",
+      "bytes": 4360,
+      "sha256": "674af8dee9007d5a25c249e69acf570c727b1a98612f4333a6d8b76ab24f905a"
+    },
+    "docs/checkpoints/array-transform-callable-result-perl-2026-11-11/classification.json": {
+      "alias": "qualification-original-classification.json.gz",
+      "bytes": 20114,
+      "sha256": "2bd64fc5e2b8663c60387dd6dc2a36f0bf7c23572bd26de12a9d0f625f5d7f78"
+    }
+  },
+  "readiness_only": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed"
+  ],
+  "original_after_actual_exit": 3,
+  "targets": 43,
+  "preserved_records": 266,
+  "limits": "Three compatibility readiness movements have no product-RED or portable initial-input policy credit. Complete original payload/error/field-absence observations stay exact; first normal/fixture/classification and actual failed after epoch survive."
+}

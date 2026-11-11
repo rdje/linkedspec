@@ -7,7 +7,7 @@ answers:
   - "can a correct callable take with value still have an unready descriptor"
   - "why is a literal Array not the established constructor guard oracle"
 date: 2026-11-11
-status: qualified selection41 frozen; Perl policy intake complete; bounded result78.6.1.2 next
+status: qualified selection41 frozen; bounded Perl result78.6.1.2 focused-checked; independent peers next
 tags: [functions, arrays, transforms, guards, readiness, qualification]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.41; original44/separate45 retain13 supported targets/25 healthy/seven profiles,44 full records/source pairs exact,89 actual pairs/178 artifacts, first readonly0/empty stderr/fifteen controls and current128 named identities."
 reverify: "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-selection-2026-11-11/review.py"
@@ -48,5 +48,7 @@ Evidence and recovery limits:
 
 Current Perl intake: [[perl-callable-array-transform-intake]] records35 valid
 result targets/288 source pairs and context-specific policy fences. Result1.2 is
-next; the unactivated strict-marker proposal1.1 is superseded by the signature
+implemented with focused312, separate readiness qualification and recovery;
+[[perl-callable-array-transform-result-guards]] records its exact scope. The
+unactivated strict-marker proposal1.1 is superseded by the signature
 inventory, without production changes. Original selection populations stay dated.

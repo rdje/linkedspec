@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_RESULT_CAPTURE=docs/checkpoints/array-transform-callable-result-perl-2026-11-11/after_qualified",
+    "perl",
+    "-Iperl",
+    "t/array_transform_callable_result_guard_composition.t"
+  ],
+  "cwd": "."
+}

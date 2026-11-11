@@ -1,0 +1,39 @@
+{
+  "surface": "task_evidence",
+  "actual_bytes": 12588381,
+  "limit_bytes": 12582912,
+  "excess_bytes": 5469,
+  "outer_exit": 1,
+  "complete_hook_PASS": false,
+  "scope": "Only new current-leaf activation/progress/checklist explanation routed; Goal/Dependencies/Acceptance and all prior nodes stay exact. No cap/source/test/proof changes.",
+  "inputs": {
+    "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+      "alias": "TYPE-REFERENCE-BOOK.helpers-60plus.md.gz",
+      "bytes": 649118,
+      "sha256": "e850e3f9ccaf0a935abde2ec2d744175f9503b8a7de633b791c895fe96325c86",
+      "mode": 420
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+      "alias": "TYPE-REFERENCE-BOOK.index.jsonl.gz",
+      "bytes": 1294,
+      "sha256": "d2960fb7f1df6efeacd06493dbed085c55fb3b490b5ff68ed284771925425783",
+      "mode": 420
+    },
+    "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+      "alias": "TYPE-REFERENCE-BOOK.overview.md.gz",
+      "bytes": 496768,
+      "sha256": "e3ed84df16ab054733506d46b6dc10a61c95f37786226cd205392bb3556c0181",
+      "mode": 420
+    },
+    "MEMORY.md": {
+      "alias": "MEMORY.md.gz",
+      "bytes": 2520,
+      "sha256": "90a705e4faa8e56aec326670d68a4f10712afc3147de617e11949e8da7b9a21b",
+      "mode": 420
+    }
+  },
+  "original_leaf_bytes": 8104,
+  "compact_leaf_bytes": 2440,
+  "bytes_routed": 5664,
+  "activation": "09bad87aa19304486f836cf6dff44b499a8ea5ec"
+}

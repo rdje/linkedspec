@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/array-transform-callable-perl-2026-11-11/cases.json": {
+    "alias": "template-1.gz",
+    "bytes": 114422,
+    "mode": 420,
+    "sha256": "888f577afdf8a75165954090918853d4aebcfc877559632521378662889db6a5"
+  },
+  "docs/checkpoints/array-transform-callable-perl-2026-11-11/observer.pl": {
+    "alias": "template-0.gz",
+    "bytes": 3492,
+    "mode": 420,
+    "sha256": "2ce66948f7678b07b3ed62ea668d930200927761c546c1f576b875e6c20cecef"
+  },
+  "docs/checkpoints/array-transform-callable-perl-2026-11-11/policy-contract.json": {
+    "alias": "template-3.gz",
+    "bytes": 29144,
+    "mode": 420,
+    "sha256": "e42b1602ba1ea679b28870da275267bdedb412de30bdb8453ff6623bd2f4c436"
+  },
+  "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal-cases.json": {
+    "alias": "template-2.gz",
+    "bytes": 25535,
+    "mode": 420,
+    "sha256": "17919ebff359df9523f9fb9bcf433f90d3b43b62454364f90bdf2566e9292d87"
+  }
+}

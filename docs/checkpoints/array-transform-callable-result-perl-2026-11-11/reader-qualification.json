@@ -1,0 +1,21 @@
+{
+  "original_exit": 1,
+  "replacements": [
+    [
+      "        need(images[name] == expected, 'SDK origin')",
+      "        need(images[name][0] == expected[0], 'SDK origin')\n        need(bool(images[name][1] & 0o111) == bool(expected[1] & 0o111), 'SDK executable class')"
+    ],
+    [
+      "        need(images[PRIVATE] == (owner, history.files[OWNER][1]), 'private source input')",
+      "        declared = json.loads(images[str(REL / 'owner-images.json')][0])['images']['old' if phase == 'private_old' else 'current']\n        need(images[PRIVATE] == (owner, declared['mode']), 'private source input')"
+    ],
+    [
+      "        need(images[name] == history.files[name], 'direct original consumer')",
+      "        need(images[name][0] == history.files[name][0], 'direct original consumer')\n        need(bool(images[name][1] & 0o111) == bool(history.files[name][1] & 0o111), 'direct executable class')"
+    ]
+  ],
+  "mode_card": "docs/knowledge/project-root-evidence-filesystem-modes.md",
+  "declared_sdk_mode_differences": 12,
+  "source_or_permission_changes": false,
+  "limits": "Source byte origin/Git executable class and exact captured full filesystem modes are separate checks. Original readers/first channels remain; no chmod, SDK edit, new runtime verdict or whole-repository permission census."
+}

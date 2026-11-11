@@ -1,0 +1,86 @@
+[
+  {
+    "path": "perl/LinkedRE.pm",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "8f3bb342f25b1d0f9c8986e2477d1b00d7bb1359cf38b9d209f680d216896e12",
+    "executable_class_equal": true
+  },
+  {
+    "path": "perl/PathSearch.pm",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "ad943a8335f1bbb031214e3c60ea2b97cd8440eed68dacac218062c42e7eb255",
+    "executable_class_equal": true
+  },
+  {
+    "path": "perl/env.conf",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "45ed4c049b260fed7bf5e9ced195e259b9327834ff08def0581d1f01ffe60591",
+    "executable_class_equal": true
+  },
+  {
+    "path": "perl/gdcheck.pl",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "e12ddba1c2a252c91ba48f24ad888e7693f92bdb167a791e847025fe41f153f5",
+    "executable_class_equal": true
+  },
+  {
+    "path": "perl/htmlcss_driver.pl",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "9abd0b9bc521b97df100517c547da60b82c6dcd947726733c6001d420582c67c",
+    "executable_class_equal": true
+  },
+  {
+    "path": "perl/ptchange.pl",
+    "filesystem_mode": 488,
+    "git_mode": 493,
+    "sha256": "13336081ceff048e5172169d4e9bad5997b245c10170ef30f81220dcaae30062",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/ifelse.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "a5dc04f47d03b8f405accb9b6e9d88c5f0ea1c1a19cf8d91f0d82bfe7ca151e5",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/operators_try.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "51da411557f83ff7ff9261752499132a65c8d246b89f74cb0b268f155ae6f811",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/portmap.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "8eaa69168df3331386ae46f898a27166f722e5bbabced6fa6fdad7c0d798c7c6",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/regdef.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "61a244abd049ed1537d923d1526f3250f8cc5b8ea4351691b7ce0a4eca41f192",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/tclite.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "bdf7e110ecc3a093f266ce8ddd31b1ffff6880cf8a202e607a226351be3107b3",
+    "executable_class_equal": true
+  },
+  {
+    "path": "specs/verilog.spec",
+    "filesystem_mode": 416,
+    "git_mode": 420,
+    "sha256": "3d0a7dac512941503e6de4bd0ef1c747d61e555ca88df410346dc2dd80b7e134",
+    "executable_class_equal": true
+  }
+]

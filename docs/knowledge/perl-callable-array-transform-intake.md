@@ -7,7 +7,7 @@ answers:
   - "does invalid take or sorted receiver readiness require the free helper marker"
   - "which task owns open arity concat array result continuations"
 date: 2026-11-11
-status: focused intake frozen; no production repair; result78.6.1.2 next
+status: focused intake frozen; result78.6.1.2 implemented with separately disclosed readiness movements
 tags: [perl, functions, arrays, guards, arity, policies, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0; original240/separate terminal48 retain288 actual pairs/576 artifacts,35 valid result targets/74 healthy contract intents/253 protected records, first readonly0/empty stderr/thirteen controls and current126 named identities."
 reverify: "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-perl-2026-11-11/review.py"
@@ -47,5 +47,9 @@ Independent raw/source/Git/mode/artifact/channel recovery and thirteen corruptio
 controls pass. Native/cache/transitive/toolchain/OS4.2/SESSION5 remains open; direct
 intent composition has actual combined exec output, without original separated
 channels. Fresh packages share their runtime, and substitution is diagnostic only.
-Result78.6.1.2 refreshes the data and positive source/order fences before editing.
+Result78.6.1.2 subsequently refreshes all288 records/source bodies and sixteen
+positive producer controls before15/two implementation. Three initial composed
+take profiles retain values/errors/effects and gain canonical readiness; this
+separate metadata movement is not input policy or product-RED credit. Original
+intake populations remain dated. See [[perl-callable-array-transform-result-guards]].
 Evidence/limits: `docs/checkpoints/array-transform-callable-perl-2026-11-11/REVIEW.md`.

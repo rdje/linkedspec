@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "-c",
+    "perl/LinkedSpec/ActionIR/MethodLowering.pm"
+  ],
+  "cwd": "."
+}

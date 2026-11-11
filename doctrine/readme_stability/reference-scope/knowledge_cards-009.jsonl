@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2713,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-outward-descriptor-model-tag-drift.md","sha256":"449c33deb17e874f8b6bae6635f93f51f5616a0cd803e43a72558146c513ca62","type":"member"}
 {"bytes":3111,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pick-keys-conditional-local-reuse.md","sha256":"9dfac9fbab66bd2c37e72681619288c5c1eec5b327a697284e0414d6bac9654b","type":"member"}
 {"bytes":4618,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-regex-source-provenance.md","sha256":"c80620e4f8c15f04e82b678ac41fb36ddbdb5b4794d081262a1973459cbe8dfd","type":"member"}
 {"bytes":4694,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-source-provenance-diagnosis.md","sha256":"1cc7d554752fc7c28744448280968fbb9c30ac9fcdc763d5f6d8fb08ef67b914","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6058,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-closed-hardlink-cleanup.md","sha256":"f6d74160998b9ea476ea2d20a053f6f5be73a6b656c4fe56d8a96c0879decd2f","type":"member"}
 {"bytes":4174,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-descendant-liveness-gap.md","sha256":"7ac1dcec4a9cdeb63356948c55ac2e9958a45bc34a479fc625610a92d0403ea8","type":"member"}
 {"bytes":4787,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-env-initializer.md","sha256":"ce81e01bf59e45a3dba99b2043dc8ca296025e48fb3f256a5cd1541a39b555af","type":"member"}
-{"bytes":3950,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-final-residue-proof.md","sha256":"5b43533ecbeb4155a64b772a929f6de1506428386b86362c2e4cd21372cf598f","type":"member"}

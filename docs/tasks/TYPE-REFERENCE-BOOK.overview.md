@@ -1600,6 +1600,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
+  Addition78.6.1.2: Register t/array_transform_callable_result_guard_composition.t and tests/fixtures/array_transform_callable_result_guard_perl_cases.json through exact canonical selection before23.4/push. Focused312 and direct212/188 prove the selected behavior, not canonical discovery; preserve the first/qualified data and three separately disclosed readiness movements.
   Addition74.3: Inventory Dart length_result_guard_composition_test/shared24 and length_result_guard_dart_domain.json against actual runner/canonical discovery; focused45 does not establish selection. Avoid duplicate entries where discovery already exists.
   Addition74.4: Inventory Julia length_result_guard_composition_test/shared24 and independent domain/error profiles against runner/canonical discovery; focused220 assertions and one runtests include do not establish canonical selection. Avoid duplicate entries.
   Addition74.5: Inventory Lua length_result_guard_composition_test/shared24 and independently frozen installed-host domain/error profiles against runner/canonical discovery; targeted122 per host and three runner lines do not establish canonical selection. Avoid duplicate entries.

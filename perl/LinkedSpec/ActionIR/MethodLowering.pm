@@ -5759,10 +5759,23 @@ my $lower_numeric_array_reducer_source_expr = sub {
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
      || (($_->{trailing_block_arg} || $_->{receiver_trailing_block_arg}) && ($_->{method} // '') ne 'with') } @$calls);
+  # Valid function sources reuse the terminal transform producer; wrong fixed
+  # or variadic signatures keep their existing unresolved rejection path.
+  my $array_transform_receiver_signature_valid = 1;
+  if (@$calls > 1 && _ordinary_array_transform_result_call($calls->[0], 1)
+      && ($receiver->{kind} // '') eq 'call') {
+   my $definition = _user_function_definition_for_name($deps, $receiver->{name});
+   if (ref($definition) eq 'HASH') {
+    my $signature = _user_function_call_signature($definition);
+    my $args = $receiver->{args} || [];
+    $array_transform_receiver_signature_valid = ref($signature) eq 'HASH' && ref($args) eq 'ARRAY'
+     && @$args >= $signature->{min_arity}
+     && (!defined($signature->{max_arity}) || @$args <= $signature->{max_arity});
+   }
+  }
   my $ordinary_array_transform_result_chain = (_ordinary_array_transform_result_call($receiver, 0)
     || (@$calls > 1 && ($receiver->{kind} // '') ne 'raw_perl'
-     && !(($receiver->{kind} // '') eq 'call'
-       && _user_function_definition_for_name($deps, $receiver->{name}))
+     && $array_transform_receiver_signature_valid
      && _ordinary_array_transform_result_call($calls->[0], 1)))
    && !defined(_actionir_ast_first_unknown_value_call_name($node, $deps))
    && !(grep { _is_tree_traversal_receiver_method($_->{method} // '')
