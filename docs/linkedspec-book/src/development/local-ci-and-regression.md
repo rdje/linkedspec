@@ -1139,7 +1139,7 @@ Never blanket-delete an operating-system temporary directory or a shared develop
 state, application IPC, or another project's data.
 
 Retained history and pending pushes have different scopes: the whole local Git store includes already-published data. See
-`docs/checkpoints/artifact-growth-2026-11-05/PLAN.md` for dated outgoing-range evidence, preserved-history policy and the separately owned input-reuse plan.
+`docs/checkpoints/artifact-growth-2026-11-05/PLAN.md` for dated outgoing-range evidence, preserved-history policy and the separately owned input-reuse plan. Daily cleanup may archive exact completed owned logs: verify compressed readback and independent use before removing plain duplicates, retaining original mode records and checking exact residue. The November11 bounded packet is `docs/checkpoints/artifact-review-2026-11-11/REVIEW.md`; all other artifacts/caches/proof remain protected, and no physical-reclamation claim follows.
 
 The bounded command `--execute --offset 68 --limit 31` now passes 31/31. Anonymous capture, logical/output helper,
 recursive top-rule, structural child-push, statement mutation, and public-parser leading-trivia leaves closed each

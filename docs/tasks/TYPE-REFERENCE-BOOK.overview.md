@@ -2751,12 +2751,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Known wrapper recurrence: Documentation update exits0 with child6359 setpgid warning; no final PGID/standalone stderr retained. Existing SESSION7 owns repair; no lifecycle claim or recover/purge. Exact observation: docs/checkpoints/task-headroom-rust-2026-11-11/wrapper-notice.json.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.26`
-  Status: `pending`
+  Status: `completed`
   Goal: Perform the next roughly daily safe artifact cleanup after clean Lua callable landing.
   Dependencies: Clean79.6.5; latest daily record November10 15:19UTC. Schedule this near the next24h boundary before another feature assessment.
   Acceptance: Own a bounded same-volume artifact census with active-job/tracked-proof/cache protection. Remove only100%-safe owned artifacts, retaining exact producer/inputs/channels and independent recovery/meaningful controls. Prefer verified archival retirement of this session's completed plain command logs; no ambiguous/shared caches or other repositories/submodule data. Overwrite docs/ARTIFACT_CLEANUP.md latest-only and synchronize docs/normal commit before selection23.1.41. No infrastructure/limit change or broad native-custody claim.
-  Planned verification: Focused exact finite ownership/metadata/copy-verify-use-delete/residue controls, readonly recovery, book/task/Knowledge/scope/history/memory/diff/normal hooks; canonical only for separately owned infrastructure changes/final push.
-  Planned claim verification: Finite named-file evidence with missing filesystem/native legs disclosed; declare at activation.
+  Verification tier: `focused`
+  Focused checks: Exact finite ownership/metadata/copy-verify-use-delete/residue controls, independent readonly recovery, book/task/Knowledge/scope/history/memory/diff and normal hooks.
+  Canonical trigger: Final clean push; any infrastructure change requires separate ownership/canonical proof. This leaf changes only dated maintenance data and evidence.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.26.json`
+  Activation: Clean e5f2cb78ab99192974178ea04177b6cabf283e1e, all10/post-pointer/brief0. Read latest-only November10 record, accepted bounded scanner/independent walker and channel/claim composition contracts, cleanup boundary card and book storage workflow. Inspect eight named root/Rust/log scopes and preserve all unproved candidates; retire only four exact owned completed combined command logs after compressed readback and independent actual use. No shared cache, lifecycle purge, submodule or other-repository write.
+  Next-owner reconciliation: Assessment23.1.41 also owns the encountered stale helper inventory's two current-frontier statements (still before Perl result79.6.1.2) and missing .41 link in parent23.1's Children list. Reproduce against this activation Git and repair there; no historical outcome rewrite or feature-completeness inference.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Dated census/replay matches1,235 metadata rows in eight scopes; four exact completed-log ownership/metadata/Git identities retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Only four owned completed combined logs are redundant plain copies; census membership grants no disposal authority.
+  - [x] **FIX** — Compressed byte readback/independent actual use precede exact plain-file retirement; latest-only record advances to November11 15:29UTC.
+  - [x] **ADDRESSED (verified)** — Predelete and separate readonly0/empty stderr, fourteen effective reason-sensitive corruptions and four absent residue paths pass; full channels retained.
+  - [x] **NO REGRESSION** — All124,012 original content bytes/original mode records survive; every unselected artifact/source/cache stays retained. No physical-reclamation/global-liveness claim; native/OS leg stays4.2.
+  - [x] **LOCKSTEP** — Book/Knowledge/live/task/index/scope/history/MEMORY align; focused normal commit precedes23.1.41.
+  Outcome: docs/checkpoints/artifact-review-2026-11-11/REVIEW.md and source-bound two-claim record retain explicit census template/producers/index/actual child commands/channels, four original combined logs, metadata/modes/Git records, predelete proof and exact retirement receipt. No runtime/tool/storage-default/limit or other-repository change. Original logs lacked stdout/stderr separation; no retrospective promotion. Parent/full23.4 remains open.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.41`
   Status: `pending`

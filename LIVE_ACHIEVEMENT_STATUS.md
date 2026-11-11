@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues after all bounded ordinary79/callable79.6 backend lanes have focused results. Parent/full23.4 admission remains open. Daily4.26 then authoritative remaining-feature assessment23.1.41 are next.
+Full PNT continues after all bounded ordinary79/callable79.6 backend lanes have focused results and daily cleanup4.26 is verified. Parent/full23.4 admission remains open. Authoritative remaining-feature assessment23.1.41 is next.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5. Four interpreter insertions/two deletions/one runner group/no chunk locals; invocation/producers/formats preserved. Each installed host194/four routes1164PASS/private19RED-current194/direct2254 covers16 supported targets/three separate pattern compatibility movements/175 full records exact.1353 pairs/eight qualified traces per host/first readonly0-eighteen controls/current500 identities pass. First trace1 remains explicit; native bytes stable before load/new parsed persistence/full public error maps retained.
+TYPE-REFERENCE-BOOK.1.2.23.4.26. Dated eight-scope census/replay matches1,235 metadata rows. Four completed owned combined logs retain124,012 content bytes/modes; independent predelete use passes, exact plain duplicates are removed and residue is absent. Separate readonly0/empty stderr/fourteen effective controls pass. All other artifacts/caches/proof/repositories stay protected; no physical-reclamation or complete native/OS claim.
 
 ## Next Action
 
-Activate daily4.26 from clean Git near the24h boundary (last November10 15:19UTC): bounded safe artifact census/owned completed-log archival retirement, exact proof/latest-only record/docs/normal commit. Then activate23.1.41 to reconcile the authoritative inventory with remaining agreed features and deferred verification; select a bounded next owner without inferring completeness. Full native/source/context/registration/formatter/declared5.4/historical4.24/safe-launcher/routing owners remain open.
+Activate23.1.41 from clean Git. Reconcile the authoritative operation inventory with remaining agreed features and deferred verification, repair its two stale current pointers and missing parent child link, then select a bounded next owner without inferring completeness. Assess unassessed registered-function compositions through public tools before production. Full native/source/context/registration/formatter/declared5.4/historical4.24/safe-launcher/routing owners remain open.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.26 —1,235 dated metadata rows; four exact combined logs/124,012 content bytes/modes archived before duplicate retirement; readonly0/fourteen controls; assessment41 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5 — Each194/four routes1164PASS/private19RED-current194/175 full records/direct2254/1353 pairs/eight qualified traces/readonly18/current500; daily4.26 then selection41.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.25 — Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail exact;48537 bytes renewed/53 queries/first readonly ten controls; Julia next.
@@ -29,7 +30,6 @@ Activate daily4.26 from clean Git near the24h boundary (last November10 15:19UTC
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.3 —173/four routes/private19RED-current173PASS/direct318;154 healthy records/173 artifact pairs exact; first readonly eleven controls; independent Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.2 —173/four routes/private11RED-current173PASS/direct374;162 healthy records/173 artifact pairs/warnings exact; first readonly nine controls; independent Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1 —244PASS/private18RED-restored244PASS/direct384; first readonly thirteen controls;225 exact projections/one descriptor advance; independent Rust next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.0 — Number source fence166PASS/private14RED-qualified166PASS/direct195; qualified readonly twelve controls; original18 composition targets preserved.
 
 ## History
 

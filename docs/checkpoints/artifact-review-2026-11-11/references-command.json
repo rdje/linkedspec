@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "git",
+    "grep",
+    "-n",
+    "-F",
+    "-e",
+    "callable-pipeline-dart-commit-qualified.log",
+    "-e",
+    "task-headroom-rust-commit.log",
+    "-e",
+    "callable-pipeline-julia-commit.log",
+    "-e",
+    "callable-pipeline-lua-commit.log",
+    "--",
+    "docs/claims",
+    "docs/checkpoints",
+    "docs/knowledge"
+  ],
+  "cwd": "."
+}

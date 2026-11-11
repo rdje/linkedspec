@@ -1,4 +1,4 @@
 # Latest artifact cleanup
 
-- Date: 2026-11-10T15:19:32.257058+00:00
-- Summary: TYPE-REFERENCE-BOOK.1.2.23.4.19 reviewed1181 matching per-file metadata rows in eight named root/Rust/log scopes; configured Cargo target covered, five metadata/four channel controls and separate readonly replay pass. Nothing was removed; caches, proof and other repositories remain protected. Actual snapshot/channels: docs/checkpoints/artifact-review-2026-11-10/; readonly channel_review.py verifies them. Complete native/OS custody remains separately owned by23.4.2.
+- Date: 2026-11-11T15:29:23.870616+00:00
+- Summary: TYPE-REFERENCE-BOOK.1.2.23.4.26 reviewed 1235 matching metadata rows in eight named scopes; archived four completed owned combined logs (124012 content bytes/modes), verified independent use before deletion, removed exactly their plain duplicates and confirmed residue absent. Separate readonly0/empty stderr and fourteen corruption controls pass. All other artifacts/caches/proof/repositories remain retained; no physical reclamation claim. Evidence: docs/checkpoints/artifact-review-2026-11-11/; complete native/OS custody remains23.4.2.

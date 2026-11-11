@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2392,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-spec-name-authority.md","sha256":"dd4fcc6f20bdb18ad1b1719049ee15040c211ab2938c1f0df7ae03867b8fd2b6","type":"member"}
 {"bytes":4154,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-staged-artifact-schema.md","sha256":"2a0364e999c3d42c5cba5a11d00141ece0fe7dca12c77ffa85acd5e50af9f34b","type":"member"}
 {"bytes":2909,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-static-rule-authority.md","sha256":"f8b0e013d8f4723c58a009678df2cfb6697b630e7a0f0be797795494e378ef83","type":"member"}
 {"bytes":8940,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-query-budget-contract-gaps.md","sha256":"e6a348876dcfa1199bc709ece95eb602eb18ac04ea4d7064a6fbd4a99396c344","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2188,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-slot-shorthand.md","sha256":"07dd01df7fb1c29d61d7ea35b6adb03513bb1c375d1d0c76fb4b2e568c98d768","type":"member"}
 {"bytes":2621,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-source-slot-bare-reads.md","sha256":"452d5387b37f63af402ea8bbd0bb4c979fde29eb62940a576828723afd807e51","type":"member"}
 {"bytes":3633,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-shape-literal-value-expressions.md","sha256":"ff5c94ca1cbb7af0f7f4fb6e202a4996f2bdad3a1ebe6f9eb5d82b0449991816","type":"member"}
-{"bytes":3176,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-source-migration-runtime-boundaries.md","sha256":"7b6ec9bb09f6087bff1fa470a880fd9b401f95e82be4847ee91146fb043d5639","type":"member"}

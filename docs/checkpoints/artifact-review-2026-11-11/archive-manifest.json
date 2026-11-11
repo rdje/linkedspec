@@ -1,0 +1,68 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.26",
+  "activation_commit": "e5f2cb78ab99192974178ea04177b6cabf283e1e",
+  "at_utc": "2026-11-11T15:29:23.466966+00:00",
+  "records": [
+    {
+      "path": ".linkedspec-data/callable-pipeline-dart-commit-qualified.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-dart-commit-qualified.log.gz",
+      "sha256": "4143c4ab9544d29ff891a966747adfea8aafccc5b199a819537ca898504a6e62",
+      "metadata": {
+        "device": 16777244,
+        "inode": 848829486,
+        "bytes": 31148,
+        "mode": 420,
+        "mtime_ns": 1794399959436893912,
+        "links": 1
+      },
+      "commit": "c97b864fe9e9de16eaff5bcc840e46e97afe1699",
+      "git": "c97b864fe9e9de16eaff5bcc840e46e97afe1699\n9ed018787cac456a0e0bf95942bcdb735f5e4e6c\nTYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 - guard Dart callable pipeline results\n"
+    },
+    {
+      "path": ".linkedspec-data/task-headroom-rust-commit.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/task-headroom-rust-commit.log.gz",
+      "sha256": "7f346a65beeffb5cc118adf4bcf89bc7e15dd45f06889fbbf389cebbee87fd5a",
+      "metadata": {
+        "device": 16777244,
+        "inode": 848940792,
+        "bytes": 29257,
+        "mode": 420,
+        "mtime_ns": 1794401436597483016,
+        "links": 1
+      },
+      "commit": "580fe233a7d0299d177ecbd442ad8ba027bbe6da",
+      "git": "580fe233a7d0299d177ecbd442ad8ba027bbe6da\nc97b864fe9e9de16eaff5bcc840e46e97afe1699\nTYPE-REFERENCE-BOOK.1.2.23.4.25 - preserve closed Rust task narratives\n"
+    },
+    {
+      "path": ".linkedspec-data/callable-pipeline-julia-commit.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-julia-commit.log.gz",
+      "sha256": "10818232b1efd101793c93c756809ad7eee1251fcbbf75a1dbff90daa3e33162",
+      "metadata": {
+        "device": 16777244,
+        "inode": 848983020,
+        "bytes": 20581,
+        "mode": 420,
+        "mtime_ns": 1794405524959194528,
+        "links": 1
+      },
+      "commit": "9a6b229ce3f944ef3822e71935b1c40c109f74b9",
+      "git": "9a6b229ce3f944ef3822e71935b1c40c109f74b9\n580fe233a7d0299d177ecbd442ad8ba027bbe6da\nTYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 - guard Julia callable pipeline results\n"
+    },
+    {
+      "path": ".linkedspec-data/callable-pipeline-lua-commit.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-lua-commit.log.gz",
+      "sha256": "78dc7753922d48ff665548cf6ddc3915392e1f07bbce12011cf354e5df280fd4",
+      "metadata": {
+        "device": 16777244,
+        "inode": 849524628,
+        "bytes": 43026,
+        "mode": 420,
+        "mtime_ns": 1794410670226107728,
+        "links": 1
+      },
+      "commit": "e5f2cb78ab99192974178ea04177b6cabf283e1e",
+      "git": "e5f2cb78ab99192974178ea04177b6cabf283e1e\n9a6b229ce3f944ef3822e71935b1c40c109f74b9\nTYPE-REFERENCE-BOOK.1.2.23.3.79.6.5 - guard installed Lua callable pipeline results\n"
+    }
+  ],
+  "scope": "Four exact combined logs from completed commands owned by this session. Original channel separation is unavailable; no global process-liveness or disk-free-space claim. All other files, caches, native products and historical proof remain retained."
+}

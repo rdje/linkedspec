@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.26",
+  "claims": [
+    {
+      "name": "dated-metadata-and-exact-combined-log-recovery",
+      "statement": "The dated primary and independent census agree on 1235 named-scope metadata rows. Four completed owned combined logs retain all 124012 content bytes and original modes in compressed evidence. Independent use passes before exact plain-file retirement and again afterward; fourteen distinguishing metadata/log/channel corruptions reject.",
+      "scope": "Eight explicit root/Rust/log scopes, with configured rust/target covered. Only the four manifest-named combined command logs are retired; every other candidate, cache, native product, tracked proof and other repository remains protected. Retained combined logs do not recreate the original stdout/stderr separation. Source template, census/index records, project instruments, command channels, archives, original modes, Git completion identities and residue receipt are explicit inputs. No whole-project population, global liveness, allocated/free-space reclamation, concurrent-adversarial guarantee or infrastructure/runtime change.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-11/review.py",
+        "granularity": "Each retained census path/suffix/byte row, each of four log bodies/modes/actual Git completion markers, exact retirement/residue and actual capture/replay/predelete/retirement channels.",
+        "result": "{\"archived_content_bytes\": 124012, \"archived_files\": 4, \"census_date\": \"2026-11-11T15:29:09.308443+00:00\", \"limits\": \"Retained named-scope metadata and exact four combined logs; no whole-project, original channel separation, global liveness, allocated/free-space or complete native/OS custody claim.\", \"phase\": \"readonly\", \"rejected_controls\": [{\"control\": \"missing-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"wrong-size\", \"observed_red\": \"metadata population\"}, {\"control\": \"duplicate-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"outside-path\", \"observed_red\": \"metadata population\"}, {\"control\": \"producer-byte\", \"observed_red\": \"packet identity\"}, {\"control\": \"missing-log\", \"observed_red\": \"log population\"}, {\"control\": \"altered-log\", \"observed_red\": \"log body identity\"}, {\"control\": \"executable-mode\", \"observed_red\": \"log mode\"}, {\"control\": \"invented-commit\", \"observed_red\": \"commit identity\"}, {\"control\": \"missing-hook-marker\", \"observed_red\": \"complete hook marker\"}, {\"control\": \"wrong-command\", \"observed_red\": \"command identity\"}, {\"control\": \"wrong-exit\", \"observed_red\": \"actual exit\"}, {\"control\": \"unexpected-stderr\", \"observed_red\": \"unexpected stderr\"}, {\"control\": \"wrong-stdout\", \"observed_red\": \"stdout result\"}], \"result\": \"PASS\", \"scoped_rows\": 1235}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An omitted/changed metadata row, missing or altered archive, fabricated successful log, wrong mode/commit or substituted command/channel could be accepted as support for safe exact retirement.",
+        "oracle": "Separately implemented scandir/lstat population versus the accepted os.walk scanner; independent reader of retained gzip bytes and original Git records, without census-helper or retirement imports; actual healthy predelete and postdelete invocations.",
+        "red_control": "[{\"control\": \"missing-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"wrong-size\", \"observed_red\": \"metadata population\"}, {\"control\": \"duplicate-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"outside-path\", \"observed_red\": \"metadata population\"}, {\"control\": \"producer-byte\", \"observed_red\": \"packet identity\"}, {\"control\": \"missing-log\", \"observed_red\": \"log population\"}, {\"control\": \"altered-log\", \"observed_red\": \"log body identity\"}, {\"control\": \"executable-mode\", \"observed_red\": \"log mode\"}, {\"control\": \"invented-commit\", \"observed_red\": \"commit identity\"}, {\"control\": \"missing-hook-marker\", \"observed_red\": \"complete hook marker\"}, {\"control\": \"wrong-command\", \"observed_red\": \"command identity\"}, {\"control\": \"wrong-exit\", \"observed_red\": \"actual exit\"}, {\"control\": \"unexpected-stderr\", \"observed_red\": \"unexpected stderr\"}, {\"control\": \"wrong-stdout\", \"observed_red\": \"stdout result\"}]"
+      },
+      "durability": {
+        "status": "checked",
+        "mode": "live",
+        "inputs": [
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.18-census.py",
+            "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/REPO-HYGIENE.19/census.py",
+            "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-10/review.py",
+            "sha256": "2aa497231ae02ce4381023685ff8ff886ecd43bf7ddd5ca7a8118b0c0200c165",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/archive-manifest.json",
+            "sha256": "1fb743eb0035b7bf8d6de2d1e53a4321be3530d0412295ed5c445b800fed7fe6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-capture-command.json",
+            "sha256": "3c40743032d886b68fce7582fe3340239ece8b965f35168672439d6c16e1ae5b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-capture-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-capture-inputs.json.gz",
+            "sha256": "557c8e1d0ac0fd76755e4e05bd2781109398598dc59a0917e2b63fe7a9252ca8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-capture-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-capture-stdout.log.gz",
+            "sha256": "b931595c59a7b67e7b00951331c46003e3a2e25a6d4ad7d84cbff35284979570",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-review-command.json",
+            "sha256": "9272ab8cda0652082c15e76bd1985fbe0fb6ada4005388a7e4564353c7f7b11f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-review-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-review-inputs.json.gz",
+            "sha256": "557c8e1d0ac0fd76755e4e05bd2781109398598dc59a0917e2b63fe7a9252ca8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-review-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census-review-stdout.log.gz",
+            "sha256": "b931595c59a7b67e7b00951331c46003e3a2e25a6d4ad7d84cbff35284979570",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/census.py",
+            "sha256": "b586cc11c3100c1ba8cbd6a74b62835796c7b5825562299ad7ed834943545cfb",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-dart-commit-qualified.log.gz",
+            "sha256": "64960a7f2bdf5bbccbe07ed3a58d5f5b3cfc9f74ae693455f5f8bd1225536763",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-julia-commit.log.gz",
+            "sha256": "e6f21b1031d3b17118e933dfee78cc16c6263350be00c650ccad4f64073bead9",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/callable-pipeline-lua-commit.log.gz",
+            "sha256": "05d58cba8c3f3a024004b154dfc1178558b92131e01cbaa4caea2e0437a87b50",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/combined-logs/task-headroom-rust-commit.log.gz",
+            "sha256": "7cf4bb59d9aa7cbdb9cb0ed8119af406ae72af2831e42d54d9e3c7bd2af9593b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/composition-input.json.gz",
+            "sha256": "63320d5da69abe2193146757392604f18b3f2003f3f4cae9000bc8a44b31fdce",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/composition.json",
+            "sha256": "241de60405375cd284d23ef71123842233c56e646c75ba411954e9c55a7056a1",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/observation.json.gz",
+            "sha256": "0ad7483ac7b70b818a01ada417a073cb7b100419f4f1fe69a8d146b9eb252af6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/predelete-command.json",
+            "sha256": "52f60b35a081a37d3351d328901f61d4bd42ed2112c3d51ce72226c0dd149863",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/predelete-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/predelete-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/predelete-stdout.log.gz",
+            "sha256": "e31e34782a1e5cea5746175711e0bb7b420e4789907b4887752900d8decdd846",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare-command.json",
+            "sha256": "8bf4b07f045c2d573d5069a6657e980341f6593578ed23c6445b37a226509fe6",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare-inputs.json.gz",
+            "sha256": "59f55f8db1b8b0e5ca56060608f750a1ed17237c473c32777b9665a4b064b660",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare-stdout.log.gz",
+            "sha256": "f0896a6b44e00c6826fc42a6a79e87f65df809a69417fd6e78fd8ec9ee2ac101",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/prepare.py",
+            "sha256": "239a5b67147a383a79c2553f17fed61a93f1142af4308ef044391a7f1d5e58d7",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/publish.py",
+            "sha256": "9984b6cfebfc68909feffd53ba4eec5f7bf8a0afbce8696885a9043bc5ed02f6",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/readonly-command.json",
+            "sha256": "926e0efe193f2d442f042cfede57a55ace463feb758c6160a26d8eac5c008c2f",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/readonly-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/readonly-inputs.json.gz",
+            "sha256": "557c8e1d0ac0fd76755e4e05bd2781109398598dc59a0917e2b63fe7a9252ca8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/readonly-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/readonly-stdout.log.gz",
+            "sha256": "48a5712e5e1386851caae429c2c83bbf3130d9ff59ead966395b3d066852c34b",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/references-command.json",
+            "sha256": "aab2f325b1b6a52b60373f33eb82f18b8a97f7d19bd564797399497f7770f806",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/references-exit.txt",
+            "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/references-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/references-stdout.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire-command.json",
+            "sha256": "5dcf1ddb74ce17bf7d2e752586388cb7abef81a69b368a1d7dc643d9fc40ac2e",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire-exit.txt",
+            "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire-inputs.json.gz",
+            "sha256": "557c8e1d0ac0fd76755e4e05bd2781109398598dc59a0917e2b63fe7a9252ca8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire-stderr.log.gz",
+            "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire-stdout.log.gz",
+            "sha256": "ea10e943553d82dd463f423109482d919f7963947d2ac5897c21db4a26651dd8",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retire.py",
+            "sha256": "2cfd3e6ea102890d000065f973311e0cc7b67cff795f15baeedbd1b1a2794a5f",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/retirement.json",
+            "sha256": "c1a15f69f73363bc784afb9babe4575e58e3506e4f7beb228e549eb4539ad248",
+            "role": "input"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/review.py",
+            "sha256": "0b7ba3171e2ea28853be8a89e8e9756e0d657455fe88cabf79aa82f4dca34a45",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/run.py",
+            "sha256": "cd7431f90debf1acf77a9fcfc970263be15892ca570a8e8d8dcdb481c9a5cf6a",
+            "role": "producer"
+          },
+          {
+            "path": "docs/checkpoints/artifact-review-2026-11-11/tracked-before.gz",
+            "sha256": "538bf538e6838626e85752c1402c3589ae6904af6b0aceec4faf7b3e67c564c6",
+            "role": "input"
+          },
+          {
+            "path": "tools/project_data_env.sh",
+            "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+            "role": "producer"
+          },
+          {
+            "path": "tools/project_data_run.sh",
+            "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+            "role": "producer"
+          },
+          {
+            "path": "tools/run_lua_project_data.sh",
+            "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+            "role": "input"
+          },
+          {
+            "path": "tools/run_python_project_data.sh",
+            "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+            "role": "producer"
+          }
+        ]
+      }
+    },
+    {
+      "name": "dated-host-maintenance-with-native-custody-gap",
+      "statement": "The dated host census and exact four-log archival retirement completed with retained actual command channels and independent checks.",
+      "scope": "Original dated host filesystem observation and owned plain-duplicate retirement only. Later readonly recovery establishes retained evidence consistency; it does not recreate the original host epoch or measure reclaimed physical storage.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-11/review.py",
+        "granularity": "Each retained census path/suffix/byte row, each of four log bodies/modes/actual Git completion markers, exact retirement/residue and actual capture/replay/predelete/retirement channels.",
+        "result": "{\"archived_content_bytes\": 124012, \"archived_files\": 4, \"census_date\": \"2026-11-11T15:29:09.308443+00:00\", \"limits\": \"Retained named-scope metadata and exact four combined logs; no whole-project, original channel separation, global liveness, allocated/free-space or complete native/OS custody claim.\", \"phase\": \"readonly\", \"rejected_controls\": [{\"control\": \"missing-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"wrong-size\", \"observed_red\": \"metadata population\"}, {\"control\": \"duplicate-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"outside-path\", \"observed_red\": \"metadata population\"}, {\"control\": \"producer-byte\", \"observed_red\": \"packet identity\"}, {\"control\": \"missing-log\", \"observed_red\": \"log population\"}, {\"control\": \"altered-log\", \"observed_red\": \"log body identity\"}, {\"control\": \"executable-mode\", \"observed_red\": \"log mode\"}, {\"control\": \"invented-commit\", \"observed_red\": \"commit identity\"}, {\"control\": \"missing-hook-marker\", \"observed_red\": \"complete hook marker\"}, {\"control\": \"wrong-command\", \"observed_red\": \"command identity\"}, {\"control\": \"wrong-exit\", \"observed_red\": \"actual exit\"}, {\"control\": \"unexpected-stderr\", \"observed_red\": \"unexpected stderr\"}, {\"control\": \"wrong-stdout\", \"observed_red\": \"stdout result\"}], \"result\": \"PASS\", \"scoped_rows\": 1235}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An omitted/changed metadata row, missing or altered archive, fabricated successful log, wrong mode/commit or substituted command/channel could be accepted as support for safe exact retirement.",
+        "oracle": "Separately implemented scandir/lstat population versus the accepted os.walk scanner; independent reader of retained gzip bytes and original Git records, without census-helper or retirement imports; actual healthy predelete and postdelete invocations.",
+        "red_control": "[{\"control\": \"missing-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"wrong-size\", \"observed_red\": \"metadata population\"}, {\"control\": \"duplicate-row\", \"observed_red\": \"metadata population\"}, {\"control\": \"outside-path\", \"observed_red\": \"metadata population\"}, {\"control\": \"producer-byte\", \"observed_red\": \"packet identity\"}, {\"control\": \"missing-log\", \"observed_red\": \"log population\"}, {\"control\": \"altered-log\", \"observed_red\": \"log body identity\"}, {\"control\": \"executable-mode\", \"observed_red\": \"log mode\"}, {\"control\": \"invented-commit\", \"observed_red\": \"commit identity\"}, {\"control\": \"missing-hook-marker\", \"observed_red\": \"complete hook marker\"}, {\"control\": \"wrong-command\", \"observed_red\": \"command identity\"}, {\"control\": \"wrong-exit\", \"observed_red\": \"actual exit\"}, {\"control\": \"unexpected-stderr\", \"observed_red\": \"unexpected stderr\"}, {\"control\": \"wrong-stdout\", \"observed_red\": \"stdout result\"}]"
+      },
+      "durability": {
+        "status": "gap",
+        "reason": "All named project sources, template/index/census inputs, archive bodies/modes and actual channels are retained. The original interpreter/native libraries/toolchain/kernel/filesystem and complete transitive first-use epoch are not acquired.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2"
+      }
+    }
+  ]
+}

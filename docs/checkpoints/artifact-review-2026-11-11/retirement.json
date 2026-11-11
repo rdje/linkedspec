@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "at_utc": "2026-11-11T15:29:23.870616+00:00",
+  "removed_plain_files": 4,
+  "archived_content_bytes": 124012,
+  "absent": [
+    ".linkedspec-data/callable-pipeline-dart-commit-qualified.log",
+    ".linkedspec-data/task-headroom-rust-commit.log",
+    ".linkedspec-data/callable-pipeline-julia-commit.log",
+    ".linkedspec-data/callable-pipeline-lua-commit.log"
+  ],
+  "predelete_actual_exit": 0,
+  "limits": "Exact duplicate retirement after verified compressed recovery and independent use; allocated/free-space reclamation is not measured."
+}

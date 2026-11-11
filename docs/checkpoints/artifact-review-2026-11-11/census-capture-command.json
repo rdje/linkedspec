@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/artifact-review-2026-11-11/census.py",
+    "--capture"
+  ],
+  "cwd": "."
+}

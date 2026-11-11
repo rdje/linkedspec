@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
 {"bytes":4638,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-hash-value-result-guards.md","sha256":"9361c6243d5ed5d72f3c2b63e4a831d1a8626201d34078f687ce91f2c96052ac","type":"member"}
 {"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4414,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-public-no-drift.md","sha256":"04af4c4c1c02a3f654bcda8bf5ac95fb1c0fce87f3d47b20f3d7112b88f074de","type":"member"}
 {"bytes":3123,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-recurring-gate-plan.md","sha256":"aa3a5044e67fcea8d4a0b3862660089e2560b12b359d65aa33af1e4427a54999","type":"member"}
 {"bytes":4817,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-recurring-gate.md","sha256":"cda756656079d6e5b0c4ce9fa49f1acec1fcd169f9c21771de7a888ba44588c6","type":"member"}
-{"bytes":2392,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-spec-name-authority.md","sha256":"dd4fcc6f20bdb18ad1b1719049ee15040c211ab2938c1f0df7ae03867b8fd2b6","type":"member"}

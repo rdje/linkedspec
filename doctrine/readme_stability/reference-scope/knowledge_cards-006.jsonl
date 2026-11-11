@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15354,"lines":210,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-control-numeric-collection-reading.md","sha256":"9a1521a252ed4e8d81a6f940533b9640bc9f274b311a2e55c89a62c1fa6e8c9e","type":"member"}
 {"bytes":14124,"lines":190,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-function-generated-execution-reading.md","sha256":"eefbe9845a56126f5c571f9bb3b7582f34a832aae216d62eded7301aceb6d25d","type":"member"}
 {"bytes":15272,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-generated-runtime-cursor-reading.md","sha256":"0628e6da2e809a3987b959aa8664165893fce1404383466d03262933330e9f39","type":"member"}
 {"bytes":14799,"lines":201,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-named-capture-scoped-callback-reading.md","sha256":"2b80cd5f36aeae82e488d726091329e85bdcf1dcaa012d93bcb7433af65732c2","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":11362,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-location-dormant-red.md","sha256":"07760887eecc55d0a08a2163a9063f49e71cf18b2105856330bdd9c3482ac3f8","type":"member"}
 {"bytes":20067,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md","sha256":"73a07473e19133768bfb44f6097f7834ae3107961fda95b5ca1d243435aca99d","type":"member"}
 {"bytes":13616,"lines":125,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-lower-completion-reading.md","sha256":"873eb4f90e3d816f9f18a437b1aa789148eb383e14b8eee645afd9a1bdf46659","type":"member"}
-{"bytes":8561,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-rule-label-implementation-plan.md","sha256":"b81555d8c1f5b1fa701dbd0c33ddcfbf8f6a601eadb166dddcda95dfb09e06f7","type":"member"}

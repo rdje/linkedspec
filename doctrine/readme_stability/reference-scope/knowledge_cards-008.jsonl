@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3912,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-collecting-parent-runtime-error-loss.md","sha256":"73d431af07c553a3af44662333ed55f7ffda8e4e4ccc0207907db7ce5d5dc6c7","type":"member"}
 {"bytes":8165,"lines":122,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-comment-newline-lowering-drift.md","sha256":"51bad69ccf756692ab6569b81474fb6b148ea7266eb6871b1908bf90a792a856","type":"member"}
 {"bytes":5242,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-compiler-pipeline-stage-and-mode-boundaries.md","sha256":"668df8eedad08352d1ccf451013ce1046051805408ad6f7afb934eac5fe72f34","type":"member"}
 {"bytes":7711,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-compiler-source-membership.md","sha256":"3ff20c983bc7b8a7532c37d3a54d0c4225ca7ce8504aa5cb1fd2e68cd6e9232e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3111,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pick-keys-conditional-local-reuse.md","sha256":"9dfac9fbab66bd2c37e72681619288c5c1eec5b327a697284e0414d6bac9654b","type":"member"}
 {"bytes":4618,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-regex-source-provenance.md","sha256":"c80620e4f8c15f04e82b678ac41fb36ddbdb5b4794d081262a1973459cbe8dfd","type":"member"}
 {"bytes":4694,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-source-provenance-diagnosis.md","sha256":"1cc7d554752fc7c28744448280968fbb9c30ac9fcdc763d5f6d8fb08ef67b914","type":"member"}
-{"bytes":3447,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-split-source-metadata.md","sha256":"e11de0d89de222dfbbc014bb0ff21d3ca144a7fd2178a38eed17fa7d201ca6ee","type":"member"}
