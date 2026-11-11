@@ -2921,7 +2921,7 @@
   Schedule: Perl then independent Rust, Dart, Julia and installed Lua, committing each focused lane before the next; full23.4/final push after coverage. Native malformed Perl-only controls must never enter the shared Lua producer.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1`
-  Status: `in_progress`
+  Status: `completed` / bounded children focused-checked; full admission separate
   Children: `.79.6.1.0`, `.79.6.1.1`, `.79.6.1.2`.
   Goal: Independently acquire/repair Perl registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
@@ -2930,7 +2930,7 @@
   Planned canonical trigger: Full23.4/final clean push after coverage.
   Planned claim verification: Finite authored controls; each child declares its claim boundary.
   Activation: Clean237a738b; frozen79.6/shared37/Perl41, original39 qualification, book, actual handlers and source predicate reviewed before independent acquisition. Distinct caller/parameter names avoid separately owned shadowing32. No production edit before intake.
-  Frontier: Intake child0 retains original178/terminal18. Bounded first-call arity child1 is focused-checked;25 result/readiness gaps remain child2. Re-acquire178 against the repaired source after clean child1 landing; commit between children. Canonical evidence and full constraints: docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md.
+  Frontier: Intake0, first-call arity1 and callable result2 are completed with focused proof. Result188/private30RED-current188 preserves signature/pattern/error boundaries; canonical packet: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/REVIEW.md. Independent Rust79.6.2 follows the clean result commit; parent79.6/full23.4 stay open.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2`
   Status: `pending`
@@ -3013,10 +3013,25 @@
   - [x] **LOCKSTEP** — Book/reference/Knowledge/roadmap/task/index/live/MEMORY align; focused docs/gates and normal clean commit precede re-acquisition/result79.6.1.2.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2`
-  Status: `pending`
+  Status: `completed` / bounded callable result guards focused-checked
   Goal: Repair independently confirmed Perl callable pipeline result/readiness gaps after the arity prerequisite.
   Dependencies: Clean79.6.1.1; re-acquire unchanged178 against that source image and own actual metadata-only or error-provenance movements before production.
   Acceptance: Full79.6 contract and parent79.6.1 requirements. Preserve initial terminal/with and nonliteral pattern normalization, function-arity rejection/earlier owners/scalar/index/mutation/formats; supported chains need correct execution and full-source readiness. Own private exact old/current module control and focused new/direct normals/recovery/docs before independent Rust79.6.2.
-  Planned verification: Parent79.6 focused checks with every actual source/new fixture/default grammar/normal/private input bound before use.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage.
-  Planned claim verification: none: Finite authored result/preservation controls, no population/performance measurement.
+  Verification tier: `focused`
+  Focused checks: Fresh original178 acquisition and independent producer/signature/error policies before production; supported result normal/valid preservation, exact same-path old/current loaded owner, smallest direct pipeline/function/arity normals, readonly/corruptions/current source identity, syntax/book/Knowledge/task/index/scope/history/memory/diff/normal hooks.
+  Canonical trigger: Full23.4/final clean push after feature coverage.
+  Claim verification: none: Finite authored result/preservation controls, no population/performance measurement.
+  Activation: Clean5f22dae8d3a10cd10f4d2ecfbc6d0be9fd71e172 after first-call arity1.1 all10/post-pointer/brief0/clean Git. Read frozen79.6, original178/terminal18 and qualified selection41, P1 first-call proof, relevant source/signature/CountKeys callable cards, current book/workaround and ordinary pipeline/copy/logical/with classifiers. Production retains the registered-function exclusion; do not remove it before fresh178 acquisition and independent signature/pattern/needed-error boundaries. P1 malformed first-call fence and its125 normal remain required. Full source/context/native/custody/admission and peers stay separate. No source edit yet.
+  Intake progress: Fresh178 against committed5f22 exits0/empty outer stderr with all actual source pairs/first inputs retained; production unchanged. Before lifting the function exclusion, acquire ten existing fixed/variadic signature boundary controls because valid calls must enter result guards while invalid signatures retain their original rejection. Reuse the existing signature reader/min/max model; no new callable or regex authority. Three original pattern-source compositions retain terminal literal-normalization boundaries and require separately disclosed readiness movements, not new eager pattern execution.
+  Documentation defect owned: The maintained callable-selection Knowledge card says six metadata fields, but its retained observer and all current rows enumerate five. Correct the live card's count during this leaf; preserve sealed historical producer/output wording with an explicit erratum.
+  Direct preparation failure: First direct producer exits1 on its review.py input-stability assertion after the review draft was edited during the run. Original inputs/before-after review bytes/full channels/actual per-test exits survive under direct-failure; no complete direct PASS credit. SDK/fixture bytes did not drift. Repeat all four normals in direct_qualified using an explicit frozen actual SDK/instrument input set; exclude the unexecuted review draft. Retain first failure and producer unchanged; no product or source rebaseline.
+  Session health: Context is long; a fresh context would help after this leaf's clean landing. Current source/proofs and every next action remain durable; no external blocker or director decision required.
+  Outcome: Existing fixed/V2 signature reader gates valid sources into the exact terminal/result frame (15 insertions/two deletions).188 groups/private30RED-current188 cover27 supported targets/three separately disclosed pattern readiness movements/158 full preserved projections.940 actual source pairs/qualified direct441 groups with1876 API artifacts/both syntax/first readonly0-empty stderr/fourteen controls/current121 identity pass. Original direct instrumentation1 remains explicit; no complete PASS credit. All invalid signatures and nonliteral pattern normalization stay exact. Evidence: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Fresh178+ten signatures precede production; original/private old normal fail exactly30, distinguishing27 targets and three compatibility readiness movements.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Registered-function exclusion bypasses ordinary pipeline result frame; existing signature validity distinguishes supported sources from invalid calls.
+  - [x] **FIX** — Reuse existing signature reader and recursive terminal producer/result guards; no model/format/pattern/global arity/callback expansion.
+  - [x] **ADDRESSED (verified)** —188PASS/private old-current, full needed-error producer oracles/native-fresh effects/readiness; readonly fourteen controls/current121 identity.
+  - [x] **NO REGRESSION** —158 full projections/28 malformed helper-function signatures exact; direct6+66+244+125/syntax and940 pairs/1876 API artifacts retained.
+  - [x] **LOCKSTEP** — Book/Knowledge/roadmap/live/task/index/scope/MEMORY align; focused gates and normal clean landing precede Rust79.6.2. Full23.4 remains separate.
+  Landing whitespace correction: Staged diff check exits2 for a blank line at EOF in the sealed reader. Exact first-reader bytes survive as first-review.py.gz with original first-use inputs/output/seal unchanged; qualified reader resolves only that historical alias and freezes its own inputs before repeat. No SDK/normal/oracle changes. Qualified actual reader0/empty stderr/same14 controls passes; exact failure/provenance: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/LANDING.md.

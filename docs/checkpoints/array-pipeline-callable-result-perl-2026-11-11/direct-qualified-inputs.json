@@ -1,0 +1,19 @@
+{
+  "capture_direct.py": {
+    "sha256": "7449ff31dc2ac89d8b9d72b722a54edb4a574a04083268e9396d18d35e1b01c4",
+    "retained": "qualified-template-capture_direct.py.gz"
+  },
+  "direct_runner.pl": {
+    "sha256": "a02ba1533c78093e5d76289bb14e86227e8838332e6217e712b3aadc0f65c3b5",
+    "retained": "qualified-template-direct_runner.pl.gz"
+  },
+  "capture_direct2.py": {
+    "sha256": "38fa18f82370504dcfe2de7a1c69eebe44b1d11cb8f60427f062bf6860eb95c0"
+  },
+  "direct_runner_qualified.pl": {
+    "sha256": "ecd7529b0e9a205bbe8b57b94fe3505a9aa3d6a83f7e5da8e81a7a587b70b243"
+  },
+  "prepare_direct_qualified.py": {
+    "sha256": "07507fa9b66c59b3c2f0b64e98686fe06d7defa1a4beffe6a185ac0a6f4c817d"
+  }
+}

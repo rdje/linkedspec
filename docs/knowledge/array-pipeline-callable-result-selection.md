@@ -26,7 +26,7 @@ bounded implementation gap, not new syntax or a function-registration failure.
 
 Qualified41 has16 targets: eleven execution/error failures and five matching
 value/error cases with unresolved metadata. The latter are trim_later_with,
-three initial-kind compositions and invalid_range_receiver_composed. Six selected
+three initial-kind compositions and invalid_range_receiver_composed. Five selected
 action-rewriter fields distinguish readiness from execution. A correct null or
 regex error alone is not acceptance. Family79.6 owns both; each peer independently
 acquires its own policy, error framing and actual SDK routes before production.
@@ -48,7 +48,7 @@ shadowing32, still separately owned rather than accepted as a source policy.
 
 All first own source/grammar/instrument inputs and actual module/handler bytes
 precede SDK use/loading. Full observed error fields/classes/values/warnings and
-absent fresh fields survive; metadata scope is the six named projection fields.
+absent fresh fields survive; metadata scope is the five named projection fields.
 Context-free call_spec_handler_subst lacks the source function registry and is
 diagnostic only. Fresh packages share the Perl process. First readonly/thirteen
 corruptions and current source/grammar/instrument identity pass. Historical input
@@ -56,3 +56,8 @@ recovery is independent of the latest SDK. Full native/cache/transitive/toolchai
 custody4.2/SESSION5, source/context/isolation/registration/declared5.4/full23.4
 remain open. Perl intake79.6.1.0 now separates P1 arity79.6.1.1 before result79.6.1.2; see [[perl-callable-pipeline-intake-and-arity]].
 Related: [[array-pipeline-result-guard-selection]], [[terse-user-defined-functions-mvp-contract]].
+
+November11 erratum/supersession: the selected metadata map has five named fields;
+sealed historical six-field prose is unchanged and carries no extra field claim.
+[[perl-callable-pipeline-result-guards]] closes the bounded Perl result gap after
+[[perl-callable-pipeline-first-call-arity]]; independent peers remain pending.

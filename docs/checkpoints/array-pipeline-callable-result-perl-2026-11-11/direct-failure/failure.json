@@ -1,0 +1,15 @@
+{
+  "outer_exit": 1,
+  "changed_declared_input": "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/review.py",
+  "before_sha256": "261e5321b2fcbfd08d7abbc4f573692f383d3828fd5cadc8f7bf57e7063a0ad0",
+  "after_sha256": "c7be7fcefeb6558b059b000620dc247d7685f30fb6f2a0a25c73bc047c9a1c03",
+  "actual_direct_exits": {
+    "array_pipeline_result_guard_composition-exit": "0",
+    "syntax-phase0-exit": "0",
+    "variadic_user_function_contract-exit": "0",
+    "array_pipeline_value_contract-exit": "0",
+    "syntax-module-exit": "0"
+  },
+  "complete_direct_PASS": false,
+  "reason": "Review draft edited while the overbroad declared input set was frozen; SDK sources were unchanged."
+}

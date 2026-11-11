@@ -1,0 +1,13 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "-c",
+    "t/phase0_regression.t"
+  ]
+}

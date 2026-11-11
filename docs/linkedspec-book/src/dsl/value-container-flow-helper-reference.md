@@ -1940,29 +1940,42 @@ these safe checks use valid pattern text. Earlier guarded prefixes, source
 snapshots, nested kinds and standalone writeback stay intact. Reload applications
 with the updated Lua SDK; declared PUC5.4 and full native admission remain open.
 
-Registered-function pipeline receivers have a separately owned Perl gap. A
-terminal receiver can work while a longer chain retains unresolved DSL or an
-unsupported `with` marker; matching returned values do not establish compiler
-readiness. Until that repair lands, use the ordinary free-helper wrapper when
-feeding a function result into a pipeline. This tested form returns `[null,""]`:
+Perl also supports the existing seven canonical pipelines on valid registered
+function results through guarded consumers, copying, logical continuations and
+`with`. The source runs once. An incompatible Hash consumer rejects before its
+key/value operands and skips later continuations, while preserving source effects.
+This tested form returns `[null,"S"]` with a ready full-source descriptor:
 
 ```text
 fn supply(seed) {return(seed)}
 Value:: I {
   order="";
-  out=trim_each(supply([" head "," tail "])).set_key(
+  out=supply({order=cat(order,"S");[" tail "]}).trim_each().set_key(
     {order=cat(order,"K");"k"}, {order=cat(order,"V");1}
-  );
+  ).copy().with(){order=cat(order,"W");return("ran")};
   return([out,order]);
 }
 ```
 
-The equivalent `supply(...).trim_each().set_key(...)` continuation remains an
-owned repair on Perl. Required source/delimiter errors and literal regex errors
-must retain their original provenance; the existing function syntax, pure local
-scope and exact arity remain unchanged. This finite Perl finding is not a peer
-verdict. Computed DSL blocks are not an admitted eager Perl `filter_match` pattern
-contract; use the documented regex operand syntax. Native Lua malformed-pattern
+The ordinary `trim_each(supply(...))` spelling remains supported. Compatible
+receiver chains retain their value kinds. Initial Number/null/Hash results retain
+Perl's empty-Array producer policy and still enter an immediate `with`; rejecting
+a later consumer is distinct from rejecting the original function result.
+Existing valid variadic functions also work: `fn all_values(...values) {return(values)}`
+permits `all_values().trim_each()` (empty Array) and
+`all_values(" head "," tail ").trim_each()` (`["head","tail"]`). Invalid fixed or
+variadic signatures retain their previous rejection and unready descriptor;
+result guards do not turn an invalid call into a valid empty Array.
+
+Required source/delimiter errors and literal regex errors keep their original
+provenance before consumer operands or later bodies. Existing terminal pattern
+normalization remains unchanged: composed String/bare/block pattern observations
+may gain canonical readiness without gaining eager pattern execution. Use the
+documented regex operand syntax; computed DSL blocks are not an admitted eager
+Perl `filter_match` pattern contract. Matching payloads alone do not establish
+readiness. Regenerate older emitted Perl modules for these compiler guards.
+This focused Perl repair makes no peer verdict; independent backends and full
+source/context/native admission remain separate. Native Lua malformed-pattern
 handling and declared PUC5.4 admission remain separately qualified.
 
 Perl rejects malformed first pipeline calls on registered-function receivers

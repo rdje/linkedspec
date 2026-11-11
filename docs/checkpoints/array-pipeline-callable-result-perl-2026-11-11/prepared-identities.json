@@ -1,0 +1,5 @@
+{
+  "tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json": "fc2ea54db6ee091b09a879e49d9a6325fe803e3536e0910629a0cba881952e80",
+  "t/array_pipeline_callable_result_guard_composition.t": "47e550ed281c3f91dfbf02aa6f9ca58be59ce3906d8c719f71f22e479494c6f7",
+  "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/classification.json": "ac5888759767f34708fab9bb0a7301bf8510b7b469d155d302c9b6b7d676f7df"
+}

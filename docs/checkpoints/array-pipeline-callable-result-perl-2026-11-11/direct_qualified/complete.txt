@@ -1,0 +1,1 @@
+Four selected direct normals and syntax complete; actual API products retained.

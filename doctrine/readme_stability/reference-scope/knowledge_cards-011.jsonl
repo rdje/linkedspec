@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5385,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-large-number-conversion-defect.md","sha256":"3e5a8cb1fc069e6de50d1fe8766e1f4dbbc8a814f6345fe82475db4a15255644","type":"member"}
 {"bytes":3202,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-leading-input-trivia-boundary.md","sha256":"29e9abff9a3c7721c9612913f2bf72f9e60de941fcb8fb57bbdcccde835ceec7","type":"member"}
 {"bytes":4920,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-legacy-shipped-spec-oracle-smokes.md","sha256":"42324792ec6c09ef3e563e0390927e7de9cfcfba35a766c968bfa3972b629e3d","type":"member"}
 {"bytes":3727,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.2","path":"docs/knowledge/rust-length-result-guards.md","sha256":"108bdc17f192fa9d6daf4f87f42c3f7ef1f2277dd903af75aaa5f3883452a801","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8940,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-query-budget-contract-gaps.md","sha256":"e6a348876dcfa1199bc709ece95eb602eb18ac04ea4d7064a6fbd4a99396c344","type":"member"}
 {"bytes":5592,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-rule-calls-empty-function-gate.md","sha256":"9aeb787ed0c00f1053fae4c59464a3a0557370140efd97433fe7a95817a41041","type":"member"}
 {"bytes":4241,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-source-ceiling-boundary.md","sha256":"dfd69ee4858798625bc2212c102695b128f4b85c8ccacc8fca112ea3df7ab831","type":"member"}
-{"bytes":14703,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-design.md","sha256":"e7bac80a9de1cec446fc5494a60e5253f7bb0e62158c3fbae7c6a65534409780","type":"member"}

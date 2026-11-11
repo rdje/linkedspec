@@ -8,7 +8,7 @@ answers:
   - "why can a rejected callable pipeline drop its producer source effect"
   - "which safe command recovers the Perl callable pipeline intake"
 date: 2026-11-11
-status: intake frozen; first-call arity79.6.1.1 focused-checked; result79.6.1.2 pending
+status: intake frozen; first-call arity and result79.6.1.2 focused-checked
 tags: [perl, functions, pipeline, arity, readiness, guards, recovery]
 evidence: "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md retains178/own137 plus terminal18/all196 pairs,84 terminal/with controls,25 supported targets, nine false-ready receiver arities/nine rejecting free oracles; qualified recovery2 actual0/empty stderr/twelve controls/current input identity. Both earlier setup failures remain explicit; no production change."
 reverify:
@@ -47,4 +47,5 @@ Related: [[array-pipeline-callable-result-selection]].
 November11 supersession: [[perl-callable-pipeline-first-call-arity]] closes the
 bounded initial receiver-signature defect with125 groups/private18RED/direct72
 and first readonly eleven controls. Original observations above remain historical;
-25 result/readiness gaps still belong to79.6.1.2 after fresh re-acquisition.
+[[perl-callable-pipeline-result-guards]] closes the25 result/readiness gaps after
+fresh acquisition and adds two valid variadic targets; peers remain independent.

@@ -1,0 +1,17 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/check_current.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/check_current.py": "2600acfe19e427951c296d6fc8ef6e45178251f3f008ce8a01a4122f4a296a29",
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/capture_current.py": "97f66b41901ddc2dac34fb45df1cfb1df92d76ad2f344c8afa2347065f51c802",
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/after/input-identities.json": "b9781ccdabffece73b21e34c6c35c630ef3606b870d352e969335b175b8090f4"
+  }
+}

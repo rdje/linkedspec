@@ -1,0 +1,35 @@
+{
+  "recovery": "PASS",
+  "normal_groups": 188,
+  "supported_targets": 27,
+  "original_supported_targets": 25,
+  "added_variadic_targets": 2,
+  "compatibility_readiness": 3,
+  "preserved_projections": 158,
+  "actual_source_pairs": 940,
+  "first_direct": "input-stability failure retained, no complete PASS",
+  "selected_direct_assertions": {
+    "array_pipeline_value_contract": 6,
+    "variadic_user_function_contract": 66,
+    "array_pipeline_result_guard_composition": 244,
+    "array_pipeline_callable_arity": 125
+  },
+  "direct_artifacts": 1876,
+  "effective_corruptions": [
+    "actual old producer loss remains RED",
+    "source effect lost",
+    "later with executes after rejection",
+    "unready matching value accepted",
+    "fresh execution omitted",
+    "required source error detail erased",
+    "generated producer provenance changed",
+    "computed pattern body executes",
+    "invalid function signature admitted",
+    "Boolean and Number conflated",
+    "numeric kind changed to text",
+    "private image swapped",
+    "unrelated source changed",
+    "actual handler identity changed"
+  ],
+  "limits": "Signature-valid registered Perl function pipeline sources reuse exact terminal producers. Three legacy pattern readiness movements grant no eager pattern/first-class regex authority.28 malformed helper/function signature projections remain unready. Five metadata fields/full observed errors/channels. Same-process fresh modules; native/cache/transitive/toolchain4.2/SESSION5/shadowing32/context/isolation/registration/full23.4 remain open."
+}

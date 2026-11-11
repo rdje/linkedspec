@@ -1,0 +1,15 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_CALLABLE_PIPELINE_RESULT_CAPTURE=docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/private_old",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/private_runner.pl",
+    ".linkedspec-data/scratch/callable-pipeline-result-perl/owner.pm",
+    "t/array_pipeline_callable_result_guard_composition.t"
+  ]
+}

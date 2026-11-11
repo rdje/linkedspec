@@ -1,0 +1,11 @@
+{
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "actual_exit": 2,
+  "reason": "New blank line at EOF in sealed readonly reader; original exact source retained as first-review.py.gz, subsequent qualified reader recovers that alias explicitly.",
+  "original_reader_sha256": "cda7cc77772bbf7bc5d7737b64d59e50f4bde630a231ef3b120d29ca734dffb3"
+}

@@ -1,0 +1,14 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_CALLABLE_PIPELINE_RESULT_CAPTURE=docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/direct_qualified",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/direct_runner_qualified.pl",
+    "t/variadic_user_function_contract.t"
+  ]
+}

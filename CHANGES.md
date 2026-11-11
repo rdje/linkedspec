@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Preserve Perl callable pipeline results and readiness (79.6.1.2)
+
+Fifteen compiler insertions/two deletions admit valid registered-function sources through existing signature/terminal/result guards, preserving invalid calls and pattern normalization.188 groups/private30RED-current188 cover27 supported targets/three separate readiness movements/158 preserved projections;940 actual source pairs survive. Qualified direct6+66+244+125/syntax/1876 artifacts and first readonly0-fourteen controls/current121 identities pass. First direct review-input stability failure stays retained without complete PASS credit. Book/Knowledge/task/live/roadmap/MEMORY align; regenerate older Perl modules. Independent Rust follows clean landing. Evidence: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/REVIEW.md.
+
 ## 2026-11-11 — Reject malformed first callable pipeline signatures on Perl (79.6.1.1)
 
 Ten MethodLowering lines reuse existing aggregate signatures/public rejection markers before legacy folding. Malformed first registered-function receiver pipeline calls return null/unready without source/operand/later effects or host failures.125 normal groups move18RED to125PASS, reproduced by exact old/current images at one private path;107 normal/169 original projections stay exact and only nine original arities change. All678 source pairs/direct31 artifacts survive. Direct6+66/syntax/first readonly0-eleven controls/current121 identity pass. Known25 callable result gaps remain child2 after fresh178 re-acquisition. Book/Knowledge/task/live/roadmap/MEMORY align; no format/source getter/function-signature/alias policy changes. Evidence: docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/REVIEW.md.
