@@ -49,8 +49,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Status: `done`
   Goal: Implement conditional control flow — if/elseif/else and switch/case/default
   Acceptance: if/elseif/else/endif and switch/case/default/endswitch interpreters working in Rust runtime; regression tests; all existing tests pass
-  Verification: Done — 2026-06-16: 177/177 PASS (86 core + 8 types + 67 engine + 16 integration). 12 new tests: 4 if/elseif/else, 3 switch/case/default, 2 lazy evaluation, 2 no-op markers, 1 combined. Lazy evaluation via `call_helper_lazy` + `eval_expr` intercept for conditional flow calls.
   Commit: `pending`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.2`.
 
 - ID: `RUST-PARITY.3`
   Status: `done`
@@ -63,117 +63,103 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Status: `superseded`
   Goal: Implement self-hosting — Rust compiles and runs spec.spec against itself
   Acceptance: spec.spec compiles in Rust; Rust can parse .spec files using the spec.spec grammar (not just bootstrap); regression test; all existing tests pass
-  Verification: Superseded 2026-06-16 — Rust-self-hosting on spec.spec is the wrong target. spec.spec is a Perl-side artifact (rewritten under `SPEC-SPEC-SELFHOST`); the real Rust-parity contract is reproducing `BootstrapSpec::Core` output, not self-hosting spec.spec. Real follow-on = the parity audit findings in Decisions (retv BLOCKER, etc.). In-flight exploration committed as a WIP checkpoint.
   Commit: WIP checkpoint (this session)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.4`.
 
 - ID: `RUST-PARITY.5`
   Status: `done`
   Goal: Close the real Rust↔Perl parity gaps found by the audit (retv blocker, match/entry split, char-indexing, dead arms, missing helpers)
   Children: `.5.1` (done), `.5.2` (done), `.5.3` (done), `.5.4` (done), `.5.5` (done — split into `.5.5.1`–`.5.5.4`, all done)
-  Note: Split from a single broad leaf (PNT rule 5 — too broad for one signoff slice). The 3-agent audit in Decisions is the implementation spec. Sequenced retv-first because it gates correct output for nearly every grammar. The "0/20 runtime-tested corpus" gap stays in `.7` (test-corpus breadth).
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5`.
 
 - ID: `RUST-PARITY.5.1`
   Status: `done`
   Goal: Fix the child-return (retv) propagation BLOCKER
   Acceptance: After `->`/`=>` dispatch, the child rule's `return(expr)` value is propagated to the parent and readable as `retv` (so `scalar(retv)` in an `LE` block resolves to the child result, not undef); the half-built dead `set_retv` is completed or removed; new regression tests cover retv-in-LE across AND/OR/REP dispatch; `cargo test` + `cargo clippy` clean; the 182-test baseline stays green.
-  Verification: Done — 2026-06-16. `execute_rule` now returns `Result<RuntimeValue, String>` (the rule's own return value, via a per-invocation save/restore channel in `RuntimeContext`); both `->` (acode) and `=>` (bcode) dispatch sites call `ctx.set_retv(child_retv)` after dispatching, so the parent's attached code / `LE` / `E` read the child result as `scalar(retv)`. `return(expr)` records the channel (still pushes the accumulator — `execute()`'s contract). The dead `set_retv` is now wired in (completed, not removed). `call(child)` returns the child's value and resolves a bare rule-name arg (latent bug fixed — enables the `assign(s(retv), call(child))` reference pattern). 4 new integration tests (acode/OR, blind-call/AND, REP, `call`). `cargo test` = 186 passed (182 baseline + 4), 0 failed; `cargo clippy` adds zero new warnings to `linkedspec-runtime` (lib stays at 16 pre-existing `doc_lazy_continuation` lints).
   Commit: `RUST-PARITY.5.1 — fix child-return (retv) propagation in the Rust engine`; prior node reference: `RUST-PARITY.5.1` (see Commit Log); retained completion note: engine.rs + runtime.rs + 4 integration tests; 186/186 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.1`.
 
 - ID: `RUST-PARITY.5.2`
   Status: `done`
   Goal: Separate `match_*` from `entry_*` (stop unifying them at engine.rs:171-174)
   Acceptance: `match_*` reads the current local match while `entry_*` reads the entry match; nested-match reads diverge correctly; regression test; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. The match-set site previously assigned the rule's own match to BOTH `entry_*` and `match_*`. Now `execute_rule` emulates Perl's per-handler `IMATCH`/`LMATCH` lexicals via a `SavedMatchState` save/restore on the shared `RuntimeContext`: the invocation's ENTRY match = the dispatcher's local match (`$info = $minfo`, `MethodLowering.pm:332` + `SpecEntry::_build_handler_preamble` `IMATCH=$$info{match}`); the rule's own match updates only the LOCAL match (`LMATCH`, `_build_lmatch_extraction`); the entry match is seeded from the rule's own first match only when empty (top-rule / dispatcher-less case); both registers are restored on exit (blind-call + normal returns) so a child's matching is transparent to the parent. 3 new integration tests (`match_5_2_child_entry_is_dispatcher_match_local_is_own`, `match_5_2_parent_local_match_survives_child_dispatch`, `match_5_2_top_rule_entry_equals_local_match`). `cargo test` = 189 passed (186 baseline + 3), 0 failed; `cargo clippy -p linkedspec-runtime --tests` adds zero new warnings (touched-file warning set identical to baseline, only line-shifted). No book change (the `.spec` contract already documents `entry_*`/`match_*`; Rust now conforms — book sync is `.9`).
   Commit: `RUST-PARITY.5.2 — separate entry_* from match_* in the Rust engine`; prior node reference: `RUST-PARITY.5.2` (see Commit Log); retained completion note: engine.rs SavedMatchState save/restore + 3 integration tests; 189/189 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.2`.
 
 - ID: `RUST-PARITY.5.3`
   Status: `done`
   Goal: Char-based (not byte) indexing for slicing + cursor line/col; fix hardcoded start positions
   Acceptance: `substr`/`input_slice`/`capture_slice`/`capture_from` and cursor line-col use char offsets (no panic on multibyte UTF-8; parity with Perl's char-based offsets); `entry/match_start_pos` no longer hardcoded to 0; multibyte regression tests; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. Internal positions stay byte-based (regex engine works in bytes); the DSL boundary is now char-based (Perl parity). New `byte_to_char_offset` + `char_substr`/`char_substr_from` helpers in `engine.rs`. `substr`/`input_slice` char-slice their DSL char-offset args (no more panic on a multibyte boundary). `cursor_pos`/`cursor_col`/`cursor_rest_len`/`input_len`/`input_end_pos`/`capture_slice_len`/`capture_slice_pos`/`mark_pos`/`entry_*_pos`/`entry_len`/`match_*_pos`/`match_len`/`length` convert byte→char. `entry_start_pos`/`match_start_pos` no longer hardcoded `0.0`: `RuntimeContext` gains `entry_start_byte`/`entry_end_byte`/`match_start_byte`/`match_end_byte` span fields (part of `SavedMatchState`, recorded from `m.start`/`m.end`, entry seeded by the same dispatcher-vs-own-first-match rule as `.5.2`). 7 new multibyte unit tests (`chars_5_3_*`). `cargo test` = 196 passed (189 baseline + 7), 0 failed; `cargo clippy -p linkedspec-runtime --tests` touched-file warning set identical to baseline (15), zero new. No book change (positions/lengths/`substr` are char-based in the documented `.spec` contract; Rust now conforms — book sync is `.9`). Out of scope: group indexing (`.5.2` note) and the `entry_line`/`entry_col`/`match_line`/`match_col` arg-taking quirk (left as-is; `cursor` line/col fixed as specified).
   Commit: `RUST-PARITY.5.3 — char-based offsets/slicing in the Rust engine`; prior node reference: `RUST-PARITY.5.3` (see Commit Log); retained completion note: engine.rs byte→char conversions + runtime.rs match-span fields + 7 multibyte unit tests; 196/196 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.3`.
 
 - ID: `RUST-PARITY.5.4`
   Status: `done`
   Goal: Remove duplicate/unreachable match arms; make the REP zero-progress guard check `pos`
   Acceptance: the shadowed arms (`hash`/`h`, `hash_copy`, `print`) are de-duplicated so the correct behavior wins; the REP loop's zero-progress guard actually compares `pos` before/after and breaks on no advance; regression tests; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. Removed the three earlier shadowing arms in `call_helper` (`print`, `hash`/`h`, `hash_copy`) so the later, more complete arms win: `hash`/`h` now merges Hash-valued args, `hash_copy` resolves its target via `resolve_array_target` (raw-AST), and `print` is served by the consolidated `say | print | print_each` arm. This also cleared 3 `unreachable_patterns` warnings. The REP loop's zero-progress guard previously checked `matches > rep_min && matches > 100` (an iteration cap, never `pos`); it now captures `pos_before` at the top of each iteration and breaks when `ctx.pos == pos_before` (Perl `loop_end_pos == loop_start_pos`), so a zero-width REP match terminates after one no-progress iteration and the post-loop min-bound check fails it if still under `rep_min`. 2 new tests (`rep_5_4_zero_progress_guard_terminates`, `hash_5_4_better_hash_arm_merges_hash_args`). `cargo test` = 198 passed (196 baseline + 2), 0 failed; `cargo clippy -p linkedspec-runtime --tests` touched-file warnings 15 → 12 (removed 3 unreachable-pattern duplicates; zero new). No book change (internal dedup + REP termination correctness, which already matches the documented Perl model — book sync is `.9`).
   Commit: `RUST-PARITY.5.4 — dedup shadowed arms + fix REP zero-progress guard in the Rust engine`; prior node reference: `RUST-PARITY.5.4` (see Commit Log); retained completion note: engine.rs removed 3 duplicate arms + pos-based REP guard + 2 unit tests; 198/198 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.4`.
 
 - ID: `RUST-PARITY.5.5`
   Status: `done`
   Goal: Implement the ~28 missing capture/mark/entry/match/input helpers (+ real aliases `tail`/`drop_last`/`flatten`)
   Children: `.5.5.1` (done), `.5.5.2` (done), `.5.5.3` (done), `.5.5.4` (done)
-  Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice; ~28 helpers across ~7 families, plus an alias-policy question). The `.1` Inventory (Gap 5) + `docs/linkedspec-book/src/appendix/helper-contract-catalog.md` are the implementation spec. Confirmed against engine.rs: only `drop_front`/`drop_back`/`array_copy`/`flat_array` of this family exist; all 28 below are genuinely missing. (`array_values`/`return_imatch`/`return_im` are explicitly NOT added — not real Perl helpers.)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.5`.
 
 - ID: `RUST-PARITY.5.5.1`
   Status: `done`
   Goal: Named-group helpers — `entry_named`/`entry_has`/`entry_map`/`entry_named_map` + `match_named`/`match_has`/`match_map`/`match_named_map`
   Acceptance: the 8 named-group readers read the existing `entry_named`/`match_named` maps (`entry_named(name)`→string, `entry_has(name)`→bool, `entry_map()`/`entry_named_map()`→hash; same for `match_*`) to helper-contract-catalog parity; per-family tests; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. Added 8 arms to `call_helper` (`rust/linkedspec-runtime/src/engine.rs`): the 4 `entry_*` after `entry_groups` read `ctx.entry_named`; the 4 `match_*` after `match_groups` read `ctx.match_named`. `entry_named(name)`/`match_named(name)` → `Scalar` or `Undef` (absent); `entry_has`/`match_has` → `Bool(contains_key)`; `entry_map`/`entry_named_map` and `match_map`/`match_named_map` are combined arms (the `_named_map` forms are the catalog's retired aliases) returning a `RuntimeValue::Hash` via a new free helper `named_map_to_hash` that sorts keys for deterministic projection (matching `sorted_keys`/`sorted_values`). Both maps already exist on `RuntimeContext`, populate from `MatchResult.named` (engine.rs:280 local / :291 entry-when-empty), and save/restore in `SavedMatchState` — purely additive, no struct/population changes. 6 new tests (`helpers_5_5_1_*`, end-to-end via `(?P<name>…)` regexes: entry_named present/absent, entry_has present/absent, entry_map + alias, match_named present/absent, match_has present/absent, match_map + alias). `cargo test --manifest-path rust/Cargo.toml` = 204 passed / 0 failed (198 baseline + 6). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` lint multiset byte-identical to the stashed HEAD baseline (13 = 13; zero new). No book change (catalog §8 already documents these — Rust now conforms; book sync is `.9`). No knowledge card (localized additive change reading existing infra).
   Commit: `RUST-PARITY.5.5.1 — named-group reader helpers in the Rust engine`; prior node reference: `RUST-PARITY.5.5.1` (see Commit Log); retained completion note: engine.rs +8 `call_helper` arms (entry/match `_named`/`_has`/`_map`+`_named_map`) + `named_map_to_hash` + 6 tests; 204/204 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.5.1`.
 
 - ID: `RUST-PARITY.5.5.2`
   Status: `done`
   Goal: Input-boundary helpers (`input_end_line`, `input_end_col`) + real compat aliases (`tail`, `drop_last`, `flatten`, and `flat` if missing)
   Acceptance: `input_end_line`/`input_end_col` return the char line/col at end-of-input; the aliases map per the catalog (`tail`→`drop_front`, `drop_last`→`drop_back`, `flatten`→`flat`) with `flat` added if absent; resolve the alias-retirement question (book §catalog says "retired alias", `ROADMAP_V2` says "remain compatibility syntax") against the Perl reference before landing; tests; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. **Open Question resolved against the Perl reference (see Decisions/Open Questions):** the Perl reference does NOT recognize `tail`/`drop_last`/`flatten`/`array_values` — they are absent from the helper-recognition regexes (`BootstrapSpec/Core.pm:82`, `FlowExpr.pm:81,270`, `MethodLowering.pm:1627,1635`), unused in all 20 shipped specs, and not regression-locked in `t/phase0_regression.t` (grep count 0). Retired in `COMPAT-ALIAS-RETIREMENT.1` (knowledge card `medium-term-alias-retirement-deferred`); the book catalog §Compatibility-Aliases also lists them "Retired". For cross-variant **parity** the Rust variant must match the reference's recognized surface, so the three retired aliases are deliberately NOT added (adding them would diverge, not converge). Only `flat` (canonical, recognized; catalog retired-table target of `flatten`) was missing in Rust and is added. Implemented 3 new `call_helper` arms in `rust/linkedspec-runtime/src/engine.rs`: `input_end_line` (= `1 + newline count over the whole input`, parity with Contracts.pm `INPUT_END_LINE_READ`), `input_end_col` (char distance past the last newline, `+1` when none — parity with `_build_column_read_expr(pos_expr => length($$STRING))`, modeled on the existing `cursor_col`), and the generic `flat(container)` splice (Array→Array, Hash→Hash, scalar→single-element list; consistent with `flat_array`/`flat_hash`). 3 new tests (`helpers_5_5_2_*`, end-to-end incl. multibyte + trailing-newline + flat-into-parent-hash). `cargo test --manifest-path rust/Cargo.toml` = 207 passed / 0 failed (204 baseline + 3). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests`: `linkedspec-runtime` lib = 13 warnings = stashed baseline 13 (zero new; integration_test's lone `len_zero` at :199 pre-existing per MEMORY; vendored pgen/rgx-core ignored). No book change (catalog §9 documents `input_end_line`/`input_end_col`, §Compatibility-Aliases marks the three retired — Rust now conforms; book sync is `.9`). New knowledge card `docs/knowledge/rust-retired-array-aliases-not-added.md`.
   Commit: `RUST-PARITY.5.5.2 — input-boundary helpers + flat splice in the Rust engine`; prior node reference: `RUST-PARITY.5.5.2` (see Commit Log); retained completion note: engine.rs +3 `call_helper` arms (`input_end_line`/`input_end_col`/`flat`) + 3 tests; retired aliases resolved out; 207/207 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.5.2`.
 
 - ID: `RUST-PARITY.5.5.3`
   Status: `done`
   Goal: Mark-based capture family — `capture_*_from` (`capture_len_from`, `capture_until_cursor_from`, `capture_take_until_cursor_from`, `capture_take_len_from`, `capture_rest_from`, `capture_take_rest_from`), `capture_between`/`capture_len_between`, and `mark_copy`/`mark_input_start`/`mark_input_end`
   Acceptance: each reads the named mark(s) (byte offsets) and returns char-correct text/length per the catalog; `mark_*` set marks; tests with multibyte input; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. **Open Question resolved as option (a)** (user-confirmed): `capture_from` now ends at the **start of the current local match** (`ctx.match_start_byte`, parity with Perl `$LSPOS - length $LMATCH`), was `ctx.pos` (match-end); landed test `helpers_5_2_mark_and_capture_from` updated `"hello"`→`""`. Implemented the full mark-based family per `Contracts.pm` ~690–1047 as `call_helper` arms in `engine.rs` (+ guarded free helpers `span_text`/`span_char_len`): to-match-start readers `capture_from`/`capture_len_from`/`capture_take_len_from`; to-cursor `capture_until_cursor_from`(+`_len`)/`capture_take_until_cursor_from`(+`_len`); to-end-of-input `capture_rest_from`(+`_len`)/`capture_take_rest_from`(+`_len`); two-mark `capture_between`/`capture_len_between`; setters `mark_input_start`(→0)/`mark_input_end`(→byte len)/`mark_copy(target,source)` (**2-arg** copy/delete). `_take_*` advance the mark to the read's endpoint (cursor, or end-of-input for `_rest_`); text → raw slice, `_len_*` → char count; missing mark / reversed span → `undef`. **Book catalog §7 corrected** to the contract (user-requested): `capture_from` endpoint, 2-arg `mark_copy`, `_until_cursor_`/`_take_` + anonymous `capture_slice` endpoint wording, + the missing `_len_` companions. `cargo test --manifest-path rust/Cargo.toml` = 223 passed / 0 failed (207 baseline + 16 `helpers_5_5_3_*`). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` source warnings 13 = baseline 13 (11 engine.rs + 2 helpers.rs, all pre-existing locations; vendored pgen/rgx-core ignored). `mdbook build` exit 0. New knowledge card `docs/knowledge/rust-mark-based-capture-family.md`.
   Commit: `RUST-PARITY.5.5.3 — mark-based capture family in the Rust engine`; prior node reference: `RUST-PARITY.5.5.3` (see Commit Log); retained completion note: engine.rs `capture_from` fixed to match-start + 15 new mark-family arms + `span_text`/`span_char_len` + 16 tests; catalog §7 corrected; knowledge card; 223/223 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.5.3`.
 
 - ID: `RUST-PARITY.5.5.4`
   Status: `done`
   Goal: Anonymous capture-slice variants — `capture_slice_until_cursor`, `capture_take_until_cursor`, `capture_take_len`, `capture_take_rest` (and any `_len` variants from the inventory). **Also fix the existing anonymous `capture_slice`/`capture_slice_len` endpoint** (discovered in `.5.5.3`): they read to `ctx.pos` (cursor/match-end) but the contract (`Contracts.pm` CAPTURE_SLICE = `$LSPOS - $IPOS - length $LMATCH`) and the now-corrected catalog §7 say they end at the **start of the current match** (`ctx.match_start_byte`).
   Acceptance: each operates on the anonymous `capture_start`/cursor per the catalog, char-correct; the anonymous `capture_slice`/`capture_slice_len` endpoint matches match-start (closing the catalog↔Rust gap `.5.5.3` opened in the book); tests; baseline green; clippy clean.
-  Verification: Done — 2026-06-16. Implemented the **complete anonymous capture-slice family** as `call_helper` arms in `rust/linkedspec-runtime/src/engine.rs`, read straight from the authoritative Perl lowering `perl/LinkedSpec/ActionIR/Contracts.pm` ~366–656 (the anonymous counterparts of the `.5.5.3` mark family, reading `ctx.capture_start` = Perl `$IPOS` instead of a named mark). **Fixed** `capture_slice`/`capture_slice_len`: were reading to `ctx.pos` (cursor); now end at `ctx.match_start_byte` (Perl `$LSPOS - length $LMATCH`), panic-safe via the `.5.5.3` `span_text`/`span_char_len` helpers. **Added** 10 arms: `capture_slice_until_cursor`(+`_len`) → cursor; `capture_take`(+`_len`) → match-start, advance `capture_start` to the cursor; `capture_take_until_cursor`(+`_len`) → cursor, advance to cursor; `capture_rest`(+`_len`) → end-of-input; `capture_take_rest`(+`_len`) → end-of-input, advance to end. Text → raw slice (correct chars); `_len` → char count (.5.3); degenerate (reversed) span → `undef`; `_take_*` mutate only on a valid span. **Scope note:** folded in the inventory-missing-but-same-family `capture_rest`/`capture_rest_len`/`capture_take` (anonymous) so the family lands complete rather than mirroring the inventory's own gap (these are anonymous capture-slice variants = exactly this leaf's subject). **Book:** catalog §7 already documented `capture_slice`/`capture_slice_len` at match-start (the `.5.5.3` gap — now closed by the engine fix); added the 10 missing anonymous-variant entries + refined the §7 intro/destructive notes (variant-agnostic, no-drift). Updated the two landed `helpers_5_2_capture_slice_*` tests to the corrected match-start values (`"hello"`→`""`, len `>0`→`0`), mirroring the `.5.5.3` `capture_from` test update. `cargo test --manifest-path rust/Cargo.toml` = 233 passed / 0 failed (223 baseline + 10 new `helpers_5_5_4_*`: each endpoint, `_take_` mutation, multibyte char-length). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --tests` source warnings 13 = baseline 13 (11 engine.rs + 2 helpers.rs, all pre-existing locations outside the new ~1036–1180 range; vendored pgen/rgx-core ignored). `mdbook build` exit 0. Knowledge card `docs/knowledge/rust-anonymous-capture-slice-family.md`.
   Commit: `RUST-PARITY.5.5.4 — anonymous capture-slice family in the Rust engine`; prior node reference: `RUST-PARITY.5.5.4` (see Commit Log); retained completion note: engine.rs `capture_slice`/`_len` fixed to match-start + 10 new anonymous arms (`until_cursor`/`take`/`rest`) + 10 tests; catalog §7 anonymous entries added; 2 landed tests updated; `.5.5` + `.5` closed; knowledge card; 233/233 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.5.5.4`.
 
 - ID: `RUST-PARITY.6`
   Status: `done`
   Goal: Implement strict_syntax validation mode
   Acceptance: strict_syntax mode rejects reference warnings as hard errors; test covering strict mode
-  Verification: Done — 2026-06-16. Added `validate_with_options(spec, strict_syntax: bool)` to `rust/linkedspec-core/src/validation.rs`; `validate(spec)` is now a non-strict wrapper (`= validate_with_options(spec, false)`), so all ~70 existing call sites are unchanged. Strict mode adds `check_unused_rules` (every defined rule must be referenced by an edge; `unused = defined − used`), promoting the Perl reference's unused-rule **warning** to a hard error — parity with `perl/LinkedSpec/Validation.pm validate_dsl_syntax(..., strict_syntax => 1)`. **Verified the exact reference semantics empirically** (direct `validate_dsl_syntax` calls, timeout-guarded — unrelated to the RTLUtils phase0 hang): (Case A) `Top:: -> Child` with `Child` defined → strict FAILS "Unused rule(s): Top" (the top rule is **not** exempt), non-strict passes; (Case B) `Top:: -> Ghost` → strict FAILS "Undefined rule reference(s): Ghost", reported first. Undefined references are already fatal in this backend in every mode (`check_edge_targets`, which runs before the strict check — preserving the reference's "undefined before unused" order), so strict mode's observable addition is the unused-rule rejection; this is a pre-existing, recorded divergence (this backend's default is stricter than the reference's default, which only warns on undefined). 4 new tests (`validate_strict_rejects_unreferenced_top_rule`, `validate_nonstrict_allows_unreferenced_rules`, `validate_strict_still_rejects_undefined_reference`, `validate_strict_accepts_fully_referenced_spec`). `cargo test --manifest-path rust/Cargo.toml` = 237 passed / 0 failed (233 baseline + 4). `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-core --tests` validation.rs warnings 4 = baseline 4 (pre-existing `collapsible_match` in `check_balanced_braces`; zero new), `-p linkedspec-runtime --tests` 13 = baseline 13. No book change (the strict_syntax contract is already documented in `compiler/pipeline-overview.md` §pipeline; Rust now conforms — book sync is `.9`). Knowledge card `docs/knowledge/rust-strict-syntax-validation.md`.
   Commit: `RUST-PARITY.6 — strict_syntax validation mode in the Rust variant`; prior node reference: `RUST-PARITY.6` (see Commit Log); retained completion note: validation.rs `validate_with_options(spec, strict)` + `check_unused_rules` (unused-rule warning → hard error; undefined already fatal); `validate` kept as non-strict wrapper; 4 tests; Perl semantics verified empirically; knowledge card; 237/237 green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.6`.
 
 - ID: `RUST-PARITY.7`
   Status: `done`
   Goal: Expand the Rust test corpus to match Perl's regression coverage breadth — via a Perl↔Rust output oracle
   Children: `.7.1`, `.7.2`, `.7.3`, `.7.4`, `.7.5`
-  Note: Split 2026-06-16 (PNT rule 5 — too broad for one signoff slice). **`.7.5` added 2026-06-17** — `.7.1` built the oracle and it immediately proved the split's premise wrong: the Rust engine does NOT reproduce the shipped recursive specs (tclite/Lispish), so `.7.2`/`.7.3` (add shipped specs) were **blocked on `.7.5`** (the engine output-parity fix). `.7.5` was the discovered lower-level dependency (PNT splitting rule). A two-agent read-only investigation (Rust test/corpus infra + Perl reference output path) established: (1) **no oracle mechanism / canonical cross-variant output form existed yet**; (2) the Perl reference returns its top rule's value **directly** (e.g. `tclite` `[]` → `["?tcl_script:",[["?command_subst:",[]]]]`; `Lispish` `(x y)` → `["x",["y"]]`) while the Rust engine returns the **accumulator wrapped one level** (`[<value>]`, per the inline lifecycle corpus test) — a shape-reconciliation step is needed; (3) only ~3 specs (`tclite`, `Lispish`, `pplugin`) had any input fixtures even on the Perl side, so ~16 specs needed authored inputs; (4) the `RTLUtils` catastrophic-backtrack hang (per `MEMORY.md`) had to be guarded with a hard timeout in any Perl-over-corpus run. **Design:** a timeout-guarded Perl oracle generator (`tools/`) emits canonical-JSON fixtures plus `manifest.json` into `rust/linkedspec-runtime/tests/corpus/`; a Rust fixture-runner integration test asserts `engine.execute(input)` matches and rejects manifest/directory drift — decoupled (no Perl at `cargo test` time; aligns with ADR 0006 §Phase 8.6 language-neutral corpus). `.7.1`, `.7.2`, `.7.3`, `.7.4`, and `.7.5` are now done/deferred as applicable, so `.7` is closed.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7`.
 
 - ID: `RUST-PARITY.7.1`
   Status: `done`
   Goal: Build the Perl↔Rust output-oracle mechanism + canonical comparison form + first proof
   Acceptance: a timeout-guarded Perl oracle generator (`tools/`) emits canonical-JSON fixtures into `rust/linkedspec-runtime/tests/corpus/`; a language-neutral fixture format is defined (spec reference + input + expected canonical JSON); a Rust fixture-runner integration test enumerates the corpus and asserts `engine.execute(input)` matches the fixture under the documented Perl↔Rust output-shape rule; the wrapping/canonical mapping (Perl `X` vs Rust `[X]`) is reconciled and documented; proven end-to-end on `tclite` (`[]`, `""`) + `Lispish` (`(x y)`); `cargo test` + clippy zero-new vs baseline (runtime 13, core 10 / validation.rs 4); the 237-test baseline stays green.
-  Verification: Done — 2026-06-17. **Mechanism built + proven green; oracle immediately caught real divergences (its purpose).** `tools/gen_oracle_corpus.pl` (Perl, `alarm`-timeout-guarded per parse, `JSON::PP->canonical(1)`) emits one corpus dir per case — `rust/linkedspec-runtime/tests/corpus/<case>/{input.spec, input.txt, expected.json}` — matching the book's `backend-handoff.md` corpus contract (so adopting it is zero-drift, and the corpus is self-contained/language-neutral per ADR 0006). `expected.json` stores the **backend-neutral reference (Perl top-rule) value**; the Rust runner `rust/linkedspec-runtime/tests/corpus_oracle.rs` enumerates the corpus, runs `parse_spec→validate→compile→Engine::new→execute(input.txt)`, and asserts `engine.execute == json!([expected])` (the documented one-level wrap: Perl returns the top value directly, Rust wraps the accumulator — `engine.rs` ~150). The runner reports every entry (PASS/FAIL) and fails once at the end. **Output-shape RECONCILED + documented** (corpus `README.md`, generator/runner headers, knowledge card). **ACCEPTANCE ADAPTED (honest):** the named proof specs `tclite`/`Lispish` do **NOT** reach Rust output parity — the oracle proved the `.7`-split's "matches modulo wrap" assumption FALSE: tclite `[]` → Rust `[]` (vs Perl `["?tcl_script:",[["?command_subst:",[]]]]`), Lispish → `exit_now(1)`. Shared root cause: a single-regex `name : /re/` (single-colon) rule compiles in Rust as **0-regex**, so `-> child[0]` edges never fire (deferred to new leaf `.7.5`). The mechanism is instead proven green on 2 controlled authored grammars (scalar `"scalar-ok"`→`["scalar-ok"]`; nested array `["?proof:","ok"]`→`[["?proof:","ok"]]`) that avoid every divergence source (no retv, no group-indexing, no single-colon rule, action-less child). `cargo test --manifest-path rust/Cargo.toml` = **238 passed / 0 failed** (237 baseline + 1 `corpus_oracle::oracle_corpus_matches_perl_reference`). `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests` = core 10 / runtime 13 / validation.rs 4 = baseline (zero-new; `corpus_oracle.rs` clean). `perl -c tools/gen_oracle_corpus.pl` OK; self-check exit 0. No book change (the backend-handoff corpus format already matched; the wrap-rule book note is deferred to `.7.4`/`.9`). Knowledge card `docs/knowledge/rust-perl-output-oracle.md`.
   Commit: `RUST-PARITY.7.1 — Perl↔Rust output-oracle mechanism + green first proof`; prior node reference: `RUST-PARITY.7.1` (see Commit Log); retained completion note: new `tools/gen_oracle_corpus.pl` (timeout-guarded Perl generator) + `rust/linkedspec-runtime/tests/corpus_oracle.rs` runner + `tests/corpus/` (2 authored proof fixtures + README); oracle caught tclite/Lispish divergence → new leaf `.7.5`; 238/238 green; knowledge card
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.1`.
 
 - ID: `RUST-PARITY.7.2`
   Status: `done`
   Goal: Expand the oracle corpus to the structurally simple specs (batch 1), authoring inputs
   Acceptance: representative inputs authored + fixtures generated for a first batch of clean specs (candidate set: `BNF`, `ebnf`, `DT`, `ifelse`, `operators_try`, `portmap`, `lib_reader` — exact set decided in-slice); the Rust fixture-runner is green over them; any Perl↔Rust divergence is either fixed in the engine or recorded as a deferred follow-up with evidence; `cargo test` + clippy zero-new; baseline green.
-  Verification: Done — 2026-07-02. First clean shipped-spec batch is deliberately small: `hlink_substitution`
-  raw-string paths now have two oracle fixtures (`hlink_raw_string`, `hlink_raw_escaped_brackets`), taking the
-  Rust corpus from 63 to 65 fixtures. The slice also fixed two Rust parity blockers surfaced while trying broader
-  shipped-spec candidates: (1) header-rest lifecycle/code blocks now use the same `parse_single_element` path as
-  normal body lines, so compact header-line forms such as `raw_string: /.../ I.return(entry_text())` and multiline
-  header-rest blocks are parsed as executable `CodeBlock`s before following body lines are collected; (2)
-  `entry_group(N)` / `match_group(N)` now expose Perl-compatible **captures-only**, compacted groups (`0` = first
-  participating capture; non-participating optional groups omitted; participating empty captures retained), while
-  `entry_text()` / `match_text()` read the full match from stored spans. Focused parser/runtime checks and the
-  65-fixture corpus oracle pass. Deferred evidence from attempted candidates: `portmap_*` still differ on nested
-  aggregate shape / multi-branch payloads; `lib_reader_cell_attribute` returns `[[]]` instead of the expected group
-  AST; `ebnf_expression_rules` has a structural rule-payload mismatch; `BNF`, `DT`, `ifelse`, and `operators_try`
-  return `[]`/`[null]` or hit action-parser warnings; four `spec.spec` smoke cases still return `[[[]]]`. Those are
-  not RGX top-level branch-index issues (the Rust regex path still uses RGX branch identification); they remain
-  `.7.3`/later shipped-spec parity work.
   Commit: `RUST-PARITY.7.2 - expand shipped-spec oracle batch`; prior node reference: `pending`; retained completion note: parser header-rest multiline lifecycle fix; Rust captures-only entry/match group indexing; two `hlink_substitution` raw-string oracle fixtures; 65-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.2`.
 
 - ID: `RUST-PARITY.7.3`
   Status: `done`
@@ -181,12 +167,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     more broad shipped-spec work.
   Children: `.7.3.1`, `.7.3.2`, `.7.3.3`, `.7.3.4`, `.7.3.5`, `.7.3.6`, `.7.3.7`
   Acceptance: inputs authored + fixtures generated (timeout-guarded) for the remaining specs incl. legacy/plugin/RTL-touching ones (candidate set: `pplugin`, `vhdl`, `simenv`, `tablegrep`, `sdce`, `regdef`, `tkgui`, remaining non-raw `hlink_substitution` delimiter paths, `ds_vhistory`, `verilog`, `spec.spec` — exact set decided in-slice); any current timeout/hang risk is reproduced with LinkedSpec's toolbox first, pinpointed to exact source/rule/regex evidence, and either fixed or proven stale/retired before the broad legacy/plugin/RTL smoke lane continues; parity gaps fixed or recorded; the Rust fixture-runner is green; `cargo test` + clippy zero-new; baseline green.
-  Verification: Done — 2026-07-04. Batch 2 is closed through its children: `.7.3.1` split the work; `.7.3.2`
-    and `.7.3.7` hardened timeout coverage; `.7.3.3` added/deferred hlink delimiters by representability;
-    `.7.3.4` closed structural `portmap`/`lib_reader`/`ebnf` through implementation subleaves; `.7.3.5`
-    separated null-output/debug cases from valid semantic smokes; `.7.3.6` added seven RTL/plugin/legacy safety
-    smokes. The corpus is **88 fixtures** before `.7.4` finalization.
   Commit: `pending`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3`.
 
 - ID: `RUST-PARITY.7.3.1`
   Status: `done`
@@ -194,18 +176,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Record why `.7.3` is too broad for one signoff slice, preserve `.7.2`'s known divergence evidence,
     split candidate families into follow-up leaves, make the timeout/hang investigation the immediate owned
     frontier, update live trackers and Knowledge Map, and avoid runtime/corpus code changes.
-  Verification: **DONE 2026-07-03.** Read `docs/tasks/RUST-PARITY.md`, `tools/gen_oracle_corpus.pl`,
-    `rust/linkedspec-runtime/tests/corpus/README.md`, `rust/linkedspec-runtime/tests/corpus_oracle.rs`, and the
-    Knowledge Map oracle card. The generator already has the hard `alarm(...)` timeout; the committed corpus has
-    65 fixtures; `.7.2` already recorded concrete divergences for `portmap`, `lib_reader`, `ebnf`, `BNF`, `DT`,
-    `ifelse`, `operators_try`, and `spec.spec` smokes. The user then directed that any referenced timeout must be
-    debugged directly, not merely guarded. Re-read `TOOLBOX.md`: true hangs require the fork+SIGKILL census first
-    because `alarm()` cannot interrupt a catastrophic regex opcode; trace (`LINKEDSPEC_TRACE_LEVEL=debug`,
-    per-call trace options, parser-source dumps) follows once there is a live reproducer/rule path. Split the
-    remaining batch into a trace-first timeout/hang investigation, hlink delimiter/link-path fixture expansion,
-    recorded simple-spec structural divergence lanes, null-output/action-parser lanes, and post-timeout
-    RTL/plugin/legacy safety smokes. No parser/runtime/corpus code changed.
   Commit: `RUST-PARITY.7.3.1 - split batch-2 oracle lanes and timeout owner`; retained completion note: no runtime/corpus code change; splits the broad remaining shipped-spec oracle batch into timeout/hang investigation, hlink, simple-spec divergence, action-parser/null-output, and RTL/plugin/legacy lanes
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.1`.
 
 - ID: `RUST-PARITY.7.3.2`
   Status: `done`
@@ -217,22 +189,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     fix the live root cause under this leaf or split a narrower implementation owner with evidence before code; if
     the timeout is stale, update generator/corpus/task/KM wording so it says the historic RTLUtils hang is retired
     while retaining a generic safety guard for future pathological specs.
-  Verification: **DONE 2026-07-03.** Read the `rtlutils-regex-hang` and `rust-perl-output-oracle` Knowledge Map
-    cards, `TOOLBOX.md` hang protocol, the oracle generator, and the corpus README. Verified the current core tree
-    has no `perl/RTLUtils.pm`, `perl/FSMGen.pm`, or `perl/VHDL/ConstantEval.pm`; `perl -Iperl` loads
-    `perl/LinkedSpec.pm`; current core/spec/corpus scans find only a retirement comment plus docs, while the old
-    `RTLUtils.pm` hit is confined to the unrelated nested `rgx` checkout. A fork+SIGKILL wrapper around the
-    current 65-fixture generator completed normally (`GENERATOR_EXIT status=0 elapsed=11.305s`), proving no live
-    corpus hang. The stale/weak guard was the generator implementation itself: `alarm()` cannot interrupt a
-    catastrophic regex. Replaced `run_oracle` with a per-case child process that serializes the result to JSON,
-    while the parent enforces `ORACLE_TIMEOUT` with wall-clock wait + `SIGKILL`. `perl -c -Iperl
-    tools/gen_oracle_corpus.pl` passes; `perl -Iperl tools/gen_oracle_corpus.pl` regenerates all **65** fixtures
-    byte-identically; `ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl` proves the hard-kill path with
-    `ORACLE_TIMEOUT after 0s (hard kill) for case='proof_edge_array_literal' input="xhello"`. Corpus README and
-    oracle Knowledge Map wording now say the historic `RTLUtils` hang is retired and the remaining guard is generic
-    process-level protection. Rust `corpus_oracle` passes over the **65** fixtures; Knowledge Map, memory,
-    doctrine, whitespace, and full local CI gates pass (phase0 **1018** tests).
   Commit: `RUST-PARITY.7.3.2 - harden oracle timeout guard`; retained completion note: tools/gen_oracle_corpus.pl now enforces per-case fork/SIGKILL timeouts; historic RTLUtils timeout verified retired from current core; corpus README and KM wording updated
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.2`.
 
 - ID: `RUST-PARITY.7.3.3`
   Status: `done`
@@ -251,14 +209,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Read the shipped spec and existing hlink tests/fixtures, identify which non-raw inputs are
     JSON-safe fixture candidates, identify any oracle-representation blockers, split follow-up leaves, and avoid
     generator/corpus/runtime changes.
-  Verification: **DONE 2026-07-03.** Read `specs/hlink_substitution.spec`, existing
-    `hlink_raw_string` / `hlink_raw_escaped_brackets` corpus entries, and phase0
-    `hlink_substitution_parser_smoke` cases. The candidate `{abc}` returns a plain string value (`["{abc}"]`) and
-    is JSON-safe. The bracket candidates `[abc]` and `foo[bar]{baz}` return Perl scalar references in the reference
-    AST (`[\'abc']` / mixed arrays), and `JSON::PP` refuses to encode scalar references (`cannot encode reference to
-    scalar`). Split the work into `.7.3.3.2` for the JSON-safe curly fixture and `.7.3.3.3` for the scalar-ref
-    oracle representation decision before bracket/mixed fixtures.
   Commit: `RUST-PARITY.7.3.3.1 - split hlink delimiter fixtures`; retained completion note: no generator/corpus/runtime code change; splits JSON-safe curly fixture from scalar-ref bracket/mixed representation work
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.3.1`.
 
 - ID: `RUST-PARITY.7.3.3.2`
   Status: `done`
@@ -266,15 +218,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Add a representative `{abc}` fixture to the oracle generator, regenerate fixtures with the hardened
     timeout guard, prove Rust `corpus_oracle` remains green, update live docs/KM, and leave scalar-ref bracket
     cases untouched.
-  Verification: **DONE 2026-07-03.** Direct `perl -Iperl -MJSON::PP -MLinkedSpec` probing encoded `{abc}` as
-    `["{abc}"]`. Added `hlink_curly_brace` to `tools/gen_oracle_corpus.pl` without touching bracket/mixed
-    scalar-ref cases. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; normal regeneration writes **66** oracle
-    fixtures, including `rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/{input.spec,input.txt,expected.json}`;
-    Rust `cargo test --manifest-path rust/Cargo.toml --test corpus_oracle` passes over the 66-fixture corpus.
-    Corpus README, mdBook backend handoff, roadmap/live docs, and Knowledge Map evidence now point to the
-    66-fixture state and `.7.3.3.3` scalar-ref representation frontier. mdBook, Knowledge Map, memory, doctrine,
-    whitespace, and full local CI gates pass (phase0 **1018** tests).
   Commit: `RUST-PARITY.7.3.3.2 - add hlink curly oracle fixture`; retained completion note: added `hlink_curly_brace` for `{abc}` to the oracle generator and checked-in corpus; 66-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.3.2`.
 
 - ID: `RUST-PARITY.7.3.3.3`
   Status: `done`
@@ -282,21 +227,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Define whether/how Perl scalar references in reference ASTs are canonicalized into the JSON oracle,
     probe Rust's representable output for `[abc]` and mixed `foo[bar]{baz}`, then either implement a neutral
     representation with tests/docs or explicitly defer bracket/mixed hlink fixtures with evidence.
-  Verification: **DONE 2026-07-03.** Direct Perl `Data::Dumper`/`JSON::PP` probing shows `[abc]` returns
-    `[\'abc']`, while `foo[bar]{baz}` returns a mixed array containing `\'bar`; both fail JSON encoding with
-    `cannot encode reference to scalar`. Rust source audit shows `RuntimeValue` is currently JSON-native
-    (`Undef`, `Scalar`, `Number`, `Array`, `Hash`, `Bool`) with no scalar-reference representation. A temporary
-    focused Rust execution probe against `specs/hlink_substitution.spec` was then run and removed: it reported
-    the existing action parser warning for `substitute_statement2`
-    (`unexpected character '\' ... near: '\(my $capt = capture_slice()))'`) and `[abc]` fell through to
-    `(HLinkSubst) -E- Unmatched closing bracket` / `Err("exit_now(2)")`. Therefore bracket/mixed fixtures are not
-    a simple JSON adapter addition. They are deferred behind `.7.3.3.4`, which must either define a neutral
-    tagged scalar-ref JSON contract plus Rust parser/runtime support for the scalar-ref action payload, or migrate
-    the shipped hlink spec away from host Perl scalar-ref AST values. No generator/corpus/runtime code changed;
-    the temporary Rust probe was removed and `git diff -- rust/linkedspec-runtime/tests/integration_test.rs` was
-    empty afterward. Knowledge Map, memory architecture, doctrine, and whitespace gates pass; Rust
-    `corpus_oracle` passes over the 66-fixture corpus; full local CI passes with phase0 **1018** tests.
   Commit: `RUST-PARITY.7.3.3.3 - defer hlink scalar-ref fixtures`; retained completion note: no generator/corpus/runtime code change; records Perl scalar-ref JSON failure plus Rust scalar-ref action-branch failure and defers bracket/mixed fixtures to `.7.3.3.4`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.3.3`.
 
 - ID: `RUST-PARITY.7.3.3.4`
   Status: `deferred`
@@ -315,21 +247,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Reproduce each recorded mismatch with the oracle/toolbox path, classify whether the first fix is in
     parser, compiler, runtime, or fixture selection, land only a safe green fixture or split an implementation leaf
     with evidence.
-  Verification: Done — 2026-07-03. Reproduced the Perl reference outputs with `perl -Iperl` and
-    `LinkedSpec::get_parser`, then reproduced Rust outputs through a temporary `/private/tmp` probe that uses the
-    same `parse_spec_with_user_functions -> validate -> compile -> Engine::execute` path as `corpus_oracle`.
-    `portmap` is not fixture-safe yet: `foo` reference `["?bare:",["foo"]]` becomes Rust
-    `[["?bare:",[["foo"]]]]`, `bar[3]` becomes a `?bare:` node and warns `unknown helper 'or'`, and
-    `{foo bar[2]}` becomes `[["?multi:",[]]]`. First owners: Rust runtime boolean helper parity (`or`/siblings),
-    list-context splice semantics for `array(flat_array(...))`, and action-edge fluent/recursive aggregation for
-    concatenation. `lib_reader` is parser/compiler-owned first: `lib_file:: -> group .push` is present in the
-    shipped spec, but the Rust compiled `lib_file` rule has no regex patterns and no action dispatch, so both
-    `cell("foo"){ attr : "bar"; }` and `cell("foo"){ attr("bar,baz"); }` collapse to `[[]]` instead of the Perl
-    `GROUP` AST. `ebnf` is runtime-owned after compile: grammar-file `.push(child, rule)` fluent chains are present
-    in the compiled table, but `Expr := Term ("+" Term)*` returns duplicated rule headers and drops token payloads
-    (`[[[],[[["rule","Expr"],["rule","Expr"]],[["rule","Term"],["rule","Term"]]]]]`). No green fixture was landed;
-    implementation is split into `.7.3.4.1`-`.7.3.4.3`.
   Commit: `RUST-PARITY.7.3.4 - triage structural oracle mismatches`; retained completion note: no runtime/corpus code change; reproduces `portmap`/`lib_reader`/`ebnf` Rust structural divergences and splits parser/runtime implementation owners into `.7.3.4.1`-`.7.3.4.3`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.4`.
 
 - ID: `RUST-PARITY.7.3.4.1`
   Status: `done`
@@ -338,18 +257,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: The Rust compiled `lib_file` rule contains the `group` action-edge fluent push; the representative
     `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
     are cleanly blocked by a later runtime owner with evidence; focused parser/compiler/runtime tests pass.
-  Verification: Done — 2026-07-03. The Rust header parser now treats only recognized suffixes (`AND`, `OR+`,
-    bounded forms, symbolic repeaters, and siblings) as rule modes. When the first header-rest token is ordinary
-    body syntax such as `->`, `->Child.push`, or `I.return(...)`, the token is restored into the rule body instead
-    of being silently consumed as an unrecognized default mode. Action and blind-call edge recognition now matches
-    `specs/spec.spec`: spaces/tabs after `->` and `=>` are optional (`[ \t]*`), so `->Child`, `=>Child`, and
-    compact header-rest forms such as `Top::->Child.push` are valid. Parser, compiler, and runtime regression
-    tests lock the compact action-edge path. A real `lib_reader` compiled-rule dump now shows `lib_file` has the
-    `group` action-edge fluent `.push` dispatch and the dependency-resolved child regex; representative sattribute
-    and cattribute probes no longer collapse to `[[]]`. They still produce `GROUP` nodes with null capture fields,
-    proving the remaining blocker is runtime capture propagation for dependency-resolved edge-only child regexes,
-    split below as `.7.3.4.4`.
   Commit: `RUST-PARITY.7.3.4.1 - fix header-rest action-edge parsing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.4.1`.
 
 - ID: `RUST-PARITY.7.3.4.4`
   Status: `done`
@@ -359,16 +268,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     dependency-resolved child regex expose the actual child match captures instead of null values; representative
     `lib_reader` sattribute and cattribute inputs reproduce the Perl wrapped `GROUP` AST through the oracle path or
     split again with narrower runtime evidence; focused runtime tests pass.
-  Verification: Done — 2026-07-03. A focused edge-only child-regex regression proves dependency-resolved action-edge
-    dispatch already seeds the child entry captures correctly. The representative `lib_reader` null fields were
-    instead caused by missing Rust execution for shipped-spec statement-form mutations after the parser/compiler
-    fix: `substr(scalar(target), pattern, replacement, flags)` / `regex_subst(...)` must mutate the scalar target,
-    and `split(array(target), scalar(source), delimiter)` must replace the array target. Rust now detects those
-    statement forms before the pure value `substr`/`split` helpers, applies regex replacement with `g` global and
-    inline `i/m/s/x` flags (`o` is a no-op), and updates scalar/array working variables. Focused `.7.3.4.4` tests
-    pass, and `tools/gen_oracle_corpus.pl` now includes `lib_reader_sattribute` and `lib_reader_cattribute`; the
-    68-fixture Rust `corpus_oracle` passes.
   Commit: `RUST-PARITY.7.3.4.4 - land lib_reader action-helper parity`; retained completion note: engine.rs statement-form scalar regex substitution + array split mutation helpers; `.7.3.4.4` integration locks; two `lib_reader` oracle fixtures; 68-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.4.4`.
 
 - ID: `RUST-PARITY.7.3.4.2`
   Status: `done`
@@ -377,19 +278,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     sibling boolean helper proved necessary) and splices list-context array helper payloads so
     `array(flat_array(entry_parts))` matches the Perl shape; `foo`, `bar[3]`, `baz[7:0]`, and `0x1f` can be added
     or proven blocked with exact remaining evidence; focused runtime tests pass.
-  Verification: Done — 2026-07-03. Rust validation/runtime now recognize `or`, `and`, and `not` as portable
-    boolean helpers. `array(...)` now applies Perl-style list-context splicing only for explicit flattening helper
-    arguments (`flat`, `flat_array`, `flat_hash`), preserving nested snapshots for `array_copy(...)`. The runtime
-    regex dispatcher now wraps each rule regex in a non-capturing branch before joining alternatives, so an
-    internal top-level alternation inside a child regex (the `|(?i)(0x...)` branch in `portmap::bare_bit_slice`)
-    no longer shifts the parent action-edge dispatch index. Focused tests lock list-context splicing, boolean
-    truthiness, the internal-alternation dispatcher case, and real `specs/portmap.spec` scalar classifications for
-    `foo`, `bar[3]`, `baz[7:0]`, and `0x1f`. `tools/gen_oracle_corpus.pl` now includes `portmap_bare`,
-    `portmap_bit`, `portmap_slice`, and `portmap_constant`; the 72-fixture Rust `corpus_oracle` passes.
-    `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-core -p linkedspec-runtime --lib`, mdBook,
-    Knowledge Map, memory architecture, doctrine, and whitespace gates pass.
-    `portmap` concatenation remains out of this leaf and stays owned by `.7.3.4.3` with `ebnf`.
   Commit: `RUST-PARITY.7.3.4.2 - land portmap scalar helper parity`; retained completion note: boolean helper/list-context/regex-dispatch parity; four `portmap` scalar oracle fixtures; 72-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.4.2`.
 
 - ID: `RUST-PARITY.7.3.4.3`
   Status: `done`
@@ -398,20 +288,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     for `ebnf` rule payloads and `portmap` concatenation; the representative `ebnf_expression_rules`,
     `ebnf_logging_annotation`, and `portmap` concatenation cases either become green oracle fixtures or are split
     again with narrower evidence.
-  Verification: Done — 2026-07-04. Rust now treats action-edge block/fluent child calls as edge-scoped child
-    returns instead of re-searching input from the advanced parent cursor. Non-passive children dispatch once and
-    expose their return through `retv`, `call(child)`, `push(child)`, `push(child, target)`, and child-index
-    statement forms; passive terminal skip rules do not re-execute because the parent edge regex already consumed
-    them. Scalar assignment no longer overwrites remembered aggregate slots for non-shape RHS values, and
-    aggregate-consuming helper slots prefer the aggregate store for bare working-var arguments. Regex normalization
-    now accepts Perl's lower-unbounded counted quantifier spelling (`{,N}`) by normalizing it to `{0,N}` for the
-    Rust regex engine. Focused locks cover action-edge block `call(child)`, scoped fluent `push(child,target)`,
-    statement `push(child,index)`, shipped `portmap` concatenation, shipped `ebnf` expression payloads, shipped
-    `ebnf` logging annotations, and the `ebnf` `grammar_rule` header regex. `tools/gen_oracle_corpus.pl` now
-    includes `portmap_concatenation`, `ebnf_expression_rules`, and `ebnf_logging_annotation`; the oracle corpus is
-    **77 fixtures** and Rust `corpus_oracle` passes over all 77. Full local CI passes, including phase0
-    **1021** tests.
   Commit: `RUST-PARITY.7.3.4.3 - land action-edge child aggregation parity`; retained completion note: edge-scoped child returns, passive terminal child skip, lower-unbounded quantifier normalization; `portmap_concatenation` plus two `ebnf` fixtures; 77-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.4.3`.
 
 - ID: `RUST-PARITY.7.3.5`
   Status: `done`
@@ -419,19 +297,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     `spec.spec` smokes).
   Acceptance: Reproduce the `[]`/`[null]`/action-parser-warning behavior under timeout, separate invalid fixture
     choice from real Rust parity gaps, and land or defer each case with precise evidence.
-  Verification: Done — 2026-07-04. Perl reference probes show representative `BNF`, `DT`, `ifelse`, and
-    `operators_try` inputs return `null`, so those diagnostic/debug-print specs are invalid or weak semantic-output
-    oracle fixture choices today. Rust returned an empty accumulator for those inputs; no fixture was promoted for
-    that boundary. A real Rust parser gap was found in `operators_try`: lifecycle debug strings contain literal
-    braces, and the Rust code-block scanner counted `{` / `}` inside quoted strings as block delimiters, truncating
-    `group`, `function_call`, and `string` `I` blocks and emitting action-parser warnings. `parser.rs` now ignores
-    quoted braces with backslash escapes, and focused parser tests lock generic quoted-brace blocks plus the actual
-    `operators_try` strings. `spec.spec` smokes are current and JSON-safe: added `spec_spec_minimal_rule`,
-    `spec_spec_action_edge`, `spec_spec_user_function_definition`, and `spec_spec_comment_skip`. `perl -c -Iperl
-    tools/gen_oracle_corpus.pl` passes; regeneration emits **81 fixtures**; Rust `corpus_oracle` passes all 81;
-    `parse_all_shipped_specs` passes with the `operators_try` warnings gone. Remaining shipped-spec parse warnings
-    are existing non-target action-code warnings.
   Commit: `RUST-PARITY.7.3.5 - close null-output and spec smoke triage`; retained completion note: quoted-brace code-block scanner fix; four `spec.spec` smokes; BNF/DT/ifelse/operators_try null-output candidates documented; 81-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.5`.
 
 - ID: `RUST-PARITY.7.3.6`
   Status: `done`
@@ -440,19 +307,8 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Acceptance: Pick minimal representative inputs after `.7.3.2` has resolved or retired the timeout/hang concern,
     keep the generic guard active during generation, keep green fixtures only when Rust matches the Perl reference,
     and route plugin/RTL-only blockers to explicit follow-up leaves instead of broadening `.7.3`.
-  Verification: Done — 2026-07-04. Perl reference probes and a temporary Rust parity probe measured the
-    remaining candidates before fixture promotion. Seven JSON-safe green smokes landed:
-    `regdef_nested_register_fields`, `tablegrep_simple_term`, `simenv_multiline_value`, `vhdl_library_use`,
-    `ds_vhistory_version_entry`, `pplugin_empty`, and `tkgui_empty`. Richer candidates were deliberately not
-    promoted: real `pplugin` subdefs return Perl coderefs that the JSON oracle cannot represent; `tkgui` sub-GUI
-    bodies still hit Rust action-code parsing for the raw Perl pair return; `sdce` slice/capture segmentation
-    diverges; `tablegrep` recursive groups double-report child terms in Rust; `simenv` single-line values lose the
-    verbatim payload in Rust; `vhdl` entity port clauses collapse to null under current Rust execution; `ds_vhistory`
-    branch entries are classified as version entries; and the placeholder `verilog` top returns Perl `0` while Rust
-    returns an empty accumulator. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; generation emits **88**
-    fixtures under the hard timeout guard; Rust `corpus_oracle` passes all 88; `parse_all_shipped_specs` still
-    parses all 21 specs successfully with only known non-target action-code warnings.
   Commit: `RUST-PARITY.7.3.6 - land legacy shipped-spec safety smokes`; retained completion note: seven RTL/plugin/legacy green smokes; richer mismatches routed to follow-up; 88-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.6`.
 
 - ID: `RUST-PARITY.7.3.7`
   Status: `done`
@@ -464,87 +320,64 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
     file, rule, regex/action path, and source location; then either fix the live root cause under this leaf or split
     a narrower implementation leaf before changing runtime/compiler behavior. If no current timeout exists, record
     the trace/toolbox evidence and preserve the hard-timeout guard as the permanent broad-corpus safety net.
-  Verification: **DONE 2026-07-03.** A current shipped-spec/input fork+SIGKILL census found a live timeout
-    reproducer immediately: `BNF` exceeded a 5s build+parse child wrapper even on empty input. Focused separation
-    showed this is parser construction, not parser execution: `LinkedSpec::get_parser("BNF")` took about 6.4s,
-    while parsing empty input after construction took about 0.03s; `ebnf` showed the same build-cost class at
-    about 7.0s. `LINKEDSPEC_TRACE_LEVEL=debug` / `trace_log_file` for `BNF` reached `Parser generation completed
-    successfully` and `ParserFactory` returned a coderef, proving the live issue was the oracle guard boundary:
-    `tools/gen_oracle_corpus.pl` built parsers in the parent before the timeout-protected child parse. Fixed the
-    generator so each child now builds the reference parser and runs the parse under the same `ORACLE_TIMEOUT`
-    wall-clock guard; the parent `SIGKILL`s either parser-construction or parse-execution hangs. Updated corpus
-    README and Knowledge Map wording. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; forced
-    `ORACLE_TIMEOUT=0 perl -Iperl tools/gen_oracle_corpus.pl` reports `hard kill during parser build/parse`;
-    normal regeneration writes **66** fixtures byte-identically; Rust `corpus_oracle` passes over the 66-fixture
-    corpus; Knowledge Map, memory architecture, doctrine, and whitespace gates pass; full local CI passes with
-    phase0 **1018** tests.
   Commit: `RUST-PARITY.7.3.7 - hard-timeout parser construction too`; retained completion note: oracle generator now hard-timeout guards parser construction plus parse execution; normal regeneration remains 66-fixture byte-identical; corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.3.7`.
 
 - ID: `RUST-PARITY.7.4`
   Status: `done`
   Goal: Regression guard + finalize the oracle corpus
   Acceptance: the fixture-runner provably enumerates ALL corpus fixtures (fails on drift / a missing fixture); a documented way to regenerate fixtures; a book/`DEVELOPMENT_NOTES.md` note on the oracle (incl. the Perl↔Rust wrap rule) as warranted; `.7` closed when every child is `done`/`deferred`.
-  Verification: Done — 2026-07-04. `tools/gen_oracle_corpus.pl` now rejects duplicate case names and writes root
-    `rust/linkedspec-runtime/tests/corpus/manifest.json` with `format`, `generated_by`, `case_count`, and ordered
-    `cases`. `rust/linkedspec-runtime/tests/corpus_oracle.rs` loads the manifest, rejects unsupported manifest
-    format, mismatched case count, duplicate/invalid case names, missing fixture directories, and stale extra
-    fixture directories, then executes fixtures in manifest order. Focused drift tests cover missing and extra
-    fixture sets. `perl -c -Iperl tools/gen_oracle_corpus.pl` passes; `perl -Iperl tools/gen_oracle_corpus.pl`
-    emits **88 fixtures plus manifest**; `cargo fmt --manifest-path rust/Cargo.toml --all` passes; Rust
-    `corpus_oracle` passes **3 tests** and all **88** manifest-listed fixtures. Corpus README, mdBook backend
-    handoff, Knowledge Map facts, roadmap, and live recovery docs document the manifest and regeneration contract.
   Commit: `RUST-PARITY.7.4 - finalize oracle corpus manifest guard`; retained completion note: generator writes manifest and rejects duplicate cases; Rust runner rejects missing/stale fixture drift and executes 88 fixtures in manifest order; `.7` closed
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.4`.
 
 - ID: `RUST-PARITY.7.5`
   Status: `done`
   Goal: Rust engine output-parity fixes for shipped recursive specs — unblock the oracle corpus (`.7.2`/`.7.3`). Discovered by `.7.1`'s oracle.
   Children: `.7.5.1` (done), `.7.5.2` (done), `.7.5.3` (done)
-  Note: Split 2026-06-17 (PNT rule 5). Originally two children; **`.7.5.3` added 2026-06-17** when `.7.5.1` (the parser header-regex fix) proved **necessary but NOT sufficient** for tclite. `.7.5.1` made the header-line regexes register (proven by unit tests), but the oracle still showed tclite → `[]`: tclite accumulates via **fluent continuations on ACTION edges** (`-> command_subst .push`, `-> command_subst[1] .return(...)`), and the Rust parser only attached a `.method` fluent chain to a BLIND edge (`=>`) at that point. **`.7.5.3` is now closed by later committed terse-track implementation evidence:** `SPEC-FORMAT-TERSE.2.3.3.1` carried action-edge `fluent_chain` through parser/compiler/runtime for no-arg `.push` / `.return(expr)` / `.return_undef`; `.2.3.3.3.2` completed explicit-target and flow-chain action-edge semantics; `.2.3.3.3.3.1` landed the remaining default-mode recursive repetition/preamble-return behavior and restored the two shipped `tclite` oracle fixtures. **Lispish-green still needs `.7.5.2`** (it uses `{ code }` blocks and `scalaref(retv, {content})`, not the fluent form). Still re-evaluate the **child-`return` accumulator leak** and the **group-indexing divergence** (Open Questions) as part of whichever child surfaces them. Acceptance (tree-level): the Rust engine reproduces the Perl reference (modulo the one-level wrap) for `tclite` (`[]`→`["?tcl_script:",[["?command_subst:",[]]]]`; `""`→`["?tcl_script:",[["?double_quote:",[]]]]`) and `Lispish` (`(x y)`→`["x",["y"]]`); each deferred case is re-enabled in `tools/gen_oracle_corpus.pl` by the child that closes its last blocker and passes the fixture-runner; `cargo test` + clippy zero-new; baseline green.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.5`.
 
 - ID: `RUST-PARITY.7.5.1`
   Status: `done`
   Goal: Fix the header-line-regex → 0-regex parser bug (the shared root cause for tclite + Lispish + most shipped specs)
   Acceptance: a rule with a regex on its **header line** registers that regex (today it is silently dropped, so `-> child[0]` edges "never fire"). **Root cause (confirmed):** `rust/linkedspec-core/src/parser.rs:86` — the header regex `^(\w+)[ \t]*(::|:)[ \t]*(\S*)[ \t]*(.*)` uses `(\S*)` for the mode suffix (group 3 `mode_raw`), which greedily swallows a leading `/…/` regex on the header line; `parse_mode_suffix("/;/")` then falls to `RuleMode::Default` and the regex is discarded (never reaches `rest`/body). It bites BOTH `:` and `::` rules that put a regex on the header line — the passing tests/`::` top-rules only avoid it because they put the regex on a **separate body line** (`Child::` then `/…/`). **Fix:** narrow group 3 to `([^\s/]*)` so a `/`-led regex falls through to `rest` (group 4), where `parse_inline_body` registers it. The bracket-pair semantics are not just preserved but **repaired** — verified.
-  Verification: Done — 2026-06-17. **The fix landed and is proven at the parse/compile layer; the bundled "tclite oracle green" validation was MOVED to new leaf `.7.5.3` because the oracle proved a second, independent blocker (see below).** Changed `rust/linkedspec-core/src/parser.rs:86` `(\S*)`→`([^\s/]*)` (one char class; every real mode suffix — `AND`/`OR+`/`&`/`*`/`?`/`AND{2,4}` — is slash-free, so identical for all non-regex header content; the second header regex at `parser.rs:270` is detection-only with a trailing `*` group and needs no change). **Bracket-pair semantics traced + tested:** `command_subst : /open/ /close/` went from `[close]` (1 regex; the self-recursive `-> command_subst[1]` was out-of-bounds → "never fires", and entry via `-> command_subst` matched the *close*) to `[open, close]` (2 regexes; entry idx 0 = open, `[1]`→idx 1 = close via the self-recursive branch in `build_dependency_regex_map`) — the recursive bracket matcher the spec intends. 4 new unit tests: 3 in `parser.rs` (`header_line_single_regex_is_registered`, `header_line_bracket_pair_registers_open_then_close`, `header_line_mode_suffix_still_parsed_without_regex`) + 1 in `compiler.rs` (`header_line_bracket_pair_self_recursive_close_edge_resolves`). `cargo test --manifest-path rust/Cargo.toml` = **242 passed / 0 failed** (238 baseline + 4 new; `linkedspec_core` 90→94; corpus_oracle stays 1 green proof). `cargo clippy -p linkedspec-core -p linkedspec-runtime --tests` warning multiset = baseline (linkedspec-core 10 / linkedspec-runtime 13 / validation.rs 4 — zero-new). **Pre-existing, recorded:** clippy `--tests` exits 101 on `approx_constant` deny-errors in untouched test floats `expr.rs:687` (`(*value - 3.14)`) and `types_test.rs:143` (`Some(3.14)`) — present at HEAD, unrelated to this leaf (Open Questions). **THE DISCOVERY (why the oracle re-enablement moved):** with the regexes now registering, the oracle STILL showed tclite `[]`→`[]`. Root cause #2 (independent): tclite accumulates via fluent continuations on ACTION edges (`-> command_subst .push`, `-> command_subst[1] .return(...)`), but the Rust parser only attaches a `.method` fluent chain to a BLIND edge (`=>`, `parser.rs:443`); after a `->` edge the `.push`/`.return(...)` becomes a standalone `FluentChain` element the compiler discards (`compiler.rs:171`), so the edges dispatch but never accumulate/return. That is `.7.5.3` (action-edge fluent lowering), which greens tclite — not bundled here (PNT: independent, separately-reviewable). tclite oracle cases re-deferred in `tools/gen_oracle_corpus.pl` (corpus back to 2 green proofs) so `cargo test` stays green.
   Commit: `RUST-PARITY.7.5.1 — fix the header-line-regex → 0-regex parser bug in the Rust variant`; prior node reference: `RUST-PARITY.7.5.1` (see Commit Log); retained completion note: parser.rs:86 `(\S*)`→`([^\s/]*)`; header-line regexes now register, bracket-pairs repaired (open[0]/close[1]); 4 unit tests (3 parser + 1 compiler); 242/242 green; clippy zero-new. Oracle revealed a 2nd tclite blocker (action-edge fluent lowering) → new leaf `.7.5.3`; tclite oracle cases re-deferred
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.5.1`.
 
 - ID: `RUST-PARITY.7.5.2`
   Status: `done`
   Goal: Add `{…}` hash-literal / field-accessor support to the Rust action-code expression parser (the second Lispish gap)
   Acceptance: `scalaref(retv, {content})` parses and evaluates (extract the named field from the referenced hash) so Lispish `(x y)` reproduces the Perl reference `["x",["y"]]`. **Root cause (confirmed):** `rust/linkedspec-core/src/expr.rs:299` — `parse_expr` has no `{` case (no hash/object/field-accessor syntax in the expression language), so `{content}` raises `unexpected character '{'`. **Scope:** larger than `.7.5.1` — needs a new `Expr` variant + parser production + engine evaluation (`scalaref(ref, {field})` reads `field` from the hash the ref points at). Decide the exact `{…}` semantics against the Perl reference (`specs/Lispish.spec:40-43`, `scalaref(retv, {content})`; line 78 `CAPTURE`) before implementing. Depends on `.7.5.1` (done — the Lispish child rules now register their regexes). **Note:** Lispish uses `{ code }` blocks on its edges (not the fluent form), so it does NOT need `.7.5.3`; `.7.5.1` + `.7.5.2` should green it. Re-enable the Lispish case in `tools/gen_oracle_corpus.pl`; fixture-runner green; baseline + green; clippy zero-new.
-  Verification: Done — 2026-07-02. Added a scalaref-only legacy path AST (`Expr::ScalarRefPath` with mixed `{key}` / `[index]` segments) parsed only for the second positional argument of `scalaref`, so general brace expressions and normal hash literals stay on their existing paths. Runtime `scalaref` now walks hash/array values with legacy semantics: bare key atoms such as `{content}` are literal hash keys, explicit expressions such as `{scalar(k)}` / `[scalar(i)]` evaluate, and the direct-access bare-path rule remains unchanged. The engine now also contains child-return accumulator containment (`execute_child_rule`) so a child `return(...)` feeds the parent `retv` without leaking into the parent accumulator, action-edge blocks that explicitly call their child avoid duplicate pre-dispatch, and explicit aggregate-wrapper assignment (`assign(array(word), array())`, `set(hash(meta), hash(...))`) replaces the array/hash store instead of falling back to scalar assignment. Re-enabled `lispish_x_y` in `tools/gen_oracle_corpus.pl`; regenerated corpus contains 63 fixtures and `lispish_x_y` expected value `["x",["y"]]`. Focused parser/runtime checks and Rust corpus oracle pass; full commit-gate evidence is recorded below.
-  Boundary: `scalaref(...)` is restored here as legacy compatibility only; user directive 2026-07-02 says it shall be retired/removed under a separate owning task-tree migration.
   Commit: `RUST-PARITY.7.5.2 - land Lispish scalaref parity` (see Commit Log); retained completion note: expr.rs `ScalarRefPath` parser hook + runtime legacy scalaref path evaluation, child-return accumulator containment, explicit action-block call compatibility, aggregate-wrapper assignment replacement, active `lispish_x_y` fixture; 63-fixture corpus oracle green
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.5.2`.
 
 - ID: `RUST-PARITY.7.5.3`
   Status: `done`
   Goal: Lower action-edge fluent continuations (`.push` / `.return(...)` after a `-> edge`) so tclite reproduces the Perl reference (the second, independent tclite blocker the `.7.5.1` oracle uncovered)
   Acceptance: a fluent `.method(...)` chain written after an ACTION edge (`-> Child .push`, `-> Child[1] .return(...)`) is attached to that edge and executed after dispatching the child (push the child result into the rule's accumulator / route the value to `return`), matching the BLIND-edge (`=>`) fluent behavior that already works. **Root cause (confirmed):** the Rust parser attaches a `.method` fluent chain only to a BLIND edge — `parse_single_element` calls `parse_fluent_chain(&rest)` for `=>` (`parser.rs:443`) but for `->` only captures a following `{ }` block (`parser.rs:411-429`); a trailing `.push`/`.return(...)` after a `->` edge therefore parses as a STANDALONE `FluentChain` body element, which the compiler discards (`compiler.rs:171`, `BodyElementKind::FluentChain { .. } => { last_regex_line = None; }` — no codegen). So tclite's `-> command_subst .push` / `-> command_subst[1] .return(...)` dispatch but never accumulate/return, and tclite still yields `[]` even after `.7.5.1` registered the regexes. **Scope:** parser (add a `fluent_chain` field to `BodyElementKind::ActionEdge`, parse the chain after a `->` edge), compiler (lower the chain onto the `AcodeEntry` — like `BcodeEntry.fluent_chain`, or synthesize an attached code block), engine (execute the attached chain after `execute_rule` in the acode-dispatch loop, `engine.rs:340-351`). Decide `.push`/`.return(...)` semantics against the Perl reference (`specs/tclite.spec`; `push(child)` = append the dispatched child's result, `return(...)` = the rule's return). Re-enable the tclite cases (`[]`, `""`) in `tools/gen_oracle_corpus.pl`, regenerate, confirm the fixture-runner is green (`[]`→`["?tcl_script:",[["?command_subst:",[]]]]`, `""`→`["?tcl_script:",[["?double_quote:",[]]]]`). `cargo test` baseline + green; clippy zero-new.
-  Verification: Done — 2026-07-02 reconciliation. No new runtime code was needed in this slice: the accepted implementation already landed under owned `SPEC-FORMAT-TERSE` leaves. Evidence chain: `.2.3.3.1` added `ActionEdge.fluent_chain` / `AcodeEntry.fluent_chain` and runtime no-arg `.push`, `.return(expr)`, `.return_undef`; `.2.3.3.3.2` completed explicit-target `.push(target)`, `.push(child,target)`, helper calls, `.if/.else/.endif` gating, and return continuations; `.2.3.3.3.3.1` restored `tclite_command_subst` and `tclite_double_quote` after the separate default-mode recursive repetition / child-preamble-return gap was fixed. Current source audit finds `execute_action_edge_fluent_chain` in `rust/linkedspec-runtime/src/engine.rs`, fluent-chain parsing/compilation in `rust/linkedspec-core/src/{parser,compiler}.rs`, and active `tclite` cases in `tools/gen_oracle_corpus.pl` plus `rust/linkedspec-runtime/tests/corpus/`. Focused revalidation for this reconciliation: Rust `corpus_oracle` passes over the current 62-fixture corpus, including `tclite_*`; mdBook/KM/memory/doctrine/diff and full local CI are recorded in the commit workflow. At that reconciliation point, the remaining `.7.5` frontier was `.7.5.2` (Lispish legacy `scalaref(retv, {content})`), independent of action-edge fluent continuations; it later landed temporarily and was then retired under `SCALAREF-RETIREMENT`.
   Commit: `RUST-PARITY.7.5.3 - reconcile action-edge fluent closure` (see Commit Log); retained completion note: no runtime code change; closes stale parity leaf against `SPEC-FORMAT-TERSE.2.3.3.*` implementation evidence, active `tclite_*` oracle fixtures, and current 62-fixture corpus oracle
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.7.5.3`.
 
 - ID: `RUST-PARITY.8`
   Status: `done`
   Goal: Implement code-gen emitter — HandlerIR/CompiledSpec to Rust source generation
   Children: `.8.1` (done), `.8.2` (done), `.8.3` (done/split), `.8.4` (done), `.8.5` (done)
   Acceptance: Rust source emitter produces compilable Rust from HandlerIR/CompiledSpec nodes; tests prove generated code compiles and runs; final all-variant matrix covers the 10 HandlerIR variant families or explicitly documented Rust-native equivalents
-  Note: Split 2026-07-04 (PNT rule 5). The original `.8` leaf was too broad for one signoff slice: it spans the Perl `HandlerVariantEmitter.pm` 10-kind HandlerIR contract, the current Rust-native interpreted `CompiledSpec`/`CompiledRule` structures, source-generation API design, a compile/run harness, variant-family emission, lifecycle/action execution, and oracle/corpus integration. Current Rust remains an interpreter; this lane adds a generated Rust-source path without weakening the interpreter or oracle gates.
-  Verification: Done — `.8.1` split the lane, `.8.2` landed the minimal scaffold/compile-run proof, `.8.3` closed the non-repetition family matrix through its metadata/acode/bcode/matrix-closeout children, `.8.4` added direct REP generated-family execution, and `.8.5` integrated generated-source validation with the manifest-backed oracle corpus subset. The full 88-fixture corpus remains the interpreter oracle gate; generated-source corpus coverage is a curated subset proof.
   Commit: `pending` (container closes through child commits)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8`.
 
 - ID: `RUST-PARITY.8.1`
   Status: `done`
   Goal: Split and inventory the Rust source-emitter lane before implementation
   Acceptance: `.8` is decomposed into child leaves; the first implementation leaf is narrow enough to review; live docs and Knowledge Map record that Rust currently interprets `CompiledSpec`, while `.8` will add an emitted-source path from the HandlerIR/CompiledSpec structural contract
-  Verification: Done — 2026-07-04. Read the canonical HandlerIR fact card, the Perl `HandlerVariantEmitter.pm` builders/emitters, Rust `CompiledSpec`/`CompiledRule`/`AcodeEntry`/`BcodeEntry` structures, Rust runtime execution loop, Rust README, and mdBook backend handoff. The durable conclusion: Perl HandlerIR has 10 structural variant kinds and emits Perl/JSON today; Rust has a native interpreted structural contract (`CompiledSpec`) with parsed lifecycle `CodeBlock`s and dispatch tables, not Rust source generation. The code-generation work is therefore split into a scaffold/harness leaf, non-repetition variant emission, repetition variant emission, and all-variant/oracle integration. No parser/runtime source behavior changed in this leaf.
   Commit: `RUST-PARITY.8.1 - split Rust source emitter lane` (see Commit Log); retained completion note: no source behavior change; splits generated Rust-source work into scaffold/harness, non-REP families, REP families, and all-variant/oracle integration
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.1`.
 
 - ID: `RUST-PARITY.8.2`
   Status: `done`
   Goal: Add the minimal Rust source-emitter scaffold and compile/run harness
   Acceptance: A focused emitter API can render a minimal generated Rust parser module from the Rust structural contract; a test builds that generated source in an isolated temporary crate or build harness and executes one simple non-recursive parser case; the interpreter path remains unchanged
-  Verification: Done — 2026-07-04. Added `linkedspec_runtime::source_emitter::emit_rust_source(&CompiledSpec)`, which emits a standalone Rust module containing a serialized `CompiledSpec`, a `LINKEDSPEC_GENERATED_SOURCE_FORMAT` marker, and a `parse(input)` entry point that delegates to the existing `Engine`. Added `tests/source_emitter.rs`, which parses/validates/compiles a simple non-recursive `.spec`, confirms the interpreter result, emits generated source, builds that source inside an isolated temporary crate, and runs the generated crate's test under `cargo test --offline --quiet`. The interpreter path is unchanged; this leaf proves the generated-source API and compile/run harness before `.8.3` starts direct non-REP handler-family emission.
   Commit: `RUST-PARITY.8.2 - add Rust source emitter scaffold` (see Commit Log); retained completion note: new `source_emitter` module emits a standalone Rust module from `CompiledSpec`; isolated temp-crate compile/run harness proves a simple generated parser that delegates through `Engine`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.2`.
 
 - ID: `RUST-PARITY.8.3`
   Status: `done/split`
@@ -559,57 +392,57 @@ remaining helpers, strict_syntax, test corpus expansion, and code-gen emitter.
   Status: `done`
   Goal: Carry rule-mode/family metadata and emit a generated non-REP family plan
   Acceptance: `CompiledRule` preserves enough parsed mode metadata to classify non-repetition generated families; `emit_rust_source` emits an explicit family plan for supported default/OR/AND acode-bcode shapes; focused generated-source tests prove the emitted plan compiles and still executes through the existing harness while leaving direct family execution to later children
-  Verification: Done — 2026-07-04. `RuleMode` is now preserved on `CompiledRule` with a serde default for old serialized compiled specs. The source emitter classifies each compiled rule into an explicit `GeneratedRuleFamily` (`Default`, `OrAcode`, `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, `OrBcode`, `Repetition`), emits a `GENERATED_RULES` plan beside the embedded `CompiledSpec`, and validates that generated plan against the compiled rule labels/families before delegating through the existing `Engine`. The focused source-emitter test now builds one isolated temp crate containing generated modules for default, OR acode, AND single-acode, AND sequential-acode, AND bcode, and OR bcode cases, proving the plan markers compile and the generated `parse` entry points still match interpreter output while direct family execution remains owned by `.8.3.2`–`.8.3.4`. Focused verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-core --test types_test`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-core --test types_test`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`. Broader gates passed: `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` (1021 phase0 regression tests PASS).
   Commit: `RUST-PARITY.8.3.1 - emit generated family plan` (see Commit Log); retained completion note: preserves parsed `RuleMode` in `CompiledRule`; generated Rust source now embeds and validates a non-REP family plan across default/OR/AND acode-bcode cases while still delegating execution through `Engine`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.3.1`.
 
 - ID: `RUST-PARITY.8.3.2`
   Status: `done`
   Goal: Emit direct default and OR acode execution
   Acceptance: Generated-source execution covers default and OR acode structural families without whole-parser delegation, with focused compile/run tests matching interpreter and Perl-oracle expectations for representative fixtures
-  Verification: Done — 2026-07-04. Generated modules now validate `GENERATED_RULES` and call `Engine::execute_generated_with_plan(...)` instead of delegating to `Engine::execute(...)`. The generated-plan executor directly handles `Default` and `OrAcode` families with the same recursion guard, entry/local match save/restore, lifecycle block execution, action-edge `retv`/`call(child)` contract, default-mode repetition loop, and zero-progress guard used by the interpreter. Later-family paths remained owned by later leaves at `.8.3.2` completion. The focused source-emitter matrix proves a default repeated-match case (`hello one hello two` → `["one","two"]`) and an OR acode edge block that reads the dispatched child return (`or-acode:go`); `.8.3.3` and `.8.3.4` later replaced the remaining non-repetition generated-family delegation paths with direct execution. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` (1021 phase0 regression tests PASS).
   Commit: `RUST-PARITY.8.3.2 - emit direct default-or acode execution` (see Commit Log); retained completion note: generated source entered a plan-aware executor; default and OR acode families ran directly, with later leaves owning the remaining non-repetition and REP families
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.3.2`.
 
 - ID: `RUST-PARITY.8.3.3`
   Status: `done`
   Goal: Emit direct AND acode execution
   Acceptance: Generated-source execution covers AND single-acode and AND sequential-acode structural families, including ordered consume behavior, with focused compile/run tests matching interpreter and Perl-oracle expectations for representative fixtures
-  Verification: Done — 2026-07-04. The generated-plan executor now treats `AndSingleAcode` and `AndAcodeSeq` as direct acode families instead of falling back. The shared Rust regex/acode loop now enforces non-repetition AND ordered sequence by requiring regex slot 0, then slot 1, and so on; an out-of-order or incomplete sequence returns `undef` before the rule exit block. The focused source-emitter matrix proves direct AND single-acode and a two-slot AND sequential-acode case whose second edge returns `and-seq`, which would fail if execution stopped after the first regex. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`.
   Commit: `RUST-PARITY.8.3.3 - emit direct AND acode execution` (see Commit Log); retained completion note: generated source now directly handles AND single-acode and AND sequential-acode; shared Rust loop enforces ordered AND regex/acode sequence before completion
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.3.3`.
 
 - ID: `RUST-PARITY.8.3.4`
   Status: `done`
   Goal: Emit direct AND/OR bcode execution
   Acceptance: Generated-source execution covers AND bcode sequential dispatch and OR bcode first-match dispatch with focused compile/run tests matching interpreter and Perl-oracle expectations for representative fixtures
-  Verification: Done — 2026-07-04. The generated-plan executor now treats `AndBcode` and `OrBcode` as direct generated families instead of falling back to whole-rule interpreter execution. Blind-edge tail execution is shared between the interpreted and generated paths: child returns become parent `retv`, attached blind-edge code and fluent calls run in order, and the parent `E` block reads the resulting `retv`. Explicit OR bcode dispatch stops after the first truthy child return and fires `LX` on no child match. The source-emitter matrix proves AND bcode ordered child-return collection (`A`, `B`), OR bcode first-match behavior on `a b` (`or-bcode:A`, which would become the later child if dispatch kept looping), and OR bcode no-match `LX` behavior on `c` (`or-miss`). Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` (1021 phase0 regression tests PASS).
   Commit: `RUST-PARITY.8.3.4 - emit direct bcode execution` (see Commit Log); retained completion note: generated source now directly handles AND/OR bcode; blind-edge tail execution is shared and OR bcode stops after the first truthy child return
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.3.4`.
 
 - ID: `RUST-PARITY.8.3.5`
   Status: `done`
   Goal: Close the non-repetition generated-family matrix
   Acceptance: The generated-source test matrix covers every non-repetition family named by `.8.3`, documents any Rust-native equivalent boundaries, and advances the `.8` frontier to REP families only when the non-REP generated-source path is green
-  Verification: Done — 2026-07-04. `GeneratedPlanExecutor::execute_rule` now routes exhaustively by `GeneratedRuleFamily`: `Default`, `OrAcode`, `AndSingleAcode`, `AndAcodeSeq`, `AndBcode`, and `OrBcode` use direct generated execution, while `Repetition` is the only fallback-owned generated family. The source-emitter matrix now asserts complete non-REP coverage with a `BTreeSet` of expected families before REP work begins. Focused verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`.
   Commit: `RUST-PARITY.8.3.5 - close non-REP generated matrix` (see Commit Log); retained completion note: generated-plan routing is exhaustive for all non-REP generated families; source-emitter matrix asserts complete non-REP family coverage; REP remains the only fallback
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.3.5`.
 
 - ID: `RUST-PARITY.8.4`
   Status: `done`
   Goal: Emit repetition handler families and termination guards
   Acceptance: Generated Rust covers REP acode, REP bcode, REP-AND acode, and REP-AND bcode structural families, including min/max bounds and zero-progress/recursion termination behavior; representative compile/run tests pass
-  Verification: Done — 2026-07-04. `source_emitter` now classifies repetition rules into explicit `GeneratedRuleFamily` variants: `RepAcode`, `RepBcode`, `RepAndAcode`, and `RepAndBcode`. `GeneratedPlanExecutor` routes all four directly. The shared Rust runtime now repeats blind-call OR choice and AND sequence steps with min/max bounds and a zero-progress guard; REP-AND acode counts complete ordered regex groups so `IT` fires per group. The source-emitter matrix proves bounded REP acode, bounded REP bcode, bounded REP-AND acode, bounded REP-AND bcode, zero-progress termination, and same-position recursive-call termination in generated modules built/run in the isolated temp crate; a compatibility lock proves legacy `Repetition` plan rows still execute through direct REP specialization. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib`; `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `mdbook build docs/linkedspec-book`; `bash knowledge-map/scripts/check_knowledge_map.sh`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh` (1021 phase0 tests).
   Commit: `RUST-PARITY.8.4 - emit REP generated families` (see Commit Log); retained completion note: generated source classifies and directly runs explicit REP families; source-emitter matrix covers REP subfamilies, termination guards, and legacy `Repetition` compatibility
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.4`.
 
 - ID: `RUST-PARITY.8.5`
   Status: `done`
   Goal: Integrate generated-source validation with the oracle/corpus contract
   Acceptance: Generated-source execution is validated across an all-variant smoke matrix and at least one manifest-backed corpus subset; documented limitations are explicit; `.8` closes only when generated Rust source has compile/run proof for every supported structural family
-  Verification: Done — 2026-07-04. The source-emitter test now has three generated-source proofs: the all-family matrix, the legacy `GeneratedRuleFamily::Repetition` compatibility lock, and a manifest-backed corpus subset. The new subset test loads `rust/linkedspec-runtime/tests/corpus/manifest.json`, asserts selected cases are present, parses each fixture with `parse_spec_with_user_functions`, validates/compiles it, first confirms normal Rust interpreter output equals `[expected.json]`, then emits generated Rust modules and runs them in an isolated temporary crate. The manifest subset is `proof_edge_array_literal`, `proof_edge_scalar_literal`, `autoexist_array_bare_arg`, `terse_1_5_2_primitive_literals`, `terse_2_2_3_attached_if_blocks`, `terse_4_3_2_user_function_runtime`, `tclite_command_subst`, and `portmap_bare`. Limitation: generated-source corpus proof is curated and not yet the full 88-fixture corpus; the full corpus remains covered by `corpus_oracle` on the interpreter path. Verification passed: `cargo fmt --manifest-path rust/Cargo.toml --all`; `cargo fmt --manifest-path rust/Cargo.toml --all --check`; `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter -- --nocapture` (3 passed); `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --test corpus_oracle -- --nocapture` (3 passed); `cargo test --manifest-path rust/Cargo.toml -p linkedspec-runtime --lib` (126 passed); `cargo clippy --manifest-path rust/Cargo.toml -p linkedspec-runtime --test source_emitter`; `mdbook build docs/linkedspec-book`; Knowledge Map, memory architecture, doctrine, and whitespace gates; `tools/run_ci_local.sh` (1021 phase0 tests passed).
   Commit: `RUST-PARITY.8.5 - integrate generated source with oracle corpus` (see Commit Log); retained completion note: source-emitter test now validates generated source against all supported structural families plus a manifest-backed 8-case oracle corpus subset
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.8.5`.
 
 - ID: `RUST-PARITY.9`
   Status: `done`
   Goal: Documentation sync and finalization — update book, roadmap, live docs
   Acceptance: ROADMAP_V2.md tracker updated; CHANGES.md + DEVELOPMENT_NOTES.md + MEMORY.md updated; book backend-handoff.md refreshed; ARCHITECTURE_STATE.md updated
-  Verification: Done — 2026-07-04. `ROADMAP_V2.md` marks the Rust follow-on row done and records the generated-source coverage boundary; `ARCHITECTURE_STATE.md` now reflects the 88-fixture interpreter oracle plus direct generated-source executor; the mdBook backend handoff and `rust/README.md` describe the current generated-source direct-execution/subset-proof status; live docs and task-tree index close `RUST-PARITY`; `TOP-RULE-AS-NORMAL.3.2` is unblocked as the next PNT leaf because its Rust recursive-grammar prerequisite landed under `RUST-PARITY`. Verification passed: `mdbook build docs/linkedspec-book`; `bash scripts/check_memory_architecture.sh`; `bash scripts/check_doctrines.sh`; `git diff --check`; `bash tools/run_ci_local.sh`.
   Commit: `RUST-PARITY.9 - finalize Rust parity documentation` (see Commit Log); retained completion note: Rust parity follow-on tree closed; roadmap/live docs/book/architecture state synchronized; next PNT leaf routed to `TOP-RULE-AS-NORMAL.3.2`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.25`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree RUST-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.25 --id RUST-PARITY.9`.
 
 ## Current Frontier
 

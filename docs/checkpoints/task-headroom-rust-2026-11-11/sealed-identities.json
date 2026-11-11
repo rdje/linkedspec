@@ -1,0 +1,974 @@
+{
+  "docs/checkpoints/task-headroom-rust-2026-11-11/candidate-command.json": {
+    "bytes": 357,
+    "sha256": "24514758acad7ce7e8950515950e2d83cb2ae880b7b58f4b749ba55d575be64d"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/candidate-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/candidate-result.json": {
+    "bytes": 115,
+    "sha256": "6fcdbc4e4afaafe272e880e3bcedf342752a8f657485834e602cce7e72779bb8"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/candidate-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/candidate-stdout.log.gz": {
+    "bytes": 121,
+    "sha256": "b862e1453a55fafc3d46e83418f714e8d50e97c989953bb43ed87bda706b6578"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/capture.py": {
+    "bytes": 6884,
+    "sha256": "42cc1037a89573a664f13a9e5694e27de34c43b2ff68199f03e82425171f3f41"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/check_candidate.py": {
+    "bytes": 1968,
+    "sha256": "e08a80c263ed80755863c7552d0c0fa0a607acdd0cacdc0ddda523524d9752ae"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/migration/command.json": {
+    "bytes": 297,
+    "sha256": "6bc73d09ea4a73dc1b393a44dabe035cdbe67ddbf7c9d6945df9576509018996"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/migration/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/migration/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/migration/stdout.log.gz": {
+    "bytes": 130,
+    "sha256": "7ebffd29d3d7da582ec8b4c6c250c3b00039343842ae684cad66fc1f59dfdc09"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.1/command.json": {
+    "bytes": 241,
+    "sha256": "a3424c8abdc9f4b3777806cec43a59fd9fc7d775f9ff072b71d7784ec6107176"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.1/stdout.log.gz": {
+    "bytes": 350,
+    "sha256": "8054471d87b6a848089d24a76b33b6f6c61c1138eb19cc3b9b3a050bc0334a94"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.2/command.json": {
+    "bytes": 241,
+    "sha256": "18596e6db8315266c19e2ca1491b597b3d548d0ae1a0b306afc124e76cbad138"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.2/stdout.log.gz": {
+    "bytes": 380,
+    "sha256": "76f2ab3ab3e9aed94b695f4c7fe2e502c2013f42a3032e715319367a631d8c26"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.3/command.json": {
+    "bytes": 241,
+    "sha256": "d0c01a664bb41bc7ad33cabd901e1a5c12b3a2ddd0c3c5a5ef9c50ef40be2c06"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.3/stdout.log.gz": {
+    "bytes": 331,
+    "sha256": "e70e9185cd9a616fb09366bd52dff0e9e145b77e23ca7681b1f30fa403f8d9ab"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.4/command.json": {
+    "bytes": 241,
+    "sha256": "b3ee745076861e3938f6e44e1a44de0e12c288abd1f44c8fcbdd64aa8b521b6f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.4/stdout.log.gz": {
+    "bytes": 455,
+    "sha256": "22ccb7f61d99245cacc764382e212997fdbbcbf62a5adc3bb0c6bac77b40d443"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.1/command.json": {
+    "bytes": 243,
+    "sha256": "b2b848d263f21c5dfaa498859f3ed0bd11a3677aa6518c15c6270810cfef836b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.1/stdout.log.gz": {
+    "bytes": 900,
+    "sha256": "7c29868a187751223f0c47ea9b4574399925a130d4c7e45404e3c5ab2dff8b8e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.2/command.json": {
+    "bytes": 243,
+    "sha256": "feb5a878b00fa8bde4631d69ce17f5a45734cc0d2baa52b2f782ce96c9bb706f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.2/stdout.log.gz": {
+    "bytes": 988,
+    "sha256": "bcaaf9f379cb5229e8cc2fa66e54f617ab275e24b8231e2a326732856eea4e2f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.3/command.json": {
+    "bytes": 243,
+    "sha256": "90b0dbd6c860140bc19ec1b7b98a370dfc3aeba886a6c46ff043aeb32d1eb177"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.3/stdout.log.gz": {
+    "bytes": 1028,
+    "sha256": "b65daffa5b0168daad61bbf13f7a678b8fd14c531db8bab9dfacbf51fec33f6f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.4/command.json": {
+    "bytes": 243,
+    "sha256": "68336fce58c58db702c30bf651874f0e11ad357638d235d5956c7501dd1976a9"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.4/stdout.log.gz": {
+    "bytes": 1000,
+    "sha256": "1215fcf225d3ada808b2c29517e18f7cede85c82c22c54ddef52f8684b84a412"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.1/command.json": {
+    "bytes": 245,
+    "sha256": "5ab44a2ce920c2ce6de1666f4eddf95db5abe597ff320edce0f87e353263482a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.1/stdout.log.gz": {
+    "bytes": 1112,
+    "sha256": "c2be3ce1ff326abf40e483efc84b53624cf03e05befc24c14edb6ec6e1a6df6a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.2/command.json": {
+    "bytes": 245,
+    "sha256": "360bdce9c24de73935bb2dcb2da5e9643c44916acbd1976e08ea38d6c6784e10"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.2/stdout.log.gz": {
+    "bytes": 1549,
+    "sha256": "61e000e4365c72c5e54d2fa4312f92e3f0a1405d53487baef04a9e33c3bf0f5e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.3/command.json": {
+    "bytes": 245,
+    "sha256": "18b8a15a0c2ee730f42edc01b5a04cf82aee2d09f76d6372041c53cf00df09a7"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.3/stdout.log.gz": {
+    "bytes": 1230,
+    "sha256": "d42b779ae85749ee49521bf3d04d33ca331839e5b48513683defea269f2f55a3"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.4/command.json": {
+    "bytes": 245,
+    "sha256": "ef9ffa89efb4c9cb4396e7f38525cc694b6912c302045e3aedd8befc12fdd92f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5.4/stdout.log.gz": {
+    "bytes": 1591,
+    "sha256": "15eaa80982a978c9f52b9af30443675e25eadf68e2a7975ac2c064bc2c0048f6"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5/command.json": {
+    "bytes": 243,
+    "sha256": "dbdd39201842c3cce6be73e96be9e2ef75559ae36c00fe6cd221ebed15cd1322"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5.5/stdout.log.gz": {
+    "bytes": 488,
+    "sha256": "77bb4514783224ccb53313c3592ca0ca515fd4ccf7e2628d6414721d20edb544"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5/command.json": {
+    "bytes": 241,
+    "sha256": "336684f0ec76104a5dd1e7397e473fd34bdd2cb1931764889d7bc2aff3e59f35"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.5/stdout.log.gz": {
+    "bytes": 416,
+    "sha256": "d8312cb5f9139f3f0696ca6f58c52e5357e313f9e84612de9b7a4d70b29a1a15"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.6/command.json": {
+    "bytes": 241,
+    "sha256": "e482b0afc3cb2d900024edb836a5880a886ef3ab97518817b9ac06d511536321"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.6/stdout.log.gz": {
+    "bytes": 1281,
+    "sha256": "abb9d730af8e2e39e4d5b125879f55b989a2aa7b7556f1e26e892379c8ac824a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.1/command.json": {
+    "bytes": 243,
+    "sha256": "1f73433f6469ce029f0584518797546309d0ec31d2c9e1e95a0f427c54d1db6e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.1/stdout.log.gz": {
+    "bytes": 1758,
+    "sha256": "199da96d88b84f5c0f97c78e7baf386b8da5ff5ad69cb441e875a3e37de3e71a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.2/command.json": {
+    "bytes": 243,
+    "sha256": "e11710686b6093753c552d663b71420e52d14045974d056ec35f41345a4b6983"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.2/stdout.log.gz": {
+    "bytes": 1291,
+    "sha256": "9aedcac534b9c8895932fb5526d45532873433a7756169f6041660d37321e77c"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.1/command.json": {
+    "bytes": 245,
+    "sha256": "c34aeb76f2d0806fc1c9f620a19dee99e907a3f667aa35f20c13b22c4305567c"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.1/stdout.log.gz": {
+    "bytes": 1015,
+    "sha256": "e63eb81326a6cf499007802da947a8bbdfd78052b149452d64cbc4a0f917ccd3"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.2/command.json": {
+    "bytes": 245,
+    "sha256": "bd5cea2cc712f26cfe91624fceeb56450820b8974b071ac2ad2f668a5a438daf"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.2/stdout.log.gz": {
+    "bytes": 1407,
+    "sha256": "2f508d7430ffb40c37072b9b291546c31e1a95df8c05b877737420dd45290433"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.1/command.json": {
+    "bytes": 247,
+    "sha256": "bd3b067e1fbda701420533f69217818d35d69999a758a7deb94b9006bc8f388d"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.1/stdout.log.gz": {
+    "bytes": 671,
+    "sha256": "621adfd4df45ae5357a95ae75482551d75035e894c03c6d0bb57722e3e5ad9c7"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.2/command.json": {
+    "bytes": 247,
+    "sha256": "fb0226ad63936bf42a6945b1371016f392d340cb5f9e38091afa563ca4c93084"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.2/stdout.log.gz": {
+    "bytes": 774,
+    "sha256": "5394e0188ff47f4ab8f4028b74b41c1082394194853ee7c52b7207f5c85a5383"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.3/command.json": {
+    "bytes": 247,
+    "sha256": "b03095daaf0ee9dd178e5847d1462ac9884e9e30f7754ca9a17e41cf908f41ab"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.3/stdout.log.gz": {
+    "bytes": 1164,
+    "sha256": "4fa721cd1f07e9f08b6a769d563c1ab42e62738438b596e4097c58324f9beab4"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.4/command.json": {
+    "bytes": 247,
+    "sha256": "78e91aab0a846aabe03348ae25ab2e1ff1a82977d8e56d2d7571c3cb084f1cbb"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3.4/stdout.log.gz": {
+    "bytes": 522,
+    "sha256": "4eebf8535f816c80ebb896e3c4e80a8df376ce36a6fb2b8f8ce7e1ee77b90048"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3/command.json": {
+    "bytes": 245,
+    "sha256": "cd793e7d2c3eeed3008af9ef0305c366888cda85fb4a6514b2f3f4cefc8743e5"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.3/stdout.log.gz": {
+    "bytes": 453,
+    "sha256": "fa9a06de92e603fb9825246a20d80e8278071e47e5abca4b80a1c3187aa6a48f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.1/command.json": {
+    "bytes": 247,
+    "sha256": "d9ff9e47f5113c599448c59e51b63d72fd916dc76dec2d98570371337c4ac5be"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.1/stdout.log.gz": {
+    "bytes": 938,
+    "sha256": "9e1d32754ed352ffbaed6a095352e1e56514955b0f69ca15be3e583895693bb7"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.2/command.json": {
+    "bytes": 247,
+    "sha256": "44a197ea17a58b7e26eeb69a1efcaed1439879e652d763b78360d90a3a734655"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.2/stdout.log.gz": {
+    "bytes": 1037,
+    "sha256": "90be8a7c0479de53dec527c7d9e358735a6c62fa684328ef69b3155a66cddeca"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.3/command.json": {
+    "bytes": 247,
+    "sha256": "f35c6e95ce1735494eb255d5bfb782ec928ce8bca808cc2404bd411c6a244e39"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.3/stdout.log.gz": {
+    "bytes": 1040,
+    "sha256": "c551c7e3934fe99ea5f65f5a6513b0453e22597a6398a54350264404657f281a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.4/command.json": {
+    "bytes": 247,
+    "sha256": "516c9a7e5bf139e061d514545dfde705704ec7ae1c5f93e0d9742a472bec7de6"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4.4/stdout.log.gz": {
+    "bytes": 917,
+    "sha256": "4b3e64de8ca63482275929cf27c3407515bd4b4bb364b013831d863980610d7e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4/command.json": {
+    "bytes": 245,
+    "sha256": "69afd9a992ba981614b550333422e4e77a45c501f15dfbbe2fa3a829686c5108"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.4/stdout.log.gz": {
+    "bytes": 1131,
+    "sha256": "e71612a82dd28776241c9a3d129a8d4eff143e0b008bfb945df3f60d91381e7f"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.5/command.json": {
+    "bytes": 245,
+    "sha256": "74f001866c9a2ccc74db81b3a545a86d802bb0e13ba3acb87b0d2514484dd607"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.5/stdout.log.gz": {
+    "bytes": 986,
+    "sha256": "a8f71a87115c3b82cfcad7de7b91964782ee6276d9f78459badbc68593520280"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.6/command.json": {
+    "bytes": 245,
+    "sha256": "b6e9a181fabf612cd2adf35ca5735f729ee4ef2dbab4347ddb9463f034438b5b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.6/stdout.log.gz": {
+    "bytes": 1080,
+    "sha256": "15894ba022d755622119956188a479fd10d3580c9186945ccf235dcb336fe313"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.7/command.json": {
+    "bytes": 245,
+    "sha256": "0192960c2acfd422d0d623f899ed8862ba6943f83d469aca7666dfd5c289e7e2"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.7/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.7/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3.7/stdout.log.gz": {
+    "bytes": 1290,
+    "sha256": "b93912b5ea14c8ce67ca4eceb811c981de0eada29f3e3dfa0eca00b0d84482aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3/command.json": {
+    "bytes": 243,
+    "sha256": "9b71910c3b314f73bd0288b01cf1ead22495e226cc4d186f3da70798270bf39e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.3/stdout.log.gz": {
+    "bytes": 844,
+    "sha256": "abd124b058a6658b0aa7791f632b08a13c6a30942eb0a24f2707253a372ec31b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.4/command.json": {
+    "bytes": 243,
+    "sha256": "66d0825cf173bbf3154c1c4c3f2fee6e47fad52f4ed8aa2a502de9205017c18b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.4/stdout.log.gz": {
+    "bytes": 825,
+    "sha256": "88ca3a6eb3827e172861663d352114cf9e935e88abaef25ce181d15c6524b183"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.1/command.json": {
+    "bytes": 245,
+    "sha256": "5c928e05bb4cf40d86d2815a2da409a69b67ccc8859ea5a89e28c906710f1b83"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.1/stdout.log.gz": {
+    "bytes": 2089,
+    "sha256": "9bd346ba7261849bb1f19206f862c82543b9ad9a0d6d5999c53be42dfa24e039"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.2/command.json": {
+    "bytes": 245,
+    "sha256": "1117813d35fe1ab3f89ec4653f75a3fc489af1a5d99effe72cad561c88ca6b23"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.2/stdout.log.gz": {
+    "bytes": 1509,
+    "sha256": "d0ba2eebbefdb6742a26e3908b13826a14ed42d14cfa0695d1d94273afb977fb"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.3/command.json": {
+    "bytes": 245,
+    "sha256": "e4b136f2e232dd8a7fa7b70c43eaac406184ee13946d7c67845a56d5e900ce73"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5.3/stdout.log.gz": {
+    "bytes": 1824,
+    "sha256": "ad423434efc21f2276ab7d38197b74201015a24ad4e5046acb7e580bc8c182df"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5/command.json": {
+    "bytes": 243,
+    "sha256": "fa1046437b826b2fcce4e8979fc9316ad1e1c425ca123056cca2eb36cbe34d26"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7.5/stdout.log.gz": {
+    "bytes": 1120,
+    "sha256": "85489dd1a32456e3460d75ab7e7db6d73b7831d76cacb0c54d81640263fbeab0"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7/command.json": {
+    "bytes": 241,
+    "sha256": "09b7c956331d3906ea55c615ce441744a9d587eb54ffcdbb5c04957930167b85"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.7/stdout.log.gz": {
+    "bytes": 1101,
+    "sha256": "ef261be66328eb2f4c10484c0060be2aa4f266257f4d6865b3db46d39d255c7b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.1/command.json": {
+    "bytes": 243,
+    "sha256": "b6098f22693a35b3b0449b3baef9873c4f6a1c6556d89300281f7d3a2673dc33"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.1/stdout.log.gz": {
+    "bytes": 733,
+    "sha256": "1adb8c118d8d5aec75ee034c1b306af9fb61ee5af90abc57ce4f2831ffc59878"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.2/command.json": {
+    "bytes": 243,
+    "sha256": "437903bf6521fb5276a3984abd5820ae63c2d345324807364d88cafa273e8954"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.2/stdout.log.gz": {
+    "bytes": 740,
+    "sha256": "5794bc11251cb29f6d1156d60ad9fdaec07e525f2a91bfaa3d03c66886c80303"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.1/command.json": {
+    "bytes": 245,
+    "sha256": "3bc74689e6acadc2fb12779a986f5966b1bb616eeffac21cf7e03be9aa8fdeae"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.1/stdout.log.gz": {
+    "bytes": 1094,
+    "sha256": "8f7713f33e90a03a7759adcd01cd1d4e32d9a499d4d9273347236cd6c4e5121d"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.2/command.json": {
+    "bytes": 245,
+    "sha256": "d91b816f9592b2910f6145d5aed996b297057d911b4180f23867df5ddac1d824"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.2/stdout.log.gz": {
+    "bytes": 1008,
+    "sha256": "311dfa57a169a92a2e59ca409037bcee71102292758b5afc4a6397c75f922684"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.3/command.json": {
+    "bytes": 245,
+    "sha256": "07d52aa2b2272c8813425d102862718cd66f814bffc33b47c20bc837b0c6b259"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.3/stdout.log.gz": {
+    "bytes": 725,
+    "sha256": "2375e9d9f71954af8637ac2440c7e34e6af47cad1ff8621ae036218ecd5e458d"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.4/command.json": {
+    "bytes": 245,
+    "sha256": "47fca63f5495d247a835cf12ae87d6e0e77c70c94a9efbee362f2ab8ff5e498d"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.4/stdout.log.gz": {
+    "bytes": 909,
+    "sha256": "2b5bb567f389bdc11fc48bc8bdbc3a7d2090530f35e83b188fa3e29b0dbd5538"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.5/command.json": {
+    "bytes": 245,
+    "sha256": "1b56406b5c70a7f4072097853973dff0d6f9b6624ef27ec44a9a450c099abbd5"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3.5/stdout.log.gz": {
+    "bytes": 666,
+    "sha256": "cc0d6bd9f7ac87c6d5a21659f914b39e616f80a107868d1a0b76dd954f31ce7c"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3/command.json": {
+    "bytes": 243,
+    "sha256": "43645b519f8ff307770b9479fdedd23d6c71ef8b333387d440bd641cdbf53026"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.3/stdout.log.gz": {
+    "bytes": 795,
+    "sha256": "b7813de0ec2209bb19c03bd8d0174e0609b191870c10d24f10e097841cd342ae"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.4/command.json": {
+    "bytes": 243,
+    "sha256": "b5cc3b6ec4d5bb043b33371585d16e3e3f8d910dfe55188c3efc8e31ff0fa2e2"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.4/stdout.log.gz": {
+    "bytes": 912,
+    "sha256": "c493c3d9d258082e17061e3d55af3814ea027dbbcc919ce07ddaecdb7b2f6416"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.5/command.json": {
+    "bytes": 243,
+    "sha256": "0d8d6faf99228ce874a245ef93df622b449937b76f7f2b7ed089905587bddd61"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8.5/stdout.log.gz": {
+    "bytes": 1041,
+    "sha256": "936bd14bfca1c6065103c8a93acd02e50718532a11e7b2c99489fbacb0f101da"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8/command.json": {
+    "bytes": 241,
+    "sha256": "9869a0706fde13830670ce056b3cfb430b654e8a865a2ded6957c7b6d5796139"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.8/stdout.log.gz": {
+    "bytes": 796,
+    "sha256": "2ad8f69330a50ad2b94d07258639811b7537d5acd34cec78de69cff2c6deaa4b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.9/command.json": {
+    "bytes": 241,
+    "sha256": "f9d0db8448e04631320df42fad587c9c885bdea7382c20a4c7ef98c5e3ee97db"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.9/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.9/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY.9/stdout.log.gz": {
+    "bytes": 724,
+    "sha256": "b16fee3fd29c5dce38bc14ab298ade5bdb6713e26fb503711bffa52273c54538"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY/command.json": {
+    "bytes": 239,
+    "sha256": "ef73c7d4bb7bc61fa124fa18289ebbda2f10b4e3ad0edc8c2bbd5845715f7293"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-RUST-PARITY/stdout.log.gz": {
+    "bytes": 147,
+    "sha256": "bb99f78185ea6f1e8f24b8e993e011d4b115760ecb737fc1f2b9781da4e863c9"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-all/command.json": {
+    "bytes": 221,
+    "sha256": "4b5d5ff6e3d453ed6869c1c39cf20d221d96ca308f084ca21dafcac5dc615bdd"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-all/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-all/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/commands/reader-all/stdout.log.gz": {
+    "bytes": 65042,
+    "sha256": "ce612a1ea53994432b631204770250744531c5bb927d4431adaf2bcb9c1954ab"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/complete.txt": {
+    "bytes": 85,
+    "sha256": "4afbca80c72790971c406327cac9741e361026cfd2481af426e90ee344ee0f68"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/git-input-identities.json": {
+    "bytes": 1945,
+    "sha256": "6743c7278a4dd2485feb226cbc0f461e20bdf782c5766af001c759deff2a2544"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/git-inputs/source-0.log.gz": {
+    "bytes": 190693,
+    "sha256": "84d7c4731e8eb12a1ce76e9b28c64d5d8be5217998772c163b66909e408ac6c4"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/git-inputs/source-1.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/git-inputs/source-2.log.gz": {
+    "bytes": 40348,
+    "sha256": "d8309cb0b6d39830c250b429ba0bc97606cea7c6c77c348f6feaaea6f1773a47"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/git-inputs/source-3.log.gz": {
+    "bytes": 78838,
+    "sha256": "1e1957ab6ded9d58579d25575cdfffafc8b5032109c1826b845a1c5061b404b3"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/inputs-before-migration-identities.json": {
+    "bytes": 24821,
+    "sha256": "fbe132c304246bd8d79fe3a6c52207edff0df2c3f2215e03b9082d4776a4f903"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/inputs-before-migration.tar.gz": {
+    "bytes": 3607096,
+    "sha256": "1bd05b1487b17a4a511fa443fb1e425535d3b4c56416e6bef2e714b8e39a4a5e"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/outputs-before-reader-identities.json": {
+    "bytes": 361,
+    "sha256": "3693334e5c50e42ca225858c89dddd3eefc7528a4a6d328cfa1afaede82dd2ec"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/outputs-before-reader.tar.gz": {
+    "bytes": 48679,
+    "sha256": "f00e7012483c235fa77e5d0e5f42f0281c225dab586a1cdb526c8c5e50e90537"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/prepare.py": {
+    "bytes": 1873,
+    "sha256": "2c5a623cd59114f268fddd0a4c76ca52249671d02bd9c69ad517f81589cf585a"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/review.py": {
+    "bytes": 9775,
+    "sha256": "431f2a0edfda582d937303d557535674deb32d291153200e97001af7febf2905"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/run_review.py": {
+    "bytes": 1013,
+    "sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/seal.py": {
+    "bytes": 708,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-capture.py.gz": {
+    "bytes": 2382,
+    "sha256": "e53869543ffc0d52a5d022404b158a35bce3717b5b51ac66784985c0534c0228"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-check_candidate.py.gz": {
+    "bytes": 854,
+    "sha256": "d0eaa5bf4625946e2e7227da65c0ebac83394d36433e6b575cc4a6c099b3c77b"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-identities.json": {
+    "bytes": 1929,
+    "sha256": "8a3ad01219485a26ced19e742f13c774fc97ffb2fdc5c2a145e2f0963c678ae4"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-review.py.gz": {
+    "bytes": 3308,
+    "sha256": "8b1103111095ad87c424d5b87c8be247dcc43ad9a349aeb482109d62eb2a1ec6"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-run_review.py.gz": {
+    "bytes": 517,
+    "sha256": "92b721088a377fb5949a0c4850caf6e0676d1e5156f39bad53b0514dbb84ca30"
+  },
+  "docs/checkpoints/task-headroom-rust-2026-11-11/template-seal.py.gz": {
+    "bytes": 444,
+    "sha256": "f3b6f880abfa2bf9666429f724f0e8a5e1344d7fa4e0960626d7bec298d79a1a"
+  }
+}

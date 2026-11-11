@@ -1428,7 +1428,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
@@ -2729,3 +2729,23 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned verification: Exact archived instrument/ordering/input identities, meaningful distinguishing controls and focused claim/document checks; canonical at admission/infrastructure boundaries.
   Planned claim verification: Finite source-order/custody evidence with missing historical legs disclosed.
   Schedule: After feature coverage, before23.4 admission; P1, owned alongside4.2/SESSION5. Evidence: docs/checkpoints/array-pipeline-callable-rust-2026-11-11/RESTORE_ORDER.md.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.25`
+  Status: `completed`
+  Goal: Renew bounded task headroom before independent Julia callable pipeline work.
+  Dependencies: Clean c97b864fe9e9de16eaff5bcc840e46e97afe1699; unchanged ADR0139 migration and published epoch reader.
+  Acceptance: Extract only eligible closed RUST-PARITY commentary from the exact activation source. Preserve every ID/status/CORE field, complete unselected bodies, metadata, whole Current Frontier tail and source modes. Retain actual before-use inputs/outputs/public reader channels, independent preservation/corruptions and current identities. No tools/limits/runtime change; focused docs and normal clean commit before Julia79.6.4.
+  Verification tier: `focused`
+  Focused checks: Exact migration/public source and all node queries; independent preservation/corruptions/current identities; task/routing/index/Knowledge/book/scope/history/memory/diff/normal hooks.
+  Canonical trigger: Final clean push; new infrastructure changes require separate canonical ownership.
+  Claim verification: none: Finite exact documentation transformation, no runtime/population/performance/disk-reclamation measurement.
+  Activation: Dart all10/post-pointer/brief0/clean Git. Read ADR0139, prior Julia/Dart/legacy-boundary cards, unchanged migration/reader/CORE interfaces, relevant book workflow and RUST-PARITY source metadata/frontier. Exact uppercase boundary and no prior extraction; do not infer modern Rust parity from dated task observations. Broader4.17/18.2 stays separate.
+  Outcome:52 ordered IDs/statuses/CORE fields, six complete unselected bodies/prefix/full112804-byte tail exact.46 closed pointers renew48537 current text bytes (212629 to164092). Actual migration/all53 public queries0/empty stderr; first independent readonly0/ten controls/current identities pass. Evidence: docs/checkpoints/task-headroom-rust-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Clean Dart leaves about200 task bytes; exact activation source retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Closed commentary occupies bounded current collection; existing epoch contracts retain exact source.
+  - [x] **FIX** — Unchanged migrator extracts46 eligible closed narratives; no cap/tool/runtime change.
+  - [x] **ADDRESSED (verified)** —53 actual public queries exact; first independent readonly0/ten distinguishing corruptions/current identities pass.
+  - [x] **NO REGRESSION** —52 ordered IDs/all CORE/statuses/six unselected bodies/metadata/full frontier tail exact.
+  - [x] **LOCKSTEP** — Book/Knowledge/roadmap/task/index/live/MEMORY align; focused normal commit precedes Julia79.6.4.
+  Known wrapper recurrence: Documentation update exits0 with child6359 setpgid warning; no final PGID/standalone stderr retained. Existing SESSION7 owns repair; no lifecycle claim or recover/purge. Exact observation: docs/checkpoints/task-headroom-rust-2026-11-11/wrapper-notice.json.

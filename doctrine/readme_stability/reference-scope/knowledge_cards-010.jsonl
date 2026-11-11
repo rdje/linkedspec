@@ -81,6 +81,7 @@
 {"bytes":5135,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-capture-group-helper-indexing.md","sha256":"b407cdae404441b39939fa643139650c78a32248573047b4893e98297a324aac","type":"member"}
 {"bytes":4942,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-char-based-offsets.md","sha256":"bc8d5086b1abe43788bf3f72b50c4d4fb2af8280b5a79d7412623fc93cab8025","type":"member"}
 {"bytes":3563,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-ci-pgen-missing-input-rebuilds.md","sha256":"ca64a1d759b87a8780e9757a874aca51c6afa2c84a1ff348df55f5c84bd2b1b8","type":"member"}
+{"bytes":2534,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.25","path":"docs/knowledge/rust-closed-task-narrative-headroom.md","sha256":"6322fa6771dac46a866a265e639b28d41433e29aaa6f9637db1767c52d15b8ad","type":"member"}
 {"bytes":9055,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-coalesce-evaluation-drift.md","sha256":"565c2f71643672c7a38da145650897b51b1e1b6bb791b743f78d1038d8af82df","type":"member"}
 {"bytes":2049,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-constructor-result-guards.md","sha256":"ded3246ddea7c6cca3c9ed7160ab761338016aeb64e50c3314826c1cd4a88aff","type":"member"}
 {"bytes":3387,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-contains-source-guards.md","sha256":"28c9d278ab46688e6215af2495e41248d51210394b02ba8cf8790a4e15d67e1b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
 {"bytes":4638,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-hash-value-result-guards.md","sha256":"9361c6243d5ed5d72f3c2b63e4a831d1a8626201d34078f687ce91f2c96052ac","type":"member"}
 {"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
-{"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}

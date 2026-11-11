@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Preserve closed Rust task commentary and renew headroom (23.4.25)
+
+Existing ADR0139 epoch migration preserves52 IDs/statuses/all CORE fields, six complete unselected bodies, metadata and the full112804-byte Current Frontier tail.46 eligible closed pointers renew48537 current-text bytes (212629 to164092). Actual migration/all53 public queries0/empty stderr; first independent readonly0/ten effective corruptions/current identities pass. Original templates/source/input/output/modes/channels remain recoverable. Tools, limits and runtime behavior stay unchanged; book/Knowledge/task/live/roadmap/MEMORY align before Julia79.6.4. Evidence: docs/checkpoints/task-headroom-rust-2026-11-11/REVIEW.md.
+
 ## 2026-11-11 — Guard Dart callable pipeline results and preserve wire errors (79.6.3)
 
 Four interpreter insertions/four deletions admit only canonical registered-source pipeline prefixes, retaining invocation/signature/producer/free-helper/format policies.194/four routes/private19RED-current194 covers16 supported targets/three separate pattern compatibility changes/175 full-wire records preserved;388 pairs/776 normal inputs/seven trace inputs/direct383/fatal analysis/format/first readonly17 controls/current497 identities pass. Full available runtime/generated toJson fields and new persist/read/compile/restore order survive; old omitted fields and Rust/Dart timing stay qualified under expanded P1 audit4.24. Book/Knowledge/task/live/roadmap/MEMORY align; rebuild Dart. Evidence: docs/checkpoints/array-pipeline-callable-dart-2026-11-11/REVIEW.md.

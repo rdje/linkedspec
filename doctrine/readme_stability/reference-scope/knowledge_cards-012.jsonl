@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8940,"lines":145,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-query-budget-contract-gaps.md","sha256":"e6a348876dcfa1199bc709ece95eb602eb18ac04ea4d7064a6fbd4a99396c344","type":"member"}
 {"bytes":5592,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-rule-calls-empty-function-gate.md","sha256":"9aeb787ed0c00f1053fae4c59464a3a0557370140efd97433fe7a95817a41041","type":"member"}
 {"bytes":4241,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-source-ceiling-boundary.md","sha256":"dfd69ee4858798625bc2212c102695b128f4b85c8ccacc8fca112ea3df7ab831","type":"member"}
 {"bytes":14703,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-design.md","sha256":"e7bac80a9de1cec446fc5494a60e5253f7bb0e62158c3fbae7c6a65534409780","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3176,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-source-migration-runtime-boundaries.md","sha256":"7b6ec9bb09f6087bff1fa470a880fd9b401f95e82be4847ee91146fb043d5639","type":"member"}
 {"bytes":5511,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-statement-separator-contract.md","sha256":"a5b3105454887f33e9d95646c2e28b0ec29180e3b4b6f141ff37c8bbf590971d","type":"member"}
 {"bytes":4432,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-comparison-bridge-contract.md","sha256":"2236db2f6df34b0cb5024ff5debb9754d810c82ca0de1aec7b18cd315816eebb","type":"member"}
-{"bytes":2810,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-method-surface-verified.md","sha256":"9e82aa7a7b3dc2b6a58ff9db6bc4d5b0ceee722f493b13e448ddf00612a71ce3","type":"member"}

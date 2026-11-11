@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3` | `completed` | Callable194/four routes/private19RED-current194/direct383/readonly17/current497;175 full-wire records exact and historical qualification explicit. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.25` | `completed` | Exact Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail;48537 task bytes renewed/53 queries/readonly ten controls. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4` | `pending` | Independently acquire safe37 and Julia producer/signature/error/arity policies before bounded callable result repair. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |

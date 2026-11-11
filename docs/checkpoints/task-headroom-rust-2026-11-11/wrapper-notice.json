@@ -1,0 +1,11 @@
+{
+  "observation": "Existing managed-wrapper child-side process-group warning recurred during index/map/reference-scope documentation update.",
+  "emitter": "tools/project_data_run.sh",
+  "message": "child setpgid (6359 to 6359): Operation not permitted",
+  "outer_exit": 0,
+  "channel_custody": "Tool combined output only; no separately retained original stderr or final child PGID. Do not infer either failed or established group.",
+  "following_output": "knowledge-map wrote1731 facts/12373 keys; reference-scope update PASS1933 members/17 pages.",
+  "repair_owner": "SESSION-STARTUP-READING.7",
+  "canonical_fact": "docs/knowledge/project-data-liveness-permission-denial.md",
+  "limits": "Known monitor-mode wrapper mechanism; specific timing/kernel cause remains unestablished. No recover/purge/deletion probe; no new lifecycle claim."
+}

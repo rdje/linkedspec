@@ -1,0 +1,12 @@
+{
+  "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.25.json": {
+    "bytes": 1230,
+    "mode": 420,
+    "sha256": "8cca1c63725ec3cfec418b68c436fbcecd424947fd501afc9038b2d08909b69c"
+  },
+  "docs/tasks/RUST-PARITY.md": {
+    "bytes": 164092,
+    "mode": 420,
+    "sha256": "92d8b4ae6f7f8ec0ec571933a87b75927e659b2d4a453ed731edf5cc42db2a5b"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/read_task_narrative.py",
+    "--tree",
+    "RUST-PARITY",
+    "--epoch",
+    "TYPE-REFERENCE-BOOK.1.2.23.4.25",
+    "--id",
+    "RUST-PARITY.8.1"
+  ],
+  "cwd": "."
+}
