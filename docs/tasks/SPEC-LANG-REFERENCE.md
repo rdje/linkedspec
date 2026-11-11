@@ -63,207 +63,63 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Status: `done` / `closed`
   Goal: Complete + variant-agnostic + example-rich book coverage of the whole `.spec` language
   Children: `.1`–`.7` (done, including `.5.1`–`.5.5`; `.5.3.1`/`.5.4.1` deferred),
-  `.8` (done/closed), `.9` (done — §5.5 drift fix, later superseded by `.10.4`/`.10.5.16), `.10`
-  (historical remediation done; its no-regex validity premise was later superseded by ADR `0010`;
-  `.10.1` verdict superseded, `.10.2` superseded, `.10.3`/`.10.5`/`.10.6` done).
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE`.
 
 - ID: `SPEC-LANG-REFERENCE.1`
   Status: `done`
   Goal: Audit — enumerate the complete `.spec` surface from authoritative sources and map the
-  book's current coverage (depth, example density, variant-neutrality) into a categorized gap
-  list + a KM-card candidate list, which becomes the decomposition into concrete gap-filling
-  leaves
   Acceptance: a recorded inventory of every `.spec` construct (with its authoritative source),
-  a per-construct coverage verdict (well-covered / thin / missing / variant-leaking /
-  example-poor) citing book file:line, a prioritized gap list, and a KM-card candidate list;
-  concrete `.2…` leaves added to the frontier; no book content change in this leaf (audit only).
-  Verification: Done — 2026-06-17. Two read-only audits (authoritative `.spec` surface
-  inventory from `Core.pm`/`Validation.pm`/`Contracts.pm`/`spec.spec`/shipped specs ∥ book
-  coverage map over all `user-model`/`dsl`/`compiler`/`appendix` chapters) synthesized into the
-  "Audit Findings" section below. Result: **8 of 10 surface areas already WELL-COVERED** (rule
-  labels, rule modes, parse modes, edges, lifecycle markers, capture/marks, helper catalog,
-  control flow); the binding gaps are the **output/return-shape contract** and **regex as a
-  first-class concept**, plus smaller clarity/example gaps. Decomposed into `.2`–`.8` (below).
-  One inventory claim was rejected on verification: the surface agent called lifecycle markers
-  `E`/`IT` "deprecated", which contradicts the completed `LIFECYCLE-FAMILY-AUDIT` (all 7 markers
-  equivalent/supported) — NOT propagated. No book content changed (audit only).
   Commit: `SPEC-LANG-REFERENCE.1 — audit: full .spec surface inventory + book coverage map; decompose into .2-.8`; prior node reference: `SPEC-LANG-REFERENCE.1` (see Commit Log); retained completion note: Also creates the owning tree + registers it in docs/TASK_TREE.md (ownership-first, folded into the first leaf per repo convention). Audit only — no book change
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.1`.
 
 - ID: `SPEC-LANG-REFERENCE.2`
   Status: `done`
   Goal: Document **regex in `.spec` as a first-class concept** (CRITICAL gap) — a backend must
-  know exactly what its regex engine has to support
   Acceptance: a user-facing treatment (new `user-model` chapter and/or expanded
-  `appendix/formal-grammar.md`) of: `/pattern/` literal syntax + delimiter escaping; the
-  multi-cluster ordered-sequence model; the capture-group ↔ `entry_group(N)`/`match_group(N)` /
-  `entry_named(name)`/`match_named(name)` indexing relationship; and an explicit, **verified**
-  statement of the regex feature set a backend must provide (alternation with position tracking
-  per `LinkedRE`; numbered + named capture groups; which flags are/aren't part of the contract).
-  Verify engine capabilities against `perl/LinkedRE.pm` + the rgx engine before asserting them
-  (do NOT guess). Several worked examples; `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. New chapter `docs/linkedspec-book/src/user-model/regex-in-spec.md`
-  (registered in `SUMMARY.md`) covering: `/pattern/` literal + `\/` escaping + inline `(?flags)`;
-  regex slots/clusters → ordered-sequence (AND) vs alternatives (OR) + which-alternative branch
-  tracking; `seek`/`consume` anchoring; numbered groups (**0-based, captures-only, compacted**),
-  named groups, the compaction gotcha + named-group remedy, entry-vs-match; and a verified
-  "regex feature set a backend must support" section. `appendix/formal-grammar.md §3.1` expanded
-  with the capture-group contract + inline-flags clarification. **All engine facts verified
-  against `perl/LinkedRE.pm` (`oredRE`/`_build_match_info`: `match_list = [grep defined $1..$N]`),
-  the ActionIR lowering (`Contracts.pm` `entry_group`→`$IMATCH_LIST[N]`, `match_group`→`$LMATCH_LIST[N]`),
-  the Rust `rgx` runtime (`CompiledAlternation` + `matched_branch_number` + per-branch `group_offset`),
-  and cross-checked against shipped specs (`lib_reader.spec`/`tablegrep.spec`/`spec.spec` all use
-  `entry_group(0)`=first capture).** Found + corrected a real capture-indexing **contradiction**:
-  `helper-contract-catalog.md` claimed "index 0 is the full match" (wrong) while the walkthrough
-  said 0 = first capture (right); fixed the catalog, fixed two buggy examples that used the wrong
-  1-based convention (`overview/what-is-linkedspec.md`, `appendix/formal-grammar.md` Child rule),
-  and added a captures-only/compacted clarifier to `source-boundary-helper-reference.md`. This
-  closes the capture-group-mapping accuracy concern, so `.5` (helper-catalog sweep) need not
-  re-litigate the indexing contract. `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.2 — book: regex as a first-class concept (new user-model chapter) + fix capture-indexing drift`; prior node reference: `SPEC-LANG-REFERENCE.2` (see Commit Log); retained completion note: New `user-model/regex-in-spec.md` + `SUMMARY.md`; `formal-grammar.md §3.1` capture-group/flags expansion; corrected the `entry_group`/`match_group` indexing contradiction in `helper-contract-catalog.md`, `overview/what-is-linkedspec.md`, `formal-grammar.md`, `source-boundary-helper-reference.md`. All facts verified vs `LinkedRE.pm`/`Contracts.pm`/rgx/shipped specs
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.2`.
 
 - ID: `SPEC-LANG-REFERENCE.3`
   Status: `done`
   Goal: Document the **output / return-value shape contract** (CRITICAL gap) in
-  `appendix/runtime-semantics.md`
   Acceptance: a new section defining what a `.spec` parser returns — the top rule's value, the
-  implicit accumulator model, the canonical one-level wrap, the tagged-shape convention
-  (`["?rule:", [...]]`), and how `return(...)` interacts with the accumulator — grounded in the
-  `docs/knowledge/rust-perl-output-oracle.md` card + shipped specs, with worked input→output
-  examples so a backend does not reverse-engineer it from the corpus. `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. Expanded `appendix/runtime-semantics.md §5` (renamed
-  "Accumulator Convention" → "Accumulator and Output Shape") with four new subsections: §5.5
-  *What a Parser Returns* (top rule's value, returned directly, no envelope) with three **verified**
-  input→output pairs; §5.6 *The Output Shape Is the Author's Choice* (engine imposes **no output schema**; `["?<rule>:", …]`, tag-only form, `a(...)`
-  / `flat_array(...)`, tag is a plain string with **no engine meaning** — presented as an **optional, older convention** (authors may use any output shape, or none), per user feedback 2026-06-17 that the tagged shape must not be shown as mandatory); §5.7 *`return(...)` versus the
-  accumulator* (return = value channel; a child return is consumed explicitly, not auto-appended to
-  the parent accumulator; canonical `return(a("?rule:", array_copy(a(acc))))`); §5.8 *Backend Output
-  Reconciliation* (the one-level wrap — reference value is canonical; an accumulator-returning runtime
-  wraps one level; oracle stores the reference value and compares against `[reference]`). **Grounded
-  + verified, not guessed**: the two literal examples are frozen oracle-corpus fixtures
-  (`rust/linkedspec-runtime/tests/corpus/proof_edge_{scalar,array}_literal/expected.json`); the tagged
-  `["?pair:","key","val"]` example was produced by **running the Perl reference** (`LinkedSpec::Get`);
-  the tagged convention was confirmed by grepping shipped specs (`ds_vhistory`/`portmap`/`vhdl`/`regdef`);
-  the wrap + return-vs-accumulator contract is grounded in `docs/knowledge/rust-perl-output-oracle.md`.
-  A hand-built accumulator example that returned `[undef,undef,undef]` was **discarded** rather than
-  documented — repeated-rule accumulator mechanics are subtle, so only verified material was used.
-  `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.3` (see Commit Log)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.3`.
 
 - ID: `SPEC-LANG-REFERENCE.4`
   Status: `done`
   Goal: Add worked examples for the MAJOR/MEDIUM clarity gaps — grouped shared-code targets
-  (`-> A | B { ... }`) and an entry-vs-local-match divergence scenario
   Acceptance: a worked example of a grouped shared-code action edge (multiple targets, one
-  block) in the edges chapter; a worked example showing when `entry_*` and `match_*` return
-  different values (multi-regex-slot / dispatched-child case) in the capture/lifecycle chapter;
-  examples valid against the grammar; `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. (1) Added a **Grouped action-edge targets** section to
-  `dsl/action-and-lifecycle-placement.md` (`-> RuleA | RuleB { ... }`, one shared block bound to
-  multiple targets), grounded in the shipped `ebnf.spec` `semantic_annotation` rule and the formal
-  grammar §3.2; a minimal grouped-target spec was confirmed to **compile** (`LinkedSpec::Get` builds
-  a parser). (2) Added a **When `entry_*` and `match_*` diverge** section to
-  `dsl/capture-marks-and-source-locations.md` — a dispatched-child example (`Call`→`Inner` over
-  `greet(world)`) where `entry_text()` reads the entering `greet(` match and `match_text()` reads the
-  local `world` match, cross-linked to the source-boundary "Entry versus match example"; the example
-  **compiles** (verified). **Verified, not guessed**: both examples were compiled through the Perl
-  reference; the divergence semantics are grounded in the verified source wiring (`entry_*` = IMATCH /
-  entering match, `match_*` = LMATCH / local match — from `.2`'s `Contracts.pm`/`SpecEntry.pm`/
-  `HandlerVariantEmitter.pm` reading) and are consistent with the book's existing source-boundary
-  example. **Honest scope note**: a clean *top-level runtime output* dump for the divergence was
-  **not** fabricated — ~9 minimal accumulator/dispatch shapes were run and all collapsed to
-  `[]`/`undef`/`0` (the documented hard accumulator-/child-return divergence axes in
-  `docs/knowledge/rust-perl-output-oracle.md`), so the divergence is documented at the verified
-  reader-wiring level (which span each family reads), matching the book's established style, rather
-  than an unverified I/O. `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.4 — book: grouped action-edge targets (edges chapter) + entry-vs-match divergence (capture chapter)`; prior node reference: `SPEC-LANG-REFERENCE.4` (see Commit Log); retained completion note: Grouped-target section in `action-and-lifecycle-placement.md` (ebnf-grounded) + divergence section in `capture-marks-and-source-locations.md`; both examples compile-verified. Divergence documented at reader-wiring level (top-level I/O entangled with hard accumulator axes — not fabricated)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.4`.
 
 - ID: `SPEC-LANG-REFERENCE.5`
   Status: `done`
   Goal: Helper-contract catalog **completeness + variant-neutrality + examples** sweep
   Acceptance: confirm every helper family in `perl/LinkedSpec/ActionIR/Contracts.pm` is
-  represented in `appendix/helper-contract-catalog.md` with a backend-neutral behavioral
-  contract (signature + semantics + edge cases) and at least one example; separate any
-  Perl-implementation note from the contract; add examples where the catalog is example-poor.
-  **Split during implementation (the surface is large)** — see Audit Findings (`.5`) below.
   Children: `.5.1` (done), `.5.2` (done), `.5.3`, `.5.4`, `.5.5`
-  Verification: Done — 2026-07-08. `.5.1` confirmed zero public helper-catalog completeness gaps
-  and decomposed the example-density work; `.5.2` added Scalar/Numeric examples; `.5.3` added Array
-  examples; `.5.4` added Hash + Control Flow examples; `.5.5` added Declaration, Capture/Mark,
-  Entry/Match, Input, and Call examples. All documented example outputs were generated through
-  focused `LinkedSpec::Get` probes, with caveats recorded in KM where durable.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5`.
 
 - ID: `SPEC-LANG-REFERENCE.5.1`
   Status: `done`
   Goal: Completeness confirmation + variant-neutrality fixes + decomposition
   Acceptance: a read-only completeness audit (every `Contracts.pm` helper id vs the catalog),
-  the variant-neutrality fixes the audit flags, and the per-family example decomposition recorded
-  as `.5.2`–`.5.x`. `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. A read-only audit (delegated) reconciled the `Contracts.pm`
-  helper-id set against the catalog and found: **(completeness) ZERO public-API gaps** — all ~130
-  public helpers are documented; the 158 (loose `\bid\b => '`) vs 146 (anchored) vs 140 (`###`
-  headings) spread is **17 internal IR variants** (all map to documented DSL names, e.g.
-  `capture_from_mark`→`capture_from(name)`) + **~11 deprecated `compatibility_surface => 1`
-  contracts** (`my_declare_bare`/`exit_bare`/…, intentionally not public). **(variant-neutrality)
-  2 Perl-sigil leaks** — `declare(scalar, name)` said "variable `$name`" (→ "named `name`") and
-  `push(arr, child)` said "implicit accumulator `$rule_label`" (→ "named after the rule label");
-  both fixed, and a whole-catalog re-sweep (`$`/`@`/`%` sigils + `lowers to`/`do {`/`Data::Dumper`/
-  `JSON::PP`/`//gcp`) confirmed **no others**. **(examples) 0 `.spec` examples across all 10
-  families / ~140 helpers** — the large remaining surface, decomposed into per-family example
-  sub-leaves `.5.2`–`.5.5` (≥1 worked, compile-verified example per family; the original `.5`
-  acceptance's "at least one example" is per-family). `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.5.1 — helper-catalog audit: 0 completeness gaps, fix 2 variant-neutrality sigil leaks, decompose example work into .5.2-.5.5`; prior node reference: `SPEC-LANG-REFERENCE.5.1` (see Commit Log); retained completion note: Confirmed 0 public-API gaps; fixed `$name`/`$rule_label` sigil leaks in `helper-contract-catalog.md`; split `.5` into per-family example sub-leaves. mdbook build exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5.1`.
 
 - ID: `SPEC-LANG-REFERENCE.5.2`
   Status: `done`
   Goal: Worked examples — Scalar + Numeric helper families
   Acceptance: ≥1 compile-verified `.spec` example per family added to the Scalar and Numeric
-  sections of `helper-contract-catalog.md`, with several more for high-frequency helpers; every
-  example built through `LinkedSpec::Get` before asserting behavior. `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. Added a shared **Worked examples** preamble to §2 (Scalar)
-  and a back-reference in §5 (Numeric), then a **verified** `Example` to **every** helper in both
-  families (17 Scalar + 18 Numeric = 35 helpers covered). **Every example was compile-AND-run
-  verified through `LinkedSpec::Get`** with a scratch oracle-style driver (build parser → run on
-  the documented input → JSON-encode the top-level value with the same `JSON::PP->canonical`
-  encoder as `tools/gen_oracle_corpus.pl`); the driver was sanity-checked against the two frozen
-  oracle fixtures (`proof_edge_{scalar,array}_literal`) and reproduced them exactly, so its outputs
-  are the reference behavior — nothing guessed. **Two do-not-guess traps caught and avoided**:
-  (1) the value-returning vs condition-only split — `is_defined`/`is_undefined` lower **only** via
-  the control-flow path (`ActionIR/FlowExpr.pm` `_lower_flow_composite_expr`, NOT the value-expr
-  regex set at `FlowExpr.pm:270`), so `return(is_defined(x))` dies with "Undefined subroutine"; they
-  are documented in the verified `if (is_defined(x)) { … }` condition form with a "condition-only"
-  usage note (`matches`/`starts_with`/`ends_with`/`contains_substr` ARE value-expressible and
-  surface as `1`/`0`); (2) `num_sum(split(...))` returns `null` (the `split→num_sum` composition does
-  not flatten here) — so the array-form reducers are documented with an explicit `array(...)` of
-  capture groups / literals (verified: `num_sum(array(1,2,3,4))`→`10`), and `split` is left to the
-  Array family (`.5.3`). The reliable doc scaffold is `Demo:: /<re>/ -> Demo { return(<expr>) }`
-  (bare-`::` OR self-ref edge), confirmed by reproducing the frozen fixtures. `mdbook build` exit 0.
-  **Discovered defect (NOT fixed here — owned by new leaf `.9`, no bundling):** the §5.5
-  `runtime-semantics.md` "verified" Pair example (`Pair::AND … -> Pair[0] { return(array("?pair:",
-  …)) }`) actually outputs `[]`, not the documented `["?pair:","key","val"]`; the tagged array is
-  produced by the OR self-ref form `Pair:: … -> Pair { return(array(…)) }` (verified) — `.3`'s live
-  run used a self-ref-OR shape that was mis-transcribed into the `AND`/`[0]` form.
   Commit: `SPEC-LANG-REFERENCE.5.2 — book: compile-verified worked examples for all Scalar + Numeric helpers (helper-contract-catalog §2/§5)`; prior node reference: `SPEC-LANG-REFERENCE.5.2` (see Commit Log); retained completion note: 35 helpers, each run-verified through `LinkedSpec::Get` against the oracle; shared runnable-spec preamble; condition-only note for `is_defined`/`is_undefined`; array-form reducers via explicit `array(...)`. Found §5.5 drift → new leaf `.9`. mdbook build exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5.2`.
 
 - ID: `SPEC-LANG-REFERENCE.5.3`
   Status: `done`
   Goal: Worked examples — Array helper family (largest, ~33 helpers)
   Acceptance: ≥1 compile-verified example for the Array family plus several for high-frequency
-  array helpers (`split`, `map`-likes, reducers, edge drops); built through `LinkedSpec::Get`.
-  `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Added a verified Array worked-examples block to
-  `appendix/helper-contract-catalog.md` using the same no-regex `demo::` wrapper scaffold as
-  the Scalar/Numeric examples. Focused `LinkedSpec::Get` probes cover constructor/copy/splice,
-  concat, count/first/last, take/take_last/drop_front/drop_back/slice, sorted/reversed,
-  contains/index_of/is_empty/is_nonempty/join_values, receiver `split`, statement-form split,
-  split_each/trim_each/filter_nonempty/filter_match/uniq/lowercase_each/uppercase_each,
-  push/append replacement forms, receiver chains, and array-tree traversal. The probes also
-  found current Perl shape-sensitive caveats: compact `I.return(split(...))` emits an older
-  tagged shorthand shape, direct `return(split_each(array(items), ...))` returns the Perl
-  assignment count in the standard demo wrapper, and `items.uniq().sorted()` is not a portable
-  documented receiver chain. The book now documents stable receiver/block/assignment forms, and
-  KM fact `array-helper-return-shape-caveats` records the caveat with a reverify command.
-  `mdbook build`, whitespace, memory, task-tree, doctrine, and Knowledge Map checks pass.
   Commit: `SPEC-LANG-REFERENCE.5.3 - add Array helper worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.3` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.3 — add Array helper worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Array examples for constructor/copy/splice, selectors, edge slices, ordering, membership, split, pipelines, mutations, receiver chains, and array-tree traversal. KM fact `array-helper-return-shape-caveats` records split/pipeline shape-sensitive caveats; optional normalization deferred to `.5.3.1`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5.3`.
 
 - ID: `SPEC-LANG-REFERENCE.5.3.1`
   Status: `deferred`
@@ -282,17 +138,8 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Status: `done`
   Goal: Worked examples — Hash + Control Flow helper families
   Acceptance: ≥1 compile-verified example per family (Hash + Control Flow), built through
-  `LinkedSpec::Get`. `mdbook build` exit 0.
-  Verification: DONE 2026-07-08. Focused `LinkedSpec::Get` oracle probes verified Hash constructor,
-  explicit `undef`, `flat_hash`, copy snapshot, merge, pure and mutating `set_key`, hash-index
-  assignment, rename/drop/pick, membership/count, sorted views, receiver chains, block receivers,
-  hash-tree map/walk/reduce, inline/marker/attached branch forms, switch forms, `while`, `next`,
-  `return`, and `return_undef`. Descriptor probe verified `exit_now(2)` as canonical `EXIT` metadata
-  without running the terminating path. `call_spec_handler_subst` root-caused direct odd-arity
-  `hash("a", 1, "missing")` as unsupported-helper output (`[null]` through the demo wrapper), so
-  the book now documents explicit `undef` / list-splice forms and KM fact
-  `hash-helper-odd-arity-current-behavior` records the caveat.
   Commit: `SPEC-LANG-REFERENCE.5.4 - add Hash and Control Flow worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.4` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.4 — add Hash and Control Flow worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Hash examples for constructor/copy/splice, pure/mutating updates, sorted views, receiver chains, and hash-tree traversal, plus Control Flow examples for branch forms, `switch`, `while`, `next`, `return`, `return_undef`, and descriptor-verified `exit_now`. KM fact `hash-helper-odd-arity-current-behavior` records the direct odd-arity `hash(...)` caveat; optional normalization deferred to `.5.4.1`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5.4`.
 
 - ID: `SPEC-LANG-REFERENCE.5.4.1`
   Status: `deferred`
@@ -310,116 +157,42 @@ The surface to cover (authoritative sources in parentheses) includes at least:
   Status: `done`
   Goal: Worked examples — Declaration, Capture/Mark, Entry/Match, Input, Call families
   Acceptance: ≥1 compile-verified example per remaining family, built through `LinkedSpec::Get`;
-  closes `.5`. `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Added focused worked examples to
-  `appendix/helper-contract-catalog.md` for declaration replacements (`name = value` plus explicit
-  aggregate resets), anonymous capture cursor reads, named marks with `capture_between(...)`,
-  entry-vs-local-match readers, whole-input readers, and `call(child)`. Focused `LinkedSpec::Get`
-  probes verified every documented output. During verification, stale entry-vs-match examples in
-  `capture-marks-and-source-locations.md` and `source-boundary-helper-reference.md` were corrected
-  from an unverified `return(call(Inner/Child))` shape to the verified ordered-child shape
-  (`Top:: -> Name .push` + `Name:AND` later-slot action). KM fact
-  `entry-match-divergence-verified-shape` records the durable pattern. This closes `.5`.
   Commit: `SPEC-LANG-REFERENCE.5.5 - add remaining helper-family worked examples`; prior node reference: `SPEC-LANG-REFERENCE.5.5` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.5.5 — add remaining helper-family worked examples`; retained completion note: `helper-contract-catalog.md` now has verified Declaration, Capture/Mark, Entry/Match, Input, and Call examples. Corrected stale entry-vs-match examples in the source-boundary chapters to the verified ordered-child shape and added KM fact `entry-match-divergence-verified-shape`. This closes the helper-catalog sweep `.5`; frontier advances to `.6`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.5.5`.
 
 - ID: `SPEC-LANG-REFERENCE.6`
   Status: `done`
   Goal: Capture/mark cross-example + any remaining thin spots
   Acceptance: one worked rule exercising the anonymous + named capture/mark families together
-  (`@capture_slice`, `@mark(name)`, `capture_*_from`/`_between`, `mark_*`), plus any
-  small thin-spot fixes the audit flagged; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Added a verified marker-form cross-example to
-  `dsl/source-boundary-helper-reference.md` and `dsl/action-and-lifecycle-placement.md` using
-  `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`,
-  `capture_from(body_start)`, and `capture_between(body_start, close_start)`. Focused
-  `LinkedSpec::Get` probes verify `foo(alpha)` under seek mode returns
-  `[{"anonymous":"alpha","between":"alpha","body_start":4,"close_start":9,"named":"alpha"}]`.
-  The same slice corrected placement-sensitive named-mark examples in
-  `action-and-lifecycle-placement.md` to use `mark_here(...)` inside the opener action when exact
-  action-block timing is needed; consume-mode probes verify `Delimited` and `Block` examples return
-  `{"body":"body"}`-shaped payloads. KM fact `split-boundary-marker-action-timing` records the
-  durable marker timing caveat. `mdbook build` and KM/memory/doctrine gates pass.
   Commit: `SPEC-LANG-REFERENCE.6 - add capture/mark marker cross-example`; prior node reference: `SPEC-LANG-REFERENCE.6` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.6 — add capture/mark marker cross-example`; retained completion note: `source-boundary-helper-reference.md` and `action-and-lifecycle-placement.md` now include a verified marker-form cross-example for `@capture_slice`, `@mark(body_start)`, `mark_match_start(close_start)`, `capture_slice()`, `capture_from(...)`, and `capture_between(...)`. KM fact `split-boundary-marker-action-timing` records marker visibility timing; frontier advances to `.7`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.6`.
 
 - ID: `SPEC-LANG-REFERENCE.7`
   Status: `done`
   Goal: Knowledge Map fact cards for the durable `.spec`-language subjects
   Acceptance: KM cards (`docs/knowledge/<id>.md`, with `answers:` front-matter) for the key
-  durable subjects — at least: the output/return-shape contract, the regex feature-set a
-  backend must support, the rule-mode→semantics map (incl. `:&`/`:|`), lifecycle execution
-  order + `retv`, the action-vs-blind edge/dispatch model, and the capture/mark family
-  taxonomy; KM gate regenerates `KNOWLEDGE_MAP.md` and passes. (Cards may be written alongside
-  their originating leaf; this leaf ensures full coverage.)
-  Verification: Done — 2026-07-08. Added canonical `.spec`-language KM facts
-  `spec-output-return-shape-contract`, `spec-regex-feature-contract`,
-  `spec-rule-mode-semantics-map`, `spec-lifecycle-retv-order`, and
-  `spec-capture-mark-family-taxonomy`; extended `spec-edge-syntax-contract` with the
-  action-vs-blind dispatch retrieval keys and summary. `KNOWLEDGE_MAP.md` now routes all six
-  audit-required questions to fact cards, and `knowledge-map/scripts/check_knowledge_map.sh`
-  passes.
   Commit: `SPEC-LANG-REFERENCE.7 - add spec-language Knowledge Map cards`; prior node reference: `SPEC-LANG-REFERENCE.7` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.7 — add spec-language Knowledge Map cards`; retained completion note: Added canonical KM fact cards for output/return shape, regex backend feature contract, rule-mode semantics, lifecycle/`retv` order, and capture/mark taxonomy; extended `spec-edge-syntax-contract` for action-vs-blind dispatch retrieval. KM gate passes; frontier advances to `.8`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.7`.
 
 - ID: `SPEC-LANG-REFERENCE.9`
   Status: `done`
   Goal: Correct the drifted "verified" output in `runtime-semantics.md` §5.5 (Pair example)
   Acceptance: change the §5.5 third example so its documented output matches a **re-verified**
-  live run — the `["?pair:","key","val"]` output requires the OR self-ref form
-  `Pair:: /(\w+)=(\w+)/ -> Pair { return(array("?pair:", match_group(0), match_group(1))) }`
-  (the current `Pair::AND … -> Pair[0]` form actually returns `[]`). Re-run the corrected snippet
-  through `LinkedSpec::Get` before asserting; check no other §5.5/§5.6 snippet has the same
-  AND-`[N]`-self-edge drift; `mdbook build` exit 0. (Discovered during `.5.2`; high priority —
-  a known-wrong "verified" example violates the no-drift doctrine.)
-  Verification: Done — 2026-06-17. Re-verified with the scratch oracle driver: the **current**
-  `Pair::AND … -> Pair[0] { return(array(…)) }` form outputs `[]` (reconfirmed under default,
-  `consume`, AND `seek` — parse mode is NOT the variable); the **corrected** OR self-ref form
-  `Pair:: … -> Pair { return(array("?pair:", match_group(0), match_group(1))) }` outputs
-  `["?pair:","key","val"]` (verified default + consume). Fixed the §5.5 third example to that form
-  and added a one-line note that the self-ref action edge (`-> Pair`) is what surfaces the return
-  value (§5.7 cross-ref). §5.5/§5.6 sweep: the first two §5.5 examples are frozen Top→Done OR
-  fixtures (correct); the §5.6 `object`/`manifest` snippets are `I.return` fluent on `:` body rules
-  (a different construct, grounded in shipped specs — NOT the AND-`[N]`-self-edge class, left
-  untouched; a faithful standalone reconstruction is entangled with entry-group seeding per the
-  `.4` lesson, so not rewritten here). `mdbook build` exit 0. **Discovered a SYSTEMIC variant of
-  this drift** (owned by new leaf `.10`, not bundled): the same single-slot `::AND … -> Rule[0]
-  { return(...) }` form is used in **several other chapters that assert a concrete top-level output**
-  — most importantly `user-model/worked-spec-walkthrough.md` (claims `{kind=>"pair",…}` for
-  `answer = 42`; actually returns `[]`). Shipped specs DO use `-> Rule[N] { return(...) }` self-edges,
-  but on **multi-slot** rules returning at the closing slot (often an accumulator snapshot), so the
-  construct is real — the drift is specifically single-slot `::AND` self-edge examples claiming the
-  `return` value as output.
   Commit: `SPEC-LANG-REFERENCE.9 — book: fix drifted §5.5 Pair example output (AND-[0] self-edge returns [] not the tagged array)`; prior node reference: `SPEC-LANG-REFERENCE.9` (see Commit Log); retained completion note: Corrected the §5.5 Pair example to the verified OR self-ref `-> Pair` form (+ §5.7 cross-ref). Surfaced a SYSTEMIC variant across chapters → new leaf `.10` (blocked on a user decision). mdbook build exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.9`.
 
 - ID: `SPEC-LANG-REFERENCE.10`
   Status: `done`
   Goal: **HISTORICAL CORRECTION (2026-06-17, superseded in doctrine by ADR `0010`)** — Remediate
-  the examples that were then classified as structurally invalid and retract the mis-diagnosed
-  `.10.1` "engine bug" record. **Current doctrine note (2026-07-08):** ADR `0010` later superseded
-  the no-regex/two-rule-minimum validity premise. `::` marks the rule entered first; after entry
-  selection, `::` and `:` have the same feature surface. The `.10.x` book rewrites remain acceptable
-  as stream-parser teaching examples, not as proof that regex-bearing `::` rules are invalid.
   Children: `.10.1` (done — investigation; its verdict is now **superseded** — see note), `.10.2`
-  (**superseded** — the engine-fix-vs-doc fork is moot), `.10.3` (done — redid `.5.2` examples + both
-  preambles with the verified 2-rule idiom), `.10.6` (done — retracted the inaccurate `[]` premise;
-  rationale = the 2-rule authoring doctrine), `.10.5.4.1` (done — reactivated the paused scorch),
-  `.10.5` (remediation active; `.10.5.5` next)
   Commit: `SPEC-LANG-REFERENCE.10 — correction: top rule has no regex; .5.2/.9 examples are structurally invalid (not an engine bug); retract .10.1, plan remediation (.10.3-.5)`; table label: `SPEC-LANG-REFERENCE.10` (correction); retained completion note: User-established structural invariant (top `::` rule no regex; valid spec ≥2 rules), verified vs Core.pm/RuleIR.pm + 20-spec audit. Deleted the wrong KM card, added `spec-top-rule-no-regex-two-rule-minimum.md` with the proven 2-rule idiom. Superseded `.10.1` verdict + `.10.2`; added remediation leaves. NO Perl change. Repo handoff-ready; fresh session recommended
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10`.
 
 - ID: `SPEC-LANG-REFERENCE.10.1`
   Status: `done`
   Goal: Read-only root-cause investigation — is the single-slot-AND-self-edge-`return`→`[]`
-  behavior an engine bug or intended reference behavior?
-  Verification: Done — 2026-06-17. **NOTE — VERDICT SUPERSEDED 2026-06-17 by user correction.**
-  The investigation traced the `[]` to a missing `push` in `_emit_and_single_acode_handler` and
-  concluded "engine regression." **That conclusion was WRONG**, because the *premise* was wrong:
-  the examples that returned `[]` are **structurally invalid** — they put a regex on the **top
-  (`::`) rule** and/or use a single rule. A valid `.spec` has ≥2 rules (a top `::` entry rule with
-  NO regex — the dispatch loop — plus ≥1 normal `:` rule carrying the regex); the top rule is
-  entered without matching any regex (`BootstrapSpec/Core.pm:414,417` tag `::`→`_INITIAL`;
-  `RuleIR.pm:193-195`; all 20 shipped specs have `regex_on_top=no`). So `[]` is the correct output
-  for an invalid grammar, not an engine defect. The mis-diagnosis KM card
-  (`and-single-acode-edge-return-dropped.md`) is **DELETED** and replaced by the correct card
-  `spec-top-rule-no-regex-two-rule-minimum.md`. Lesson recorded in DEVELOPMENT_NOTES.
   Commit: `SPEC-LANG-REFERENCE.10.1 — investigation: single-slot AND drops its edge return ([]) is a Perl-reference regression, not intended (KM card + verdict)`; prior node reference: `SPEC-LANG-REFERENCE.10.1` (investigation), corrected by the `.10` remediation commit.; retained completion note: Read-only root-cause investigation; VERDICT = accidental regression in `AND_SINGLE_ACODE` emitter (missing `push`); triple-verified vs source/git/card; KM card `and-single-acode-edge-return-dropped.md`. `.10.2` fix blocked on a user direction decision. No code/book change. **(Verdict later SUPERSEDED — see `.10` correction commit.)**
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.1`.
 
 - ID: `SPEC-LANG-REFERENCE.10.2`
   Status: `superseded`
@@ -432,591 +205,182 @@ The surface to cover (authoritative sources in parentheses) includes at least:
 - ID: `SPEC-LANG-REFERENCE.10.3`
   Status: `done`
   Goal: Redo the `.5.2` Scalar + Numeric helper examples **and the catalog "Worked examples"
-  preamble** with VALID `.spec` structure
   Acceptance: replace the invalid `Demo:: /regex/ -> Demo { return(<expr>) }` scaffold (regex on the
-  top rule) with the **verified** two-rule idiom — a top `::` entry rule (no regex) dispatching to a
-  normal `:` rule that carries the regex and returns the helper value reading `entry_group(N)` (see
-  the proven idiom in Decisions / KM card `spec-top-rule-no-regex-two-rule-minimum.md`). Re-verify
-  EVERY example through `LinkedSpec::Get` (and re-derive its real output); update the preamble to
-  teach the correct structure. `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. Rewrote the §2 (Scalar) + §5 (Numeric) "Worked examples" preambles
-  and **all 33 helper examples** (17 Scalar + 16 Numeric) in `appendix/helper-contract-catalog.md` to
-  the **verified two-rule idiom**: a top `demo::` entry rule (NO regex) `-> value .push` + terminal
-  `LX { return(array_copy(a(demo))) }`, and a normal `value : /<re>/  I.return(<expr>)` rule reading
-  **`entry_group(N)`** (not `match_group(N)`). Full `.spec` blocks (`concat`/`is_defined`/`trim`/
-  `num_add`/`num_sum`) show the 2-rule form; `is_defined`/`is_undefined` keep the required
-  `I { if (...) … }` block. **Every example was build-AND-run re-verified through `LinkedSpec::Get`**
-  with a scratch harness that builds each spec from the exact book scaffold and JSON-encodes the
-  output (`JSON::PP->canonical`), sanity-checked against the frozen `["hello-world"]` idiom. All 33
-  produce the documented outputs, now the **top rule's one-element accumulator snapshot** (e.g.
-  `["hello-world"]`, `[5]`, `[3.5]`, `[null]`, `[1]`/`[0]`) — the honest consequence of valid
-  structure (the old invalid `Demo:: /re/ -> Demo {…}` form returned `[]`). **One do-not-guess fix:**
-  `is_defined`'s `/(\w*)(\S*)/` matched twice (empty-matchable → two dispatch-loop hits →
-  `["present","present"]`), corrected to `/(\w+)/` → `["present"]`. The only remaining `match_group`
-  in the catalog is the §8 Entry/Match helper *reference* (correct, untouched). `mdbook build` exit 0
-  (rendered HTML confirms the full blocks stay single code blocks with the required inter-rule blank
-  line). self-check + KM gate pass. No Perl change.
   Commit: `SPEC-LANG-REFERENCE.10.3 — book: redo Scalar+Numeric helper examples + preambles with the valid 2-rule idiom (entry_group; re-verified outputs)`; prior node reference: `SPEC-LANG-REFERENCE.10.3` (see Commit Log); retained completion note: Rewrote both `helper-contract-catalog.md` worked-examples preambles + all 33 examples to the top-entry-rule + normal-rule form reading `entry_group(N)`; every output re-derived through `LinkedSpec::Get`; outputs are the one-element accumulator snapshot. `mdbook build` exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.3`.
 
 - ID: `SPEC-LANG-REFERENCE.10.4`
   Status: `superseded`
   Goal: ~~Redo the `.9` §5.5 `runtime-semantics.md` Pair example with valid structure~~ —
-  **SUPERSEDED by `.10.5.16`** (2026-06-17). The whole-book scorch (`.10.5`) folds the §5.5 Pair fix
-  into the per-file `runtime-semantics.md` leaf `.10.5.16`, which fixes all three §5.5 forms + the
-  §5.6 fragments together. No separate work here.
-  Verification: n/a (superseded)
   Commit: n/a
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.4`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5`
   Status: `done`
   Goal: **SCORCH THE WHOLE BOOK** (user directive 2026-06-17 — "the book shall not mislead; only
-  truthful, valid code snippets") — exhaustively audit **EVERY** `.spec` code snippet across all of
-  `docs/linkedspec-book/src/**` for the then-active no-regex top doctrine and output-correctness
-  (any claimed input→output matches a `LinkedSpec::Get` run), then remediate every misleading/invalid
-  snippet. **Current doctrine note (2026-07-08):** the no-regex-top validity premise is superseded by
-  ADR `0010`; the resulting two-rule examples remain valid stream-parser idioms.
-  **SCOPE DECISION (user, 2026-06-17): FULL BOOK-WIDE SCORCH** — rewrite *every* worked example
-  (including the isolated DSL helper-illustration fragments) to the verified 2-rule idiom, and correct
-  all wrong outputs. See the scope Decision below.
   Children: `.10.5.1` (done — audit + decomposition), `.10.5.2`–`.10.5.4` (done per-file fixes),
-  `.10.5.4.1` (done — reactivation metadata), `.10.5.5`–`.10.5.19` (per-file fixes + finalize)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.1`
   Status: `done`
   Goal: Exhaustive read-only audit of every `.spec` snippet in `docs/linkedspec-book/src/**` +
-  decomposition into per-file fix sub-leaves
   Acceptance: every `.spec` block classified (A: regex-on-`::` / single-rule doctrine violation; B:
-  output drift; C: `::AND -> Rule[N]` broken shape; D: other; CLEAN) with file:line + claimed-vs-actual;
-  fix sub-leaves `.10.5.2…` added to the frontier; no book change (audit only).
-  Verification: Done — 2026-06-17. Fanned out **8 read-only `Explore` agents** over chapter groups
-  (enumerate every `.spec` block → classify → run claimed-output snippets), then **personally
-  ground-truthed every load-bearing finding** through a private `LinkedSpec::Get` driver (an audit
-  agent had clobbered the shared scratch driver mid-run, so all agent ACTUAL_OUTPUT values were
-  treated as hypotheses — cf. the `.10.6` transcription lesson). Established engine facts: `::` and
-  `:` are **interchangeable on a non-first rule** (T1==T2==`[0]`); only the **first** rule is the
-  top/entry (multiple `::` rules don't collide, T4); the `::`-no-regex rule is therefore an
-  **authoring doctrine**, not a hard engine constraint (matches `.10.6`). Findings synthesized into
-  "Audit Findings (`.10.5.1`)" below. Headline: the `Rule::AND /regex/ -> Rule[N] {return}` idiom is
-  **pervasive (~105 `::`-mode rule headers across ~20 files)** and is doctrine-divergent twice over
-  (regex on a `::` rule; the `::AND -> Rule[N]` shape returns `[]`). Two preliminary-hunt hypotheses
-  were **overturned on re-verification**: the `ebnf-spec-walkthrough.md` "richer example" **does
-  compile/parse** (matches its claimed output — CLEAN), and the §5.5 forms **run and return values**.
-  User chose **full book-wide scorch** (AskUserQuestion, 2026-06-17). No book/Perl change. `mdbook`
-  not rebuilt (no content change).
   Commit: `SPEC-LANG-REFERENCE.10.5.1` (see Commit Log)
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.1`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.2`
   Status: `done`
   Goal: Fix `overview/what-is-linkedspec.md` minimal key/value example (`Top::AND+ /…/ -> Top[0]`,
-  single-rule regex-on-top → compile-fail/`null`) → verified 2-rule idiom
   Acceptance: replaced with a top `::` entry rule (no regex) + normal `:` rule carrying the regex;
-  re-verified through `LinkedSpec::Get` (e.g. `[{"key":"foo","val":"bar"},…]`); `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. Replaced the single-rule `Top::AND+ /(\w+)=(\w+)/ -> Top[0] {…}`
-  block (regex on the top rule + `::AND -> Top[0]` self-edge → handler compile failure → `null`) with
-  the verified 2-rule idiom: `top:: -> pair .push` / `LX { return(array_copy(a(top))) }` + a normal
-  `pair:` rule carrying `/(\w+)=(\w+)/` in an `I { return(hash("key", entry_group(0), "val",
-  entry_group(1))) }` block. **Extracted the exact block from the book file and ran it through
-  `LinkedSpec::Get`**: input `foo=bar baz=qux` → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`
-  (single `answer=42` → `[{"key":"answer","val":"42"}]`). Prose rewritten to teach the entry-rule
-  (no regex) + normal-rule (regex) structure + the actual output, with cross-links to `regex-in-spec.md`
-  and `spec-files-and-rule-paragraphs.md`. **Idiom note (verified):** the bare action-block form
-  `pair: /re/ { return(...) }` (no `I`) returns `[0,0]` — the `I { … }` lifecycle block is required.
-  `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.2 — book: fix what-is-linkedspec.md minimal kv example → verified 2-rule idiom`; prior node reference: `SPEC-LANG-REFERENCE.10.5.2` (see Commit Log); retained completion note: Replaced the single-rule `Top::AND+ /…/ -> Top[0]` (regex-on-top → compile-fail/`null`) with `top:: -> pair .push` / `LX{return(array_copy(a(top)))}` + `pair: /(\w+)=(\w+)/ I{return(hash(…entry_group(0/1)…))}`; book-extracted run → `[{"key":"foo","val":"bar"},{"key":"baz","val":"qux"}]`; `mdbook build` exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.2`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.3`
   Status: `done`
   Goal: Fix `public-api/get-and-get-parser.md` "minimal example" (`Top::AND /foo/ -> Top[0]` → `[]`)
-  → verified 2-rule idiom
   Acceptance: 2-rule form, re-verified output; `mdbook build` exit 0.
-  Verification: Done — 2026-06-17. Replaced the inline `Get(...)` heredoc spec (`Top::AND /foo/ ->
-  Top[0] { return(hash("kind","top","text",match_text())) }` → `[]`) with `top:: -> word .push` /
-  `LX { return(array_copy(a(top))) }` + `word: /foo/ I { return(hash("kind","top","text",
-  entry_text())) }`, added a `# $ast is [ { kind => "top", text => "foo" } ]` comment + a sentence
-  teaching the two-rule shape. **Extracted from the book file + ran `LinkedSpec::Get`**: `foo` →
-  `[{"kind":"top","text":"foo"}]`. **Caught a `match_text()`→`entry_text()` trap** (same family as
-  `.10.3`): `match_text()` in the freshly-dispatched child returns `null` (`[{"kind":"top","text":
-  null}]`); `entry_text()` (the entering match) returns `"foo"`. Only the one inline `.spec` heredoc
-  on the page (the `get_parser` example uses a named spec, not inline `.spec`). `mdbook build` exit 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.3 — book: fix get-and-get-parser.md minimal Get example → verified 2-rule idiom`; prior node reference: `SPEC-LANG-REFERENCE.10.5.3` (see Commit Log); retained completion note: Replaced inline `Top::AND /foo/ -> Top[0] {…match_text()…}` (→ `[]`) with `top:: -> word .push` / `LX{return(array_copy(a(top)))}` + `word: /foo/ I{return(hash("kind","top","text",entry_text()))}`; book-extracted run → `[{"kind":"top","text":"foo"}]`; `match_text()`→`null` trap caught; `mdbook build` exit 0
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.3`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4`
   Status: `done`
   Goal: Fix `user-model/worked-spec-walkthrough.md` — convert the chapter's central single-rule
-  `Pair::AND /…/ -> Pair[0]` example (→ `[]`, claims a `{kind:pair,…}` hash) to the 2-rule idiom and
-  **re-derive every claimed input→output across the whole chapter**
   Acceptance: central example + all downstream claimed outputs re-verified through `LinkedSpec::Get`;
-  `mdbook build` exit 0.
-  Verification: Done — 2026-06-18. Rewrote the chapter to the verified 2-rule idiom: a `Top::` entry
-  rule (no regex; `-> Pair .push` dispatch loop + `LX { return(array_copy(a(Top))) }`) plus a `Pair:`
-  matcher rule carrying the regex in an `I { return(hash("kind","pair","name",entry_group(0),"value",
-  trim(entry_group(1)))) }` block. **Every claimed output re-derived through `LinkedSpec::Get`** via a
-  mode-aware driver (`/tmp/lsq_me/runpm.pl`, scalar-ref input, `JSON::PP->canonical`, sanity-checked vs
-  the frozen `["hello-world"]` idiom): `answer = 42` (default/consume) → `[{"kind":"pair","name":
-  "answer","value":"42"}]`; `junk answer = 42` consume → `[]`; same input seek → the pair; multi
-  `a = 1, b = 2` → two-element list. The chapter's old single-hash output claim is corrected to a
-  one-element **list** (the entry rule's accumulator snapshot). **Descriptor/ctx re-derived:**
-  `ref eq HASH`, `meta.parse_mode eq 'consume'`, `exists spec{Pair}` all still hold; **`ctx{top_rule}`
-  corrected `Pair`→`Top`** (the top rule is now the entry rule). `match_group`→`entry_group` throughout
-  (the dispatched matcher's local match is unset; documented + cross-linked to the entry-vs-match
-  divergence). Three traps caught: `:AND` mode on the matcher with a separated `I` block collapses the
-  push to `[0]` (use a bare `:` matcher with regex+`I {` on one line); OR-with-`I`-block over alternative
-  capture groups is fragile (`[null]`/`[]`) → the OR growth sketch is shown structurally, no output claim.
-  **declare()/assign() removed** from the advanced "Evolving the spec" sketch per user direction
-  (2026-06-18) — the `call(...)` dataflow teaching is preserved without them; they remain live in the
-  reference engine and elsewhere in the book until `SPEC-FORMAT-TERSE` lands the terse forms.
-  `mdbook build` exit 0; `scripts/check_memory_architecture.sh` exit 0. No Perl change.
   Commit: `SPEC-LANG-REFERENCE.10.5.4 — book: fix worked-spec-walkthrough.md → verified 2-rule idiom; re-derive whole-chapter outputs; drop declare/assign`; prior node reference: `SPEC-LANG-REFERENCE.10.5.4` (see Commit Log); retained completion note: Central single-rule `Pair::AND -> Pair[0]` (→`[]`, claimed `{kind:pair,…}`) → `Top::` entry + `Pair:` matcher; every claimed I/O re-derived via `LinkedSpec::Get`; output corrected single-hash→one-element list; `match_group`→`entry_group`; `ctx{top_rule}` Pair→Top; declare()/assign() removed from the advanced sketch per the user terse-format pivot. `mdbook build` exit 0. **Whole-book scorch PAUSED here — user activated `SPEC-FORMAT-TERSE`.**
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.4`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.4.1`
   Status: `done`
   Goal: Reactivate the paused whole-book scorch at the user's 2026-07-08 directive, without bundling
-  the next book-content fix.
   Acceptance: central task-tree index, this task file, memory pointer, live status, changelog, and
-  development notes all agree that the scorch is active again and `.10.5.5` is the next resumable leaf;
-  no mdBook content or parser/runtime behavior changes in this metadata-only slice.
-  Verification: Done — 2026-07-08. Updated durable coordination records to resolve the 2026-06-18
-  pause and point the active frontier at `.10.5.5` (`user-model/spec-files-and-rule-paragraphs.md`).
-  No book source, parser/runtime code, corpus, or Knowledge Map fact changed.
   Commit: `SPEC-LANG-REFERENCE.10.5.4.1 - reactivate book scorch`; prior node reference: `SPEC-LANG-REFERENCE.10.5.4.1` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.4.1 — reactivate book scorch`; retained completion note: User reactivated `SPEC-LANG-REFERENCE`; durable coordination records now point to `.10.5.5` as the next book-content leaf. Metadata-only; no mdBook source or parser/runtime behavior changed
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.4.1`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.5`
   Status: `done`
   Goal: Fix `user-model/spec-files-and-rule-paragraphs.md` — the malformed label-in-block example
-  (`Top::AND … label:` → DSL compile error) + the `Top::AND` regex-on-top sketches
   Acceptance: valid forms, re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the page's runnable `Top::AND` minimal, label-in-block,
-  same-line, and multiline examples with the verified 2-rule idiom (`Top:: -> Word .push` /
-  `LX { return(copy(array(Top))) }` plus normal `Word:`/`Item:` matcher rules). Replaced the malformed
-  bare `label:` block with a valid quoted `"label:"` helper value, and documented that a bare label-like
-  line inside an open `{ ... }` block fails validation with `Rule definition not allowed inside open
-  block`. The four replacement snippets were compile/run-verified through `LinkedSpec::Get`; the
-  mdBook build exits 0 (`mdbook build docs/linkedspec-book`).
   Commit: `SPEC-LANG-REFERENCE.10.5.5 - fix spec file paragraph examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.5` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.5 — fix spec file paragraph examples`; retained completion note: `spec-files-and-rule-paragraphs.md` runnable examples now use the verified 2-rule idiom; the malformed bare `label:` block is replaced with valid quoted `"label:"` helper content plus the exact validation-error note. Four snippets verified through `LinkedSpec::Get`; mdBook build exit 0; Knowledge fact card added
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.5`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.6`
   Status: `done`
   Goal: Fix `user-model/rule-modes-and-parse-modes.md` — convert all ~20 mode fragments off
-  regex-on-`::` (use single-colon `:` normal rules for regex-carrying rules), reframe the "the same
-  mode suffixes can appear after either colon form / both valid shapes" teaching to the doctrine
-  (`::` = the single no-regex entry rule; `:` carries the regex), and fix the `Top:: /foo/` seek/
-  consume examples
   Acceptance: no example puts a regex on a `::` rule; framing corrected; representative examples
-  re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Reframed the rule-label surface so runnable examples use
-  no-regex `Top::` entry/dispatcher rules and single-colon regex-carrying rules. Converted the
-  regex-owning mode fragments (`Pair:&`, `Pair:AND`, `NameRun:+`, `TokenStream:OR`, bounded
-  `OR{...}` and `AND{...}` families, and the mixed-edge `BadRule:` negative example) off `::`.
-  Replaced the `Top:: /foo/` seek/consume snippets with the verified 2-rule wrapper (`Top:: -> Word
-  .push` / `LX { return(copy(array(Top))) }` + `Word: /foo/ I.return(entry_text())`). Runtime probes:
-  token stream `foo "bar"` → `["foo","bar"]`; `seek` over `junk foo` → `["foo"]`; `consume` over
-  `junk foo` → `[]`; `consume` over `foo` → `["foo"]`. `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.6 - fix rule mode and parse mode examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.6` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.6 — fix rule mode and parse mode examples`; retained completion note: `rule-modes-and-parse-modes.md` regex-owning mode examples now use single-colon labels, the `::` framing teaches no-regex entry/dispatcher usage, and `Top:: /foo/` parse-mode snippets are replaced with the verified 2-rule wrapper. Runtime probes and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.6`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.7`
   Status: `done`
   Goal: Fix `user-model/regex-in-spec.md` — convert the `::`-with-regex fragments (`Top::`, `Pair::AND`,
-  `Subdef::AND`, `Unit::AND`) to valid form while preserving the capture-group / compaction teaching
   Acceptance: doctrine-valid examples, re-verified; capture-indexing facts intact; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the minimal `Top:: /foo/` example with a no-regex `Top::`
-  wrapper dispatching to `Keyword:`. Reworked numbered, named, and compaction examples so regex-bearing
-  rules use single-colon labels (`Pair:`, `Subdef:`, `Unit:`) and dispatched child rules read captures
-  with `entry_group` / `entry_named`. Preserved the capture-indexing contract: 0-based captures-only
-  groups, compacted non-participating numbered groups, and stable named-group reads. Runtime probes:
-  `foo` → `["foo"]`; `foo=bar` → `[{"key":"foo","val":"bar"}]`; `alpha` →
-  `[{"name":"alpha"}]`; numbered compaction `abc` → `[{"amount":"abc","name":null}]`, `12abc` →
-  `[{"amount":"12","name":"abc"}]`; named groups `abc` →
-  `[{"amount":null,"name":"abc"}]`, `12abc` → `[{"amount":"12","name":"abc"}]`.
-  `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.7 - fix regex chapter examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.7` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.7 — fix regex chapter examples`; retained completion note: `regex-in-spec.md` examples now use no-regex `Top::` wrappers plus single-colon regex-bearing rules. Numbered/named capture and compaction teaching is preserved with `entry_group` / `entry_named`; runtime probes and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.7`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.8`
   Status: `done`
   Goal: Audit + fix `user-model/blind-calls-and-parser-orchestration.md` (blind-call `::` rules carry
-  no regex — likely mostly clean; fix any regex-on-`::` and the `BadRule::` negative example framing)
   Acceptance: any regex-on-`::` removed; negative examples clearly marked; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Focused scan found the blind-call wrapper examples clean, but four
-  regex-owning action-edge examples still used `::`: `Parent::AND`, `BadRule::AND`, `HeaderRule::AND`,
-  and `Field::AND`. Converted them to single-colon labels while leaving no-regex blind-call wrappers
-  (`Document::AND`, `Atom::|`, `LineStream::OR`, bounded blind-call streams, `Record::AND`, etc.)
-  unchanged. Added a negative-example note that `BadRule:AND` uses single colon because it owns a regex
-  slot; the illustrated error is mixing `->` and `=>`. Reverified the mixed-edge case with a valid
-  `Top::` wrapper: validation reports `Cannot mix ACTION (->) and BLIND CALL (=>) code blocks`.
-  The page scan reports no `::` header followed by a regex slot, and `mdbook build docs/linkedspec-book`
-  exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.8 - fix blind-call orchestration examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.8` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.8 — fix blind-call orchestration examples`; retained completion note: `blind-calls-and-parser-orchestration.md` keeps no-regex blind-call `::` wrappers, converts regex-owning action-edge examples to single-colon labels, and clarifies the mixed-edge negative example. Scan/probe and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.8`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.9`
   Status: `done`
   Goal: Fix `dsl/action-and-lifecycle-placement.md` worked examples (`Token::AND`, `List::AND`,
-  `Name::AND`, `Delimited::AND`, `Block::AND`, `Tuple::AND`, `Pair::AND`, `MaybeName::OR`, `Items:*`,
-  …) → 2-rule idiom (regex on `:` rules), preserving the grouped-target + lifecycle-placement teaching
   Acceptance: no regex on `::`; representative examples re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Converted regex-owning examples to normal `:` labels and tightened
-  the chapter's entry-vs-local-slot model: dispatched entry-match transforms use `I { ... }` with
-  `entry_text()` / `entry_group(...)`, while indexed local-slot actions use `match_text()` /
-  `match_group(...)`. Replaced invalid bare child-rule lines in the Pair sketch with verified local-slot
-  regex/action flow, corrected aggregate hash initialization (`set(hash(meta), { ... })` where examples later
-  read `hash(meta)`), and changed the lifecycle statement-block example to explicit `return(...)`. Focused
-  probes: `Name` later slots → `[{"entry":"name","kind":"name","separator":"=","value":"Alpha"}]`;
-  `Token` entry `I` → `[{"kind":"token","text":"alpha"}]`; explicit lifecycle return →
-  `[{"ignored":"not_a_return","out":"from_i"}]`; Pair slot flow → `{"kind":"pair","lhs":"answer","rhs":"42"}`.
-  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` and
-  Knowledge Map check pass. A Perl handler-shape drift found during verification is tracked in Knowledge fact
-  `perl-lifecycle-final-value-e-drift` and follow-up leaf `.10.5.20`.
   Commit: `SPEC-LANG-REFERENCE.10.5.9 - fix action and lifecycle placement examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.9` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.9 — fix action and lifecycle placement examples`; retained completion note: `action-and-lifecycle-placement.md` now separates entry-match `I`/`entry_*` from local-slot action `match_*`, removes regex-on-`::` examples, corrects hash initialization, and records the Perl lifecycle handler drift caveat
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.9`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.10`
   Status: `done`
   Goal: Fix `dsl/capture-marks-and-source-locations.md` worked examples (`Top::AND`, `Call::AND`/
-  `Inner::AND` divergence) → 2-rule idiom, preserving the entry-vs-match teaching
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the `Top::AND` capture example with a no-regex `Top::`
-  wrapper and normal `Body:` delimiter rule: `Top:: -> Body .push` / `LX { return(copy(array(Top))) }`
-  plus `Body: /BEGIN/ /END/ -> Body[1] { return(hash("body", trim(capture_slice()))) }`. Runtime
-  probe with `parse_mode=>"seek"` returns `[{"body":"body"}]` for `BEGIN body END`; the same minimal
-  delimiter shape returns `[null]` under `consume`, so the seek-vs-consume caveat is recorded in
-  Knowledge fact `perl-capture-slice-delimiter-seek-boundary`. Replaced the `Call::AND`/`Inner::AND`
-  divergence sketch with a no-regex blind-call wrapper (`Top::AND => Call`) and normal regex-owning
-  `Call:`/`Inner:` rules. Runtime probe over `greet(world)` returns
-  `[{"outer":"greet","outer_name":"greet","inner":"world","inner_name":"world"}]`, preserving the
-  entry-vs-match teaching without regex slots under `::`. The page scan reports no `::` header followed
-  by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.10 - fix capture and entry-match examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.10` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.10 — fix capture and entry-match examples`; retained completion note: `capture-marks-and-source-locations.md` now uses a no-regex `Top::` wrapper plus normal `Body:` delimiter rule for the `capture_slice()` example, and a blind-call `Top::AND => Call` wrapper plus normal `Call:`/`Inner:` rules for entry-vs-match divergence. Seek-mode capture probe returns `[{"body":"body"}]`; blind-call probe returns `greet` vs `world`; Knowledge fact `perl-capture-slice-delimiter-seek-boundary` records the consume-mode caveat
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.10`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.11`
   Status: `done`
   Goal: Fix `dsl/declaration-helper-reference.md` worked examples (`Token::AND`, `List::AND`) → 2-rule idiom
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the `List::AND` accumulator example with a no-regex
-  `List::` stream wrapper that owns `set(array(items), [])`, `retv`, and the final `LX` return, plus a
-  normal `Item:` matcher (`/\s*[A-Za-z_]+/`) that returns one item record through `entry_text()`. Runtime
-  probe over `alpha beta` returns `{"kind":"list","items":[{"text":"alpha"},{"text":"beta"}],"item_count":2}`.
-  Replaced the regex-owning `Token::AND` metadata example with a no-regex `Top::` wrapper and normal
-  `Token:` matcher; runtime probe over `Alpha` returns
-  `[{"kind":"token","source":"Token","text":"alpha","text_length":5}]`. The page scan reports no `::`
-  header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.11 - fix declaration helper examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.11` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.11 — fix declaration helper examples`; retained completion note: `declaration-helper-reference.md` now uses no-regex wrappers for accumulator and metadata examples: `List::` owns aggregate state while `Item:` owns the matcher, and `Top::` dispatches to regex-owning `Token:`. Runtime probes return the documented two-item list and token metadata outputs; page scan and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.11`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.12`
   Status: `done`
   Goal: Fix `dsl/source-boundary-helper-reference.md` worked examples (`Tuple::AND`, `Block::AND`,
-  `Paren::AND`, `Pair::AND`, `Body::AND`, `AtEnd::AND`, `Top::AND`/`Child::AND`) → 2-rule idiom
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced every regex-owning `::AND` example with a no-regex
-  `Top::AND => <Rule>` blind-call wrapper and a normal regex-owning `<Rule>:AND` (or `Call:`/`Child:`)
-  rule. Added a short seek-mode note for delimiter-body examples, matching the caveat recorded in
-  `perl-capture-slice-delimiter-seek-boundary`. Reduced the old three-segment Tuple/Body sketches to
-  verified two-segment forms that still exercise `capture_take()`, `capture_slice()`,
-  `mark_capture_slice(...)`, and `start_capture_slice_from(...)`. Focused probes:
-  Tuple → `[["?Tuple:",["alpha","beta"]]]`; Block → `[{"body":"abc","body_start_col":2,"body_start_line":1}]`;
-  Paren → `[{"body":"abc","col":2,"line":1}]`; Pair → `[{"left":"left","right":"right"}]`;
-  Body bridge → `[{"first":"alpha","second":"beta","whole_body":"alpha,beta"}]`;
-  AtEnd → `[{"cursor_pos":7,"prefix":"abc END","remaining":"","source_end_col":8,"source_end_line":1,"source_len":7}]`;
-  entry-vs-match → `[{"entry_group_count":1,"entry_prefix":"foo","entry_text":"foo","local_group_count":1,"local_name":"bar","local_text":"bar"}]`.
-  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.12 - fix source-boundary examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.12` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.12 — fix source-boundary examples`; retained completion note: `source-boundary-helper-reference.md` now uses no-regex `Top::AND` blind-call wrappers plus normal regex-owning rules for Tuple, Block, Paren, Pair, Body, AtEnd, and entry-vs-match examples. Seven focused probes return the documented source-boundary outputs; page scan and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.12`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.13`
   Status: `done`
   Goal: Fix `dsl/value-container-flow-helper-reference.md` worked examples (`Token::AND`, `Node::AND`,
-  `Sequence::AND`, `Kind::AND`, `FieldList::AND`, `logging_annotation:` already `:`) → 2-rule idiom
   Acceptance: doctrine-valid + re-verified; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced regex-owning `Token::AND`, `FieldList::AND`, and
-  `Kind::AND` examples with no-regex `Top::` wrappers plus normal regex-owning `Token:`,
-  `FieldList:`, and `Kind:` rules. Reworked the `Node::AND` and `Sequence::AND` examples as
-  no-regex entry rules that dispatch to explicit `Child:` / `Item:` matchers, preserving the hash
-  normalization and head/tail array teaching without relying on regex slots under `::` headers.
-  Focused probes: Token → `[{"kind":"token","text":"alpha","text_length":5}]`;
-  FieldList → `[{"field_count":2,"fields":["name","kind"],"first_field":"name","kind":"field_list"}]`;
-  Kind → `[{"kind":"node","raw":"node"}]`;
-  Node → `{"kind":"word","name":"Alpha","normalized_name":"alpha"}`;
-  Sequence → `{"head":{"text":"alpha"},"item_count":2,"kind":"sequence","rest":[{"text":"beta"}]}`.
-  The page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.13 - fix value-container flow examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.13` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.13 — fix value-container flow examples`; retained completion note: `value-container-flow-helper-reference.md` now uses no-regex wrappers or entry rules for Token, FieldList, Node, Sequence, and Kind examples, with regex slots moved to normal matcher rules. Five focused probes return the documented token, field-list, node-normalization, sequence head/tail, and switch-classification outputs; page scan and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.13`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.14`
   Status: `done`
   Goal: Fix the remaining DSL pages — `dsl/values-containers-and-flow-helpers.md` (`Token::`),
-  `dsl/action-model-and-helper-surface.md` (`Top::`), `dsl/fluent-and-block-forms.md` (`Items::AND+`,
-  `Toplevel:AND+`), and audit `dsl/actionir-lowering-mental-model.md` (helper-statement fragments)
   Acceptance: no regex on `::`; complete worked examples re-verified; isolated helper-statement
-  fragments confirmed valid or wrapped; `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the `Token::` practical pattern in
-  `dsl/values-containers-and-flow-helpers.md` and the `Top:: /name=.../` tiny example in
-  `dsl/action-model-and-helper-surface.md` with no-regex `Top::` wrappers plus normal
-  regex-owning `Token:` / `Value:` rules. In `dsl/fluent-and-block-forms.md`, reduced the
-  `Toplevel:AND+` lifecycle sketch to the lifecycle block fragment it was demonstrating, and
-  rewrote the `Items::AND+` all-forms example as a no-regex `Items::` entry rule plus normal
-  `Item:` matcher. Audited `dsl/actionir-lowering-mental-model.md`: the in-scope blocks are
-  helper-statement or lowering-pipeline fragments, not runnable regex-owning spec examples, so
-  no content change was needed. Focused probes: Token → `[{"col":1,"kind":"token","line":1,"text":"Alpha"}]`;
-  Value → `[{"kind":"assignment","name":"alpha"}]`;
-  Items `alpha` → `{"item":{"text":"alpha"},"kind":"singleton"}`;
-  Items `alpha beta` → `{"first":{"text":"alpha"},"kind":"pair","second":{"text":"beta"}}`;
-  Items `alpha beta gamma` → `{"count":3,"items":[{"text":"alpha"},{"text":"beta"},{"text":"gamma"}],"kind":"list"}`.
-  The four-page scan reports no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.14 - fix remaining DSL examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.14` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.14 — fix remaining DSL examples`; retained completion note: `values-containers-and-flow-helpers.md`, `action-model-and-helper-surface.md`, and `fluent-and-block-forms.md` now avoid regex-bearing `::` examples for Token, Value, and Items. `actionir-lowering-mental-model.md` audited clean as helper/pipeline fragments only. Focused Token, Value, and Items probes pass; four-page scan and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.14`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.15`
   Status: `done`
   Goal: Fix `appendix/formal-grammar.md` — §1 paragraph-model example (`Top:: /a/ -> Next` + `Next:: /b/`)
-  and §12 "complete example" (`DemoParser:: … /pattern1/ …` + undefined targets `A`/`B`) → valid forms
   Acceptance: doctrine-valid + compile/run-verified (or clearly-marked grammar meta-notation);
-  `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Replaced the §1 paragraph-model example with a no-regex
-  `Top::` entry rule that dispatches to normal regex-owning `Next:` and returns the paragraph
-  result from `LX`. Reworked the §12 complete example so `DemoParser::` is a no-regex top rule,
-  `Child:` owns the `hello` regex, `SecondChild:OR+` owns its repeated word regex/action, and
-  `ThirdChild:AND` dispatches to defined `First:` and `Second:` matcher rules instead of
-  undefined `A`/`B` targets. Focused probes: paragraph example `a` →
-  `["?Top:",[["?Next:","a"]]]`; `DemoParser` on `hello Alice hello Bob` →
-  `["?result:",["Alice","Bob"]]`; `SecondChild` on `one two` → `["one","two"]`;
-  `ThirdChild` on `first second` → `["?third:",["first","second"]]`. The appendix scan reports
-  no `::` header followed by a regex slot; `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.15 - fix formal grammar examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.15` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.15 — fix formal grammar examples`; retained completion note: `formal-grammar.md` §1 and §12 now use no-regex top rules plus normal regex-owning matcher rules. The complete example defines every dispatch target and verifies DemoParser, SecondChild, and ThirdChild outputs; appendix scan and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.15`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.16`
   Status: `done`
   Goal: Fix `appendix/runtime-semantics.md` §5.5/§5.6 examples (the three `Top::`/`Pair::` regex-on-top
-  forms incl. the **`.10.4` §5.5 Pair target**, and the §5.6 single `object:`/`manifest:` fragments)
-  → 2-rule idiom; re-derive outputs. **Closes/subsumes `.10.4`.**
   Acceptance: doctrine-valid + re-verified outputs; `.10.4` marked superseded-by-`.10.5.16`;
-  `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Rewrote all §5.5 parser-output examples to no-regex
-  `Top::` wrappers dispatching to normal regex-owning `Done:` / `Pair:` rules, preserving the
-  documented scalar, array, and tagged-pair output shapes. Replaced the §5.6 `object:` and
-  `manifest:` single-rule fragments with complete no-regex `Top::` wrappers plus normal
-  regex-owning body rules. The `.10.4` Pair target is closed here: the Pair example now reads
-  `entry_group(0/1)` in the dispatched `Pair:` rule and returns that value through `Top`.
-  Focused probes: scalar → `"scalar-ok"`; proof array → `["?proof:","ok"]`;
-  pair → `["?pair:","key","val"]`; object → `["?object:","foo"]`;
-  manifest → `["?manifest:"]`. The page scan reports no `::` header followed by a regex slot;
-  `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.16 - fix runtime semantics examples`; prior node reference: `SPEC-LANG-REFERENCE.10.5.16` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.16 — fix runtime semantics examples`; retained completion note: `runtime-semantics.md` §5.5/§5.6 now uses no-regex `Top::` wrappers plus normal regex-owning `Done:`, `Pair:`, `object:`, and `manifest:` rules. The folded `.10.4` Pair target now returns the verified `entry_group` tagged array through `Top`; five focused outputs, page scan, and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.16`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.17`
   Status: `done`
   Goal: Fix `specs-and-corpora/tablegrep-spec-walkthrough.md` output drifts — `sens` is `=` not `=~`
-  (regex captures only `([!=])`); the GROUP example output (`{"group":["internal"]}`) is misquoted
   Acceptance: claimed outputs corrected to verified `LinkedSpec::Get` runs of `specs/tablegrep.spec`;
-  `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Re-ran the Perl reference parser through
-  `LinkedSpec::get_parser('tablegrep')` and replaced the two output examples with JSON renderings
-  of the actual ASTs. `field1 =~ /foo/` returns
-  `[{"field":"field1","re":"foo","sens":"=","type":"TERM"}]`; grouped input
-  `(field1 =~ /foo/ || field2 =~ /bar/)` returns
-  `[{"group":[{"field":"field1","re":"foo","sens":"=","type":"TERM"},{"type":"OR_OP"},{"field":"field2","re":"bar","sens":"=","type":"TERM"}],"type":"GROUP"}]`.
-  Also corrected the same page's stale descriptor helper list after checking the live spec and
-  descriptor metadata: five rules ready, zero blocked, zero compatibility, zero raw, zero unresolved.
-  `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.17 - fix tablegrep walkthrough outputs`; prior node reference: `SPEC-LANG-REFERENCE.10.5.17` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.17 — fix tablegrep walkthrough outputs`; retained completion note: `tablegrep-spec-walkthrough.md` now shows verified JSON outputs for the simple term and grouped expression (`sens` is `=`), and its descriptor helper list matches the live spec. Parser probes, descriptor metadata probe, and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.17`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.18`
   Status: `done`
   Goal: Fix `specs-and-corpora/portmap-spec-walkthrough.md` — the 5 output-shape examples claim flat
-  `['?bare:','clk',undef,undef,undef]` etc.; actual is nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`
   Acceptance: every claimed output corrected to verified `specs/portmap.spec` runs (and any wrong
-  input like `4'b1011` corrected); `mdbook build` exit 0.
-  Verification: Done — 2026-07-08. Re-ran the Perl reference parser through
-  `LinkedSpec::get_parser('portmap')` for all five documented output-shape examples. The current
-  walkthrough already matches the live nested JSON shapes: `clk` ->
-  `["?bare:",["clk"]]`, `bar[3]` -> `["?bit:",["bar","3"]]`,
-  `addr[7:0]` -> `["?slice:",["addr","7","0"]]`, `0x1f` ->
-  `["?constant:",["0x1f"]]`, and `{sig_a sig_b[7:0] 0x1f}` ->
-  `["?concat:",[["?bare:",["sig_a"]],["?slice:",["sig_b","7","0"]],["?constant:",["0x1f"]]]]`.
-  `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.18 - verify portmap walkthrough outputs`; prior node reference: `SPEC-LANG-REFERENCE.10.5.18` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.18 — verify portmap walkthrough outputs`; retained completion note: `portmap-spec-walkthrough.md`'s five output-shape examples were rechecked against `LinkedSpec::get_parser('portmap')`; the current page already matches the live nested JSON for bare, bit, slice, constant, and concatenation cases. Parser probes and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.18`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.19`
   Status: `done`
   Goal: Finalize the scorch — whole-book re-grep confirming **zero** regex-on-`::` example rules
-  remain, every claimed I/O re-verified, `mdbook build` exit 0; close the planned `.10.5.2`–`.10.5.18`
-  book-page sweep
   Acceptance: clean whole-book sweep; planned page-fix children `done`/`superseded`; any follow-up drift
-  leaf remains separately tracked if it is not part of the page-scorch closeout.
-  Verification: Done — 2026-07-08. Whole-book `rg` scans for same-line and immediately-following-line
-  regex slots under `::` rule headers now return no matches across `docs/linkedspec-book/src`. The closeout
-  sweep found and fixed three residual mdBook examples: the recursive `sexpr` example in
-  `spec-files-and-rule-paragraphs.md`, the direct value-path and array-end-mutation examples in
-  `helper-contract-catalog.md`, and the function-registry proof snippet in `compiler/pipeline-overview.md`.
-  Focused `LinkedSpec::Get` probes verify the corrected outputs: `(a(b)c)` -> `[["a",["b"],"c"]]`,
-  `(a) (b)` -> `[["a"],["b"]]`, direct value-path assignment -> `"updated"`, array end mutations ->
-  `["a"]`, and the function proof -> `["x","ab",2,"v"]`. `mdbook build docs/linkedspec-book` exits 0.
   Commit: `SPEC-LANG-REFERENCE.10.5.19 - finalize book scorch`; prior node reference: `SPEC-LANG-REFERENCE.10.5.19` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.19 — finalize book scorch`; retained completion note: Whole-book closeout scans found and fixed the remaining regex-on-`::` mdBook examples in `spec-files-and-rule-paragraphs.md`, `helper-contract-catalog.md`, and `compiler/pipeline-overview.md`. Follow-up scans return no matches; focused parser probes and mdBook build pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.19`.
 
 - ID: `SPEC-LANG-REFERENCE.10.5.20`
   Status: `done`
   Goal: Resolve the lifecycle handler-shape drift found during `.10.5.9`: current Perl generated handlers
-  can expose an `I` block's final host statement value when explicit `return(...)` is omitted, and a direct
-  default-rule `I` + regex + `E` shape can omit the regex/E path in generated source, while existing Rust
-  tests model the intended statement-block contract.
   Acceptance: decide whether this remains a documented Perl-reference caveat or becomes a backend/runtime
-  fix task; update mdBook/KM/tests/task-tree records accordingly; keep the Perl reference untouched unless
-  a separately-owned implementation leaf explicitly authorizes code changes.
-  Verification: Done — 2026-07-08. Focused Perl probes reverified the caveat: the direct
-  `Top:: I { set(out,...); set(ignored,"not_a_return") } /x/ E { return(hash(...)) }`
-  shape returns `"not_a_return"`, a dispatched child without explicit `return(...)` returns
-  `["not_a_return"]`, and `dump_parser_source` for the direct shape contains the `I` block's
-  `not_a_return` statement while omitting the `hash("out",...)` `E` path. ADR `0020` records
-  the policy: document this as a current Perl-reference caveat for language-reference closeout;
-  any behavior normalization needs a separately-owned implementation/parity leaf. `runtime-semantics.md`
-  now teaches explicit `return(...)` as the portable return channel, and KM fact
-  `perl-lifecycle-final-value-e-drift` points to ADR `0020`. `mdbook build`, memory/task/doctrine,
-  whitespace, and Knowledge Map checks pass.
   Commit: `SPEC-LANG-REFERENCE.10.5.20 - document lifecycle drift policy`; prior node reference: `SPEC-LANG-REFERENCE.10.5.20` (see Commit Log); table reference: `SPEC-LANG-REFERENCE.10.5.20 — document lifecycle drift policy`; retained completion note: Lifecycle final-value/direct-`E` drift resolved as a documented current Perl-reference caveat under ADR `0020`; `runtime-semantics.md` teaches explicit `return(...)` as the portable return channel; KM fact updated; focused probes and gates pass
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.5.20`.
 
 - ID: `SPEC-LANG-REFERENCE.10.6`
   Status: `done`
   Goal: Correct the durable record — retract the inaccurate "a regex-on-top / single-rule spec
-  silently returns `[]`" sub-claim of the `.10` CORRECTION, and reframe the remediation rationale as
-  the **authoring doctrine** (top `::` entry rule with no regex + ≥1 normal `:` rule), not an `[]` bug
   Acceptance: rewrite the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first (verified
-  2-rule idiom; brief retraction; the only broken shape to avoid in examples is `::AND … -> Rule[N]`);
-  add a superseding Decision here; correct the framing in CHANGES/DEVELOPMENT_NOTES/LIVE/MEMORY. No
-  book-example change (the `.10.3` catalog already follows the doctrine). KM gate regenerates.
-  Verification: Done — 2026-06-17. Ground-truth via `LinkedSpec::Get` established that the OR
-  self-ref / cross-rule action-edge forms (the old `.5.2`/`.9` shape AND the §5.5 frozen oracle
-  fixtures) **run and return their value** (`Greeting:: /…/ -> Greeting {return(concat(...))}` →
-  `"hello-world"`; `Sum:: …` → `5`; `Pair:: …` → `["?pair:","key","val"]`), so the prior
-  "regex-on-top → `[]`" premise was factually wrong; the ONLY shape returning `[]` is the explicit
-  `::AND … -> Rule[N] { return(...) }` form (AND mode + slot index — the `.10.1` AND_SINGLE_ACODE
-  finding, real but narrow). Rewrote the KM card doctrine-first with that retraction. **The 2-rule
-  doctrine and `.10.3` stand** — they match all 20 shipped specs and [[feedback_spec-structure-top-plus-normal]];
-  only the *rationale wording* changed (the examples violated the 2-rule authoring doctrine, they
-  were not returning `[]`). self-check + KM gate pass (KM regenerates `KNOWLEDGE_MAP.md`). No Perl,
-  no book-example change.
   Commit: `SPEC-LANG-REFERENCE.10.6 — record: retract the inaccurate "regex-on-top → []" premise; reframe the .10 rationale as the 2-rule authoring doctrine`; prior node reference: `SPEC-LANG-REFERENCE.10.6` (see Commit Log); retained completion note: Rewrote the KM card `spec-top-rule-no-regex-two-rule-minimum.md` doctrine-first + superseding Decision + record-framing fixes; doctrine and `.10.3` unchanged. No Perl/book-example change
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.10.6`.
 
 - ID: `SPEC-LANG-REFERENCE.8`
   Status: `done`
   Goal: Finalize — whole-book consistency + close, including the current top-rule doctrine
-  correction after stale no-regex wording resurfaced.
   Acceptance: full `mdbook build` exit 0; a cross-chapter consistency pass confirming every
-  `.spec` construct from the `.1` inventory is documented with at least one example and no
-  variant leakage; every example verified valid against the grammar; durable doctrine records
-  agree that ADR `0010` supersedes the old no-regex/two-rule-minimum validity doctrine; tree
-  closed when all children are `done`/`deferred`.
-  Verification: Done — 2026-07-08. Focused `LinkedSpec::Get` probes confirmed current ADR `0010`
-  doctrine: regex-bearing `Entry::` and selected regex-bearing `Body:` with equivalent default-rule
-  bodies both return `"foo"`, and equivalent `Entry::AND` / selected `Body:AND` bodies both return
-  `{"name":"name","value":"value"}`. Corrected current-facing task-tree, ADR, Knowledge Map, mdBook,
-  and toolbox wording so no-regex top wrappers are stream-parser idiom, not validity law. Rewrote
-  `spec-top-rule-no-regex-two-rule-minimum` as a superseded redirect and regenerated `KNOWLEDGE_MAP.md`.
-  `mdbook build docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
-  `scripts/check_memory_architecture.sh`, `scripts/check_task_tree_metadata.sh`,
-  `scripts/check_doctrines.sh`, and `git diff --check` all pass.
   Commit: `SPEC-LANG-REFERENCE.8 - correct top-rule doctrine drift and close language reference`; table reference: `SPEC-LANG-REFERENCE.8 — correct top-rule doctrine drift and close language reference`; retained completion note: Reaffirmed ADR `0010` as current doctrine (`::` marks the entered-first rule; `::`/`:` share the feature surface after entry selection), converted the old no-regex/two-rule-minimum card into a superseded redirect, aligned mdBook/toolbox/task/live docs, and closed the language-reference tree. Focused parity probes, mdBook, KM, memory, task-tree metadata, doctrine, and whitespace gates pass
-
-## Audit Findings (`.1`, 2026-06-17)
-
-Synthesis of two read-only audits (full surface inventory ∥ book coverage map). This is the
-durable anti-archaeology artifact: it records the authoritative source for each surface area
-and the book's coverage verdict, so a future session does not re-run the audit.
-
-**Authoritative sources for the full `.spec` surface** (the completeness yardstick):
-- Rule labels (`:` body / `::` top) + paragraph model: `perl/LinkedSpec/BootstrapSpec/Core.pm`
-  (~410-491), `perl/LinkedSpec/Validation.pm` (`_parse_rule_label_line`, `_scan_rule_edges_in_fragment`).
-- Rule modes (mode-alias map `&`→AND, `|`→OR, `+`/`*`/`?`; explicit `AND`/`OR`/`AND+`/`OR+`;
-  bounded `:AND{N,M}`/`:OR{N,M}`): `Core.pm:345-408`, `Validation.pm:47-82`, `specs/spec.spec:39-43`.
-- Regex literals/clusters: `Core.pm:516-527`, `specs/spec.spec:102-104`. Comments `#` /
-  blank lines: `Core.pm:624-631`, `Validation.pm:163`.
-- Edges (action `->` / blind `=>`, `[N]` indexing, grouped `A | B`, fluent continuations):
-  `Core.pm:529-739`. Method-chain parsing: `Core.pm:42-127`.
-- Lifecycle markers `I`/`LS`/`LE`/`E`/`EX`/`IT`/`LX`: `RuleIR/EmitContext.pm:550-557`,
-  `specs/spec.spec:29-30`. (All 7 supported/equivalent per the completed `LIFECYCLE-FAMILY-AUDIT`
-  — the surface agent's "E/IT deprecated" note is **wrong** and was not propagated.)
-- Capture/mark/source-location surface (`@capture_slice`, `@mark(name)`, the anonymous +
-  named capture-slice families, `mark_*`, `capture_*_from`/`_between`, `input_*`/`entry_*`/
-  `match_*`/`cursor_*` readers): `Core.pm:686-699`, `perl/LinkedSpec/ActionIR/Contracts.pm`.
-- Full helper-contract catalog (**158** contracts, `grep -cE "\bid\b => '" Contracts.pm`):
-  `ActionIR/Contracts.pm`. Output/return shape: `docs/knowledge/rust-perl-output-oracle.md`
-  + `appendix/runtime-semantics.md` §5.
-
-**Coverage verdict (book) — 8/10 WELL-COVERED, 2 binding gaps + minor clarity gaps:**
-- WELL-COVERED: rule labels, rule modes, parse modes (seek/consume), edges, lifecycle markers,
-  capture/marks, helper catalog (structurally), control flow — all with examples + formal contracts.
-- **GAP A (CRITICAL) → `.2`**: regex is defined only at the syntax level in
-  `appendix/formal-grammar.md:111-127`; no mental model, no examples, and no statement of the
-  regex feature set a backend must support (flags? named groups? capture↔`entry_group(N)`).
-- **GAP B (CRITICAL) → `.3`**: the output/return-shape contract is undocumented — backends
-  reverse-engineer the AST shape from `tests/corpus/`. (Authoritative material exists in the
-  oracle KM card; just not surfaced in the book.)
-- GAP C (MAJOR) → `.4`: grouped shared-code targets `-> A | B { ... }` defined in the formal
-  grammar (`:131-141`) but no worked example.
-- GAP D (MEDIUM) → `.4`: entry-vs-local-match is explained but lacks a divergence example.
-- GAP E → `.5`: helper-catalog example density is uneven + some Perl-implementation notes are
-  mixed into the backend-neutral contract (variant-leak to separate).
-- GAP F (MINOR) → `.6`: no single worked example exercising the capture/mark families together.
-
-**KM-card candidates → `.7`** (durable subjects worth retrieval): output/return-shape contract;
-regex feature-set a backend must support; rule-mode→semantics map; lifecycle execution order +
-`retv`; action-vs-blind edge/dispatch model; capture/mark family taxonomy.
-
-## Audit Findings (`.10.5.1`, 2026-06-17) — whole-book `.spec`-snippet scorch
-
-Method: 8 read-only `Explore` agents over chapter groups (enumerate → classify A/B/C/D/CLEAN → run
-claimed-output snippets), then **every load-bearing finding personally re-verified** through a private
-`LinkedSpec::Get` driver (the shared scratch driver was clobbered by an audit agent mid-run, so all
-agent ACTUAL_OUTPUT values were treated as hypotheses; cf. the `.10.6` transcription lesson). All
-"actual" values below are from my own ground-truth runs unless marked "(agent, re-verify at fix)".
-
-**Engine facts established (so the fix leaves don't re-derive them):**
-- `::` and `:` are **interchangeable on a non-first rule** — `child::AND /re/` and `child:AND /re/`
-  compile + run identically (both `[0]` in the probe). Only the **first** rule is the top/entry; a
-  second `::` rule does not collide. So **`::`-no-regex is an authoring doctrine, not a hard engine
-  constraint** (consistent with `.10.6`'s retraction; the engine is permissive).
-- The `Rule::AND /regex/ -> Rule[N] { return(...) }` shape (AND mode + slot self-edge) **drops its
-  edge return → `[]`** (the `.10.1` `_emit_and_single_acode_handler` finding). This shape is used in
-  **dozens** of book worked examples → those examples don't surface their `return(...)` value.
-
-**Scale:** `grep` finds **~105 `Name::<mode>` rule headers** in book code blocks across ~20 files; the
-`Rule::AND /regex/ -> Rule[N]` idiom is the book's pervasive worked-example shape.
-
-**Classification key:** A = regex on a `::` rule / single-rule "complete" spec · B = claimed
-input→output ≠ actual · C = `::AND -> Rule[N]` `[]` shape · D = other (won't compile / undefined
-target) · CLEAN.
-
-| File | Block(s) | Class | Claimed → Actual (verified) | Fix leaf |
-| --- | --- | --- | --- | --- |
-| `overview/what-is-linkedspec.md` | §"minimal kv parser" `Top::AND+ /…/ -> Top[0]` (single rule) | A+C+D | "returns a hash per match" → **compile error → `null`** | `.10.5.2` |
-| `public-api/get-and-get-parser.md` | "minimal example" `Top::AND /foo/ -> Top[0]` | A+B+C | "runnable parser" → **`[]`** | `.10.5.3` |
-| `user-model/worked-spec-walkthrough.md` | central `Pair::AND /…/ -> Pair[0]` (single rule, whole chapter) | A+B+C | `{kind:pair,name:answer,value:42}` → **`[]`** | `.10.5.4` |
-| `user-model/spec-files-and-rule-paragraphs.md` | label-in-block `Top::AND … label:`; `Top::AND` sketches | A+D | "label belongs to the block" → **DSL compile error** (`Rule definition not allowed inside open block`, reverified 2026-07-08); fixed in `.10.5.5` | `.10.5.5` |
-| `user-model/rule-modes-and-parse-modes.md` | ~20 mode fragments `Pair::&`/`::AND`/`::OR`/`Top:: /foo/`…; line 24 "both valid shapes" framing | A | regex on `::` throughout; `Top:: /foo/ -> Top` → **`null`**; fixed in `.10.5.6` | `.10.5.6` |
-| `user-model/regex-in-spec.md` | `Top::` (l.38), `Pair::AND` (l.101), `Subdef::AND`, `Unit::AND` fragments | A | regex on `::` (capture-indexing teaching is correct); fixed in `.10.5.7` | `.10.5.7` |
-| `user-model/blind-calls-and-parser-orchestration.md` | `Document::AND`/`Atom::|`… (blind-call, no regex); `BadRule::` negative | mostly CLEAN | blind-call `::` rules carry no regex; fixed stray action-edge regex-on-`::` examples in `.10.5.8` | `.10.5.8` |
-| `dsl/action-and-lifecycle-placement.md` | `Token::AND`,`List::AND`,`Name::AND`,`Delimited::AND`,`Block::AND`,`Tuple::AND`,`Pair::AND`,`MaybeName::OR`,`Items:*` | A + drift caveat | regex on `::` fixed in `.10.5.9`; entry-vs-local-slot examples tightened; lifecycle final-value / direct-`E` Perl caveat recorded in KM | `.10.5.9` |
-| `dsl/capture-marks-and-source-locations.md` | `Top::AND`; `Call::AND`/`Inner::AND` divergence | A | regex on `::` (entry-vs-match teaching correct) | `.10.5.10` |
-| `dsl/declaration-helper-reference.md` | `Token::AND`,`List::AND` worked examples | A | regex on `::` | `.10.5.11` |
-| `dsl/source-boundary-helper-reference.md` | `Tuple::AND`,`Block::AND`,`Paren::AND`,`Pair::AND`,`Body::AND`,`AtEnd::AND`,`Top::AND`/`Child::AND` | A | regex on `::` | `.10.5.12` |
-| `dsl/value-container-flow-helper-reference.md` | `Token::AND`,`Node::AND`,`Sequence::AND`,`Kind::AND`,`FieldList::AND` (`logging_annotation:` is `:` → CLEAN) | A | regex on `::` | `.10.5.13` |
-| `dsl/values-containers-and-flow-helpers.md` `+ action-model-and-helper-surface.md` `+ fluent-and-block-forms.md` `+ actionir-lowering-mental-model.md` | `Token::` (l.160); `Top::` (l.35); `Items::AND+`,`Toplevel:AND+`; helper-statement fragments | A | regex on `::`; isolated helper fragments are CLEAN | `.10.5.14` |
-| `appendix/formal-grammar.md` | §1 `Top:: /a/ -> Next`; §12 `DemoParser:: … /pattern1/` (+ undefined `A`/`B`) | A+D | regex on `::`; §1 → `["?Top:",[]]` (agent) | `.10.5.15` |
-| `appendix/runtime-semantics.md` | §5.5 three `Top::`/`Pair::` regex-on-top; §5.6 `object:`/`manifest:` single fragments | A | regex on `::` (forms run; doctrine-divergent); **folds `.10.4`** | `.10.5.16` |
-| `specs-and-corpora/tablegrep-spec-walkthrough.md` | `field1 =~ /foo/` `sens`; GROUP example | B | `sens '=~'` → **`'='`**; group → **`{"group":["internal"]}`** | `.10.5.17` |
-| `specs-and-corpora/portmap-spec-walkthrough.md` | 5 output-shape examples | B | flat `['?bare:','clk',undef,…]` → **nested `["?bare:",["clk"]]` / `["?slice:",["addr","7","0"]]`** | `.10.5.18` |
-
-**Closeout residuals (`.10.5.19`, fixed):**
-
-| File | Block(s) | Class | Drift fixed | Fix leaf |
-| --- | --- | --- | --- | --- |
-| `user-model/spec-files-and-rule-paragraphs.md` | recursive `sexpr:: /\(/ /\)/` example | A | regex on `::` in the recursion example; rewritten as no-regex `top::` wrapper plus normal recursive `sexpr:` rule | `.10.5.19` |
-| `appendix/helper-contract-catalog.md` | direct value-path and array-end-mutation worked examples | A+B | `Top:: /x/` / `Done:: /[a-z]+/` examples rewritten to no-regex `Top:: -> Done`; direct value-path output corrected to `"updated"` and semicolon-separated terse statements restored | `.10.5.19` |
-| `compiler/pipeline-overview.md` | function-registry runtime proof snippet | A | `Top:: /x/` / `Done:: /x/` proof rewritten to no-regex `Top:: -> Done`; function bodies use the verified `copy(array(...))` / `copy(hash(...))` forms | `.10.5.19` |
-
-**Confirmed CLEAN (no fix needed after `.10.5.19`):** remaining `compiler/*`, `architecture/owner-tree.md`,
-`development/*`; `public-api/{trace-api,plugin-registry,descriptor-introspection}.md`;
-`appendix/helper-contract-catalog.md` §2/§5 worked examples (the `.10.3` 2-rule idiom, re-spot-checked);
-`appendix/backend-handoff.md`; `specs-and-corpora/shipped-specs-and-corpora.md`;
-`specs-and-corpora/lispish-spec-walkthrough.md` (faithful shipped-spec quotes + verified outputs);
-`specs-and-corpora/pplugin-spec-walkthrough.md` (faithful + verified);
-**`specs-and-corpora/ebnf-spec-walkthrough.md`** (the "richer example" **compiles + parses to its
-claimed structure** — the preliminary-hunt "does not compile" hypothesis was **wrong**; faithful
-shipped-spec quotes elsewhere). Isolated helper-statement / lifecycle / method-chain DSL fragments
-(no rule label, no regex-on-`::`, no claimed output) are CLEAN teaching fragments — agent A4's
-"Class D: missing rule wrapper" over-flagging is **rejected**; they will be confirmed valid (and
-wrapped only where a complete worked example is intended) during the per-file fixes.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.27`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree SPEC-LANG-REFERENCE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.27 --id SPEC-LANG-REFERENCE.8`.
 
 ## Current Frontier
 

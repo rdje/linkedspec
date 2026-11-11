@@ -1,0 +1,32 @@
+{
+  "capture.py": {
+    "source": "docs/checkpoints/task-headroom-rust-2026-11-11/capture.py",
+    "template_sha256": "42cc1037a89573a664f13a9e5694e27de34c43b2ff68199f03e82425171f3f41",
+    "retained_template": "template-capture.py.gz",
+    "generated_sha256": "d3ed8b6a2b3fbb1f12633a0a5d6e246d756291b998f8882a6e98a4227403d4bf"
+  },
+  "check_candidate.py": {
+    "source": "docs/checkpoints/task-headroom-rust-2026-11-11/check_candidate.py",
+    "template_sha256": "e08a80c263ed80755863c7552d0c0fa0a607acdd0cacdc0ddda523524d9752ae",
+    "retained_template": "template-check_candidate.py.gz",
+    "generated_sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "review.py": {
+    "source": "docs/checkpoints/task-headroom-rust-2026-11-11/review.py",
+    "template_sha256": "431f2a0edfda582d937303d557535674deb32d291153200e97001af7febf2905",
+    "retained_template": "template-review.py.gz",
+    "generated_sha256": "991115ea1146383f830fc786133182635e4fba69c475e5ab9b712b037bdd8816"
+  },
+  "seal.py": {
+    "source": "docs/checkpoints/task-headroom-rust-2026-11-11/seal.py",
+    "template_sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963",
+    "retained_template": "template-seal.py.gz",
+    "generated_sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "run_review.py": {
+    "source": "docs/checkpoints/task-headroom-rust-2026-11-11/run_review.py",
+    "template_sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190",
+    "retained_template": "template-run_review.py.gz",
+    "generated_sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  }
+}

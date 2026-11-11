@@ -20,8 +20,8 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2` | `completed` | Qualified312/43 targets/three metadata movements/266 preserved; direct400/readonly17/current165; independent Rust next. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2` | `pending` | After bounded task-headroom renewal, acquire own shared45/source/signature/arity/error/snapshot boundaries before repair. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.27` | `completed` |45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/ten controls; Rust next. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2` | `pending` | Headroom renewed; acquire own shared45/source/signature/arity/error/snapshot boundaries before repair. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.1.41` | `completed` | Original44/qualified45 and exact qualification retained; frozen78.6 with independent backend owners. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |
 | 5 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |

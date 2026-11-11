@@ -1,4 +1,5 @@
-{"member_count":75,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":76,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3814,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-assignment-expression-values.md","sha256":"debc703d7911676b9b4d407f310ead4f6fca9bbe5fb431f52c6312e5e0366b3e","type":"member"}
 {"bytes":4491,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-bare-read-seams.md","sha256":"c5245162093a7bdbac4fb08d14c37c1c81c7c6f42e1f0938cfe96823c5c9d962","type":"member"}
 {"bytes":2188,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-slot-shorthand.md","sha256":"07dd01df7fb1c29d61d7ea35b6adb03513bb1c375d1d0c76fb4b2e568c98d768","type":"member"}
 {"bytes":2621,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-source-slot-bare-reads.md","sha256":"452d5387b37f63af402ea8bbd0bb4c979fde29eb62940a576828723afd807e51","type":"member"}

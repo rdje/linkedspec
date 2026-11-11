@@ -32,6 +32,7 @@
 {"bytes":4989,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-language-self-containment-and-ebnf-profile.md","sha256":"e5e5e47426c0861c2b542ef6cfb7735bf54736e0fdaf3bd914f215f29b24ce72","type":"member"}
 {"bytes":2127,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-lifecycle-retv-order.md","sha256":"ec0d1002c353f9fb120c52ae6dbeab3d6a8b11b835f19ba63d0ae21e057ede21","type":"member"}
 {"bytes":2057,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-output-return-shape-contract.md","sha256":"1615b468a898c6224139ded36bc784133e687a543a41f61b13f81b0b316ce80e","type":"member"}
+{"bytes":2532,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.27","path":"docs/knowledge/spec-reference-closed-task-narrative-headroom.md","sha256":"d2ee21c4e261d0f9f051cfee8ad67b862b507458a24e5b8b9f2d635f96e8542e","type":"member"}
 {"bytes":3148,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-regex-feature-contract.md","sha256":"4c1b8d0e984119f88e31592f53313e8c11dd506475122549a9fa80af14c8bfad","type":"member"}
 {"bytes":3377,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-rule-mode-semantics-map.md","sha256":"d6f068858022ddb38e405a3338f4a5dae046ade43a675715906e030f7f6bd200","type":"member"}
 {"bytes":10458,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-spec-self-hosted-grammar.md","sha256":"727c710695b3a82d1544f2ecef49d3da958d94a01ed95d996b97880adc8074d6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2204,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-rhs-shape-target-kind-parity.md","sha256":"6d56523bb7aa80b2f2f06994206760d66bcb3023b18cbb28a733f29bc09ff170","type":"member"}
 {"bytes":2919,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-scalar-bare-read-parity.md","sha256":"92305c0bfd16150ebe93c8dcd33490a7526a98dd393cea1d4d222a226ae375de","type":"member"}
 {"bytes":2924,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-shape-literal-value-parity.md","sha256":"ee2883f33d8b141b3ce94102e2b4bb877ee1ed154464fd47d67fc0fd0497ae09","type":"member"}
-{"bytes":3814,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-scalar-assignment-expression-values.md","sha256":"debc703d7911676b9b4d407f310ead4f6fca9bbe5fb431f52c6312e5e0366b3e","type":"member"}
