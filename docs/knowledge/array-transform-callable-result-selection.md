@@ -7,7 +7,7 @@ answers:
   - "can a correct callable take with value still have an unready descriptor"
   - "why is a literal Array not the established constructor guard oracle"
 date: 2026-11-11
-status: qualified selection41 frozen; bounded78.6 owned; no production repair yet
+status: qualified selection41 frozen; Perl policy intake complete; bounded result78.6.1.2 next
 tags: [functions, arrays, transforms, guards, readiness, qualification]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.41; original44/separate45 retain13 supported targets/25 healthy/seven profiles,44 full records/source pairs exact,89 actual pairs/178 artifacts, first readonly0/empty stderr/fifteen controls and current128 named identities."
 reverify: "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-selection-2026-11-11/review.py"
@@ -21,7 +21,7 @@ null/no-effects take/with remains unready. Own MethodLowering near5762 explicitl
 excludes registered-function sources from ordinary_array_transform_result_chain;
 the canonical helper/arity/operand predicate is near1882. Existing function MVP
 allows compatible value/receiver composition. Family78.6 owns this bounded repair,
-starting with independent Perl78.6.1.0 policy intake before production.
+with independent Perl78.6.1.0 policy intake now frozen before production.
 
 Original44's literal-Array constructor expectation lacked authority: ordinary78's
 established oracle is array(...). Preserve that original expectation and its
@@ -31,8 +31,10 @@ only that expectation tag to a profile and adds the exact existing constructor.
 Initial-literal policy1.2.1.3.1 is owned separately; no universal invalid-input
 rejection rule or peer source policy follows. Profiles are not semantic PASS.
 
-All named own source/grammar/intake instruments precede SDK use; generated inputs
-precede loading/execution. Full observed public error fields/classes/warnings and
+All named own source/grammar/intake instruments precede SDK use. Emitted modules
+precede fresh loading; native source dumps follow Get's internal compilation and
+precede native invocation, not native compilation. The inherited handler_input
+label is qualified by [[perl-native-source-dump-custody]]. Full observed public error fields/classes/warnings and
 failed-load field absence survive. Five metadata projections distinguish readiness
 from values; fresh packages share their runtime. Fifteen actual distinguishing
 corruptions and source/Git/mode/artifact/channel recovery pass independently.
@@ -43,3 +45,8 @@ historical4.24/safe-launcher4.22/literal policy and full23.4 stay open.
 
 Evidence and recovery limits:
 `docs/checkpoints/array-transform-callable-selection-2026-11-11/REVIEW.md`.
+
+Current Perl intake: [[perl-callable-array-transform-intake]] records35 valid
+result targets/288 source pairs and context-specific policy fences. Result1.2 is
+next; the unactivated strict-marker proposal1.1 is superseded by the signature
+inventory, without production changes. Original selection populations stay dated.

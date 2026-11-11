@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal_observer.pl",
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal-cases.json",
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal"
+  ],
+  "cwd": "."
+}

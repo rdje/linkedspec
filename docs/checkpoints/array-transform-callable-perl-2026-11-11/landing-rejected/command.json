@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "perl",
+    "tools/check_task_verification_fields.pl",
+    "--owner"
+  ],
+  "cwd": "."
+}

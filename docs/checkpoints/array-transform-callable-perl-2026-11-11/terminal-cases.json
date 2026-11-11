@@ -1,0 +1,482 @@
+[
+  {
+    "id": "own_extra_take_free_terminal_probe",
+    "body": "order=\"\";out=take(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_take_free"
+  },
+  {
+    "id": "own_needed_source_take_free_terminal_probe",
+    "body": "order=\"\";out=take(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_take_free"
+  },
+  {
+    "id": "own_extra_take_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).take(1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).take(1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_take_receiver"
+  },
+  {
+    "id": "own_needed_source_take_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take(1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take(1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_take_receiver"
+  },
+  {
+    "id": "own_extra_take_last_free_terminal_probe",
+    "body": "order=\"\";out=take_last(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take_last(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_take_last_free"
+  },
+  {
+    "id": "own_needed_source_take_last_free_terminal_probe",
+    "body": "order=\"\";out=take_last(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take_last(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_take_last_free"
+  },
+  {
+    "id": "own_extra_take_last_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).take_last(1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).take_last(1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_take_last_receiver"
+  },
+  {
+    "id": "own_needed_source_take_last_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take_last(1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take_last(1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_take_last_receiver"
+  },
+  {
+    "id": "own_extra_drop_front_free_terminal_probe",
+    "body": "order=\"\";out=drop_front(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_front(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_drop_front_free"
+  },
+  {
+    "id": "own_needed_source_drop_front_free_terminal_probe",
+    "body": "order=\"\";out=drop_front(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_front(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_drop_front_free"
+  },
+  {
+    "id": "own_extra_drop_front_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).drop_front(1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).drop_front(1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_drop_front_receiver"
+  },
+  {
+    "id": "own_needed_source_drop_front_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).drop_front(1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).drop_front(1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_drop_front_receiver"
+  },
+  {
+    "id": "own_extra_drop_back_free_terminal_probe",
+    "body": "order=\"\";out=drop_back(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_back(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_drop_back_free"
+  },
+  {
+    "id": "own_needed_source_drop_back_free_terminal_probe",
+    "body": "order=\"\";out=drop_back(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_back(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_drop_back_free"
+  },
+  {
+    "id": "own_extra_drop_back_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).drop_back(1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).drop_back(1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_drop_back_receiver"
+  },
+  {
+    "id": "own_needed_source_drop_back_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).drop_back(1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).drop_back(1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_drop_back_receiver"
+  },
+  {
+    "id": "own_extra_slice_free_terminal_probe",
+    "body": "order=\"\";out=slice(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),1,1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_slice_free"
+  },
+  {
+    "id": "own_needed_source_slice_free_terminal_probe",
+    "body": "order=\"\";out=slice(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1,1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1,1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_slice_free"
+  },
+  {
+    "id": "own_extra_slice_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).slice(1,1,{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).slice(1,1,{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_slice_receiver"
+  },
+  {
+    "id": "own_needed_source_slice_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).slice(1,1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).slice(1,1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_slice_receiver"
+  },
+  {
+    "id": "own_extra_sorted_free_terminal_probe",
+    "body": "order=\"\";out=sorted(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=sorted(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_sorted_free"
+  },
+  {
+    "id": "own_needed_source_sorted_free_terminal_probe",
+    "body": "order=\"\";out=sorted(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=sorted(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}));return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_sorted_free"
+  },
+  {
+    "id": "own_extra_sorted_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).sorted({order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).sorted({order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_sorted_receiver"
+  },
+  {
+    "id": "own_needed_source_sorted_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).sorted();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).sorted();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_sorted_receiver"
+  },
+  {
+    "id": "own_extra_reversed_free_terminal_probe",
+    "body": "order=\"\";out=reversed(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=reversed(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_reversed_free"
+  },
+  {
+    "id": "own_needed_source_reversed_free_terminal_probe",
+    "body": "order=\"\";out=reversed(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=reversed(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}));return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_reversed_free"
+  },
+  {
+    "id": "own_extra_reversed_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).reversed({order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).reversed({order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_reversed_receiver"
+  },
+  {
+    "id": "own_needed_source_reversed_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).reversed();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).reversed();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_reversed_receiver"
+  },
+  {
+    "id": "own_extra_concat_arrays_free_terminal_probe",
+    "body": "order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),[\"tail\"],{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}),[\"tail\"],{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_concat_arrays_free"
+  },
+  {
+    "id": "own_needed_source_concat_arrays_free_terminal_probe",
+    "body": "order=\"\";out=concat_arrays(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),[\"tail\"]);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),[\"tail\"]);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_concat_arrays_free"
+  },
+  {
+    "id": "own_extra_concat_arrays_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).concat_arrays([\"tail\"],{order=cat(order,\"X\");1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).concat_arrays([\"tail\"],{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_extra_concat_arrays_receiver"
+  },
+  {
+    "id": "own_needed_source_concat_arrays_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).concat_arrays([\"tail\"]);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).concat_arrays([\"tail\"]);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error-terminal",
+    "paired_with": "own_needed_source_concat_arrays_receiver"
+  },
+  {
+    "id": "own_missing_slice_free_terminal_probe",
+    "body": "order=\"\";out=slice(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}));return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_missing_slice_free"
+  },
+  {
+    "id": "own_missing_slice_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).slice();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).slice();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_missing_slice_receiver"
+  },
+  {
+    "id": "own_missing_concat_arrays_free_terminal_probe",
+    "body": "order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}));return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(supply({order=cat(order,\"S\");[\"head\",\"tail\"]}));return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_missing_concat_arrays_free"
+  },
+  {
+    "id": "own_missing_concat_arrays_receiver_terminal_probe",
+    "body": "order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).concat_arrays();return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply({order=cat(order,\"S\");[\"head\",\"tail\"]}).concat_arrays();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-helper-arity-terminal",
+    "paired_with": "own_missing_concat_arrays_receiver"
+  },
+  {
+    "id": "own_needed_count_take_free_terminal_probe",
+    "body": "order=\"\";out=take(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_take_free"
+  },
+  {
+    "id": "own_needed_count_take_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).take({items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).take({items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_take_receiver"
+  },
+  {
+    "id": "own_needed_count_take_last_free_terminal_probe",
+    "body": "order=\"\";out=take_last(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=take_last(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_take_last_free"
+  },
+  {
+    "id": "own_needed_count_take_last_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).take_last({items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).take_last({items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_take_last_receiver"
+  },
+  {
+    "id": "own_needed_count_drop_front_free_terminal_probe",
+    "body": "order=\"\";out=drop_front(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_front(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_drop_front_free"
+  },
+  {
+    "id": "own_needed_count_drop_front_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).drop_front({items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).drop_front({items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_drop_front_receiver"
+  },
+  {
+    "id": "own_needed_count_drop_back_free_terminal_probe",
+    "body": "order=\"\";out=drop_back(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=drop_back(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_drop_back_free"
+  },
+  {
+    "id": "own_needed_count_drop_back_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).drop_back({items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).drop_back({items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_drop_back_receiver"
+  },
+  {
+    "id": "own_needed_start_slice_free_terminal_probe",
+    "body": "order=\"\";out=slice(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1},1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply([\"head\",\"tail\"]),{items=\"bad\";items+=1;1},1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_start_slice_free"
+  },
+  {
+    "id": "own_needed_count_slice_free_terminal_probe",
+    "body": "order=\"\";out=slice(supply([\"head\",\"tail\"]),1,{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=slice(supply([\"head\",\"tail\"]),1,{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_slice_free"
+  },
+  {
+    "id": "own_needed_start_slice_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).slice({items=\"bad\";items+=1;1},1);return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).slice({items=\"bad\";items+=1;1},1);return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_start_slice_receiver"
+  },
+  {
+    "id": "own_needed_count_slice_receiver_terminal_probe",
+    "body": "order=\"\";out=supply([\"head\",\"tail\"]).slice(1,{items=\"bad\";items+=1;1});return([out,order])",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";out=supply([\"head\",\"tail\"]).slice(1,{items=\"bad\";items+=1;1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-operand-error-terminal",
+    "paired_with": "own_needed_count_slice_receiver"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-pipeline-callable-perl-2026-11-11/prepare.py": {
+    "artifact": "docs/checkpoints/array-transform-callable-perl-2026-11-11/template-1.gz",
+    "bytes": 6236,
+    "sha256": "6c10de6e2705cbc309b63ca700882eff4ba7ab29dc618a8376a2e16f4ab4481f"
+  },
+  "docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/signature-cases.json": {
+    "artifact": "docs/checkpoints/array-transform-callable-perl-2026-11-11/template-2.gz",
+    "bytes": 5661,
+    "sha256": "4dbd5f22b14a0a56da4fcd4e7b8f1efc1b27fc8f73b8d726514f401fb6e8d4cf"
+  },
+  "docs/checkpoints/array-transform-callable-selection-2026-11-11/observer.pl": {
+    "artifact": "docs/checkpoints/array-transform-callable-perl-2026-11-11/template-0.gz",
+    "bytes": 3496,
+    "sha256": "fb6075d2fa5a5148cafeca5cf885790e6f6634daa742693c65deb2a77a67d19d"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_cases.json": {
+    "artifact": "docs/checkpoints/array-transform-callable-perl-2026-11-11/template-3.gz",
+    "bytes": 21340,
+    "sha256": "2f37b1e0502900c3e5377c73c62feb61e5c3c8d58f491d4df421dda887df0794"
+  }
+}

@@ -1,0 +1,719 @@
+{
+  "arity": {
+    "own_extra_concat_arrays_free_terminal_probe": {
+      "fresh": [
+        [
+          "head",
+          "tail",
+          "tail"
+        ],
+        "SX"
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail",
+          "tail"
+        ],
+        "SX"
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_concat_arrays_free"
+    },
+    "own_extra_concat_arrays_receiver_terminal_probe": {
+      "fresh": [
+        [
+          "head",
+          "tail",
+          "tail"
+        ],
+        "SX"
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail",
+          "tail"
+        ],
+        "SX"
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_concat_arrays_receiver"
+    },
+    "own_extra_drop_back_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_back"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_drop_back_free"
+    },
+    "own_extra_drop_back_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_back"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_drop_back_receiver"
+    },
+    "own_extra_drop_front_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_front"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_drop_front_free"
+    },
+    "own_extra_drop_front_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "drop_front"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_drop_front_receiver"
+    },
+    "own_extra_reversed_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "reversed"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_reversed_free"
+    },
+    "own_extra_reversed_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "reversed"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_reversed_receiver"
+    },
+    "own_extra_slice_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_slice_free"
+    },
+    "own_extra_slice_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_slice_receiver"
+    },
+    "own_extra_sorted_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "sorted"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_sorted_free"
+    },
+    "own_extra_sorted_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_sorted_receiver"
+    },
+    "own_extra_take_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_take_free"
+    },
+    "own_extra_take_last_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take_last"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_take_last_free"
+    },
+    "own_extra_take_last_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "take_last"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_take_last_receiver"
+    },
+    "own_extra_take_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_extra_take_receiver"
+    },
+    "own_missing_concat_arrays_free_terminal_probe": {
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ],
+      "native_error": null,
+      "paired_with": "own_missing_concat_arrays_free"
+    },
+    "own_missing_concat_arrays_receiver_terminal_probe": {
+      "fresh": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 1,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
+      },
+      "native": [
+        [
+          "head",
+          "tail"
+        ],
+        "S"
+      ],
+      "native_error": null,
+      "paired_with": "own_missing_concat_arrays_receiver"
+    },
+    "own_missing_slice_free_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_missing_slice_free"
+    },
+    "own_missing_slice_receiver_terminal_probe": {
+      "fresh": [
+        null,
+        ""
+      ],
+      "fresh_error": null,
+      "fresh_present": true,
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "slice"
+        ]
+      },
+      "native": [
+        null,
+        ""
+      ],
+      "native_error": null,
+      "paired_with": "own_missing_slice_receiver"
+    }
+  },
+  "needed": {
+    "own_needed_count_drop_back_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_drop_back_free",
+      "ready": 1
+    },
+    "own_needed_count_drop_back_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_drop_back_receiver",
+      "ready": 1
+    },
+    "own_needed_count_drop_front_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_drop_front_free",
+      "ready": 1
+    },
+    "own_needed_count_drop_front_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_drop_front_receiver",
+      "ready": 1
+    },
+    "own_needed_count_slice_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_slice_free",
+      "ready": 1
+    },
+    "own_needed_count_slice_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_slice_receiver",
+      "ready": 1
+    },
+    "own_needed_count_take_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_take_free",
+      "ready": 1
+    },
+    "own_needed_count_take_last_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_take_last_free",
+      "ready": 1
+    },
+    "own_needed_count_take_last_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_take_last_receiver",
+      "ready": 1
+    },
+    "own_needed_count_take_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_count_take_receiver",
+      "ready": 1
+    },
+    "own_needed_source_concat_arrays_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_concat_arrays_free",
+      "ready": 1
+    },
+    "own_needed_source_concat_arrays_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_concat_arrays_receiver",
+      "ready": 1
+    },
+    "own_needed_source_drop_back_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_drop_back_free",
+      "ready": 1
+    },
+    "own_needed_source_drop_back_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_drop_back_receiver",
+      "ready": 1
+    },
+    "own_needed_source_drop_front_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_drop_front_free",
+      "ready": 1
+    },
+    "own_needed_source_drop_front_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_drop_front_receiver",
+      "ready": 1
+    },
+    "own_needed_source_reversed_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_reversed_free",
+      "ready": 1
+    },
+    "own_needed_source_reversed_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_reversed_receiver",
+      "ready": 1
+    },
+    "own_needed_source_slice_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_slice_free",
+      "ready": 1
+    },
+    "own_needed_source_slice_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_slice_receiver",
+      "ready": 1
+    },
+    "own_needed_source_sorted_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_sorted_free",
+      "ready": 1
+    },
+    "own_needed_source_sorted_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_sorted_receiver",
+      "ready": 1
+    },
+    "own_needed_source_take_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_take_free",
+      "ready": 1
+    },
+    "own_needed_source_take_last_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_take_last_free",
+      "ready": 1
+    },
+    "own_needed_source_take_last_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_take_last_receiver",
+      "ready": 1
+    },
+    "own_needed_source_take_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_source_take_receiver",
+      "ready": 1
+    },
+    "own_needed_start_slice_free_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_start_slice_free",
+      "ready": 1
+    },
+    "own_needed_start_slice_receiver_terminal_probe": {
+      "fresh_binding_error": true,
+      "loaded": 1,
+      "native_binding_error": true,
+      "paired_with": "own_needed_start_slice_receiver",
+      "ready": 1
+    }
+  },
+  "pairs": 48
+}

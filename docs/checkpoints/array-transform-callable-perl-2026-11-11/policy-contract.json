@@ -1,0 +1,1067 @@
+{
+  "healthy_intents": {
+    "concat_arrays_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "concat_arrays_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "drop_back_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "drop_back_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "drop_front_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ]
+    },
+    "drop_front_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "established_constructor_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "needed_count_terminal": {
+      "code": "binding_kind_mismatch",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "needed_source_composed": {
+      "code": "binding_kind_mismatch",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "needed_source_terminal": {
+      "code": "binding_kind_mismatch",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "nested_kinds": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        {
+          "k": [
+            1
+          ]
+        },
+        null,
+        0,
+        false
+      ]
+    },
+    "own_needed_count_drop_back_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_back_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_back_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_front_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_front_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_front_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_slice_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_slice_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_slice_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_last_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_last_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_last_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_concat_arrays_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_concat_arrays_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_concat_arrays_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_back_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_back_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_back_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_front_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_front_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_front_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_reversed_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_reversed_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_reversed_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_slice_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_slice_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_slice_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_sorted_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_sorted_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_sorted_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_last_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_last_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_last_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_start_slice_free": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_start_slice_free_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_start_slice_receiver_terminal_probe": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_optional_drop_back_free_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_drop_front_free_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_slice_free_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_take_free_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_take_last_free_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_signature_variadic_empty_terminal": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "own_signature_variadic_multi_terminal": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          " head "
+        ],
+        "S"
+      ]
+    },
+    "reversed_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "tail",
+          "head"
+        ],
+        [
+          "tail",
+          "head"
+        ]
+      ]
+    },
+    "reversed_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "selected_hash_bridge": {
+      "kind": "value",
+      "ready": true,
+      "value": 1
+    },
+    "slice_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ]
+    },
+    "slice_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "sorted_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "head",
+          "tail"
+        ],
+        [
+          "head",
+          "tail"
+        ]
+      ]
+    },
+    "sorted_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source_once": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        "HEAD",
+        "S"
+      ]
+    },
+    "source_snapshot": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "changed"
+        ]
+      ]
+    },
+    "take_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "head"
+        ],
+        [
+          "head"
+        ]
+      ]
+    },
+    "take_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "take_last_compatible": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        [
+          "tail"
+        ],
+        [
+          "tail"
+        ]
+      ]
+    },
+    "take_last_free_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "valid_empty_with": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        0,
+        "W"
+      ]
+    }
+  },
+  "invalid_receiver_shapes": "Excluded take/sorted ready-null folds remain protected; the unactivated strict-marker proposal is superseded by signature inventory1.2.1.4.3.",
+  "metadata_fields": [
+    "canonical_action_ir_fallback_count",
+    "language_agnostic_action_ir_ready",
+    "raw_perl_dependency_count",
+    "unresolved_helper_count",
+    "unresolved_helpers"
+  ],
+  "next": "Clean intake commit, then78.6.1.2 fresh acquisition/positive source-once/operand-order controls before any production edit; split a demonstrated producer prerequisite if needed.",
+  "open_concat": "Existing helper signature is [1,unbounded], but frozen78.6 result guards select free-two/receiver-one. Selection23.1.42 owns wider continuations; no extra-input-kind authority here.",
+  "policy": "Protected observed compatibility is not semantic PASS or a portable input/invalid-signature policy. Preserve complete raw records; later code-artifact identities may change under declared lowering fixes.",
+  "protected_records": [
+    "concat_arrays_compatible",
+    "concat_arrays_free_hash_guard",
+    "constructor_rejection_oracle",
+    "drop_back_compatible",
+    "drop_back_free_hash_guard",
+    "drop_front_compatible",
+    "drop_front_free_hash_guard",
+    "established_constructor_guard",
+    "initial_hash_composed",
+    "initial_hash_terminal",
+    "initial_null_composed",
+    "initial_null_terminal",
+    "initial_number_composed",
+    "initial_number_terminal",
+    "needed_count_terminal",
+    "needed_source_composed",
+    "needed_source_terminal",
+    "nested_kinds",
+    "own_extra_concat_arrays_free",
+    "own_extra_concat_arrays_free_terminal_probe",
+    "own_extra_concat_arrays_receiver",
+    "own_extra_concat_arrays_receiver_terminal_probe",
+    "own_extra_drop_back_free",
+    "own_extra_drop_back_free_terminal_probe",
+    "own_extra_drop_back_receiver",
+    "own_extra_drop_back_receiver_terminal_probe",
+    "own_extra_drop_front_free",
+    "own_extra_drop_front_free_terminal_probe",
+    "own_extra_drop_front_receiver",
+    "own_extra_drop_front_receiver_terminal_probe",
+    "own_extra_reversed_free",
+    "own_extra_reversed_free_terminal_probe",
+    "own_extra_reversed_receiver",
+    "own_extra_reversed_receiver_terminal_probe",
+    "own_extra_slice_free",
+    "own_extra_slice_free_terminal_probe",
+    "own_extra_slice_receiver",
+    "own_extra_slice_receiver_terminal_probe",
+    "own_extra_sorted_free",
+    "own_extra_sorted_free_terminal_probe",
+    "own_extra_sorted_receiver",
+    "own_extra_sorted_receiver_terminal_probe",
+    "own_extra_take_free",
+    "own_extra_take_free_terminal_probe",
+    "own_extra_take_last_free",
+    "own_extra_take_last_free_terminal_probe",
+    "own_extra_take_last_receiver",
+    "own_extra_take_last_receiver_terminal_probe",
+    "own_extra_take_receiver",
+    "own_extra_take_receiver_terminal_probe",
+    "own_function_arity_extra_composed",
+    "own_function_arity_extra_terminal",
+    "own_function_arity_missing_composed",
+    "own_function_arity_missing_terminal",
+    "own_initial_hash_concat_arrays_free",
+    "own_initial_hash_concat_arrays_free_with",
+    "own_initial_hash_concat_arrays_receiver",
+    "own_initial_hash_concat_arrays_receiver_with",
+    "own_initial_hash_drop_back_free",
+    "own_initial_hash_drop_back_free_with",
+    "own_initial_hash_drop_back_receiver",
+    "own_initial_hash_drop_back_receiver_with",
+    "own_initial_hash_drop_front_free",
+    "own_initial_hash_drop_front_free_with",
+    "own_initial_hash_drop_front_receiver",
+    "own_initial_hash_drop_front_receiver_with",
+    "own_initial_hash_reversed_free",
+    "own_initial_hash_reversed_free_with",
+    "own_initial_hash_reversed_receiver",
+    "own_initial_hash_reversed_receiver_with",
+    "own_initial_hash_slice_free",
+    "own_initial_hash_slice_free_with",
+    "own_initial_hash_slice_receiver",
+    "own_initial_hash_slice_receiver_with",
+    "own_initial_hash_sorted_free",
+    "own_initial_hash_sorted_free_with",
+    "own_initial_hash_sorted_receiver",
+    "own_initial_hash_sorted_receiver_with",
+    "own_initial_hash_take_free",
+    "own_initial_hash_take_free_with",
+    "own_initial_hash_take_last_free",
+    "own_initial_hash_take_last_free_with",
+    "own_initial_hash_take_last_receiver",
+    "own_initial_hash_take_last_receiver_with",
+    "own_initial_hash_take_receiver",
+    "own_initial_hash_take_receiver_with",
+    "own_initial_null_concat_arrays_free",
+    "own_initial_null_concat_arrays_free_with",
+    "own_initial_null_concat_arrays_receiver",
+    "own_initial_null_concat_arrays_receiver_with",
+    "own_initial_null_drop_back_free",
+    "own_initial_null_drop_back_free_with",
+    "own_initial_null_drop_back_receiver",
+    "own_initial_null_drop_back_receiver_with",
+    "own_initial_null_drop_front_free",
+    "own_initial_null_drop_front_free_with",
+    "own_initial_null_drop_front_receiver",
+    "own_initial_null_drop_front_receiver_with",
+    "own_initial_null_reversed_free",
+    "own_initial_null_reversed_free_with",
+    "own_initial_null_reversed_receiver",
+    "own_initial_null_reversed_receiver_with",
+    "own_initial_null_slice_free",
+    "own_initial_null_slice_free_with",
+    "own_initial_null_slice_receiver",
+    "own_initial_null_slice_receiver_with",
+    "own_initial_null_sorted_free",
+    "own_initial_null_sorted_free_with",
+    "own_initial_null_sorted_receiver",
+    "own_initial_null_sorted_receiver_with",
+    "own_initial_null_take_free",
+    "own_initial_null_take_free_with",
+    "own_initial_null_take_last_free",
+    "own_initial_null_take_last_free_with",
+    "own_initial_null_take_last_receiver",
+    "own_initial_null_take_last_receiver_with",
+    "own_initial_null_take_receiver",
+    "own_initial_null_take_receiver_with",
+    "own_initial_number_concat_arrays_free",
+    "own_initial_number_concat_arrays_free_with",
+    "own_initial_number_concat_arrays_receiver",
+    "own_initial_number_concat_arrays_receiver_with",
+    "own_initial_number_drop_back_free",
+    "own_initial_number_drop_back_free_with",
+    "own_initial_number_drop_back_receiver",
+    "own_initial_number_drop_back_receiver_with",
+    "own_initial_number_drop_front_free",
+    "own_initial_number_drop_front_free_with",
+    "own_initial_number_drop_front_receiver",
+    "own_initial_number_drop_front_receiver_with",
+    "own_initial_number_reversed_free",
+    "own_initial_number_reversed_free_with",
+    "own_initial_number_reversed_receiver",
+    "own_initial_number_reversed_receiver_with",
+    "own_initial_number_slice_free",
+    "own_initial_number_slice_free_with",
+    "own_initial_number_slice_receiver",
+    "own_initial_number_slice_receiver_with",
+    "own_initial_number_sorted_free",
+    "own_initial_number_sorted_free_with",
+    "own_initial_number_sorted_receiver",
+    "own_initial_number_sorted_receiver_with",
+    "own_initial_number_take_free",
+    "own_initial_number_take_free_with",
+    "own_initial_number_take_last_free",
+    "own_initial_number_take_last_free_with",
+    "own_initial_number_take_last_receiver",
+    "own_initial_number_take_last_receiver_with",
+    "own_initial_number_take_receiver",
+    "own_initial_number_take_receiver_with",
+    "own_missing_concat_arrays_free",
+    "own_missing_concat_arrays_free_terminal_probe",
+    "own_missing_concat_arrays_receiver",
+    "own_missing_concat_arrays_receiver_terminal_probe",
+    "own_missing_slice_free",
+    "own_missing_slice_free_terminal_probe",
+    "own_missing_slice_receiver",
+    "own_missing_slice_receiver_terminal_probe",
+    "own_needed_count_drop_back_free",
+    "own_needed_count_drop_back_free_terminal_probe",
+    "own_needed_count_drop_back_receiver_terminal_probe",
+    "own_needed_count_drop_front_free",
+    "own_needed_count_drop_front_free_terminal_probe",
+    "own_needed_count_drop_front_receiver_terminal_probe",
+    "own_needed_count_slice_free",
+    "own_needed_count_slice_free_terminal_probe",
+    "own_needed_count_slice_receiver_terminal_probe",
+    "own_needed_count_take_free",
+    "own_needed_count_take_free_terminal_probe",
+    "own_needed_count_take_last_free",
+    "own_needed_count_take_last_free_terminal_probe",
+    "own_needed_count_take_last_receiver_terminal_probe",
+    "own_needed_count_take_receiver_terminal_probe",
+    "own_needed_source_concat_arrays_free",
+    "own_needed_source_concat_arrays_free_terminal_probe",
+    "own_needed_source_concat_arrays_receiver_terminal_probe",
+    "own_needed_source_drop_back_free",
+    "own_needed_source_drop_back_free_terminal_probe",
+    "own_needed_source_drop_back_receiver_terminal_probe",
+    "own_needed_source_drop_front_free",
+    "own_needed_source_drop_front_free_terminal_probe",
+    "own_needed_source_drop_front_receiver_terminal_probe",
+    "own_needed_source_reversed_free",
+    "own_needed_source_reversed_free_terminal_probe",
+    "own_needed_source_reversed_receiver_terminal_probe",
+    "own_needed_source_slice_free",
+    "own_needed_source_slice_free_terminal_probe",
+    "own_needed_source_slice_receiver_terminal_probe",
+    "own_needed_source_sorted_free",
+    "own_needed_source_sorted_free_terminal_probe",
+    "own_needed_source_sorted_receiver_terminal_probe",
+    "own_needed_source_take_free",
+    "own_needed_source_take_free_terminal_probe",
+    "own_needed_source_take_last_free",
+    "own_needed_source_take_last_free_terminal_probe",
+    "own_needed_source_take_last_receiver_terminal_probe",
+    "own_needed_source_take_receiver_terminal_probe",
+    "own_needed_start_slice_free",
+    "own_needed_start_slice_free_terminal_probe",
+    "own_needed_start_slice_receiver_terminal_probe",
+    "own_nested_scalar_kinds",
+    "own_numeric_array_source",
+    "own_optional_drop_back_free",
+    "own_optional_drop_back_free_composed",
+    "own_optional_drop_back_receiver",
+    "own_optional_drop_front_free",
+    "own_optional_drop_front_free_composed",
+    "own_optional_drop_front_receiver",
+    "own_optional_slice_free",
+    "own_optional_slice_free_composed",
+    "own_optional_slice_receiver",
+    "own_optional_take_free",
+    "own_optional_take_free_composed",
+    "own_optional_take_last_free",
+    "own_optional_take_last_free_composed",
+    "own_optional_take_last_receiver",
+    "own_optional_take_receiver",
+    "own_prior_copy",
+    "own_prior_count",
+    "own_prior_hash",
+    "own_prior_key_count",
+    "own_prior_length",
+    "own_prior_view",
+    "own_scalar_bool_free",
+    "own_scalar_bool_free_with",
+    "own_scalar_bool_receiver",
+    "own_scalar_bool_receiver_with",
+    "own_scalar_string_binding_name_free",
+    "own_scalar_string_binding_name_free_with",
+    "own_scalar_string_binding_name_receiver",
+    "own_scalar_string_binding_name_receiver_with",
+    "own_signature_fixed_extra_composed",
+    "own_signature_fixed_extra_terminal",
+    "own_signature_fixed_missing_composed",
+    "own_signature_fixed_missing_terminal",
+    "own_signature_variadic_empty_terminal",
+    "own_signature_variadic_missing_composed",
+    "own_signature_variadic_missing_terminal",
+    "own_signature_variadic_multi_terminal",
+    "reversed_compatible",
+    "reversed_free_hash_guard",
+    "selected_hash_bridge",
+    "slice_compatible",
+    "slice_free_hash_guard",
+    "sorted_compatible",
+    "sorted_free_hash_guard",
+    "source_once",
+    "source_snapshot",
+    "take_compatible",
+    "take_free_hash_guard",
+    "take_last_compatible",
+    "take_last_free_hash_guard",
+    "valid_empty_with"
+  ],
+  "targets": {
+    "concat_arrays_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "drop_back_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "drop_front_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "drop_logical_later_with": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "needed_count_composed": {
+      "code": "binding_kind_mismatch",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_back_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_drop_front_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_slice_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_last_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_count_take_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_concat_arrays_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_back_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_drop_front_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_reversed_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_slice_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_sorted_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_last_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_source_take_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_needed_start_slice_receiver": {
+      "code": "binding_kind_mismatch",
+      "identifier": "items",
+      "kind": "needed-error",
+      "ready": true
+    },
+    "own_optional_drop_back_receiver_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_drop_front_receiver_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_slice_receiver_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_take_last_receiver_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_optional_take_receiver_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_signature_variadic_empty_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "own_signature_variadic_multi_composed": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "own_source_before_rejection": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "reverse_copy_later_with": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "reversed_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "slice_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "sorted_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "source_effect_before_rejection": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        "S"
+      ]
+    },
+    "take_last_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "take_later_with": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "take_receiver_hash_guard": {
+      "kind": "value",
+      "ready": true,
+      "value": [
+        null,
+        ""
+      ]
+    }
+  }
+}

@@ -1,0 +1,2398 @@
+{
+  "own_extra_concat_arrays_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      [
+        "head",
+        "tail",
+        "tail"
+      ],
+      "SX"
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 11583,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_concat_arrays_free_terminal_probe.handler.pl.gz",
+      "sha256": "fb22bbb34b432ee150c19a84bc2f3a206f28e9dfa2d62c0f404cb0237094823a"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 11609,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_concat_arrays_free_terminal_probe.pm.gz",
+      "sha256": "18faeb06dd56de021c7f787905067ddc4eb5192187bbef31af4f0bbf148955e2"
+    },
+    "native": [
+      [
+        "head",
+        "tail",
+        "tail"
+      ],
+      "SX"
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = [do { my $__ls_concat_arrays = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = [do { my @__ls_evaluated_values = (\"tail\"); @__ls_evaluated_values }]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = do { $order = do { my @__ls_cat_parts = ($order, \"X\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; 1 }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }];return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_concat_arrays_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      [
+        "head",
+        "tail",
+        "tail"
+      ],
+      "SX"
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 11583,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_concat_arrays_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "fb22bbb34b432ee150c19a84bc2f3a206f28e9dfa2d62c0f404cb0237094823a"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 11609,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_concat_arrays_receiver_terminal_probe.pm.gz",
+      "sha256": "18faeb06dd56de021c7f787905067ddc4eb5192187bbef31af4f0bbf148955e2"
+    },
+    "native": [
+      [
+        "head",
+        "tail",
+        "tail"
+      ],
+      "SX"
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_drop_back_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9795,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_back_free_terminal_probe.handler.pl.gz",
+      "sha256": "efefbbbd0c86a3848cb8ca194a4672b6a2bedbd76e9f2ca4c251a7ffb924a69a"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "drop_back"
+      ]
+    },
+    "module_input": {
+      "bytes": 9821,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_back_free_terminal_probe.pm.gz",
+      "sha256": "d8016708dc0d59fbbe75b0417a58b8fae6e018dc847ecb2e4fcf5cc65b5fb412"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:drop_back\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_drop_back_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9795,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_back_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "efefbbbd0c86a3848cb8ca194a4672b6a2bedbd76e9f2ca4c251a7ffb924a69a"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "drop_back"
+      ]
+    },
+    "module_input": {
+      "bytes": 9821,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_back_receiver_terminal_probe.pm.gz",
+      "sha256": "d8016708dc0d59fbbe75b0417a58b8fae6e018dc847ecb2e4fcf5cc65b5fb412"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_drop_front_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9796,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_front_free_terminal_probe.handler.pl.gz",
+      "sha256": "8e30c007cff1a69907ded6c355e59de53d5e7701ec64bc372f9e8fffd7068962"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "drop_front"
+      ]
+    },
+    "module_input": {
+      "bytes": 9822,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_front_free_terminal_probe.pm.gz",
+      "sha256": "5e6e7cb02e4f83408f0c3f70fa88b2feba80990931b95312742e972f88aeccf9"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:drop_front\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_drop_front_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9796,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_front_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "8e30c007cff1a69907ded6c355e59de53d5e7701ec64bc372f9e8fffd7068962"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "drop_front"
+      ]
+    },
+    "module_input": {
+      "bytes": 9822,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_drop_front_receiver_terminal_probe.pm.gz",
+      "sha256": "5e6e7cb02e4f83408f0c3f70fa88b2feba80990931b95312742e972f88aeccf9"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_reversed_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9794,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_reversed_free_terminal_probe.handler.pl.gz",
+      "sha256": "4570f9019ef0152e90e0ae1f6a94b43ebeb75776172adcc94b7b571e75474d11"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "reversed"
+      ]
+    },
+    "module_input": {
+      "bytes": 9820,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_reversed_free_terminal_probe.pm.gz",
+      "sha256": "b2514b41979214d12b361af76db4ebb44479d1414bb78c1710f9cfcde502fd20"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:reversed\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_reversed_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9794,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_reversed_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "4570f9019ef0152e90e0ae1f6a94b43ebeb75776172adcc94b7b571e75474d11"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "reversed"
+      ]
+    },
+    "module_input": {
+      "bytes": 9820,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_reversed_receiver_terminal_probe.pm.gz",
+      "sha256": "b2514b41979214d12b361af76db4ebb44479d1414bb78c1710f9cfcde502fd20"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_slice_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9791,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_slice_free_terminal_probe.handler.pl.gz",
+      "sha256": "05067c53b9b7b26dc2d2f69e369a6384c0d697325fdd7179201d7b0986143733"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "slice"
+      ]
+    },
+    "module_input": {
+      "bytes": 9817,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_slice_free_terminal_probe.pm.gz",
+      "sha256": "64d909bfd4d626a07eac4dc13cde1895ca5863dd95702bf336728b6efc9501ca"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:slice\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_slice_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9791,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_slice_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "05067c53b9b7b26dc2d2f69e369a6384c0d697325fdd7179201d7b0986143733"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "slice"
+      ]
+    },
+    "module_input": {
+      "bytes": 9817,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_slice_receiver_terminal_probe.pm.gz",
+      "sha256": "64d909bfd4d626a07eac4dc13cde1895ca5863dd95702bf336728b6efc9501ca"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_sorted_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9792,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_sorted_free_terminal_probe.handler.pl.gz",
+      "sha256": "9d642a95e345af840ec3aa8554ba4abc4e239d7848be2ecc7f00a325b74fd17a"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "sorted"
+      ]
+    },
+    "module_input": {
+      "bytes": 9818,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_sorted_free_terminal_probe.pm.gz",
+      "sha256": "bb0082ec65d9027fe62a7238949786a013b238adbd30bc8d77c36c88616d7d01"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:sorted\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_sorted_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9697,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_sorted_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "1fa107277e2c48304dd340a5a4cb6eea0d7a2c343d9ccfa9074180990ce9f7ec"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 9723,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_sorted_receiver_terminal_probe.pm.gz",
+      "sha256": "08e9dbbd1c0617a6cf85531a4ccc95c5bfd21828406db4be8f079bb9a8b73450"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = undef;return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_take_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9790,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_free_terminal_probe.handler.pl.gz",
+      "sha256": "9f3ada96fdeacc4510958d682cfbe231ab805116ba35365ed0ee3ebb8f91ec53"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "take"
+      ]
+    },
+    "module_input": {
+      "bytes": 9816,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_free_terminal_probe.pm.gz",
+      "sha256": "16ed1296a6d40e45450091cc06dd079c55b2b02036845bd3a0a12e330ac0f206"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:take\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_take_last_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9795,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_last_free_terminal_probe.handler.pl.gz",
+      "sha256": "a48fca834955dee267e7f117b29a6e14d86a80227abb9d1b25584fd94d7f4ed1"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "take_last"
+      ]
+    },
+    "module_input": {
+      "bytes": 9821,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_last_free_terminal_probe.pm.gz",
+      "sha256": "9b564cc716f5c26ad9036fa5992559d0a35825b5b4f12646fbd68f9c7417d4e4"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:take_last\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_take_last_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9795,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_last_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "a48fca834955dee267e7f117b29a6e14d86a80227abb9d1b25584fd94d7f4ed1"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "take_last"
+      ]
+    },
+    "module_input": {
+      "bytes": 9821,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_last_receiver_terminal_probe.pm.gz",
+      "sha256": "9b564cc716f5c26ad9036fa5992559d0a35825b5b4f12646fbd68f9c7417d4e4"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_extra_take_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9697,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "1fa107277e2c48304dd340a5a4cb6eea0d7a2c343d9ccfa9074180990ce9f7ec"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 9723,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_extra_take_receiver_terminal_probe.pm.gz",
+      "sha256": "08e9dbbd1c0617a6cf85531a4ccc95c5bfd21828406db4be8f079bb9a8b73450"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = undef;return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_missing_concat_arrays_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      [
+        "head",
+        "tail"
+      ],
+      "S"
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 10691,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_concat_arrays_free_terminal_probe.handler.pl.gz",
+      "sha256": "000c39f0c308c79c710d265d3b5ab7a6e7f038d26c985fb0063ca678f4594fab"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10717,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_concat_arrays_free_terminal_probe.pm.gz",
+      "sha256": "56cf6630a892de01199fe139fbc2ef39eeceb3d0101d601ac8eae2715b03da34"
+    },
+    "native": [
+      [
+        "head",
+        "tail"
+      ],
+      "S"
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = [do { my $__ls_concat_arrays = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }];return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_missing_concat_arrays_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      [
+        "head",
+        "tail"
+      ],
+      "S"
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 10691,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_concat_arrays_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "000c39f0c308c79c710d265d3b5ab7a6e7f038d26c985fb0063ca678f4594fab"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10717,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_concat_arrays_receiver_terminal_probe.pm.gz",
+      "sha256": "56cf6630a892de01199fe139fbc2ef39eeceb3d0101d601ac8eae2715b03da34"
+    },
+    "native": [
+      [
+        "head",
+        "tail"
+      ],
+      "S"
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_missing_slice_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9791,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_slice_free_terminal_probe.handler.pl.gz",
+      "sha256": "05067c53b9b7b26dc2d2f69e369a6384c0d697325fdd7179201d7b0986143733"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "slice"
+      ]
+    },
+    "module_input": {
+      "bytes": 9817,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_slice_free_terminal_probe.pm.gz",
+      "sha256": "64d909bfd4d626a07eac4dc13cde1895ca5863dd95702bf336728b6efc9501ca"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:slice\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_missing_slice_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": [
+      null,
+      ""
+    ],
+    "fresh_cursor": 0,
+    "fresh_error": null,
+    "handler_input": {
+      "bytes": 9791,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_slice_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "05067c53b9b7b26dc2d2f69e369a6384c0d697325fdd7179201d7b0986143733"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 0,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 1,
+      "unresolved_helpers": [
+        "slice"
+      ]
+    },
+    "module_input": {
+      "bytes": 9817,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_missing_slice_receiver_terminal_probe.pm.gz",
+      "sha256": "64d909bfd4d626a07eac4dc13cde1895ca5863dd95702bf336728b6efc9501ca"
+    },
+    "native": [
+      null,
+      ""
+    ],
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": null,
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_drop_back_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10861,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_back_free_terminal_probe.handler.pl.gz",
+      "sha256": "2ae34b037189a4fa693deab4c932aa1d2295e3cd7a363ebc94110f82e74b6698"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10887,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_back_free_terminal_probe.pm.gz",
+      "sha256": "31af2779be3caba0f721a88149c53b6ebbec8fd9c3dd056f73acd8ab79172454"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_drop_last = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\\A-?\\d+\\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_drop_back_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10861,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_back_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "2ae34b037189a4fa693deab4c932aa1d2295e3cd7a363ebc94110f82e74b6698"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10887,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_back_receiver_terminal_probe.pm.gz",
+      "sha256": "31af2779be3caba0f721a88149c53b6ebbec8fd9c3dd056f73acd8ab79172454"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_drop_front_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10596,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_front_free_terminal_probe.handler.pl.gz",
+      "sha256": "c8e19492ff51cddf7b4087962c6d649befe47a7e1afdad47e81f0c125fd76eb2"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10622,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_front_free_terminal_probe.pm.gz",
+      "sha256": "56d174a1abc72a47e45520445a4d563ee92fffc412488b222bee35b5182fb55b"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_tail = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\\A-?\\d+\\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_drop_front_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10596,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_front_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "c8e19492ff51cddf7b4087962c6d649befe47a7e1afdad47e81f0c125fd76eb2"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10622,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_drop_front_receiver_terminal_probe.pm.gz",
+      "sha256": "56d174a1abc72a47e45520445a4d563ee92fffc412488b222bee35b5182fb55b"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_slice_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_slice_free_terminal_probe.handler.pl.gz",
+      "sha256": "8b5bc96e289880bf544f4e07332a87b41ed6ef796e60d78123c927631936b0a9"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_slice_free_terminal_probe.pm.gz",
+      "sha256": "7f949fc0b4ae784872d340d130f5e67dab22a39fa69271b2db8e48892cfd4e5b"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_slice = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\\A-?\\d+\\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\\A-?\\d+\\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_slice_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_slice_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "8b5bc96e289880bf544f4e07332a87b41ed6ef796e60d78123c927631936b0a9"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_slice_receiver_terminal_probe.pm.gz",
+      "sha256": "7f949fc0b4ae784872d340d130f5e67dab22a39fa69271b2db8e48892cfd4e5b"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_take_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10703,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_free_terminal_probe.handler.pl.gz",
+      "sha256": "80d4fa8c0d81259337e07d1c1f87b45fab8129655068a5fb3ee031150d989360"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10729,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_free_terminal_probe.pm.gz",
+      "sha256": "61b2f50dc62d7eb6e45f457356b0918bba3c6a630a2f432a554891bf2680e44a"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_take_last_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10825,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_last_free_terminal_probe.handler.pl.gz",
+      "sha256": "a1359aa55a713a35c48158715ad0e71498f2fa653fb2d6029d855bf15874f691"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10851,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_last_free_terminal_probe.pm.gz",
+      "sha256": "f09a88116651e262254da5eeb6bf55270ad2a83d892fd19f7ad3499833e9e9c9"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_take_last = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\\A-?\\d+\\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_take_last_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10825,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_last_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "a1359aa55a713a35c48158715ad0e71498f2fa653fb2d6029d855bf15874f691"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10851,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_last_receiver_terminal_probe.pm.gz",
+      "sha256": "f09a88116651e262254da5eeb6bf55270ad2a83d892fd19f7ad3499833e9e9c9"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_count_take_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10703,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "80d4fa8c0d81259337e07d1c1f87b45fab8129655068a5fb3ee031150d989360"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10729,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_count_take_receiver_terminal_probe.pm.gz",
+      "sha256": "61b2f50dc62d7eb6e45f457356b0918bba3c6a630a2f432a554891bf2680e44a"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_concat_arrays_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10543,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_concat_arrays_free_terminal_probe.handler.pl.gz",
+      "sha256": "b98896b7affd25efb215b970e94de4334d04448313f8c861a76a8c7dc92d5a37"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10569,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_concat_arrays_free_terminal_probe.pm.gz",
+      "sha256": "b092caec17dffbc1f0db35c634d189a124006f2e5d2d6c3b605d3e90964545cd"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = [do { my $__ls_concat_arrays = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = [do { my @__ls_evaluated_values = (\"tail\"); @__ls_evaluated_values }]; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }];return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_concat_arrays_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10543,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_concat_arrays_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "b98896b7affd25efb215b970e94de4334d04448313f8c861a76a8c7dc92d5a37"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10569,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_concat_arrays_receiver_terminal_probe.pm.gz",
+      "sha256": "b092caec17dffbc1f0db35c634d189a124006f2e5d2d6c3b605d3e90964545cd"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_drop_back_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10861,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_back_free_terminal_probe.handler.pl.gz",
+      "sha256": "64d0f80eeb152864931df79392acc4d383ebcada5678876969508de19d4bbd2d"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10887,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_back_free_terminal_probe.pm.gz",
+      "sha256": "f3a78f19ad2ffb2589cc20b61d3c3f5a7c736275b84b7754ae8b1aecd9de214d"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_drop_last = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_drop_last) && ref($__ls_drop_last) eq 'ARRAY') { my $__ls_drop_last_count = 1; $__ls_drop_last_count = 0 unless defined($__ls_drop_last_count) && $__ls_drop_last_count =~ /\\A-?\\d+\\z/; $__ls_drop_last_count = 0 if $__ls_drop_last_count < 0; my $__ls_drop_last_len = scalar(@{$__ls_drop_last}); if ($__ls_drop_last_len > $__ls_drop_last_count) { my $__ls_drop_last_end = $__ls_drop_last_len - $__ls_drop_last_count - 1; [@{$__ls_drop_last}[0 .. $__ls_drop_last_end]] } elsif ($__ls_drop_last_count == 0 && $__ls_drop_last_len) { [@{$__ls_drop_last}[0 .. $__ls_drop_last_len - 1]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_drop_back_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10861,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_back_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "64d0f80eeb152864931df79392acc4d383ebcada5678876969508de19d4bbd2d"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10887,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_back_receiver_terminal_probe.pm.gz",
+      "sha256": "f3a78f19ad2ffb2589cc20b61d3c3f5a7c736275b84b7754ae8b1aecd9de214d"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_drop_front_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10596,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_front_free_terminal_probe.handler.pl.gz",
+      "sha256": "716a811aa1e19876291674890c110ad9f7fb6c5dc32049f4ec8c7f04d347b091"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10622,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_front_free_terminal_probe.pm.gz",
+      "sha256": "f3f36c9dade017165c8014667437b0a93c88f904164cf13f0571a3a6e6a446f6"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_tail = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_tail) && ref($__ls_tail) eq 'ARRAY') { my $__ls_tail_skip = 1; $__ls_tail_skip = 0 unless defined($__ls_tail_skip) && $__ls_tail_skip =~ /\\A-?\\d+\\z/; $__ls_tail_skip = 0 if $__ls_tail_skip < 0; my $__ls_tail_len = scalar(@{$__ls_tail}); $__ls_tail_len > $__ls_tail_skip ? [@{$__ls_tail}[$__ls_tail_skip .. $__ls_tail_len - 1]] : [] } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_drop_front_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10596,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_front_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "716a811aa1e19876291674890c110ad9f7fb6c5dc32049f4ec8c7f04d347b091"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10622,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_drop_front_receiver_terminal_probe.pm.gz",
+      "sha256": "f3f36c9dade017165c8014667437b0a93c88f904164cf13f0571a3a6e6a446f6"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_reversed_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10329,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_reversed_free_terminal_probe.handler.pl.gz",
+      "sha256": "26a6f379b3f8037598520e6a0723f60b4efd25cb0419f687c66517971dc17250"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10355,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_reversed_free_terminal_probe.pm.gz",
+      "sha256": "5489f1db75ce7eae859df5aab4aefd02fd9f5c8b0d137b18e14a1e678279b8c1"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_reversed = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; defined($__ls_reversed) && ref($__ls_reversed) eq 'ARRAY' ? [reverse @{$__ls_reversed}] : [] };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_reversed_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10322,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_reversed_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "1737454d50f94d656d5e8145f486acbfb44a41223eec594616b010055f1b8615"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10348,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_reversed_receiver_terminal_probe.pm.gz",
+      "sha256": "005ab83ef525ad40a69a7af823fabbbb2b9236d968d056b0d13299ba2eadbaaa"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_slice_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_slice_free_terminal_probe.handler.pl.gz",
+      "sha256": "0886dd330d37540bf25feb1771e8da0a258f774b324d6102df1c5127c8ce55dc"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_slice_free_terminal_probe.pm.gz",
+      "sha256": "f432799a9b865bacb60f513a67f9a7dc1d3927237e2e130ab25f8779b8127639"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_slice = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = 1; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\\A-?\\d+\\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 1; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\\A-?\\d+\\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_slice_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_slice_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "0886dd330d37540bf25feb1771e8da0a258f774b324d6102df1c5127c8ce55dc"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_slice_receiver_terminal_probe.pm.gz",
+      "sha256": "f432799a9b865bacb60f513a67f9a7dc1d3927237e2e130ab25f8779b8127639"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_sorted_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10493,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_sorted_free_terminal_probe.handler.pl.gz",
+      "sha256": "768bd3887a7f2f2500f1731c2aa836d2e10f91e0bf2254ccd95ddfd31f98d438"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10519,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_sorted_free_terminal_probe.pm.gz",
+      "sha256": "bd69f7bb7ff48864b6fbcc158b55a74656d089d94c8ff2f66f8023925962533f"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_sorted = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; defined($__ls_sorted) && ref($__ls_sorted) eq 'ARRAY' ? [sort { our ($a, $b); my ($__ls_sort_left, $__ls_sort_right) = ($a, $b); (defined($__ls_sort_left) ? $__ls_sort_left : \"\") cmp (defined($__ls_sort_right) ? $__ls_sort_right : \"\") } @{$__ls_sorted}] : [] };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_sorted_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10320,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_sorted_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "65a528f3a9a18905c66c4c7426ee839bb7cc15c59e185ea8bc191f95aed17ae9"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10346,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_sorted_receiver_terminal_probe.pm.gz",
+      "sha256": "e6065aa9a938c3acfe3b72379ed29ae19537a29718fd780eb24f453ba0480889"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_take_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10703,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_free_terminal_probe.handler.pl.gz",
+      "sha256": "736170ae4998271783b2a7bfd359e1c7f4185ef4fed0fd170fed059c8c3041b4"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10729,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_free_terminal_probe.pm.gz",
+      "sha256": "bd3588d458e816f52f17011a8772ecb98ff60a1b2349a804468e886b763ebaf1"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_take = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_take) && ref($__ls_take) eq 'ARRAY') { my $__ls_take_count = 1; $__ls_take_count = 0 unless defined($__ls_take_count) && $__ls_take_count =~ /\\A-?\\d+\\z/; $__ls_take_count = 0 if $__ls_take_count < 0; my $__ls_take_len = scalar(@{$__ls_take}); if ($__ls_take_count > 0 && $__ls_take_len) { my $__ls_take_end = $__ls_take_count < $__ls_take_len ? $__ls_take_count - 1 : $__ls_take_len - 1; [@{$__ls_take}[0 .. $__ls_take_end]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_take_last_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10825,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_last_free_terminal_probe.handler.pl.gz",
+      "sha256": "cae09880795c3d08fc60fb62959b21b5ee97a63391ec7f860e20c23b4dc5b099"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10851,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_last_free_terminal_probe.pm.gz",
+      "sha256": "e217492104bb6050dd88220dc42f1ad2fe87a2a53b8625b4d2f8332ec1de7c85"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_take_last = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_take_last) && ref($__ls_take_last) eq 'ARRAY') { my $__ls_take_last_count = 1; $__ls_take_last_count = 0 unless defined($__ls_take_last_count) && $__ls_take_last_count =~ /\\A-?\\d+\\z/; $__ls_take_last_count = 0 if $__ls_take_last_count < 0; my $__ls_take_last_len = scalar(@{$__ls_take_last}); if ($__ls_take_last_count > 0 && $__ls_take_last_len) { my $__ls_take_last_start = $__ls_take_last_count < $__ls_take_last_len ? $__ls_take_last_len - $__ls_take_last_count : 0; [@{$__ls_take_last}[$__ls_take_last_start .. $__ls_take_last_len - 1]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_take_last_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10825,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_last_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "cae09880795c3d08fc60fb62959b21b5ee97a63391ec7f860e20c23b4dc5b099"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10851,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_last_receiver_terminal_probe.pm.gz",
+      "sha256": "e217492104bb6050dd88220dc42f1ad2fe87a2a53b8625b4d2f8332ec1de7c85"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_source_take_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10703,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "736170ae4998271783b2a7bfd359e1c7f4185ef4fed0fd170fed059c8c3041b4"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10729,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_source_take_receiver_terminal_probe.pm.gz",
+      "sha256": "bd3588d458e816f52f17011a8772ecb98ff60a1b2349a804468e886b763ebaf1"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_start_slice_free_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_start_slice_free_terminal_probe.handler.pl.gz",
+      "sha256": "6872075e5d46c877581393abfe4107bb41131042ce21c60ea1163943636c88e6"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_start_slice_free_terminal_probe.pm.gz",
+      "sha256": "2cfb3b04d7152574cb15efd2a054a86909d615485c54e6c1c0577dbe4dbd74db"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_slice = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef }; if (defined($__ls_slice) && ref($__ls_slice) eq 'ARRAY') { my $__ls_slice_start = do { $items = \"bad\"; do { require LinkedSpec::BindingRuntime; $items = LinkedSpec::BindingRuntime::push_value($items, \"items\", 1) }; 1 }; $__ls_slice_start = 0 unless defined($__ls_slice_start) && $__ls_slice_start =~ /\\A-?\\d+\\z/; $__ls_slice_start = 0 if $__ls_slice_start < 0; my $__ls_slice_count = 1; $__ls_slice_count = 0 unless defined($__ls_slice_count) && $__ls_slice_count =~ /\\A-?\\d+\\z/; $__ls_slice_count = 0 if $__ls_slice_count < 0; my $__ls_slice_len = scalar(@{$__ls_slice}); if ($__ls_slice_count > 0 && $__ls_slice_len > $__ls_slice_start) { my $__ls_slice_end = $__ls_slice_start + $__ls_slice_count - 1; $__ls_slice_end = $__ls_slice_len - 1 if $__ls_slice_end >= $__ls_slice_len; [@{$__ls_slice}[$__ls_slice_start .. $__ls_slice_end]] } else { [] } } else { [] } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  },
+  "own_needed_start_slice_receiver_terminal_probe": {
+    "build_error": null,
+    "descriptor_error": null,
+    "emission_error": null,
+    "fresh": null,
+    "fresh_cursor": 0,
+    "fresh_error": {
+      "code": "generated_execution_failed",
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_family": "default",
+      "rule_label": "Value",
+      "source_identity": "array-transform-callable-perl.spec",
+      "stage": "execute_generated",
+      "summary": "Generated parser execution failed",
+      "type": "generated_source_error"
+    },
+    "handler_input": {
+      "bytes": 10963,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_start_slice_receiver_terminal_probe.handler.pl.gz",
+      "sha256": "6872075e5d46c877581393abfe4107bb41131042ce21c60ea1163943636c88e6"
+    },
+    "load_error": null,
+    "loaded": 1,
+    "metadata": {
+      "canonical_action_ir_fallback_count": 0,
+      "language_agnostic_action_ir_ready": 1,
+      "raw_perl_dependency_count": 0,
+      "unresolved_helper_count": 0,
+      "unresolved_helpers": []
+    },
+    "module_input": {
+      "bytes": 10989,
+      "path": "docs/checkpoints/array-transform-callable-perl-2026-11-11/terminal/own_needed_start_slice_receiver_terminal_probe.pm.gz",
+      "sha256": "2cfb3b04d7152574cb15efd2a054a86909d615485c54e6c1c0577dbe4dbd74db"
+    },
+    "native": null,
+    "native_callable": 1,
+    "native_cursor": 0,
+    "native_error": {
+      "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar\n",
+      "handler_source_label": "LinkedSpec::generated_handler:Value:<none>",
+      "handler_variant": "<none>",
+      "owner_stage": "runtime_handler:rule_handler_eval",
+      "rule_label": "Value",
+      "spec_name": "",
+      "spec_path": "",
+      "stage": "rule_handler_eval",
+      "summary": "Rule handler execution failed",
+      "top_rule": "Value",
+      "type": "runtime_handler"
+    },
+    "substitution": "$order = \"\";$out = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:supply\"; undef };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+    "substitution_error": null,
+    "warnings": []
+  }
+}

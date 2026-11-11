@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6591,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-composition-dispatch-gap.md","sha256":"f2280f1bfff1e02364b99aa9098df6a72d29ef1f686fe8d0dce36e2bb77db3f3","type":"member"}
 {"bytes":5252,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-push-composition.md","sha256":"56ae8e36bd252c345eebaea1b6668b6afc5767af03c3c30a1e031a3a84634035","type":"member"}
 {"bytes":3912,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-collecting-parent-runtime-error-loss.md","sha256":"73d431af07c553a3af44662333ed55f7ffda8e4e4ccc0207907db7ce5d5dc6c7","type":"member"}
 {"bytes":8165,"lines":122,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-comment-newline-lowering-drift.md","sha256":"51bad69ccf756692ab6569b81474fb6b148ea7266eb6871b1908bf90a792a856","type":"member"}
@@ -115,6 +116,7 @@
 {"bytes":12613,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-regex-scanner-boundaries.md","sha256":"00ea459ee6aee0312c5479453d6e31400010cf00db75da79a0a3ab2df4895c22","type":"member"}
 {"bytes":2451,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-named-capture-endpoint-presence-repair.md","sha256":"4158a9a78d2f42cee8116e1843072daf4feb3c228ec9374343b0916f826a9f81","type":"member"}
 {"bytes":6740,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-mcp-server-plan.md","sha256":"a14234db56f129ecac389743695efdd520ad5e5d979fc026d42799f0d66b0b7f","type":"member"}
+{"bytes":2497,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0","path":"docs/knowledge/perl-native-source-dump-custody.md","sha256":"1b755d82fd0a6e1f7747506ca88a839a565b05a9d5bff950d2cf04ba85feadcc","type":"member"}
 {"bytes":2885,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-spec-resolution.md","sha256":"51d45357f87f426207cb442feaf477b490d7feb45b66c88ffdf8c29675627bcc","type":"member"}
 {"bytes":4545,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-nested-raw-readiness-diagnosis.md","sha256":"b4aae022d9d8d6ebfa08a30e118546f9553fba964113e47c8375a94095d30a07","type":"member"}
 {"bytes":4784,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-statement-separator-coverage-gap.md","sha256":"346ebd8b7f649be9f2e13acaac841b56c615e4edcf940131c0771c637b66be1f","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":1939,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-ordered-zero-width-continuation.md","sha256":"abb5207b282c998375cbba1e8f85650cfb6e7c5d1903bd1f4ebdc5bfd6e3b4aa","type":"member"}
 {"bytes":5264,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-original-event-input-grants.md","sha256":"bfc866945dbbc82b8fda1e7b37d62598ccd20c8d490c9e1a12d62b0f555426ce","type":"member"}
 {"bytes":2713,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-outward-descriptor-model-tag-drift.md","sha256":"449c33deb17e874f8b6bae6635f93f51f5616a0cd803e43a72558146c513ca62","type":"member"}
-{"bytes":3111,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pick-keys-conditional-local-reuse.md","sha256":"9dfac9fbab66bd2c37e72681619288c5c1eec5b327a697284e0414d6bac9654b","type":"member"}
-{"bytes":4618,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-regex-source-provenance.md","sha256":"c80620e4f8c15f04e82b678ac41fb36ddbdb5b4794d081262a1973459cbe8dfd","type":"member"}

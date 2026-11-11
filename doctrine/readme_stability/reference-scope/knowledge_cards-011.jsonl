@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6333,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generic-final-codeblock-normalization.md","sha256":"29b712c6cf6f7663ea91371cf130ced86e17a5f027b94cab4d52a9022270d9e4","type":"member"}
+{"bytes":2434,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-governed-capture-mark-parity.md","sha256":"e3425b8da2e2540e405fc4a45736765fe5f3883cec11ebab41f8d4e092467dde","type":"member"}
 {"bytes":7494,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-separator-and-cat-arity-defects.md","sha256":"5fbb19473630b0ac33d61f860096ba3626ccdfa341b0a6f67b3114cb687ba9a4","type":"member"}
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
 {"bytes":4638,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-hash-value-result-guards.md","sha256":"9361c6243d5ed5d72f3c2b63e4a831d1a8626201d34078f687ce91f2c96052ac","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":15362,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-api-mcp-direction.md","sha256":"4cb2622a4acf7c31ddef5f32df2c59f9741c1d838c6a523ba40212d1973e9195","type":"member"}
 {"bytes":3820,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-generated-plan-authority.md","sha256":"b7fdbbfa13a2abe576b7a79d210161fc5b6fbaff5e25c8a394471ed0307f9da1","type":"member"}
 {"bytes":5624,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-neutral-contract.md","sha256":"caf96320a04aeb2c94ca7d646daa6981ff658f8e8ce2d40bd3c52d977352a0a2","type":"member"}
-{"bytes":4414,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-public-no-drift.md","sha256":"04af4c4c1c02a3f654bcda8bf5ac95fb1c0fce87f3d47b20f3d7112b88f074de","type":"member"}
-{"bytes":3123,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-recurring-gate-plan.md","sha256":"aa3a5044e67fcea8d4a0b3862660089e2560b12b359d65aa33af1e4427a54999","type":"member"}

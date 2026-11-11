@@ -633,7 +633,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.1.4`
   Status: `pending`
-  Children: `.1.2.1.4.1`, `.1.2.1.4.2`.
+  Children: `.1.2.1.4.1`, `.1.2.1.4.2`, `.1.2.1.4.3`.
   Goal: Reconcile the syntax/helper/receiver inventories against current authority roles, then select bounded implementation gaps under23. Broad semantic validation remains deferred until feature coverage.
   Dependencies: `TYPE-REFERENCE-BOOK.1.2.1.3`
   Planned tier: `focused`; no full suite for inventory closeout under the current director policy.
@@ -1092,7 +1092,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1`
   Status: `active` / bounded remaining-feature selection child; full matrix open
-  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`, `.23.1.37`, `.23.1.38`, `.23.1.39`, `.23.1.40`, `.23.1.41`.
+  Children: `.23.1.1`, `.23.1.2`, `.23.1.3`, `.23.1.4`, `.23.1.5`, `.23.1.6`, `.23.1.7`, `.23.1.8`, `.23.1.9`, `.23.1.10`, `.23.1.11`, `.23.1.12`, `.23.1.13`, `.23.1.14`, `.23.1.15`, `.23.1.16`, `.23.1.17`, `.23.1.18`, `.23.1.19`, `.23.1.20`, `.23.1.21`, `.23.1.22`, `.23.1.23`, `.23.1.24`, `.23.1.25`, `.23.1.26`, `.23.1.27`, `.23.1.28`, `.23.1.29`, `.23.1.30`, `.23.1.31`, `.23.1.32`, `.23.1.33`, `.23.1.34`, `.23.1.35`, `.23.1.36`, `.23.1.37`, `.23.1.38`, `.23.1.39`, `.23.1.40`, `.23.1.41`, `.23.1.42`.
   Goal: Build the per-type fluent coverage and gap matrix from the complete inventory and project use cases.
   Acceptance: Cover the actual scalar/string/numeric, array, harray, boolean/null and codeblock model, generic versus type-specific operations, meaningful free-helper/receiver counterparts, signatures, accepted inputs, return/element types, mutation/identity, empty/missing/error and backend boundaries. Identify required method-family gaps explicitly; a registered-name count is insufficient. Split new implementation work before writes.
   Planned tier: Focused source/contract audit; declare measurements at activation.
@@ -1593,6 +1593,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Retained-consumer/direct-input audit, historical-source recovery, distinguishing byte/provenance negatives and affected focused suites with exact input identities; original packet/history preservation and claim/book/continuity checks.
   Planned canonical trigger: Admission prerequisite/declared capture-closure closeout before push; infrastructure changes split into explicit canonical leaves if needed.
   Planned claim verification: none: This node schedules review of a demonstrated template-reuse risk; no additional missing-input census, measured repair or current runtime failure is claimed.
+  Addition78.6.1.0/P1 native timing claims: The retained Perl observer persists emit_generated_source before fresh eval, but persists parser_source_ref after Get returns; SpecEntry has already eval-compiled internal native handlers. The inherited handler_input/handler.pl artifact is a standalone dump, not that internal eval input. Current intake and selection-card overstatements are qualified before landing; source-bound native-dump-timing review0/three controls and original narratives are retained. Audit earlier reused Perl observers/prose after feature coverage and before admission/push with SESSION5; qualify every demonstrated overstatement, preserve original receipts, and establish prospective actual native-input custody where supported. No retroactive precompile receipt, exhaustive historical census or changed runtime verdict is inferred. This owner remains responsible through verified closeout.
 
   Addition75.6.3.1/P1 named source assets before admission: Dart's public default function loader reads specs/user_function_definition.spec. Initial callable3 intake/normal/direct snapshots omitted that direct input; immutable qualified companions now capture and explicitly supply it before SDK use, preserving all16 observations/module/parsed bodies and qualified normal16/direct29. Original partial epochs are not retroactively closed. The same check confirms Rust spec_parser.rs19-20 embeds that file with include_str!, while saved Rust75.6.2 declarations cover rust/ and fixtures but omit the compile-time grammar asset. Rust observations and saved declared-source identities remain actual; original embedded asset/warm native-producer provenance is not proved. This owner must inventory these named asset edges, retain a prospective grammar-before-build/producer-bound companion and coordinate actual native/cache provenance with SESSION-STARTUP-READING.5 before23.4/push. No whole-history omission census or runtime defect is inferred. Current Dart3.1 closes its prospective direct asset edge; broader historical/default and Rust embedded-build legs remain open.
 
@@ -2804,3 +2805,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Acceptance: Read canonical initial binding/literal/receiver/error authorities, reproduce with public tools and separate constructor/produced/named/free controls, retain actual effects/full diagnostics and decide the existing target. Repair any established defect in bounded backend leaves with focused RED/GREEN; escalate only genuinely missing authority. Keep original observations intact.
   Planned verification: Focused contract/public evidence; declare actual tier and claim boundary at activation, canonical only for public policy movement/admission.
   Planned claim verification: No new aggregate measurement; initial policy remains unassessed outside the retained exact reproduction.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.1.42`
+  Status: `pending` / P2 next selection after bounded78.6
+  Goal: Assess existing open-arity concat_arrays result continuations before declaring agreed feature coverage exhausted.
+  Dependencies: All bounded78.6 backend lanes/preceding clean owner; current helper spelling/signature/book authorities and own Perl intake78.6.1.0.
+  Reproduction/impact: Original240/terminal48 show ready terminal one-source and extra-operand concat forms with actual S/SX source effects; some later Hash/with compositions lose source effects or remain unresolved. Current78/78.6 explicitly guards free-two/receiver-one only. Do not treat excluded composed failures as accepted policy or use the non-Array extra-operand sample to admit arbitrary input kinds.
+  Schedule: Immediately after bounded78.6, before deferred broad verification/full23.4. Own source-linked ordinary/registered-function open-arity intake, with valid additional Array operands and independently acquired backend limits before any implementation.
+  Acceptance: Read existing open-arity helper purpose/contract and public book examples, reproduce valid Array-only terminal/composed forms, distinguish initial fallback/input errors/variadic call syntax from result guards, and freeze one bounded next owner without changing arity/type authority. Keep all current sources/outcomes/qualifications and required source/argument effects; no peer verdict or completeness inference.
+  Planned verification: Focused canonical source/public probes/independent recovery as needed, docs and normal clean commit before production.
+  Planned claim verification: Finite authored selection; declare actual tier/claim boundary at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.1.4.3`
+  Status: `pending` / P2 excluded-shape diagnostics inventory
+  Goal: Establish the contextual readiness/diagnostic policy for invalid free-helper calls versus receiver null-shape rejection.
+  Dependencies: Receiver/signature inventories1.2.1.3/1.2.1.4; acquired Perl78.6.1.0 original240/terminal48.
+  Reproduction: Extra first take/sorted receiver forms on valid registered-function results yield null/no effects/ready1 and bare undef in public handlers; effective-arity-matched free forms yield null/no effects/unready/public unsupported-helper markers. The existing early fluent-shape validator deliberately defines complete-null expressions. Wrong fixed/rest calls separately retain their canonical unresolved-helper boundary with zero raw fallback.
+  Impact/ownership: Do not equate a context difference with false readiness or impose a universal free-helper policy on excluded receiver syntax. The unactivated strict-marker proposal78.6.1.1 is superseded here; preserve its evidence without product-RED credit. No current production defect is adjudicated from these metadata fields alone.
+  Schedule: With signature/receiver inventory after agreed bounded feature coverage, before full23.4 admission and final per-type reference. This does not block valid78.6 result composition.
+  Acceptance: Read exact public readiness/receiver-shape/signature authorities and current fixtures, distinguish valid constant-null rejection from unsupported-helper diagnostics, reproduce required contexts and document their intended policy. Repair any established mismatch with bounded proof, or retain an intentional distinction with explicit source-linked rationale. Escalate only an actual unresolved authority choice; no speculative policy normalization.
+  Planned verification: Focused contextual contract/public evidence; classify actual tier/claim boundary before policy changes or admission.
+  Planned claim verification: Finite authored policy reconciliation, no completeness/population/performance assertion.

@@ -1,0 +1,21 @@
+{
+  "original_questions": 240,
+  "terminal_questions": 48,
+  "groups": {
+    "excluded-helper-arity-terminal": 20,
+    "needed-operand-error-terminal": 12,
+    "needed-source-error-terminal": 16
+  },
+  "source_sha256": "888f577afdf8a75165954090918853d4aebcfc877559632521378662889db6a5",
+  "templates": {
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/observer.pl": {
+      "sha256": "2ce66948f7678b07b3ed62ea668d930200927761c546c1f576b875e6c20cecef",
+      "bytes": 3492
+    },
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/capture.py": {
+      "sha256": "c5ca7489baddc8e21978d46359c8c57c2ca4fcbb4259d9207af0cacc848a30e7",
+      "bytes": 4306
+    }
+  },
+  "scope": "Separate terminal oracle acquisition only; no original source, observation, expectation or SDK body is changed."
+}

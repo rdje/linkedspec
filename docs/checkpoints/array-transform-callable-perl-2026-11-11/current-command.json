@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-perl-2026-11-11/current.py"
+  ],
+  "cwd": "."
+}

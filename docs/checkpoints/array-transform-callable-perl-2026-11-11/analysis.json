@@ -1,0 +1,518 @@
+{
+  "own_question_groups": {
+    "additional-source-kind": [
+      "own_scalar_bool_free",
+      "own_scalar_bool_receiver",
+      "own_scalar_string_binding_name_free",
+      "own_scalar_string_binding_name_receiver"
+    ],
+    "additional-source-kind-first-with": [
+      "own_scalar_bool_free_with",
+      "own_scalar_bool_receiver_with",
+      "own_scalar_string_binding_name_free_with",
+      "own_scalar_string_binding_name_receiver_with"
+    ],
+    "earlier-owner": [
+      "own_prior_count",
+      "own_prior_key_count",
+      "own_prior_length",
+      "own_prior_hash",
+      "own_prior_copy",
+      "own_prior_view"
+    ],
+    "excluded-helper-arity": [
+      "own_extra_take_free",
+      "own_extra_take_receiver",
+      "own_extra_take_last_free",
+      "own_extra_take_last_receiver",
+      "own_extra_drop_front_free",
+      "own_extra_drop_front_receiver",
+      "own_extra_drop_back_free",
+      "own_extra_drop_back_receiver",
+      "own_extra_slice_free",
+      "own_extra_slice_receiver",
+      "own_extra_sorted_free",
+      "own_extra_sorted_receiver",
+      "own_extra_reversed_free",
+      "own_extra_reversed_receiver",
+      "own_extra_concat_arrays_free",
+      "own_extra_concat_arrays_receiver",
+      "own_missing_slice_free",
+      "own_missing_slice_receiver",
+      "own_missing_concat_arrays_free",
+      "own_missing_concat_arrays_receiver"
+    ],
+    "function-arity-composed": [
+      "own_function_arity_missing_composed",
+      "own_function_arity_extra_composed"
+    ],
+    "function-arity-terminal": [
+      "own_function_arity_missing_terminal",
+      "own_function_arity_extra_terminal"
+    ],
+    "initial-first-with": [
+      "own_initial_number_take_free_with",
+      "own_initial_number_take_receiver_with",
+      "own_initial_null_take_free_with",
+      "own_initial_null_take_receiver_with",
+      "own_initial_hash_take_free_with",
+      "own_initial_hash_take_receiver_with",
+      "own_initial_number_take_last_free_with",
+      "own_initial_number_take_last_receiver_with",
+      "own_initial_null_take_last_free_with",
+      "own_initial_null_take_last_receiver_with",
+      "own_initial_hash_take_last_free_with",
+      "own_initial_hash_take_last_receiver_with",
+      "own_initial_number_drop_front_free_with",
+      "own_initial_number_drop_front_receiver_with",
+      "own_initial_null_drop_front_free_with",
+      "own_initial_null_drop_front_receiver_with",
+      "own_initial_hash_drop_front_free_with",
+      "own_initial_hash_drop_front_receiver_with",
+      "own_initial_number_drop_back_free_with",
+      "own_initial_number_drop_back_receiver_with",
+      "own_initial_null_drop_back_free_with",
+      "own_initial_null_drop_back_receiver_with",
+      "own_initial_hash_drop_back_free_with",
+      "own_initial_hash_drop_back_receiver_with",
+      "own_initial_number_slice_free_with",
+      "own_initial_number_slice_receiver_with",
+      "own_initial_null_slice_free_with",
+      "own_initial_null_slice_receiver_with",
+      "own_initial_hash_slice_free_with",
+      "own_initial_hash_slice_receiver_with",
+      "own_initial_number_sorted_free_with",
+      "own_initial_number_sorted_receiver_with",
+      "own_initial_null_sorted_free_with",
+      "own_initial_null_sorted_receiver_with",
+      "own_initial_hash_sorted_free_with",
+      "own_initial_hash_sorted_receiver_with",
+      "own_initial_number_reversed_free_with",
+      "own_initial_number_reversed_receiver_with",
+      "own_initial_null_reversed_free_with",
+      "own_initial_null_reversed_receiver_with",
+      "own_initial_hash_reversed_free_with",
+      "own_initial_hash_reversed_receiver_with",
+      "own_initial_number_concat_arrays_free_with",
+      "own_initial_number_concat_arrays_receiver_with",
+      "own_initial_null_concat_arrays_free_with",
+      "own_initial_null_concat_arrays_receiver_with",
+      "own_initial_hash_concat_arrays_free_with",
+      "own_initial_hash_concat_arrays_receiver_with"
+    ],
+    "initial-terminal": [
+      "own_initial_number_take_free",
+      "own_initial_number_take_receiver",
+      "own_initial_null_take_free",
+      "own_initial_null_take_receiver",
+      "own_initial_hash_take_free",
+      "own_initial_hash_take_receiver",
+      "own_initial_number_take_last_free",
+      "own_initial_number_take_last_receiver",
+      "own_initial_null_take_last_free",
+      "own_initial_null_take_last_receiver",
+      "own_initial_hash_take_last_free",
+      "own_initial_hash_take_last_receiver",
+      "own_initial_number_drop_front_free",
+      "own_initial_number_drop_front_receiver",
+      "own_initial_null_drop_front_free",
+      "own_initial_null_drop_front_receiver",
+      "own_initial_hash_drop_front_free",
+      "own_initial_hash_drop_front_receiver",
+      "own_initial_number_drop_back_free",
+      "own_initial_number_drop_back_receiver",
+      "own_initial_null_drop_back_free",
+      "own_initial_null_drop_back_receiver",
+      "own_initial_hash_drop_back_free",
+      "own_initial_hash_drop_back_receiver",
+      "own_initial_number_slice_free",
+      "own_initial_number_slice_receiver",
+      "own_initial_null_slice_free",
+      "own_initial_null_slice_receiver",
+      "own_initial_hash_slice_free",
+      "own_initial_hash_slice_receiver",
+      "own_initial_number_sorted_free",
+      "own_initial_number_sorted_receiver",
+      "own_initial_null_sorted_free",
+      "own_initial_null_sorted_receiver",
+      "own_initial_hash_sorted_free",
+      "own_initial_hash_sorted_receiver",
+      "own_initial_number_reversed_free",
+      "own_initial_number_reversed_receiver",
+      "own_initial_null_reversed_free",
+      "own_initial_null_reversed_receiver",
+      "own_initial_hash_reversed_free",
+      "own_initial_hash_reversed_receiver",
+      "own_initial_number_concat_arrays_free",
+      "own_initial_number_concat_arrays_receiver",
+      "own_initial_null_concat_arrays_free",
+      "own_initial_null_concat_arrays_receiver",
+      "own_initial_hash_concat_arrays_free",
+      "own_initial_hash_concat_arrays_receiver"
+    ],
+    "needed-operand-error": [
+      "own_needed_count_take_free",
+      "own_needed_count_take_receiver",
+      "own_needed_count_take_last_free",
+      "own_needed_count_take_last_receiver",
+      "own_needed_count_drop_front_free",
+      "own_needed_count_drop_front_receiver",
+      "own_needed_count_drop_back_free",
+      "own_needed_count_drop_back_receiver",
+      "own_needed_start_slice_free",
+      "own_needed_count_slice_free",
+      "own_needed_start_slice_receiver",
+      "own_needed_count_slice_receiver"
+    ],
+    "needed-source-error": [
+      "own_needed_source_take_free",
+      "own_needed_source_take_receiver",
+      "own_needed_source_take_last_free",
+      "own_needed_source_take_last_receiver",
+      "own_needed_source_drop_front_free",
+      "own_needed_source_drop_front_receiver",
+      "own_needed_source_drop_back_free",
+      "own_needed_source_drop_back_receiver",
+      "own_needed_source_slice_free",
+      "own_needed_source_slice_receiver",
+      "own_needed_source_sorted_free",
+      "own_needed_source_sorted_receiver",
+      "own_needed_source_reversed_free",
+      "own_needed_source_reversed_receiver",
+      "own_needed_source_concat_arrays_free",
+      "own_needed_source_concat_arrays_receiver"
+    ],
+    "nested-kinds": [
+      "own_nested_scalar_kinds"
+    ],
+    "numeric-kind": [
+      "own_numeric_array_source"
+    ],
+    "optional-default-composed": [
+      "own_optional_take_free_composed",
+      "own_optional_take_receiver_composed",
+      "own_optional_take_last_free_composed",
+      "own_optional_take_last_receiver_composed",
+      "own_optional_drop_front_free_composed",
+      "own_optional_drop_front_receiver_composed",
+      "own_optional_drop_back_free_composed",
+      "own_optional_drop_back_receiver_composed",
+      "own_optional_slice_free_composed",
+      "own_optional_slice_receiver_composed"
+    ],
+    "optional-default-terminal": [
+      "own_optional_take_free",
+      "own_optional_take_receiver",
+      "own_optional_take_last_free",
+      "own_optional_take_last_receiver",
+      "own_optional_drop_front_free",
+      "own_optional_drop_front_receiver",
+      "own_optional_drop_back_free",
+      "own_optional_drop_back_receiver",
+      "own_optional_slice_free",
+      "own_optional_slice_receiver"
+    ],
+    "signature-invalid-signature": [
+      "own_signature_fixed_missing_terminal",
+      "own_signature_fixed_missing_composed",
+      "own_signature_fixed_extra_terminal",
+      "own_signature_fixed_extra_composed",
+      "own_signature_variadic_missing_terminal",
+      "own_signature_variadic_missing_composed"
+    ],
+    "signature-valid": [
+      "own_signature_variadic_empty_terminal",
+      "own_signature_variadic_empty_composed",
+      "own_signature_variadic_multi_terminal",
+      "own_signature_variadic_multi_composed"
+    ],
+    "source-before-rejection": [
+      "own_source_before_rejection"
+    ]
+  },
+  "pairs": 240,
+  "shared": {
+    "concat_arrays_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "concat_arrays_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "concat_arrays_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "constructor_rejection_oracle": {
+      "classification": "profile",
+      "failures": []
+    },
+    "drop_back_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_back_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_back_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "drop_front_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_front_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "drop_front_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "drop_logical_later_with": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "established_constructor_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "initial_hash_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_hash_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_null_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_null_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_number_composed": {
+      "classification": "profile",
+      "failures": []
+    },
+    "initial_number_terminal": {
+      "classification": "profile",
+      "failures": []
+    },
+    "needed_count_composed": {
+      "classification": "target",
+      "failures": [
+        "native:needed-error",
+        "fresh:unavailable"
+      ]
+    },
+    "needed_count_terminal": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "needed_source_composed": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "needed_source_terminal": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "nested_kinds": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reverse_copy_later_with": {
+      "classification": "target",
+      "failures": [
+        "readiness",
+        "native:value",
+        "fresh:value"
+      ]
+    },
+    "reversed_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reversed_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "reversed_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "selected_hash_bridge": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "slice_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "sorted_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "sorted_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "sorted_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "source_effect_before_rejection": {
+      "classification": "target",
+      "failures": [
+        "readiness",
+        "native:value",
+        "fresh:value"
+      ]
+    },
+    "source_once": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "source_snapshot": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_compatible": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_free_hash_guard": {
+      "classification": "healthy",
+      "failures": []
+    },
+    "take_last_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "take_later_with": {
+      "classification": "target",
+      "failures": [
+        "readiness"
+      ]
+    },
+    "take_receiver_hash_guard": {
+      "classification": "target",
+      "failures": [
+        "native:unexpected-error",
+        "native:value",
+        "fresh:unavailable"
+      ]
+    },
+    "valid_empty_with": {
+      "classification": "healthy",
+      "failures": []
+    }
+  },
+  "summary": {
+    "healthy": [
+      "take_compatible",
+      "take_free_hash_guard",
+      "take_last_compatible",
+      "take_last_free_hash_guard",
+      "drop_front_compatible",
+      "drop_front_free_hash_guard",
+      "drop_back_compatible",
+      "drop_back_free_hash_guard",
+      "slice_compatible",
+      "slice_free_hash_guard",
+      "sorted_compatible",
+      "sorted_free_hash_guard",
+      "reversed_compatible",
+      "reversed_free_hash_guard",
+      "concat_arrays_compatible",
+      "concat_arrays_free_hash_guard",
+      "source_once",
+      "source_snapshot",
+      "valid_empty_with",
+      "nested_kinds",
+      "selected_hash_bridge",
+      "needed_source_terminal",
+      "needed_source_composed",
+      "needed_count_terminal",
+      "established_constructor_guard"
+    ],
+    "profile": [
+      "constructor_rejection_oracle",
+      "initial_number_terminal",
+      "initial_number_composed",
+      "initial_null_terminal",
+      "initial_null_composed",
+      "initial_hash_terminal",
+      "initial_hash_composed"
+    ],
+    "target": [
+      "take_receiver_hash_guard",
+      "take_last_receiver_hash_guard",
+      "drop_front_receiver_hash_guard",
+      "drop_back_receiver_hash_guard",
+      "slice_receiver_hash_guard",
+      "sorted_receiver_hash_guard",
+      "reversed_receiver_hash_guard",
+      "concat_arrays_receiver_hash_guard",
+      "take_later_with",
+      "reverse_copy_later_with",
+      "drop_logical_later_with",
+      "needed_count_composed",
+      "source_effect_before_rejection"
+    ]
+  }
+}

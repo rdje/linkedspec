@@ -1,0 +1,8 @@
+{
+  "kind": "actual direct exec_command observation, not a replay",
+  "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-transform-callable-perl-2026-11-11/freeze.py",
+  "cwd": ".",
+  "exit_code": 0,
+  "combined_output": "{\"healthy_intents\": 74, \"no_production_change\": true, \"protected_observations\": 253, \"questions\": 288, \"result\": \"PASS\", \"result_targets\": 35}\n",
+  "limits": "Source/intent composition used a direct exec wrapper. Actual merged output/exit is retained; standalone original stdout/stderr were not acquired separately. Runtime/inspection/recovery acquisitions retain their own complete child channels."
+}

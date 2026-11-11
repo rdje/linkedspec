@@ -107,6 +107,7 @@
 {"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
 {"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
 {"bytes":1962,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-quoted-marker-current-oracle.md","sha256":"52fbcc0405087b93f5c593c3f3c05555dd7c50c8fde97b37a25cdd6bff039406","type":"member"}
+{"bytes":3603,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"038d634792c423d752b4af18dad582eceb1a27f5acf1dffaa198baeec299c446","type":"member"}
 {"bytes":5094,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-attached-conditional-execution.md","sha256":"ce6f3564205d977e41a77343ac55b5fa1f15b3ddeb9eac2aae66b8479b936b10","type":"member"}
 {"bytes":3691,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-dynamic-invocation.md","sha256":"52635d7769d7347dbd5032b8889bdef10b2e4e7401ea47c427dd20b5a246f056","type":"member"}
 {"bytes":4625,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-literal-record.md","sha256":"cbe04af46db9d6a4ebf92ba87e28f59f54b4176ad8b68a307a078b0cddbdf11a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2710,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-capture-endpoint-local-register-repair.md","sha256":"4d847d9576a2c849a98686ae08aa8d5cf8dfe0d235914968e4c4435f2f367766","type":"member"}
 {"bytes":2960,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-capture-slice-delimiter-seek-boundary.md","sha256":"a448dbc16227f14d91e34544efc624ed3397b5f2dce4c0bb0f3156338e847fa5","type":"member"}
 {"bytes":3470,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md","sha256":"9141a3c3f4f56903229bf37f5e6cb6bf38d96619ba7a7ae0c93b4f20a84e8d1b","type":"member"}
-{"bytes":6591,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-composition-dispatch-gap.md","sha256":"f2280f1bfff1e02364b99aa9098df6a72d29ef1f686fe8d0dce36e2bb77db3f3","type":"member"}

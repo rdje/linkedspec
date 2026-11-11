@@ -1387,8 +1387,22 @@ compilation on the recorded Perl implementation. The selected repair covers
 the eight transform names above, later copy/logical/with rejection, needed errors
 and source effects. One `supply(...).take(...).set_key(...).with(){...}` form already returns
 null/no effects while remaining unresolved in descriptor readiness, so a matching
-value is insufficient. Family78.6 begins with independent Perl policy intake;
-each other backend is assessed separately before any fix or support claim.
+value is insufficient. Independent Perl policy intake is now frozen;35 valid
+result/readiness targets await repair78.6.1.2. Each other backend is assessed
+separately before any fix or support claim.
+
+The recorded Perl initial-input policies differ by context. A registered function
+returning Number/Hash input to receiver `sorted` or `reversed` raises a typed
+array-binding error; the corresponding free helper returns an empty Array. Null
+keeps its empty behavior. These compatibility observations do not expand portable
+input authority: portable programs supply Arrays. The repair must reuse the
+original terminal producer and preserve its errors and argument order.
+
+Excluded argument shapes also keep their current behavior. Some receiver shapes
+fold directly to null before effects while free helper forms are unresolved;
+their different readiness flags alone do not establish a required policy change.
+Signature inventory1.2.1.4.3 owns that contextual question. Wider open-arity
+`concat_arrays` continuations remain selection23.1.42 after bounded78.6.
 
 Initial wrong-input policy remains separate from produced-result guards. The
 established constructor contrast uses `array(...)`; a direct literal Array with
