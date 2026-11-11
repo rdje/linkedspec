@@ -1,0 +1,2186 @@
+{
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/QUALIFICATION.md": {
+    "bytes": 3045,
+    "sha256": "431173db9191e3878e441b05f95204d0b8b3761fc612873e7bf8fd1f9c76f433"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after-check-qualified.json": {
+    "bytes": 1721,
+    "sha256": "fd18bd86ae8bfb563d4aff01373dc063d09e854337de9bed18722958d3e8f88a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/cargo-version-command.json": {
+    "bytes": 293,
+    "sha256": "47f22c2c071bf2a94fea413f50afefdd62309f5b7adf8f7fc12d96bb499d6163"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/custody.json": {
+    "bytes": 430407,
+    "sha256": "8462139127c04c6946c1c1d7098b3187270eef1cd3dbfde535c2bd87fc7e69d7"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-build-command.json": {
+    "bytes": 452,
+    "sha256": "7c14b9c1d2e13b56cff6234a6e098cb75cb80c57251e2cd63ca7cf46654e3aa6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-build-stderr.log.gz": {
+    "bytes": 121868,
+    "sha256": "84cefcd270608023b2758172d2a291c4dd0622800de9f99cde1be185a095da43"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-built-product.json": {
+    "bytes": 330,
+    "sha256": "973e3d1436515a4b958ebe6d61effbb8fc18b10dbad7db055c31c9754ed58d4f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-command.json": {
+    "bytes": 359,
+    "sha256": "da37210e2f4576d085e5d285b68b2d03178d1eb6b72095719bb3befa763f4ccc"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-lock-command.json": {
+    "bytes": 429,
+    "sha256": "325f9350480e60b4bc5c5a9972aa8127303afb8dd0c4f1d13e428f654f3b3e6c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-metadata-command.json": {
+    "bytes": 486,
+    "sha256": "9b31c305956c81175f05f16cf83c97c62e0bca52811d83e54bee829d22edb260"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-metadata-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-metadata-stdout.log.gz": {
+    "bytes": 620,
+    "sha256": "82d86b64c9cf72b6445cf7dea1503874e5abba4dd109ed94e666fd3133f38128"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-product-inputs.tar.gz": {
+    "bytes": 12993755,
+    "sha256": "1a04e8da71974852b9b34e4f1dacf50ac652ea6d02dfc3c960fcd9c8463a2305"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-source-inputs.tar.gz": {
+    "bytes": 121824,
+    "sha256": "1f8b5449e6d41e1036fe09be3d805906044c2e0e811e9938235d39dae13100be"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-stdout.log.gz": {
+    "bytes": 2125,
+    "sha256": "7f00878dc981bdfa4a377b930755a89742f0ff1d813609774ec5da9836fdab91"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-strip-command.json": {
+    "bytes": 382,
+    "sha256": "fe2ca0cdf0225d6076d198f58c9c589a4f4a64cc015f0ff6ad22e49cd8450719"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/fresh-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-build-command.json": {
+    "bytes": 453,
+    "sha256": "2be667d1fe1e6112be42984916550adf8e263cdeecde248f66b06c93d24390e3"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-build-stderr.log.gz": {
+    "bytes": 121867,
+    "sha256": "17b4dcf24d7296ca3c1e34346b52e8d050243c94b0f84a26ea59b4d3123633cf"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-built-product.json": {
+    "bytes": 331,
+    "sha256": "5b5791d0de2220fbbfb4c846946d92584c3a050244a033f5960c978a14cafe4e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-command.json": {
+    "bytes": 437,
+    "sha256": "6e9e4fee79f66c84d1f261cbafd9193b4751e5c454678b05448684c3f815a0b4"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-lock-command.json": {
+    "bytes": 430,
+    "sha256": "3fff6b5d9966fb46165eb7083e6268112bd0aaa7be4e93e86063ce0866708a5a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-metadata-command.json": {
+    "bytes": 487,
+    "sha256": "97bdd1a02c98a8605fd74bf735d38f96b696a10be78a4664393f14b194bd8f92"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-metadata-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-metadata-stdout.log.gz": {
+    "bytes": 599,
+    "sha256": "6dfbf9b0c18e296a32a0583fe71293af5bba1f18984620523ae7539fa5510a7a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-product-inputs.tar.gz": {
+    "bytes": 13188541,
+    "sha256": "fe36cc0e0fd5933bae1e4d41b5e3d57d048b4bd19be3b7e819387479baf4b1f2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-source-inputs.tar.gz": {
+    "bytes": 21300,
+    "sha256": "6732dd5264274b3f64ba19fde55aef7c8aed8d499075c769f0e5ab172c68e602"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-stdout.log.gz": {
+    "bytes": 34208,
+    "sha256": "e48fc2229269f9e88861cd3e981d7b8830068e8b81decbd783c1ae5cb660ac50"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-strip-command.json": {
+    "bytes": 383,
+    "sha256": "b48f05b4ef592e5448f956c2f60b8885f2217add864dafea80381c0a67286e80"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/native-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/root-inputs.tar.gz": {
+    "bytes": 1241757,
+    "sha256": "a5f874894d7b6ae3cfd96d4575f266f00406fc45e4aa7796d5d6561126f08cf1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/rustc-version-command.json": {
+    "bytes": 301,
+    "sha256": "2158dcdd650aa3d50507d9364fe0eb562068d2d3d36020fcab3361794b2377b9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/after/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/baseline-qualified.json": {
+    "bytes": 1511,
+    "sha256": "5f9348fc87e576da98ef8a5e50e2d41d2be3d194bb2b2866532f84d462e9e4e6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/baseline.json": {
+    "bytes": 1110,
+    "sha256": "8fccd94a7164a000612e504510c63f3435832b67fcc7261b6755d588eb708b68"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before-check.json": {
+    "bytes": 1230,
+    "sha256": "b0b33248df0b74e6fc2e7b750b72ec49bcc12ba93866000405f80acf0cc0defd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/cargo-version-command.json": {
+    "bytes": 294,
+    "sha256": "9be6d2ec574c6142ce8181f7ad9f29ed4ce9ea5ce132baf461b7efd11cb666e1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/custody.json": {
+    "bytes": 342492,
+    "sha256": "069db00f4ac19b8c94ffa449d0acf4e1b6474a2ea25c3850cc468b95b2917e43"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-build-command.json": {
+    "bytes": 539,
+    "sha256": "b8ecdaefb2a2e69c27df227722abcf02931681e1dd7c0f28cd65873b04ceb2a5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-build-stderr.log.gz": {
+    "bytes": 200,
+    "sha256": "7f115bdf18a91e9afb5a361ecf2de53f0091b97f06b9bd009a4e48e10f014cbd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-build-stdout.log.gz": {
+    "bytes": 483326,
+    "sha256": "bc38abffa15c77eb6d0f76a305af1caef8deb196d8d44a498d06095852ac6f8a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-built-product.json": {
+    "bytes": 366,
+    "sha256": "6a2f201e8d3fe4cd3da3ba223dc37d9ea40a9b20f3485fd74ba49e94e3d3246f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-command.json": {
+    "bytes": 405,
+    "sha256": "da4c9a4717a4d0448141586341b33aa9ef38f983bdcb177a1d540d668e47fa37"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-exit.txt": {
+    "bytes": 4,
+    "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-parsed-inputs.tar.gz": {
+    "bytes": 23322,
+    "sha256": "9e1907e9426f7e5d78882c72feaee65439429a8a8b99d6271e4c84d9406d2498"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-product-inputs.tar.gz": {
+    "bytes": 13412178,
+    "sha256": "51bdd6e8e4ca3588898694864dd3a8edd3f25d3dadb93b47e518e6dc45464433"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-serialized-inputs.tar.gz": {
+    "bytes": 26443,
+    "sha256": "58c8bf4477cfa81fece8ec5f4f92e08f5a423178f0da65df670e52b6be9d7635"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-stderr.log.gz": {
+    "bytes": 32437,
+    "sha256": "07e2bf73a1616f5aa19dd94e94b82794c0d8b421a9c86b8427ae02cf44ecb568"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-stdout.log.gz": {
+    "bytes": 1547,
+    "sha256": "2a39f9eca855f94fccda36b978325d028e2b145e62e2817a1cd42a9451817400"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-strip-command.json": {
+    "bytes": 385,
+    "sha256": "bd83e0e8484a0f17a503426514f5435b25eec4350edb92b3f56a28f231889a8a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/root-inputs.tar.gz": {
+    "bytes": 1237446,
+    "sha256": "37cb3bfe5bf4bc1db5d578185f114b1591bba30b42a912eb283c04a3ca4fa270"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/rustc-version-command.json": {
+    "bytes": 302,
+    "sha256": "316869406a145bcc03c95b90918ad7b541b65bd0d49ba2a10e2dbb76cd89ecb3"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture.py": {
+    "bytes": 12152,
+    "sha256": "18ce47882973ece3cc92ba8064417f55753fa804f4bd7662fc9476d63cd3eed6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_intake.py": {
+    "bytes": 7270,
+    "sha256": "0ee4b39ceeb47282ff016f9218bdefb7cdbc231fd702eb9d8b661004b15f0bb0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_qualified.py": {
+    "bytes": 12442,
+    "sha256": "7b85dc1341b1732e1bf1f7eda7bfd4d2368f566d77c889c10ed53a39b07aa400"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_trace.py": {
+    "bytes": 6327,
+    "sha256": "215737b536e92edff638a7249654b622afe244e6802aac9f4df12847ab1b3f3e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_after.py": {
+    "bytes": 2342,
+    "sha256": "e5af669dec21bdb04dc4b84c28580098769e1eb90f7f434f121781df5e0e9479"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_after_qualified.py": {
+    "bytes": 2653,
+    "sha256": "4cbf80d9bcd41f043d6e14aaf294b9aa53c759327f030e1cc6663ebd54e07aa1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_after_qualified2.py": {
+    "bytes": 3425,
+    "sha256": "b03ae48431ec7220b3444b014e3d95ba05c5b1dbce6b6682c002d5b91f3ec34f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_before.py": {
+    "bytes": 2893,
+    "sha256": "ad7e7272c97d9f3fb355804284872f4d53d2de72bc1261ec2f1e10acb4035d5a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_current.py": {
+    "bytes": 1555,
+    "sha256": "29e43486f2e49f839a35f94515d904c19bcaa24f8e7ebb98cab6ed25a018e089"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/diagnose_initial.py": {
+    "bytes": 4972,
+    "sha256": "7b184e9f3e53415af90459b90bc3b3019cbef83bb4c9da96539fbe7216279eda"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/diagnose_initial_qualified.py": {
+    "bytes": 5072,
+    "sha256": "fb59700e3fde3a3af74827ab660226855e7931af9374d618cf0ac86781090d48"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-built-product.json": {
+    "bytes": 365,
+    "sha256": "01878a83d8b5c33ebb208778b43b8ffd5e1631771b72ac79fb0abcdde621b53e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-command.json": {
+    "bytes": 447,
+    "sha256": "7f922840c13969931ec757294b661868db7fa2004d88a5758085c48d45c519d4"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-product-inputs.tar.gz": {
+    "bytes": 13363485,
+    "sha256": "60d89a90ccca48604250fb5c4afb00b051c11408ddecf312b603e91ba9e51423"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-stderr.log.gz": {
+    "bytes": 1905,
+    "sha256": "41e8584aff61b01f29554007b458daeb9d630ad838eb0794b821ccb60e5c2e2d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-stdout.log.gz": {
+    "bytes": 975,
+    "sha256": "b626bd561b2c157e47550d6af28da76a6ba6226e11c7dc4e33fc8c6e86681de5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-strip-command.json": {
+    "bytes": 427,
+    "sha256": "124b7cc517f7cef4984aecc6221c6876276a8511b37403ef1f383a009bbb2218"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_pipeline_callable_result_guard_composition-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-built-product.json": {
+    "bytes": 357,
+    "sha256": "f8fc6b445c52bfc79e497dee8562270b290717121442eaf4d255e5279fb057dd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-command.json": {
+    "bytes": 439,
+    "sha256": "c590e0df321e254068c4fe8a670f99ed3fe989a8bba288ff4985778beb8b5708"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-product-inputs.tar.gz": {
+    "bytes": 13357097,
+    "sha256": "bcd98c59ef8232e095a24ff68762d0db09d0f78af291a5ed8a8054bec04a441f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-stderr.log.gz": {
+    "bytes": 1548,
+    "sha256": "95192b73dcc68426e3e7b70231c24b2a674363b4fa4722458aaca76014fc3690"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-stdout.log.gz": {
+    "bytes": 923,
+    "sha256": "e797560ffd3f633a3c584bf6218f7964c199d21f9d80f15a0923d8e78583e569"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-strip-command.json": {
+    "bytes": 419,
+    "sha256": "73dbee34ca69e671bcf9256e02dfc394742111c91e9f53e750d5c6e244ca53bb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/array_transform_result_guard_composition-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/cargo-version-command.json": {
+    "bytes": 294,
+    "sha256": "4334396e68c08212066016ed3c355e8e4c13795c6ff15b7870b1c64db88ca344"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/custody.json": {
+    "bytes": 344553,
+    "sha256": "806dad2d919207188790f9ef0f08ffad20f1c1f235b1534e998f3d8fcea97084"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-build-command.json": {
+    "bytes": 671,
+    "sha256": "43806a64b2323ced63a7488c93d41f6dbc600cadcca36e9a408056423b5965cb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-build-stderr.log.gz": {
+    "bytes": 200,
+    "sha256": "8c1b0270d8da69530d21f7fb7c14aa7f0eeb261506368a3ec5948cb83e20d509"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-build-stdout.log.gz": {
+    "bytes": 483406,
+    "sha256": "5f0d211ec65bd795a29db9828711a0f817e0b1ac53a648491913f7967f974fc1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-built-product.json": {
+    "bytes": 366,
+    "sha256": "915509698d0688903c8c0e8c506fa5ffc73645fbf91219961da39bbb5c0e1f22"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-command.json": {
+    "bytes": 405,
+    "sha256": "0946255b9a7a7e825c8b2e573e918bfae338c1cfd25589e854820e1fd49d59af"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-parsed-inputs.tar.gz": {
+    "bytes": 23296,
+    "sha256": "ed03ed8a9d1a9a91582f899d91f40b6b164aec91d554f2529af587011cccbd5d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-product-inputs.tar.gz": {
+    "bytes": 13412088,
+    "sha256": "efd8551f585f090a7830e54ef544f42cb8d062a5e560a7a39c56b2cc2b259df5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-serialized-inputs.tar.gz": {
+    "bytes": 26496,
+    "sha256": "9e31827d8eb6cb158768f4fa36c98a303f591cc6986c3c21e061b269d1a11244"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-stderr.log.gz": {
+    "bytes": 30590,
+    "sha256": "533eb0f3ae1dbb618eea5cd98abfdbb48b98135a2a045d9d3ddad23c508c975a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-stdout.log.gz": {
+    "bytes": 1431,
+    "sha256": "02901a2d1a88c8643e0e1ffb4a74653b2529ed62a92b99aeed8459b27146e6d9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-strip-command.json": {
+    "bytes": 385,
+    "sha256": "838947478d851b948320944fbb3cc400391032f679440885a7bcad99c3dc941c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/normal-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/root-inputs.tar.gz": {
+    "bytes": 1251290,
+    "sha256": "613f101c218b25fd242f327d2225fa593ef6e6b7d2657a9c183b8612fe7231e7"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/rustc-version-command.json": {
+    "bytes": 302,
+    "sha256": "c0a528aea53450299cf4f36e0bfef56da8b6612fb0a781a53c5881d525a6d176"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/direct/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/freeze_policy.py": {
+    "bytes": 7875,
+    "sha256": "931bde4cd9520d805e8c667065f22e88ec736a0ba5c97e91626c279e5b2a2766"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/initial-policy-diagnosis-qualified.json": {
+    "bytes": 6474,
+    "sha256": "d220be92d11273fa81d80c73f45e4e31cd967c9c1299e23b339e4038ef1f941d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/initial-qualification/input-identities.json": {
+    "bytes": 2025,
+    "sha256": "9ecd7f66f69ad9deb77992888a5fd9808676082facd8711fe73049f751b37d89"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/initial-qualification/inputs-before-use.tar.gz": {
+    "bytes": 120226,
+    "sha256": "71d75a59055a8c16944b7adb4f1ee03f93b11b51b46e162228ad4d9e5cd17472"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/initial-qualification/result.json": {
+    "bytes": 787,
+    "sha256": "5dabe41e65c460eadd6fae1d8132a5d23334107c39e2e5ca13e92b6d1800a549"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/inspect_intake.py": {
+    "bytes": 2871,
+    "sha256": "20113def192b16302024ef3a7496bbfca77a08ab40be65ea091564bfb1b53bfd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake-assessment.json": {
+    "bytes": 280185,
+    "sha256": "ffec03e36b2c08b566c22f2acb8b24cbc705e7477f1e230eecb48f21620b2689"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/cargo-version-command.json": {
+    "bytes": 176,
+    "sha256": "a176cdd0e66a7740b838b35e3d8f76ce124aa50f30708b069c559c604d6f5c68"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/custody.json": {
+    "bytes": 432002,
+    "sha256": "656c8d15c5098d7d7a828696dac095ec00e528ada9feb9318ed9dafe64416756"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-build-command.json": {
+    "bytes": 336,
+    "sha256": "288b1cac86e1ff01ed09b8621fbb6c1e901fc4e3b53b6ec372ad74cab9fd87ab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-build-stderr.log.gz": {
+    "bytes": 121869,
+    "sha256": "5a692f7d0308eaed46ec9f0b462084dfa389d0b33f591fb70b30b6190d421b3a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-built-product.json": {
+    "bytes": 354,
+    "sha256": "7d196e6ea2521a2751e0e4a75051e6e886e22ed048ce87385876224dfa2284af"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-command.json": {
+    "bytes": 243,
+    "sha256": "f6ac013e5a6a785b52fe27a765580577f7ea7709950c5a8e28466d863a912bb4"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-lock-command.json": {
+    "bytes": 313,
+    "sha256": "f72f13a9029885dfe48bc501ba6da19d1ac656566f2abcfa9e01f782b0aded3f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-metadata-command.json": {
+    "bytes": 370,
+    "sha256": "91b6a79517b1e320c8e83b4d1bf0bb37e512760b603cd5736de33205f2395f26"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-metadata-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-metadata-stdout.log.gz": {
+    "bytes": 621,
+    "sha256": "0cd433f84167db7cf66e77ea9fafbfa0bf94a8b7fc02d2e8590826a01d848289"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-product-inputs.tar.gz": {
+    "bytes": 12994007,
+    "sha256": "a47ef8ed1de6a92c5ad791765e3bb6cae14686c8ca55006f6e902cf15cddbc91"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-source-inputs.tar.gz": {
+    "bytes": 121396,
+    "sha256": "93555c39c6037f98f58b28a626905c0bd568dc3b04da0233e36bca7ce9e62b7b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-stderr.log.gz": {
+    "bytes": 97,
+    "sha256": "9a74fbedae6ecb27e2a9bd4b861ca7af01179e78e4bd0096c6c03d4ef00bdedd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-stdout.log.gz": {
+    "bytes": 2146,
+    "sha256": "e11f1f7bd0f47b5bea2bfee1314a6f81671df8f89a6509be9c2a2dbc186dbf38"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-strip-command.json": {
+    "bytes": 266,
+    "sha256": "4252ebe82921fb7d1e9d491045d5f0d00bc3ae91239234492949c05f42ea44d0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/fresh-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-build-command.json": {
+    "bytes": 337,
+    "sha256": "1478dc078a9e56aa17134065c43ee91ef2557e19fa3b9d609b9794f78e01d26a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-build-stderr.log.gz": {
+    "bytes": 121868,
+    "sha256": "5fd8fe77880d927290e6eb2d48d51b2621ad6764d361a2c6da7fdfe3c1ea8f4d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-built-product.json": {
+    "bytes": 355,
+    "sha256": "7922b41441c9a399bd0f1a65fe81bae00631db4dd24a2bc74fc8ab9f31ef3631"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-command.json": {
+    "bytes": 322,
+    "sha256": "712517d7004b06d259a76bf709e428466ac2afcf14a055ee35723cbf47f69793"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-lock-command.json": {
+    "bytes": 314,
+    "sha256": "3da8a69a783892aeb34a65c62514c73fd9929c69775d7ece0b0a4170f3a515e3"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-metadata-command.json": {
+    "bytes": 371,
+    "sha256": "2a678218fcb5e30bc2288313e8e5df51cf670ffbd30368acb05934cda9c34110"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-metadata-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-metadata-stdout.log.gz": {
+    "bytes": 599,
+    "sha256": "ebc012fb45ece0202ac2a5c40b164b1763000eb05ca634cf7842650772ba785b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-product-inputs.tar.gz": {
+    "bytes": 13188696,
+    "sha256": "df047d2bbea08515340f026a48a447e10963c7b45c08e26bc4aad6a26ccd5ecd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-source-inputs.tar.gz": {
+    "bytes": 21299,
+    "sha256": "86f4c4a30a3bfdadbf5617f517253e98bcfedd2ecb2586887846d308b981da1f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-stdout.log.gz": {
+    "bytes": 34289,
+    "sha256": "e09b15cd7a5b7dddd1be4c66614e55d9b998467fedf3d5a329081f3a1c74c8f2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-strip-command.json": {
+    "bytes": 267,
+    "sha256": "e136ea4a3f1f9fe4bfe2d2aebc7cc519be45ece2b21bd65cd5dc0f53f62199b9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/native-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/root-inputs.tar.gz": {
+    "bytes": 1142461,
+    "sha256": "661702db74e04ffe559a13fd43d8931617c3b2905a73c6587ef841869cafd4be"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/rustc-version-command.json": {
+    "bytes": 184,
+    "sha256": "d7a44da2061cf440a878390c55e535e77f7568c0e9e0dad6b0fe5bd358dfcdb6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/intake/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/command.json": {
+    "bytes": 257,
+    "sha256": "7ed6416c9864e8a471cd61eb136b800a4de6f0536d74b7c105a59da8b5d2e0eb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/identities.json": {
+    "bytes": 9489,
+    "sha256": "0af414d36ed842ae47ce66a9980fd0c4db8c920769fd0023dd50851b8b08fa49"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/inputs.tar.gz": {
+    "bytes": 184451,
+    "sha256": "96d3a454e11b4396ac96465fda992dce8a969c027248a0e1ccbf539db8bdb36e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/after/stdout.log.gz": {
+    "bytes": 88,
+    "sha256": "10ae491b287be821aa69e153157242de204fdbd560817a12d9b32d5690d261a9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/command.json": {
+    "bytes": 256,
+    "sha256": "b841c64cd3b85591bede97e707e23f3c1ee3f37ff3eacab2f80a65994e1a38a0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/identities.json": {
+    "bytes": 8883,
+    "sha256": "391d6e7fe52dc64dd37b567ff79ab5781e5e15110028f21110ffeffd23df6351"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/inputs.tar.gz": {
+    "bytes": 177970,
+    "sha256": "e361627468449ecb4f54d06b3459e2d7081118e20332815f0a74e6ca9a4abf19"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/before/stdout.log.gz": {
+    "bytes": 89,
+    "sha256": "0a3f426b3b346e261c2d76883aa11dedb7a355f33808122c2d14cda5693a686d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/command.json": {
+    "bytes": 244,
+    "sha256": "341f53e5ee465e9a9e92d2eab0499e1e19477f89b8f7b291fd883b639fc94988"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/identities.json": {
+    "bytes": 11812,
+    "sha256": "5e3722e7b4cfd739cdd0a19e7c0ee699ae46d763860ccc876855233192a00657"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/inputs.tar.gz": {
+    "bytes": 200144,
+    "sha256": "3038c659bad44ea38520b2bef06970a5d252d965322758e30d8bc0d7846eaf7f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/stderr.log.gz": {
+    "bytes": 253,
+    "sha256": "ad4eb6d434b8a20cdc9b4f51b70e1a2f22f12887344c07d9d4db3bdf80e020eb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/command.json": {
+    "bytes": 245,
+    "sha256": "b3d1209a9d72e9b89b8ef77bb93102e93534c669f323bbd9b3ffeadb7781d96f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/identities.json": {
+    "bytes": 12025,
+    "sha256": "815a24a228f8754aa1e7242fd325ab7f3f5a51e60252a3a5761be0039619e4ad"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/inputs.tar.gz": {
+    "bytes": 200419,
+    "sha256": "633ef7e964e143b7a9fafe658f3260e5da1f214f2ddd14c6e76085d21afe74cd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after-qualified2/stdout.log.gz": {
+    "bytes": 679,
+    "sha256": "9341ecba304259fc6bd99ce4e0c5019782db84020d8fdbcf6b4cfed310a6679b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/command.json": {
+    "bytes": 234,
+    "sha256": "319a9d8b4d0917538f5155bfb038557069fb0f41099100fa486d4a43209e5d56"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/identities.json": {
+    "bytes": 9895,
+    "sha256": "d295ebefdc771fa7192ada016ec8e91a0a760635db94f37709ed21bb68ae5c31"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/inputs.tar.gz": {
+    "bytes": 185578,
+    "sha256": "4c29f74839fd9646f51a68d7b0fe2044c324b95ddf42713866f36c292203704a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/stderr.log.gz": {
+    "bytes": 280,
+    "sha256": "c55b142c55ab32801d859d0a89eb49802259d42502e8d056b3e4b7b9e4fb0b1f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-after/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/command.json": {
+    "bytes": 235,
+    "sha256": "b1d12675ed0cca2b5af13f25fc653a6bdbadbe6a5b607ef9c817db760f20d65b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/identities.json": {
+    "bytes": 9284,
+    "sha256": "3e13f9096090508bd5f4480f5c0afe41adb8c5ab84580ed00c28c27c5ac76b72"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/inputs.tar.gz": {
+    "bytes": 184260,
+    "sha256": "b2722050bfed4feeefe966235f029007c742fc04fe5525fdcac1ea0b455f1fa0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/check-before/stdout.log.gz": {
+    "bytes": 453,
+    "sha256": "0ef44907c80d795ca2ae09a8aa14c65dfd65526aec9c1aa19e62d710d070545c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/command.json": {
+    "bytes": 236,
+    "sha256": "21a55647d4f6f677d3795c405923fe6b562289e03e4ae784252b02355ba2fd31"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/identities.json": {
+    "bytes": 13299,
+    "sha256": "4c4020fc1ab1e656d506d9ae1658b6923f72a8dd1596eed1f958a6608e7c4594"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/inputs.tar.gz": {
+    "bytes": 376219,
+    "sha256": "595a2d9a45e24945691410c7c1d11c6b9a7ee718740fbd3b9819190c325ea7d5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/current-identities/stdout.log.gz": {
+    "bytes": 188,
+    "sha256": "518cf8343f24f5f8371b235496c25943a2ddc54f46d370deb48a7e1349127ec1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/command.json": {
+    "bytes": 249,
+    "sha256": "c4a6308e943b1ca37c25eff6bc6631a9bd3f309dc641f5e1abc01d9d96b8e941"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/identities.json": {
+    "bytes": 10319,
+    "sha256": "bdeeeb059f3741917b0541ee641c2da2f35fcb087ce99265d5b742987532ef6a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/inputs.tar.gz": {
+    "bytes": 186861,
+    "sha256": "9b5bf86d3e3cf68c43490b4d86a08191fa5e6a85dc7274ac993f01d35986df74"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial-qualified/stdout.log.gz": {
+    "bytes": 891,
+    "sha256": "ccd7633ea6d04d1e5e5bb8167b1d1dd090bfeedaef4287604f4724a515b6132a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/command.json": {
+    "bytes": 239,
+    "sha256": "3ec68861e686eb5ede786b0bb3a1ed83aa1b8315cf216e7ef8572c280e6adffd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/identities.json": {
+    "bytes": 10102,
+    "sha256": "77a02fa2107ce9032358ee9684c70cd95381369967e1cd95584cd64c31a9069f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/inputs.tar.gz": {
+    "bytes": 186714,
+    "sha256": "f74decaedcc0027b37772fc27c1d1bbb6f49dc045e49a7f179bc339397b61b0f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/stderr.log.gz": {
+    "bytes": 259,
+    "sha256": "76acff3fe6e8740e1b7511264120a25cc3ef1dfea00ddd48502236a97ac90148"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/diagnose-initial/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/command.json": {
+    "bytes": 268,
+    "sha256": "470b03d75966481814af132e60b51625469cf4611fe854bb1b7ca8b6233dd43f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/identities.json": {
+    "bytes": 12866,
+    "sha256": "9218a0206f12f00405480b3da9ef69efdeed8f929ab1884401e80f50e187d3e9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/inputs.tar.gz": {
+    "bytes": 205931,
+    "sha256": "fa46a8456e27a664a224202c4086872f0c7832837aaa01d7fd490a60c8d0c825"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/direct/stdout.log.gz": {
+    "bytes": 88,
+    "sha256": "6842e25b46ee4b8b08b1a4bab5eebd780ce1412c8827a0aea6cb867424f00ae0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/command.json": {
+    "bytes": 236,
+    "sha256": "4bcc61523a68eb293ac8e242daf82f21c49dd7050d4305d6008c631bdb87858d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/identities.json": {
+    "bytes": 5581,
+    "sha256": "e2051291e1b3059b1285c49d4685f1c61150373143169f5c3c9c509a36589492"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/inputs.tar.gz": {
+    "bytes": 69274,
+    "sha256": "2812ffd39a0bc81546a49872956e730537b5b9ba2d137f0f463fb9f4f3c648bf"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/freeze-policy/stdout.log.gz": {
+    "bytes": 110,
+    "sha256": "979bd7688159c7098fc98b323ba5c9034c1011a64639b2da5787c4ee7e4dfa2b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/command.json": {
+    "bytes": 237,
+    "sha256": "f962e7a79866008659c5ffa57bfa2c7ea9613a35c72d15db2d5bbacccd96c9cd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/identities.json": {
+    "bytes": 5165,
+    "sha256": "b14c688bf6d6f55d1d7ce36a638b4b0b54cd28b7ce874988260fa08715d7160e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/inputs.tar.gz": {
+    "bytes": 59685,
+    "sha256": "56efc07e457cca8e8e5693a39fc5b96e75ba09ff94942d2ba694041341cbb2a2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/inspect-intake/stdout.log.gz": {
+    "bytes": 245,
+    "sha256": "6b1cc9f16f166723da6f1f363bf0beb294f6076003a5a19043e76a8d445b6633"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/command.json": {
+    "bytes": 237,
+    "sha256": "3b86a0d01cb4d0e2240b456b500e0a3471c9b457d71e656f96dfc0d559ef7e7b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/identities.json": {
+    "bytes": 4347,
+    "sha256": "5b721476efac9103c192d3c70ef0e70b2913d81227c703b90da2b458fba6e635"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/inputs.tar.gz": {
+    "bytes": 56783,
+    "sha256": "176583a7f2c38629d3154fce537c0cdb2d422df98a443d4941c1a8cf51411dfd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/intake/stdout.log.gz": {
+    "bytes": 105,
+    "sha256": "d6b50226633fccf941e67f15d15dcb1e1547c40d6da75c1d481ecef2a56f4964"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/command.json": {
+    "bytes": 237,
+    "sha256": "de75705f5622541b5e67c4ad0f9ad35831c6217a0007a5c83fbc434dd728242c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/identities.json": {
+    "bytes": 7679,
+    "sha256": "8f49a53a63b11e5a3b93969f4c652b7bc3f138fc5ab83739d7a9c5f5fa09547f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/inputs.tar.gz": {
+    "bytes": 172750,
+    "sha256": "cb36f110cc22c2a86bec47a372ff366cc8c7f2db8de185448ca9988da6fb76d8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-epochs/stdout.log.gz": {
+    "bytes": 113,
+    "sha256": "66f6364a12bb08bccc10b0b3250a4a6c62602aa859577663e3909a59bb8fed8b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/command.json": {
+    "bytes": 247,
+    "sha256": "1e79fb1a53acf6f15e54fe0ab960dd958434e66ed8fe3d9b96ea90771c7c6897"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/identities.json": {
+    "bytes": 12658,
+    "sha256": "a04f36e3d4144f6f47908d3b80820ce37d2d8d8cd20e364edb6bf294fa2d5eca"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/inputs.tar.gz": {
+    "bytes": 204360,
+    "sha256": "0b96a16792ee54fd52983c75514b34f9227af038512c77849118b61cbbed0c5e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-review-qualified/stdout.log.gz": {
+    "bytes": 100,
+    "sha256": "aa37d64331b493e8a3049a9c71a60a46b690f83e713df7f191ae4782ab29268d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/command.json": {
+    "bytes": 236,
+    "sha256": "960abc0555fb46b14c36e0310d5accca92765747e99570d92b7ad37f3602dc6b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/identities.json": {
+    "bytes": 4756,
+    "sha256": "9cb0c82329c75a0a04a23605302eb2f66cae2f05631187931f75049248d731c5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/inputs.tar.gz": {
+    "bytes": 58300,
+    "sha256": "5c26431776aab3a41cddbfe8b5de19d4b2416ce631c794d15d963fd5fdb1b621"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare-trace/stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "101c8ae2f5b765c841307946f916c42c815ae969afb4e5a3b54e1f2aadb6393b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/command.json": {
+    "bytes": 230,
+    "sha256": "166900b970a1a5fa6e39e22a2eb985974ef6087caddff4a3411bf2454824bdf5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/identities.json": {
+    "bytes": 712,
+    "sha256": "152a85c21ea7ea09c75b4aac333d925e0fddefafaa51afebcf11230ca12dac26"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/inputs.tar.gz": {
+    "bytes": 8048,
+    "sha256": "89adc89b5080e044dcbe0a7c8e9976fc9a7e4bdb275ab427f2dcd64b6628be10"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/prepare/stdout.log.gz": {
+    "bytes": 208,
+    "sha256": "91acd3fef657a620811b4e5d74a64898a34419dd384fd319a62b368222114c1e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/command.json": {
+    "bytes": 276,
+    "sha256": "adf2ab86a1924c3dc8d8bf8c1ce70b55a3173346c3bfc734dc81aafbcff0d764"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/identities.json": {
+    "bytes": 12866,
+    "sha256": "9218a0206f12f00405480b3da9ef69efdeed8f929ab1884401e80f50e187d3e9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/inputs.tar.gz": {
+    "bytes": 205931,
+    "sha256": "b39b019788f2e9589b8a42608315d57f03689901d5f896cd99cc5f95fc64a274"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-fixed/stdout.log.gz": {
+    "bytes": 93,
+    "sha256": "5224d4587e332391161b7c914be972b7c7a660568eaa2979026cac41b193db48"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/command.json": {
+    "bytes": 274,
+    "sha256": "3410bb4ef24dacc2d204055550f9101822175c63964117b02bed1e88fbd4d1e0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/identities.json": {
+    "bytes": 12443,
+    "sha256": "47a92b459ae33aa3657ce6db9bd4fef09b805a0562989f2147585881545ed51d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/inputs.tar.gz": {
+    "bytes": 202126,
+    "sha256": "0d2be6723bceb77cdc67b191a75f80980319cbca749be6b84037f09627e9b4a8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/private-old/stdout.log.gz": {
+    "bytes": 91,
+    "sha256": "ee0b1f07a20139bec8c2dda17ab9a1a3fbd4301464c3d8431b8fb83f7877d4b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/command.json": {
+    "bytes": 238,
+    "sha256": "b184f4593e61303349bef32919e083db6f35925a6e1806542f110f4f3e8a601b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/identities.json": {
+    "bytes": 10752,
+    "sha256": "add75b154ca58ac897313287131c7a961bbc8ef12731212f936d38dfeb944aa5"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/inputs.tar.gz": {
+    "bytes": 188778,
+    "sha256": "ce63c4243ec23e5f78859cede9f1f467e5a2b78e31667beba9e5caf8649fbbe0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/qualify-initial/stdout.log.gz": {
+    "bytes": 130,
+    "sha256": "4d554b38bb8722548829dd6ada0885f067de7df13e3789dbe324b2e00e53de94"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/command.json": {
+    "bytes": 246,
+    "sha256": "b4647ddeb7dc1d65ca9e61b5fce12d82baa5ad8a108855d10081f9284502b5fe"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/identities.json": {
+    "bytes": 12443,
+    "sha256": "47a92b459ae33aa3657ce6db9bd4fef09b805a0562989f2147585881545ed51d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/inputs.tar.gz": {
+    "bytes": 202126,
+    "sha256": "be32072033b32b939b50174ccc4a66e2caa80170fb90b68130fc32af3a94fefa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/remaining/stdout.log.gz": {
+    "bytes": 112,
+    "sha256": "fe89a60aa751046c4ae0101cc0ec79e7418d6056df94027f7c296a4c4362ef7c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/command.json": {
+    "bytes": 233,
+    "sha256": "6b78761637d65b737da282616d86765316aa55d2270a46f6d676cc02dd2f9bf4"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/identities.json": {
+    "bytes": 9489,
+    "sha256": "0af414d36ed842ae47ce66a9980fd0c4db8c920769fd0023dd50851b8b08fa49"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/inputs.tar.gz": {
+    "bytes": 184451,
+    "sha256": "de141bd23425fb1c0a36c406e10ce78c1bbf9e67e436e3517a9429b94ecab5ab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/repair/stdout.log.gz": {
+    "bytes": 310,
+    "sha256": "c3dc0ad0d05e949f3fc9400b9306653c2c02fe72e14777364d612ca8794eb6bf"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/command.json": {
+    "bytes": 251,
+    "sha256": "0dbfab575551be93d1935c87fe6d61e4b0c4fe6ccee459c6ef960e3679e8cc97"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/identities.json": {
+    "bytes": 13085,
+    "sha256": "42a0e35b81eb1f2c964c46d6a34baacdaeb368af90b6efcde52cdce07712f692"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/inputs.tar.gz": {
+    "bytes": 206149,
+    "sha256": "31b7b293863564b05591b486f74a8a1d88d665dddf373eb1982fa90caa0819c9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/retire-copies/stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "3f53408fe5b3c1eefd25787ecd289ab3daa187a1661e6bc774fb6090bf5b8258"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/seal/command.json": {
+    "bytes": 227,
+    "sha256": "34b29478a9910b27ae8a87b1b65d65ac487af4f8e8d2fa6e4c7c1e0924ea27a0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/seal/identities.json": {
+    "bytes": 13299,
+    "sha256": "4c4020fc1ab1e656d506d9ae1658b6923f72a8dd1596eed1f958a6608e7c4594"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/seal/inputs.tar.gz": {
+    "bytes": 376219,
+    "sha256": "b65dce6e13286c66ed15907b8a576056c1513d4dc7f66ac49c414e74e8283a5c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/command.json": {
+    "bytes": 236,
+    "sha256": "78b1a437122ff0a4d614160b5b2a232c073b2799c2b63a9e42918bdd57485b25"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/identities.json": {
+    "bytes": 5377,
+    "sha256": "12fff8a5e00ba32d29d64be2366a3e041ca62addae7477b59d48f84eb7b1139b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/inputs.tar.gz": {
+    "bytes": 66899,
+    "sha256": "c9b3d245a82dde05837be58dd131820d9ea29210812777b4012436d84ea420a8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/launches/trace/stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "b894f1ab7ec574f2207c9f39c2251f9859cc83890f3cec3ed1625f93c99cde32"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-before-format.rs.gz": {
+    "bytes": 3060,
+    "sha256": "f882119960ab06f6d053981367cdc0ada0aa686e89b123aa44399ff068aa8fc0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-format-command.json": {
+    "bytes": 322,
+    "sha256": "e56b5d7f1395bca4bcb4f01a1a4bb0f51d122a3ae41eaee4ab7ae891256c1abc"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-format-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-format-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-template-identity.json": {
+    "bytes": 196,
+    "sha256": "e9c299619fb1b6d0674c18c517946d64383b067b5f84bb00da8a7bc76448371b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/normal-template.rs.gz": {
+    "bytes": 2503,
+    "sha256": "0f89f9ce0513f3af6964d0d77c0acc7acb6edc9e133f6ce2e05be289303f0077"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/observer.rs": {
+    "bytes": 4864,
+    "sha256": "da3b5e5900f3978c14d2de411b1d4e205e84aa45725862ed46ba5516567e5070"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/own-questions.json": {
+    "bytes": 133963,
+    "sha256": "ab40c5e88dd82990fd6fff17d6b5f5c5cf48e213a0703315840ea28221430873"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/owner-before.rs.gz": {
+    "bytes": 93501,
+    "sha256": "63aee5745e64f0d1ebc8e30c9171c246013c78ca61107d912b25edba65f9cbbd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare.py": {
+    "bytes": 4685,
+    "sha256": "2c643cffc8c0dcd699c9f684b01d5f34413b4e3ca7b42d9e692f8f1517fabf8c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare_epochs.py": {
+    "bytes": 4727,
+    "sha256": "41550c112fb97fa3a0a90360d06037970d87ba60da28c3fafbbb62654df02c3c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare_review_qualified.py": {
+    "bytes": 6976,
+    "sha256": "918e72e374a3849c6df2c5bd45a152c5bbd8a588e6a823cb5300b6c1ab8875c9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare_trace.py": {
+    "bytes": 2266,
+    "sha256": "f023d09b931282764a635125bc9e741058e4bf829170cdbb271f3710f8adda87"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/cargo-version-command.json": {
+    "bytes": 301,
+    "sha256": "e54dffc3f8f5f4166786a5c9ff6ab7bdba95a6111b951dfa4a37325b6543c657"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/custody.json": {
+    "bytes": 576158,
+    "sha256": "a7b094e6711a9f121fcee87145b85732313df5c104dec35aa94e8391e072956f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-build-command.json": {
+    "bytes": 618,
+    "sha256": "867697474ece331460d515cfe0a1a82b35419dbe0197d36b86f37637a58ab915"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-build-stderr.log.gz": {
+    "bytes": 253,
+    "sha256": "62ea0d6f79d993b80c337f63bbe1238ff9fdf0f9dbfd0d6d05624edd1b18b485"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-build-stdout.log.gz": {
+    "bytes": 483361,
+    "sha256": "5758ded798f01a0e163fb601038c6b516bf0b6c9db7f0ff955488d6a1007dd64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-built-product.json": {
+    "bytes": 366,
+    "sha256": "0d739c9aac44758b51cd2765ab4d43b23cf622bde5e3af3500dc924429a9503a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-command.json": {
+    "bytes": 419,
+    "sha256": "ff520e743c1832d3d326b956eef5c50fc1ecb9abeb0b7aca35685db6f233baf6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-parsed-inputs.tar.gz": {
+    "bytes": 23004,
+    "sha256": "2eb07cb2df0cdc03ca13439983c96e82b4d7141b5d4e154b51e1216efe96cbfd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-product-inputs.tar.gz": {
+    "bytes": 13412097,
+    "sha256": "f1409e80fafbe8bd414de21b07edb61b517d293b10482a81d6ca199e2491d652"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-serialized-inputs.tar.gz": {
+    "bytes": 26108,
+    "sha256": "58feab22f45e892ba1c04c1f7f8b1a2a9943ed1da41ea4d273e17969bb8e1e25"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-stderr.log.gz": {
+    "bytes": 30590,
+    "sha256": "533eb0f3ae1dbb618eea5cd98abfdbb48b98135a2a045d9d3ddad23c508c975a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-stdout.log.gz": {
+    "bytes": 1429,
+    "sha256": "efb971d1d6f79b8880212e5551edfd7a6d229cdd61d44fb5f7da9bfda987c37c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-strip-command.json": {
+    "bytes": 399,
+    "sha256": "0356b3ef4bcdffa70c2660ad524b950854038d0af1e5f510cc41ca7b6d4bf548"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/normal-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/root-inputs.tar.gz": {
+    "bytes": 2353236,
+    "sha256": "a074d2cde167859d0426b56bd1917fc49d4f501ea0d7e5a15457018f904b3bb7"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/rustc-version-command.json": {
+    "bytes": 309,
+    "sha256": "cc2615ac77dcf1b30b9aaf73943c41da5900da6ac1a8263aa2df364c69d1f5f0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-fixed/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/activation.txt": {
+    "bytes": 41,
+    "sha256": "3ab11b1c228c91cb5be7e508273c6e669def237ccee691754aa76856ebcaa3b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/cargo-version-command.json": {
+    "bytes": 299,
+    "sha256": "01732dd3146b28a340fa48f92365b986c87dfd89d6b0fd8bd8a869795c3da29d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/cargo-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/cargo-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/cargo-version-stdout.log.gz": {
+    "bytes": 56,
+    "sha256": "4f2333eeed0862e6f551b72d14169c798fb25f06fdb8c9e867cb39939775aeab"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/custody.json": {
+    "bytes": 574900,
+    "sha256": "923c31d1d499678d576f8d21bd4eb19d7d625b731d109c0dae769d4a07aa9722"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-build-command.json": {
+    "bytes": 616,
+    "sha256": "b75148d86c0ec67c1e37cc3855aadfb32c6eb9e400063fd33c20f17f4c3e24ee"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-build-stderr.log.gz": {
+    "bytes": 253,
+    "sha256": "84ffe7ad2673b9a1b6e4bd4e906fc7cb2fda2b08458003428e7aea75c7f68368"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-build-stdout.log.gz": {
+    "bytes": 483381,
+    "sha256": "c984d3cc4ace7b56d34ccec2bbb7f35057f6578e814698d741e9d15ee5eb5108"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-built-product.json": {
+    "bytes": 366,
+    "sha256": "c932d8453f5eb48b2feb956c1a0140f992bc5b7fa5f1bdce9ec6abd9987464e0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-command.json": {
+    "bytes": 415,
+    "sha256": "b4fa66784d69a24dc09350fa67edf6e600459bc5ae86f9d3f6fe177918e1dfc8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-exit.txt": {
+    "bytes": 4,
+    "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-parsed-inputs.tar.gz": {
+    "bytes": 23042,
+    "sha256": "2d25511ba71801980d32a51f56f6ee0e1d0d716e8bed4319d267dee9ba6557fa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-product-inputs.tar.gz": {
+    "bytes": 13412181,
+    "sha256": "44496481291616785de2f2668c74c0cfe60e79384b825ba1e254ae98531db4eb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-serialized-inputs.tar.gz": {
+    "bytes": 26274,
+    "sha256": "a4128f8dd20834035742b6cbd3eaa4686458d538422809fdd449d81c0db6fcb8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-stderr.log.gz": {
+    "bytes": 32522,
+    "sha256": "80af0a6444512e6cae2701afb9feafcc02e43735d0975d7b3241f0f3fc2a4ac9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-stdout.log.gz": {
+    "bytes": 1565,
+    "sha256": "d44c60898d247912669bbb55e42125eccad045996564ac2b5586d895912d148b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-strip-command.json": {
+    "bytes": 395,
+    "sha256": "f45f87bf6221c81242cbf48d222d50e236752efd6b408d7ef6f7d6647ff93592"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/normal-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/root-inputs.tar.gz": {
+    "bytes": 2353229,
+    "sha256": "f768492255d2c2e01eba5ed1ca09cc4a851ce15a41b541a57dd73bcf73410200"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/rustc-version-command.json": {
+    "bytes": 307,
+    "sha256": "39fb0c04ce7aca198e4b2b1e351688890bd7b7609186a2c76c58f01cd320b06c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/rustc-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/rustc-version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old/rustc-version-stdout.log.gz": {
+    "bytes": 163,
+    "sha256": "f704c56517a3493b313e1209daf51e0e4f2998cae79af463b0931a22e47d1dcb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/profiles-original.json.gz": {
+    "bytes": 10081,
+    "sha256": "b1f006a6d4236e7ff6109ea272c0c1a3f2687245d483d691e2636067239eb6e3"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/qualify_initial.py": {
+    "bytes": 6137,
+    "sha256": "69e0e3afaf1a82fd86f424b435b0dff15f7f0b27ed475c63b5bceaf84161444e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/complete.txt": {
+    "bytes": 65,
+    "sha256": "931c6de95485df1bbc735fba34e21c49c2df450521261ab8c068527dac4f77fa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-command.json": {
+    "bytes": 439,
+    "sha256": "d05e5e2cc8280f2a2a762f876a6981dace34ec073f02236e03b144351efbf5a6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-memory-command.json": {
+    "bytes": 101,
+    "sha256": "7329126d411c9905d61f0a617ddc70eebe048fa973034fd66f01eca7935a38ce"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "e77e72233e8d6c825db7224c959d4d5633301159787269aaabec6ac3fd467bf1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/direct-stdout.log.gz": {
+    "bytes": 82,
+    "sha256": "680eaa1a3fb891a1043fdf9f730266ef05e577b6ec6c8a917753f136697e4d65"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-command.json": {
+    "bytes": 454,
+    "sha256": "3ad46c600a1fcb2594239ce93f89610a250f7a0ce2c70795c116ac4242d51b10"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-memory-command.json": {
+    "bytes": 101,
+    "sha256": "7329126d411c9905d61f0a617ddc70eebe048fa973034fd66f01eca7935a38ce"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "d8e42d9c16570f62b9372d985a442db82466b9e45719036a089ea292f7fdcfb8"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-fixed-stdout.log.gz": {
+    "bytes": 89,
+    "sha256": "4a459e1a36c5b9584e71fe53bdb0c7c48b0dcc69eadbd46df5ee4325ee49387b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-command.json": {
+    "bytes": 450,
+    "sha256": "3599eae7c9c3b3f467e8dd7e106fe7a99ba5eca1b71bf73466b1da254eff014d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-memory-command.json": {
+    "bytes": 101,
+    "sha256": "7329126d411c9905d61f0a617ddc70eebe048fa973034fd66f01eca7935a38ce"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "8bfe92dd4f30b14842aa2efd550b2711af72377ac079c426859bccd5950e0eff"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/remaining/private-old-stdout.log.gz": {
+    "bytes": 87,
+    "sha256": "883bbfe1e885279835354109456e42a017ccc45d05bf65a8c85af88b7270fbd6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/apply-command.json": {
+    "bytes": 223,
+    "sha256": "0f5d51c486b331575f83df7a5019055eff57344a17382d317cdc5b2d397173cf"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/apply-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/apply-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/apply-stdout.log.gz": {
+    "bytes": 310,
+    "sha256": "c3dc0ad0d05e949f3fc9400b9306653c2c02fe72e14777364d612ca8794eb6bf"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/complete.txt": {
+    "bytes": 82,
+    "sha256": "73b092615f7f12540a2d65a39ec08b5d86ebebb8d9643f003143fa9dfd5a82fb"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/format-command.json": {
+    "bytes": 272,
+    "sha256": "fe43e97f73d8003436b8cb16b2ceae43d17c1dd47e2c813c262914834ba70b19"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/format-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/format-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/input-identities.json": {
+    "bytes": 1301,
+    "sha256": "dd82df181b80f810f7794e24e36b054f27a7d9cf0b8a9c3f8f8471866f457fdc"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/inputs-before-use.tar.gz": {
+    "bytes": 198972,
+    "sha256": "de839bc696eb20a4ab633b7de6becd2abc75738637d5a5a440293d9e4046499f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/owner-after.rs.gz": {
+    "bytes": 93502,
+    "sha256": "40708a88843451a7539ec063098b12468d8e7409976155b3bd7dbbaa5f49b4f7"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/rehearsal-command.json": {
+    "bytes": 208,
+    "sha256": "ab4f9705ec64546021267a5f45ae53af41d85ba2f84bbfb0efcacd78f9050a5a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/rehearsal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/rehearsal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair-run/rehearsal-stdout.log.gz": {
+    "bytes": 310,
+    "sha256": "144ace1f3014061d5006e71ede93ac0e46e3827d0b171ac996a08141c0f08e2c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair.py": {
+    "bytes": 1839,
+    "sha256": "937b6e1e48e1fa1ad2a58df11b92d722f28299d75c176e70a771953564f9ed82"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/retire_live_copies.py": {
+    "bytes": 2476,
+    "sha256": "b5eb2c6ebdab7f4755388bff94a2920cdeeb9d2b2f6cd3dd51e14e7bafe7afec"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/retire_live_copies_qualified.py": {
+    "bytes": 2711,
+    "sha256": "92199e9e2e7f816e28eb61dd4e4400722e2399a4fbf736e198ca858bd0d9319f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/retired-live-copies.json": {
+    "bytes": 897448,
+    "sha256": "cf77967e5b2ef09db03dc51565b799b1e23ddbfbc730afa2515ebd47c2646e47"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/review.py": {
+    "bytes": 20762,
+    "sha256": "b30f24920b1dbd341df404e83c862e8c467625b6d24fab8e9fc3e75c9477d858"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/review_qualified.py": {
+    "bytes": 25385,
+    "sha256": "05a597e13e6b66eca21356428f53481529df2c4313f3070ad72e205aec0f4858"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_remaining.py": {
+    "bytes": 2401,
+    "sha256": "f1868d1f027990ace973edf113544975841fcb7f0c44b878d5b62fc9ac98bda6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_remaining_qualified.py": {
+    "bytes": 2421,
+    "sha256": "75e7b2e62cf37cf378604756cff2b1cc7b06ef48f99b864ed936aea210e3ef4e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_repair.py": {
+    "bytes": 2842,
+    "sha256": "84c3c60ce7f369b1cf518b8bb755a5d5c11147634914ee778354947d9361e7da"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/seal.py": {
+    "bytes": 685,
+    "sha256": "94a17419b3de3c91b39da3929c34bfdf8efea901be0d4b87dea660804b65f489"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-0.gz": {
+    "bytes": 2584,
+    "sha256": "1a0aa23d273342fb703dbc8a678a7b2d1db17bc39a97ab0b6c1049d4d1382907"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-1.gz": {
+    "bytes": 1528,
+    "sha256": "1091291c16667accc99600b4b0096eb6c6a6b080351ddd2a0e169fae06472ac0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-10.gz": {
+    "bytes": 425,
+    "sha256": "8dad86cbae30d35aebe6208f97d1553440db7656c38ed96b2725f297deb9f662"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-11.gz": {
+    "bytes": 1448,
+    "sha256": "3e5d89283fb92a286d03d354b7461d65ffafdce59b4613f6e91a57908e1c1fff"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-12.gz": {
+    "bytes": 6325,
+    "sha256": "df42d69047424e12c5ebebd7ad072359b5889983a141dcaf9432e1357ddf5b41"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-2.gz": {
+    "bytes": 3912,
+    "sha256": "3f43c74147d1f1ecd56fd551e28d9ab11bcacadc53b6bf6f953c1b713e3d7991"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-3.gz": {
+    "bytes": 6042,
+    "sha256": "63df18d5052b969238d9f20dcc339144cfa82a26e50b8b1af4c0ce3fd6047d6b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-4.gz": {
+    "bytes": 2439,
+    "sha256": "7d63a030d5f16d5d3d72f44b8b64149c79882b756368db21b55b1e47b02b8570"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-5.gz": {
+    "bytes": 662,
+    "sha256": "44007d11078eaf4444df4878cece85ac5342ea7971e2ff5af1a2118ad74a9baa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-6.gz": {
+    "bytes": 865,
+    "sha256": "2d11988c73e19843ef5365323f28d311b6112da38e93693e8869a67f0893b4b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-7.gz": {
+    "bytes": 1193,
+    "sha256": "6f67fbe1a9a377595d66fd6bb5345e5beb76e1dbb5d48f252339e27009c944cd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-8.gz": {
+    "bytes": 904,
+    "sha256": "a47e3988d6e2100762b5e27cd7221e19661045dfd1937389775834acd9d06d30"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-9.gz": {
+    "bytes": 800,
+    "sha256": "7f2bc9ec0c34261bc3ffbbc0c7a753ebbf47ac7f4ee728489e4491da088c4d9f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-identities.json": {
+    "bytes": 3573,
+    "sha256": "6ac041b34000b5cf23ee86fa5de75c4eb51e5b858f98504d5421410ce0790ba9"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/actual-traces-inputs.tar.gz": {
+    "bytes": 3796,
+    "sha256": "d23d331121c0ba880e7e2e4c790e744147c210a73a75b06108cca600fe726aff"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/build-command.json": {
+    "bytes": 336,
+    "sha256": "2c4d798f7e58419f04b8e4ceac11deb27729559aac937e27a5fab1aca3acde3e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/build-stderr.log.gz": {
+    "bytes": 121870,
+    "sha256": "60b0339ab0790a59bc020b5f2e85a5a25a95dccd12915bdc8e3f15df9b1ebead"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/cases.json": {
+    "bytes": 4138,
+    "sha256": "21ebac18152864712e30ec59b7f4c1e63ef021afc5386165cd14f8ae45b98114"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/custody.json": {
+    "bytes": 126831,
+    "sha256": "929636fe8f1013088eac225536727348d97989f80a7f4cb4acfd952b72a78007"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/drop_logical_later_with.trace.log.gz": {
+    "bytes": 293,
+    "sha256": "419909bbe41b4dae9419ad325f0d2a08e0b5a4dbff633b3f10001bc5d62a4104"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/initial_number_composed.trace.log.gz": {
+    "bytes": 292,
+    "sha256": "7f8f8a40aa70877cdc1ae0aad37c705b6408b70359f16f50d04747bac54b30e1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/drop_logical_later_with.json": {
+    "bytes": 3850,
+    "sha256": "f1a2c880c7cbba8abfa4f5fc52cab6f2b3a0f1a8d6880f066c16d2e9aca45b75"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/initial_number_composed.json": {
+    "bytes": 3496,
+    "sha256": "623cf8e2f7ee47e039076eb01718d8ff29cba03089fd4a1c028168a886e26b8d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/own_signature_variadic_multi_composed.json": {
+    "bytes": 4120,
+    "sha256": "c895e748fcab8cc2e78767613f7500a35ac83f2d5b3a329bce231a0e24d12198"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/reverse_copy_later_with.json": {
+    "bytes": 3539,
+    "sha256": "f28dff3aa599b0e7a5e53a6c9b2f341fd8904190062fcab861bfbd7d32599e86"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/source_effect_before_rejection.json": {
+    "bytes": 3753,
+    "sha256": "5f5eae040ed7b09e8c800ff00bf3ac0022aa8a4ab2d53c6fedec6a64016d628b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/take_later_with.json": {
+    "bytes": 3536,
+    "sha256": "3edf8cb7ad6a9d5fbb6a49322b614ff3a054580a546ddcd5715fd81bd5b7dc02"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/inputs/take_receiver_hash_guard.json": {
+    "bytes": 2849,
+    "sha256": "d668399bec17a731ffa2da9521caa2cf18020a5475dd4aff034c9a009ebc2d97"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/lock-command.json": {
+    "bytes": 313,
+    "sha256": "96bbaa97673ea7e48249e3e07e91f2ae2f2defd4d73c55a36906c510fdfa1263"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/lock-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/lock-stderr.log.gz": {
+    "bytes": 85,
+    "sha256": "17dba7adf9f390c2c1a37d07bdac9845dd314645677a439da1d82de9f503682d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/lock-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/metadata-command.json": {
+    "bytes": 370,
+    "sha256": "4bd980dc70d5f908f3eaf22416050f789bc3406edcf4c911e5dfdb5634bfa9c6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/metadata-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/metadata-stdout.log.gz": {
+    "bytes": 600,
+    "sha256": "3906e679509644a6642e560d17273d0ccd9205b9759e9e3a782b6b58e08544bd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/own_signature_variadic_multi_composed.trace.log.gz": {
+    "bytes": 294,
+    "sha256": "2e9174d667a0b3a3ec38bce8d9e54910d27e2cabcb5a738bdfb2a5731a36dd28"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/drop_logical_later_with.json": {
+    "bytes": 2243,
+    "sha256": "814e337e0fe07b5b926dfb44e23733e87a0fc771aef09a1fbb4b69c1c56fef26"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/initial_number_composed.json": {
+    "bytes": 2066,
+    "sha256": "0bc942a33a58585c8ae791d993d7fb4050c2baa14a19b6202180e9a1b42b3018"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/own_signature_variadic_multi_composed.json": {
+    "bytes": 2572,
+    "sha256": "1dc82e4472897beb3d8293d6753e5a43d11a4362cff18c936745d4e5de1a8544"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/reverse_copy_later_with.json": {
+    "bytes": 2123,
+    "sha256": "d63a97886a744b4ca6fd8a6a7984b7eb98cbb566ef2d90d5f56363e5c416c5ec"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/source_effect_before_rejection.json": {
+    "bytes": 2168,
+    "sha256": "4f945a065506e54717e9230ece4556fb3ecb38bce34a18cf9dcdab56d7afa2e0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/take_later_with.json": {
+    "bytes": 2093,
+    "sha256": "125b1f8a46f38ce8b6b3ae31e7f6a660e6c7d9b070ac48145ae78d49ec5b6d9d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/parsed-inputs/take_receiver_hash_guard.json": {
+    "bytes": 1979,
+    "sha256": "359a1effc624d84e36eb97b78345b783d07b276e6502bb54448db4bdcad2fd0f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/reverse_copy_later_with.trace.log.gz": {
+    "bytes": 292,
+    "sha256": "7f8f8a40aa70877cdc1ae0aad37c705b6408b70359f16f50d04747bac54b30e1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/root-inputs.tar.gz": {
+    "bytes": 806148,
+    "sha256": "9b12ed3727872080938769808c54820788d845ee089ed8cade266d6cbb11069a"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/source-inputs.tar.gz": {
+    "bytes": 14143,
+    "sha256": "3ae51f60a92cbbaa06352442da0da6a3bddf241eb43b185c16f850ba1bb2f23f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/source_effect_before_rejection.trace.log.gz": {
+    "bytes": 294,
+    "sha256": "2e9174d667a0b3a3ec38bce8d9e54910d27e2cabcb5a738bdfb2a5731a36dd28"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/take_later_with.trace.log.gz": {
+    "bytes": 292,
+    "sha256": "7f8f8a40aa70877cdc1ae0aad37c705b6408b70359f16f50d04747bac54b30e1"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/take_receiver_hash_guard.trace.log.gz": {
+    "bytes": 288,
+    "sha256": "e00a4e9d4b9eb9aa1ce163118e80742a0e373b10b93e9c38b994b9ad0155bffd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-built-product.json": {
+    "bytes": 348,
+    "sha256": "577c1f3db0a608a08e946e1b0c47b5a623800326264d00c0cc38a47092eff78c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-command.json": {
+    "bytes": 313,
+    "sha256": "d15b43ab0c9b364bcca299a753c252d7b3874e125744c9d4a25c148882df475c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-product-inputs.tar.gz": {
+    "bytes": 13015503,
+    "sha256": "9cb54f47482af71ad80fc4d02ed085f815b48377a93f6d91db2e5378ec685eb6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-stdout.log.gz": {
+    "bytes": 2155,
+    "sha256": "fab41881418a09e936dbbae8f19343c28c6d49d80f4e53b42938373d5df24589"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-strip-command.json": {
+    "bytes": 265,
+    "sha256": "6bd7b5df463048fe99107e39c4fd0a6363713ca89221ba2f822fb321094af6fc"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-strip-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-strip-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace/trace-strip-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/trace_observer.rs": {
+    "bytes": 2088,
+    "sha256": "2e56bcf5cdcbef9506502082a737efa9d97fcb25dfa422c2898187aa267f5fde"
+  }
+}

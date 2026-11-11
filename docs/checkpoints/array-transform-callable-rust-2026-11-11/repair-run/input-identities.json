@@ -1,0 +1,37 @@
+{
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/owner-before.rs.gz": {
+    "bytes": 93501,
+    "mode": 420,
+    "sha256": "63aee5745e64f0d1ebc8e30c9171c246013c78ca61107d912b25edba65f9cbbd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/repair.py": {
+    "bytes": 1839,
+    "mode": 420,
+    "sha256": "937b6e1e48e1fa1ad2a58df11b92d722f28299d75c176e70a771953564f9ed82"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_repair.py": {
+    "bytes": 2842,
+    "mode": 420,
+    "sha256": "84c3c60ce7f369b1cf518b8bb755a5d5c11147634914ee778354947d9361e7da"
+  },
+  "rust/linkedspec-runtime/src/engine.rs": {
+    "bytes": 651716,
+    "mode": 420,
+    "sha256": "b89c0e34306a04534c885bbe3d1e989d1579e72b66638e2cd33469080e474933"
+  },
+  "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs": {
+    "bytes": 17464,
+    "mode": 420,
+    "sha256": "d41bacb7b8e5027b11d3932030364590a0c4639e4180473e2861be79e64b06c6"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "programs": 312,
+  "supported_targets": [
+    "drop_logical_later_with",
+    "own_optional_drop_back_receiver_composed",
+    "own_optional_drop_front_receiver_composed",
+    "own_optional_slice_receiver_composed",
+    "own_optional_take_last_receiver_composed",
+    "own_optional_take_receiver_composed",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "own_source_before_rejection",
+    "positive_concat_arrays_receiver_composed",
+    "positive_drop_back_receiver_composed",
+    "positive_drop_front_receiver_composed",
+    "positive_reversed_receiver_composed",
+    "positive_slice_receiver_composed",
+    "positive_sorted_receiver_composed",
+    "positive_take_last_receiver_composed",
+    "positive_take_receiver_composed",
+    "reverse_copy_later_with",
+    "source_effect_before_rejection",
+    "take_later_with"
+  ],
+  "preserved": 292,
+  "shared_healthy": 34,
+  "shared_profiles": 7,
+  "limits": "Finite authored Rust controls, no compatibility/readiness normalization or peer policy; excluded/open-arity and initial-input authority stay unchanged."
+}

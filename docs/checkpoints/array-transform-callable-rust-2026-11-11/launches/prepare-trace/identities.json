@@ -1,0 +1,122 @@
+{
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_intake.py": {
+    "bytes": 7270,
+    "mode": 420,
+    "sha256": "0ee4b39ceeb47282ff016f9218bdefb7cdbc231fd702eb9d8b661004b15f0bb0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/cases.json": {
+    "bytes": 155300,
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/inspect_intake.py": {
+    "bytes": 2871,
+    "mode": 420,
+    "sha256": "20113def192b16302024ef3a7496bbfca77a08ab40be65ea091564bfb1b53bfd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/observer.rs": {
+    "bytes": 4864,
+    "mode": 420,
+    "sha256": "da3b5e5900f3978c14d2de411b1d4e205e84aa45725862ed46ba5516567e5070"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/own-questions.json": {
+    "bytes": 133963,
+    "mode": 420,
+    "sha256": "ab40c5e88dd82990fd6fff17d6b5f5c5cf48e213a0703315840ea28221430873"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare.py": {
+    "bytes": 4685,
+    "mode": 420,
+    "sha256": "2c643cffc8c0dcd699c9f684b01d5f34413b4e3ca7b42d9e692f8f1517fabf8c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare_trace.py": {
+    "bytes": 2266,
+    "mode": 420,
+    "sha256": "f023d09b931282764a635125bc9e741058e4bf829170cdbb271f3710f8adda87"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-0.gz": {
+    "bytes": 2584,
+    "mode": 420,
+    "sha256": "1a0aa23d273342fb703dbc8a678a7b2d1db17bc39a97ab0b6c1049d4d1382907"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-1.gz": {
+    "bytes": 1528,
+    "mode": 420,
+    "sha256": "1091291c16667accc99600b4b0096eb6c6a6b080351ddd2a0e169fae06472ac0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-10.gz": {
+    "bytes": 425,
+    "mode": 420,
+    "sha256": "8dad86cbae30d35aebe6208f97d1553440db7656c38ed96b2725f297deb9f662"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-11.gz": {
+    "bytes": 1448,
+    "mode": 420,
+    "sha256": "3e5d89283fb92a286d03d354b7461d65ffafdce59b4613f6e91a57908e1c1fff"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-12.gz": {
+    "bytes": 6325,
+    "mode": 420,
+    "sha256": "df42d69047424e12c5ebebd7ad072359b5889983a141dcaf9432e1357ddf5b41"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-2.gz": {
+    "bytes": 3912,
+    "mode": 420,
+    "sha256": "3f43c74147d1f1ecd56fd551e28d9ab11bcacadc53b6bf6f953c1b713e3d7991"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-3.gz": {
+    "bytes": 6042,
+    "mode": 420,
+    "sha256": "63df18d5052b969238d9f20dcc339144cfa82a26e50b8b1af4c0ce3fd6047d6b"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-4.gz": {
+    "bytes": 2439,
+    "mode": 420,
+    "sha256": "7d63a030d5f16d5d3d72f44b8b64149c79882b756368db21b55b1e47b02b8570"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-5.gz": {
+    "bytes": 662,
+    "mode": 420,
+    "sha256": "44007d11078eaf4444df4878cece85ac5342ea7971e2ff5af1a2118ad74a9baa"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-6.gz": {
+    "bytes": 865,
+    "mode": 420,
+    "sha256": "2d11988c73e19843ef5365323f28d311b6112da38e93693e8869a67f0893b4b2"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-7.gz": {
+    "bytes": 1193,
+    "mode": 420,
+    "sha256": "6f67fbe1a9a377595d66fd6bb5345e5beb76e1dbb5d48f252339e27009c944cd"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-8.gz": {
+    "bytes": 904,
+    "mode": 420,
+    "sha256": "a47e3988d6e2100762b5e27cd7221e19661045dfd1937389775834acd9d06d30"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-9.gz": {
+    "bytes": 800,
+    "mode": 420,
+    "sha256": "7f2bc9ec0c34261bc3ffbbc0c7a753ebbf47ac7f4ee728489e4491da088c4d9f"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/template-identities.json": {
+    "bytes": 3573,
+    "mode": 420,
+    "sha256": "6ac041b34000b5cf23ee86fa5de75c4eb51e5b858f98504d5421410ce0790ba9"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

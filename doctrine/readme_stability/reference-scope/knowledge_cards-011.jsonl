@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3933,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-result-projection.md","sha256":"922962b8b1c71ae0d238330e781fe0ead790c44936731f5e84690b3cf67e1c43","type":"member"}
 {"bytes":7106,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v2-rule-local-cursor.md","sha256":"7e52d901e573ecc92383f225637d4e54e5aecaf535207414c67df799abce79d2","type":"member"}
 {"bytes":6333,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generic-final-codeblock-normalization.md","sha256":"29b712c6cf6f7663ea91371cf130ced86e17a5f027b94cab4d52a9022270d9e4","type":"member"}
 {"bytes":2434,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-governed-capture-mark-parity.md","sha256":"e3425b8da2e2540e405fc4a45736765fe5f3883cec11ebab41f8d4e092467dde","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6921,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-call-signature-and-container-projection-gaps.md","sha256":"99f4dd304b7ae7d4fc8c469d463ba2db73d493f1964551980c71458e8d3a01b5","type":"member"}
 {"bytes":6137,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-grouped-edge-source-correlation-gaps.md","sha256":"b83d7142790beae7ff74050e79c7d00e76c8520473a04d3084e6e235d034ffd6","type":"member"}
 {"bytes":15362,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-api-mcp-direction.md","sha256":"4cb2622a4acf7c31ddef5f32df2c59f9741c1d838c6a523ba40212d1973e9195","type":"member"}
-{"bytes":3820,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-generated-plan-authority.md","sha256":"b7fdbbfa13a2abe576b7a79d210161fc5b6fbaff5e25c8a394471ed0307f9da1","type":"member"}

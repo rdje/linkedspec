@@ -1,0 +1,40 @@
+{
+  "repaired_public": "PASS",
+  "programs": 312,
+  "routes": 4,
+  "exact_supported_changes": [
+    "drop_logical_later_with",
+    "own_optional_drop_back_receiver_composed",
+    "own_optional_drop_front_receiver_composed",
+    "own_optional_slice_receiver_composed",
+    "own_optional_take_last_receiver_composed",
+    "own_optional_take_receiver_composed",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "own_source_before_rejection",
+    "positive_concat_arrays_receiver_composed",
+    "positive_drop_back_receiver_composed",
+    "positive_drop_front_receiver_composed",
+    "positive_reversed_receiver_composed",
+    "positive_slice_receiver_composed",
+    "positive_sorted_receiver_composed",
+    "positive_take_last_receiver_composed",
+    "positive_take_receiver_composed",
+    "reverse_copy_later_with",
+    "source_effect_before_rejection",
+    "take_later_with"
+  ],
+  "separate_initial_compatibility": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed"
+  ],
+  "full_preservation_records": 289,
+  "warning_channels": {
+    "native": "both empty",
+    "fresh": "original exact83-byte known wrapper setpgid notice; repaired empty; raw streams retained",
+    "repair_owner": "SESSION-STARTUP-READING.7",
+    "original_final_pgid": "uncaptured; no lifecycle claim"
+  },
+  "limits": "Focused four-route semantic comparison; original comparison1/first qualified comparison1 and original diagnostic1 retained; known launcher notice explicitly guarded without suppression; separate initial compatibility qualification retained; exact private old/current, direct dependents and independent custody recovery remain separate checks."
+}

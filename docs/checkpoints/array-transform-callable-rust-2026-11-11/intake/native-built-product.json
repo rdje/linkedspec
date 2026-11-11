@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/array-transform-callable-rust-native",
+  "bytes": 54629480,
+  "sha256": "b3c805bb48eefd3d61da191877a893f002012ef98cda0e1ab4051ecd5fea3335",
+  "mode": 493,
+  "scope": "Unstripped build-product identity only; complete upstream native/toolchain custody remains4.2. The actual executed copy below is retained after strip -S."
+}

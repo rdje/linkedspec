@@ -1,0 +1,52 @@
+{
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/baseline.json": {
+    "bytes": 1110,
+    "mode": 420,
+    "sha256": "8fccd94a7164a000612e504510c63f3435832b67fcc7261b6755d588eb708b68"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture.py": {
+    "bytes": 12152,
+    "mode": 420,
+    "sha256": "18ce47882973ece3cc92ba8064417f55753fa804f4bd7662fc9476d63cd3eed6"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/check_after.py": {
+    "bytes": 2342,
+    "mode": 420,
+    "sha256": "e5af669dec21bdb04dc4b84c28580098769e1eb90f7f434f121781df5e0e9479"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/initial-policy-diagnosis-qualified.json": {
+    "bytes": 6474,
+    "mode": 420,
+    "sha256": "d220be92d11273fa81d80c73f45e4e31cd967c9c1299e23b339e4038ef1f941d"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/qualify_initial.py": {
+    "bytes": 6137,
+    "mode": 420,
+    "sha256": "69e0e3afaf1a82fd86f424b435b0dff15f7f0b27ed475c63b5bceaf84161444e"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/review.py": {
+    "bytes": 20762,
+    "mode": 420,
+    "sha256": "b30f24920b1dbd341df404e83c862e8c467625b6d24fab8e9fc3e75c9477d858"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_remaining.py": {
+    "bytes": 2401,
+    "mode": 420,
+    "sha256": "f1868d1f027990ace973edf113544975841fcb7f0c44b878d5b62fc9ac98bda6"
+  },
+  "rust/linkedspec-runtime/src/engine.rs": {
+    "bytes": 651850,
+    "mode": 420,
+    "sha256": "b954e6bf4bfd137543a9d6838b6cf6808097fbd7577dea086296a3f392dfa8f2"
+  },
+  "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs": {
+    "bytes": 17464,
+    "mode": 420,
+    "sha256": "d41bacb7b8e5027b11d3932030364590a0c4639e4180473e2861be79e64b06c6"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_rust_profiles.json": {
+    "bytes": 298656,
+    "mode": 420,
+    "sha256": "715d0355970cfbaa055c169d91d1b2c7adcc6ae311f7e53a5e8906c8e23e3a61"
+  }
+}

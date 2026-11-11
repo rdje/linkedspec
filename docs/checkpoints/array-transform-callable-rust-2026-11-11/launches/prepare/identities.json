@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/prepare.py": {
+    "bytes": 4685,
+    "mode": 420,
+    "sha256": "2c643cffc8c0dcd699c9f684b01d5f34413b4e3ca7b42d9e692f8f1517fabf8c"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

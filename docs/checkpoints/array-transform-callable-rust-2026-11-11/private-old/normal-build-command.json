@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_cargo_local.sh",
+    "test",
+    "--manifest-path",
+    "docs/checkpoints/array-transform-callable-rust-2026-11-11/control-owner/rust/Cargo.toml",
+    "--locked",
+    "--offline",
+    "-j",
+    "1",
+    "-p",
+    "linkedspec-runtime",
+    "--no-run",
+    "--message-format=json",
+    "--test",
+    "array_transform_callable_result_guard_composition"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE": "docs/checkpoints/array-transform-callable-rust-2026-11-11/private-old"
+  }
+}

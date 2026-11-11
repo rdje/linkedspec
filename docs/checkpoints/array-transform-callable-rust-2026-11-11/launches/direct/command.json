@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_qualified.py",
+    "direct",
+    "direct"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

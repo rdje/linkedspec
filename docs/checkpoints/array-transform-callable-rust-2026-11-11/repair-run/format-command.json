@@ -1,0 +1,13 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "rustfmt",
+    "--edition",
+    "2024",
+    "--check",
+    "rust/linkedspec-runtime/src/engine.rs",
+    "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "qualified": "PASS",
+  "supported_targets": 20,
+  "separate_initial_compatibility": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed"
+  ],
+  "preserved": 289,
+  "original_profile_sha256": "715d0355970cfbaa055c169d91d1b2c7adcc6ae311f7e53a5e8906c8e23e3a61",
+  "qualified_profile_sha256": "dc080ecf80e8f3c64255b1261287a746b9b64328cbe25d8dcf803f757523ca3a",
+  "unchanged_normal_sha256": "d41bacb7b8e5027b11d3932030364590a0c4639e4180473e2861be79e64b06c6",
+  "production_unchanged_by_qualification": true,
+  "limits": "Only three composed off-contract expectations/roles change. Initial terminal/first-with policies96 stay exact; no portable input admission or production change. Original failed comparison and failed diagnostic remain retained."
+}

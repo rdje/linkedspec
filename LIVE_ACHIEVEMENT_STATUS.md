@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Bounded task-headroom4.27 is focused-checked through existing ADR0139 epochs; independent Rust callable Array-transform78.6.2 is next. Perl78.6.1.2 remains implemented with focused proof; broad verification/full23.4 stays separate.
+Full PNT continues. Bounded Perl and independently acquired Rust callable Array-transform implementations are focused-checked. Independent Dart78.6.3 is next; complete source/context/portable admission remains full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.27.45 ordered IDs/statuses/CORE fields,42 closed pointers/three unselected bodies/full71681-byte tail exact.169647 to117394 renews52253 task bytes under unchanged tools/limits.46 actual exact public all/node queries, first readonly0/empty stderr/ten corruptions/current identities pass; no runtime or language-completeness claim.
+TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2. Independent312/four routes;20 supported targets/three separate initial-source compatibility movements/289 full records and96 initial producer/first-with policies exact. Original20RED/292PASS and failures retained; qualified same-path23RED-current312/direct701/first full readonly0/23 controls/current825. Only one classifier changes5/4; actual launcher notice stays explicit.
 
 ## Next Action
 
-Activate independent Rust78.6.2 from clean Git. Read its public integration/contracts and own transform/pipeline facts; acquire shared45 plus own initial/optional/excluded/function-signature/error/source-order/snapshot boundaries before repair. Keep public native/restored/plan/emitted formats/custody and all previous policies; no imported Perl verdict. Open concat42 follows bounded78.6; full23.4/native/registration/formatter/declared5.4 remain open.
+Activate independent Dart78.6.3 from clean Git, reading its public integration and own transform/pipeline contracts. Acquire own shared45/initial/optional/excluded/function-signature/error/order/snapshot/terminal questions before repair; retain parsed/native/emitted inputs before relevant use and full observed error maps. No imported Rust verdict or initial/stderr policy. Open concat42 follows bounded78.6; full23.4/native/registration/formatter/declared5.4 remain open.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.27 —45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/readonly ten controls/current identities; Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0 —240+terminal48/288 pairs/35 valid targets/74 healthy intents/253 protected; readonly thirteen controls/current126; proposed marker change withdrawn, result1.2 next.
@@ -29,7 +30,6 @@ Activate independent Rust78.6.2 from clean Git. Read its public integration/cont
 - TYPE-REFERENCE-BOOK.1.2.23.4.23 — Julia75 IDs/61 closed pointers/14 unselected bodies/full232573-byte tail exact;15377 task bytes renewed/76 queries/readonly ten controls; Perl arity next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0 —178+terminal18/all196 pairs/84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls; arity prerequisite next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
 
 ## History
 

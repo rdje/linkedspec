@@ -10,6 +10,14 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-11 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 — Initial producer policy differs from a later rejected continuation
+
+Rust's function exclusion in is_ordinary_array_transform_result_chain bypasses persistent trailing-with result guards. Admit only canonical first transforms, retaining unregistered free-helper identity and existing signature checks. The unchanged index0 fallback runs the actual producer; its Array then owns later Hash rejection. Five insertions/four deletions suffice.
+
+The original freeze20/292 conflates three off-contract composed continuations with initial producer policy. Actual96 initial terminal/first-with controls remain exact; only later K/V/W is skipped. Keep20 supported targets, three compatibility movements and289 full preservation records. Original comparison1/diagnostic1 (mistaken [] versus shared pair[[],[]])/qualified comparison1 remain, with separate qualified diagnosis/comparator2 returning0. Exact raw original fresh stderr carries the known83-byte setpgid notice while repaired stderr is empty; do not suppress it or infer original PGID/lifecycle correctness. SESSION7 retains ownership.
+
+Qualified four-route312, identical-path23RED/current312, direct701, first full readonly0/23 controls and current825 pass. Actual parsed snapshots precede program compile, compiled snapshots precede restore/invocation and emitted modules precede fresh compile;624 triples and all normal/trace inputs remain byte/mode recoverable after duplicate retirement. Complete native/cache/transitive/toolchain/OS/source/context/isolation and full23.4 are separate. Evidence and recovery limits: docs/checkpoints/array-transform-callable-rust-2026-11-11/REVIEW.md and QUALIFICATION.md. Independent Dart acquires its own policies next.
+
 ## 2026-11-11 — Exact closed documentation commentary recovery precedes Rust activation
 
 Bounded4.27 uses unchanged public ADR0139 migration/reader on exact398d723bf SPEC-LANG-REFERENCE.45 ordered IDs/statuses/CORE contracts, three complete unselected bodies, metadata and full71681-byte Current Frontier/trailing bytes remain exact;42 closed commentary bodies gain explicit source-bound pointers. All46 public source/node results match retained before-use bytes; independent recovery/ten corruptions and current target-manifest checks pass. Existing epoch manifests/source blobs are retained with actual inputs, and outputs precede queries. Data169647 to117394 renews52253 bytes without new tools/limits/schema/native or runtime evidence. Historical claims stay dated; generic boundary4.17/broader routing18.2 stay deferred. Source: docs/checkpoints/task-headroom-spec-reference-2026-11-11/REVIEW.md.

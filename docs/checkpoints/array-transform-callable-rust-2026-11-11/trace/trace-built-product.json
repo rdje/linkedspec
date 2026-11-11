@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/callable-transform-trace-rust",
+  "bytes": 53820096,
+  "sha256": "f77411b94c6eb9a8f9e5cd3be20754d4a5c4460b4f88a473f1b0c343ca4f9865",
+  "mode": 493,
+  "scope": "Unstripped build-product identity only; complete upstream native/toolchain custody remains4.2. The actual executed copy below is retained after strip -S."
+}

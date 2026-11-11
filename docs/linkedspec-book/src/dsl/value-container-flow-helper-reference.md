@@ -1354,10 +1354,10 @@ admission remain open. Dart's additional direct tests now have a separate qualif
 original six omitted first-use identities stay unknown; its own Array-transform
 cases and inverse remain bound.
 
-### Registered-function Array transforms in Perl
+### Registered-function Array transforms
 
 A pure registered function can return the Array consumed by these transforms.
-Compatible free and receiver forms already work on the recorded Perl routes:
+Compatible free and receiver forms work on the recorded Perl and Rust routes:
 
 ```text
 fn supply(seed) {return(seed)}
@@ -1382,7 +1382,7 @@ Value:: I {
 }
 ```
 
-The corresponding receiver prefix now uses the same result-kind guards on Perl.
+The corresponding receiver prefix now uses the same result-kind guards on Perl and Rust.
 This covers the eight transform names above, later copy/logical/with rejection,
 needed errors and source effects. Source and required operands run once before
 result rejection; rejected Hash operands and later work remain skipped:
@@ -1401,12 +1401,15 @@ Value:: I {
 
 This returns `[null,"SN"]`. Valid empty Array results still enter `with`.
 Valid fixed or final-rest function signatures remain required; malformed calls
-retain their existing rejection and do not become valid empty Arrays. Descriptor
+retain their existing rejection and do not become valid empty Arrays. Perl descriptor
 readiness is checked independently of values, including matching null results.
-Regenerate previously emitted Perl modules to receive the guards. The bounded
-Perl implementation has passing focused normals, independent old/current controls
-and historical recovery. Each other backend is assessed separately before
-any fix or support claim; complete portable admission remains separate.
+Regenerate previously emitted Perl modules to receive the guards; rebuild Rust
+applications with the updated runtime. The bounded Perl implementation has passing
+focused normals, independent old/current controls and historical recovery. Rust
+has independently passing native, restored, generated-plan and compiled emitted
+controls, same-path old/current proof, direct regressions and historical recovery. Each other
+backend is assessed separately before any fix or support claim; complete portable
+admission remains separate.
 
 The recorded Perl initial-input policies differ by context. A registered function
 returning Number/Hash input to receiver `sorted` or `reversed` raises a typed
@@ -1415,10 +1418,48 @@ keeps its empty behavior. These compatibility observations do not expand portabl
 input authority: portable programs supply Arrays. Errors and argument order
 follow the existing terminal operation.
 
-Excluded argument shapes also keep their current behavior. Some receiver shapes
-fold directly to null before effects while free helper forms are unresolved;
+Rust keeps its own initial-source policy. Number, null and Hash inputs to the
+seven non-concat transforms still produce empty Arrays, and those empty Arrays
+still enter an immediate `with`. For example, this Rust compatibility program
+returns `[0,"W"]`:
+
+```text
+fn supply(seed) {return(seed)}
+
+Value:: I {
+ order="";
+ out=supply(3).take(1).with(){order=cat(order,"W");return(value.count())};
+ return([out,order]);
+}
+```
+
+The resulting empty Array then owns later kind checks. Adding `set_key` before
+`with` rejects before the key and later block run; this returns `[null,""]`:
+
+```text
+fn supply(seed) {return(seed)}
+
+Value:: I {
+ order="";
+ out=supply(3).take(1).set_key({order=cat(order,"K");"k"},1
+ ).with(){order=cat(order,"W");return("ran")};
+ return([out,order]);
+}
+```
+
+Rust's Number/null/Hash compositions previously ran the rejected Hash operands
+and later `with`. Their changed continuations are recorded as compatibility
+movements separately from supported Array-input fixes. The first producer and
+immediate `with` policies are unchanged. `concat_arrays` still retains an initial
+scalar or Hash as one element before the second Array. These examples describe
+Rust compatibility; portable programs supply Arrays.
+
+Excluded argument shapes also keep their current behavior. On Perl, some receiver
+shapes fold directly to null before effects while free helper forms are unresolved;
 their different readiness flags alone do not establish a required policy change.
-Signature inventory1.2.1.4.3 owns that contextual question. Wider open-arity
+Signature inventory1.2.1.4.3 owns that contextual question. Rust retains its observed
+missing/excess transform evaluation and fixed/minimum function-arity errors; those
+transform shapes gain no new guarded-result authority. Wider open-arity
 `concat_arrays` continuations remain selection23.1.42 after bounded78.6.
 
 Initial wrong-input policy remains separate from produced-result guards. The

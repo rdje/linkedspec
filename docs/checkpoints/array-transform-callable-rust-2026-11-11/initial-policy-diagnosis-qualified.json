@@ -1,0 +1,359 @@
+{
+  "diagnosis": "PASS",
+  "unexpected_three": [
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed"
+  ],
+  "initial_policies_exact": 96,
+  "complete_contrasts": {
+    "initial_number_composed": {
+      "initial_terminal": {
+        "native": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            []
+          ]
+        }
+      },
+      "immediate_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "original": {
+        "native": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        }
+      },
+      "repaired": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      }
+    },
+    "initial_null_composed": {
+      "initial_terminal": {
+        "native": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            []
+          ]
+        }
+      },
+      "immediate_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "original": {
+        "native": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        }
+      },
+      "repaired": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      }
+    },
+    "initial_hash_composed": {
+      "initial_terminal": {
+        "native": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            []
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            []
+          ]
+        }
+      },
+      "immediate_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "original": {
+        "native": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        }
+      },
+      "repaired": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      }
+    }
+  },
+  "valid_empty_terminal": {
+    "native": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "restored": {
+      "value": [
+        [],
+        ""
+      ]
+    },
+    "fresh": {
+      "value": [
+        [],
+        ""
+      ]
+    }
+  },
+  "cause": "The original freeze conflated the producer fallback with a later broken Hash continuation. First take still returns the same empty Array and immediate with still runs; existing index0 fallback then yields to actual Array kind rejection before K/V/W.",
+  "disposition": "Retain20 supported product targets; qualify these three composed off-contract inputs as separate compatibility movements, preserving all original profiles/normal20RED/failed comparison1 and actual data. No production change or portable initial-input admission.",
+  "unchanged_evaluator_sha256": "e36a199c0e2d774939b4356fa895480c2012cddbfbfecbf9788a027c313647f4",
+  "limits": "Public trace has lifecycle/output granularity. Source-order plus exact terminal contrasts establish this bounded cause; no finer expression event was emitted."
+}

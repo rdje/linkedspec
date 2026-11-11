@@ -9291,11 +9291,12 @@ impl Engine {
         }) {
             return false;
         }
+        // Function evaluation retains signature checks and source effects. Only
+        // a following canonical transform establishes this function result guard.
         if let Expr::Call { name, args } = receiver {
-            if self.spec.find_function(name).is_some() {
-                return false;
-            }
-            if Self::is_ordinary_array_transform_result_call(name, args, false) {
+            if self.spec.find_function(name).is_none()
+                && Self::is_ordinary_array_transform_result_call(name, args, false)
+            {
                 return true;
             }
         }

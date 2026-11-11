@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "rustfmt",
+    "--edition",
+    "2024",
+    "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs"
+  ],
+  "cwd": ".",
+  "input_bytes": 17284,
+  "input_sha256": "ab60da154dab6c62f769c3640f2e87cb1c3aa413362ba5ed74d26b24b314fc05"
+}

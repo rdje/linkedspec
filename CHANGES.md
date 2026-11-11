@@ -12,6 +12,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 — Rust callable Array-transform result guards
+
+- Reuse existing producer/signature paths and persistent actual-kind guards for registered-function first-transform prefixes. Only engine.rs changes: five insertions/four deletions; helper bodies and serialized/emitted formats remain unchanged.
+- Independent312 native/restored/plan/emitted-fresh questions establish20 supported targets, three separate initial-source continuation movements and289 preserved records. All96 initial terminal/first-with policies remain exact. Qualified same-path old23RED/current312 and direct312+195+194=701 pass.
+- Preserve original normal20RED/292PASS, failed comparisons/diagnostic, original projections and the exact83-byte original wrapper notice. Qualification changes only three composed expectations/roles; no portable wrong-input or lifecycle/PGID credit. SESSION7 owns the known launcher recurrence.
+- Retain624 exact parsed/compiled/module triples, normal/trace snapshots and complete actual channels. First full historical recovery0/empty stderr rejects23 reason-sensitive corruptions; current825 identity passes at activation/pre-staging. Book/Knowledge/live/task/resume/scope and required doc gates accompany normal landing; full23.4 remains separate. Evidence: docs/checkpoints/array-transform-callable-rust-2026-11-11/REVIEW.md. Independent Dart78.6.3 next.
+
 ## 2026-11-11 — Renew closed language-reference task headroom (4.27)
 
 Existing approved ADR0139 epoch migration preserves45 ordered IDs/statuses/CORE fields,42 closed pointers/three unselected bodies and full71681-byte tail;169647 to117394 renews52253 bytes.46 exact public all/node queries, first independent readonly0/empty stderr/ten corruptions/current identities pass. Source/instruments/outputs precede use; tools/limits/runtime and current obligations stay unchanged. No new language-completeness or disk-reclamation claim. Independent Rust78.6.2 is next. Evidence: docs/checkpoints/task-headroom-spec-reference-2026-11-11/REVIEW.md.

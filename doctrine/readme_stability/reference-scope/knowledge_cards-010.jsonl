@@ -77,6 +77,7 @@
 {"bytes":2478,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-blind-postcall-iteration-outcomes.md","sha256":"75756a3c53ecb2b411d9df34110f73fb7da2fc9443ed61b5337765d9e47a6d34","type":"member"}
 {"bytes":11256,"lines":170,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-body-parser-lexical-boundary-defects.md","sha256":"423e3cba7e499db5c68fb2794b2048bb1216d1ca788aed19e5f1b95873028926","type":"member"}
 {"bytes":3120,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-build-requirements-documentation-gap.md","sha256":"6d90e2d30957f9651ca0c92342f1ab4de388f6eb188ac905e78bb10ae9499e11","type":"member"}
+{"bytes":5021,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2","path":"docs/knowledge/rust-callable-array-transform-result-guards.md","sha256":"46ef4a466e06cc77156662f676ecac36fa99d45538ff91bfa4b70fee25dda185","type":"member"}
 {"bytes":6761,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-codeblock-dynamic-invocation.md","sha256":"f0f6aaec5279a6ef519a96d9c651e2e3eb5e134f3cee8f901943272fdb9ef79d","type":"member"}
 {"bytes":6575,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-callable-codeblock-literal-state.md","sha256":"0f331db9cb0aa3579c8d1a0c37f53cdb93300be1b61b6e1be4c4558ecae53bbe","type":"member"}
 {"bytes":4288,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/rust-callable-key-count-preservation.md","sha256":"9aeec75b384aed8a7cc592ae8e19ed99d8697889a4bbba25011c7b8bc91815f5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4349,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-full-manifest-classification.md","sha256":"3bdb46eb0b43a861c7e13bfde61514bb0919879fb88f09f53c4256b33a6d0c0b","type":"member"}
 {"bytes":3233,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-literal-encoding-gap.md","sha256":"15b220d76f67d6865a3f261916aabde71f68146b0b5c7342d6b9241cb6abccca","type":"member"}
 {"bytes":3109,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-metadata-errors.md","sha256":"1f579c434dc8db92459fb961e83a176704e3d1ed3d66194362d84d617c0a6389","type":"member"}
-{"bytes":3933,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-result-projection.md","sha256":"922962b8b1c71ae0d238330e781fe0ead790c44936731f5e84690b3cf67e1c43","type":"member"}

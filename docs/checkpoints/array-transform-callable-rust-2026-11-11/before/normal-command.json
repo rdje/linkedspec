@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "docs/checkpoints/array-transform-callable-rust-2026-11-11/before/normal-exec",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE": "docs/checkpoints/array-transform-callable-rust-2026-11-11/before"
+  }
+}
