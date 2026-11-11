@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "test",
+    "--reporter",
+    "expanded",
+    "--concurrency=1",
+    "test/array_pipeline_callable_result_guard_composition_test.dart"
+  ],
+  "cwd": "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/control-owner/dart",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1",
+    "LINKEDSPEC_CALLABLE_PIPELINE_DART_CAPTURE": "private-fixed"
+  }
+}

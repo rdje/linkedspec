@@ -1,0 +1,11 @@
+{
+  "surface": "task_evidence",
+  "actual_bytes": 12585276,
+  "limit_bytes": 12582912,
+  "excess_bytes": 2364,
+  "hook": "README-STABILITY",
+  "complete_hook_PASS": false,
+  "outer_exit": 143,
+  "repair": "Route only new Dart commentary/checklist explanation to the canonical evidence packet; preserve existing contracts/limits/source/proofs.",
+  "termination": "Owned isolated process group stopped after known routing failure; no complete hook PASS"
+}

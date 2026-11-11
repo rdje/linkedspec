@@ -1,0 +1,17 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/review.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/review.py": "16c2c3b1bb76c56c6b4d565b9f826357307f591fad312ae14e4ea65a03cd9022",
+    "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/record_review.py": "a52bd9c540996066e7c0dced71775856607662b19cb0f8b104de165555bb5006",
+    "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/sealed-identities.json": "b59bd3a0cfe355127163b28e8e91bd6603abe93b36c4fbefa729f7a3c0d8c51d"
+  }
+}

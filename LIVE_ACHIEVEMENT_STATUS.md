@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues callable79.6. Perl79.6.1 and Rust79.6.2 are implemented with focused checks; independent Dart79.6.3 is next. Full source/context/native admission remains open, including historical-input audit4.24.
+Full PNT continues callable79.6. Perl79.6.1/Rust79.6.2/Dart79.6.3 are implemented with focused checks; independent Julia79.6.4 is next. Full source/context/native admission stays open, including historical Rust/Dart input audit4.24.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2. Five runtime insertions/four deletions admit registered source prefixes to canonical pipeline guards while preserving invocation/producers/formats.194/four routes/private11RED-current194 cover eight supported targets/three separate pattern compatibility changes/183 preserved.388 source pairs/776 normal inputs/seven trace inputs/direct383/scoped rustfmt/first readonly13 controls/current793 identities pass. Historical restore-before-persist wording is qualified, new captures repair order and P1 audit4.24 precedes admission; original packets stay exact.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3. Four interpreter insertions/four deletions admit canonical registered-source pipeline guards, preserving invocation/producers/formats.194/four routes/private19RED-current194 covers16 supported targets/three separate pattern compatibility changes/175 exact full-wire records.388 pairs/776 normal parsed inputs/seven trace inputs/direct383/fatal analysis/format/first readonly17 controls/current497 identities pass. New capture order/error wires are retained; historical Rust/Dart claims remain qualified under P1 audit4.24 before admission.
 
 ## Next Action
 
-Activate independent Dart79.6.3 from clean Git. Acquire safe shared37 and actual Dart producer/signature/error/arity/earlier-owner policies on its public SDK routes before source edits. Implement only confirmed gaps, retain exact old/current source controls and focused direct/recovery/docs proof, then commit. Julia/Lua follow. Full23.4/historical4.24/safe-launcher4.22/routing18.2 remain after coverage.
+First renew task headroom with unchanged ADR0139 in a newly owned bounded capacity leaf from clean Git; about200 bytes remain. Then activate independent Julia79.6.4. Acquire safe37 and actual Julia callable producer/signature/arity/error/earlier-owner policies on its public SDK routes before source edits; preserve first-use inputs/full available errors and exact old/current source controls. Focused implementation/proof/docs/normal commit, then installed Lua. Full23.4/historical4.24/safe-launcher4.22/routing18.2 follow coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 —194/four routes/private19RED-current194/175 full-wire records/direct383/readonly17/current497; Rust/Dart custody qualification4.24; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2 —194/four routes/private11RED-current194/183 preserved/direct383/readonly13/current793; historical source-order4.24 qualified; Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2 —188PASS/private30RED-current188/27 targets+three readiness/158 preserved/940 pairs/direct441/readonly14/current121; Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1 —125PASS/private18RED-current125/direct72/readonly eleven/current121;178 preserves169 projections/nine arity changes;25 result gaps remain.
@@ -29,7 +30,6 @@ Activate independent Dart79.6.3 from clean Git. Acquire safe shared37 and actual
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.0 —184 programs/148 profiles/180 pairs,14 main-only reads/source79.0 and one extra composition-error target; readonly ten controls; no production edit.
 - TYPE-REFERENCE-BOOK.1.2.23.4.21 —68 IDs/58 closed pointers/ten short bodies/full54718-byte tail exact,64936 bytes renewed/69 public queries/readonly ten controls; Perl79.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.39 — pure-pipeline36/17 failures19 healthy,29 ready/seven unresolved receivers,36 module-handler pairs/first readonly eleven controls; family79/Perl79.1 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.5 — each installed host156/four routes903PASS/direct1713 plus with controls/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine corruptions; selection39 next.
 
 ## History
 

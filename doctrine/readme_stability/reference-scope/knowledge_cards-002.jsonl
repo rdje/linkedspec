@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3819,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-public-facade-startup-reading.md","sha256":"fbc43f7985457fdc4917065d4c10a0e4b23b0e5af93b85c01809a131917572ab","type":"member"}
 {"bytes":2733,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-pure-blind-dependency-regex-gap.md","sha256":"ad4b84528b509de4be29133582c970c6eb0a715bad9c9fa9affb15d2b8e297f0","type":"member"}
 {"bytes":2207,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-push-snapshot-result-guards.md","sha256":"629530536819d9b9b8b5e11acd9bc6932ecda9afe9b71462a9edc55198ea1b01","type":"member"}
 {"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":24411,"lines":172,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-current-boundary.md","sha256":"80a5c1c9e9dc9dcf841a8cab71efb1571097e1067ec4705681f5c5c59e53ce52","type":"member"}
 {"bytes":19119,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-neutral-contract.md","sha256":"bf842211b5ee2994c5836d9bb741adbb57215e80e8da5b51cd9188ae363aefaa","type":"member"}
 {"bytes":4540,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-recomposition.md","sha256":"a17f5f7f51195960e86473227a71251d8a6de246704141c2e12f286738afc553","type":"member"}
-{"bytes":13894,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-contract-v1.md","sha256":"cbdba9150c9d8879467794b29cbd365a4c528d8bc17e0dfa16a2793748ef02f8","type":"member"}

@@ -1,0 +1,13 @@
+{
+  "source": "dart/tool/probe_array_pipeline_results.dart",
+  "archive_owners": [
+    "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/intake/root-inputs.tar.gz",
+    "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/intake/native-inputs.tar.gz"
+  ],
+  "bytes": 4139,
+  "sha256": "27088cad8dfbd5e0c4d10c442cd707f4524e7e551691c6569bc9539961afa8d3",
+  "compile_line": 61,
+  "restore_line": 62,
+  "persist_line": 69,
+  "limit": "Original parsed bodies are retained after compilation/restoration. Before-first-use parsed-input retention is not established. Original grammar/source inputs and outcomes remain actual; no missing historical fields or custody are reconstructed."
+}

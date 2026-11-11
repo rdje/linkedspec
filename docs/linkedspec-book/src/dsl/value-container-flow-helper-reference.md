@@ -2012,6 +2012,16 @@ observations retain their existing producers without broader pattern admission;
 use the documented regex operands. Rebuild Rust applications. Serialized/emitted
 formats, pure function scope and other backends' independent qualifications stay.
 
+Dart supports these registered-function pipeline continuations too: the variadic
+example above returns `[null,"S"]`, preserving the caller's source effect while
+skipping K/V and the later body. Initial non-Array producer fallbacks and valid
+empty-Array `with` behavior remain unchanged. Required source/delimiter/pattern
+errors keep their native diagnostics and generated source attribution; later
+`coalesce` cannot hide them. Invalid fixed/rest calls retain their invocation
+errors. Existing excess-argument behavior is excluded from the canonical contract;
+portable code uses the documented arities. Noncanonical pattern observations gain
+no broader admission. Rebuild Dart applications; parsed/emitted formats stay.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and

@@ -1,0 +1,5241 @@
+{
+  "programs": 194,
+  "observed": 194,
+  "serialized_inputs": 194,
+  "fresh": 194,
+  "shared_healthy": [
+    "split_each_compatible",
+    "split_each_free_hash_guard",
+    "trim_each_compatible",
+    "trim_each_free_hash_guard",
+    "filter_nonempty_compatible",
+    "filter_nonempty_free_hash_guard",
+    "lowercase_each_compatible",
+    "lowercase_each_free_hash_guard",
+    "uppercase_each_compatible",
+    "uppercase_each_free_hash_guard",
+    "uniq_compatible",
+    "uniq_free_hash_guard",
+    "filter_match_compatible",
+    "filter_match_free_hash_guard",
+    "source_once",
+    "source_snapshot",
+    "valid_empty_with",
+    "needed_source_terminal",
+    "needed_source_composed",
+    "needed_delimiter_terminal",
+    "needed_delimiter_composed"
+  ],
+  "shared_differences": {
+    "split_each_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "trim_each_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "filter_nonempty_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "lowercase_each_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "uppercase_each_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "uniq_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "filter_match_receiver_hash_guard": {
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "KV"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "KV"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "KV"
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "KV"
+        ]
+      }
+    },
+    "trim_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "uniq_copy_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "lower_logical_later_with": {
+      "native": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVDW"
+        ]
+      }
+    },
+    "initial_number_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_null_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_hash_composed": {
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    }
+  },
+  "shared_profiles": {
+    "initial_number_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    },
+    "initial_null_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    },
+    "initial_hash_terminal": {
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    }
+  },
+  "own_groups": {
+    "initial-source": {
+      "initial_number_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_split_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_split_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_trim_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_trim_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_nonempty_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_nonempty_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_lowercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_lowercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uppercase_each_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uppercase_each_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uniq_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_uniq_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_number_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_null_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_match_free": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "initial_hash_filter_match_receiver": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      }
+    },
+    "initial-source-with": {
+      "initial_number_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_split_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_split_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_trim_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_trim_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_nonempty_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_nonempty_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_lowercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_lowercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uppercase_each_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uppercase_each_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uniq_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_uniq_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_number_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_null_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_match_free_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      },
+      "initial_hash_filter_match_receiver_with": {
+        "native": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            0,
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            0,
+            "W"
+          ]
+        }
+      }
+    },
+    "excluded-extra-arity": {
+      "extra_split_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_split_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_trim_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_trim_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_nonempty_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_filter_nonempty_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_lowercase_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_lowercase_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uppercase_each_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_uppercase_each_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_uniq_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_uniq_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_filter_match_free": {
+        "native": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKW"
+          ]
+        }
+      },
+      "extra_filter_match_receiver": {
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      }
+    },
+    "needed-source-error": {
+      "needed_source_split_each_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_split_each_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_split_each_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_split_each_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_trim_each_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_trim_each_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_trim_each_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_trim_each_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_filter_nonempty_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_filter_nonempty_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_filter_nonempty_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_filter_nonempty_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_lowercase_each_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_lowercase_each_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_lowercase_each_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_lowercase_each_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_uppercase_each_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_uppercase_each_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_uppercase_each_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_uppercase_each_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_uniq_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_uniq_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_uniq_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_uniq_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_filter_match_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_filter_match_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_source_filter_match_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_source_filter_match_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      }
+    },
+    "excluded-missing-arity": {
+      "missing_split_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_trim_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_filter_nonempty_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_lowercase_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_uppercase_each_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_uniq_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_filter_match_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_split_each_free": {
+        "native": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_split_each_receiver": {
+        "native": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "h",
+              "e",
+              "a",
+              "d"
+            ],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_filter_match_free": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      },
+      "missing_operand_filter_match_receiver": {
+        "native": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            "W"
+          ]
+        }
+      }
+    },
+    "earlier-owner": {
+      "prior_count": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_key_count": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_length": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_hash": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_copy": {
+        "native": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            null,
+            ""
+          ]
+        }
+      },
+      "prior_view": {
+        "native": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "a"
+            ],
+            "W"
+          ]
+        }
+      }
+    },
+    "needed-delimiter-error": {
+      "needed_delimiter_free": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_delimiter_free.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "needed_delimiter_receiver": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/needed_delimiter_receiver.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      }
+    },
+    "regex-error-policy": {
+      "invalid_range_free_terminal": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "invalid_range_free_composed": {
+        "native": {
+          "value": null
+        },
+        "restored": {
+          "value": null
+        },
+        "plan": {
+          "value": null
+        },
+        "fresh": {
+          "value": null
+        }
+      },
+      "invalid_range_receiver_terminal": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      },
+      "invalid_range_receiver_composed": {
+        "native": {
+          "value": []
+        },
+        "restored": {
+          "value": []
+        },
+        "plan": {
+          "value": []
+        },
+        "fresh": {
+          "value": []
+        }
+      }
+    },
+    "nested-kinds": {
+      "nested_scalar_kinds": {
+        "native": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              false,
+              null,
+              ""
+            ],
+            [
+              false,
+              0,
+              null,
+              "0",
+              ""
+            ]
+          ]
+        }
+      }
+    },
+    "numeric-kind": {
+      "numeric_array_source": {
+        "native": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "3"
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ],
+            [
+              3
+            ]
+          ]
+        }
+      }
+    },
+    "function-signature-valid": {
+      "own_signature_variadic_empty_terminal": {
+        "native": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [],
+            ""
+          ]
+        }
+      },
+      "own_signature_variadic_empty_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KVW"
+          ]
+        }
+      },
+      "own_signature_variadic_multi_terminal": {
+        "native": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head",
+              "tail"
+            ],
+            "S"
+          ]
+        }
+      },
+      "own_signature_variadic_multi_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "SKVW"
+          ]
+        }
+      }
+    },
+    "function-signature-invalid-signature": {
+      "own_signature_fixed_missing_terminal": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_fixed_missing_terminal.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value"
+          }
+        }
+      },
+      "own_signature_fixed_missing_composed": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_fixed_missing_composed.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 1 in rule Value"
+          }
+        }
+      },
+      "own_signature_fixed_extra_terminal": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_fixed_extra_terminal.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value"
+          }
+        }
+      },
+      "own_signature_fixed_extra_composed": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_fixed_extra_composed.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'pair' expects 2 argument(s), got 3 in rule Value"
+          }
+        }
+      },
+      "own_signature_variadic_missing_terminal": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_variadic_missing_terminal.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value"
+          }
+        }
+      },
+      "own_signature_variadic_missing_composed": {
+        "native": {
+          "error": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_signature_variadic_missing_composed.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: user function 'collect' expects at least 1 argument(s), got 0 in rule Value"
+          }
+        }
+      }
+    },
+    "pattern-boundary": {
+      "own_pattern_string_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        }
+      },
+      "own_pattern_string_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        }
+      },
+      "own_pattern_variable_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            ""
+          ]
+        }
+      },
+      "own_pattern_variable_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "KW"
+          ]
+        }
+      },
+      "own_pattern_block_terminal": {
+        "native": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        },
+        "fresh": {
+          "value": [
+            [
+              "head"
+            ],
+            "P"
+          ]
+        }
+      },
+      "own_pattern_block_composed": {
+        "native": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        },
+        "fresh": {
+          "value": [
+            "ran",
+            "PKW"
+          ]
+        }
+      }
+    },
+    "pattern-error-boundary": {
+      "own_pattern_error_free_terminal": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_pattern_error_free_terminal.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "own_pattern_error_free_composed": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_pattern_error_free_composed.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "own_pattern_error_receiver_terminal": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_pattern_error_receiver_terminal.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      },
+      "own_pattern_error_receiver_composed": {
+        "native": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "restored": {
+          "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "RuntimeInterpreterException",
+          "error_json": {
+            "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "diagnostic": {
+              "type": "runtime_parser",
+              "stage": "runtime_execution",
+              "owner_stage": "dart_runtime",
+              "summary": "Dart runtime interpreter failed",
+              "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+              "top_rule": "Value",
+              "rule_label": "Value",
+              "handler_source_label": "dart_runtime:rule:Value"
+            }
+          }
+        },
+        "plan": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard-assessment.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        },
+        "fresh": {
+          "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "class": "GeneratedSourceException",
+          "error_json": {
+            "type": "generated_source_error",
+            "stage": "execute_generated",
+            "code": "generated_execution_failed",
+            "summary": "Generated Dart parser execution failed",
+            "source_identity": "array-pipeline-callable-result-guard/own_pattern_error_receiver_composed.spec",
+            "rule_label": "Value",
+            "handler_family": "default",
+            "detail": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+          }
+        }
+      }
+    }
+  }
+}

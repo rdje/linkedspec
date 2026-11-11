@@ -1,0 +1,28 @@
+{
+  "programs": 194,
+  "supported_targets": [
+    "filter_match_receiver_hash_guard",
+    "filter_nonempty_receiver_hash_guard",
+    "initial_hash_composed",
+    "initial_null_composed",
+    "initial_number_composed",
+    "invalid_range_receiver_composed",
+    "lower_logical_later_with",
+    "lowercase_each_receiver_hash_guard",
+    "own_signature_variadic_empty_composed",
+    "own_signature_variadic_multi_composed",
+    "split_each_receiver_hash_guard",
+    "trim_each_receiver_hash_guard",
+    "trim_later_with",
+    "uniq_copy_later_with",
+    "uniq_receiver_hash_guard",
+    "uppercase_each_receiver_hash_guard"
+  ],
+  "compatibility": [
+    "own_pattern_block_composed",
+    "own_pattern_string_composed",
+    "own_pattern_variable_composed"
+  ],
+  "preserved": 175,
+  "limits": "Three noncanonical pattern compatibility changes confer no new pattern admission; terminal Rust/Perl observations are not Dart verdicts."
+}

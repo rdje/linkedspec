@@ -2723,9 +2723,9 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.24`
   Status: `pending` / P1 evidence correction before admission
-  Goal: Resolve inherited Rust serialized-input first-use retention claims without rewriting original evidence.
-  Dependencies: Rust callable79.6.2 static archived-source audit; feature coverage before broader audit.
-  Acceptance: Audit relevant inherited observer epochs/maintained claims, distinguish actual later recovery from before-restoration retention, correct live/book/Knowledge wording and prospectively repair instruments. Preserve originals/missing history; no retroactive first-use credit. Current callable instrument is repaired immediately under79.6.2.
+  Goal: Resolve inherited Rust/Dart serialized-input first-use retention claims without rewriting original evidence.
+  Dependencies: Rust79.6.2 and Dart79.6.3 archived-source ordering audits; feature coverage before broader audit.
+  Acceptance: Audit relevant inherited Rust/Dart observer epochs/maintained claims, distinguish actual later recovery from before-restoration retention, correct live/book/Knowledge wording and prospectively repair instruments. Preserve originals/missing history; no retroactive first-use credit. Current callable instruments repair ordering under79.6.2/.3; omitted old generated-error wire fields remain unassessed.
   Planned verification: Exact archived instrument/ordering/input identities, meaningful distinguishing controls and focused claim/document checks; canonical at admission/infrastructure boundaries.
   Planned claim verification: Finite source-order/custody evidence with missing historical legs disclosed.
   Schedule: After feature coverage, before23.4 admission; P1, owned alongside4.2/SESSION5. Evidence: docs/checkpoints/array-pipeline-callable-rust-2026-11-11/RESTORE_ORDER.md.

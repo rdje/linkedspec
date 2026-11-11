@@ -19,7 +19,7 @@
 {"bytes":2912,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-and-required-dependency-steps.md","sha256":"e3cc04f4af97ad532e1470bad6125aedf60ce4f5e1c791b84fe0e2f8b47e5b77","type":"member"}
 {"bytes":3000,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-arithmetic-result-source-guards.md","sha256":"a479ff90047b785a54b0214bf47b717b2f045bc5e61ab503ec8b3e9c6c26628c","type":"member"}
 {"bytes":1918,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-array-flat-list-context-splice.md","sha256":"f868d869789367d8b3b21edc933ac503678e9841f12b6219d6155d7854436151","type":"member"}
-{"bytes":4394,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.3","path":"docs/knowledge/dart-array-pipeline-result-guards.md","sha256":"b7bc5c4bf110fb1f93dbcd864bbb17fdd92bb137bea4b69b19b451bf0cca60fd","type":"member"}
+{"bytes":5223,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3","path":"docs/knowledge/dart-array-pipeline-result-guards.md","sha256":"e4eea101cdae197edcdc0c5afc7f0727babca639e29a26209406a19d5aae204a","type":"member"}
 {"bytes":5610,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.20","path":"docs/knowledge/dart-array-transform-result-guards.md","sha256":"604ad9b9da573168dc017fe9f399e7b921dace79d858f4cd1eece222b4b25f68","type":"member"}
 {"bytes":5840,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-attached-switch-body-omission.md","sha256":"b76e880b383867a58f7fd741064510c55263a70d4e1e8e2f560a8b45f4b6081b","type":"member"}
 {"bytes":2075,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-backend-interpreter-first-plan.md","sha256":"22d152c75a9c8ad7151dc4f838bec6308155edef5d831582a9b6e27f60d4174c","type":"member"}
@@ -32,6 +32,7 @@
 {"bytes":5157,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callable-codeblock-dynamic-invocation.md","sha256":"5556e6d7d99a3cd27d74e40b02ada510ea8f7c873802fe3abeb60e3bc1769175","type":"member"}
 {"bytes":4668,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callable-codeblock-literal-state.md","sha256":"4a60999d34b474a49ebbacb2be548435009c8e59b94d68e2607410e9ffa14c41","type":"member"}
 {"bytes":4038,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/dart-callable-key-count-preservation.md","sha256":"9fa8980ee02429c595b2239d79103df9f24cac2ff1e8761b81ce1b819da148b2","type":"member"}
+{"bytes":3415,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3","path":"docs/knowledge/dart-callable-pipeline-result-guards.md","sha256":"66ec16087325b5116ba446b95c1ce75dbec3480a0478217c7c06fd7810df3d7f","type":"member"}
 {"bytes":10452,"lines":142,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-callback-helper-recursion-identity-gap.md","sha256":"39bfd839fb30d5d19301eebcb8e2fd17768d74ddb6564d26d64b3a413f6609f4","type":"member"}
 {"bytes":4150,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-primary-cli-trace.md","sha256":"08a0b1ff48edbee22a8e2d06a38ec46255994dc75b90d93ae7fa279a8fee9aef","type":"member"}
 {"bytes":2164,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-canonical-set-result-guards.md","sha256":"291fbd45208106c28f9d996fc374b25385d4c8d91df6a1b234d319570bfee75c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6830,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-carriers.md","sha256":"4ed82974a0ce6f7995e99ae14d627893a629a917babb62865ce092c369c28d3c","type":"member"}
 {"bytes":4701,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-dormant-red.md","sha256":"62d00db807308fc22420066c8d375dfb2f44ef5dd9483589f104d11c325d6928","type":"member"}
 {"bytes":8985,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-project-data-ssd-storage.md","sha256":"c9df6669e9d5e6bfaa71171c57cefdd884ba15f5fd929eeeba3e803f0b1af190","type":"member"}
-{"bytes":3819,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-public-facade-startup-reading.md","sha256":"fbc43f7985457fdc4917065d4c10a0e4b23b0e5af93b85c01809a131917572ab","type":"member"}

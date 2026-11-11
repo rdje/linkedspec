@@ -2953,13 +2953,22 @@
   - [x] **LOCKSTEP** — Book/Knowledge/task/index/live/roadmap/MEMORY align; focused docs/gates and normal clean commit precede Dart79.6.3. Full23.4/native/context admission and historical4.24 remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently acquire/repair Dart registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
-  Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
-  Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
-  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+  Verification tier: `focused`
+  Focused checks: 194/four routes/private/direct383/readonly17/current497; scoped analysis/format, docs/gates; full evidence below.
+  Canonical trigger: Full23.4/final push after coverage.
+  Claim verification: none: Finite authored controls.
+  Evidence: docs/checkpoints/array-pipeline-callable-dart-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — 19RED.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — pipeline predicate.
+  - [x] **FIX** — 4/4 lines.
+  - [x] **ADDRESSED (verified)** — 194PASS.
+  - [x] **NO REGRESSION** — 175/direct383.
+  - [x] **LOCKSTEP** — docs/gates.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4`
   Status: `pending`

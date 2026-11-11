@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7711,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-compiler-source-membership.md","sha256":"3ff20c983bc7b8a7532c37d3a54d0c4225ca7ce8504aa5cb1fd2e68cd6e9232e","type":"member"}
 {"bytes":2466,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-constructor-result-guards.md","sha256":"c08f126eeda92992f268a0f6280ab1156f78c3a201b727dfdba52540ed1cf1ed","type":"member"}
 {"bytes":5010,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-constructor-capture.md","sha256":"d4495eb02813656375014266fbd989d7a7df352db469c9bde6798cccb0169596","type":"member"}
 {"bytes":5302,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-dependency-capture.md","sha256":"b6e96532c1a1193512f107d8df9d29373527eed7fb8c63ebbab114e09aaa659f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3447,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-split-source-metadata.md","sha256":"e11de0d89de222dfbbc014bb0ff21d3ca144a7fd2178a38eed17fa7d201ca6ee","type":"member"}
 {"bytes":4921,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-statement-source-provenance.md","sha256":"26653193b0334f9060343f5e18d380bcfa89b40361ac5977889f81f38efa08a1","type":"member"}
 {"bytes":3674,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-conformance-audit.md","sha256":"8320a13faf642a67e182e2487275169c605ced334bab74a128be1db185891595","type":"member"}
-{"bytes":4322,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-operational-failures.md","sha256":"fd2e8c7b01a6aa256a5052b21a0bb1d8571be28b1a13bf63e289a781265bf653","type":"member"}

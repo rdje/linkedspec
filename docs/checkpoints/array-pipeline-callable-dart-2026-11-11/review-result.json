@@ -1,0 +1,32 @@
+{
+  "recovery": "PASS",
+  "programs": 194,
+  "routes": 4,
+  "supported_targets": 16,
+  "separate_pattern_compatibility": 3,
+  "preserved": 175,
+  "parsed_module_pairs": 388,
+  "normal_parsed_inputs": 776,
+  "traced_parsed_inputs": 7,
+  "direct_groups": 383,
+  "effective_corruptions": [
+    "actual old registered receiver result is RED",
+    "receiver operands execute",
+    "source effect lost",
+    "valid empty initial skips with",
+    "excluded free X evaluated",
+    "function signature error masked",
+    "needed source error masked",
+    "regex result guard bypassed",
+    "existing pattern P skipped",
+    "Boolean becomes Number",
+    "generated source attribution changed",
+    "missing fresh case",
+    "emitted module changed",
+    "unrelated source edit",
+    "old private image called repaired",
+    "historical restore-before-persist promoted",
+    "own SDK routing changed"
+  ],
+  "limits": "Finite authored controls; complete available RuntimeInterpreterException/GeneratedSourceException wire maps, no missing historical field recovery. Three pattern compatibility movements grant no new pattern admission. New capture order fixed; inherited Rust/Dart audit4.24 remains before admission. Native/VM/cache/transitive/toolchain4.2/SESSION5, source/context/isolation/registration/declared5.4/full23.4 remain open."
+}

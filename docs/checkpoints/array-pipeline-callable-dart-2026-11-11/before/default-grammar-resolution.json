@@ -1,0 +1,7 @@
+{
+  "cwd": "dart",
+  "nearer_candidate": "dart/specs/user_function_definition.spec",
+  "nearer_candidate_exists": false,
+  "selected": "specs/user_function_definition.spec",
+  "selected_sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+}

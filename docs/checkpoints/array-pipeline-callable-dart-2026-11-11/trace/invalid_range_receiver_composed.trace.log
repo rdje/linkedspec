@@ -1,0 +1,85 @@
+[HIGH][enter] -> dart_frontend:parse_spec_with_functions source_code_units=157
+[HIGH][enter]   -> dart_frontend:function_parser_spec source_code_units=12677
+[HIGH][enter]     -> dart_frontend:parse_spec source_code_units=12677
+[MEDIUM][decision]       dart_frontend:parse_spec:rules taken=1 reason=rule_count=12
+[HIGH][exit]     <- dart_frontend:parse_spec ok rule_count=12
+[HIGH][enter]     -> dart_compiler:compile_spec rules=12 functions=0 validate=1 strict=0
+[HIGH][enter]       -> dart_frontend:validate_spec rules=12 functions=0 strict=0
+[MEDIUM][decision]         dart_frontend:validate_spec:checks taken=1 reason=strict=0
+[HIGH][exit]       <- dart_frontend:validate_spec ok
+[HIGH][enter]       -> dart_compiler:function_registry function_count=0
+[HIGH][exit]       <- dart_compiler:function_registry ok function_count=0
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=user_function_definitions definition_index=0
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=codeblock_function_definition definition_index=1
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=function_definition definition_index=2
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=variadic_function_definition definition_index=3
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=body_brace definition_index=4
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=double_quoted_string definition_index=5
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=single_quoted_string definition_index=6
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=slash_line_comment definition_index=7
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=hash_line_comment definition_index=8
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=regex_literal definition_index=9
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=malformed_function_definition definition_index=10
+[MEDIUM][decision]       dart_compiler:compile_spec:rule taken=1 reason=label=rule_paragraph definition_index=11
+[MEDIUM][decision]       dart_compiler:compile_spec:dependency_regex taken=1 reason=rule_count=12
+[HIGH][exit]     <- dart_compiler:compile_spec ok rules=12 functions=0
+[HIGH][exit]   <- dart_frontend:function_parser_spec ok
+[HIGH][enter]   -> dart_frontend:function_parser_execute source_code_units=157
+[LOW][decision]     dart_runtime:entry_rule_selection taken=1 reason=requested=<default> effective=user_function_definitions basis=first_authored_marker
+[HIGH][enter]     -> dart_runtime:parse top_rule=user_function_definitions
+[HIGH][enter]       -> dart_runtime:rule label=user_function_definitions entry_regex=0 mode=Default cursor_policy=seek cursor=0
+[DEBUG][decision]         dart_runtime:regex_match taken=1 reason=rule=user_function_definitions entry_regex=0 parse_mode=seek alternative=2 match_start=0 match_end=17 cursor_before=0
+[HIGH][mark]         dart_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=function_definition regex_index=0
+[HIGH][enter]         -> dart_runtime:rule label=function_definition entry_regex=0 mode=Default cursor_policy=seek cursor=17
+[DEBUG][decision]           dart_runtime:regex_match taken=1 reason=rule=function_definition entry_regex=0 parse_mode=seek alternative=1 match_start=29 match_end=30 cursor_before=17
+[HIGH][mark]           dart_runtime:regex_slot_selected rule_label=function_definition selection_role=choice target_rule=function_definition regex_index=1
+[HIGH][exit]         <- dart_runtime:rule matched=true cursor=30
+[DEBUG][decision]         dart_runtime:child_dispatch taken=1 reason=edge_family=action rule=user_function_definitions target=function_definition[0] cursor_before=17 cursor_after=30
+[DEBUG][decision]         dart_runtime:regex_match taken=1 reason=rule=user_function_definitions entry_regex=0 parse_mode=seek alternative=4 match_start=32 match_end=91 cursor_before=30
+[HIGH][mark]         dart_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=rule_paragraph regex_index=0
+[DEBUG][decision]         dart_runtime:regex_match taken=0 reason=rule=user_function_definitions entry_regex=0 parse_mode=seek alternative=-1 match_start=-1 match_end=-1 cursor_before=91
+[HIGH][mark]         dart_runtime:lifecycle_block rule=user_function_definitions lifecycle=LX line=20 cursor=91
+[HIGH][exit]       <- dart_runtime:rule matched=true cursor=91
+[HIGH][exit]     <- dart_runtime:parse matched=true cursor=91
+[MEDIUM][decision]     dart_frontend:function_parser_execute:definitions taken=1 reason=definition_count=1
+[HIGH][exit]   <- dart_frontend:function_parser_execute ok matched=1 definition_count=1
+[HIGH][enter]   -> dart_staged:parse_spec_with_function_asts source_code_units=157
+[HIGH][enter]     -> dart_frontend:function_shell_spec source_code_units=157
+[HIGH][enter]       -> dart_frontend:function_projection source_code_units=157
+[MEDIUM][decision]         dart_frontend:function_projection:definition taken=1 reason=index=0 name=supply arity=1
+[HIGH][exit]       <- dart_frontend:function_projection ok function_count=1
+[HIGH][enter]       -> dart_frontend:parse_spec source_code_units=157
+[MEDIUM][decision]         dart_frontend:parse_spec:rules taken=1 reason=rule_count=1
+[HIGH][exit]       <- dart_frontend:parse_spec ok rule_count=1
+[HIGH][exit]     <- dart_frontend:function_shell_spec ok functions=1 rules=1
+[HIGH][enter]     -> dart_staged:function_body_dispatch function_count=1
+[MEDIUM][decision]       dart_staged:function_body_dispatch:job taken=1 reason=function_index=0 function_name=supply
+[HIGH][enter]       -> dart_staged:execute_jobs start
+[MEDIUM][decision]         dart_staged:execute_jobs:queue taken=1 reason=normalized=1 sorted=1
+[HIGH][enter]         -> dart_staged:job queue_index=0 job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29
+[MEDIUM][decision]           dart_staged:job:resolve taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 resolved_spec_id=builtin:actionir-body.spec
+[MEDIUM][decision]           dart_staged:job:load taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 source_kind=builtin_adapter
+[MEDIUM][decision]           dart_staged:job:compile taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 top_rule=action_block
+[MEDIUM][decision]           dart_staged:job:execute taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 result_field=body_ast
+[HIGH][exit]         <- dart_staged:job ok
+[HIGH][exit]       <- dart_staged:execute_jobs ok result_count=1
+[MEDIUM][decision]       dart_staged:function_body_dispatch:stitch taken=1 reason=function_index=0 result_field=body_ast
+[HIGH][exit]     <- dart_staged:function_body_dispatch ok result_count=1
+[HIGH][exit]   <- dart_staged:parse_spec_with_function_asts ok functions=1 rules=1
+[HIGH][exit] <- dart_frontend:parse_spec_with_functions ok functions=1 rules=1
+[HIGH][enter] -> dart_compiler:compile_spec rules=1 functions=1 validate=1 strict=0
+[HIGH][enter]   -> dart_frontend:validate_spec rules=1 functions=1 strict=0
+[MEDIUM][decision]     dart_frontend:validate_spec:checks taken=1 reason=strict=0
+[HIGH][exit]   <- dart_frontend:validate_spec ok
+[HIGH][enter]   -> dart_compiler:function_registry function_count=1
+[MEDIUM][decision]     dart_compiler:function_registry:definition taken=1 reason=index=0 name=supply arity=1
+[HIGH][exit]   <- dart_compiler:function_registry ok function_count=1
+[MEDIUM][decision]   dart_compiler:compile_spec:rule taken=1 reason=label=Value definition_index=0
+[MEDIUM][decision]   dart_compiler:compile_spec:dependency_regex taken=1 reason=rule_count=1
+[HIGH][exit] <- dart_compiler:compile_spec ok rules=1 functions=1
+[LOW][decision] dart_runtime:entry_rule_selection taken=1 reason=requested=<default> effective=Value basis=first_authored_marker
+[HIGH][enter] -> dart_runtime:parse top_rule=Value
+[HIGH][enter]   -> dart_runtime:rule label=Value entry_regex=0 mode=Default cursor_policy=seek cursor=0
+[HIGH][mark]     dart_runtime:lifecycle_block rule=Value lifecycle=I line=3 cursor=0
+[HIGH][exit]   <- dart_runtime:rule matched=true cursor=0
+[HIGH][exit] <- dart_runtime:parse matched=true cursor=0

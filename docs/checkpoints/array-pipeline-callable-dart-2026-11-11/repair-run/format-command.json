@@ -1,0 +1,14 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_dart_project_data.sh",
+    "format",
+    "--output=none",
+    "--set-exit-if-changed",
+    "dart/lib/src/runtime/interpreter.dart",
+    "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+    "dart/tool/probe_callable_array_pipeline_results.dart",
+    "dart/tool/callable_array_pipeline_observation.dart"
+  ]
+}

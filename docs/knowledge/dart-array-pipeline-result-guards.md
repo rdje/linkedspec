@@ -2,6 +2,7 @@
 id: dart-array-pipeline-result-guards
 title: Dart pure Array pipelines retain actual-kind guards after the first producer
 answers:
+  - "were Dart pipeline parsed bytes retained before compilation and restoration"
   - "why does Dart trim_each set_key run Hash operands"
   - "which Dart guard path owns split_each trim_each filter_nonempty lowercase_each uppercase_each uniq filter_match results"
   - "does Dart preserve pipeline Number null Hash initial sources"
@@ -14,6 +15,7 @@ status: bounded Dart79.3 focused-checked; independent peers/full admission separ
 tags: [dart, arrays, pipeline, guards, source, arity, custody]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.79.3; array-pipeline-result-guard-dart-2026-11-11/REVIEW.md retains independent173/shared36+own137,141 profiles,nineteen original targets/154 exact healthy records,173 parsed/module pairs,four-route173PASS/private19RED-current173PASS/direct318 and first readonly0/empty stderr/eleven corruptions."
 reverify:
+  - "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-pipeline-callable-dart-2026-11-11/audit_restore_order.py"
   - "bash tools/run_python_project_data.sh docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/review.py"
   - "cd dart && bash ../tools/run_dart_project_data.sh test --reporter expanded --concurrency=1 test/array_pipeline_result_guard_composition_test.dart test/array_transform_result_guard_composition_test.dart test/value_copy_test.dart"
 ---
@@ -59,3 +61,11 @@ Rebuild Dart applications. Full native/VM/cache/transitive/toolchain/OS custody
 remain separate. Generated rows retain class/text projection; omitted additional
 toJson fields stay unassessed. Related: [[array-pipeline-result-guard-selection]],
 [[dart-array-transform-result-guards]], [[dart-direct-test-fixture-inputs]].
+
+November11 custody qualification: the original retained probe compiles/restores
+before writing parsed JSON. The pairs remain actual later captures; before-first-
+restoration retention is not established. Callable79.6.3 persists/readbacks first
+and captures all available RuntimeInterpreterException/GeneratedSourceException
+wire fields. Original omitted generated wire values remain unknown. P1 audit4.24
+owes inherited-claim review after coverage and before admission; original packets
+are unchanged. Static retained-source evidence: array-pipeline-callable-dart-2026-11-11/restore-order-result.json.
