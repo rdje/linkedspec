@@ -1,0 +1,5 @@
+{
+  "source": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/intake/luajit/native-before-first-run.tar.gz",
+  "source_sha256": "24c6ba6965724150f1a392aa3ae6e8d724a5b163506b9bbbdd1264dd2ce41871",
+  "scope": "Exact retained opaque native products reused; no new compiler or native implementation claim."
+}

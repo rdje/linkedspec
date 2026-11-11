@@ -1,0 +1,122 @@
+{
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/lower_logical_later_with.compiled.json": {
+    "bytes": 6769,
+    "mode": 420,
+    "sha256": "1813954799f20202a486e07d8070cee2d5de5a3cf20bcfb33ee024d1835e7693"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/lower_logical_later_with.parsed.json": {
+    "bytes": 2474,
+    "mode": 420,
+    "sha256": "1b142cc47b5c45bfe3c05fb51bc53dd2c93bc183b1b5186cf437b94ae119abc3"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/lower_logical_later_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "df141812beedab4f13113a941e0214e4567ec1678eda25eeb54af7b1688eb6cc"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_block_composed.compiled.json": {
+    "bytes": 6870,
+    "mode": 420,
+    "sha256": "2b0695a4d1a9a02cb25f200086ca2b90e5b84efca625eea637c5c0baca077396"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_block_composed.parsed.json": {
+    "bytes": 2492,
+    "mode": 420,
+    "sha256": "ff532500df035e293d94520d952b1c3cdc1fcf005237095bbbde3b702ebfa677"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_block_composed.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "07ebf911730d12903b60faee2a90380c264f3792a6b82d066678510c6be52dca"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_literal_composed.compiled.json": {
+    "bytes": 5854,
+    "mode": 420,
+    "sha256": "e6eb0638ea103cef695b5c6db99e604acb6cc9ff12e52835d5abd5c637073d9c"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_literal_composed.parsed.json": {
+    "bytes": 2411,
+    "mode": 420,
+    "sha256": "da1e0d04485bccd4236abbc0525f59769bc65f98fee2679e5e756e46e9d472ab"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_pattern_literal_composed.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "a6375f17ba33c3af8ac725ede7e5d9f9c594efcafbcc3592e535b7365d62b533"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_fixed_missing_composed.compiled.json": {
+    "bytes": 6413,
+    "mode": 420,
+    "sha256": "2eb6e0adf8cb9b1d0c948ab2ccaca6e8366a82afc3b3c5ffae0ca14083bac044"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_fixed_missing_composed.parsed.json": {
+    "bytes": 2677,
+    "mode": 420,
+    "sha256": "0ebbe7d613d1f0961aecd29e75e7a5a7cf7b9f36846068e084cd08ea946b6bfb"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_fixed_missing_composed.trace.log": {
+    "bytes": 6911,
+    "mode": 420,
+    "sha256": "332158501cd23d1370e980289a475ddc02be2deb14b7fa2dedaaad2b4b250d64"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_variadic_multi_composed.compiled.json": {
+    "bytes": 6646,
+    "mode": 420,
+    "sha256": "5b1ddd4897e78aac9cb033e0d2fca0d118b0159adf1f63d6ddcd0949b487d87d"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_variadic_multi_composed.parsed.json": {
+    "bytes": 2806,
+    "mode": 420,
+    "sha256": "fbb26b5bf2496c0e3e32c4cb430326d8be6778a344c4da3f5ee38b2ac1d40fcb"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/own_signature_variadic_multi_composed.trace.log": {
+    "bytes": 6945,
+    "mode": 420,
+    "sha256": "9f5635d819aa5693de42aaef8c6986bfcfd99f8173ac0e39c898656184c11f9f"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_free_hash_guard.compiled.json": {
+    "bytes": 4241,
+    "mode": 420,
+    "sha256": "5b93c7617d336d2e0183fa3a4ce58ffa8e43a561370e4f7a01de0420dc52b00e"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_free_hash_guard.parsed.json": {
+    "bytes": 2249,
+    "mode": 420,
+    "sha256": "1474e1bf4d658b93422d5034399cc7abc775de6b1a2daf7c0124ad38059cd72a"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_free_hash_guard.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "534589632b44e4d65417d71b870905ddbc629ae15bda6e0224a10814f9570638"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_receiver_hash_guard.compiled.json": {
+    "bytes": 4203,
+    "mode": 420,
+    "sha256": "52cf699bb3365e61d3c62cbfa1b80dbdc60f30f71e47301ac2d8dd7e7c37c38d"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_receiver_hash_guard.parsed.json": {
+    "bytes": 2252,
+    "mode": 420,
+    "sha256": "ea1929227cfb54d6b72b7fd4967e371949f5333f1cf39ab020b79894d7f00da8"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_each_receiver_hash_guard.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "f39c103c18c147262b54fd65ac404af849e128dc5f48bb124b7a9986b99e1808"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_later_with.compiled.json": {
+    "bytes": 5556,
+    "mode": 420,
+    "sha256": "f7ba3bf682be85ee58bbd51ed9dec00d34932e78c351f05fcca657eb580c464b"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_later_with.parsed.json": {
+    "bytes": 2360,
+    "mode": 420,
+    "sha256": "3501d8b8776a70d93b2276ca9d1ed1d04c8a1dc3e8f67dc70d85c52224f04cd9"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/luajit/trim_later_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "0a4d1d0369894451ecb302d82540d257d8d55ce6f726b28c7683ae72a0324339"
+  }
+}

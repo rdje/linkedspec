@@ -1,0 +1,9 @@
+{
+  "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+  "LUA_CPATH": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/luajit/native/?.so;;",
+  "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+  "LINKEDSPEC_CALLABLE_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/luajit",
+  "LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT": "",
+  "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/callableproof/luajit",
+  "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/luajit/prior-key-count"
+}

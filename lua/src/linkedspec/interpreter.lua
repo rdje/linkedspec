@@ -4205,9 +4205,11 @@ function typed_source.receiver_mutation.is_ordinary_array_pipeline_result_chain(
       return false
     end
   end
+  -- Invocation keeps its arity checks and caller effects. A canonical pipeline
+  -- prefix owns the produced result without becoming an unregistered free call.
   if expr ~= nil and expr.kind == "call" then
-    if engine.compiled_spec.function_registry:has_name(expr.name) then return false end
-    if (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg and
+    if not engine.compiled_spec.function_registry:has_name(expr.name) and
+      (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg and
       typed_source.receiver_mutation.is_canonical_array_pipeline_arity(expr.name, #(expr.args or {})) and
       typed_source.receiver_mutation.is_ordinary_array_pipeline_arguments(expr.name, expr.args, false) then
       return true

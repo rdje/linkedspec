@@ -2035,6 +2035,19 @@ arities and documented regex operands; String/bare/block compatibility observati
 add no broader pattern or callback admission. Reload the updated Julia runtime
 and rebuild deployed applications; parsed/emitted formats remain unchanged.
 
+Installed PUC Lua5.5.1 and LuaJIT also support these canonical callable pipeline
+continuations. Valid empty variadic results remain empty Arrays; a wrong Hash
+consumer rejects before K/V and later copying, logical or `with` work, preserving
+source effects. Initial non-Array fallbacks, immediate empty-Array `with` and
+existing fixed/rest invocation errors keep Lua's own behavior. Native errors keep
+their diagnostic stage and outer helper/arity metadata; generated failures keep
+source attribution. Needed pattern errors are checked with valid text after a
+DSL binding error. String/bare/block pattern observations retain empty Arrays
+and existing block effects, without broader pattern or callback admission; use
+the documented regex syntax. Reload the updated Lua SDKs. Parsed/emitted formats
+stay unchanged, while malformed native-pattern handling and declared PUC5.4
+remain separately owned and unadmitted.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and

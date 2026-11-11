@@ -1,0 +1,52 @@
+{
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/baseline.json": {
+    "bytes": 690868,
+    "mode": 420,
+    "sha256": "dd2dfd7f2b1da650aa5fdf7029104a08d2f2b25d44744afda246671f6976e17f"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/before/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/before/puc/normal-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/repair.py": {
+    "bytes": 4204,
+    "mode": 420,
+    "sha256": "f99d1d670af3593efaf3de84801422c0916a44ae59b04f48b5aa86d46dde9ef0"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/run_repair.py": {
+    "bytes": 2349,
+    "mode": 420,
+    "sha256": "ab1c4ec9ffba3c49c8643daecdf9bf07072fd2d1a015a915922c032bd9841683"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/complete.txt": {
+    "bytes": 50,
+    "mode": 420,
+    "sha256": "9dd515cab85209a97e9462f867d97eb23689ff63e1fb6d8827208b914a0c02ed"
+  },
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 281190,
+    "mode": 420,
+    "sha256": "fc672d634792ec81840cc101d42b11227d9714368d8962e7ef4365d89a127758"
+  },
+  "lua/test/run.lua": {
+    "bytes": 406287,
+    "mode": 420,
+    "sha256": "da80df4dc80ddb8b18b58438dbb6cef43380a36cd42ae335b8ed6542aca278b2"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

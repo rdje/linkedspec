@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues callable79.6. Perl/Rust/Dart/Julia are implemented with focused checks. Installed safe Lua79.6.5 is next; complete source/context/native admission and historical Rust/Dart audit4.24 remain separate.
+Full PNT continues after all bounded ordinary79/callable79.6 backend lanes have focused results. Parent/full23.4 admission remains open. Daily4.26 then authoritative remaining-feature assessment23.1.41 are next.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4. Four interpreter insertions/two deletions preserve invocation/producers/formats; one runner include.194/four routes776PASS/private20RED-current194 covers17 supported targets/three separate pattern compatibility movements/174 full-wire records exact. Direct1866 assertions/1353 retained pairs/eight trace inputs/first readonly0-empty stderr-seventeen controls/current482 identities pass. New persist/read/compile/restore order and complete available public error maps remain retained.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5. Four interpreter insertions/two deletions/one runner group/no chunk locals; invocation/producers/formats preserved. Each installed host194/four routes1164PASS/private19RED-current194/direct2254 covers16 supported targets/three separate pattern compatibility movements/175 full records exact.1353 pairs/eight qualified traces per host/first readonly0-eighteen controls/current500 identities pass. First trace1 remains explicit; native bytes stable before load/new parsed persistence/full public error maps retained.
 
 ## Next Action
 
-Activate independent installed Lua79.6.5 from clean Git. Acquire shared safe37 and actual Lua callable source/signature/arity/error/earlier-owner policies before production, on installed PUC/LuaJIT through published SDK routes. Retain native products before load and first-use inputs/full available fields; never execute unsafe malformed native patterns or unsafe full runner. Focused bounded implementation/proof/docs/normal commit, then pick remaining roadmap-aligned work. Full23.4/historical4.24/safe-launcher4.22/routing18.2 follow feature coverage.
+Activate daily4.26 from clean Git near the24h boundary (last November10 15:19UTC): bounded safe artifact census/owned completed-log archival retirement, exact proof/latest-only record/docs/normal commit. Then activate23.1.41 to reconcile the authoritative inventory with remaining agreed features and deferred verification; select a bounded next owner without inferring completeness. Full native/source/context/registration/formatter/declared5.4/historical4.24/safe-launcher/routing owners remain open.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5 — Each194/four routes1164PASS/private19RED-current194/175 full records/direct2254/1353 pairs/eight qualified traces/readonly18/current500; daily4.26 then selection41.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.25 — Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail exact;48537 bytes renewed/53 queries/first readonly ten controls; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 —194/four routes/private19RED-current194/175 full-wire records/direct383/readonly17/current497; Rust/Dart custody qualification4.24; Julia next.
@@ -29,7 +30,6 @@ Activate independent installed Lua79.6.5 from clean Git. Acquire shared safe37 a
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.2 —173/four routes/private11RED-current173PASS/direct374;162 healthy records/173 artifact pairs/warnings exact; first readonly nine controls; independent Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1 —244PASS/private18RED-restored244PASS/direct384; first readonly thirteen controls;225 exact projections/one descriptor advance; independent Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.0 — Number source fence166PASS/private14RED-qualified166PASS/direct195; qualified readonly twelve controls; original18 composition targets preserved.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.1.0 —184 programs/148 profiles/180 pairs,14 main-only reads/source79.0 and one extra composition-error target; readonly ten controls; no production edit.
 
 ## History
 

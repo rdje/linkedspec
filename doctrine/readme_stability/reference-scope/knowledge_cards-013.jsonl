@@ -1,4 +1,5 @@
-{"member_count":69,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":70,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5511,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-statement-separator-contract.md","sha256":"a5b3105454887f33e9d95646c2e28b0ec29180e3b4b6f141ff37c8bbf590971d","type":"member"}
 {"bytes":4432,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-comparison-bridge-contract.md","sha256":"2236db2f6df34b0cb5024ff5debb9754d810c82ca0de1aec7b18cd315816eebb","type":"member"}
 {"bytes":2810,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-method-surface-verified.md","sha256":"9e82aa7a7b3dc2b6a58ff9db6bc4d5b0ceee722f493b13e448ddf00612a71ce3","type":"member"}
 {"bytes":9658,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-string-receiver-value-chains.md","sha256":"0af31151577230cad923986076e7c040efff42d0ab5e4b5c218f5f179694db25","type":"member"}

@@ -1,0 +1,65 @@
+[HIGH][enter] -> lua_frontend:parse_spec_with_functions source_bytes=248
+[HIGH][enter]   -> lua_frontend:function_parser_execute source_bytes=248
+[HIGH][enter]     -> lua_runtime:create_engine rules=12 functions=0
+[HIGH][exit]     <- lua_runtime:create_engine ok
+[LOW][decision]     lua_runtime:entry_rule_selection taken=1 reason=requested=user_function_definitions effective=user_function_definitions basis=explicit_selector
+[HIGH][enter]     -> lua_runtime:parse top_rule=user_function_definitions
+[HIGH][enter]       -> lua_runtime:rule rule=user_function_definitions entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=0
+[DEBUG][decision]         lua_runtime:regex_match taken=1 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=2 match_start=0 match_end=17 cursor_before=0
+[HIGH][mark]         lua_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=function_definition regex_index=0
+[HIGH][enter]         -> lua_runtime:rule rule=function_definition entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=17
+[DEBUG][decision]           lua_runtime:regex_match taken=1 reason=rule=function_definition cursor_policy=seek entry_regex=0 alternative=1 match_start=29 match_end=30 cursor_before=17
+[HIGH][mark]           lua_runtime:regex_slot_selected rule_label=function_definition selection_role=choice target_rule=function_definition regex_index=1
+[DEBUG][mark]           lua_runtime:mark_capture source=helper rule=function_definition helper=capture_slice arity=0 cursor=30 match_start=29 match_end=30 capture_start=17
+[DEBUG][mark]           lua_runtime:mark_capture source=helper rule=function_definition helper=capture_slice arity=0 cursor=30 match_start=29 match_end=30 capture_start=17
+[DEBUG][mark]           lua_runtime:mark_capture source=helper rule=function_definition helper=capture_slice arity=0 cursor=30 match_start=29 match_end=30 capture_start=17
+[HIGH][exit]         <- lua_runtime:rule matched=true cursor=30
+[DEBUG][decision]         lua_runtime:child_dispatch taken=1 reason=edge_family=action rule=user_function_definitions target=function_definition[0] cursor_before=17 cursor_after=30
+[DEBUG][decision]         lua_runtime:regex_match taken=1 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=4 match_start=32 match_end=248 cursor_before=30
+[HIGH][mark]         lua_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=rule_paragraph regex_index=0
+[DEBUG][decision]         lua_runtime:regex_match taken=0 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=-1 match_start=-1 match_end=-1 cursor_before=248
+[HIGH][mark]         lua_runtime:lifecycle_block rule=user_function_definitions lifecycle=LX line=20 cursor=248
+[HIGH][exit]       <- lua_runtime:rule matched=true cursor=248
+[HIGH][exit]     <- lua_runtime:parse matched=true cursor=248
+[MEDIUM][decision]     lua_frontend:function_parser_execute:definitions taken=1 reason=definition_count=1
+[HIGH][exit]   <- lua_frontend:function_parser_execute ok definition_count=1
+[HIGH][enter]   -> lua_staged:parse_spec_with_function_asts source_bytes=248
+[HIGH][enter]     -> lua_frontend:function_shell_spec source_bytes=248
+[HIGH][enter]       -> lua_frontend:function_projection source_bytes=248
+[MEDIUM][decision]         lua_frontend:function_projection:definition taken=1 reason=index=0 name=supply arity=1
+[HIGH][exit]       <- lua_frontend:function_projection ok function_count=1
+[HIGH][enter]       -> lua_frontend:parse_spec source_bytes=248
+[MEDIUM][decision]         lua_frontend:parse_spec:rules taken=1 reason=rule_count=1
+[HIGH][exit]       <- lua_frontend:parse_spec ok rule_count=1
+[HIGH][exit]     <- lua_frontend:function_shell_spec ok functions=1 rules=1
+[HIGH][enter]     -> lua_staged:function_body_dispatch function_count=1
+[MEDIUM][decision]       lua_staged:function_body_dispatch:job taken=1 reason=function_index=0 function_name=supply
+[HIGH][enter]       -> lua_staged:execute_jobs start
+[MEDIUM][decision]         lua_staged:execute_jobs:queue taken=1 reason=normalized=1 sorted=1
+[HIGH][enter]         -> lua_staged:job queue_index=0 job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29
+[MEDIUM][decision]           lua_staged:job:resolve taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 resolved_spec_id=builtin:actionir-body.spec
+[MEDIUM][decision]           lua_staged:job:load taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 source_kind=builtin_adapter
+[MEDIUM][decision]           lua_staged:job:compile taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 top_rule=action_block
+[MEDIUM][decision]           lua_staged:job:execute taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:17-29 result_field=body_ast
+[HIGH][exit]         <- lua_staged:job ok
+[HIGH][exit]       <- lua_staged:execute_jobs ok result_count=1
+[MEDIUM][decision]       lua_staged:function_body_dispatch:stitch taken=1 reason=function_index=0 result_field=body_ast
+[HIGH][exit]     <- lua_staged:function_body_dispatch ok result_count=1
+[HIGH][exit]   <- lua_staged:parse_spec_with_function_asts ok functions=1 rules=1
+[HIGH][exit] <- lua_frontend:parse_spec_with_functions ok functions=1 rules=1
+[HIGH][enter] -> lua_compiler:compile_spec rules=1 functions=1 validate=1 strict=0
+[HIGH][enter]   -> lua_frontend:validate_spec rules=1 functions=1 strict=0
+[MEDIUM][decision]     lua_frontend:validate_spec:checks taken=1 reason=strict=0
+[HIGH][exit]   <- lua_frontend:validate_spec ok
+[HIGH][enter]   -> lua_compiler:function_registry function_count=1
+[MEDIUM][decision]     lua_compiler:function_registry:definition taken=1 reason=index=0 name=supply arity=1
+[HIGH][exit]   <- lua_compiler:function_registry ok function_count=1
+[MEDIUM][decision]   lua_compiler:compile_spec:rule taken=1 reason=label=Value definition_index=0
+[MEDIUM][decision]   lua_compiler:compile_spec:dependency_regex taken=1 reason=rule_count=1
+[HIGH][exit] <- lua_compiler:compile_spec ok rules=1 functions=1
+[LOW][decision] lua_runtime:entry_rule_selection taken=1 reason=requested=<default> effective=Value basis=first_authored_marker
+[HIGH][enter] -> lua_runtime:parse top_rule=Value
+[HIGH][enter]   -> lua_runtime:rule rule=Value entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=0
+[HIGH][mark]     lua_runtime:lifecycle_block rule=Value lifecycle=I line=3 cursor=0
+[HIGH][exit]   <- lua_runtime:rule matched=true cursor=0
+[HIGH][exit] <- lua_runtime:parse matched=true cursor=0

@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/capture_current.py": {
+    "bytes": 2120,
+    "mode": 420,
+    "sha256": "32c746869a6376a47accbd21ef0500d3af8f1d0d60ad5fdaad1ddfc8f162f8e0"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/check_current.py": {
+    "bytes": 1568,
+    "mode": 420,
+    "sha256": "62593fee094a37a6b54b2abcf168c4a584c32825d8c76e80515294cfd2e921a7"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/input-identities.json": {
+    "bytes": 88469,
+    "mode": 420,
+    "sha256": "4caacfdaf2aa1ecd98fa2b5edf279ca5c3811d2867e9eed0ee549cca67ac903b"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 979840,
+    "mode": 420,
+    "sha256": "56671bbfe3d2a96041ad49715b6ef70525de3f033406d9181c7611be37eae81e"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/repair-run/identities.json": {
+    "bytes": 1847,
+    "mode": 420,
+    "sha256": "6ea5868ab6656bce915b07f123dec6aee7dca17754de9525ad2af9eb3bc2a462"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/input-identities.json": {
+    "bytes": 83828,
+    "mode": 420,
+    "sha256": "165ba907d0554269df38ce4439952cd021438c3708ca1ad20c0d018c817ae516"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

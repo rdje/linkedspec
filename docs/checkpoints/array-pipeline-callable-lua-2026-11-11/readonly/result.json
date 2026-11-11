@@ -1,0 +1,50 @@
+{
+  "recovery": "PASS",
+  "hosts": {
+    "puc": {
+      "programs": 194,
+      "supported_targets": 16,
+      "separate_pattern_compatibility": 3,
+      "complete_preserved_records": 175,
+      "normal_checks": 1164,
+      "private_old_failed_groups": 19,
+      "private_current_passed_groups": 194,
+      "retained_pairs": 1353
+    },
+    "luajit": {
+      "programs": 194,
+      "supported_targets": 16,
+      "separate_pattern_compatibility": 3,
+      "complete_preserved_records": 175,
+      "normal_checks": 1164,
+      "private_old_failed_groups": 19,
+      "private_current_passed_groups": 194,
+      "retained_pairs": 1353
+    }
+  },
+  "qualified_public_traces_per_host": 8,
+  "current_declared_inputs": 500,
+  "direct_checks_per_host": 2254,
+  "first_trace": "actual1 retained; no complete PASS credit",
+  "effective_corruptions": [
+    "original wrong consumer accepted as repaired",
+    "case omitted",
+    "source effect lost",
+    "pattern producer effect lost",
+    "source fallback changed",
+    "excess free argument skipped",
+    "split edge fields fabricated",
+    "earlier owner runs with",
+    "Boolean coerced to Number",
+    "native diagnostic stage omitted",
+    "generated source identity omitted",
+    "generated detail omitted",
+    "outer native arity code omitted",
+    "invalid signature masked as null",
+    "private owner replaced by alias",
+    "unrelated source edit admitted",
+    "opaque native product changed",
+    "parsed product changed"
+  ],
+  "limits": "Finite historical source/native-product/data proof. Fresh modules share each Lua runtime/process. Complete native/transitive/toolchain/cache4.2/SESSION5, declared5.4, unsafe formatter2.3 and full source/context/portable admission remain separate."
+}

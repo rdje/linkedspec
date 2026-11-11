@@ -1,0 +1,5 @@
+{
+  "source": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/intake/puc/native-before-first-run.tar.gz",
+  "source_sha256": "10ba898fd46ec87f19ad095730d1d23741acfc3fa5393fde0d5798378e3a161a",
+  "scope": "Exact retained opaque native products reused; no new compiler or native implementation claim."
+}

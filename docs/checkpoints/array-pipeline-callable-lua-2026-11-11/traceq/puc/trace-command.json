@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/trace_qualified.lua",
+    "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/cases.json",
+    "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/puc"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/traceq/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua"
+  }
+}

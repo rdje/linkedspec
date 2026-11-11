@@ -24,6 +24,7 @@
 {"bytes":4537,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-callable-codeblock-literal-state.md","sha256":"fdf714656d594dc667ec7b024f87cef3d04b38846c433cdd3b91dd7c9b3f4e17","type":"member"}
 {"bytes":7255,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.38","path":"docs/knowledge/lua-callable-codeblock-typed-audit.md","sha256":"fd8c7c5192255383f8bdea66bbfc299c751b39cd114f45afa16d14a1c5083df8","type":"member"}
 {"bytes":2846,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/lua-callable-key-count-preservation.md","sha256":"d1228a65bc7e6724b60ecae00ca1b845792984fe013f6729f6351d124a8de706","type":"member"}
+{"bytes":4027,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5","path":"docs/knowledge/lua-callable-pipeline-result-guards.md","sha256":"6e42640b38eddb4d7fa06aaaca1e0ba79fca00d12e280826a492d0e0771a5fc4","type":"member"}
 {"bytes":2435,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-canonical-set-result-guards.md","sha256":"b7a0e154a5fec4c44105228b257656952dbe87cca4d0b8df955a49a3e0211a42","type":"member"}
 {"bytes":9038,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-cursor-runtime-audit.md","sha256":"9be6cbaa77554c3cd451bc9ed2d76e2f14e48241499b9dbff6b6b27298e777fa","type":"member"}
 {"bytes":2529,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-capture-endpoint-absence-compatibility.md","sha256":"98cf18971e8bf0c0835d3b87453c5ed6e157215e42b9fe43e39a568961e78d35","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3322,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-outward-function-descriptor-union.md","sha256":"c565f7510e8b74ecd9276e31e8f1db52e818dd428fdb42efe7f09f291e08de47","type":"member"}
 {"bytes":22824,"lines":219,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-completion-semantic-foundation-reading.md","sha256":"e31cd1b61d81881c32ca53c0afcaabdfa04879a21d908d665a361210faec2c9f","type":"member"}
 {"bytes":15354,"lines":210,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-control-numeric-collection-reading.md","sha256":"9a1521a252ed4e8d81a6f940533b9640bc9f274b311a2e55c89a62c1fa6e8c9e","type":"member"}
-{"bytes":14124,"lines":190,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-function-generated-execution-reading.md","sha256":"eefbe9845a56126f5c571f9bb3b7582f34a832aae216d62eded7301aceb6d25d","type":"member"}

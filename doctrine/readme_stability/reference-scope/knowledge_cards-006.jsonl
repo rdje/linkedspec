@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14124,"lines":190,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-function-generated-execution-reading.md","sha256":"eefbe9845a56126f5c571f9bb3b7582f34a832aae216d62eded7301aceb6d25d","type":"member"}
 {"bytes":15272,"lines":202,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-generated-runtime-cursor-reading.md","sha256":"0628e6da2e809a3987b959aa8664165893fce1404383466d03262933330e9f39","type":"member"}
 {"bytes":14799,"lines":201,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-named-capture-scoped-callback-reading.md","sha256":"2b80cd5f36aeae82e488d726091329e85bdcf1dcaa012d93bcb7433af65732c2","type":"member"}
 {"bytes":13552,"lines":188,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-pipeline-corpus-frontend-reading.md","sha256":"7a0c3d84e9fdfe2482ab31366cdf738b4f284aa9e757d6a96c40d60e4355fcd5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":20067,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md","sha256":"73a07473e19133768bfb44f6097f7834ae3107961fda95b5ca1d243435aca99d","type":"member"}
 {"bytes":13616,"lines":125,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-lower-completion-reading.md","sha256":"873eb4f90e3d816f9f18a437b1aa789148eb383e14b8eee645afd9a1bdf46659","type":"member"}
 {"bytes":8561,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-rule-label-implementation-plan.md","sha256":"b81555d8c1f5b1fa701dbd0c33ddcfbf8f6a601eadb166dddcda95dfb09e06f7","type":"member"}
-{"bytes":4100,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-rule-label-negative-isolation.md","sha256":"c9ced3684b00f83b575fac1ec042264c3ef621468c28d3539565a6ef292b5ce1","type":"member"}

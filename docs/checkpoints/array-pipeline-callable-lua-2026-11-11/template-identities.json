@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/prepare.py": {
+    "bytes": 8081,
+    "sha256": "8112df6a35b9087ccb1f15f269a129147bd021fff135d76bea8da5dc5d1843f2"
+  },
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/signature-sources.json": {
+    "bytes": 5645,
+    "sha256": "5b44eada061cca30c7a237ef101f4d77999d62830e73a15b4a5ced9a638afc67"
+  },
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/pattern-sources.json": {
+    "bytes": 5793,
+    "sha256": "315f6d95777b864e3a328943594f10012776a0a310369c190016f6a01e10e8f6"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/capture.py": {
+    "bytes": 5965,
+    "sha256": "376c34cb7f1b8167b5fdf6146ac76dd1d212f7dac20a815082be8ecc78c5cdaa"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/proof_io.py": {
+    "bytes": 3815,
+    "sha256": "c03ddca4e554436c8a529d497eb98ff55e78d6bc0afb47eb7e577333ebab8d5b"
+  },
+  "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/observer.lua": {
+    "bytes": 4019,
+    "sha256": "ad5564cc2241c68bb858a893e21962ecabbee13c376860c3bd6aa8c76e5891b3"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/capture_trace.py": {
+    "bytes": 2944,
+    "mode": 420,
+    "sha256": "62067c97565596aa2b7958c0cdc1ae1c225d7b53d835942c267fcd21196b68d2"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/qualify_trace.py": {
+    "bytes": 2661,
+    "mode": 420,
+    "sha256": "5da3a733e0870134166d2f26300dc29bba8029ae9519138d08bee43cd665f635"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/trace.lua": {
+    "bytes": 2126,
+    "mode": 420,
+    "sha256": "3b6b8fa46e9fa9046c2f70c4a95a5e030a406b69279f4f77668773c1f54399df"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/trace/puc/trim_each_free_hash_guard.parsed.json": {
+    "bytes": 2249,
+    "mode": 420,
+    "sha256": "1474e1bf4d658b93422d5034399cc7abc775de6b1a2daf7c0124ad38059cd72a"
+  },
+  "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/trace/puc/trim_each_free_hash_guard.trace.log": {
+    "bytes": 6357,
+    "mode": 420,
+    "sha256": "2ba229d28fcad3e31dcb446e7258c0880a6056fc89c0cb5745e12a4e16d917ab"
+  }
+}

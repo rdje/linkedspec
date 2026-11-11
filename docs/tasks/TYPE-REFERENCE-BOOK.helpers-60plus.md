@@ -2754,7 +2754,7 @@
   Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
   Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
   Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
-  Frontier: All bounded ordinary79 backend outcomes are focused-checked. Selection23.1.40 freezes callable79.6 independently; clean selection landing precedes Perl79.6.1. Commit/brief0/clean Git precedes each next owner; parent/full admission closeout remains23.4 after coverage.
+  Frontier: All bounded ordinary79 and callable79.6 backend lanes are focused-checked on recorded routes/hosts. Parent/full source/context/native admission closeout remains23.4 after coverage. Daily4.26 and remaining-feature selection23.1.41 follow the clean Lua lane; no completeness claim from finite controls.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
   Status: `active` / source acquisition precedes production
@@ -2913,7 +2913,7 @@
   Landing correction: Initial normal commit fails DOCUMENT-HISTORY because a nonraw Python replacement inserts byte02 and removes the live Next Action heading. Preserve exact staged live bytes/full hook log; terminate only the owned failed commit tree with actual143 and no interrupted-check PASS. Rebuild fixed live sections explicitly, retain exact History/recent rows, check changed live text for controls, run focused document-history gate and normal corrected staging/scope/memory/hooks workflow. No source or SDK result changes.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6`
-  Status: `in_progress` / Perl/Rust/Dart bounded lanes focused-checked; Julia/Lua remain
+  Status: `in_progress` / all five bounded backend lanes focused-checked; complete admission23.4 remains separate
   Children: `.79.6.1`, `.79.6.2`, `.79.6.3`, `.79.6.4`, `.79.6.5`.
   Goal: Preserve existing registered-function pipeline receiver/result composition.
   Dependencies: Qualified selection23.1.40/shared safe37; normal clean selection landing before production.
@@ -2997,13 +2997,31 @@
   - [x] **LOCKSTEP** — Book/Knowledge/roadmap/task/index/live/MEMORY align; focused docs/gates/normal clean commit precedes installed Lua79.6.5. Full23.4 stays separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently acquire/repair installed Lua registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Verification tier: `focused`
+  Focused checks: Independent safe37/own source-signature-error policies per installed PUC/LuaJIT before production; retained native products before load, public trace/AST probes, new/direct ordinary pipeline/callable CountKeys normals, exact same-path old/current owner, readonly/corruptions/current identities; loadfile only for full runner, no chunk locals/unsafe malformed patterns; book/Knowledge/task/index/scope/history/memory/diff/normal hooks.
+  Canonical trigger: Full23.4/final clean push after agreed feature coverage; new infrastructure separately owned.
+  Claim verification: none: Finite authored feature/preservation controls; no complete native/cache/transitive, population/performance or declared5.4 measurement.
+  Activation: Clean9a6b229ce3f944ef3822e71935b1c40c109f74b9 Julia after all10/post-pointer/brief0/clean Git. Read frozen79.6/safe37, own ordinary pipeline/callable CountKeys/diagnostic/native-interface records, source-only probes/producer interfaces and relevant book. Acquire actual installed hosts independently before source changes. Use valid pattern text and needed DSL binding errors only; known native formatter2.3 and declared5.4 stay separate. Preserve complete available public error JSON plus outer native arity fields, first-use parsed input order, source effects/policies/formats and private loaded path; no other repository/submodule implementation work.
+  Documentation defect owned: Parent's peer-specific status annotation became stale after Julia completed. Replace it with a stable rollout qualification; child evidence and exact contracts remain authoritative.
+  Preparation: Safe shared37/own137 plus ten signature/ten pattern source-only questions total194; no peer outcomes imported and malformed native pattern questions are excluded. New observer retains public runtime/generated JSON plus existing native outer arity fields, writes/readbacks parsed JSON before compile/restore. Intake is running sequentially on installed hosts; retain native products before SDK load and reuse those exact opaque bytes for later epochs. Production unchanged.
+  First trace defect owned: PUC trace exits1 at trace.lua:31 because the instrument encodes a plain payload list; public JSON requires json.array/json.harray. Original producers/first-use capsule/child stdout-stderr-exit1 and partial parsed/trace artifacts stay exact; LuaJIT was not attempted. Qualify a new tagged-array trace producer/namespace, grant no complete first-trace PASS, and retire only verified archived native duplicates. Cold194 and before19RED/175PASS full records remain exact on both hosts; production unchanged.
+  Implementation progress: New normal matches every cold record and reproduces19 failed groups/175 preserved per host (1164 checks/76 failures). Qualified eight public AST/runtime traces per host pass. Four insertions/two deletions preserve free-helper identity and original invocation/producers/formats; one runner group/no chunk locals. After each194/four routes1164 checks0 failures. Private old/current and direct/recovery/current/docs/commit remain.
   Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
   Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
   Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+  Outcome: Each installed host194/four routes1164 checks0 failures/private19RED-current194,16 supported targets/three separate pattern compatibility movements/175 full records exact. Direct2254 checks/1353 pairs per host; eight qualified AST/runtime traces each/first readonly0-empty stderr-eighteen controls/current500 identities pass. Source4 insertions/two deletions/one runner group/no chunk locals; invocation/producers/formats unchanged. Original trace1/partial products remain without complete PASS credit. Native products held byte-exact before load; new parsed inputs precede compile/restore and full public error maps/outer fields remain. Evidence: docs/checkpoints/array-pipeline-callable-lua-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Both cold194 and new normal19 failed groups/175 preserved records match exactly; supported16/compatibility3 separate.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Qualified public parsed/compiled AST/runtime traces and namespace registry exclusion identify absent result-kind ownership.
+  - [x] **FIX** —4 insertions/two deletions preserve free-helper/invocation/producer behavior; one runner group/no chunk locals.
+  - [x] **ADDRESSED (verified)** — Both194PASS/private original-current, complete public error maps/outer fields; first readonly18 controls/current500 identities pass.
+  - [x] **NO REGRESSION** —175 complete records/policies/signatures/nested kinds, direct2254 per host and only declared source delta; native bytes stable before each load.
+  - [x] **LOCKSTEP** — Book/Knowledge/roadmap/task/index/live/MEMORY align; focused normal commit precedes daily4.26 then selection23.1.41. Full23.4/formatter/declared5.4 remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0`
   Status: `completed` / immutable intake with qualified recovery

@@ -1,0 +1,9 @@
+{
+  "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+  "LUA_CPATH": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/puc/native/?.so;;",
+  "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+  "LINKEDSPEC_CALLABLE_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/puc",
+  "LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT": "",
+  "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/callableproof/puc",
+  "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/puc/prior-key-count"
+}

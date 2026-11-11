@@ -1,0 +1,9 @@
+{
+  "outer_exit": 1,
+  "child_exit": 1,
+  "host": "puc",
+  "luajit": "not attempted",
+  "cause": "plain Lua payload list rejected by JSON codec; tagged array required",
+  "credit": "No complete first-trace PASS; original source/data/channels retained",
+  "native_retirement": "Exact three verified before-use archive duplicates removed after child exit; no residue"
+}

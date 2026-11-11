@@ -1,0 +1,4 @@
+{
+  "pipeline": "docs/checkpoints/array-pipeline-result-guard-lua-2026-11-11/callableproof/luajit",
+  "key_count": "docs/checkpoints/array-pipeline-callable-lua-2026-11-11/direct/luajit/prior-key-count"
+}
