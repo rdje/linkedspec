@@ -1,0 +1,1 @@
+Selected direct normals and syntax complete; full inputs and public API artifacts retained.

@@ -2930,7 +2930,7 @@
   Planned canonical trigger: Full23.4/final clean push after coverage.
   Planned claim verification: Finite authored controls; each child declares its claim boundary.
   Activation: Clean237a738b; frozen79.6/shared37/Perl41, original39 qualification, book, actual handlers and source predicate reviewed before independent acquisition. Distinct caller/parameter names avoid separately owned shadowing32. No production edit before intake.
-  Frontier: Intake child0 retains original178/terminal18. Nine malformed receiver arities are compiler defects, not producer policies. P1 child1 precedes result/readiness child2; commit cleanly between children. Canonical evidence and full constraints: docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md.
+  Frontier: Intake child0 retains original178/terminal18. Bounded first-call arity child1 is focused-checked;25 result/readiness gaps remain child2. Re-acquire178 against the repaired source after clean child1 landing; commit between children. Canonical evidence and full constraints: docs/checkpoints/array-pipeline-callable-perl-2026-11-11/INTAKE.md.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2`
   Status: `pending`
@@ -2991,13 +2991,26 @@
   Landing correction: First staged candidate fails task pressure by4413 bytes and duplicate actual verification owners after subdivision. Exact candidate/task snapshots/full hook log retained under INTAKE containment; owned hook processes terminated, exit unavailable after recovery (no PASS). Parent becomes planning-only; deduplicate only new prose into INTAKE without changing old tasks or caps. Scope updater's rejected -P sibling-import launch is also retained there; use its published wrapper.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1`
-  Status: `pending` / P1 prerequisite before callable prefix result repair
-  Goal: Reject malformed Perl pipeline signatures without emitting undefined private helper calls or falsely ready descriptors.
+  Status: `completed` / bounded first-call fence focused-checked before callable prefix result repair
+  Goal: Reject the demonstrated malformed first pipeline signatures on Perl registered-function receivers without private-helper calls or false readiness.
   Dependencies: Clean intake79.6.1.0 and its terminal-arity controls/current contract/source mechanism; preserve original178 and supported callable targets.
-  Acceptance: Own source/arity diagnosis and published signature rejection, reuse existing supported diagnostics/guarding without new helper or portable wrong-arity policy. No undefined __array_value helper survives malformed source. Preserve source-before-effects/optional-scope compatibility/current valid producer behavior, source/format/function/callback boundaries and all supported41 result targets. Minimal meaningful RED/GREEN/direct checks, same-path old/current source control, input/artifact recovery/current identity, docs and normal commit.
-  Planned verification: Focused malformed terminal/composed arity controls plus canonical direct-dependent pipelines; mandatory source/format/docs/hook checks.
-  Planned canonical trigger: Full23.4/final clean push after coverage; any new authority separately owned.
-  Planned claim verification: none: Finite authored arity/self-containment controls, no population/performance measurement.
+  Acceptance: Own source/arity diagnosis and published signature rejection, reuse existing supported diagnostics/guarding without new helper or portable wrong-arity policy. No undefined __array_value helper survives malformed source. Preserve source-before-effects/optional-scope compatibility/current valid producer behavior, source/format/function/callback boundaries and all qualified41 cases and25 supported result targets. Minimal meaningful RED/GREEN/direct checks, same-path old/current source control, input/artifact recovery/current identity, docs and normal commit.
+  Verification tier: `focused`
+  Focused checks: Same-backend terminal/composed malformed-signature oracles and valid canonical/initial policies; original178 preservation epoch, exact same-path old/current loaded owner, smallest direct pipeline/function normals, syntax/readonly/corruptions/current identity/book/Knowledge/task/index/scope/history/memory/diff/normal hooks.
+  Canonical trigger: Full23.4/final clean push after coverage; any new authority separately owned.
+  Claim verification: none: Finite authored arity/self-containment controls, no population/performance measurement.
+
+  Activation: Clean d4f430b96bafdf66b85a6d44e5a0c4f9e0d5e7ce after4.23 all10/post-pointer/brief0/clean Git. Read frozen79.6, intake/terminal18/actual handlers, current pipeline book, function signature/registry and existing early fluent-shape rejection/aggregate arity table. Own exactly the first canonical pipeline call on a registered function receiver; no later-owner/alias/optional-scope/global policy expansion. All source/format/earlier-owner and needed-error exclusions remain. Normal assertions must not freeze the25 known result defects; preserve those only in historical before/after records until child2 repairs them. Distinct caller/parameter names avoid owned shadowing32. Source/instrument/product custody precedes use; no production edit yet.
+
+  Outcome: Ten inserted compiler lines reuse the aggregate arity table/unsupported marker for only a first canonical pipeline on a registered-function receiver.125 groups move18 receiver RED/107PASS to125PASS; identical private path reproduces18RED with old bytes and125PASS with repaired bytes. Original178 changes only nine receiver arities;169 other projections retain complete observed fields/types/errors, including25 pending result targets. All678 actual module/handler pairs/first inputs survive. Direct pipeline6/variadic66 and both syntax checks pass with31 API artifacts. First actual readonly0/empty stderr/eleven controls and current121 input identity pass. Evidence: docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/REVIEW.md.
+  Oracle boundary: Nine terminal free forms reject null/no effects/unready. Malformed composed free forms retain their original unready KVW/W observations; they are excluded observations, not new policy or receiver-composition oracles. Recurring normal125 asserts legitimate producer policies and receiver rejection; known25 result defects are preserved only in historical comparison and remain child2's repair targets. Broad phase0 execution/full matrices remain23.4 after feature coverage.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Public125 normal has18 receiver RED; terminal nine false-ready forms contrast nine rejecting function oracles.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Failed private pipeline normalization retains DSL/private calls; early fluent shape validation lacked the equivalent first registered-receiver signature fence.
+  - [x] **FIX** — Ten lines reuse existing aggregate signatures with one implicit operand and existing public-helper rejection before effects; no source/format/alias/global policy change.
+  - [x] **ADDRESSED (verified)** —125PASS on native/fresh; exact private18RED-current125; first readonly eleven controls/current121 identity.
+  - [x] **NO REGRESSION** —107 normal/169 original projections exact,84 initial/with and14 canonical Array controls stable; direct6+66/syntax pass; original source/artifacts retained.
+  - [x] **LOCKSTEP** — Book/reference/Knowledge/roadmap/task/index/live/MEMORY align; focused docs/gates and normal clean commit precede re-acquisition/result79.6.1.2.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2`
   Status: `pending`

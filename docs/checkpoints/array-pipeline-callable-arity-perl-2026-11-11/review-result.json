@@ -1,0 +1,29 @@
+{
+  "recovery": "PASS",
+  "normal_groups": 125,
+  "receiver_RED_groups": 18,
+  "healthy_projections": 107,
+  "original_programs": 178,
+  "changed_receiver_arities": 9,
+  "original_other_projections": 169,
+  "actual_normal_and_preservation_pairs": 678,
+  "selected_direct_assertions": {
+    "array_pipeline_value_contract": 6,
+    "variadic_user_function_contract": 66
+  },
+  "direct_artifacts": 31,
+  "effective_corruptions": [
+    "actual baseline receiver remains RED",
+    "false readiness hidden",
+    "private helper execution leak",
+    "source effect executed",
+    "later with effect executed",
+    "fresh route omitted",
+    "Boolean and Number conflated",
+    "Number and text conflated",
+    "unrelated source edit",
+    "private image swapped",
+    "pending result defect silently normalized"
+  ],
+  "limits": "First canonical pipeline call on registered Perl function receivers only. Free terminal rejection is the oracle; malformed free composed records remain unready excluded observations.25 result gaps remain pending. Five metadata fields, complete observed errors/channels/source artifacts; same-process fresh modules. Native/cache/transitive/toolchain4.2/SESSION5/shadowing32/context/isolation/registration/full23.4 remain open."
+}

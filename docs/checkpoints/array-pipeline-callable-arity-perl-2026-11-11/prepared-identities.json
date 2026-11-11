@@ -1,0 +1,5 @@
+{
+  "tests/fixtures/array_pipeline_callable_arity_perl_cases.json": "97275a5cfeb308b5a54bd1bdc6e41485ba5b9542868b389570c2c4f9c2815c38",
+  "t/array_pipeline_callable_arity.t": "7219f6cb704e07e4811e8257975e0e35a927509e5b59ddf4bd4486449eb14ad2",
+  "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/preservation_observer.pl": "ac7e49ee471539fa0f03919934cd649aa7be7362b17ea6e29b79e815da36388d"
+}

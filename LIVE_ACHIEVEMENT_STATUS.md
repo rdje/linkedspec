@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues callable79.6. Documentation headroom4.23 is preserved under existing ADR0139; Perl arity79.6.1.1 precedes result79.6.1.2 and independent peers. Ordinary79 outcomes remain focused-checked; full admission stays open.
+Full PNT continues callable79.6. Perl's bounded first-call pipeline arity fence is focused-checked; result79.6.1.2 follows fresh re-acquisition and clean arity commit, then independent peers. Ordinary79 outcomes remain focused-checked; full source/context/native admission stays open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.23. Julia closed narrative epoch retains75 IDs/all CORE fields/statuses,14 complete unselected bodies, exact metadata and full232573-byte current tail.61 closed narratives gain source-bound pointers, renewing15377 current-text bytes. Migration/all76 public queries0/empty stderr and first independent readonly0/ten controls/current candidate identities pass. Existing tools/limits/SDKs unchanged; historical parity/reading claims are not re-admitted.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1. Ten lines reject malformed first registered-function pipeline signatures before effects/private host calls.125 normal groups move18RED to125PASS; exact private old/current reproduces18RED/125PASS.107 normal and169 original projections remain exact; nine original receiver arities change, while25 result targets remain pending. All678 source pairs/direct31 artifacts survive. Direct6+66/syntax/first readonly0-eleven controls/current121 identity pass.
 
 ## Next Action
 
-Activate P1 Perl arity79.6.1.1 from clean Git. Nine malformed receiver shapes must reject like their nine same-backend function counterparts; preserve valid source policies/original178 and25 result targets. Re-acquire/result79.6.1.2 after clean arity commit, then Rust79.6.2. Broader safe-launcher4.22/routing18.2/full admission follow feature coverage.
+Activate Perl result79.6.1.2 from clean Git. Re-acquire unchanged178 against the repaired source before editing; preserve initial producer/first-with/function-signature/nonliteral-pattern/earlier-owner/error policies. Repair only confirmed callable result/readiness gaps with exact old/current source controls, focused normals/recovery/docs and normal commit. Rust79.6.2 follows completed Perl result. Full23.4/safe-launcher4.22/routing18.2 remain deferred after coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1 —125PASS/private18RED-current125/direct72/readonly eleven/current121;178 preserves169 projections/nine arity changes;25 result gaps remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.23 — Julia75 IDs/61 closed pointers/14 unselected bodies/full232573-byte tail exact;15377 task bytes renewed/76 queries/readonly ten controls; Perl arity next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0 —178+terminal18/all196 pairs/84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls; arity prerequisite next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
@@ -29,7 +30,6 @@ Activate P1 Perl arity79.6.1.1 from clean Git. Nine malformed receiver shapes mu
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.5 — each installed host156/four routes903PASS/direct1713 plus with controls/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine corruptions; selection39 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.20 — qualified unchanged292, original missing-six binding RED/new PASS, all11 streams/source preservation/first readonly eight controls; Lua78.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
 
 ## History
 

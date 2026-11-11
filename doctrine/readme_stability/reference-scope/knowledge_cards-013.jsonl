@@ -1,4 +1,5 @@
-{"member_count":63,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":64,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3097,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-closed.md","sha256":"40704e9f952ef6912fff0d2d6bac1da20542d85cdea157cd1bb5ff22401826e7","type":"member"}
 {"bytes":5575,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-inventory.md","sha256":"b93da1dcd1133f1881b94b3b0151e0205c45b47b7f7c51556bc47b908901034c","type":"member"}
 {"bytes":6760,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-defined-functions-mvp-contract.md","sha256":"3fcfd70aa8bec094d8701a3f63cc38bdb964ff92a0b032d8661ef35b270d609d","type":"member"}
 {"bytes":2918,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-extension-deferrals.md","sha256":"93b5195630948f1adc328661e97b4a01c7592a1ea3baf1795aa6bcad141db272","type":"member"}

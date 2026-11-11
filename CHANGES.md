@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Reject malformed first callable pipeline signatures on Perl (79.6.1.1)
+
+Ten MethodLowering lines reuse existing aggregate signatures/public rejection markers before legacy folding. Malformed first registered-function receiver pipeline calls return null/unready without source/operand/later effects or host failures.125 normal groups move18RED to125PASS, reproduced by exact old/current images at one private path;107 normal/169 original projections stay exact and only nine original arities change. All678 source pairs/direct31 artifacts survive. Direct6+66/syntax/first readonly0-eleven controls/current121 identity pass. Known25 callable result gaps remain child2 after fresh178 re-acquisition. Book/Knowledge/task/live/roadmap/MEMORY align; no format/source getter/function-signature/alias policy changes. Evidence: docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/REVIEW.md.
+
 ## 2026-11-11 — Preserve Julia closed narratives and renew task headroom (4.23)
 
 Apply existing ADR0139 migration to Julia task commentary after clean Perl intake. All75 IDs/contracts/statuses,14 unselected bodies, metadata and full232573-byte tail stay exact;61 closed narratives gain source-bound pointers.298069 becomes282692 current bytes, renewing15377 without limit/tool/SDK changes. Actual migration/all76 public queries0/empty stderr and first independent readonly0/ten corruption controls/current candidate identities pass. Book/Knowledge/task/live/roadmap/MEMORY route back to Perl arity79.6.1.1. Evidence: docs/checkpoints/task-headroom-julia-2026-11-11/REVIEW.md. Historical runtime/parity/reading claims remain historical.

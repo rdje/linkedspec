@@ -20,8 +20,8 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.23` | `completed` | Julia closed narrative epoch retains75 IDs/fields/full frontier, renews15377 task bytes;76 exact public queries/readonly ten controls. |
-| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1` | `pending` | P1 callable pipeline arity fence before result79.6.1.2; match existing function-form rejection and retain source policies. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1` | `completed` | First-call arity125PASS/private18RED-current125/direct72/readonly eleven;178 original programs preserve169 projections/nine arity changes. |
+| 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2` | `pending` | Re-acquire178 after clean arity landing, preserve producer/signature policies, then repair25 callable result/readiness targets. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |
 | 5 | `FUTURE-PARITY-BACKLOG.5.3.4` | `pending` | Broad transform validation deferred after all three implementations. |

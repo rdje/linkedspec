@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5010,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-constructor-capture.md","sha256":"d4495eb02813656375014266fbd989d7a7df352db469c9bde6798cccb0169596","type":"member"}
 {"bytes":5302,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-dependency-capture.md","sha256":"b6e96532c1a1193512f107d8df9d29373527eed7fb8c63ebbab114e09aaa659f","type":"member"}
 {"bytes":3891,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-factory-historical-inverse.md","sha256":"e7717e0acd22bcca7795f8bc780126b6409d76ec59fd6aa05aad92c5b3e8e41c","type":"member"}
 {"bytes":3223,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-copied-null-contains-rejection.md","sha256":"ede6d858411383e33ec1143423f17d0586d19a71a184fdc93261678a08c9a72e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3674,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-conformance-audit.md","sha256":"8320a13faf642a67e182e2487275169c605ced334bab74a128be1db185891595","type":"member"}
 {"bytes":4322,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-operational-failures.md","sha256":"fd2e8c7b01a6aa256a5052b21a0bb1d8571be28b1a13bf63e289a781265bf653","type":"member"}
 {"bytes":2534,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-strict-arguments.md","sha256":"16d1d73c7a27914dc66047b4b3220ec1493f23edeb10465ea056531157b655d4","type":"member"}
-{"bytes":3256,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-success-conformance.md","sha256":"e0c5cb0fabee6610d956ed3d3456654174ee4cc6e076580499c80b934af6a0fb","type":"member"}

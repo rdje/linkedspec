@@ -1,0 +1,17 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/check_current.py"
+  ],
+  "inputs": {
+    "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/check_current.py": "d881a7a4e40e567f7098fc400a0c2fb077666ef32981138cca8caa4112d91c19",
+    "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/capture_current.py": "97f66b41901ddc2dac34fb45df1cfb1df92d76ad2f344c8afa2347065f51c802",
+    "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/after/input-identities.json": "e6905d8803176bbbdd171e732c5f56e4cd971beaf8da2a1b4717541220fa10d5"
+  }
+}

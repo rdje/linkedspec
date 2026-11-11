@@ -1,0 +1,15 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "LINKEDSPEC_CALLABLE_PIPELINE_ARITY_CAPTURE=docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/private_current",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-pipeline-callable-arity-perl-2026-11-11/private_runner.pl",
+    ".linkedspec-data/scratch/callable-pipeline-arity-perl/owner.pm",
+    "t/array_pipeline_callable_arity.t"
+  ]
+}

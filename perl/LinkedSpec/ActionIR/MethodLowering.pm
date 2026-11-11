@@ -5618,6 +5618,16 @@ my $lower_numeric_array_reducer_source_expr = sub {
    my $call = $calls->[$index];
    my $method = $call->{method} // '';
    my $aggregate_args = $call->{args} || [];
+   # A function receiver supplies the first free-helper operand. Reject a bad
+   # initial pipeline signature before legacy folding can manufacture host calls.
+   if ($index == 0
+       && $method =~ /\A(?:split_each|trim_each|filter_nonempty|lowercase_each|uppercase_each|uniq|filter_match)\z/o
+       && ($call->{source_method} // $method) eq $method
+       && ($receiver->{kind} // '') eq 'call'
+       && _user_function_definition_for_name($deps, $receiver->{name})) {
+    return _actionir_ast_unsupported_helper_expr($method)
+     unless defined($ast_aggregate_call_method->($method, 1 + @$aggregate_args));
+   }
    return 'undef' if $method eq 'sorted' && @$aggregate_args;
    return 'undef' if $method eq 'take' && @$aggregate_args > 1;
    return 'undef' if $method eq 'join_values' && @$aggregate_args != 1;

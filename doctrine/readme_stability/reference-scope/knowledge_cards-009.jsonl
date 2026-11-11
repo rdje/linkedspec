@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3256,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-success-conformance.md","sha256":"e0c5cb0fabee6610d956ed3d3456654174ee4cc6e076580499c80b934af6a0fb","type":"member"}
 {"bytes":4634,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-ast-constructions.md","sha256":"93a2dd20d989173a4178d8697ed30bc231635ea5c81f2f7c75ae962c0b30b7a0","type":"member"}
 {"bytes":3949,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-ast-input-frames.md","sha256":"df7bd74f207cce1d04cc4c7311bc93c842f6287bfd4f14f0be812e73cf625f5c","type":"member"}
 {"bytes":2722,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-private-emission-crash-recovery.md","sha256":"a7b66659e5ecb4b8be7f158faf3ef9214d5000ef80eabaf7ea701cd94470e26a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3434,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-ssd-storage-closeout.md","sha256":"edd0efb54802ae127aaa4f73446ec1638fb2ad1425ff8cab1e3b922fc3db10af","type":"member"}
 {"bytes":17344,"lines":165,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-ssd-storage-locality.md","sha256":"ee2ae39320a8d268f1a80bb96266d9d57f8ca945b5e581e22eec29a65b7e350a","type":"member"}
 {"bytes":4265,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-storage-locality-doctrine.md","sha256":"3d19114a42e7b24ca0feac22aec45667f7a983b488fcf225f9846c55aaa7b4dc","type":"member"}
-{"bytes":4536,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-workflow-routing.md","sha256":"327a4b7dc166b66de7aeae3c289d3e639477ef4d6669b50ba425f912ebc47d39","type":"member"}
