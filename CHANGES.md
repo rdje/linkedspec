@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Preserve Julia closed narratives and renew task headroom (4.23)
+
+Apply existing ADR0139 migration to Julia task commentary after clean Perl intake. All75 IDs/contracts/statuses,14 unselected bodies, metadata and full232573-byte tail stay exact;61 closed narratives gain source-bound pointers.298069 becomes282692 current bytes, renewing15377 without limit/tool/SDK changes. Actual migration/all76 public queries0/empty stderr and first independent readonly0/ten corruption controls/current candidate identities pass. Book/Knowledge/task/live/roadmap/MEMORY route back to Perl arity79.6.1.1. Evidence: docs/checkpoints/task-headroom-julia-2026-11-11/REVIEW.md. Historical runtime/parity/reading claims remain historical.
+
 ## 2026-11-11 — Freeze Perl callable intake and arity prerequisite (79.6.1.0)
 
 Independent178/qualified41+own137 and terminal18 retain all196 source pairs/first inputs/full observed fields.84 initial/with outcomes match, while25 supported result targets and nine false-ready receiver arities remain owned. Nine corresponding function forms reject safely; malformed receiver DSL/private-helper failures are defects, not accepted policies. Split arity79.6.1.1 before result79.6.1.2. Qualified-recovery2 actual reader0/empty stderr/twelve controls/current identities pass; first misnamed-runner64 and first qualified lexical-path-oracle1 setups remain explicit before reader execution. Controlled import/failure traces explain inspect.py shadowing; safe-path invocation fixes current recovery, broader launcher4.22 is owned. Book/Knowledge/task/live/roadmap/MEMORY align; no production changes or defect closure.

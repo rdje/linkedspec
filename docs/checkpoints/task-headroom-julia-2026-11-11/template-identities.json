@@ -1,0 +1,32 @@
+{
+  "capture.py": {
+    "template": "docs/checkpoints/task-headroom-dart-2026-11-10/capture.py",
+    "template_sha256": "0113441588cf2a2c422060ff136db1f06d70c6c2c464a6cf35154c8cde334843",
+    "retained_template": "docs/checkpoints/task-headroom-julia-2026-11-11/template-capture.py.gz",
+    "generated_sha256": "3ee235568f216de8274c47e4f3192b27c82057c2b0f0d8b5108a763e9ec3774e"
+  },
+  "check_candidate.py": {
+    "template": "docs/checkpoints/task-headroom-dart-2026-11-10/check_candidate.py",
+    "template_sha256": "e08a80c263ed80755863c7552d0c0fa0a607acdd0cacdc0ddda523524d9752ae",
+    "retained_template": "docs/checkpoints/task-headroom-julia-2026-11-11/template-check_candidate.py.gz",
+    "generated_sha256": "e08a80c263ed80755863c7552d0c0fa0a607acdd0cacdc0ddda523524d9752ae"
+  },
+  "review.py": {
+    "template": "docs/checkpoints/task-headroom-dart-2026-11-10/review.py",
+    "template_sha256": "86081ae4bcab6a65ba289bea079aa8e15a79bd025af177ad3f97c409a7b3182f",
+    "retained_template": "docs/checkpoints/task-headroom-julia-2026-11-11/template-review.py.gz",
+    "generated_sha256": "2b48e2bfe48b09bbfc3fe088057b64fccd494210dad248e665ded3ef00a3a40c"
+  },
+  "seal.py": {
+    "template": "docs/checkpoints/task-headroom-dart-2026-11-10/seal.py",
+    "template_sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963",
+    "retained_template": "docs/checkpoints/task-headroom-julia-2026-11-11/template-seal.py.gz",
+    "generated_sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "run_review.py": {
+    "template": "docs/checkpoints/task-headroom-dart-2026-11-10/run_review.py",
+    "template_sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190",
+    "retained_template": "docs/checkpoints/task-headroom-julia-2026-11-11/template-run_review.py.gz",
+    "generated_sha256": "8f8df963bd59bb472b20a419b44a5086523c7e0d9a1e5bc9d68a663172d83190"
+  }
+}

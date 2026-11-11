@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0` | `completed` |178+terminal18/all196 pairs;84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.23` | `completed` | Julia closed narrative epoch retains75 IDs/fields/full frontier, renews15377 task bytes;76 exact public queries/readonly ten controls. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1` | `pending` | P1 callable pipeline arity fence before result79.6.1.2; match existing function-form rejection and retain source policies. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |
 | 4 | `FUTURE-PARITY-BACKLOG.5.4.2` | `pending` | Broad pure-pipeline recurrence deferred until feature coverage. |

@@ -1,0 +1,8 @@
+{
+  "exit": 1,
+  "page": "docs/linkedspec-book/src/development/local-ci-and-regression.md",
+  "lines": 2050,
+  "limit": 2048,
+  "sha256": "6e7aa1685130d1fa04e32dd92c27bdebae69d1ad1fdf506dfd44a148a64001b2",
+  "repair": "Integrate only the new Julia paragraph into existing narrative guidance; no cap increase."
+}

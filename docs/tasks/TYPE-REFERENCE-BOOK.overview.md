@@ -1428,7 +1428,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
@@ -2701,3 +2701,22 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned verification: Canonical infrastructure boundary after focused launcher/import/locality/compatibility controls; complete required canonical gate before landing/push.
   Planned claim verification: Declare finite setup/launcher evidence and every missing native/toolchain leg at activation.
   Schedule: After feature coverage and before full23.4 evidence/admission; do not block the now isolated current reader or pivot away from active feature repairs.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.23`
+  Status: `completed`
+  Goal: Renew task headroom before Perl callable arity repair using existing narrative epochs.
+  Dependencies: Clean d34acedac2583bd7ef7ab805880710cd806afbdd intake; task collection has361 bytes free. ADR0139 and4.21 establish the unchanged data workflow.
+  Acceptance: Extract only eligible closed JULIA-BACKEND-PARITY commentary; retain exact Git/source/modes, every ID/status/CORE field, complete open/unselected bodies, metadata and whole Current Frontier tail. Retain actual before-use inputs/output/reader channels and independent recovery/corruptions. Tools/limits/SDKs unchanged; normal clean commit precedes arity79.6.1.1.
+  Verification tier: `focused`
+  Focused checks: Exact migration/public source and node queries, independent preservation/corruptions, task metadata/routing/index/Knowledge/book/scope/history/memory/diff and normal hooks.
+  Canonical trigger: Final clean push; any new infrastructure change requires separate canonical ownership.
+  Claim verification: none: Finite exact documentation transformation, no runtime/population/performance/disk-reclamation measurement.
+  Activation: Clean d34acedac258 after all10/post-pointer/brief0/clean Git. Read ADR0139, archive/legacy-frontier/Dart cards, existing migrator/reader/CORE contract and book workflow. Julia source has exact uppercase frontier, no prior narrative extraction and unchanged source at this activation. Broader4.17/18.2 remains separate.
+  Outcome: Existing migrator retains75 IDs/all CORE fields/statuses,14 complete unselected bodies, metadata and full232573-byte tail;61 closed narratives gain epoch pointers.298069 source becomes282692 current bytes (15377 renewed). Actual migration/all76 public queries0/empty stderr match exact originals; first independent readonly0/ten controls and current before-reader identities pass. No source/tool/limit/runtime changes. Evidence: docs/checkpoints/task-headroom-julia-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Clean intake leaves361 task bytes; frozen exact source establishes bounded renewal.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Current collection includes closed commentary; existing ADR0139 epoch preserves contracts and full source.
+  - [x] **FIX** — Existing unchanged migration extracts only61 eligible closed narratives; no cap/infrastructure change.
+  - [x] **ADDRESSED (verified)** — All76 actual public queries exact; independent reader0/ten distinguishing corruptions/current output identities pass.
+  - [x] **NO REGRESSION** —75 ordered IDs/fields/statuses,14 unselected bodies/prefix/full frontier tail exact; SDKs unchanged.
+  - [x] **LOCKSTEP** — Book/Knowledge/root/roadmap/live/MEMORY align; focused metadata/routing/index/scope/history/memory/diff/normal hooks before arity79.6.1.1.

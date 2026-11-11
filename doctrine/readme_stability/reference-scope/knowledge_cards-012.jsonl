@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2388,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/shared-host-ram-budget.md","sha256":"8278098261274805f1781d7666cd88faf5a699816c35a1e7cf93aec4f8672e1d","type":"member"}
 {"bytes":1948,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/short-wrapper-alias-retirement-policy.md","sha256":"1e7869aef2373a7ad165b8fe9ae83e32c84227444d99ee23f8a53773e75f855b","type":"member"}
 {"bytes":4672,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/simenv-variable-dispatch-mismatch.md","sha256":"4687335776d8d9e699559fb611cf53b3bead6feb27ac591ae34c2689fee1873f","type":"member"}
 {"bytes":3648,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/single-quoted-action-strings-variant-contract.md","sha256":"647376592e9322f8678f5cc2f7cd36cdd25187f48db0157f15e07526ed3f5870","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6856,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-trailing-block-argument-mvp.md","sha256":"45dfdaf8e3afbc13877ee602d1909f9b39838292db69ec401aaf34d7ae260b5a","type":"member"}
 {"bytes":2416,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-backlog.md","sha256":"10de801c61d6f5b470c2576bcd89099647bf1b51db32a08f69355ccf645b17c1","type":"member"}
 {"bytes":3097,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-closed.md","sha256":"40704e9f952ef6912fff0d2d6bac1da20542d85cdea157cd1bb5ff22401826e7","type":"member"}
-{"bytes":5575,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-type-method-surface-inventory.md","sha256":"b93da1dcd1133f1881b94b3b0151e0205c45b47b7f7c51556bc47b908901034c","type":"member"}

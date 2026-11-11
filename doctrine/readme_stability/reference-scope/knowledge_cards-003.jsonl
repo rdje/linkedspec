@@ -62,6 +62,7 @@
 {"bytes":2904,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-canonical-primary-cli-trace.md","sha256":"374208f60b9e93245cf4f39ed6300907d038dde46ee5ad77cbd591fc77628600","type":"member"}
 {"bytes":2411,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-canonical-set-result-guards.md","sha256":"e0f7a9d0a843179e11223cdfe85760bcfb7e80c2f15d940cf33755885298dea9","type":"member"}
 {"bytes":2305,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-capture-endpoint-absence-compatibility.md","sha256":"c7e13d7de126e3c2f9fe821a953677043dedc53c9bdda2c64ad3152b4127ee63","type":"member"}
+{"bytes":2524,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.23","path":"docs/knowledge/julia-closed-task-narrative-headroom.md","sha256":"6a5d8465d56b22e189ea9710fcbb0a8674494a4a7da55030d444e4e235ef64c4","type":"member"}
 {"bytes":5392,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-compiled-spec-state.md","sha256":"54ca68cf8e74a7c1100d94baf27cf02886629b2379c54675f95c710125f04d21","type":"member"}
 {"bytes":2139,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-constructor-result-guards.md","sha256":"c0b0659226b4eb03b298dcde76f9abac3ebfffc1a2a9146873a8bcf6b74108e1","type":"member"}
 {"bytes":3246,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-contains-source-guards.md","sha256":"c180ae582ca55792dfb6a5a60a4aa2f7e9f4707afed5d5a4b385eccdcba62f51","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2794,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-middle-corpus-batch.md","sha256":"6df59adeef2db78fd3935e427cdfd563a7797219dd5380b6f9b21a5680977300","type":"member"}
 {"bytes":2603,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-named-capture-take-origin-repair.md","sha256":"17f0a212c6da7f619090eed7a0036ea8ac944d6691f3d5d15aa270e426b9ac71","type":"member"}
 {"bytes":5398,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-mcp-server-plan.md","sha256":"d0e205b0cba450adeb7abd9b9a70a3ad6d54297163f8f98b122c84633c6ba20a","type":"member"}
-{"bytes":4285,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-spec-resolution.md","sha256":"b01047b2d290c7ba3d4e8c4e8b4f0cf963c125b997b6a628cf1cdba9d0b23560","type":"member"}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Callable79.6 Perl lane is split into committed intake, P1 arity fence and result/readiness repair, followed by independent peers. All bounded ordinary79 outcomes are focused-checked; full feature/source/context/native admission remains open.
+Full PNT continues callable79.6. Documentation headroom4.23 is preserved under existing ADR0139; Perl arity79.6.1.1 precedes result79.6.1.2 and independent peers. Ordinary79 outcomes remain focused-checked; full admission stays open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0. Original178/own137 plus terminal18 retain all196 actual source pairs and84 terminal/first-with policies.25 supported result targets and nine false-ready receiver arities stay owned; nine matching function forms are the rejection oracle. Qualified-recovery2 actual reader0/empty stderr/twelve controls/current identities pass. Original setup64 and lexical path-oracle1 failures remain nonpassing before reader execution; safe import/failure controls explain and avoid checkpoint inspect.py side effects. No production changes.
+TYPE-REFERENCE-BOOK.1.2.23.4.23. Julia closed narrative epoch retains75 IDs/all CORE fields/statuses,14 complete unselected bodies, exact metadata and full232573-byte current tail.61 closed narratives gain source-bound pointers, renewing15377 current-text bytes. Migration/all76 public queries0/empty stderr and first independent readonly0/ten controls/current candidate identities pass. Existing tools/limits/SDKs unchanged; historical parity/reading claims are not re-admitted.
 
 ## Next Action
 
-After normal hooks/post-pointer/brief0/clean Git, activate P1 arity79.6.1.1. Reject malformed callable receiver pipeline shapes using the existing function-form oracle; preserve valid source policies/current178 and25 result targets. Re-acquire/result79.6.1.2 follows its clean commit, then Rust79.6.2. Safe-launcher4.22 and full admission follow feature coverage.
+Activate P1 Perl arity79.6.1.1 from clean Git. Nine malformed receiver shapes must reject like their nine same-backend function counterparts; preserve valid source policies/original178 and25 result targets. Re-acquire/result79.6.1.2 after clean arity commit, then Rust79.6.2. Broader safe-launcher4.22/routing18.2/full admission follow feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.23 — Julia75 IDs/61 closed pointers/14 unselected bodies/full232573-byte tail exact;15377 task bytes renewed/76 queries/readonly ten controls; Perl arity next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0 —178+terminal18/all196 pairs/84 initial-with policies;25 supported targets/nine false-ready arities; qualified recovery2 actual0/twelve controls; arity prerequisite next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.40 — qualified41/16 targets25 healthy/five readiness-only; original39 explicit, supported37 records/pairs exact; first readonly thirteen controls; safe37/independent79.6 frozen.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.5 — each173/four routes1006PASS/private17RED-current173/direct1921;156 healthy/173 pairs exact; first readonly eleven controls; remaining-feature selection next.
@@ -29,7 +30,6 @@ After normal hooks/post-pointer/brief0/clean Git, activate P1 arity79.6.1.1. Rej
 - TYPE-REFERENCE-BOOK.1.2.23.4.20 — qualified unchanged292, original missing-six binding RED/new PASS, all11 streams/source preservation/first readonly eight controls; Lua78.5 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.4 —156/four routes903PASS/direct1728/private19RED-restored156PASS;123 profiles/137 healthy/156 pairs/nine controls; P1 Dart4.20 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.3 — independent141/four routes/direct292/private19RED-restored141PASS;108 profiles/122 healthy/141 artifact pairs/eight controls; Julia78.4 next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.18.3 — exact scoped aliases/old source and routes/Facts preservation; four controls/header176/sync/book; independent Dart78.3 next.
 
 ## History
 

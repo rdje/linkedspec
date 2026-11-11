@@ -1,0 +1,24 @@
+{
+  "preservation": "PASS",
+  "stable_ids": 75,
+  "selected_closed": 61,
+  "unchanged_short_bodies": 14,
+  "original_bytes": 298069,
+  "current_bytes": 282692,
+  "current_text_bytes_renewed": 15377,
+  "current_tail_bytes": 232573,
+  "actual_public_queries": 76,
+  "effective_corruptions": [
+    "current contract lost",
+    "closed status changed",
+    "stable ID omitted",
+    "metadata prefix altered",
+    "full current tail truncated",
+    "wrong epoch pointer",
+    "undeclared extracted member",
+    "unselected body changed",
+    "source identity changed",
+    "actual public source output drift"
+  ],
+  "limits": "Historical finite task-data preservation; tools/limits/runtime unchanged. No new Julia host, feature/parity/native-custody/whole-project reading admission or disk-reclamation claim."
+}

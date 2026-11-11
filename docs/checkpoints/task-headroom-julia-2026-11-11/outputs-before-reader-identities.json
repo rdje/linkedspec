@@ -1,0 +1,12 @@
+{
+  "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.23.json": {
+    "bytes": 2147,
+    "mode": 420,
+    "sha256": "7254230662257f092d412b1fef6627c65520803e6c72c0a55f05ffb415782efc"
+  },
+  "docs/tasks/JULIA-BACKEND-PARITY.md": {
+    "bytes": 282692,
+    "mode": 420,
+    "sha256": "f82409a93ff2dd3b7aef1caebc731aea00f72c81120859bfe8046a10a1609b43"
+  }
+}

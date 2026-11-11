@@ -1,0 +1,11 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/task-headroom-julia-2026-11-11/check_candidate.py",
+    "--check"
+  ],
+  "producer_sha256": "e08a80c263ed80755863c7552d0c0fa0a607acdd0cacdc0ddda523524d9752ae",
+  "input_metadata_sha256": "58d2c0215f7213f179bf36282249a23b2f5b4d2b94549446915096d104993190"
+}

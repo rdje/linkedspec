@@ -71,10 +71,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
     available; define the intended `julia/` package layout, test command, formatter/linter command if available,
     package manager command, Julia-specific CLI entrypoint, and corpus-runner entrypoint before source
     implementation.
-  Verification: `PASS` - Julia `1.12.6` is installed through Homebrew at `/opt/homebrew/bin/julia`; `Pkg` and
-    `Test` import successfully when `JULIA_DEPOT_PATH` points to a writable depot; optional global
-    `JuliaFormatter` and `JET` packages are not installed.
   Commit: `JULIA-BACKEND-PARITY.1.1 - verify Julia toolchain preflight`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.1.1`.
 
 - ID: `JULIA-BACKEND-PARITY.1.2`
   Status: `done`
@@ -123,21 +121,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Goal: Implement frontend validation and strict syntax behavior.
   Acceptance: Validation rejects duplicate labels/functions, mixed edge families, undefined references, malformed
     regexes, malformed helper/function definitions, and strict-syntax warnings as documented.
-  Verification: `PASS` - `Pkg.test()` covers top-rule presence, duplicate labels/functions, function registry
-    collisions and reserved params, raw fallback lines, mixed edge families, grouped action targets, undefined
-    references, regex slot bounds, regex structure, strict unused-rule behavior, all checked-in specs, and rule-only
-    corpus specs.
   Commit: `JULIA-BACKEND-PARITY.2.3 - add Julia frontend validation`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.2.3`.
 
 - ID: `JULIA-BACKEND-PARITY.2.4`
   Status: `done`
   Goal: Integrate `specs/user_function_definition.spec` as the function-definition shell owner.
   Acceptance: Julia consumes the spec-defined `function_definition` / `function_definition_error` AST shape and
     does not maintain a competing host-language raw scanner as the semantic contract.
-  Verification: `PASS` - `Pkg.test()` covers spec-shaped function-definition node projection, malformed
-    `function_definition_error` handling, staged sidecar drift rejection, wrapper-shape normalization, stripped
-    rule-source parsing, and validation of the resulting `SpecFile`.
   Commit: `JULIA-BACKEND-PARITY.2.4 - project Julia function-definition shells`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.2.4`.
 
 - ID: `JULIA-BACKEND-PARITY.3`
   Status: `done`
@@ -150,43 +143,32 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Calls, literals, variables, direct/nested access, shape literals, assignments, block values,
     structured controls, receiver chains, trailing blocks, and standalone value-drop statements are structural AST
     nodes, not text rewrites.
-  Verification: `PASS` - `Pkg.test()` covers 74 Action AST parser assertions over calls, literals, variables,
-    direct/nested access, shape literals, assignments, block values, structured controls, receiver chains, trailing
-    blocks, standalone value-drop statements, and raw fallback nodes; total Julia tests pass with 353 assertions.
   Commit: `JULIA-BACKEND-PARITY.3.1 - add Julia ActionIR AST parser`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.3.1`.
 
 - ID: `JULIA-BACKEND-PARITY.3.2`
   Status: `done`
   Goal: Map helper/action AST to canonical helper contracts and diagnostics.
   Acceptance: Current helper/control families resolve through typed nodes; non-current helper-looking calls
     diagnose generically instead of falling back to host-language calls or Julia spellings.
-  Verification: `PASS` - `Pkg.test()` covers 39 Action contract resolver assertions over nested typed helper
-    calls, receiver methods, structural assignment contracts, generic unknown-helper/raw diagnostics, canonical
-    aliasing, and validator sharing of the current helper/control name table; total Julia tests pass with 392
-    assertions.
   Commit: `JULIA-BACKEND-PARITY.3.2 - add Julia ActionIR contract resolver`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.3.2`.
 
 - ID: `JULIA-BACKEND-PARITY.3.3`
   Status: `done`
   Goal: Build the function registry and staged function-body parse-job records.
   Acceptance: Function definitions preserve params, arity, source/body spans, `body_payload`, `body_parse_job`, and
     stitched `body_ast`, with exact-arity resolution before helper fallback.
-  Verification: `PASS` - `Pkg.test()` covers 23 user-function registry assertions over ordered entries, staged
-    body parse-job exposure, `body_payload` / `body_ast` preservation, immutable body-AST stitching, duplicate
-    rejection, exact match, wrong arity, missing names, and registry-aware ActionIR contract resolution; total Julia
-    tests pass with 415 assertions.
   Commit: `JULIA-BACKEND-PARITY.3.3 - add Julia user-function registry`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.3.3`.
 
 - ID: `JULIA-BACKEND-PARITY.3.4`
   Status: `done`
   Goal: Compile parsed specs into a Julia compiled-spec/interpreter model.
   Acceptance: Compiled state has ordered rules, dependency-regex data, function registry, lifecycle/action AST
     payloads, mode metadata, and descriptor projection equivalent to the mdBook model.
-  Verification: `PASS` - `Pkg.test()` covers 41 compiled-state assertions over rule order, mode metadata,
-    dependency refs, dependency-regex derivation, descriptor projection, lifecycle/action payload ASTs,
-    registry-aware contracts, last-definition-wins metadata when validation is skipped, validation reuse, and
-    compiled-state diagnostics; total Julia tests pass with 456 assertions.
   Commit: `JULIA-BACKEND-PARITY.3.4 - add Julia compiled-spec state`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.3.4`.
 
 - ID: `JULIA-BACKEND-PARITY.4`
   Status: `active`
@@ -198,24 +180,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Goal: Implement regex matching and match-state tracking.
   Acceptance: Seek/consume modes, alternative identity, capture groups, named captures, char offsets, cursor
     position, entry/local match separation, and zero-progress detection match the contract.
-  Verification: `PASS` - `Pkg.test()` covers 60 runtime-matching assertions over parse modes, invalid-pattern
-    diagnostics, seek/consume selection, stable alternative identity, compiled-rule patterns, compact/full/named
-    captures, multibyte character offsets, line/column projection, cursor and entry/local registers, zero-width /
-    zero-progress behavior, reindexing, immutable cursor/capture-start updates, and boundary/input guards; total
-    Julia tests pass with 516 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.1 - add Julia runtime matching state`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.1`.
 
 - ID: `JULIA-BACKEND-PARITY.4.2`
   Status: `done`
   Goal: Implement first executable rule dispatch over compiled state.
   Acceptance: Default, AND, OR, and repetition modes execute with lifecycle order, action-edge/blind-call child
     dispatch, explicit return behavior, accumulators, recursion guards, and output shape parity.
-  Verification: `PASS` - `Pkg.test()` covers 34 focused rule-interpreter assertions over default repetition,
-    action-edge and blind-call child dispatch, explicit `call(...)` / returns, passive terminal children, AND/OR
-    modes, bounded repetition, zero-progress cutoff, full lifecycle order, `retv`, accumulators, consume mode,
-    nested output shapes, recursion cutoff, lower-bound errors, unsupported-helper errors, top-rule lookup, and
-    safety-limit validation; total Julia tests pass with 550 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.2 - add Julia runtime rule interpreter`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.2`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3`
   Status: `done`
@@ -224,87 +198,64 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Core value/store/capture helpers, string/number helpers, array helpers, hash helpers,
     expression-valued blocks, structured controls, `with` trailing blocks, and tree traversal callbacks either pass
     focused tests or are split into narrower leaves before code.
-  Verification: `PASS` - `.4.3.1` through `.4.3.5` implement the scoped value/helper/control/callback families;
-    `.4.3.6` confirms focused runtime coverage, status, mdBook helper contracts, live docs, and Knowledge Map facts
-    agree at 567 assertions before cursor-control work.
   Commit: closed by `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.0`
   Status: `done`
   Goal: Split the broad runtime value/helper-family leaf into signoff-sized implementation leaves before code.
   Acceptance: Helper/value work is divided by runtime surface area; the next executable frontier is explicit and
     can land without bundling the complete helper catalog in one commit.
-  Verification: `PASS` - the helper/value surface is split into `.4.3.1` core values/stores/captures, `.4.3.2`
-    string/numeric helpers, `.4.3.3` array helpers, `.4.3.4` hash helpers, `.4.3.5` value/control/block/callback
-    execution, and `.4.3.6` no-drift closeout; memory, task-tree, doctrine, Knowledge Map, mdBook, and whitespace
-    gates pass.
   Commit: `JULIA-BACKEND-PARITY.4.3.0 - split Julia runtime helper families`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.0`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.1`
   Status: `done`
   Goal: Centralize Julia runtime value/store behavior and capture helper reads.
   Acceptance: Runtime values preserve scalar/array/hash/null/boolean/number JSON shapes; typed wrappers, bare reads,
     assignments, nested access, `copy`, `array`, `hash`, and `entry_*` / `match_*` capture helpers have focused tests.
-  Verification: `PASS` - four focused end-to-end runtime cases cover typed scalar/array/hash/null/boolean/number
-    values, named and variable-held aggregate snapshots, direct/nested reads, hash and array mutation, checked
-    no-autovivification nested assignment, positional/named capture reads, capture maps, character spans, and
-    line/column helpers; full `Pkg.test()` passes with 554 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.3.1 - add Julia runtime value capture helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.1`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.2`
   Status: `done`
   Goal: Implement string/scalar and numeric helper families, including compatible receiver chains.
   Acceptance: Current scalar/string helpers, explicit lexical comparisons, numeric arithmetic/reducers/comparisons,
     word/symbol aliases, and compatible receiver chains match helper-catalog examples.
-  Verification: `PASS` - two focused end-to-end runtime cases cover current string/scalar transforms,
-    predicates, regex flags, split/coalesce/definedness/emptiness, explicit lexical comparisons, numeric
-    arithmetic/unary/reducer/comparison helpers, aliases and symbol callees, invalid-input `nothing`, and
-    compatible string/number receiver chains; full `Pkg.test()` passes with 556 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.3.2 - add Julia runtime string numeric helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.2`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.3`
   Status: `done`
   Goal: Implement array helper family and array receiver/mutation behavior.
   Acceptance: Array construction/flattening, copy, count/select/order/membership/join/split bridges, append/end
     mutation forms, and receiver chains match helper-catalog examples without mutating snapshots unexpectedly.
-  Verification: `PASS` - two focused end-to-end runtime cases cover pure array selection/order/membership,
-    transform/filter/split pipelines, delimiter-first joins, one-level flatten/concat and constructor splicing,
-    numeric reducer terminals, explicit split replacement, named and scalar-held statement-only end mutations,
-    value-position mutation no-ops, and tagged records; full `Pkg.test()` passes with 558 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.3.3 - add Julia runtime array helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.3`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.4`
   Status: `done`
   Goal: Implement hash helper family and hash receiver/mutation behavior.
   Acceptance: Hash construction/flattening, copy, key/value views, merge/pick/drop/rename/set-key behavior, direct
     hash-index assignment values, and receiver chains match helper-catalog examples.
-  Verification: `PASS` - one focused end-to-end runtime case covers copied key/value views, pure
-    merge/pick/drop/rename/set-key transformations, statement-only named hash mutation, direct hash-index
-    assignment values, explicit flat-style hash splicing, ordinary nested map preservation, merge-slot
-    resolution, and compatible hash/array receiver chains; full `Pkg.test()` passes with 559 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.3.4 - add Julia runtime hash helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.4`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.5`
   Status: `done`
   Goal: Implement value blocks, structured action controls, trailing-block execution, and tree callbacks.
   Acceptance: Expression-valued blocks, attached/inline controls, helper/receiver `with`, and `walk_leaves` /
     `map_leaves` / `reduce_leaves` traversal callbacks match current Perl/Rust/Dart contracts.
-  Verification: `PASS` - eight focused runtime assertions cover expression-valued blocks with final values and
-    block-local return/return-undef, attached and marker controls, lazy inline controls, deterministic while
-    limits, helper/receiver `with`, hash/array tree walk/map/reduce callbacks, non-aggregate lazy failure, and
-    scoped binding restoration plus unsupported trailing-block/arity fences; full `Pkg.test()` passes with 567 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.3.5 - add Julia runtime controls and tree callbacks`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.5`.
 
 - ID: `JULIA-BACKEND-PARITY.4.3.6`
   Status: `done`
   Goal: Close helper/value no-drift for the Julia runtime slice.
   Acceptance: mdBook helper examples, Julia focused runtime tests/status, live docs, and Knowledge Map facts agree
     on the helper/value boundary before `.4.4` cursor-control work starts.
-  Verification: `PASS` - the audit confirms Julia already implements the final no-autovivification nested-write
-    contract and current block/helper/tree semantics; full `Pkg.test()` passes with 567 assertions, CLI status
-    remains `runtime-value-control-tree`, mdBook/KM/live-doc/governance gates pass, the stale `.3` container status
-    is reconciled, and central helper-catalog examples use semicolons only as same-line separators.
   Commit: `JULIA-BACKEND-PARITY.4.3.6 - close Julia helper value no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.3.6`.
 
 - ID: `JULIA-BACKEND-PARITY.4.4`
   Status: `done`
@@ -312,11 +263,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
     limits.
   Acceptance: `save_cursor()` / `restore_cursor()`, `rewind_match_start()` / `rewind_entry_start()`, and
     `capture_until_boundary(rule[, ...])` behave like Perl/Rust/Dart and affect only documented cursor state.
-  Verification: `PASS` - Julia now keeps an explicit LIFO cursor stack, synchronizes the live cursor and immutable
-    match-register cursor on restores/rewinds/boundary captures, exposes character-based cursor/input helpers,
-    preserves entry/local matches and semantic stores across cursor movement, and selects the earliest usable
-    named boundary without consuming it. Full `Pkg.test()` passes with 581 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.4 - add Julia runtime cursor controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.4`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5`
   Status: `done`
@@ -324,63 +272,48 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.4.5.0`, `.4.5.1`, `.4.5.2`, `.4.5.3`, `.4.5.4`
   Acceptance: Julia exposes default-quiet trace controls, event classes, sink behavior, branch/lifecycle trace
     points, and structured errors equivalent to the documented cross-variant trace contract.
-  Verification: `PASS` through `.4.5.4` - structured diagnostics, trace controls/events/sinks, and runtime
-    interpreter instrumentation pass 631 assertions; README/CLI status, mdBook, Knowledge Map, roadmap/task/live
-    docs, and architecture agree on the scoped `runtime-trace-events` boundary without claiming broader parity.
   Commit: `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5.0`
   Status: `done`
   Goal: Split the broad runtime diagnostics/trace-controls leaf into signoff-sized implementation leaves before code.
   Acceptance: Diagnostic payloads, trace controls/sinks, runtime trace instrumentation, and closeout proof are
     separately owned so no code slice must carry the whole cross-variant trace contract at once.
-  Verification: `PASS` - split `.4.5` into `.4.5.1` structured runtime diagnostics, `.4.5.2` trace
-    levels/controls/event classes/sinks, `.4.5.3` runtime branch/lifecycle/cursor/source-boundary instrumentation,
-    and `.4.5.4` no-drift closeout. No Julia runtime behavior changed.
   Commit: `JULIA-BACKEND-PARITY.4.5.0 - split Julia diagnostics trace controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5.0`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5.1`
   Status: `done`
   Goal: Add Julia runtime structured diagnostic payloads and diagnostic-carrying runtime exceptions.
   Acceptance: Runtime failures expose stable structured fields for type, stage, owner stage, summary, detail,
     top rule, rule label, and handler/source attribution without changing successful parse output.
-  Verification: `PASS` - exported `RuntimeDiagnostic` carries the neutral diagnostic fields through
-    `RuntimeInterpreterException.diagnostic`; engine spec identity, top/rule attribution, Julia handler labels,
-    richer inner-payload preservation, JSON projection, unchanged textual errors, and successful-output
-    preservation pass seven focused assertions. Full `Pkg.test()` passes with 588 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.5.1 - add Julia runtime diagnostics`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5.1`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5.2`
   Status: `done`
   Goal: Add Julia trace levels, controls, structured event classes, and stdout/routed-file/mirror sink behavior.
   Acceptance: Trace controls are default-quiet, available from normal Julia entrypoints, preserve successful parse
     results, support reset/truncate for routed files, and provide focused tests for level gating and sink routing.
-  Verification: `PASS` - `julia/src/trace/Trace.jl` exports ordered levels, environment/config controls,
-    structured event/scope/decision/log/dump primitives, stdout/routed-file/mirror sinks, reset behavior, and
-    traced runtime entrypoints. Twenty-nine focused assertions prove control/sink/event behavior, default quiet,
-    parse-scope routing, and output preservation; full `Pkg.test()` passes with 617 assertions.
   Commit: `JULIA-BACKEND-PARITY.4.5.2 - add Julia trace controls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5.2`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5.3`
   Status: `done`
   Goal: Instrument the Julia runtime interpreter with branch, lifecycle, dispatch, cursor, and boundary events.
   Acceptance: Traced execution emits structured scopes and decisions for rule dispatch, regex/blind branches,
     lifecycle blocks, recursion cutoffs, cursor controls, and source boundaries while untraced output is unchanged.
-  Verification: `PASS` - rule scopes, regex match/no-match decisions, action/blind child dispatch, lifecycle
-    marks, recursion cutoffs, cursor controls, and source-boundary events are emitted only through an enabled
-    trace emitter. Fourteen added trace assertions preserve traced/untraced output identity; full `Pkg.test()`
-    passes with 631 assertions and status `runtime-trace-events`.
   Commit: `JULIA-BACKEND-PARITY.4.5.3 - add Julia runtime trace events`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5.3`.
 
 - ID: `JULIA-BACKEND-PARITY.4.5.4`
   Status: `done`
   Goal: Close Julia runtime diagnostics/trace no-drift.
   Acceptance: Julia README/CLI status, mdBook trace/runtime/handoff pages, live docs, task-tree index, and
     Knowledge Map agree on the implemented diagnostics/trace boundary before `.5` staged runtime work begins.
-  Verification: `PASS` - full `Pkg.test()` remains green with 631 assertions; CLI/package status is
-    `runtime-trace-events`; Julia README, mdBook trace/status/handoff, Knowledge Map, task/index/roadmap/live docs,
-    and architecture all describe the same implemented runtime diagnostics/trace boundary. `.5.1` becomes active.
   Commit: `JULIA-BACKEND-PARITY.4.5.4 - close Julia diagnostics trace no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.4.5.4`.
 
 - ID: `JULIA-BACKEND-PARITY.5`
   Status: `done`
@@ -392,35 +325,24 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Goal: Implement the minimal staged registry provider for function-body parse jobs.
   Acceptance: `actionir-body.spec` resolves deterministically, compiles top rule `action_block`, executes queued
     jobs in stable order, and stitches `body_ast`.
-  Verification: `PASS` - Julia resolves `actionir-body.spec` to the fixed built-in provider, records the neutral
-    digest/cache/compiled-parser shape, executes jobs in stable path/span/id order through `parse_action_block`,
-    and immutably stitches JSON `action_block` results into `body_ast`. Thirty-one focused assertions cover
-    ordering, wrapper composition, diagnostics, and contract drift; full `Pkg.test()` passes with 662 assertions.
   Commit: `JULIA-BACKEND-PARITY.5.1 - add Julia staged function-body registry`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.5.1`.
 
 - ID: `JULIA-BACKEND-PARITY.5.2`
   Status: `done`
   Goal: Execute registered user functions in value positions, receiver chains, and standalone discard.
   Acceptance: Exact-arity functions use fresh function-local stores, eager argument evaluation, compatible receiver
     continuation, standalone `VALUE_DROP`, and recursion diagnostics.
-  Verification: `PASS` - Julia resolves registered calls before ordinary helper fallback, evaluates arguments in
-    caller scope, executes cached ActionIR bodies with fresh scalar/array/hash stores, restores caller stores, and
-    returns final expressions or local `return(...)` payloads. Nine focused assertions cover value/receiver/drop,
-    eager arguments, local isolation, typed params, exact arity, and direct/mutual recursion diagnostics; full
-    `Pkg.test()` passes with 671 assertions and package status `runtime-user-functions`.
   Commit: `JULIA-BACKEND-PARITY.5.2 - execute Julia user functions`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.5.2`.
 
 - ID: `JULIA-BACKEND-PARITY.5.3`
   Status: `done`
   Goal: Preserve staged parse-job and function-registry descriptor shapes.
   Acceptance: Descriptor/corpus fixtures can assert the neutral function-definition payload, parse-job, and
     stitched AST fields without Julia-specific field drift.
-  Verification: `PASS` - one 20-assertion end-to-end fixture starts from two spec-returned function-definition
-    nodes, dispatches/stitches their bodies, compiles the result, and proves ordered functions/jobs, neutral
-    `body_payload` provenance, normalized `body_parse_job` ids/paths/policies, stitched `body_ast`, descriptor
-    function order/count, and stable runtime output. Full `Pkg.test()` passes with 691 assertions; no descriptor
-    projection correction was required and package status remains `runtime-user-functions`.
   Commit: `JULIA-BACKEND-PARITY.5.3 - preserve Julia staged descriptor shapes`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.5.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6`
   Status: `done`
@@ -432,12 +354,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Goal: Bring up controlled proof fixtures.
   Acceptance: Minimal authored fixtures prove scalar output, nested arrays/hashes, rule dispatch, lifecycle return
     shape, function calls, trace/diagnostic basics, and boundary capture before shipped-spec breadth.
-  Verification: `PASS` - `execute_corpus_fixtures(...)` validates then executes every fixture through
-    parse/compile/runtime, compares the one-level wrapped backend-neutral output structurally, captures optional
-    trace lines and structured runtime diagnostics, and reports every failure without aborting. Twenty-four
-    focused assertions cover six passing authored fixtures plus runtime-error/output-mismatch continuation; full
-    `Pkg.test()` passes with 715 assertions and status `runtime-controlled-corpus`.
   Commit: `JULIA-BACKEND-PARITY.6.1 - add Julia controlled corpus execution`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.1`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2`
   Status: `done`
@@ -445,10 +363,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.6.2.0`, `.6.2.1`, `.6.2.2`, `.6.2.3`, `.6.2.4`, `.6.2.5`
   Acceptance: Each batch either passes on Julia or records a narrowly owned root-cause leaf with Perl/Rust/Dart
     oracle evidence; no fixture is weakened to fit Julia.
-  Verification: `PASS` - bounded selection/reporting, starter 40/40, middle non-function 25/25, shipped-spec
-    31/31, and the three spec-driven top-level function fixtures are permanently covered without weakening any
-    fixture. Full tests pass with 827 assertions and status is `runtime-corpus-function-shells`.
   Commit: closed by `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.0`
   Status: `done`
@@ -456,11 +372,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: `.6.2` has child leaves for bounded executable selection/reporting, starter fixtures, middle
     helper/control/runtime fixtures, shipped-spec/parser-smoke fixtures, and spec-defined top-level function shells
     before any parser/runtime behavior changes or broad diagnostic run.
-  Verification: `PASS` - `.6.2` now has separate bounded execution/reporting, starter 0–39, middle non-function
-    40–67, shipped-spec/parser-smoke 68–98, and spec-defined top-level function-shell owners before diagnostic or
-    behavior changes. mdBook, memory, Knowledge Map, task metadata, doctrine, and whitespace gates pass; Julia
-    source/runtime behavior remains the green 715-assertion `runtime-controlled-corpus` boundary.
   Commit: `JULIA-BACKEND-PARITY.6.2.0 - split Julia corpus expansion batches`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.0`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.1`
   Status: `done`
@@ -468,23 +381,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Julia can execute named or safely bounded fixture subsets through the library and corpus runner,
     report pass/fail details for every selected fixture, and keep default validation-only behavior while full
     manifest parity remains incomplete.
-  Verification: `PASS` - `execute_corpus_fixtures(...)` accepts ordered `case_names` or an `offset`/`limit`
-    window with strict selection diagnostics. The corpus runner exposes bounded `--execute` through repeated
-    `--case` or `--offset` plus `--limit`, reports every selected PASS/FAIL and summary, returns nonzero for fixture
-    failures, rejects selectors without `--execute`, and rejects unbounded CLI execution. Thirty added assertions
-    bring full `Pkg.test()` to 745 with status `runtime-corpus-selection`.
   Commit: `JULIA-BACKEND-PARITY.6.2.1 - add Julia executable corpus selection`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.1`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.2`
   Status: `done`
   Goal: Close the starter proof-edge, autoexist, and core terse runtime batch.
   Acceptance: Manifest fixtures `0..39` either pass unchanged on Julia or each mismatch is routed to a narrowly
     owned root-cause child with Perl/Rust/Dart oracle evidence.
-  Verification: `PASS` - bounded runner execution over manifest offsets `0..39` reports 40 passed and 0 failed
-    without parser/runtime or fixture changes. A permanent six-assertion package test locks manifest count, window
-    endpoints, result count, passed count, and zero failures; full `Pkg.test()` passes with 751 assertions and
-    status `runtime-corpus-starter`.
   Commit: `JULIA-BACKEND-PARITY.6.2.2 - close Julia starter corpus batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.2`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.3`
   Status: `done`
@@ -492,11 +398,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Non-function manifest fixtures `40..67` covering value blocks, controls, helper composition,
     receivers, numeric/string/array/hash helpers, with-blocks, and tree traversal pass unchanged or are routed with
     oracle evidence; top-level `fn` fixtures remain owned by `.6.2.5`.
-  Verification: `PASS` - bounded windows `40..56`, `58..59`, and `62..67` report 25 passed and 0 failed without
-    parser/runtime or fixture changes. Six permanent assertions lock window sizes/endpoints, 25 results/passes,
-    empty failures, and routed top-level `fn` offsets `57`, `60`, `61`; full `Pkg.test()` passes with 757 assertions
-    and status `runtime-corpus-middle`.
   Commit: `JULIA-BACKEND-PARITY.6.2.3 - close Julia middle corpus batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4`
   Status: `done`
@@ -506,23 +409,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Manifest fixtures `68..98` covering tclite, lispish, recursive top rules, hlink, portmap, EBNF,
     spec.spec, regdef, tablegrep, simenv, VHDL/library, history, and plugin smokes pass unchanged or each failure
     cluster is split before implementation with Perl/Rust/Dart oracle evidence.
-  Verification: Initial bounded diagnostic reported 10 passed and 21 failed. The owned mechanism leaves close
-    every residual. `.6.2.4.6` adds one permanent complete-window regression over offsets 68–98; all 31 fixtures
-    pass exact checked-in output, full `Pkg.test()` passes with 816 assertions, and status is
-    `runtime-corpus-shipped`.
   Commit: closed by `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.0`
   Status: `done`
   Goal: Split the shipped-spec/parser-smoke batch after diagnostic execution.
   Acceptance: The 31-fixture window is measured, all failures are named and grouped by observed mechanism, and
     recoverable implementation children exist before Julia source behavior changes.
-  Verification: `PASS` - bounded `--offset 68 --limit 31` execution reports 10 passed and 21 failed. The failures
-    split into four capture-boundary helper cases, five logical-helper cases, two diagnostic-output helper cases,
-    three recursive top-rule output mismatches, five EBNF/spec.spec structural-output mismatches, and two
-    lib_reader quote-normalization mismatches. Checked-in Perl/Rust expected JSON plus the completed Dart shipped-
-    smoke fact cards preserve the shared oracle boundary. No Julia source, test, or fixture behavior changed.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.0 - split Julia shipped corpus smoke batch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.0`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.1`
   Status: `done`
@@ -530,13 +426,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: `start_capture_slice`, `capture_slice`, and the directly related anonymous boundary helpers match
     the documented Perl/Rust contract; the three hlink delimiter fixtures and `ebnf_logging_annotation` either
     pass or every residual is split with direct oracle evidence.
-  Verification: `PASS` - Julia executes the complete anonymous direct family: start, match-start/cursor/input-end
-    text and character-length readers, position/line/column readers, and destructive take variants. Three focused
-    Unicode/location/mutation assertions plus six permanent corpus assertions bring full `Pkg.test()` to 766.
-    All three hlink delimiter fixtures pass; `ebnf_logging_annotation` advances from unsupported-helper failure to
-    the same structural-item output mismatch as `ebnf_expression_rules` and is routed to `.6.2.4.4`. The complete
-    window improves from 10/31 to 13/31 with no regression; status is `runtime-corpus-capture-boundaries`.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.1 - add Julia anonymous capture boundaries`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.1`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2`
   Status: `done`
@@ -544,66 +435,40 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Children: `.6.2.4.2.1`, `.6.2.4.2.2`, `.6.2.4.2.3`
   Acceptance: Current logical and diagnostic-output helpers execute with the documented portable contracts, with
     boolean and output behavior isolated into separate implementation leaves.
-  Verification: `PASS` - `.6.2.4.2.1` adds eager boolean helpers, `.6.2.4.2.3` normalizes helper regex flags,
-    and `.6.2.4.2.2` adds diagnostic output without changing parse results. All three owned helper mechanisms are
-    covered by focused runtime and shipped-corpus regressions.
   Commit: closed by `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.2`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.1`
   Status: `done`
   Goal: Add logical `and`/`or`/`not` helper execution.
   Acceptance: The four blocked portmap cases and `tablegrep_simple_term` no longer fail for unsupported logical
     helpers, with eager truthiness/value behavior matched to Perl/Rust or a narrower residual split.
-  Verification: `PASS` - Julia evaluates all logical arguments eagerly, then returns boolean `and`/`or`/`not`
-    results through the established runtime truthiness contract; empty `and`/`or`/`not` match Rust as
-    false/false/true. `portmap_bare`, `portmap_bit`, `portmap_concatenation`, and `tablegrep_simple_term` pass.
-    `portmap_constant` advances from unsupported `or` to `?bare:` versus expected `?constant:`; exact matching and
-    capture probes show `matches(entry_group(0), /^\d/io)` fails only because Julia passes Perl's no-op `o` regex
-    flag through to `Regex`. That residual is split to `.6.2.4.2.3`. Six permanent corpus assertions bring full
-    `Pkg.test()` to 772, the complete window moves from 13/31 to 17/31, and status is
-    `runtime-corpus-logical-helpers`.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.1 - add Julia logical helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.2.1`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.2`
   Status: `done`
   Goal: Add diagnostic `print`/`print_each`/`say` helper execution.
   Acceptance: Diagnostic-output helpers preserve runtime output while matching the portable side-effect contract;
     `simenv_multiline_value` and `ds_vhistory_version_entry` advance past unsupported-helper failures.
-  Verification: `PASS` - Julia eagerly evaluates all diagnostic arguments, emits `print`, `say`, and
-    `print_each` messages through the configured low-level trace/diagnostic sink, returns `nothing`, and leaves
-    parser output unchanged. Focused runtime coverage locks concatenation, newline/suffix behavior, array walking,
-    and result neutrality. Both routed corpus cases advance past unsupported `print`: `simenv_multiline_value`
-    now stops at unsupported `exit_now`, while `ds_vhistory_version_entry` reaches its already-known leading-trivia
-    output mismatch. Seven permanent corpus-boundary assertions bring full `Pkg.test()` to 780. The complete
-    shipped window remains 18/31 because this helper leaf advances failure mechanisms rather than closing either
-    fixture; status is `runtime-corpus-diagnostic-output`, and `.6.2.4.3` becomes active.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.2 - add Julia diagnostic output helpers`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.2.2`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.2.3`
   Status: `done`
   Goal: Normalize portable no-op regex flags in Julia helper regex compilation.
   Acceptance: Julia helper regex paths preserve meaningful `i`/`m`/`s`/`x` behavior while treating Perl's
     compile-once `o` flag as a portable no-op; `portmap_constant` passes without weakening invalid-regex handling.
-  Verification: `PASS` - `_runtime_compile_helper_regex(...)` centralizes helper regex compilation, preserves
-    `i`/`m`/`s`/`x`, ignores execution-only `g` and Perl compile-once `o`, and returns failure for unknown flags or
-    invalid patterns. Both `matches(...)` and regex `split(...)` use the seam. Focused helper coverage locks `igo`,
-    regex split `go`, and unknown `q`; `portmap_constant` passes at exact expected output. Full tests remain 772,
-    shipped smoke moves from 17/31 to 18/31, status is `runtime-corpus-helper-regex-flags`, and `.6.2.4.2.2` is next.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.2.3 - normalize Julia helper regex flags`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.2.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.3`
   Status: `done`
   Goal: Close recursive top-rule lifecycle and accumulator outputs.
   Acceptance: All three recursive top-rule fixtures match checked-in Perl/Rust outputs, with caller/child local
     state and LX result composition proven by focused Julia tests.
-  Verification: `PASS` - Each rule invocation now owns a first-write snapshot map for explicit aggregate resets.
-    `set(array(name), ...)`, `set(hash(name), ...)`, and explicit split-target replacement restore the caller's
-    prior scalar/array/hash binding on rule exit, while ordinary undeclared child mutations remain caller-visible;
-    user functions stay outside this tracker because they already swap complete stores. Focused array/hash reset
-    and shared-mutation assertions plus three permanent recursive corpus assertions bring full `Pkg.test()` to
-    785. All three recursive fixtures pass, the complete shipped window moves from 18/31 to 21/31, status is
-    `runtime-corpus-recursive-rule-scope`, and `.6.2.4.4` becomes active.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.3 - scope Julia recursive rule resets`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.4`
   Status: `done`
@@ -611,15 +476,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Both EBNF fixtures and the four spec.spec smoke fixtures preserve their expected structural records,
     or independent parser/runtime mechanisms are split again before implementation. `ebnf_logging_annotation`
     reaches structural execution after `.6.2.4.1`; it no longer belongs to the capture-helper leaf.
-  Verification: `PASS/SPLIT` - Julia now recognizes action-edge `push(child)`, `push(child, target)`,
-    `push(child, index)`, and `push(child, target, index)`, reuses the current edge's already-dispatched child
-    result, and appends the whole/indexed value to the implicit or explicit accumulator. Focused coverage locks all
-    four forms. All four spec.spec smokes pass. Both EBNF fixtures preserve every structural record and now differ
-    only because statement-form `substr(...)` has not stripped quotes; that independent mutation/normalization
-    mechanism is routed to `.6.2.4.5.2`. Seven permanent corpus assertions bring full `Pkg.test()` to 793. The
-    complete window moves from 21/31 to 25/31, status is `runtime-corpus-action-edge-child-push`, and
-    `.6.2.4.5.1` becomes active.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.4 - add Julia action-edge child push`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.4`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5`
   Status: `done`
@@ -628,25 +486,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Fatal diagnostic control, statement mutation/quote normalization, and public-parser leading trivia
     each have an independent executable leaf; simenv, both EBNF cases, both lib_reader cases, and history either
     pass or expose a newly split mechanism before final 31/31 no-drift.
-  Verification: `PASS` - `.5.1` adds fatal exit control, `.5.2` adds portable statement regex mutation, and
-    `.5.3` mirrors public-parser leading trivia. All six routed fixtures pass, the shipped window is 31/31, and
-    final no-drift advances independently to `.6`.
   Commit: `closed by JULIA-BACKEND-PARITY.6.2.4.5.3`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.5`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.1`
   Status: `done`
   Goal: Add terminating `exit_now(...)` runtime control.
   Acceptance: `simenv_multiline_value` advances past unsupported `exit_now` with the fatal-control contract locked
     independently from later statement mutation.
-  Verification: `PASS` - Julia evaluates the optional first status expression, defaults absent/nonnumeric status
-    to Rust-compatible `1`, and immediately throws `RuntimeInterpreterException` with rule attribution; the
-    established wrapper retains structured top/rule/spec diagnostic fields. Focused coverage locks explicit
-    `exit_now(7)`, default `exit_now(1)`, and an unreachable following return. Simenv advances from unsupported
-    `exit_now` to deliberate `exit_now(1) in rule begin_end_blocks`, proving the helper while exposing its earlier
-    statement-form `substr(...)` prerequisite under `.6.2.4.5.2`. Eight permanent boundary assertions and seven
-    focused runtime assertions bring full `Pkg.test()` to 801; the shipped window remains 25/31 without regression,
-    status is `runtime-corpus-exit-now`, and `.6.2.4.5.2` becomes active.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.1 - add Julia terminating exit control`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.5.1`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.2`
   Status: `done`
@@ -654,41 +503,24 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Both EBNF cases, both lib_reader cases, and the post-`exit_now` simenv boundary apply portable
     statement mutation without fixture-specific cleanup and match checked-in outputs or split a narrower residual;
     the exact single-quoted pattern spelling is locked across every current backend parser.
-  Verification: `PASS` - In statement context only, four-argument `substr(...)` / `regex_subst(...)` with a bare
-    scalar target now perform regex replacement before pure helper fallback. Julia preserves `i`/`m`/`s`/`x`,
-    applies global `g`, accepts compatibility no-op `o`, expands `$n` captures, and fails invalid patterns/flags
-    with rule attribution. Numeric value-form `substr(value, start, width)` stays pure, including a standalone
-    discarded call. Six focused assertions lock mutation/global/single/case-insensitive/pure behavior. Both EBNF,
-    both lib_reader, and simenv fixtures pass exact checked-in output; permanent corpus coverage brings full
-    `Pkg.test()` to 808. The complete window moves from 25/31 to 30/31, status is
-    `runtime-corpus-statement-mutation`, and `.6.2.4.5.3` becomes active for the sole history residual.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.2 - add Julia statement regex mutation`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.5.2`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.5.3`
   Status: `done`
   Goal: Mirror public-parser leading trivia for the history smoke.
   Acceptance: `ds_vhistory_version_entry` matches the checked-in public Perl/Rust output without weakening ordinary
     indexed variable reads or direct descriptor semantics.
-  Verification: `PASS` - Julia now initializes the public `runtime_parse(...)` context after only leading blank
-    lines and leading `#` comment lines, matching the Perl wrapper and completed Dart backend. A focused minimal
-    locks the leading blank/comment boundary while a second assertion proves scalar-held `payload[1]` still
-    returns the indexed value. `ds_vhistory_version_entry` passes exact checked-in output, the complete shipped
-    window is 31/31, full `Pkg.test()` passes with 810 assertions, and status is
-    `runtime-corpus-leading-trivia`. `.6.2.4.5` closes and `.6.2.4.6` becomes active for no-drift.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.5.3 - mirror Julia public parser leading trivia`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.5.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.4.6`
   Status: `done`
   Goal: Close final shipped-spec/parser-smoke no-drift.
   Acceptance: The complete offset-68/limit-31 window is 31/31 green, a permanent regression locks it, all residual
     mechanisms are explicitly owned, and package/docs/status surfaces agree before `.6.2.5` begins.
-  Verification: `PASS` - a permanent test executes exactly offset `68`, limit `31`, and locks manifest count `99`,
-    result count `31`, stable endpoints `tclite_command_subst` / `lib_reader_cattribute`, pass count `31`, empty
-    failures, and exact expected-output equality for every result. Direct CLI execution reports 31 passed / 0
-    failed. Full `Pkg.test()` passes with 816 assertions; CLI status reports `runtime-corpus-shipped`. Package,
-    README, mdBook, roadmaps, Knowledge Map, task/index, architecture, live docs, and memory agree. No runtime
-    semantic or corpus-fixture change was required.
   Commit: `JULIA-BACKEND-PARITY.6.2.4.6 - close Julia shipped corpus no drift`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.4.6`.
 
 - ID: `JULIA-BACKEND-PARITY.6.2.5`
   Status: `done`
@@ -696,42 +528,24 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Julia obtains neutral `function_definition` nodes from `specs/user_function_definition.spec`, feeds
     them through staged body projection, and passes the routed `fn` fixtures without introducing a Julia raw
     function scanner or a fixture-only semantic shortcut.
-  Verification: `PASS` - Julia now compiles and caches `specs/user_function_definition.spec`, executes it over
-    top-level `fn` source, normalizes its neutral function-definition nodes, projects and strips exact source
-    spans, dispatches body parse jobs through the existing ActionIR registry, and compiles the resulting rules and
-    function registry. The default corpus path falls back to this staged parser only after rule-only
-    `parse_spec(...)` reports a source parse error. Seven focused source-driven parser assertions and four
-    permanent three-case corpus assertions pass. Direct CLI execution is 3 passed / 0 failed; full tests pass with
-    827 assertions and status is `runtime-corpus-function-shells`. No Julia raw function scanner or fixture-only
-    semantic branch was added.
   Commit: `JULIA-BACKEND-PARITY.6.2.5 - execute Julia function shell corpus`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.2.5`.
 
 - ID: `JULIA-BACKEND-PARITY.6.3`
   Status: `done`
   Goal: Finalize manifest drift guard and full Julia corpus gate.
   Acceptance: Julia runner rejects unsupported manifest format, mismatched counts, invalid/duplicate names, missing
     fixture dirs, stale extra dirs, and output mismatches; all current fixtures pass.
-  Verification: `PASS` - the existing loader regressions reject unsupported format, count mismatch, invalid and
-    duplicate names, missing and stale fixture directories, missing required files, malformed expected JSON, and
-    output mismatch. One permanent complete-corpus regression now locks format `1`, manifest/result count `99`,
-    exact manifest order and endpoints, 99 passes, zero failures, and exact expected output for every fixture.
-    Unbounded CLI `--execute` runs the complete manifest; named, bounded, and offset-only diagnostics remain
-    available. Direct full CLI execution is 99 passed / 0 failed; full tests pass with 840 assertions and status
-    `runtime-corpus-full`.
   Commit: `JULIA-BACKEND-PARITY.6.3 - close full Julia corpus gate`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.3`.
 
 - ID: `JULIA-BACKEND-PARITY.6.4`
   Status: `done`
   Goal: Wire Julia parity into the local verification story.
   Acceptance: Focused Julia test commands are documented; broader local gate integration is added only when
     reliable and not dependent on absent local SDK state.
-  Verification: `PASS` - `tools/run_julia_local.sh` provides one repo-owned focused gate over package tests,
-    Julia CLI help/status, corpus-runner help, and full 99-fixture execution. The Julia command and depot are
-    configurable through `LINKEDSPEC_JULIA_CMD` and `LINKEDSPEC_JULIA_DEPOT_PATH`; the default depot is outside
-    the repository. `tools/run_ci_local.sh` stays core-only by default and includes Julia only when
-    `LINKEDSPEC_RUN_JULIA=1`, so machines without Julia retain the canonical gate. The focused gate passes 840
-    assertions and 99/99 corpus execution; shell syntax, default local CI, docs, and governance gates pass.
   Commit: `JULIA-BACKEND-PARITY.6.4 - wire Julia local verification`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.6.4`.
 
 - ID: `JULIA-BACKEND-PARITY.7`
   Status: `active`
@@ -743,25 +557,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Goal: Document Julia backend usage, status, and parity boundaries in the mdBook.
   Acceptance: Book pages explain how to run Julia, what parity gate it satisfies, and any remaining limitations in
     variant-neutral terms.
-  Verification: `PASS` - the backend handoff now presents Julia as a mature native in-memory backend rather than a
-    scaffold, documents focused/direct/opt-in commands, gives self-contained rule-only and top-level-function
-    embedding examples, names the 99/99 `runtime-corpus-full` boundary, and distinguishes interpreter parity from
-    generated-source and compile/parser trace claims. The public API table/example, trace status, project status,
-    local verification page, Julia README, and Knowledge Map agree. mdBook and governance checks pass.
   Commit: `JULIA-BACKEND-PARITY.7.1 - document Julia usage and parity boundary`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.1`.
 
 - ID: `JULIA-BACKEND-PARITY.7.2`
   Status: `done`
   Goal: Decide generated Julia source as a post-interpreter proof lane.
   Acceptance: Generated Julia source is either implemented against the already-green interpreter model or
     deliberately deferred with clear prerequisites; it is not the primary parity gate.
-  Verification: `PASS` - generated Julia source is deliberately deferred rather than implemented as a one-slice
-    add-on. The native in-memory interpreter already satisfies ADR `0022` and passes 99/99. Rust's source-emitter
-    precedent proves a credible generated path needs a separately split scaffold/compile-run harness, generated
-    family-plan metadata, direct structural-family execution, and curated manifest-backed corpus proof. The
-    existing future generated-source lane `FUTURE-PARITY-BACKLOG.3` now owns Rust breadth plus separate Dart/Julia
-    emitter splits; interpreter parity remains Julia's accepted gate and no behavior changed.
   Commit: `JULIA-BACKEND-PARITY.7.2 - defer Julia generated source proof`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.2`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3`
   Status: `active`
@@ -774,11 +579,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Inspect every implemented variant CLI from source; compare command purpose, options, positional
     arguments, outputs/errors, and binary availability; split decision, Julia repair, and no-drift work before
     changing implementation.
-  Verification: `PASS` - Perl `bin/linkedspec` is a parser CLI with source/input, parser-mode, trace, canonical-JSON,
-    and 1/2 exit semantics. Dart's primary CLI and Julia's primary CLI are corpus/status adapters with different
-    options and 64/2 error conventions. The Rust workspace declares no binary target. The verified contract gap is
-    split into `.7.3.1` contract/routing, `.7.3.2` Julia CLI alignment, and `.7.3.3` honest no-drift closeout.
   Commit: `JULIA-BACKEND-PARITY.7.3.0 - split strict user-facing parity closeout`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.0`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.1`
   Status: `done`
@@ -786,12 +588,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: A durable decision preserves distinct backend executable names while requiring identical commands,
     options and meanings, positional arguments, outputs/errors, and exit semantics; current Perl/Rust/Dart/Julia
     gaps are recorded and non-Julia repairs have explicit task ownership before Julia code changes.
-  Verification: `PASS` - ADR `0023` makes user-observable capability/behavior identity and one exact primary CLI
-    interface mandatory. The only permitted CLI difference is the executable token/host launch wrapper; the
-    canonical contract has the Perl parser option set, no positional arguments or subcommands, canonical JSON,
-    normalized diagnostics, and 0/1/2 exits. `FUTURE-PARITY-BACKLOG.1.5` owns Perl/Rust/Dart/global CLI repairs,
-    `.1.6` owns complete capability census, and `.3` owns public generated-source parity. `.7.3.2` owns Julia.
   Commit: `JULIA-BACKEND-PARITY.7.3.1 - ratify exact backend interface parity`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.1`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2`
   Status: `done`
@@ -804,23 +602,16 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Identify native library seams and every missing ADR `0023` mechanism; split trace prerequisites,
     argument/source/input handling, execution/canonical JSON, normalized errors/trace routing, and direct-command
     conformance into recoverable leaves.
-  Verification: `PASS` - Julia already exposes rule/staged source parsing, compilation, runtime top-rule/parse-mode,
-    structured diagnostics, trace configs/sinks, and corpus JSON utilities. Its primary CLI still owns only
-    status/corpus dispatch; no named-spec resolver, parser-option model, canonical key-sorted result serializer, or
-    compile/parser trace instrumentation exists. `.7.3.2.1` through `.7.3.2.5` own those mechanisms before repair.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.0 - split Julia primary CLI alignment`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.0`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.1`
   Status: `done`
   Goal: Close Julia compile/spec-parser/staged trace coverage required by the primary trace options.
   Acceptance: Opt-in structured trace events cover source parse/validation/compile, function-shell parsing, and
     staged dispatch through existing levels/config/sinks; default APIs remain quiet and output-compatible.
-  Verification: `PASS` - one optional caller-owned `LinkedSpecTraceEmitter` now propagates through rule parsing,
-    validation passes, compiled-state construction, spec-driven function-shell parsing/projection, runtime shell
-    execution, and staged normalize/queue/resolve/load/compile/execute phases. Twenty-eight focused assertions prove
-    scopes, decisions, failure exits, routed output, disabled quietness, and traced/untraced identity; the complete
-    868-assertion package suite and 99/99 focused corpus gate pass.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.1 - trace Julia frontend compiler and staged dispatch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.1`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.2`
   Status: `done`
@@ -828,37 +619,24 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Julia accepts only ADR `0023`'s source/input/parser/trace/help options, rejects subcommands and
     positionals with usage exit `2`, resolves named/current/repo specs consistently, and loads files without
     leaking backend-specific primary options.
-  Verification: `PASS` - Julia's primary module accepts only the exact source/input/parser/trace/help flags,
-    supports separate and `--option=value` forms, validates exclusivity/modes/levels, and rejects missing values,
-    unknown options, `status`/`corpus`, and every positional with usage exit `2`. Preparation loads exact inline/
-    file input and spec text; named resolution checks exact current path, current `NAME.spec`, repository `specs/`,
-    then deterministic authored-tree fallback while explicit paths/names do not fall through. Fifty focused
-    assertions, the full 920-assertion suite, direct CLI checks, and 99/99 corpus gate pass.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.2 - align Julia CLI arguments and loading`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.2`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.3`
   Status: `done`
   Goal: Connect primary CLI execution to the shared Julia library pipeline and canonical JSON output.
   Acceptance: Rule-only and top-level-function source flow through spec-defined parsing, compilation, engine
     parse-mode/top-rule execution, and key-sorted canonical JSON of the direct top-rule value plus one newline.
-  Verification: `PASS` - prepared requests now compose rule-first/spec-driven-function fallback parsing, traced
-    compilation, runtime construction with source identity and parse controls, and direct top-rule execution. A
-    recursive serializer emits compact JSON with every nested object key sorted lexicographically and one newline.
-    Twenty-two focused assertions, the complete 942-assertion package suite, direct canonical-output smoke, and
-    99/99 corpus gate pass.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.3 - execute Julia primary parser requests`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.3`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.4`
   Status: `done`
   Goal: Normalize Julia primary-CLI failures, exit status, and trace routing.
   Acceptance: Compile/input/runtime failures emit ADR `0023`'s stable stderr shape and exit `1`; usage exits `2`;
     stdout/route/mirror, reset, emoji, and trace-file behavior compose with machine-readable JSON exactly.
-  Verification: `PASS` - source preparation/compile precede deferred input-file loading; operational failures use
-    stable compilation/input/invocation headings, ordered runtime diagnostic fields, raw-error lines, and exit `1`
-    while usage remains `2`. Default route, explicit stdout/route/mirror, empty/missing/file sinks, reset with or
-    without file routing, quiet levels, and level-specific emoji compose with canonical JSON. Seventy-five focused
-    assertions, the complete 1,017-assertion suite, and 99/99 corpus gate pass.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.4 - normalize Julia CLI failures and trace routing`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.4`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.2.5`
   Status: `done`
@@ -866,12 +644,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Julia exposes the canonical parser CLI through its native in-memory library, with exact argument,
     output/error, trace, and exit behavior locked by focused/unit/direct-process tests; old status/corpus primary
     subcommands are rejected, corpus tooling remains separate, and the focused local gate/book are current.
-  Verification: `PASS` - `tools/check_julia_primary_cli.sh` drives nine real Julia processes covering help,
-    rule/file and top-level-function/inline success, exact JSON bytes/newline, usage `2`, three operational exit-1
-    headings, ordered runtime context, routed emoji trace, and byte-identical mirror trace before JSON. The focused
-    gate owns that checker plus 1,017 package assertions and 99/99 corpus execution. Public status advances to the
-    precise local milestone `runtime-corpus-primary-cli`; global fixture/capability/codegen parity remains open.
   Commit: `JULIA-BACKEND-PARITY.7.3.2.5 - close Julia primary CLI conformance`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.2.5`.
 
 - ID: `JULIA-BACKEND-PARITY.7.3.3`
   Status: `done`
@@ -879,16 +653,8 @@ mdBook contract. This tree is the Julia lane delegated by `FUTURE-PARITY-BACKLOG
   Acceptance: Roadmaps, task-tree index, live docs, mdBook, Knowledge Map, architecture snapshot, and verification
     commands agree on Julia's exact proven surface. Any remaining feature/behavior gap is split into owned leaves
     and keeps this tree active rather than being described as complete parity.
-  Verification: `PASS` - current-facing surfaces now agree that `runtime-corpus-primary-cli` means Julia-local
-    99/99 interpreter execution plus 1,017 package assertions and nine direct primary-process families. The audit
-    found and corrected one stale mdBook sentence inherited from `.7.3.2.1` that still denied the now-implemented
-    exact primary CLI. No implementation source changed. Julia's tree deliberately remains active/delegated rather
-    than complete: `.1.5` owns language-neutral/four-backend CLI identity and has since closed at recurring 4x2x61;
-    `.1.6` owns the public capability census and residual splits, and `.3` owns generated-source equivalence.
-    Static current-status scans, Knowledge Map,
-    memory/task/doctrine gates, mdBook build, and whitespace checks pass; commit `431f0472` is the immediately prior
-    full Julia proof (1,017 assertions, nine process families, and 99/99 corpus).
   Commit: `JULIA-BACKEND-PARITY.7.3.3 - reconcile Julia scoped parity status`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.23`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree JULIA-BACKEND-PARITY --epoch TYPE-REFERENCE-BOOK.1.2.23.4.23 --id JULIA-BACKEND-PARITY.7.3.3`.
 
 ## Current Frontier
 
