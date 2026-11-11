@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4517,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generic-trailing-codeblock-argument-correction.md","sha256":"aaee5c296afee746b7a3d41fadf993cd1d2fc0ba2745255559dee48b577ad874","type":"member"}
 {"bytes":5702,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/github-size-safe-publication.md","sha256":"0ef25efa8f29ff99fef6e205609891dc8e0682047f2c9f22306d08eb4ddea7e8","type":"member"}
 {"bytes":2087,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/governed-capture-helpers-missing-shared-inventory.md","sha256":"a86b37bcce7c3c5cf95e1d5a9f8f027fdeecebd3266b4a30914340b3ade7c69c","type":"member"}
 {"bytes":3427,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/grouped-edge-book-child-return-drift.md","sha256":"39f7b54a953ced79a47722da0a27002d1690d79b0711008b9fbdfec28450aebc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3973,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-return-and-pure-observation-gaps.md","sha256":"e83048e5b44eb67c80b7dc8b49e0322edf6449f4be38319c9d7874946f67e35b","type":"member"}
 {"bytes":15360,"lines":272,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md","sha256":"a3eaa1a2688c4657b2d80a55e3f57960032e65826cab8b13a6e21c7c9228b9d9","type":"member"}
 {"bytes":2340,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-nullable-match-state-preserves-absence.md","sha256":"901068df4f6bbd5207027e6f2b118f5b01a86d1e4d8e61e98286b12dfe15b2ce","type":"member"}
-{"bytes":2673,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-numeric-comparison-source-guards.md","sha256":"780b24ead4aca1ec409c57e730cfeacf2f669edafa5837e3bd652423447f5176","type":"member"}

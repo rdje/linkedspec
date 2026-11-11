@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Dart pure-pipeline results (79.3)
+
+Canonical seven-helper Array results enter the existing persistent actual-kind guard, preserving first-producer permission and rejecting wrong Hash consumers before operands/later work. Independent173/shared36+own137 moves19RED/154PASS to173PASS on all four routes; private19RED/current173PASS, direct318 and first readonly0/empty stderr/eleven corruptions pass.154 healthy records/173 parsed-module pairs stay exact. Preserve Dart's quiet invalid-regex fallback, distinct free/receiver excess-argument effects, missing forms, required diagnostic objects, earlier owners and Boolean boundary. Complete own/new/selected external fixtures/default grammar and relative routing precede SDK use; current SDK identities match. Book/Knowledge/task/live/roadmap pointers route to independent Julia79.4 after normal focused landing; full admission remains separate.
+
 ## 2026-11-11 — Guard Rust pure-pipeline results (79.2)
 
 Canonical seven-helper Array results enter existing direct/trailing-with actual-kind guards before incompatible consumers and later effects. Independent173/shared36+own137 moves11RED/162PASS to173PASS on native/restored/plan/compiled emitted-fresh; same-path private11RED/current173PASS, direct374 and first readonly0/empty stderr/nine corruptions pass. All162 healthy records,173 serialized/module pairs per observer epoch and original regex warnings stay exact. Preserve initial source fallbacks, excluded arities, required errors, earlier owners, producers/writeback and formats. Actual executed owned products and new untracked fixture/help/source inputs precede use; complete upstream native custody remains separate. Current SDK identities pass; book/Knowledge/task/live/roadmap pointers route to independent Dart79.3 after normal focused landing.

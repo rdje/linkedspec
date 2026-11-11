@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "pub",
+    "get",
+    "--offline"
+  ],
+  "cwd": "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/after/fresh",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

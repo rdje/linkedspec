@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2673,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-numeric-comparison-source-guards.md","sha256":"780b24ead4aca1ec409c57e730cfeacf2f669edafa5837e3bd652423447f5176","type":"member"}
 {"bytes":2874,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-ordinary-repetition-minimum-misses.md","sha256":"07c64bb427adb34fef3bb4019a2738f91e69103cc009612672d6286d13cd17fc","type":"member"}
 {"bytes":6181,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-package-readme-reading.md","sha256":"cffc90ce92d2c40bc5e6cf07311194b69f15585f9eb84bd09ab2b018b5534fbd","type":"member"}
 {"bytes":9364,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-parser-member-suffix-loss.md","sha256":"5ded33c3a4f4b8b3f6c969a35e76f39dc488f5d0b617b55510eacc87f1b71fc5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4685,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lossless-gap-cross-tree-handoff.md","sha256":"69557d77dd070e81d62f19a7e035b2447146973c52d62df3bab6e0c91a82c266","type":"member"}
 {"bytes":3852,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-action-edge-child-call-reuse.md","sha256":"197f72f9a544b0005115d4696ab6eaca2f5d53d6f285df58847a3614f0a1d259","type":"member"}
 {"bytes":3377,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-ast-parser.md","sha256":"c0aa3fe802fd0cb71b140b1c6cc62715d21f68b063e9a02884d2f05075f082bb","type":"member"}
-{"bytes":2709,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-actionir-contract-resolver.md","sha256":"f280c66ffeb7312bfcf4468416cbbf38fdc830b80956e057e23cebc76bf8d044","type":"member"}

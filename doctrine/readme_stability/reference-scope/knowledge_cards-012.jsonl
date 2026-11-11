@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6099,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-arithmetic-call-surface-ground-truth.md","sha256":"3021beab11eb8e283328a77ea98e10741227ff64cff2efe53c8ede90d97a779f","type":"member"}
 {"bytes":3262,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-authoring-quality-doctrine.md","sha256":"47a37f9954ba486ff7086d413b323fee936e4387ecc533b98b917c5a9b8fb4e8","type":"member"}
 {"bytes":2553,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-capture-mark-family-taxonomy.md","sha256":"2badbab9f11120683f51796a853b7b34c918232888a73f08121f62f5bbc742fe","type":"member"}
 {"bytes":13674,"lines":186,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-defined-user-function-definition-parser.md","sha256":"ba26432baeb821e2927cf479062e7c7daddf01c9337026428ba12718b793c48d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5103,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-implementation-inventory.md","sha256":"b8d1d1e112c74c7656ea781dbaff614214fe01df809f8e994d392a0e4a02790b","type":"member"}
 {"bytes":5405,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-registry-seam.md","sha256":"8c482a8ce837b11aaf1c26b6f7ed67abaffabddb78ecc3433e4e66a27652f9b7","type":"member"}
 {"bytes":2972,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-standalone-discard-hardening.md","sha256":"68a4a873a1d5437a710d4c1db5b7993d1eb2045893fae878d1d15946ee884fef","type":"member"}
-{"bytes":3795,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-user-function-value-call-execution.md","sha256":"cc8a88ed6b5767bf748a6d971e1ff7ffb921273708c0914c0f72c996492a7a34","type":"member"}

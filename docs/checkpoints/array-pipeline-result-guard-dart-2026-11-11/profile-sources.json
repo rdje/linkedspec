@@ -1,0 +1,1235 @@
+[
+  {
+    "id": "initial_number_split_each_free",
+    "body": "return(split_each(3,\":\"))",
+    "source": "Value:: I {return(split_each(3,\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_split_each_free_with",
+    "body": "order=\"\";out=split_each(3,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each(3,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_split_each_receiver",
+    "body": "return(3.split_each(\":\"))",
+    "source": "Value:: I {return(3.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_split_each_receiver_with",
+    "body": "order=\"\";out=3.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_split_each_free",
+    "body": "return(split_each(undef,\":\"))",
+    "source": "Value:: I {return(split_each(undef,\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_split_each_free_with",
+    "body": "order=\"\";out=split_each(undef,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each(undef,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_split_each_receiver",
+    "body": "return(undef.split_each(\":\"))",
+    "source": "Value:: I {return(undef.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_split_each_receiver_with",
+    "body": "order=\"\";out=undef.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_split_each_free",
+    "body": "return(split_each({\"k\":\"head\"},\":\"))",
+    "source": "Value:: I {return(split_each({\"k\":\"head\"},\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_split_each_free_with",
+    "body": "order=\"\";out=split_each({\"k\":\"head\"},\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each({\"k\":\"head\"},\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_split_each_receiver",
+    "body": "return({\"k\":\"head\"}.split_each(\":\"))",
+    "source": "Value:: I {return({\"k\":\"head\"}.split_each(\":\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_split_each_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_split_each_free",
+    "body": "order=\"\";out=split_each({order=cat(order,\"S\");[\"head:tail\"]},\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each({order=cat(order,\"S\");[\"head:tail\"]},\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_split_each_free",
+    "body": "order=\"\";return(split_each({items=\"bad\";items+=1;[\"head\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(split_each({items=\"bad\";items+=1;[\"head\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_split_each_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_split_each_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_split_each_free",
+    "body": "order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_trim_each_free",
+    "body": "return(trim_each(3))",
+    "source": "Value:: I {return(trim_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_trim_each_free_with",
+    "body": "order=\"\";out=trim_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=trim_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_trim_each_receiver",
+    "body": "return(3.trim_each())",
+    "source": "Value:: I {return(3.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_trim_each_receiver_with",
+    "body": "order=\"\";out=3.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_trim_each_free",
+    "body": "return(trim_each(undef))",
+    "source": "Value:: I {return(trim_each(undef))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_trim_each_free_with",
+    "body": "order=\"\";out=trim_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=trim_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_trim_each_receiver",
+    "body": "return(undef.trim_each())",
+    "source": "Value:: I {return(undef.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_trim_each_receiver_with",
+    "body": "order=\"\";out=undef.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_trim_each_free",
+    "body": "return(trim_each({\"k\":\"head\"}))",
+    "source": "Value:: I {return(trim_each({\"k\":\"head\"}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_trim_each_free_with",
+    "body": "order=\"\";out=trim_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=trim_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_trim_each_receiver",
+    "body": "return({\"k\":\"head\"}.trim_each())",
+    "source": "Value:: I {return({\"k\":\"head\"}.trim_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_trim_each_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_trim_each_free",
+    "body": "order=\"\";out=trim_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=trim_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_trim_each_free",
+    "body": "order=\"\";return(trim_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(trim_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_trim_each_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_trim_each_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_trim_each_free",
+    "body": "order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_filter_nonempty_free",
+    "body": "return(filter_nonempty(3))",
+    "source": "Value:: I {return(filter_nonempty(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_filter_nonempty_free_with",
+    "body": "order=\"\";out=filter_nonempty(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_nonempty(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver",
+    "body": "return(3.filter_nonempty())",
+    "source": "Value:: I {return(3.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver_with",
+    "body": "order=\"\";out=3.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_filter_nonempty_free",
+    "body": "return(filter_nonempty(undef))",
+    "source": "Value:: I {return(filter_nonempty(undef))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_filter_nonempty_free_with",
+    "body": "order=\"\";out=filter_nonempty(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_nonempty(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_filter_nonempty_receiver",
+    "body": "return(undef.filter_nonempty())",
+    "source": "Value:: I {return(undef.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_filter_nonempty_receiver_with",
+    "body": "order=\"\";out=undef.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_filter_nonempty_free",
+    "body": "return(filter_nonempty({\"k\":\"head\"}))",
+    "source": "Value:: I {return(filter_nonempty({\"k\":\"head\"}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_filter_nonempty_free_with",
+    "body": "order=\"\";out=filter_nonempty({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_nonempty({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_filter_nonempty_receiver",
+    "body": "return({\"k\":\"head\"}.filter_nonempty())",
+    "source": "Value:: I {return({\"k\":\"head\"}.filter_nonempty())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_filter_nonempty_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_filter_nonempty_free",
+    "body": "order=\"\";out=filter_nonempty({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_nonempty({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_filter_nonempty_free",
+    "body": "order=\"\";return(filter_nonempty({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(filter_nonempty({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_filter_nonempty_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_filter_nonempty_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_filter_nonempty_free",
+    "body": "order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_lowercase_each_free",
+    "body": "return(lowercase_each(3))",
+    "source": "Value:: I {return(lowercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_lowercase_each_free_with",
+    "body": "order=\"\";out=lowercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=lowercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver",
+    "body": "return(3.lowercase_each())",
+    "source": "Value:: I {return(3.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver_with",
+    "body": "order=\"\";out=3.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_lowercase_each_free",
+    "body": "return(lowercase_each(undef))",
+    "source": "Value:: I {return(lowercase_each(undef))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_lowercase_each_free_with",
+    "body": "order=\"\";out=lowercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=lowercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_lowercase_each_receiver",
+    "body": "return(undef.lowercase_each())",
+    "source": "Value:: I {return(undef.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_lowercase_each_receiver_with",
+    "body": "order=\"\";out=undef.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_lowercase_each_free",
+    "body": "return(lowercase_each({\"k\":\"head\"}))",
+    "source": "Value:: I {return(lowercase_each({\"k\":\"head\"}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_lowercase_each_free_with",
+    "body": "order=\"\";out=lowercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=lowercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_lowercase_each_receiver",
+    "body": "return({\"k\":\"head\"}.lowercase_each())",
+    "source": "Value:: I {return({\"k\":\"head\"}.lowercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_lowercase_each_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_lowercase_each_free",
+    "body": "order=\"\";out=lowercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=lowercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_lowercase_each_free",
+    "body": "order=\"\";return(lowercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(lowercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_lowercase_each_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_lowercase_each_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_lowercase_each_free",
+    "body": "order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_uppercase_each_free",
+    "body": "return(uppercase_each(3))",
+    "source": "Value:: I {return(uppercase_each(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_uppercase_each_free_with",
+    "body": "order=\"\";out=uppercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uppercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver",
+    "body": "return(3.uppercase_each())",
+    "source": "Value:: I {return(3.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver_with",
+    "body": "order=\"\";out=3.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_uppercase_each_free",
+    "body": "return(uppercase_each(undef))",
+    "source": "Value:: I {return(uppercase_each(undef))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_uppercase_each_free_with",
+    "body": "order=\"\";out=uppercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uppercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_uppercase_each_receiver",
+    "body": "return(undef.uppercase_each())",
+    "source": "Value:: I {return(undef.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_uppercase_each_receiver_with",
+    "body": "order=\"\";out=undef.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_uppercase_each_free",
+    "body": "return(uppercase_each({\"k\":\"head\"}))",
+    "source": "Value:: I {return(uppercase_each({\"k\":\"head\"}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_uppercase_each_free_with",
+    "body": "order=\"\";out=uppercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uppercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_uppercase_each_receiver",
+    "body": "return({\"k\":\"head\"}.uppercase_each())",
+    "source": "Value:: I {return({\"k\":\"head\"}.uppercase_each())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_uppercase_each_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_uppercase_each_free",
+    "body": "order=\"\";out=uppercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uppercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_uppercase_each_free",
+    "body": "order=\"\";return(uppercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(uppercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_uppercase_each_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_uppercase_each_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_uppercase_each_free",
+    "body": "order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_uniq_free",
+    "body": "return(uniq(3))",
+    "source": "Value:: I {return(uniq(3))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_uniq_free_with",
+    "body": "order=\"\";out=uniq(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uniq(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_uniq_receiver",
+    "body": "return(3.uniq())",
+    "source": "Value:: I {return(3.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_uniq_receiver_with",
+    "body": "order=\"\";out=3.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_uniq_free",
+    "body": "return(uniq(undef))",
+    "source": "Value:: I {return(uniq(undef))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_uniq_free_with",
+    "body": "order=\"\";out=uniq(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uniq(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_uniq_receiver",
+    "body": "return(undef.uniq())",
+    "source": "Value:: I {return(undef.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_uniq_receiver_with",
+    "body": "order=\"\";out=undef.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_uniq_free",
+    "body": "return(uniq({\"k\":\"head\"}))",
+    "source": "Value:: I {return(uniq({\"k\":\"head\"}))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_uniq_free_with",
+    "body": "order=\"\";out=uniq({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uniq({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_uniq_receiver",
+    "body": "return({\"k\":\"head\"}.uniq())",
+    "source": "Value:: I {return({\"k\":\"head\"}.uniq())}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_uniq_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_uniq_free",
+    "body": "order=\"\";out=uniq({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uniq({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_uniq_free",
+    "body": "order=\"\";return(uniq({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(uniq({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_uniq_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_uniq_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_uniq_free",
+    "body": "order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "initial_number_filter_match_free",
+    "body": "return(filter_match(3,/^head/))",
+    "source": "Value:: I {return(filter_match(3,/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_filter_match_free_with",
+    "body": "order=\"\";out=filter_match(3,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match(3,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_number_filter_match_receiver",
+    "body": "return(3.filter_match(/^head/))",
+    "source": "Value:: I {return(3.filter_match(/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_number_filter_match_receiver_with",
+    "body": "order=\"\";out=3.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=3.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_filter_match_free",
+    "body": "return(filter_match(undef,/^head/))",
+    "source": "Value:: I {return(filter_match(undef,/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_filter_match_free_with",
+    "body": "order=\"\";out=filter_match(undef,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match(undef,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_null_filter_match_receiver",
+    "body": "return(undef.filter_match(/^head/))",
+    "source": "Value:: I {return(undef.filter_match(/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_null_filter_match_receiver_with",
+    "body": "order=\"\";out=undef.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=undef.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_filter_match_free",
+    "body": "return(filter_match({\"k\":\"head\"},/^head/))",
+    "source": "Value:: I {return(filter_match({\"k\":\"head\"},/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_filter_match_free_with",
+    "body": "order=\"\";out=filter_match({\"k\":\"head\"},/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match({\"k\":\"head\"},/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "initial_hash_filter_match_receiver",
+    "body": "return({\"k\":\"head\"}.filter_match(/^head/))",
+    "source": "Value:: I {return({\"k\":\"head\"}.filter_match(/^head/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source"
+  },
+  {
+    "id": "initial_hash_filter_match_receiver_with",
+    "body": "order=\"\";out={\"k\":\"head\"}.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "initial-source-with"
+  },
+  {
+    "id": "extra_filter_match_free",
+    "body": "order=\"\";out=filter_match({order=cat(order,\"S\");[\"head:tail\"]},/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match({order=cat(order,\"S\");[\"head:tail\"]},/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_filter_match_free",
+    "body": "order=\"\";return(filter_match({items=\"bad\";items+=1;[\"head\"]},/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(filter_match({items=\"bad\";items+=1;[\"head\"]},/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "extra_filter_match_receiver",
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-extra-arity"
+  },
+  {
+    "id": "needed_source_filter_match_receiver",
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-source-error"
+  },
+  {
+    "id": "missing_filter_match_free",
+    "body": "order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "missing_operand_split_each_free",
+    "body": "order=\"\";out=split_each([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=split_each([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "missing_operand_split_each_receiver",
+    "body": "order=\"\";out=[\"head\"].split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=[\"head\"].split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "missing_operand_filter_match_free",
+    "body": "order=\"\";out=filter_match([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=filter_match([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "missing_operand_filter_match_receiver",
+    "body": "order=\"\";out=[\"head\"].filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=[\"head\"].filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "excluded-missing-arity"
+  },
+  {
+    "id": "prior_count",
+    "body": "order=\"\";out=[1].count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=[1].count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "prior_key_count",
+    "body": "order=\"\";out={\"a\":1}.count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out={\"a\":1}.count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "prior_length",
+    "body": "order=\"\";out=\"abc\".length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=\"abc\".length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "prior_hash",
+    "body": "order=\"\";out=set_key({},\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=set_key({},\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "prior_copy",
+    "body": "order=\"\";out=copy(3).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=copy(3).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "prior_view",
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "earlier-owner"
+  },
+  {
+    "id": "needed_delimiter_free",
+    "body": "order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-delimiter-error"
+  },
+  {
+    "id": "invalid_range_free_terminal",
+    "body": "order=\"\";return(filter_match([\"head\"],/[z-a]/))",
+    "source": "Value:: I {order=\"\";return(filter_match([\"head\"],/[z-a]/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "regex-error-policy"
+  },
+  {
+    "id": "invalid_range_free_composed",
+    "body": "order=\"\";return(filter_match([\"head\"],/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return(filter_match([\"head\"],/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "regex-error-policy"
+  },
+  {
+    "id": "needed_delimiter_receiver",
+    "body": "order=\"\";return([\"head:tail\"].split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return([\"head:tail\"].split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "needed-delimiter-error"
+  },
+  {
+    "id": "invalid_range_receiver_terminal",
+    "body": "order=\"\";return([\"head\"].filter_match(/[z-a]/))",
+    "source": "Value:: I {order=\"\";return([\"head\"].filter_match(/[z-a]/))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "regex-error-policy"
+  },
+  {
+    "id": "invalid_range_receiver_composed",
+    "body": "order=\"\";return([\"head\"].filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "source": "Value:: I {order=\"\";return([\"head\"].filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "regex-error-policy"
+  },
+  {
+    "id": "nested_scalar_kinds",
+    "body": "source=[false,0,undef,\"0\",\"\"];out=uniq(source);return([out,source])",
+    "source": "Value:: I {source=[false,0,undef,\"0\",\"\"];out=uniq(source);return([out,source])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "nested-kinds"
+  },
+  {
+    "id": "numeric_array_source",
+    "body": "source=[3];return([trim_each(source),filter_nonempty(source),uniq(source),source])",
+    "source": "Value:: I {source=[3];return([trim_each(source),filter_nonempty(source),uniq(source),source])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "numeric-kind"
+  }
+]

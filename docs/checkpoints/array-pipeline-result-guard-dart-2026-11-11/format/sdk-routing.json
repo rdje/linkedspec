@@ -1,0 +1,5 @@
+{
+  "package": "linkedspec_dart",
+  "config": "dart/.dart_tool/package_config.json",
+  "root": "dart"
+}

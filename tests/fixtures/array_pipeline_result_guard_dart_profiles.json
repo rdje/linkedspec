@@ -1,0 +1,4469 @@
+{
+  "extra_filter_match_free": {
+    "body": "order=\"\";out=filter_match({order=cat(order,\"S\");[\"head:tail\"]},/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match({order=cat(order,\"S\");[\"head:tail\"]},/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_filter_match_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_match(/^head/,{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_filter_nonempty_free": {
+    "body": "order=\"\";out=filter_nonempty({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_nonempty({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_filter_nonempty_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_filter_nonempty_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.filter_nonempty({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_lowercase_each_free": {
+    "body": "order=\"\";out=lowercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=lowercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_lowercase_each_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_lowercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.lowercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_split_each_free": {
+    "body": "order=\"\";out=split_each({order=cat(order,\"S\");[\"head:tail\"]},\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_split_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each({order=cat(order,\"S\");[\"head:tail\"]},\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_split_each_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_split_each_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.split_each(\":\",{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_trim_each_free": {
+    "body": "order=\"\";out=trim_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_trim_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_trim_each_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_trim_each_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.trim_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_uniq_free": {
+    "body": "order=\"\";out=uniq({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_uniq_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uniq({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_uniq_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_uniq_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uniq({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_uppercase_each_free": {
+    "body": "order=\"\";out=uppercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "id": "extra_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uppercase_each({order=cat(order,\"S\");[\"head:tail\"]},{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "extra_uppercase_each_receiver": {
+    "body": "order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "fresh": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "id": "extra_uppercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "plan": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-extra-arity",
+    "restored": {
+      "value": [
+        "ran",
+        "SXKW"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head:tail\"]}.uppercase_each({order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
+  },
+  "initial_hash_filter_match_free": {
+    "body": "return(filter_match({\"k\":\"head\"},/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_match({\"k\":\"head\"},/^head/))}\n"
+  },
+  "initial_hash_filter_match_free_with": {
+    "body": "order=\"\";out=filter_match({\"k\":\"head\"},/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_filter_match_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match({\"k\":\"head\"},/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_filter_match_receiver": {
+    "body": "return({\"k\":\"head\"}.filter_match(/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.filter_match(/^head/))}\n"
+  },
+  "initial_hash_filter_match_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_filter_match_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_filter_nonempty_free": {
+    "body": "return(filter_nonempty({\"k\":\"head\"}))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_nonempty({\"k\":\"head\"}))}\n"
+  },
+  "initial_hash_filter_nonempty_free_with": {
+    "body": "order=\"\";out=filter_nonempty({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_filter_nonempty_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_nonempty({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_filter_nonempty_receiver": {
+    "body": "return({\"k\":\"head\"}.filter_nonempty())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_filter_nonempty_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.filter_nonempty())}\n"
+  },
+  "initial_hash_filter_nonempty_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_filter_nonempty_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_lowercase_each_free": {
+    "body": "return(lowercase_each({\"k\":\"head\"}))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(lowercase_each({\"k\":\"head\"}))}\n"
+  },
+  "initial_hash_lowercase_each_free_with": {
+    "body": "order=\"\";out=lowercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_lowercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=lowercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_lowercase_each_receiver": {
+    "body": "return({\"k\":\"head\"}.lowercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_lowercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.lowercase_each())}\n"
+  },
+  "initial_hash_lowercase_each_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_lowercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_split_each_free": {
+    "body": "return(split_each({\"k\":\"head\"},\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_split_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(split_each({\"k\":\"head\"},\":\"))}\n"
+  },
+  "initial_hash_split_each_free_with": {
+    "body": "order=\"\";out=split_each({\"k\":\"head\"},\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_split_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each({\"k\":\"head\"},\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_split_each_receiver": {
+    "body": "return({\"k\":\"head\"}.split_each(\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_split_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.split_each(\":\"))}\n"
+  },
+  "initial_hash_split_each_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_split_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_trim_each_free": {
+    "body": "return(trim_each({\"k\":\"head\"}))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_trim_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(trim_each({\"k\":\"head\"}))}\n"
+  },
+  "initial_hash_trim_each_free_with": {
+    "body": "order=\"\";out=trim_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_trim_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_trim_each_receiver": {
+    "body": "return({\"k\":\"head\"}.trim_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_trim_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.trim_each())}\n"
+  },
+  "initial_hash_trim_each_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_trim_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_uniq_free": {
+    "body": "return(uniq({\"k\":\"head\"}))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_uniq_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uniq({\"k\":\"head\"}))}\n"
+  },
+  "initial_hash_uniq_free_with": {
+    "body": "order=\"\";out=uniq({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_uniq_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uniq({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_uniq_receiver": {
+    "body": "return({\"k\":\"head\"}.uniq())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_uniq_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.uniq())}\n"
+  },
+  "initial_hash_uniq_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_uniq_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_uppercase_each_free": {
+    "body": "return(uppercase_each({\"k\":\"head\"}))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uppercase_each({\"k\":\"head\"}))}\n"
+  },
+  "initial_hash_uppercase_each_free_with": {
+    "body": "order=\"\";out=uppercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_uppercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uppercase_each({\"k\":\"head\"}).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_hash_uppercase_each_receiver": {
+    "body": "return({\"k\":\"head\"}.uppercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_hash_uppercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return({\"k\":\"head\"}.uppercase_each())}\n"
+  },
+  "initial_hash_uppercase_each_receiver_with": {
+    "body": "order=\"\";out={\"k\":\"head\"}.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_hash_uppercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"k\":\"head\"}.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_filter_match_free": {
+    "body": "return(filter_match(undef,/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_match(undef,/^head/))}\n"
+  },
+  "initial_null_filter_match_free_with": {
+    "body": "order=\"\";out=filter_match(undef,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_filter_match_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match(undef,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_filter_match_receiver": {
+    "body": "return(undef.filter_match(/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.filter_match(/^head/))}\n"
+  },
+  "initial_null_filter_match_receiver_with": {
+    "body": "order=\"\";out=undef.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_filter_match_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_filter_nonempty_free": {
+    "body": "return(filter_nonempty(undef))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_nonempty(undef))}\n"
+  },
+  "initial_null_filter_nonempty_free_with": {
+    "body": "order=\"\";out=filter_nonempty(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_filter_nonempty_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_nonempty(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_filter_nonempty_receiver": {
+    "body": "return(undef.filter_nonempty())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_filter_nonempty_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.filter_nonempty())}\n"
+  },
+  "initial_null_filter_nonempty_receiver_with": {
+    "body": "order=\"\";out=undef.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_filter_nonempty_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_lowercase_each_free": {
+    "body": "return(lowercase_each(undef))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(lowercase_each(undef))}\n"
+  },
+  "initial_null_lowercase_each_free_with": {
+    "body": "order=\"\";out=lowercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_lowercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=lowercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_lowercase_each_receiver": {
+    "body": "return(undef.lowercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_lowercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.lowercase_each())}\n"
+  },
+  "initial_null_lowercase_each_receiver_with": {
+    "body": "order=\"\";out=undef.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_lowercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_split_each_free": {
+    "body": "return(split_each(undef,\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_split_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(split_each(undef,\":\"))}\n"
+  },
+  "initial_null_split_each_free_with": {
+    "body": "order=\"\";out=split_each(undef,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_split_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each(undef,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_split_each_receiver": {
+    "body": "return(undef.split_each(\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_split_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.split_each(\":\"))}\n"
+  },
+  "initial_null_split_each_receiver_with": {
+    "body": "order=\"\";out=undef.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_split_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_trim_each_free": {
+    "body": "return(trim_each(undef))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_trim_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(trim_each(undef))}\n"
+  },
+  "initial_null_trim_each_free_with": {
+    "body": "order=\"\";out=trim_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_trim_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_trim_each_receiver": {
+    "body": "return(undef.trim_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_trim_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.trim_each())}\n"
+  },
+  "initial_null_trim_each_receiver_with": {
+    "body": "order=\"\";out=undef.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_trim_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_uniq_free": {
+    "body": "return(uniq(undef))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_uniq_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uniq(undef))}\n"
+  },
+  "initial_null_uniq_free_with": {
+    "body": "order=\"\";out=uniq(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_uniq_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uniq(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_uniq_receiver": {
+    "body": "return(undef.uniq())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_uniq_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.uniq())}\n"
+  },
+  "initial_null_uniq_receiver_with": {
+    "body": "order=\"\";out=undef.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_uniq_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_uppercase_each_free": {
+    "body": "return(uppercase_each(undef))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uppercase_each(undef))}\n"
+  },
+  "initial_null_uppercase_each_free_with": {
+    "body": "order=\"\";out=uppercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_uppercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uppercase_each(undef).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_null_uppercase_each_receiver": {
+    "body": "return(undef.uppercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_null_uppercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(undef.uppercase_each())}\n"
+  },
+  "initial_null_uppercase_each_receiver_with": {
+    "body": "order=\"\";out=undef.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_null_uppercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=undef.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_filter_match_free": {
+    "body": "return(filter_match(3,/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_match(3,/^head/))}\n"
+  },
+  "initial_number_filter_match_free_with": {
+    "body": "order=\"\";out=filter_match(3,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_filter_match_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match(3,/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_filter_match_receiver": {
+    "body": "return(3.filter_match(/^head/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.filter_match(/^head/))}\n"
+  },
+  "initial_number_filter_match_receiver_with": {
+    "body": "order=\"\";out=3.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_filter_match_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.filter_match(/^head/).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_filter_nonempty_free": {
+    "body": "return(filter_nonempty(3))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(filter_nonempty(3))}\n"
+  },
+  "initial_number_filter_nonempty_free_with": {
+    "body": "order=\"\";out=filter_nonempty(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_filter_nonempty_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_nonempty(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_filter_nonempty_receiver": {
+    "body": "return(3.filter_nonempty())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_filter_nonempty_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.filter_nonempty())}\n"
+  },
+  "initial_number_filter_nonempty_receiver_with": {
+    "body": "order=\"\";out=3.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_filter_nonempty_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.filter_nonempty().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_lowercase_each_free": {
+    "body": "return(lowercase_each(3))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(lowercase_each(3))}\n"
+  },
+  "initial_number_lowercase_each_free_with": {
+    "body": "order=\"\";out=lowercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_lowercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=lowercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_lowercase_each_receiver": {
+    "body": "return(3.lowercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_lowercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.lowercase_each())}\n"
+  },
+  "initial_number_lowercase_each_receiver_with": {
+    "body": "order=\"\";out=3.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_lowercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.lowercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_split_each_free": {
+    "body": "return(split_each(3,\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_split_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(split_each(3,\":\"))}\n"
+  },
+  "initial_number_split_each_free_with": {
+    "body": "order=\"\";out=split_each(3,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_split_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each(3,\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_split_each_receiver": {
+    "body": "return(3.split_each(\":\"))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_split_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.split_each(\":\"))}\n"
+  },
+  "initial_number_split_each_receiver_with": {
+    "body": "order=\"\";out=3.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_split_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.split_each(\":\").with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_trim_each_free": {
+    "body": "return(trim_each(3))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_trim_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(trim_each(3))}\n"
+  },
+  "initial_number_trim_each_free_with": {
+    "body": "order=\"\";out=trim_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_trim_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_trim_each_receiver": {
+    "body": "return(3.trim_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_trim_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.trim_each())}\n"
+  },
+  "initial_number_trim_each_receiver_with": {
+    "body": "order=\"\";out=3.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_trim_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.trim_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_uniq_free": {
+    "body": "return(uniq(3))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_uniq_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uniq(3))}\n"
+  },
+  "initial_number_uniq_free_with": {
+    "body": "order=\"\";out=uniq(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_uniq_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uniq(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_uniq_receiver": {
+    "body": "return(3.uniq())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_uniq_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.uniq())}\n"
+  },
+  "initial_number_uniq_receiver_with": {
+    "body": "order=\"\";out=3.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_uniq_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.uniq().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_uppercase_each_free": {
+    "body": "return(uppercase_each(3))",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(uppercase_each(3))}\n"
+  },
+  "initial_number_uppercase_each_free_with": {
+    "body": "order=\"\";out=uppercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_uppercase_each_free_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uppercase_each(3).with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "initial_number_uppercase_each_receiver": {
+    "body": "return(3.uppercase_each())",
+    "fresh": {
+      "value": []
+    },
+    "id": "initial_number_uppercase_each_receiver",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "initial-source",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(3.uppercase_each())}\n"
+  },
+  "initial_number_uppercase_each_receiver_with": {
+    "body": "order=\"\";out=3.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])",
+    "fresh": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "id": "initial_number_uppercase_each_receiver_with",
+    "input": "x",
+    "native": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "initial-source-with",
+    "restored": {
+      "value": [
+        0,
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=3.uppercase_each().with(){order=cat(order,\"W\");return(value.count())};return([out,order])}\n"
+  },
+  "invalid_range_free_composed": {
+    "body": "order=\"\";return(filter_match([\"head\"],/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "value": null
+    },
+    "guard_target": "Actual Array rejects Hash consumer before coalesce; terminal fallback remains[]",
+    "id": "invalid_range_free_composed",
+    "input": "x",
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "profile_only": true,
+    "question": "regex-error-policy",
+    "restored": {
+      "value": null
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(filter_match([\"head\"],/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "invalid_range_free_terminal": {
+    "body": "order=\"\";return(filter_match([\"head\"],/[z-a]/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "invalid_range_free_terminal",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "regex-error-policy",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(filter_match([\"head\"],/[z-a]/))}\n"
+  },
+  "invalid_range_receiver_composed": {
+    "body": "order=\"\";return([\"head\"].filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "value": null
+    },
+    "guard_target": "Actual Array rejects Hash consumer before coalesce; terminal fallback remains[]",
+    "id": "invalid_range_receiver_composed",
+    "input": "x",
+    "native": {
+      "value": null
+    },
+    "plan": {
+      "value": null
+    },
+    "profile_only": true,
+    "question": "regex-error-policy",
+    "restored": {
+      "value": null
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return([\"head\"].filter_match(/[z-a]/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "invalid_range_receiver_terminal": {
+    "body": "order=\"\";return([\"head\"].filter_match(/[z-a]/))",
+    "fresh": {
+      "value": []
+    },
+    "id": "invalid_range_receiver_terminal",
+    "input": "x",
+    "native": {
+      "value": []
+    },
+    "plan": {
+      "value": []
+    },
+    "profile_only": true,
+    "question": "regex-error-policy",
+    "restored": {
+      "value": []
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return([\"head\"].filter_match(/[z-a]/))}\n"
+  },
+  "missing_filter_match_free": {
+    "body": "order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_filter_nonempty_free": {
+    "body": "order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_nonempty().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_lowercase_each_free": {
+    "body": "order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=lowercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_operand_filter_match_free": {
+    "body": "order=\"\";out=filter_match([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_operand_filter_match_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=filter_match([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_operand_filter_match_receiver": {
+    "body": "order=\"\";out=[\"head\"].filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_operand_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[\"head\"].filter_match().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_operand_split_each_free": {
+    "body": "order=\"\";out=split_each([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "id": "missing_operand_split_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each([\"head\"]).with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_operand_split_each_receiver": {
+    "body": "order=\"\";out=[\"head\"].split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "id": "missing_operand_split_each_receiver",
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [
+          "h",
+          "e",
+          "a",
+          "d"
+        ],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[\"head\"].split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_split_each_free": {
+    "body": "order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_split_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=split_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_trim_each_free": {
+    "body": "order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_trim_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_uniq_free": {
+    "body": "order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_uniq_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uniq().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "missing_uppercase_each_free": {
+    "body": "order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "id": "missing_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "excluded-missing-arity",
+    "restored": {
+      "value": [
+        [],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=uppercase_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "needed_delimiter_error_composed": {
+    "body": "order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+    "expected_error": "binding_kind_mismatch",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_delimiter_error_composed",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+  },
+  "needed_delimiter_error_terminal": {
+    "body": "return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}))",
+    "expected_error": "binding_kind_mismatch",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_delimiter_error_terminal",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}))}\n"
+  },
+  "needed_delimiter_free": {
+    "body": "order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_delimiter_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-delimiter-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(split_each([\"head:tail\"],{items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_delimiter_receiver": {
+    "body": "order=\"\";return([\"head:tail\"].split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_delimiter_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-delimiter-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return([\"head:tail\"].split_each({items=\"bad\";items+=1;\":\"}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_error_composed": {
+    "body": "order=\"\";return(split_each({items=\"bad\";items+=1;[\"head:tail\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+    "expected_error": "binding_kind_mismatch",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_error_composed",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(split_each({items=\"bad\";items+=1;[\"head:tail\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_error_terminal": {
+    "body": "return(split_each({items=\"bad\";items+=1;[\"head:tail\"]},\":\"))",
+    "expected_error": "binding_kind_mismatch",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_error_terminal",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {return(split_each({items=\"bad\";items+=1;[\"head:tail\"]},\":\"))}\n"
+  },
+  "needed_source_filter_match_free": {
+    "body": "order=\"\";return(filter_match({items=\"bad\";items+=1;[\"head\"]},/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_filter_match_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(filter_match({items=\"bad\";items+=1;[\"head\"]},/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_filter_match_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_filter_match_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_match(/^head/).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_filter_nonempty_free": {
+    "body": "order=\"\";return(filter_nonempty({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_filter_nonempty_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(filter_nonempty({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_filter_nonempty_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_filter_nonempty_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.filter_nonempty().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_lowercase_each_free": {
+    "body": "order=\"\";return(lowercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_lowercase_each_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(lowercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_lowercase_each_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_lowercase_each_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.lowercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_split_each_free": {
+    "body": "order=\"\";return(split_each({items=\"bad\";items+=1;[\"head\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_split_each_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(split_each({items=\"bad\";items+=1;[\"head\"]},\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_split_each_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_split_each_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.split_each(\":\").set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_trim_each_free": {
+    "body": "order=\"\";return(trim_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_trim_each_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(trim_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_trim_each_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_trim_each_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.trim_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_uniq_free": {
+    "body": "order=\"\";return(uniq({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_uniq_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(uniq({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_uniq_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_uniq_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uniq().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_uppercase_each_free": {
+    "body": "order=\"\";return(uppercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_uppercase_each_free",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return(uppercase_each({items=\"bad\";items+=1;[\"head\"]}).set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "needed_source_uppercase_each_receiver": {
+    "body": "order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))",
+    "fresh": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "id": "needed_source_uppercase_each_receiver",
+    "input": "x",
+    "native": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "plan": {
+      "class": "GeneratedSourceException",
+      "error": "Generated Dart parser execution failed: RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "profile_only": true,
+    "question": "needed-source-error",
+    "restored": {
+      "class": "RuntimeInterpreterException",
+      "diagnostic": {
+        "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "handler_source_label": "dart_runtime:rule:Value",
+        "owner_stage": "dart_runtime",
+        "rule_label": "Value",
+        "stage": "runtime_execution",
+        "summary": "Dart runtime interpreter failed",
+        "top_rule": "Value",
+        "type": "runtime_parser"
+      },
+      "error": "RuntimeInterpreterException: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";return({items=\"bad\";items+=1;[\"head\"]}.uppercase_each().set_key({order=cat(order,\"K\");\"k\"},1).coalesce(\"masked\"))}\n"
+  },
+  "nested_scalar_kinds": {
+    "body": "source=[false,0,undef,\"0\",\"\"];out=uniq(source);return([out,source])",
+    "fresh": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "id": "nested_scalar_kinds",
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "profile_only": true,
+    "question": "nested-kinds",
+    "restored": {
+      "value": [
+        [
+          false,
+          null,
+          ""
+        ],
+        [
+          false,
+          0,
+          null,
+          "0",
+          ""
+        ]
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {source=[false,0,undef,\"0\",\"\"];out=uniq(source);return([out,source])}\n"
+  },
+  "numeric_array_source": {
+    "body": "source=[3];return([trim_each(source),filter_nonempty(source),uniq(source),source])",
+    "fresh": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "id": "numeric_array_source",
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "profile_only": true,
+    "question": "numeric-kind",
+    "restored": {
+      "value": [
+        [
+          "3"
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ],
+        [
+          3
+        ]
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {source=[3];return([trim_each(source),filter_nonempty(source),uniq(source),source])}\n"
+  },
+  "prior_copy": {
+    "body": "order=\"\";out=copy(3).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "id": "prior_copy",
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=copy(3).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_count": {
+    "body": "order=\"\";out=[1].count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "id": "prior_count",
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=[1].count().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_hash": {
+    "body": "order=\"\";out=set_key({},\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "id": "prior_hash",
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=set_key({},\"k\",1).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_key_count": {
+    "body": "order=\"\";out={\"a\":1}.count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "id": "prior_key_count",
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out={\"a\":1}.count_keys().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_length": {
+    "body": "order=\"\";out=\"abc\".length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "id": "prior_length",
+    "input": "x",
+    "native": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "plan": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        null,
+        ""
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=\"abc\".length().trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  },
+  "prior_view": {
+    "body": "order=\"\";out=sorted_keys({\"a\":1}).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])",
+    "fresh": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "id": "prior_view",
+    "input": "x",
+    "native": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "plan": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "profile_only": true,
+    "question": "earlier-owner",
+    "restored": {
+      "value": [
+        [
+          "a"
+        ],
+        "W"
+      ]
+    },
+    "rule": "Value",
+    "source": "Value:: I {order=\"\";out=sorted_keys({\"a\":1}).trim_each().with(){order=cat(order,\"W\");return(value)};return([out,order])}\n"
+  }
+}

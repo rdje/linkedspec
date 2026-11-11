@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":17532,"lines":278,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-capacity-controls.md","sha256":"fcb6a11637b2843958c0fd319f918440ca284735c83d2d652cded6e652cccb9b","type":"member"}
 {"bytes":10498,"lines":159,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-commit-closeout-audit.md","sha256":"f4f3987e9f522b3497143c21919e0363c9d5e16b8ab8edb7e19f91c56b7bf260","type":"member"}
 {"bytes":19250,"lines":308,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-engineering-history-capacity-blocker.md","sha256":"23f844e476bf18ba67ae08075cd578be62ec86d56df38dbc53709bf42ded9840","type":"member"}
 {"bytes":12763,"lines":198,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-reading-history-capacity-blocker.md","sha256":"5be25e9b4c91f23046632009cdb7ce917aec011209906beec3b7f8f1e4cac0ad","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":13894,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-contract-v1.md","sha256":"cbdba9150c9d8879467794b29cbd365a4c528d8bc17e0dfa16a2793748ef02f8","type":"member"}
 {"bytes":8583,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-parity-audit.md","sha256":"c3c2888677c1d0ea557319353e3539b5412327fcacfea91bb5e3b93e9d79e4de","type":"member"}
 {"bytes":3593,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-perl-rust-baseline-admitted.md","sha256":"127f55bdc3c242ace50d462edbcec89410b674ebacd1b52f59b13c258f7cf2df","type":"member"}
-{"bytes":4517,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generic-trailing-codeblock-argument-correction.md","sha256":"aaee5c296afee746b7a3d41fadf993cd1d2fc0ba2745255559dee48b577ad874","type":"member"}

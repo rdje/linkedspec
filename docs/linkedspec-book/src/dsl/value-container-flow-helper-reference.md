@@ -1861,7 +1861,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 ### Pipeline continuations: selected repair
 
 The seven pure pipeline helpers above return transformed Arrays while preserving
-source bindings. Ordinary Perl and Rust results now retain their actual kind through
+source bindings. Ordinary Perl, Rust and Dart results now retain their actual kind through
 subsequent methods, copy, logical operations and immediate `with`:
 
 ```text
@@ -1874,7 +1874,7 @@ uniq(["head","head"]).set_key("k",1)           # null
 
 An incompatible Hash consumer returns null before evaluating its operands.
 Rejection persists through later copy, logical operands and `with` bodies. For
-example, this ordinary Perl/Rust program returns `[null,""]`:
+example, this program returns `[null,""]` in Perl, Rust and Dart:
 
 ```text
 order="";
@@ -1893,7 +1893,7 @@ their rejection, and valid empty Arrays enter `with` normally.
 This bounded Perl repair covers canonical `split_each`, `trim_each`,
 `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq` and `filter_match`.
 Initial producer fallback, excluded arities, regex/Unicode, copy/mutation and
-standalone writeback keep their existing policies. Dart, Julia and Lua are
+standalone writeback keep their existing policies. Julia and Lua are
 assessed independently; full source/context/portable admission remains open.
 
 Rust covers the same seven canonical producers on native execution, restored
@@ -1907,6 +1907,16 @@ Required source/delimiter errors retain their original diagnostics. Rust's
 and excess arities retain their previous behavior and gain no new authority.
 Rebuild Rust applications to obtain these runtime guards; compiled-spec and
 emitted-source formats are unchanged.
+
+Dart also covers the same canonical seven helpers on native execution, restored
+specifications, generated plans and compiled emitted modules. Initial Number/null/
+Hash sources keep their empty Arrays and enter immediate `with` bodies normally.
+Required source/delimiter errors retain their structured runtime diagnostics.
+An invalid-range `filter_match` still quietly returns `[]` on Dart; a following
+`.set_key("k",1).coalesce("masked")` now returns null after rejection. The acquired excess free
+arguments retain their previous unevaluated behavior, while the acquired receiver
+extras keep their effects; neither form gains canonical authority. Rebuild Dart
+applications for these runtime guards; emitted and serialized formats stay stable.
 
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty

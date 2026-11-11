@@ -8,7 +8,7 @@ answers:
   - "do needed Array pipeline source and delimiter errors already propagate on Perl"
   - "are direct pure pipeline values and standalone named writeback already implemented"
 date: 2026-11-10
-status: original36 frozen; Perl source79.0/result79.1.1 and Rust79.2 focused-checked; independent Dart79.3 next
+status: original36 frozen; bounded Perl79/Rust79.2/Dart79.3 focused-checked; independent Julia79.4 next
 tags: [array, pipelines, results, guards, perl, selection, recovery]
 evidence: "Historical selection TYPE-REFERENCE-BOOK.1.2.23.1.39; docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md retains original36/17 failures/19 healthy,29 ready and7 unresolved receivers,36 module-handler pairs, first readonly0/empty stderr/eleven effective controls. No production or peer verdict."
 reverify:
@@ -60,3 +60,5 @@ Source79.0 is now bounded/focused-checked: shared Number fence,166PASS/private14
 Perl result79.1.1 now repairs18 targets with244PASS/private18RED-restored244PASS/direct384 and first readonly0/thirteen controls.225 full preservation projections remain exact; one invalid-range receiver descriptor advances while its complete needed error remains. Source79.0/earlier owners/arity policies stay intact. See [[perl-array-pipeline-result-guards]]; independent peers/full admission remain separate.
 
 Independent Rust79.2 acquires173/shared36+own137 and141 profiles before production; ten shared gaps plus one invalid-range free composition target move11RED to173PASS/four routes.162 healthy records,173 serialized/module pairs per epoch and original regex warnings remain exact. Same-path private11RED/current173PASS, direct374 and first readonly0/nine controls pass; current SDK inputs match. Rust initial Number/null/Hash fallback[], invalid-regex warning/[] and excluded arities remain distinct from Perl. See [[rust-array-pipeline-result-guards]]; independent Dart79.3 follows normal landing, with full admission separate.
+
+Independent Dart79.3 acquires173/shared36+own137 and141 profiles before production. Seventeen shared free/receiver/later gaps plus two invalid-range compositions move19RED/154PASS to173PASS/four routes.154 healthy records/173 parsed-module pairs stay exact; quiet regex fallback[] and free SKW/receiver SXKW exclusions remain Dart's own policies. Same-path private19RED/current173PASS, direct318 with complete selected fixture closure and first readonly0/eleven controls pass; relative routing/current SDK identities match. See [[dart-array-pipeline-result-guards]]; independent Julia79.4 follows normal landing and full admission remains separate.
