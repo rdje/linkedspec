@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/direct/value_copy-exec",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

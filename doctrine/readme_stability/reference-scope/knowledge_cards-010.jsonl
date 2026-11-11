@@ -50,6 +50,7 @@
 {"bytes":3484,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-aggregate-selector-compile-rejection.md","sha256":"9968e38e2b2fef176f429f19445938d139e7c0abaf83299ff1d5b5f188275f93","type":"member"}
 {"bytes":8016,"lines":113,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-anonymous-capture-slice-family.md","sha256":"4aa55f8c7b698c7df694290d66b92d8aeabbbeaaf63500c004bbb3184fd3a496","type":"member"}
 {"bytes":2999,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-arithmetic-result-source-guards.md","sha256":"55972cb0ffa572610f74f2b43c9b50f61fe5b8905b8b70e23a5c258b8050c6a1","type":"member"}
+{"bytes":4296,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.2","path":"docs/knowledge/rust-array-pipeline-result-guards.md","sha256":"057ac9aa45699d03834e9295f7daf6f878ed79d7051c0853d9b6742b81501884","type":"member"}
 {"bytes":4637,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-slice-boundary-panics.md","sha256":"70b8fabb8813bc998107ee42927ae75f33b6e0f5684fea12b2e9d321e758c59e","type":"member"}
 {"bytes":3766,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.2","path":"docs/knowledge/rust-array-transform-result-guards.md","sha256":"ecdc63bac037b582f7772db7efda649b001e173f49f3325805ebcbba438821e3","type":"member"}
 {"bytes":4018,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-array-tree-traversal-receiver-blocks.md","sha256":"d41a1ad187dcc25e90bf46dfd9cf3db45b6243aaa05dab0c214472edc7d9c9bf","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2412,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-match-writer-presence-repair.md","sha256":"eca4ce770d9e329c86a9dad60d8e023e1a6af4495c6d40ec7cd6f8d5b0eab3d1","type":"member"}
 {"bytes":5620,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-local-verification-gate.md","sha256":"ee46666addbb47b94a37134a2582b6282b750a80a4bfaad6736d91f599c1836d","type":"member"}
 {"bytes":5242,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-logical-helper-neutral-runtime.md","sha256":"1c8d57ea4a6dba6ad44708415f3c7df2d3961124878fe9a3e0d201d2925eb101","type":"member"}
-{"bytes":2645,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-logical-result-source-guards.md","sha256":"597f5814003e2a13a46be271f8bd512dd7237a8edcf4bb49317339ba50f8e6ca","type":"member"}

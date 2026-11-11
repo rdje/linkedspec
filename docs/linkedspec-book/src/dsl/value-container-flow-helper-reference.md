@@ -1861,7 +1861,7 @@ The bounded eager helper/scalar bridge is targeted-checked on all five runtimes 
 ### Pipeline continuations: selected repair
 
 The seven pure pipeline helpers above return transformed Arrays while preserving
-source bindings. Ordinary Perl results now retain their actual kind through
+source bindings. Ordinary Perl and Rust results now retain their actual kind through
 subsequent methods, copy, logical operations and immediate `with`:
 
 ```text
@@ -1874,7 +1874,7 @@ uniq(["head","head"]).set_key("k",1)           # null
 
 An incompatible Hash consumer returns null before evaluating its operands.
 Rejection persists through later copy, logical operands and `with` bodies. For
-example, this ordinary Perl program returns `[null,""]`:
+example, this ordinary Perl/Rust program returns `[null,""]`:
 
 ```text
 order="";
@@ -1885,16 +1885,28 @@ return([out,order]);
 ```
 
 The producer runs first, preserving required source and delimiter errors. A
-receiver `split_each` with an erroring computed delimiter now forwards that
-original error through its consumer chain. Balanced invalid regexes still fail
-at regex compilation before consumer execution. Earlier guarded prefixes retain
+Perl receiver `split_each` with an erroring computed delimiter now forwards that
+original error through its consumer chain. On Perl, balanced invalid regexes still
+fail at regex compilation before consumer execution. Earlier guarded prefixes retain
 their rejection, and valid empty Arrays enter `with` normally.
 
 This bounded Perl repair covers canonical `split_each`, `trim_each`,
 `filter_nonempty`, `lowercase_each`, `uppercase_each`, `uniq` and `filter_match`.
 Initial producer fallback, excluded arities, regex/Unicode, copy/mutation and
-standalone writeback keep their existing policies. Rust, Dart, Julia and Lua are
+standalone writeback keep their existing policies. Dart, Julia and Lua are
 assessed independently; full source/context/portable admission remains open.
+
+Rust covers the same seven canonical producers on native execution, restored
+compiled specifications, generated plans and compiled emitted modules. Its
+initial Number/null/Hash sources still yield empty Arrays, and immediate `with`
+bodies run on those Arrays: `trim_each(3).with(){return(value.count())}` returns
+`0`. Earlier guarded Number/Hash results still reject incompatible Array work.
+Required source/delimiter errors retain their original diagnostics. Rust's
+`filter_match(["head"],/[z-a]/)` still warns and returns `[]`; a subsequent
+`.set_key("k",1).coalesce("masked")` now returns null after rejection. Missing
+and excess arities retain their previous behavior and gain no new authority.
+Rebuild Rust applications to obtain these runtime guards; compiled-spec and
+emitted-source formats are unchanged.
 
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty

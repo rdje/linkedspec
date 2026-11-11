@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2645,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-logical-result-source-guards.md","sha256":"597f5814003e2a13a46be271f8bd512dd7237a8edcf4bb49317339ba50f8e6ca","type":"member"}
 {"bytes":3501,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-lossless-child-carrier-readiness.md","sha256":"d38c7e9320a09d2d2dcef5dc39f297ca4b5cdf32cf9e5b12412ae01878754c30","type":"member"}
 {"bytes":6904,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-mark-based-capture-family.md","sha256":"edc8c6de8b613146c7216c05ee3c698d3f6cb97253a736bb9825b60c89601d12","type":"member"}
 {"bytes":1776,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-marker-short-alias-control.md","sha256":"6130642bccb787992dbaa80fa420d72b24e16c2781e2ab8545852478e4a8ffa1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1344,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/six-variant-unicode-17-case-parity.md","sha256":"69a880919afc9db79fb64cde9c191edfc6444fea2c4fe6394156c803e7639ccd","type":"member"}
 {"bytes":3421,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sparse-and-outgoing-edge-sequence-gap.md","sha256":"0f7d8bd9dafc9443b95935110939b5f0b6224b9622a877c1c900544a12012be0","type":"member"}
 {"bytes":6099,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-arithmetic-call-surface-ground-truth.md","sha256":"3021beab11eb8e283328a77ea98e10741227ff64cff2efe53c8ede90d97a779f","type":"member"}
-{"bytes":3262,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/spec-authoring-quality-doctrine.md","sha256":"47a37f9954ba486ff7086d413b323fee936e4387ecc533b98b917c5a9b8fb4e8","type":"member"}

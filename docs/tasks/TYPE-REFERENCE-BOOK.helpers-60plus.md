@@ -2747,14 +2747,14 @@
   Final focused integrity: Book render/actual HTML, Knowledge regeneration/sync, task index/reference scope, memory/handoff, both chronology pressure checks and whitespace accompany normal landing. All ten doctrines/post-pointer remain mandatory. No broad suite or push.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79`
-  Status: `pending` / independent ordinary pure-pipeline result guards
+  Status: `in_progress` / independent ordinary pure-pipeline result guards
   Children: `.79.0`, `.79.1`, `.79.2`, `.79.3`, `.79.4`, `.79.5`.
   Goal: Preserve seven ordinary pure-pipeline Array results through actual-kind consumers.
   Dependencies: Completed selection23.1.39; unchanged tests/fixtures/array_pipeline_result_guard_cases.json.
   Acceptance: Apply docs/checkpoints/type-operation-inventory/array-pipeline-result-guard-composition.md in full; its signatures, preservation, acquisition, exclusions and admission limits are normative. Original Perl36 has17 defects/19 healthy; no peer verdict. Own any observed source prerequisite before result repair.
   Backend proof contract: Independently acquire unchanged36 plus own initial Number/null/Hash, arities/source-delimiter-pattern errors/earlier-owner fences before production. Retain actual first source/grammar/instrument/artifact/full channels, every healthy observation and exact old/current loaded-owner SDK inverse/readonly recovery/corruptions when repaired. Keep producers, pure-versus-standalone semantics and all canonical exclusions unchanged. Healthy assessments need no speculative edit. Installed Lua: actual native products before load, no new chunk locals/unsafe full runner/declared5.4 inference. Full custody4.2/SESSION5/context/isolation/registration/23.4 separate.
   Focused execution: Smallest new/direct-dependent producer-pipeline-Array normals and changed syntax/format/exact runner include; book/Knowledge/history/task/memory/diff/normal hooks. No broad suite/matrix.
-  Frontier: Perl preflight79.1.0/source79.0/result79.1.1 are focused-checked; clean normal result landing precedes independent Rust79.2, then Dart/Julia/installed Lua; commit/brief0/clean Git precedes each next owner.
+  Frontier: Perl preflight79.1.0/source79.0/result79.1.1 and Rust79.2 are focused-checked; clean Rust landing precedes independent Dart79.3, then Julia/installed Lua; commit/brief0/clean Git precedes each next owner. Parent/full admission closeout remains23.4 after coverage.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.1`
   Status: `active` / source acquisition precedes production
@@ -2767,14 +2767,26 @@
   Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently assess/repair Rust ordinary pure-pipeline result guards.
   Dependencies: Frozen79/36; preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79 contract in full on native/restored CompiledSpec/generated-plan/compiled emitted-fresh; own policies acquired before production.
-  Planned verification: Parent79 focused execution.
-  Planned canonical trigger: Parent79 full23.4/final push after coverage.
-  Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+  Verification tier: `focused`
+  Focused checks: New pipeline173 plus prior Array-transform195/value-copy6; independent native/restored/plan/compiled emitted-fresh173; same-path private old/current173; actual first-use input/executed-product/artifact recovery and nine corruptions; scoped rustfmt, book/Knowledge/task/history/memory/diff and normal hooks. Commands/channels: docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/REVIEW.md.
+  Canonical trigger: none: Bounded ordinary Rust result guards; full23.4/final clean push follow feature coverage.
+  Claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
 
+  Activation: Clean74f3a4a1a21ba3cd1bf29579e3fcdb28cf3bd889 after Perl79.1.1/all10/post-pointer/brief0/full clean Git. Read frozen79/shared36, current book boundary, Rust78.2/77.2 and embedded-help input cards, public Engine/restored/generated-plan/source-emitter interfaces, project Cargo wrapper and published Rust/RGX integration instructions. Acquire own initial source/arity/error/kind/earlier-owner profiles before production; no Perl policy or failure-count inheritance. Capture actual new untracked fixtures and primary_cli help template before Cargo, retain native/generated artifacts and all channels. Use prepared opaque RGX outputs through published integration only; no dependency source/pin/build-internal changes or other-repository writes. One serial own build/check at a time with current host RAM headroom. Cleanup November10 15:19UTC remains within24h.
+
+  Acquisition: Authored137 own initial source/with/extra-missing arity/earlier-owner/source-delimiter-error/regex/kind questions; unchanged shared36 yields173 programs. Original native/restored/plan/compiled emitted-fresh complete0. Ten shared targets fail: seven free Hash consumers run KV and three later copy/logical/with chains run KVW/KVDW. Literal receiver guards already work. One additional own target invalid_range_free_composed returns[] after a wrong Hash consumer; receiver counterpart already returns null. Preserve producer invalid-range fallback[]/warning, but its actual Array must reject set_key before coalesce. Original173/141 frozen route profiles declare eleven targets/162 preservation controls before production; no peer failure-count inheritance.
+
+  Independent policy:42 initial Number/null/Hash terminal forms yield[],42 immediate-with forms yield[0,W]. Fourteen extra forms retain[ran,SXKW]; seven missing-free retain[[],W], two split missing operands retain character-split/[W] and two filter missing operands keep head/[W]. Five earlier scalar/Hash/copy owners reject before W; sorted_keys Array remains compatible. Sixteen own required source/delimiter errors retain exact native/restored and generated wrapper framing; all four shared errors already propagate. Nested Boolean/null/text/numeric kinds remain exact. Full channels retain Rust invalid-regex warnings. No source-isolation prerequisite was observed.
+
+  Custody/mechanism: Actual own Rust/grammar/fixtures/help/instruments precede Cargo;173 serialized/module pairs retained before execution/compilation. Actual executed owned copies retain bytes/modes before use after strip -S; unstripped products retain identities only, complete native/compiler/OS/transitive custody4.2. Pin f6e5acdc99720349d1e3ecef9f821f365c4db19c/status unchanged before/after; no bootstrap/other-repository writes. Public compiled inputs show canonical free/prefix pipeline calls; engine.rs direct FluentChain and trailing-with source-role lists omit this family before persistent actual-kind guards. Original173 normal completes162PASS/11RED and exactly matches acquired native/restored/plan observations. Read/construct-only repair rehearsal passes; actual writer/scoped formatter inputs/argv/full channels/exit0 retained in repair-run/.
+
+  Outcome: Canonical seven-helper role checks enter the two existing persistent guards, with initial producer permission only without an earlier owner and regex admitted only at canonical split/filter operand positions. Source112 insertions/two deletions leaves producer bodies, arities, neutral/serialized/generated formats, standalone writeback and dependencies unchanged. Repaired173 native/restored/plan/compiled emitted-fresh observations pass every declared target/preservation policy. Same-path private old162PASS/11RED and current173PASS match their corresponding public epochs exactly. Main-checkout direct374 (pipeline173/prior Array-transform195/value-copy6) and scoped rustfmt0/empty channels pass. All162 healthy records,173 serialized/module pairs per observer epoch and complete original native/fresh regex warnings remain exact.
+
+  Recovery/landing: First independent readonly0/empty stderr/nine reason-sensitive corruptions and separately scoped current SDK-input check0/empty stderr pass. Actual instruments/input identities precede reader use; SDK selectors explicitly exclude later readonly metadata. Only archive-verified owned live source/executable copies are removed; custody archives retain every byte/mode, residue empty. No failed repair/acquisition/qualification is substituted. Evidence: docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/REVIEW.md. Public book/Knowledge/live/root roadmap/task pointers route to independent Dart79.3 after normal hooks/post-pointer/brief0/clean Git; full custody4.2/SESSION5/source/context/isolation/registration/declared5.4/full23.4 remain separate. Book render/actual HTML, Knowledge synchronization, task index/reference scope, memory/handoff, both bounded-history checks and whitespace accompany mandatory normal landing; no broad suite or push.
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.3`
   Status: `pending`
   Goal: Independently assess/repair Dart ordinary pure-pipeline result guards.

@@ -1,0 +1,22 @@
+{
+  "cases": 173,
+  "shared": 36,
+  "own": 137,
+  "profiles": 141,
+  "red": [
+    "split_each_free_hash_guard",
+    "trim_each_free_hash_guard",
+    "filter_nonempty_free_hash_guard",
+    "lowercase_each_free_hash_guard",
+    "uppercase_each_free_hash_guard",
+    "uniq_free_hash_guard",
+    "filter_match_free_hash_guard",
+    "trim_later_with",
+    "uniq_copy_later_with",
+    "lower_logical_later_with",
+    "invalid_range_free_composed"
+  ],
+  "healthy": 162,
+  "own_target": "invalid_range_free_composed",
+  "scope": "Finite authored source/kind/error/arity controls; not a population measurement"
+}

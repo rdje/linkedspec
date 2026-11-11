@@ -4986,13 +4986,13 @@ custody4.2/SESSION5, isolation, complete source/context/registration/declared5.4
 full23.4 remain separate. Evidence:
 `docs/checkpoints/array-pipeline-result-selection-2026-11-10/REVIEW.md`.
 
-### Perl pure-pipeline result guards
+### Perl and Rust pure-pipeline result guards
 
-Perl79.1.1 guards canonical results of all seven pure pipeline helpers before incompatible consumers.
-Initial producers, source79.0's Number fence and earlier owners retain their original policies.
+Perl79.1.1 and Rust79.2 guard canonical results of all seven pure pipeline helpers before incompatible consumers.
+Initial producers, Perl source79.0's Number fence and earlier owners retain their original policies.
 The [pipeline reference](../dsl/value-container-flow-helper-reference.md) gives tested value/effect examples.
-New244/private18RED-restored244/direct384 and first readonly0/thirteen corruptions pass.
-Of226 preservation controls,225 full projections stay exact; one descriptor advances canonically.
-Its complete regex error stays unchanged; each normal retains240 actual source pairs, with four syntax exclusions.
-Regenerate older emitted Perl. Independent Rust79.2 follows; full source/context/native admission stays open.
-Evidence: `docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md`.
+Perl244/private18RED-restored244/direct384 passes; Rust173/four routes/private11RED-restored173/direct374/first readonly nine controls passes.
+Perl preserves225 full projections with one descriptor advance; Rust preserves162 records with eleven result targets.
+Perl retains240 actual source pairs/four syntax exclusions per normal; Rust retains173 serialized/module pairs per observer epoch.
+Regenerate older Perl and rebuild Rust. Independent Dart79.3 follows Rust's focused landing; full source/context/native admission stays open.
+Evidence: `docs/checkpoints/array-pipeline-composition-perl-2026-11-10/REVIEW.md`; `docs/checkpoints/array-pipeline-result-guard-rust-2026-11-11/REVIEW.md`.

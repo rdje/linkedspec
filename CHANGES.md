@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Rust pure-pipeline results (79.2)
+
+Canonical seven-helper Array results enter existing direct/trailing-with actual-kind guards before incompatible consumers and later effects. Independent173/shared36+own137 moves11RED/162PASS to173PASS on native/restored/plan/compiled emitted-fresh; same-path private11RED/current173PASS, direct374 and first readonly0/empty stderr/nine corruptions pass. All162 healthy records,173 serialized/module pairs per observer epoch and original regex warnings stay exact. Preserve initial source fallbacks, excluded arities, required errors, earlier owners, producers/writeback and formats. Actual executed owned products and new untracked fixture/help/source inputs precede use; complete upstream native custody remains separate. Current SDK identities pass; book/Knowledge/task/live/roadmap pointers route to independent Dart79.3 after normal focused landing.
+
 ## 2026-11-11 — Guard Perl pure-pipeline results (79.1.1)
 
 Canonical seven-helper results retain actual-kind guards through consumer/copy/logical/immediate-with links, with original first-producer permission and the source79.0 fence intact. New244 moves18RED to244PASS; same-path private18RED/restored244PASS, direct384 and first readonly0/empty stderr/thirteen corruptions pass. Of226 preservation controls,225 full projections remain exact; one invalid-range receiver descriptor advances canonically while its complete regex error remains unchanged. Align only that metadata in current source166, retaining its original fixture. All240 actual module/handler pairs per normal and before-use inputs/mutation channels survive; current SDK identities pass. Book/Knowledge/task/live pointers route to independent Rust79.2 after normal landing; full admission remains separate.

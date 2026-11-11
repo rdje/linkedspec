@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Pure-pipeline79: bounded Perl source/result work is focused-checked. Independent Rust79.2 follows normal clean Perl landing, then Dart/Julia/installed Lua. All bounded78/headroom4.21 are committed. Full feature/source/context/native admission remains open.
+Pure-pipeline79: bounded Perl source/result and Rust result work are focused-checked. Independent Dart79.3 follows normal clean Rust landing, then Julia/installed Lua. All bounded78/headroom4.21 are committed. Full feature/source/context/native admission remains open.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1. Canonical pipeline results retain kind/rejection through consumers/copy/logical/with, with original first-producer permission. New244PASS/private18RED-restored244PASS/direct384 and first readonly0/empty stderr/thirteen corruptions pass.225 full projections stay exact; one descriptor advances with unchanged required regex error. Current SDK identities pass; normal focused landing completes before the next owner.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.2. Canonical seven-helper Array results retain actual-kind guards through consumers/copy/logical/coalesce/with, with original first-producer permission. Independent173/four routes/private11RED-current173PASS/direct374/scoped format and first readonly0/empty stderr/nine corruptions pass.162 healthy records,173 serialized/module pairs per epoch and original regex warnings remain exact; current SDK inputs match.
 
 ## Next Action
 
-After normal hooks/post-pointer/brief0/clean Git, activate independent TYPE-REFERENCE-BOOK.1.2.23.3.79.2. Acquire Rust's own source/arity/error/earlier-owner policies, preserve shared36, repair only observed result gaps and complete focused checks/docs/normal commit before Dart79.3. Full native/source/context/registration/declared5.4/full23.4 remain separate.
+After normal hooks/post-pointer/brief0/clean Git, activate independent TYPE-REFERENCE-BOOK.1.2.23.3.79.3. Acquire Dart's own source/arity/error/earlier-owner policies, preserve shared36 and repair only observed result gaps. Complete focused checks/docs/normal commit before Julia79.4. Full native/source/context/registration/declared5.4/full23.4 remain separate.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.2 —173/four routes/private11RED-current173PASS/direct374;162 healthy records/173 artifact pairs/warnings exact; first readonly nine controls; independent Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1 —244PASS/private18RED-restored244PASS/direct384; first readonly thirteen controls;225 exact projections/one descriptor advance; independent Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.0 — Number source fence166PASS/private14RED-qualified166PASS/direct195; qualified readonly twelve controls; original18 composition targets preserved.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.0 —184 programs/148 profiles/180 pairs,14 main-only reads/source79.0 and one extra composition-error target; readonly ten controls; no production edit.
@@ -29,7 +30,6 @@ After normal hooks/post-pointer/brief0/clean Git, activate independent TYPE-REFE
 - TYPE-REFERENCE-BOOK.1.2.23.4.18.0 — lossless duplicate-display plan, frozen source/reader inputs, seven controls/readonly replay; canonical18.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.2 —195PASS/direct290/private21RED-restored195PASS/eight controls;152 profiles/174 healthy exact; capture qualification explicit.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1 —212PASS/direct490/private19RED-restored212PASS/seven controls;175 profiles/193 healthy exact; independent Rust78.2 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.0 — eight Number fences/189PASS, private16RED/restored189PASS/two readonly/six controls; original37 unchanged; composition78.1.1 next.
 
 ## History
 
