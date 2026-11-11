@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3674,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-conformance-audit.md","sha256":"8320a13faf642a67e182e2487275169c605ced334bab74a128be1db185891595","type":"member"}
 {"bytes":4322,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-operational-failures.md","sha256":"fd2e8c7b01a6aa256a5052b21a0bb1d8571be28b1a13bf63e289a781265bf653","type":"member"}
 {"bytes":2534,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-strict-arguments.md","sha256":"16d1d73c7a27914dc66047b4b3220ec1493f23edeb10465ea056531157b655d4","type":"member"}
 {"bytes":3256,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-primary-cli-success-conformance.md","sha256":"e0c5cb0fabee6610d956ed3d3456654174ee4cc6e076580499c80b934af6a0fb","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4507,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-obsolete-rust-objects.md","sha256":"c92e37425bd18ddbd596574065ef3172ff571e3bd054d3a947f12a16d3bf098f","type":"member"}
 {"bytes":10553,"lines":111,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-process-locality-proof.md","sha256":"9d2ecc74d72ab4b43c2398cdccc6a2456a11b5461f1a25a26dab5049977d52d7","type":"member"}
 {"bytes":4678,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-run-lifecycle.md","sha256":"3bae1c8f1a24d0c409f4d22cdda85dec20c9d1ab6b8339bc9b85834116ed08d0","type":"member"}
-{"bytes":3434,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-ssd-storage-closeout.md","sha256":"edd0efb54802ae127aaa4f73446ec1638fb2ad1425ff8cab1e3b922fc3db10af","type":"member"}

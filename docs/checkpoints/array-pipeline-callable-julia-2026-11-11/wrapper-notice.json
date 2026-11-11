@@ -1,0 +1,8 @@
+{
+  "emitter": "tools/project_data_run.sh",
+  "message": "child setpgid (62327 to 62327): Operation not permitted",
+  "phase": "source-question preparation",
+  "outer_exit": 0,
+  "repair_owner": "SESSION-STARTUP-READING.7",
+  "limits": "Tool combined observation only; final child PGID and separate original stderr unretained. Known monitor-mode mechanism, no new cause/lifecycle claim; no recover/purge."
+}

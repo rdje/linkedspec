@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-11 — Guard Julia callable pipeline results with full-wire preservation (79.6.4)
+
+Four interpreter insertions/two deletions retain unregistered free-helper identity while admitting canonical registered-source pipeline guards. Invocation/arity/producers/formats remain unchanged; one runner include.194/four routes776PASS/private20RED-current194 covers17 supported targets/three separate pattern compatibility movements/174 exact full-wire records. Direct776+1006+84=1866 assertions,1353 actual pairs/eight trace inputs/first readonly0-seventeen controls/current482 identities pass. New parsed inputs persist/readback before compile/restore; full public native/generated error maps remain. Book/Knowledge/task/live/roadmap/MEMORY align; reload/rebuild Julia. Existing SESSION7 owns the recorded preparation-wrapper warning; historical/native/source/context/full admission stays separate. Evidence: docs/checkpoints/array-pipeline-callable-julia-2026-11-11/REVIEW.md.
+
 ## 2026-11-11 — Preserve closed Rust task commentary and renew headroom (23.4.25)
 
 Existing ADR0139 epoch migration preserves52 IDs/statuses/all CORE fields, six complete unselected bodies, metadata and the full112804-byte Current Frontier tail.46 eligible closed pointers renew48537 current-text bytes (212629 to164092). Actual migration/all53 public queries0/empty stderr; first independent readonly0/ten effective corruptions/current identities pass. Original templates/source/input/output/modes/channels remain recoverable. Tools, limits and runtime behavior stay unchanged; book/Knowledge/task/live/roadmap/MEMORY align before Julia79.6.4. Evidence: docs/checkpoints/task-headroom-rust-2026-11-11/REVIEW.md.

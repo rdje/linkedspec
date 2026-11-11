@@ -1,0 +1,32 @@
+{
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/capture_current.py": {
+    "bytes": 2023,
+    "mode": 420,
+    "sha256": "4bbb45041212fbf4926fe780c1298bebff6437bec9deaee09e62e7d5acd4ab92"
+  },
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/check_current.py": {
+    "bytes": 1242,
+    "mode": 420,
+    "sha256": "f7585779b9b2c5f2f12ede7b7d4c184e7a26a74e77662311f4bb881cc291a034"
+  },
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/direct/custody.json": {
+    "bytes": 297828,
+    "mode": 420,
+    "sha256": "04ae85c4fa5a21aa4c1f4cf3305177e7cc7d550a2732b1ec9920b57eac3812c7"
+  },
+  "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/direct/root-inputs.tar.gz": {
+    "bytes": 1000732,
+    "mode": 420,
+    "sha256": "e34ad379b7d421257273bc27a939ca30ed45366856c482aa10ff5a79b4cc05a7"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

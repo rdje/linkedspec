@@ -2022,6 +2022,19 @@ errors. Existing excess-argument behavior is excluded from the canonical contrac
 portable code uses the documented arities. Noncanonical pattern observations gain
 no broader admission. Rebuild Dart applications; parsed/emitted formats stay.
 
+Julia also retains guards after canonical registered-function pipeline results,
+including later copying, logical continuations and `with`. Existing variadic
+functions keep their invocation rules: with `fn all_values(...items) {return(items)}`,
+`all_values().trim_each()` still yields an empty Array. A later incompatible Hash
+consumer rejects before its operands or subsequent bodies, while preserving the
+caller's source effects. Genuine empty Arrays still enter an immediate `with`;
+initial non-Array producer fallbacks retain Julia's original empty-Array policy.
+Needed source/delimiter/pattern errors keep their native and generated provenance,
+and invalid fixed/rest signatures retain their invocation errors. Use canonical
+arities and documented regex operands; String/bare/block compatibility observations
+add no broader pattern or callback admission. Reload the updated Julia runtime
+and rebuild deployed applications; parsed/emitted formats remain unchanged.
+
 Perl source79.0 also sends literal Number sources through the existing computed
 actual-Array fallback. `trim_each(3)` and its receiver counterpart yield an empty
 Array rather than reading unrelated host Array data. Genuine Array sources and

@@ -6943,9 +6943,11 @@ function _runtime_is_ordinary_array_pipeline_result_chain(engine, receiver, call
                 helper in _RUNTIME_HASH_HELPER_NAMES ||
                 helper in ("copy", "with", "and", "or", "not", "coalesce", "coalesce_nonempty"))
     end && return false
+    # Invocation keeps its arity checks and caller effects. A canonical pipeline
+    # prefix owns the produced result without becoming an unregistered free call.
     if receiver isa ActionCallExpr
-        has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return false
-        if something(receiver.source_method, receiver.name) == receiver.name &&
+        if !has_user_function_name(engine.compiled_spec.function_registry, receiver.name) &&
+            something(receiver.source_method, receiver.name) == receiver.name &&
             !receiver.trailing_block_arg &&
             _runtime_is_ordinary_array_pipeline_arguments(receiver.name, receiver.args)
             return true

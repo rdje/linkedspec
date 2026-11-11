@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_julia_project_data.sh",
+    "--project=julia",
+    "--startup-file=no",
+    "--history-file=no",
+    "--depwarn=error",
+    "-e",
+    "using LinkedSpecJulia,JSON3,Test; println(\"CALLABLE_PIPELINE_JULIA_OWNER \",relpath(pathof(LinkedSpecJulia),pwd())); for path in ARGS; include(path); end",
+    "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+    "julia/test/array_pipeline_result_guard_composition_test.jl",
+    "julia/test/key_count_callable_result_guard_composition_test.jl"
+  ],
+  "cwd": ".",
+  "environment": {
+    "JULIA_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "JULIA_PKG_PRECOMPILE_AUTO": "0",
+    "JULIA_NUM_PRECOMPILE_TASKS": "1",
+    "LINKEDSPEC_CALLABLE_PIPELINE_JULIA_CAPTURE": "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/direct",
+    "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE": "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/direct/prior-pipeline",
+    "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE": "docs/checkpoints/array-pipeline-callable-julia-2026-11-11/direct/prior-key-count"
+  }
+}

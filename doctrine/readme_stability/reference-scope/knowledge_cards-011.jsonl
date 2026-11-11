@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}
 {"bytes":4614,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-header-rest-action-edge-spacing.md","sha256":"979a25755afbe05dd9e28a1998958b4563b327566c0f89c885b7db7fab481b47","type":"member"}
 {"bytes":3589,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-index-source-guards.md","sha256":"56c43f8233d90e753c85202a4e98be40e82c0eebd631faea66bbe5db419fd639","type":"member"}
 {"bytes":3319,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.2","path":"docs/knowledge/rust-key-count-result-guards.md","sha256":"11af538631dbc444f5caf0914e80a31dba84e755875e9e9de330b48245f73cd4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4817,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-recurring-gate.md","sha256":"cda756656079d6e5b0c4ce9fa49f1acec1fcd169f9c21771de7a888ba44588c6","type":"member"}
 {"bytes":2392,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-spec-name-authority.md","sha256":"dd4fcc6f20bdb18ad1b1719049ee15040c211ab2938c1f0df7ae03867b8fd2b6","type":"member"}
 {"bytes":4154,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-staged-artifact-schema.md","sha256":"2a0364e999c3d42c5cba5a11d00141ece0fe7dca12c77ffa85acd5e50af9f34b","type":"member"}
-{"bytes":2909,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-static-rule-authority.md","sha256":"f8b0e013d8f4723c58a009678df2cfb6697b630e7a0f0be797795494e378ef83","type":"member"}

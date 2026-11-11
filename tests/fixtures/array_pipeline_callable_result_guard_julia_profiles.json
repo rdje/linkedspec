@@ -1,0 +1,6492 @@
+[
+  {
+    "id": "split_each_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "split_each_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "split_each_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "trim_each_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "trim_each_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "trim_each_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_nonempty_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_nonempty_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_nonempty_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "lowercase_each_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "lowercase_each_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "lowercase_each_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "uppercase_each_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "HEAD",
+            "TAIL"
+          ],
+          [
+            "HEAD",
+            "TAIL"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "uppercase_each_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "uppercase_each_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "uniq_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "head",
+            "tail"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "uniq_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "uniq_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_match_compatible",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          [
+            "head"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_match_free_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "filter_match_receiver_hash_guard",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "trim_later_with",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "uniq_copy_later_with",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "lower_logical_later_with",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "source_once",
+    "expected": {
+      "native": {
+        "value": [
+          "TAIL",
+          "S"
+        ]
+      },
+      "restored": {
+        "value": [
+          "TAIL",
+          "S"
+        ]
+      },
+      "plan": {
+        "value": [
+          "TAIL",
+          "S"
+        ]
+      },
+      "fresh": {
+        "value": [
+          "TAIL",
+          "S"
+        ]
+      }
+    }
+  },
+  {
+    "id": "source_snapshot",
+    "expected": {
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ]
+      },
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          [
+            "changed"
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "valid_empty_with",
+    "expected": {
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "needed_source_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "needed_delimiter_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "needed_delimiter_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "initial_number_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_split_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_split_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_split_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_split_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_split_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_split_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_split_each_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_split_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_split_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_split_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_split_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_trim_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_trim_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_trim_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_trim_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_trim_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_trim_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_trim_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_trim_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_trim_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_trim_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_trim_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_trim_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_trim_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_trim_each_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_trim_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_trim_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_trim_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_trim_each_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_trim_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_trim_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_trim_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_nonempty_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_nonempty_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_nonempty_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_nonempty_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_nonempty_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_nonempty_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_nonempty_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_nonempty_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_nonempty_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_nonempty_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_filter_nonempty_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_filter_nonempty_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_nonempty_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_nonempty_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_filter_nonempty_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_lowercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_lowercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_lowercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_lowercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_lowercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_lowercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_lowercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_lowercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_lowercase_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_lowercase_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_lowercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_lowercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_lowercase_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_lowercase_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_lowercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_uppercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_uppercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_uppercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_uppercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_uppercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uppercase_each_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uppercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uppercase_each_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uppercase_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uppercase_each_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_uppercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_uppercase_each_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uppercase_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uppercase_each_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_uppercase_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_uniq_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_uniq_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_uniq_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_uniq_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_uniq_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_uniq_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_uniq_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_uniq_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uniq_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uniq_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uniq_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_uniq_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_uniq_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_uniq_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uniq_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uniq_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_uniq_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_uniq_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uniq_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_uniq_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_uniq_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_match_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_number_filter_match_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_match_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_null_filter_match_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_match_free_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "initial_hash_filter_match_receiver_with",
+    "expected": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "extra_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_filter_match_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_match_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_match_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "extra_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKW"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_source_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_match_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_source_filter_match_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "missing_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "missing_operand_split_each_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "missing_operand_split_each_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "h",
+            "e",
+            "a",
+            "d"
+          ],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "missing_operand_filter_match_free",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "missing_operand_filter_match_receiver",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_count",
+    "expected": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_key_count",
+    "expected": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_length",
+    "expected": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_hash",
+    "expected": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_copy",
+    "expected": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "prior_view",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "a"
+          ],
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "a"
+          ],
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "a"
+          ],
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "a"
+          ],
+          "W"
+        ]
+      }
+    }
+  },
+  {
+    "id": "needed_delimiter_free",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_free.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "invalid_range_free_terminal",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "invalid_range_free_composed",
+    "expected": {
+      "fresh": {
+        "value": null
+      },
+      "native": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      }
+    }
+  },
+  {
+    "id": "needed_delimiter_receiver",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/needed_delimiter_receiver.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "invalid_range_receiver_terminal",
+    "expected": {
+      "fresh": {
+        "value": []
+      },
+      "native": {
+        "value": []
+      },
+      "restored": {
+        "value": []
+      },
+      "plan": {
+        "value": []
+      }
+    }
+  },
+  {
+    "id": "invalid_range_receiver_composed",
+    "expected": {
+      "native": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "fresh": {
+        "value": null
+      }
+    }
+  },
+  {
+    "id": "nested_scalar_kinds",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            false,
+            null,
+            ""
+          ],
+          [
+            false,
+            0,
+            null,
+            "0",
+            ""
+          ]
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            false,
+            null,
+            ""
+          ],
+          [
+            false,
+            0,
+            null,
+            "0",
+            ""
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            false,
+            null,
+            ""
+          ],
+          [
+            false,
+            0,
+            null,
+            "0",
+            ""
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            false,
+            null,
+            ""
+          ],
+          [
+            false,
+            0,
+            null,
+            "0",
+            ""
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "numeric_array_source",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "3"
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "3"
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "3"
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ]
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "3"
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ],
+          [
+            3
+          ]
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_empty_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_empty_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_multi_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "S"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "S"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "S"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head",
+            "tail"
+          ],
+          "S"
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_multi_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          "S"
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          "S"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "S"
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          "S"
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_signature_fixed_missing_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_missing_terminal.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_missing_terminal.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_signature_fixed_missing_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_missing_composed.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_missing_composed.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_signature_fixed_extra_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_extra_terminal.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_extra_terminal.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_signature_fixed_extra_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_extra_composed.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_fixed_extra_composed.spec",
+          "detail": "user function 'pair' expects 2 argument(s), got 3 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 3 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_missing_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_variadic_missing_terminal.spec",
+          "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_variadic_missing_terminal.spec",
+          "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_signature_variadic_missing_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_variadic_missing_composed.spec",
+          "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_signature_variadic_missing_composed.spec",
+          "detail": "user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: user function 'collect' expects at least 1 argument(s), got 0 in rule Value",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_pattern_literal_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_literal_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_string_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_string_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_bare_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_bare_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_block_terminal",
+    "expected": {
+      "fresh": {
+        "value": [
+          [
+            "head"
+          ],
+          "P"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "head"
+          ],
+          "P"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "head"
+          ],
+          "P"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "head"
+          ],
+          "P"
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_block_composed",
+    "expected": {
+      "native": {
+        "value": [
+          null,
+          "P"
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          "P"
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          "P"
+        ]
+      },
+      "fresh": {
+        "value": [
+          null,
+          "P"
+        ]
+      }
+    }
+  },
+  {
+    "id": "own_pattern_needed_error_terminal",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_pattern_needed_error_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_pattern_needed_error_terminal.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  },
+  {
+    "id": "own_pattern_needed_error_composed",
+    "expected": {
+      "fresh": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_pattern_needed_error_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      },
+      "native": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "restored": {
+        "error_json": {
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "diagnostic": {
+            "summary": "Julia runtime interpreter failed",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "stage": "runtime_execution",
+            "rule_label": "Value",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          }
+        },
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "RuntimeInterpreterException"
+      },
+      "plan": {
+        "error_json": {
+          "summary": "Generated Julia parser execution failed",
+          "handler_family": "default",
+          "source_identity": "callable-array-pipeline/own_pattern_needed_error_composed.spec",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "stage": "execute_generated",
+          "rule_label": "Value",
+          "code": "generated_execution_failed",
+          "type": "generated_source_error"
+        },
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "class": "GeneratedSourceException"
+      }
+    }
+  }
+]

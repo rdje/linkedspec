@@ -1,0 +1,12 @@
+{
+  "prepare.py": {
+    "path": "docs/checkpoints/array-pipeline-result-guard-julia-2026-11-11/prepare.py",
+    "bytes": 5546,
+    "sha256": "03b89aee18d567fc5c1b068807503fa8039a8baf6f15c42532a83efd064af0de"
+  },
+  "observer.jl": {
+    "path": "docs/checkpoints/array-pipeline-result-guard-julia-2026-11-11/observer.jl",
+    "bytes": 3513,
+    "sha256": "826c20ef146c9b1f94a1d39bd6504a5f0083fa3469b678fe9ac53deef7827a24"
+  }
+}

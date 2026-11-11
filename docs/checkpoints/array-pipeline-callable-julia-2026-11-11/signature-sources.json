@@ -1,0 +1,102 @@
+[
+  {
+    "id": "own_signature_variadic_empty_terminal",
+    "body": "order=\"\";out=all_values().trim_each();return([out,order])",
+    "source": "fn all_values(...items) {return(items)}\n\nValue:: I {order=\"\";out=all_values().trim_each();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-valid",
+    "form": "terminal"
+  },
+  {
+    "id": "own_signature_variadic_empty_composed",
+    "body": "order=\"\";out=all_values().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn all_values(...items) {return(items)}\n\nValue:: I {order=\"\";out=all_values().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-valid",
+    "form": "composed"
+  },
+  {
+    "id": "own_signature_variadic_multi_terminal",
+    "body": "order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each();return([out,order])",
+    "source": "fn all_values(...items) {return(items)}\n\nValue:: I {order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-valid",
+    "form": "terminal"
+  },
+  {
+    "id": "own_signature_variadic_multi_composed",
+    "body": "order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn all_values(...items) {return(items)}\n\nValue:: I {order=\"\";out=all_values({order=cat(order,\"S\");\" head \"},\" tail \").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-valid",
+    "form": "composed"
+  },
+  {
+    "id": "own_signature_fixed_missing_terminal",
+    "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each();return([out,order])",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "terminal"
+  },
+  {
+    "id": "own_signature_fixed_missing_composed",
+    "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "composed"
+  },
+  {
+    "id": "own_signature_fixed_extra_terminal",
+    "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"},\"tail\",\"extra\").trim_each();return([out,order])",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"},\"tail\",\"extra\").trim_each();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "terminal"
+  },
+  {
+    "id": "own_signature_fixed_extra_composed",
+    "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"},\"tail\",\"extra\").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"},\"tail\",\"extra\").trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "composed"
+  },
+  {
+    "id": "own_signature_variadic_missing_terminal",
+    "body": "order=\"\";out=collect().trim_each();return([out,order])",
+    "source": "fn collect(prefix,...items) {return(items)}\n\nValue:: I {order=\"\";out=collect().trim_each();return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "terminal"
+  },
+  {
+    "id": "own_signature_variadic_missing_composed",
+    "body": "order=\"\";out=collect().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn collect(prefix,...items) {return(items)}\n\nValue:: I {order=\"\";out=collect().trim_each().set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "profile_only": true,
+    "question": "function-signature-invalid",
+    "form": "composed"
+  }
+]

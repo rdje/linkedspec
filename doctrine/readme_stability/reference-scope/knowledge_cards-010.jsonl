@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3434,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-ssd-storage-closeout.md","sha256":"edd0efb54802ae127aaa4f73446ec1638fb2ad1425ff8cab1e3b922fc3db10af","type":"member"}
 {"bytes":17344,"lines":165,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-ssd-storage-locality.md","sha256":"ee2ae39320a8d268f1a80bb96266d9d57f8ca945b5e581e22eec29a65b7e350a","type":"member"}
 {"bytes":4265,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-storage-locality-doctrine.md","sha256":"3d19114a42e7b24ca0feac22aec45667f7a983b488fcf225f9846c55aaa7b4dc","type":"member"}
 {"bytes":4536,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/project-data-workflow-routing.md","sha256":"327a4b7dc166b66de7aeae3c289d3e639477ef4d6669b50ba425f912ebc47d39","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7494,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-separator-and-cat-arity-defects.md","sha256":"5fbb19473630b0ac33d61f860096ba3626ccdfa341b0a6f67b3114cb687ba9a4","type":"member"}
 {"bytes":4429,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-hash-tree-traversal-receiver-blocks.md","sha256":"04910eaa0e5a378cb7dabca2d22c32b2715ed03cd2e0679aa0409acfe7f4ca67","type":"member"}
 {"bytes":4638,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.2","path":"docs/knowledge/rust-hash-value-result-guards.md","sha256":"9361c6243d5ed5d72f3c2b63e4a831d1a8626201d34078f687ce91f2c96052ac","type":"member"}
-{"bytes":3657,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.6","path":"docs/knowledge/rust-hash-view-result-guards.md","sha256":"f212aa34cb101d60d17a1ba551b05b892d8f577e1989784a13826a87de31e97e","type":"member"}

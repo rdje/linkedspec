@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2603,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-named-capture-take-origin-repair.md","sha256":"17f0a212c6da7f619090eed7a0036ea8ac944d6691f3d5d15aa270e426b9ac71","type":"member"}
 {"bytes":5398,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-mcp-server-plan.md","sha256":"d0e205b0cba450adeb7abd9b9a70a3ad6d54297163f8f98b122c84633c6ba20a","type":"member"}
 {"bytes":4285,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-native-spec-resolution.md","sha256":"b01047b2d290c7ba3d4e8c4e8b4f0cf963c125b997b6a628cf1cdba9d0b23560","type":"member"}
 {"bytes":3973,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-return-and-pure-observation-gaps.md","sha256":"e83048e5b44eb67c80b7dc8b49e0322edf6449f4be38319c9d7874946f67e35b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":12307,"lines":170,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-neutral-contract.md","sha256":"b5d0af72de1ede1f922bad8d0e6c31c6f364a3725b7d7fb729ba05bcae5e8936","type":"member"}
 {"bytes":2494,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-public-no-drift.md","sha256":"6cc0fca4e7dc7f21c610076e826e09480b395d86b801a0057e60c8d3be7aa92c","type":"member"}
 {"bytes":2930,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-recurring-five-backend-gate.md","sha256":"bd3a3743573d8aa18c758ebd69cc8d2e0a045246898f03dff5e8e35efc86d2c8","type":"member"}
-{"bytes":4717,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-result-source-guards.md","sha256":"b6be84df4583af81683a518f9ec1bd69bf7d294eb4e4275d16d9bd92c8fa89d2","type":"member"}

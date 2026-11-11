@@ -2913,7 +2913,7 @@
   Landing correction: Initial normal commit fails DOCUMENT-HISTORY because a nonraw Python replacement inserts byte02 and removes the live Next Action heading. Preserve exact staged live bytes/full hook log; terminate only the owned failed commit tree with actual143 and no interrupted-check PASS. Rebuild fixed live sections explicitly, retain exact History/recent rows, check changed live text for controls, run focused document-history gate and normal corrected staging/scope/memory/hooks workflow. No source or SDK result changes.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6`
-  Status: `in_progress` / frozen callable pipeline successor; no implementation yet
+  Status: `in_progress` / Perl/Rust/Dart bounded lanes focused-checked; Julia/Lua remain
   Children: `.79.6.1`, `.79.6.2`, `.79.6.3`, `.79.6.4`, `.79.6.5`.
   Goal: Preserve existing registered-function pipeline receiver/result composition.
   Dependencies: Qualified selection23.1.40/shared safe37; normal clean selection landing before production.
@@ -2971,13 +2971,30 @@
   - [x] **LOCKSTEP** — docs/gates.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently acquire/repair Julia registered-function pipeline receiver result guards.
   Dependencies: Frozen79.6 contract/safe shared37 and preceding clean owner; no peer policy inheritance.
   Acceptance: Parent79.6 contract in full, including actual initial-source/first-with/arity/needed-error/earlier-owner policies before production; source and emitted formats unchanged. Acquire actual native/restored/generated-plan/full emitted-fresh outcomes independently; Perl descriptors/errors are not this backend oracle.
+  Verification tier: `focused`
+  Focused checks: Independent safe37/own source-signature-error policies before production; public parse/compile/runtime traces, new normal, exact same-path old/current loaded owner, nearest ordinary pipeline/callable CountKeys normals, readonly recovery/corruptions/current input identity; source/runner/book/Knowledge/task/index/scope/history/memory/diff/normal hooks.
+  Canonical trigger: Full23.4/final clean push after agreed feature coverage; infrastructure/public authority separately owned.
+  Claim verification: none: Finite authored feature/preservation controls, no population/performance/complete-native-custody measurement.
+  Activation: Clean580fe233a7d0299d177ecbd442ad8ba027bbe6da capacity after all10/post-pointer/brief0/clean Git. Read frozen79.6/safe37, own ordinary pipeline/callable CountKeys/signature/trace/diagnostic cards, public SDK and affected classifier/consumer interfaces, existing source-only instruments and book. Own independent acquisition before any production edit; no peer verdict/error/fallback inheritance. Preserve parsed inputs/readback before compile/restore and complete available public error maps. Actual version/native custody still requires acquisition; full4.2/SESSION5/23.4 remains separate.
+  Documentation defect owned: Parent79.6 still said no implementation yet despite three completed child lanes. Correct only that stale status annotation here; child evidence/contracts and historical wording remain intact. Current task-index header/TYPE row also still named18.1 and next Dart78.3; synchronize those mutable pointers to Julia79.6.4/installed Lua5 without changing historical capability markers.
+  Intake: Julia1.12.7 prepares194 programs on four routes with194 actual pairs; first inspection/freezer0/empty stderr and eight public parse/compile/runtime traces retain before-compile parsed inputs. Own policies freeze17 supported targets/three separate pattern compatibility movements/174 full-wire preservation records; six invalid signatures keep errors. New normal must reproduce before any production edit. Evidence: docs/checkpoints/array-pipeline-callable-julia-2026-11-11/.
+  Repair progress: New normal exactly reproduces cold194 records/20 failed groups (696PASS80FAIL/776 assertions). Registry exclusion bypasses the existing actual-kind frame; four insertions/two deletions retain unregistered free-helper identity while allowing canonical function receiver prefixes. One runner include; original invocation/producers/formats unchanged. Rehearsal/apply0/empty stderr; after194/four routes776PASS with174 full-wire records exact. Same-path private control precedes direct/readonly/docs/commit.
   Planned verification: Focused parent79.6 public probes, exact same-path old/current SDK when repaired, smallest direct normals, source-scope/syntax/format/runner fences, readonly/corruptions and book/Knowledge/task/history/memory/diff/normal hooks.
   Planned canonical trigger: Parent full23.4/final clean push after feature coverage.
   Planned claim verification: none: Finite authored preservation/repair controls, no population/performance measurement.
+
+  Outcome:194/four routes776PASS/private20RED-current194,17 supported targets/three separate pattern compatibility movements/174 complete full-wire records exact. Direct776+1006+84=1866 assertions;1353 retained pairs/eight trace inputs/first readonly0-empty stderr-seventeen controls/current482 identities pass. Source4 insertions/two deletions/one runner include; invocation/producers/formats unchanged. New before-compile/restore persistence and complete available error maps retained. Evidence: docs/checkpoints/array-pipeline-callable-julia-2026-11-11/REVIEW.md.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Independent cold194/four routes and normal20RED match exactly;17 targets/three compatibility movements remain distinct.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Actual AST/registry/public trace scopes plus classifier denial identify missing result-kind ownership in the common fluent frame.
+  - [x] **FIX** —4 insertions/two deletions preserve free-helper identity and original invocation/producers; one runner include.
+  - [x] **ADDRESSED (verified)** —194PASS/private old-current/full available error maps; first readonly17 controls/current482 identities pass.
+  - [x] **NO REGRESSION** —174 full records/initial-with/excess-missing/signature/earlier-owner/nested-kind policies exact; direct1866/1353 pairs and only declared source delta.
+  - [x] **LOCKSTEP** — Book/Knowledge/roadmap/task/index/live/MEMORY align; focused docs/gates/normal clean commit precedes installed Lua79.6.5. Full23.4 stays separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5`
   Status: `pending`

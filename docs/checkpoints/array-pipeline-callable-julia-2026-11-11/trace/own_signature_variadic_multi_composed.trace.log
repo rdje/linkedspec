@@ -1,0 +1,104 @@
+[LOW][enter] -> julia_frontend:function_shell:compile_parser_spec bytes=12679
+[LOW][enter]   -> julia_frontend:parse_spec bytes=12679 lines=371
+[MEDIUM][decision]     julia_frontend:parse_spec:result taken=1 reason=rules=12 functions=0
+[LOW][exit]   <- julia_frontend:parse_spec status=ok rules=12
+[LOW][enter]   -> julia_compiler:compile_spec rules=12 functions=0 validate_source=1 strict_syntax=0
+[LOW][enter]     -> julia_frontend:validate_spec rules=12 functions=0 strict_syntax=0
+[MEDIUM][decision]       julia_frontend:validate_spec:at_least_one_rule taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:rule_labels taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:duplicate_rule_labels taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:regex_slot_declarations taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:duplicate_function_names taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:function_registry taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:malformed_raw_body_lines taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:balanced_lifecycle_blocks taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:edge_structure taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:edge_targets taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:capture_gaps_directives taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:mixed_edges taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:regex_syntax taken=1 reason=pass
+[MEDIUM][decision]       julia_frontend:validate_spec:unused_rules taken=0 reason=strict_syntax=0 skipped
+[LOW][exit]     <- julia_frontend:validate_spec status=ok
+[MEDIUM][decision]     julia_compiler:compile_spec:function_registry taken=1 reason=functions=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=0 label=user_function_definitions mode=Default regexes=0 action_edges=5 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=1 label=codeblock_function_definition mode=Default regexes=2 action_edges=7 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=2 label=function_definition mode=Default regexes=2 action_edges=7 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=3 label=variadic_function_definition mode=Default regexes=2 action_edges=7 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=4 label=body_brace mode=Default regexes=2 action_edges=7 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=5 label=double_quoted_string mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=6 label=single_quoted_string mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=7 label=slash_line_comment mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=8 label=hash_line_comment mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=9 label=regex_literal mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=10 label=malformed_function_definition mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:rule taken=1 reason=index=11 label=rule_paragraph mode=Default regexes=1 action_edges=0 blind_edges=0
+[MEDIUM][decision]     julia_compiler:compile_spec:dependency_regex_map taken=1 reason=rules=12 entries=5
+[LOW][exit]   <- julia_compiler:compile_spec status=ok rules=12 functions=0
+[LOW][exit] <- julia_frontend:function_shell:compile_parser_spec status=ok rules=12
+[MEDIUM][decision] julia_frontend:function_shell:parser_source taken=1 reason=source=explicit
+[LOW][enter] -> julia_frontend:function_shell:parse_definitions bytes=255
+[LOW][decision]   julia_runtime:entry_rule_selection taken=1 reason=requested=<default> effective=user_function_definitions basis=first_authored_marker
+[HIGH][enter]   -> julia_runtime:parse top_rule=user_function_definitions
+[HIGH][enter]     -> julia_runtime:rule rule=user_function_definitions entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=0
+[DEBUG][decision]       julia_runtime:regex_match taken=1 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=1 match_start=0 match_end=25 cursor_before=0
+[HIGH][mark]       julia_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=variadic_function_definition regex_index=0
+[HIGH][enter]       -> julia_runtime:rule rule=variadic_function_definition entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=25
+[DEBUG][decision]         julia_runtime:regex_match taken=1 reason=rule=variadic_function_definition cursor_policy=seek entry_regex=0 alternative=1 match_start=38 match_end=39 cursor_before=25
+[HIGH][mark]         julia_runtime:regex_slot_selected rule_label=variadic_function_definition selection_role=choice target_rule=variadic_function_definition regex_index=1
+[HIGH][exit]       <- julia_runtime:rule rule=variadic_function_definition cursor=39
+[DEBUG][decision]       julia_runtime:child_dispatch taken=1 reason=edge_family=action rule=user_function_definitions target=variadic_function_definition[0] cursor_before=25 cursor_after=39
+[DEBUG][decision]       julia_runtime:regex_match taken=1 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=4 match_start=41 match_end=255 cursor_before=39
+[HIGH][mark]       julia_runtime:regex_slot_selected rule_label=user_function_definitions selection_role=choice target_rule=rule_paragraph regex_index=0
+[DEBUG][decision]       julia_runtime:regex_match taken=0 reason=rule=user_function_definitions cursor_policy=seek entry_regex=0 alternative=-1 match_start=-1 match_end=-1 cursor_before=255
+[HIGH][mark]       julia_runtime:lifecycle_block rule=user_function_definitions lifecycle=LX line=20 cursor=255
+[HIGH][exit]     <- julia_runtime:rule rule=user_function_definitions cursor=255
+[HIGH][exit]   <- julia_runtime:parse matched=true cursor=255
+[MEDIUM][decision]   julia_frontend:function_shell:parse_definitions:result taken=1 reason=matched=1 nodes=1
+[LOW][exit] <- julia_frontend:function_shell:parse_definitions status=ok nodes=1
+[LOW][enter] -> julia_frontend:function_shell:parse_spec bytes=255 definition_nodes=1
+[MEDIUM][enter]   -> julia_frontend:function_shell:project bytes=255 definition_nodes=1
+[MEDIUM][decision]     julia_frontend:function_shell:project:definition taken=1 reason=index=0 name=all_values arity=0
+[MEDIUM][exit]   <- julia_frontend:function_shell:project status=ok functions=1
+[LOW][enter]   -> julia_frontend:parse_spec bytes=255 lines=4
+[MEDIUM][decision]     julia_frontend:parse_spec:result taken=1 reason=rules=1 functions=0
+[LOW][exit]   <- julia_frontend:parse_spec status=ok rules=1
+[LOW][exit] <- julia_frontend:function_shell:parse_spec status=ok functions=1 rules=1
+[LOW][enter] -> julia_staged:dispatch_function_body_parse_jobs functions=1
+[LOW][enter]   -> julia_staged:execute_parse_jobs jobs=1
+[MEDIUM][decision]     julia_staged:execute_parse_jobs:normalize_job taken=1 reason=input_index=0 job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parser_spec_id=actionir-body.spec top_rule=action_block payload_kind=function_body
+[MEDIUM][decision]     julia_staged:execute_parse_jobs:queue_sorted taken=1 reason=jobs=1
+[MEDIUM][enter]     -> julia_staged:execute_parse_jobs:job queue_index=0 job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parent_ast_path=functions.0.body_source parser_spec_id=actionir-body.spec top_rule=action_block
+[MEDIUM][decision]       julia_staged:execute_parse_jobs:resolve taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parser_spec_id=actionir-body.spec top_rule=action_block
+[MEDIUM][decision]       julia_staged:execute_parse_jobs:load taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parser_spec_id=actionir-body.spec top_rule=action_block
+[MEDIUM][decision]       julia_staged:execute_parse_jobs:compile taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parser_spec_id=actionir-body.spec top_rule=action_block
+[MEDIUM][decision]       julia_staged:execute_parse_jobs:execute taken=1 reason=job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38 parser_spec_id=actionir-body.spec top_rule=action_block
+[MEDIUM][exit]     <- julia_staged:execute_parse_jobs:job status=ok job_id=parse_job:function_body:functions.0.body_source:actionir-body.spec:action_block:25-38
+[LOW][exit]   <- julia_staged:execute_parse_jobs status=ok results=1
+[LOW][exit] <- julia_staged:dispatch_function_body_parse_jobs status=ok jobs=1
+[LOW][enter] -> julia_compiler:compile_spec rules=1 functions=1 validate_source=1 strict_syntax=0
+[LOW][enter]   -> julia_frontend:validate_spec rules=1 functions=1 strict_syntax=0
+[MEDIUM][decision]     julia_frontend:validate_spec:at_least_one_rule taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:rule_labels taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:duplicate_rule_labels taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:regex_slot_declarations taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:duplicate_function_names taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:function_registry taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:malformed_raw_body_lines taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:balanced_lifecycle_blocks taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:edge_structure taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:edge_targets taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:capture_gaps_directives taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:mixed_edges taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:regex_syntax taken=1 reason=pass
+[MEDIUM][decision]     julia_frontend:validate_spec:unused_rules taken=0 reason=strict_syntax=0 skipped
+[LOW][exit]   <- julia_frontend:validate_spec status=ok
+[MEDIUM][decision]   julia_compiler:compile_spec:function_registry taken=1 reason=functions=1
+[MEDIUM][decision]   julia_compiler:compile_spec:rule taken=1 reason=index=0 label=Value mode=Default regexes=0 action_edges=0 blind_edges=0
+[MEDIUM][decision]   julia_compiler:compile_spec:dependency_regex_map taken=1 reason=rules=1 entries=0
+[LOW][exit] <- julia_compiler:compile_spec status=ok rules=1 functions=1
+[LOW][decision] julia_runtime:entry_rule_selection taken=1 reason=requested=<default> effective=Value basis=first_authored_marker
+[HIGH][enter] -> julia_runtime:parse top_rule=Value
+[HIGH][enter]   -> julia_runtime:rule rule=Value entry_regex=0 mode=Default family=or_default cursor_policy=seek cursor=0
+[HIGH][mark]     julia_runtime:lifecycle_block rule=Value lifecycle=I line=3 cursor=0
+[HIGH][exit]   <- julia_runtime:rule rule=Value cursor=0
+[HIGH][exit] <- julia_runtime:parse matched=true cursor=0

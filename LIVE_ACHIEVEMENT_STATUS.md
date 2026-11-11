@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues callable79.6. Perl/Rust/Dart are focused-checked; task headroom23.4.25 is renewed. Independent Julia79.6.4 is next; full source/context/native admission and historical Rust/Dart audit4.24 remain separate.
+Full PNT continues callable79.6. Perl/Rust/Dart/Julia are implemented with focused checks. Installed safe Lua79.6.5 is next; complete source/context/native admission and historical Rust/Dart audit4.24 remain separate.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.25. Unchanged ADR0139 migration preserves52 ordered Rust task IDs/statuses/CORE fields, six complete unselected bodies and full112804-byte tail.46 closed pointers renew48537 current-text bytes.53 exact actual public queries/first readonly0-empty stderr/ten controls/current identities pass. Tools/limits/runtime unchanged; exact sources/templates/inputs/outputs/modes/channels retained.
+TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4. Four interpreter insertions/two deletions preserve invocation/producers/formats; one runner include.194/four routes776PASS/private20RED-current194 covers17 supported targets/three separate pattern compatibility movements/174 full-wire records exact. Direct1866 assertions/1353 retained pairs/eight trace inputs/first readonly0-empty stderr-seventeen controls/current482 identities pass. New persist/read/compile/restore order and complete available public error maps remain retained.
 
 ## Next Action
 
-Activate independent Julia79.6.4 from clean Git. Acquire safe37 and actual Julia callable producer/signature/arity/error/earlier-owner policies through public SDK routes before production. Preserve first-use inputs/full available error fields and exact old/current loaded-source controls. Focused proof/docs/normal commit, then installed Lua5. Full23.4/historical4.24/safe-launcher4.22/routing18.2 follow feature coverage.
+Activate independent installed Lua79.6.5 from clean Git. Acquire shared safe37 and actual Lua callable source/signature/arity/error/earlier-owner policies before production, on installed PUC/LuaJIT through published SDK routes. Retain native products before load and first-use inputs/full available fields; never execute unsafe malformed native patterns or unsafe full runner. Focused bounded implementation/proof/docs/normal commit, then pick remaining roadmap-aligned work. Full23.4/historical4.24/safe-launcher4.22/routing18.2 follow feature coverage.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.25 — Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail exact;48537 bytes renewed/53 queries/first readonly ten controls; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 —194/four routes/private19RED-current194/175 full-wire records/direct383/readonly17/current497; Rust/Dart custody qualification4.24; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2 —194/four routes/private11RED-current194/183 preserved/direct383/readonly13/current793; historical source-order4.24 qualified; Dart next.
@@ -29,7 +30,6 @@ Activate independent Julia79.6.4 from clean Git. Acquire safe37 and actual Julia
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.1 —244PASS/private18RED-restored244PASS/direct384; first readonly thirteen controls;225 exact projections/one descriptor advance; independent Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.0 — Number source fence166PASS/private14RED-qualified166PASS/direct195; qualified readonly twelve controls; original18 composition targets preserved.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.1.0 —184 programs/148 profiles/180 pairs,14 main-only reads/source79.0 and one extra composition-error target; readonly ten controls; no production edit.
-- TYPE-REFERENCE-BOOK.1.2.23.4.21 —68 IDs/58 closed pointers/ten short bodies/full54718-byte tail exact,64936 bytes renewed/69 public queries/readonly ten controls; Perl79.1 next.
 
 ## History
 
