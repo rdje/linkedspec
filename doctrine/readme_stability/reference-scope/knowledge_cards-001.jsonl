@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}
 {"bytes":6951,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-condition-truthiness-drift.md","sha256":"301f6357f60558247e52608f90f98ecde9ad48c4dc2ea72f8695a5d758e9adb5","type":"member"}
 {"bytes":7544,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-diagnostic-output-drift.md","sha256":"236df8fb490b2861619e7dfa099a753998d0e64d46f7ccf47557ee0d4244a043","type":"member"}
 {"bytes":5938,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-scalar-numeric-drift.md","sha256":"2517f3e1ee6fd441a8406467be9fb5ee8044110189f0734a28ee7faff8bf2651","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}
 {"bytes":11898,"lines":215,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-nested-authority-gap.md","sha256":"adcccefbb33a33452ee27a4245d02a7f84e495e2610df50d75c4b22a1c584d4c","type":"member"}
 {"bytes":4918,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-admission.md","sha256":"a220a5c1c50619931d6583614688002119e10c0e6df97360c46966f7f2625249","type":"member"}
-{"bytes":10388,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-authority.md","sha256":"c0d14b4e0934eb65306de739db4ad39f9f6911d75ac3e950ca9f60a90c4d8b95","type":"member"}

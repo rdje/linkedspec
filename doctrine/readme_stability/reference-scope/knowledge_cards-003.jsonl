@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3485,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gdcheck-signed-tolerance-duplicate-default-defects.md","sha256":"8401ab8f7ac9e7e110e63f232921c34d160338dca6bf5553fa52f5035af1e507","type":"member"}
 {"bytes":24411,"lines":172,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-current-boundary.md","sha256":"80a5c1c9e9dc9dcf841a8cab71efb1571097e1067ec4705681f5c5c59e53ce52","type":"member"}
 {"bytes":19119,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-neutral-contract.md","sha256":"bf842211b5ee2994c5836d9bb741adbb57215e80e8da5b51cd9188ae363aefaa","type":"member"}
 {"bytes":4540,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-enrichment-recomposition.md","sha256":"a17f5f7f51195960e86473227a71251d8a6de246704141c2e12f286738afc553","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3207,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lossless-child-carrier-readiness.md","sha256":"025738b3174f412c9d228d4a4a1b53ada688f414ef601a3891bb96fa42d0c377","type":"member"}
 {"bytes":1629,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-marker-switch-chain-selection.md","sha256":"dd8b1d37b03ece0ed7a81b468804a2ae34f2cd1e6a14b584faf408d7efd35b8b","type":"member"}
 {"bytes":7670,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-decoded-server.md","sha256":"2b3aba91da0985a3db6f9e84f6cb6e46f9bb6d389b363fc4d779d12aa6f2a6ef","type":"member"}
-{"bytes":6775,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-implementation-admission.md","sha256":"796b38d8ec1b6b44f6ff8b7b9b70a58c1f76c33145a56e2e61a50b0f2c6c65b9","type":"member"}

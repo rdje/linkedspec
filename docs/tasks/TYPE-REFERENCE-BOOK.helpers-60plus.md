@@ -3272,3 +3272,62 @@
   - [x] **LOCKSTEP** — Book/Knowledge/live/resume/index/history/scope; normal hooks before Rust.
   Outcome:1872 pairs/2008 API artifacts, qualified recovery17/current165; original after3/reader1 preserved. Native4.2/full23.4 remain open.
   Narrative: docs/checkpoints/array-transform-callable-result-perl-2026-11-11/REVIEW.md; exact pre-route task/log/patch in landing-pressure/.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80`
+  Status: `pending` / bounded open-arity concat result family
+  Children: `.80.1`, `.80.2`, `.80.3`, `.80.4`, `.80.5`.
+  Goal: Preserve result guards/readiness through existing open-arity concat_arrays ordinary and valid registered-function continuations.
+  Dependencies: Clean selection23.1.42; all bounded78.6 implementations.
+  Acceptance: docs/checkpoints/type-operation-inventory/array-concat-open-arity-result-guard-composition.md in full. Each backend independently acquires own supported terminal/composed/initial/arity/signature/error policies before production. Keep actual producer/S-T-U effects and needed errors; wrong Hash rejects before K/V and persistent rejection skips copy/logical/with D/W. No signature/type/format expansion.
+  Owned defects: Selection42 retains84 Perl programs/66 contract passes/18 supported composition failures with84 actual module/dump pairs. Four ordinary free forms raise Hash-reference runtime errors, two ordinary receiver tails run D/W, six function free forms lose source/needed-error effects and stay unresolved, two function receiver tails lose source effects/remain unresolved copy, and four function receiver Hash forms fail compilation while reporting ready. All corresponding terminal producers work. Repair before declaring feature coverage exhausted; no peer verdict or completeness claim.
+  Schedule: `.80.1` Perl, then independent Rust/Dart/Julia/installed Lua `.80.2`–`.80.5`; one focused normal commit per leaf before next. Full23.4 stays separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.1`
+  Status: `pending`
+  Goal: Independently acquire and repair Perl existing-signature concat result continuations.
+  Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
+  Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
+  Planned verification tier: focused.
+  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
+  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.2`
+  Status: `pending`
+  Goal: Independently acquire and repair Rust existing-signature concat result continuations.
+  Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
+  Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
+  Planned verification tier: focused.
+  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
+  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.3`
+  Status: `pending`
+  Goal: Independently acquire and repair Dart existing-signature concat result continuations.
+  Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
+  Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
+  Planned verification tier: focused.
+  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
+  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.4`
+  Status: `pending`
+  Goal: Independently acquire and repair Julia existing-signature concat result continuations.
+  Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
+  Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
+  Planned verification tier: focused.
+  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
+  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.5`
+  Status: `pending`
+  Goal: Independently acquire and repair installed Lua existing-signature concat result continuations.
+  Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
+  Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
+  Planned verification tier: focused.
+  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
+  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
+  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.

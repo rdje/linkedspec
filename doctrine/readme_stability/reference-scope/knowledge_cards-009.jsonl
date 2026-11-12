@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
 {"bytes":2622,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-string-result-kinds.md","sha256":"07743a905ac3ea277b3d69e5befc246dd7c2f2719cfddac4368d7572374ef4b0","type":"member"}
 {"bytes":1939,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-ordered-zero-width-continuation.md","sha256":"abb5207b282c998375cbba1e8f85650cfb6e7c5d1903bd1f4ebdc5bfd6e3b4aa","type":"member"}
 {"bytes":5264,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-original-event-input-grants.md","sha256":"bfc866945dbbc82b8fda1e7b37d62598ccd20c8d490c9e1a12d62b0f555426ce","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2257,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/producer-residual-change-history-capacity.md","sha256":"532ae16a01f36b0a9799e9a8dcff8d2c37e8e1e102feaf43421eb2575e6ad755","type":"member"}
 {"bytes":28298,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-audit-plan.md","sha256":"047f8992b45a80ed74df14ffcfd84c626e97fb0f32d82d66ca37f2b1ab164e07","type":"member"}
 {"bytes":3880,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-public-no-drift.md","sha256":"f78f8b2220d2ccbc2580665b55fa313ea7535a813cb337d2c92db5a747ddd0fc","type":"member"}
-{"bytes":4286,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-recurring-gate.md","sha256":"b6a1f3679125db08312882c9f36c83d20076dd1c6c93012b80d3b1e3405880fb","type":"member"}

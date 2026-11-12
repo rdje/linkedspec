@@ -1,0 +1,82 @@
+{
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/assessment.json": {
+    "bytes": 283444,
+    "mode": 420,
+    "sha256": "3e3fd34768dc61c919e01443057998f8a4ef5357fb9525b4e6dbc58b627ff8f3"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/capture.py": {
+    "bytes": 4145,
+    "mode": 420,
+    "sha256": "ed7692b8b86bace243054f276fb55a96ec441419e0476b3303dc1f6907ae5c0b"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/capture_current.py": {
+    "bytes": 2115,
+    "mode": 420,
+    "sha256": "43611a145733a6149f3285c6226fd70383943b3ca836c532117d1240b59af92a"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/cases.json": {
+    "bytes": 57147,
+    "mode": 420,
+    "sha256": "de2db0fa26b1be85c87bec29e2738ed3cdcac2a0046b479a670f6a2e6ff5ce52"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/check_current.py": {
+    "bytes": 1399,
+    "mode": 420,
+    "sha256": "5f0ddc885e99ae01b793cd68340ec3110bec6d24ab7827c91243134a4fc4849b"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/inspect.py": {
+    "bytes": 5240,
+    "mode": 420,
+    "sha256": "5977bd032d8a291c3df73b1dc5f780526f58ebdc43a7f08584740382d43fd3c5"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/observer.pl": {
+    "bytes": 3644,
+    "mode": 420,
+    "sha256": "f5eac4b4f325f297ef09a90721a631dbc5d14b3b61b5a21b9b0ed08b0a1e03f4"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/prepare.py": {
+    "bytes": 5709,
+    "mode": 420,
+    "sha256": "342fe7aa0b70f44094166a6888cf5f25dafa5e938c3aeb4477bfff0a915b6f34"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/review.py": {
+    "bytes": 14109,
+    "mode": 420,
+    "sha256": "440b03e10d7484d8a9890ad2ac36b08156b608d4cf078abaa6e3ddad988b9239"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/seal.py": {
+    "bytes": 751,
+    "mode": 420,
+    "sha256": "80e999ba41615e7c42f03331b76c8ab27b089cd99b9bc8cd7518440463440afb"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/template-0.gz": {
+    "bytes": 1495,
+    "mode": 420,
+    "sha256": "d37b057fd156243bb580e5eff7d89ed7abaa25b2a6efa978c3516fbf8d21fa3a"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/template-1.gz": {
+    "bytes": 924,
+    "mode": 420,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/template-identities.json": {
+    "bytes": 551,
+    "mode": 420,
+    "sha256": "d885f442db9508d8e40e7e3ebaaa342753e19d91b0cd631231b4b53e6a31ea39"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

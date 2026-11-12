@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2777,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-trace-controls-sinks.md","sha256":"16173539ecda35cfa160551b18e08609d5a49daf76381694157be1c26be0e3aa","type":"member"}
 {"bytes":5975,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-compatibility-alias-gap.md","sha256":"b84ab4296e84cb043d1c057812a34f48a5b5f1a28e56b4af5789e26659ab0faa","type":"member"}
 {"bytes":11362,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-location-dormant-red.md","sha256":"07760887eecc55d0a08a2163a9063f49e71cf18b2105856330bdd9c3482ac3f8","type":"member"}
 {"bytes":20067,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md","sha256":"73a07473e19133768bfb44f6097f7834ae3107961fda95b5ca1d243435aca99d","type":"member"}
@@ -110,7 +111,7 @@
 {"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
 {"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
 {"bytes":1962,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-quoted-marker-current-oracle.md","sha256":"52fbcc0405087b93f5c593c3f3c05555dd7c50c8fde97b37a25cdd6bff039406","type":"member"}
-{"bytes":3952,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"62b6db403dbbe3d51c83b813d2f5c85e17bbd4728d2553a9ca062b5a4619dce5","type":"member"}
+{"bytes":3970,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"c162c6ce8161aa830d7de9e4f26bb77408cff03ee8b934f0ad91c78cf427253b","type":"member"}
 {"bytes":3968,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2","path":"docs/knowledge/perl-callable-array-transform-result-guards.md","sha256":"d5e65d965dd2060d2916763b5c1d29af5dab3a21ff9632ac32c244bc342fe223","type":"member"}
 {"bytes":5094,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-attached-conditional-execution.md","sha256":"ce6f3564205d977e41a77343ac55b5fa1f15b3ddeb9eac2aae66b8479b936b10","type":"member"}
 {"bytes":3691,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-dynamic-invocation.md","sha256":"52635d7769d7347dbd5032b8889bdef10b2e4e7401ea47c427dd20b5a246f056","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3696,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-replay-instrument-recovery.md","sha256":"98edbe7275d3bbf18cd3f560caad7c74b510c3d0378eeac2756af5b7200b5f12","type":"member"}
 {"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}
 {"bytes":3577,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-value-conditional-execution.md","sha256":"56723591803ef22d72727d902f27843081cab835a32d9f8c4de949be577392f0","type":"member"}
-{"bytes":2527,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-while-execution.md","sha256":"a4037f2b0ccda938746980f1b3a1c0eeaa03a401640324f7d4f869bc4f490269","type":"member"}

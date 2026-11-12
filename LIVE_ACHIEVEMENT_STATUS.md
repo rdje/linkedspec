@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. All bounded callable Array-transform78.6 backend implementations have focused proof. Open-arity concat selection23.1.42 is next. Complete source/context/portable admission remains full23.4.
+Full PNT continues. Open-arity concat selection23.1.42 freezes bounded80 after all bounded callable Array-transform78.6 backend lanes have focused proof. Complete source/context/portable admission remains full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5. Each installed host312/four routes/1872 checks;28 targets/three separate initial-source compatibility/281 preserved/104 initial policies exact. Private31RED-current312/direct3939/qualified2 readonly26/current531/1872 pairs/nine traces/two field probes pass. Classifier4/2 plus one runner group/no chunk locals. Original setup1/two reader1 outcomes remain; raw-native scope/4.28 explicit.
+TYPE-REFERENCE-BOOK.1.2.23.1.42. Own84 valid-Array Perl programs/66 contract passes/18 terminal-supported continuation failures;84 actual module-dump pairs/first readonly14/current126. Frozen independent80.1-.5 repair owners and corrected catalog; no production/signature/input-policy change.
 
 ## Next Action
 
-Select23.1.42 from clean Lua. Read open-arity concat contract/current book/own Perl intake, acquire valid Array-only ordinary and registered-function terminal/composed controls before freezing the next implementation owner. No arbitrary-input or peer-policy admission. Full23.4/native/source/context/registration/historical4.24/raw-field4.28/formatter/declared5.4 remain owned.
+Activate Perl80.1 from clean selection. Refresh frozen84 against committed SDK and acquire own source/operand/initial/arity/signature/snapshot/nested/error fences before a bounded result/readiness repair. Preserve all original records/artifacts and native-dump timing limits. Full23.4/native/source/context/registration/historical4.24/raw-error4.28/formatter/declared5.4 remain owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.1.42 —84 valid-Array concat programs/66 contract passes/18 supported composition failures/84 pairs/first readonly14/current126; frozen80 and independent Perl80.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Each host312/four routes/1872 checks/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct3939/qualified2 readonly26/current531; raw-field4.28 explicit, concat42 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct2927 assertions/first readonly24/current519/1872 pairs/nine traces; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
@@ -29,7 +30,6 @@ Select23.1.42 from clean Lua. Read open-arity concat contract/current book/own P
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 —194/four routes/private19RED-current194/175 full-wire records/direct383/readonly17/current497; Rust/Dart custody qualification4.24; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2 —194/four routes/private11RED-current194/183 preserved/direct383/readonly13/current793; historical source-order4.24 qualified; Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2 —188PASS/private30RED-current188/27 targets+three readiness/158 preserved/940 pairs/direct441/readonly14/current121; Rust next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1 —125PASS/private18RED-current125/direct72/readonly eleven/current121;178 preserves169 projections/nine arity changes;25 result gaps remain.
 
 ## History
 

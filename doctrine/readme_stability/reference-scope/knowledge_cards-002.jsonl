@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":10388,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-authority.md","sha256":"c0d14b4e0934eb65306de739db4ad39f9f6911d75ac3e950ca9f60a90c4d8b95","type":"member"}
 {"bytes":6830,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-carriers.md","sha256":"4ed82974a0ce6f7995e99ae14d627893a629a917babb62865ce092c369c28d3c","type":"member"}
 {"bytes":4701,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-dormant-red.md","sha256":"62d00db807308fc22420066c8d375dfb2f44ef5dd9483589f104d11c325d6928","type":"member"}
 {"bytes":8985,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-project-data-ssd-storage.md","sha256":"c9df6669e9d5e6bfaa71171c57cefdd884ba15f5fd929eeeba3e803f0b1af190","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4724,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-selected-match-ls-live-cursor-authority.md","sha256":"a193d3a9ccbfcfcc6de7b9740775c0848c81833c3bed52a710bce267c2c0e7f4","type":"member"}
 {"bytes":5492,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-slot-record-selection-source-gap.md","sha256":"9daa47b44e79e3ac05672b026fd9b417e1c5674a769d5dd465a8f888cdb281e7","type":"member"}
 {"bytes":3758,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-string-result-source-guard-gap.md","sha256":"fd54891068ce814b0af851b6aa965f284b38fc3788017a9b3d410ba816c55311","type":"member"}
-{"bytes":3485,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gdcheck-signed-tolerance-duplicate-default-defects.md","sha256":"8401ab8f7ac9e7e110e63f232921c34d160338dca6bf5553fa52f5035af1e507","type":"member"}

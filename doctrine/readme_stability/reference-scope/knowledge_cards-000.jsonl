@@ -18,6 +18,7 @@
 {"bytes":5262,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/and-return-edge-codegen-defect.md","sha256":"74c65b22fac67be2793c4f3577763d5ba20b167e65d68106b18159f4f7497a0d","type":"member"}
 {"bytes":1391,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/andplusplus-lx-parser-hang.md","sha256":"4261d729cc340da5ecff0d4888eb37a3309535505836ad35f273d095e6da37e6","type":"member"}
 {"bytes":34542,"lines":504,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/archogen-rust-lispish-integration.md","sha256":"4ed7bb435b765cfdd98278e1b67b2bc7934e66e926e26238059f0b379888b0c0","type":"member"}
+{"bytes":3495,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/array-concat-open-arity-result-selection.md","sha256":"094918706be85bc8e77e866246de08f4e7b3a7860f2a877a5261dbb7e8b7e217","type":"member"}
 {"bytes":3433,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-contains-result-handoff.md","sha256":"a99073d875f72cb6b89426e6957987888d893b931f147046acbf44b9e35c3c1c","type":"member"}
 {"bytes":2945,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-helper-return-shape-caveats.md","sha256":"29dedf6a9d767e54cbca3e97c5024f16340a04b8587686d2dce56f3ede020bc6","type":"member"}
 {"bytes":4862,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.41","path":"docs/knowledge/array-pipeline-callable-result-selection.md","sha256":"16698f38f6406da4047c03ad7768ab9950504d967730e643ec5b56567008cc8e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}
 {"bytes":10751,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1","path":"docs/knowledge/count-result-source-guards.md","sha256":"2c29bb92618be0eb4e8bbdb5193a78a626c9760f3f73aeee5893989c1b7d455a","type":"member"}
 {"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}
-{"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}

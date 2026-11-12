@@ -5,8 +5,7 @@ answers:
   - "which Perl callable Array transform result defects remain after policy intake"
   - "why do function receiver sorted and reversed reject Number and Hash sources"
   - "does invalid take or sorted receiver readiness require the free helper marker"
-  - "which task owns open arity concat array result continuations"
-date: 2026-11-11
+date: 2026-11-12
 status: focused intake frozen; result78.6.1.2 implemented with separately disclosed readiness movements
 tags: [perl, functions, arrays, guards, arity, policies, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0; original240/separate terminal48 retain288 actual pairs/576 artifacts,35 valid result targets/74 healthy contract intents/253 protected records, first readonly0/empty stderr/thirteen controls and current126 named identities."
@@ -34,9 +33,10 @@ superseded by inventory1.2.1.4.3; preserve actual data. The old pipeline arity r
 addressed raw/private-host execution, a different observed failure.
 
 Concat's existing [1,unbounded] helper signature exceeds the frozen free-two/
-receiver-one result scope. Wider composed forms remain owned by selection23.1.42
-after bounded78.6, with valid extra Arrays required before repair selection.
-Current non-Array extra inputs establish no new type authority. Initial literal
+receiver-one result scope. Wider composed forms were subsequently assessed by selection23.1.42 using valid
+extra Arrays, freezing bounded family80. Current ownership and retained actual
+findings: [[array-concat-open-arity-result-selection]]. Original non-Array extra
+inputs establish no new type authority. Initial literal
 policy1.2.1.3.1 remains separate.
 
 Named source/grammar/instruments precede SDK use. Emitted modules precede fresh

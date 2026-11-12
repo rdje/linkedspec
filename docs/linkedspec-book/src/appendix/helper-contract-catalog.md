@@ -681,10 +681,25 @@ Complete text/regex domains, contextual use and portable admission remain separa
 - **Returns**: list (splices into parent context)
 - **Behavior**: Flattens an array into list context for insertion into a parent container. Used with `hash(...)`, `array(...)`, and lifecycle accumulator returns.
 
-### `concat_arrays(a1, a2)`
-- **Signature**: `concat_arrays(a: array, b: array)`
+<a id="concat_arraysa1-a2"></a>
+
+### `concat_arrays(a1, a2, ...)`
+- **Signature**: `concat_arrays(a1: array, a2: array, ...)`
 - **Returns**: array
-- **Behavior**: Returns a new array containing all elements of `a1` followed by all elements of `a2`. Neither input is mutated.
+- **Behavior**: Returns a new array containing each input Array's elements in argument order. Inputs remain unchanged. For example, `concat_arrays(array("head"), ["tail"], ["end"])` returns `["head","tail","end"]`.
+
+Perl also accepts a single Array: `concat_arrays(array("head"))` returns
+`["head"]`, and `array("head").concat_arrays()` is the corresponding receiver
+form. Valid registered-function sources support these terminal forms too.
+Compatible `.last().uppercase()` and immediate `.with()` are exercised in the
+bounded one/two/three-Array Perl intake. An empty concatenated Array still enters
+`with`; a block returning `value.count()` returns `0`.
+
+Result guarding is currently focused-checked for free-two/receiver-one forms.
+Some wider one/three-Array compositions lose a later Hash rejection, source
+errors or readiness, including copy/logical/with tails. Bounded family80 owns the
+repair; this documented terminal support does not claim that repair is complete.
+See [Array transform continuations](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
 
 ### `push(Child)` / `push(Child, target)`
 - **Signature**: `push(child_rule: rule[, target: array])`

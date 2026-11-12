@@ -1282,9 +1282,24 @@ The bounded Perl, Rust, Dart, Julia and installed Lua forms retain their existin
 accept an optional count, `slice` requires a start and permits an omitted count,
 and `sorted`/`reversed` take no extra receiver operands. Guarded `concat_arrays`
 forms are free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
-mutation keep their existing contracts. Variadic concat continuations and broader
-context/portable admission remain separate. Other backends are assessed
+mutation keep their existing contracts. Other backends are assessed
 independently; descriptor readiness alone does not establish execution behavior.
+
+The existing `concat_arrays` helper also supports several Array inputs, as in
+`concat_arrays(array("head"),["tail"],["end"])`, which returns
+`["head","tail","end"]`. Perl additionally accepts the single-Array terminal
+`concat_arrays(array("head"))` and receiver `array("head").concat_arrays()`;
+both return `["head"]`. Registered-function Array sources retain these terminal
+forms. Compatible `.last().uppercase()` and immediate `.with()` also pass the
+recorded one/two/three-Array Perl controls, including empty Arrays entering with.
+
+Some wider one/three-Array results still fail later Hash rejection or lose the
+rejection through copy/logical/with. Selected function-result chains can also
+lose source/needed errors or report readiness while retaining uncompiled DSL.
+Bounded family80 owns those repairs after the completed two-Array78.6 lanes.
+Terminal concat support is distinct from full continuation admission; no initial
+wrong-input or helper-signature normalization follows. Each remaining backend
+acquires its own existing arity and producer policies before implementation.
 
 Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
 shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
@@ -1507,7 +1522,7 @@ intact on these recorded routes. Lua also preserves the observer's named outer
 flags; this does not establish preservation of every raw native error-table field.
 Lua evaluates positional argument values before its invocation arity preparation,
 while rejecting keywords earlier; this repair keeps that order. Wider open-arity
-`concat_arrays` continuations remain selection23.1.42 after bounded78.6.
+`concat_arrays` continuations are selected as bounded family80 after selection23.1.42; implementation is pending.
 
 Initial wrong-input policy remains separate from produced-result guards. The
 established constructor contrast uses `array(...)`; a direct literal Array with

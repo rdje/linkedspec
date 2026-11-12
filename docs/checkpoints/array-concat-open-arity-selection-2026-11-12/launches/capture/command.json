@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/capture.py"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

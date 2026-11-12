@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "image": "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/template-1.gz",
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-perl-2026-11-11/observer.pl": {
+    "bytes": 3492,
+    "image": "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/template-0.gz",
+    "sha256": "2ce66948f7678b07b3ed62ea668d930200927761c546c1f576b875e6c20cecef"
+  }
+}
