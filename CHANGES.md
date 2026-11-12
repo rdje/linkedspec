@@ -12,6 +12,19 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.2: Rust existing concat result arities
+
+Two selector/comment lines retain existing one-or-more Array concat result guards,
+without producer/function/signature/format changes. Independent504/four routes:
+16 supported targets/two separate legacy scalar-operand continuations/486 full
+preservation;80 initial/eight invalid-signature records exact. Original18RED,
+same-path old18-current504/combined direct1205/qualified2 readonly25/current871 and
+format pass. Two additional ordinary expectations outside504 are qualified by
+exact old/current terminal/composed probes; original direct1/reader1/preparer1
+remain retained. Source triples/channels/executed copies remain recoverable. Book,
+Knowledge and live docs synced; full23.4/native closure stays separate. Evidence:
+docs/checkpoints/array-concat-open-arity-rust-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.29 — Closed hygiene narrative headroom
 
 - Existing unpartitioned REPO-HYGIENE epoch retains25 ordered IDs/CORE fields,22 closed pointers, three complete unselected bodies and the full22339-byte current/trailing section.110217 becomes61280 bytes, renewing48937 current-text bytes under unchanged limits/tools/schema.

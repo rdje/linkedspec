@@ -1,0 +1,6 @@
+{
+  "pin": "f6e5acdc99720349d1e3ecef9f821f365c4db19c",
+  "published_guide": "rgx/docs/INTEGRATION.md",
+  "sha256": "c424e873b6f9e976c5b2954fc618c45eb2d667798f32060dc867df0898ef38c6",
+  "scope": "Published contract/pin metadata only. Prepared outputs are reused through normal own Cargo builds; no submodule writes, implementation inspection or transitive preparation recipe. Complete native/cache/toolchain closure remains4.2/SESSION5."
+}

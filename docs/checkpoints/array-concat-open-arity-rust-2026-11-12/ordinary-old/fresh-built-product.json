@@ -1,0 +1,7 @@
+{
+  "path": "rust/target/debug/array-concat-open-arity-rust-fresh",
+  "bytes": 52731552,
+  "sha256": "dfef1bd4674f57d26151856900fccbaae2014802f50c36b41dbc285932e6c7fc",
+  "mode": 493,
+  "scope": "Unstripped build-product identity only; complete upstream native/toolchain custody remains4.2. The actual executed copy below is retained after strip -S."
+}

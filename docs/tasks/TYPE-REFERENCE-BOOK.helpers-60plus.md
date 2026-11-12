@@ -3274,7 +3274,7 @@
   Narrative: docs/checkpoints/array-transform-callable-result-perl-2026-11-11/REVIEW.md; exact pre-route task/log/patch in landing-pressure/.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80`
-  Status: `in_progress` / Perl80.1 focused-complete; independent Rust80.2 next
+  Status: `in_progress` / Perl80.1/Rust80.2 focused-complete; independent Dart80.3 next
   Children: `.80.1`, `.80.2`, `.80.3`, `.80.4`, `.80.5`.
   Goal: Preserve result guards/readiness through existing open-arity concat_arrays ordinary and valid registered-function continuations.
   Dependencies: Clean selection23.1.42; all bounded78.6 implementations.
@@ -3305,14 +3305,41 @@
   Remaining: Full23.4/native4.2/SESSION5/source/context/isolation/discovery4.1/historical4.24/raw-error4.28/launcher4.22/SESSION7/shadowing32/literal/excluded/declared5.4/formatter stay owned. Older direct transient strings gain no custody credit; no peer verdict.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.2`
-  Status: `pending`
+  Status: `completed` / bounded focused proof; full admission separate
   Goal: Independently acquire and repair Rust existing-signature concat result continuations.
   Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
   Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
-  Planned verification tier: focused.
-  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
-  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+
+  Verification tier: `focused`
+  Focused checks: Own public native/restored/plan/fresh acquisition and supported producer/arity/initial/signature/snapshot/error contrasts before production; smallest new/direct-dependent normals, exact built-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks. Keep parsed/compiled/emitted/executed products before use and preserve all full published errors.
+  Canonical trigger: Full23.4/final clean push after coverage; actual signature/type/format/infrastructure movement splits before repair.
+  Claim verification: none: Finite authored deterministic source/result/preservation controls; no performance/population/portable-completeness measurement.
+  Activation: Cleanb3b9795f5c983e4dfb7ffa353b8368657c06bb65/all10/post-pointer/brief0/clean after headroom29. Frozen80/current book, own Rust transform/function/native/source contracts and prior observation instruments reviewed. Reuse source questions only, never Perl outcomes/initial policy. RGX public integration guide read; use prepared outputs/normal own Cargo builds, no submodule inspection/changes/pin/bootstrap or transitive recipe. Shared24GiB/free79 percent, serial -j1 builds. Acquire before production; no engine change yet.
+
+  Intake: Actual504 native/restored/plan/fresh acquisition0/empty SDK stderr with504 parsed/compiled/emitted triples. First own strict source/channel/archive/profile/intention reader0 selects16 supported targets/two separate Rust legacy scalar-operand continuations/486 full preservation;80 initial policies/eight invalid signatures remain exact. The unchanged-engine normal later confirms18RED/486PASS before production; producer/signature/format stay exact.
+
+  Progress: Exact original normal18RED/486PASS0 comparison; rehearsal/apply/format0 changes only concat result count==2 to>=1 plus comment. Actual after504/four routes0 and complete504 source triples exact. Only two legacy operand continuation profiles transfer, preserving original terminal scalar elements/SX;486 records/80 initial/eight invalid signatures stay exact.1521 verified archived intake duplicates retire after use, no caches. Same-path old18-current504 and combined1205 unique focused checks pass; full CI remains deferred.
+
+  Owned direct failure: First direct run actual1 after new504 PASS; existing ordinary195 actual101/193PASS/two failures extra_concat_arrays_free/receiver retain old SXKW instead of newly observed null/SX. These exact sources include a scalar excess operand; classify separately only after own exact old/current terminal/composed public probes. Preserve original failure/producers/capsules and completed runs; repair qualification within80.2 before commit, no new SDK change or broad CI. Callable312/pipeline194 were built but not executed by that failed controller.
+
+  Ordinary qualification: Exact four source questions on same private old/current SDK pass all four routes; both terminal values remain [[b,a,z,1],SX], only composed null/SX replaces ran/SXKW. Only two ordinary profile projections transfer, all other objects/source exact; these are outside main504 and confer no supported non-Array authority. Original direct1/ordinary193+2 remains;1008 completed504 normal snapshots archive after failure without replay. Filtered two ordinary checks plus callable312/pipeline194 pass0 under a separate retained qualified continuation; combined unique coverage1205 preserves the original failed run. SDK remains2/2, no new producer/signature/format change.
+
+  Producer qualification: First qualified-publication preparer actual1 at compile guard: injecting real newlines into a quoted book-edit literal fails SyntaxError before any publisher/book/live-output write. Original producer/failure and original unexecuted proposal image remain; separate qualified2 preparer0 escapes only that insertion, reuses existing original images without rewriting and prepares unused qualified publishers/readers. No SDK or expectation change.
+
+  Reader defect owned: First independent qualified reader actual1/empty stdout stops at supported-terminal classification. Exact cause is legacy312 own_nested_scalar_kinds: its nested-kinds question labels a reversed Array/source pair, while new108 nested-kinds labels concat flat scalar kinds. Reader intent() applies new question semantics without checking origin; production/intake/frozen fixture and all SDK observations remain unchanged. Separate qualified2 restricts new question intent to questions108 and anchors metadata to original intake; actual0/empty stderr and25 controls include the exact origin-collision RED. Original reader/seal/failure remain exact.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Independent504/four routes; exact unchanged normal18RED/486PASS, with16 supported terminal contrasts/two separate legacy operand continuations.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public compiled snapshots then engine.rs9255 show count2 result selector despite existing terminal arity; no producer/signature/format movement.
+  - [x] **FIX** — Two changed lines including comment admit existing min-one concat result ownership, preserving source/operand effects and needed errors.
+  - [x] **ADDRESSED (verified)** —504/four routes/private old18-current504/combined direct1205/qualified2 readonly0-empty stderr/25 controls/current871/format0.
+  - [x] **NO REGRESSION** —486 full records/all80 initial policies/eight invalid signatures exact; nested Bool/Number/null/source snapshots and all504 source triples retained. Two own scalar-operand continuations transfer separately with SX, no input authority.
+  - [x] **DOCUMENTATION** — Book/catalog/backend/card/live docs synced; publication206/317 historical/zero-live/three injected controls; no earlier claim binding refresh.
+  Documentation completion: Actual qualified2 publication0 and first independent publication recovery0/three report-handoff-count controls retain all actual producers/consumed report-document inputs/outputs, including original direct/remaining/preparer/reader failed channels. Both roadmap frontiers now match focused Rust80.2 and next Dart80.3; stale selection-era Perl-next wording is corrected within this owner after frozen206-claim metadata confirms only historical bindings. No original claim/hash/revision refresh.
+  Landing: Normal commit workflow log .linkedspec-data/array-concat-open-arity-rust-commit.log; collect its actual exit/all10/post-pointer/HEAD/brief0/clean before activating Dart. Staged MEMORY is the intended post-landing state, not permission to pivot while dirty.
+  Commit: `TYPE-REFERENCE-BOOK.1.2.23.3.80.2 - guard existing Rust concat arities`.
+  Narrative: docs/checkpoints/array-concat-open-arity-rust-2026-11-12/REVIEW.md; first-use capsules/full modes/separate actual channels/25 reason-sensitive controls; recovery executes no SDK, current identity is pre-staging only.
+  Remaining: Full23.4/native4.2/SESSION5/source/context/discovery4.1/historical4.24/raw-error4.28/launcher4.22/SESSION7/literal/excluded/declared5.4/formatter remain owned. Independent Dart80.3 next; canonical discovery4.1 includes the new Rust normal before admission/push.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.3`
   Status: `pending`

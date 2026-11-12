@@ -1,0 +1,29 @@
+{
+  "programs": 504,
+  "supported_targets": [
+    "function_1_free_hash",
+    "function_1_free_later",
+    "function_1_receiver_later",
+    "function_3_free_hash",
+    "function_3_free_later",
+    "function_3_receiver_later",
+    "ordinary_1_free_hash",
+    "ordinary_1_free_later",
+    "ordinary_3_free_hash",
+    "ordinary_3_free_later",
+    "own80_signature_rest_empty_free_composed",
+    "own80_signature_rest_empty_receiver_composed",
+    "own80_signature_rest_multi_free_composed",
+    "own80_signature_rest_multi_receiver_composed",
+    "own80_snapshot_function_free_hash",
+    "own80_snapshot_ordinary_free_hash"
+  ],
+  "compatibility_ids": [
+    "own_extra_concat_arrays_free",
+    "own_extra_concat_arrays_receiver"
+  ],
+  "preserved": 486,
+  "initial_policies": 80,
+  "invalid_signatures": 8,
+  "limits": "Finite own Rust authored controls; exact published JSON errors/presence/kinds. No peer policies, initial/scalar admission or complete native/cache/toolchain/OS/transitive closure (4.2/SESSION5)."
+}

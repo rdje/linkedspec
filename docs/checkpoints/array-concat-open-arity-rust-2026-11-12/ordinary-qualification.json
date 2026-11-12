@@ -1,0 +1,300 @@
+{
+  "observed": {
+    "ordinary-fixed": {
+      "extra_concat_arrays_free_composed": {
+        "fresh": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            "SX"
+          ]
+        }
+      },
+      "extra_concat_arrays_free_terminal": {
+        "fresh": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        }
+      },
+      "extra_concat_arrays_receiver_composed": {
+        "fresh": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            null,
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            null,
+            "SX"
+          ]
+        }
+      },
+      "extra_concat_arrays_receiver_terminal": {
+        "fresh": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        }
+      }
+    },
+    "ordinary-old": {
+      "extra_concat_arrays_free_composed": {
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_concat_arrays_free_terminal": {
+        "fresh": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        }
+      },
+      "extra_concat_arrays_receiver_composed": {
+        "fresh": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "native": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "plan": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        },
+        "restored": {
+          "value": [
+            "ran",
+            "SXKW"
+          ]
+        }
+      },
+      "extra_concat_arrays_receiver_terminal": {
+        "fresh": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "native": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "plan": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        },
+        "restored": {
+          "value": [
+            [
+              "b",
+              "a",
+              "z",
+              1
+            ],
+            "SX"
+          ]
+        }
+      }
+    }
+  },
+  "same_private_path": true,
+  "scope": "Two additional old ordinary profiles outside main504; same original terminal Array/effects, later Hash rejection. No SDK change, supported non-Array admission or native/cache/transitive closure.",
+  "source_triple_pairs": 4,
+  "transferred": 2
+}

@@ -1,0 +1,38 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/cases.json": {
+    "bytes": 277927,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-5.gz",
+    "mode": 420,
+    "sha256": "889d886f4d2a47ca0c6078fe53f74e9d5d6577e93d6d658cd7aa95d810246e87"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/cases.json": {
+    "bytes": 57147,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-2.gz",
+    "mode": 420,
+    "sha256": "de2db0fa26b1be85c87bec29e2738ed3cdcac2a0046b479a670f6a2e6ff5ce52"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/capture_intake.py": {
+    "bytes": 7270,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-1.gz",
+    "mode": 420,
+    "sha256": "0ee4b39ceeb47282ff016f9218bdefb7cdbc231fd702eb9d8b661004b15f0bb0"
+  },
+  "docs/checkpoints/array-transform-callable-rust-2026-11-11/observer.rs": {
+    "bytes": 4864,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-0.gz",
+    "mode": 420,
+    "sha256": "da3b5e5900f3978c14d2de411b1d4e205e84aa45725862ed46ba5516567e5070"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_rust_profiles.json": {
+    "bytes": 298656,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-4.gz",
+    "mode": 420,
+    "sha256": "dc080ecf80e8f3c64255b1261287a746b9b64328cbe25d8dcf803f757523ca3a"
+  },
+  "tests/fixtures/array_transform_callable_rust_cases.json": {
+    "bytes": 155300,
+    "image": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/template-3.gz",
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  }
+}

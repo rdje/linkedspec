@@ -42,6 +42,7 @@
 {"bytes":4962,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-native-spec-resolution.md","sha256":"596ca5802f894ee4ca501e09e70dec268daf4dbc2655ac3f5ecba6e2c7b0bf47","type":"member"}
 {"bytes":3538,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-null-output-oracle-fixture-boundary.md","sha256":"ab8bee86d07f0b08e8ec4d55c94f6c18a81ca6182f9b38e178a4cb7cce3deeef","type":"member"}
 {"bytes":2609,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-numeric-comparison-source-guards.md","sha256":"4e93b75ec5c5a3fbc34ed6483756c8931e8c6722e5fb06f002168183d0140f8e","type":"member"}
+{"bytes":4422,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.2","path":"docs/knowledge/rust-open-arity-concat-result-guards.md","sha256":"eee3740319a96624ae1f7308a2d515f33cb62d23fe0cd4f23a9f608a56e88030","type":"member"}
 {"bytes":6629,"lines":96,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outer-action-source-fidelity.md","sha256":"2e75f136b27150bd97d591becea8d8ff0c763ed6e07a159820d2883266f26840","type":"member"}
 {"bytes":6250,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-outward-compiled-descriptor-projection.md","sha256":"0ffc6df9ef8c9dc4db91e6a079dc9695ac065bb0e85ebd7dadfd2145766916d9","type":"member"}
 {"bytes":2323,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-parity-action-edge-fluent-closure.md","sha256":"f78eb66c375a8e699b8b708e95e1df2e9baf74fa84297a7e065d66f631f9b1e1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2048,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-directive.md","sha256":"08a5b053b77a04773c83de297a54a3b1618cf8ec56d386ffeb590989800efbb1","type":"member"}
 {"bytes":2277,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-inventory-contract.md","sha256":"0ad82935799fa5d495b3f9f4ccdc5a6e17df2c4b21d49ac8dbfff6381bc8cc0f","type":"member"}
 {"bytes":3497,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scanner-rule-family-architecture.md","sha256":"af73bf92a9e303c0b479f86957fa26b655e2863a45cf6279bf5bb1634447edd3","type":"member"}
-{"bytes":4029,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selected-consumer-fixed-input-capsule.md","sha256":"03c23cead35a6b0a13c2747759876d9c7fca1416478d7913df9c3617e8442861","type":"member"}

@@ -1,0 +1,150 @@
+{
+  "intersections": [
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "role": "input",
+      "sha256": "5c439b3d48782470c2e9fff6898bab9f70ffd35b69f8274f9aec97a4806ebe5c"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "role": "input",
+      "sha256": "ecfc269cba04df509818ef7dde3ee28b5a6e350cf8bb247e1fe4ebb88fc2f694"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "role": "input",
+      "sha256": "e12e8f9c5f1ee8b31af70fd3158da2e122b7374dc29b995d21c0cf56c9138499"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "role": "input",
+      "sha256": "bfc29282669d8ddee37b12aae8c1973474ba56e4e40fbc3e85cb848d0852da4a"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "role": "input",
+      "sha256": "dc71fbcb0d680e89b06d6555e94a7fef46adae20c7ee96778c800b2638ac5813"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "role": "input",
+      "sha256": "6fc3275058502b6f00333045aab2979742b3715d5f788f2d58032a1320f7ea1b"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "role": "input",
+      "sha256": "91e6a411c26d09f31a9caeacd90c0c6b57f384ee56f12f33a8e095c0e1787ffd"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "role": "input",
+      "sha256": "2c21e5922191b76a6d3172ed1f08a12ad00ebc48256fda876df914807bcc4b7f"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "role": "input",
+      "sha256": "98b35b397931cb4eebfddc31abfb6969da65be69175515b50d000a09de7c6b45"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "role": "input",
+      "sha256": "512e4ddde33ad5ab398c5d612886444b68ec1f4ae99668c41314087eeb1c528c"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "role": "input",
+      "sha256": "e4748b54e5c5888e1383edf65c83362de49da4084b465f8ddf8db10a9bb060d0"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "role": "input",
+      "sha256": "96198f7288642facf6fbe1fd06c3a99645f94c0e840b90a5c5217f223e62de39"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "role": "input",
+      "sha256": "911ef6bfa3ceed1b5a3cc7218eb7cd0a788a9e2486864afdb73c4a9b3ccf0030"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "role": "input",
+      "sha256": "5423a2d1aeb53896293bbc4a048d9f458eddd6bcd0d3627d9883d381196553bd"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "role": "input",
+      "sha256": "c167d66717fee425ae95db1f04d6849e12673224d4040bd116011c065504acd9"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "role": "input",
+      "sha256": "ec15c9ee2df4fd99f25ac43d9ccb53120e89341823d1927b4eeb0651c754fbf1"
+    }
+  ],
+  "records": 206,
+  "scope": "Frozen accepted claim metadata before current-frontier synchronization; original records/revisions/hashes unchanged."
+}

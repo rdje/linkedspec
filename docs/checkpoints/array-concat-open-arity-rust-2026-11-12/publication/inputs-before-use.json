@@ -1,0 +1,212 @@
+{
+  "CHANGES.md": {
+    "bytes": 38437,
+    "mode": 420,
+    "sha256": "58951f2bf065e602c7794c3561aae0610f78659a39ea2b557108bc9a4b4422c0"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 53969,
+    "mode": 420,
+    "sha256": "31eda655fed412ffe0e505b474680a30a9ddd8c6d68b72d39564f79c93a2d4e8"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5057,
+    "mode": 420,
+    "sha256": "4b12163c7b61f3f904d0f931ec0f5ac5c743f9f55cfa2cbb69055096d56a429e"
+  },
+  "MEMORY.md": {
+    "bytes": 3443,
+    "mode": 420,
+    "sha256": "14d3baeb47afba0d5529b0ad5b6fdcd2bdd2329c985f7a529f20ee491c885671"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/current-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/current-qualified/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/current-qualified/stdout.log.gz": {
+    "bytes": 189,
+    "mode": 420,
+    "sha256": "991683542104119467a33742787418ee363ba56682ce5fb9fe06bda6ec250274"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/direct/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/direct/stderr.log.gz": {
+    "bytes": 431,
+    "mode": 420,
+    "sha256": "12d89927a790c2e632592db966002115a8a00c10a98becdf34ce68bba9440974"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/direct/stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/format/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/format/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/format/stdout.log.gz": {
+    "bytes": 89,
+    "mode": 420,
+    "sha256": "7ce8eb0fb2795c91de6408d975a0c15ace7d5460977c3c394cdb2c32abab5028"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified/stderr.log.gz": {
+    "bytes": 510,
+    "mode": 420,
+    "sha256": "e996243c4c4d137e93e9f1dca6c78c2e5e698e186f75d6e5feeb1622f860fa9d"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified/stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified2/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified2/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/prepare-publication-qualified2/stdout.log.gz": {
+    "bytes": 141,
+    "mode": 420,
+    "sha256": "1af573b326171f0a39df66f6f92b5b61254f178883f09465c2bd89c41dda6d47"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/remaining/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/remaining/stderr.log.gz": {
+    "bytes": 269,
+    "mode": 420,
+    "sha256": "348968e2c90dfeb45dc4cdc104717c2fbc3d810406a963a5c38bb181f94d79db"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/remaining/stdout.log.gz": {
+    "bytes": 151,
+    "mode": 420,
+    "sha256": "63d5dda8f716e2681d904f68e33a1da3a02fa9fb6aac63060fb7258efcd10ecb"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-publication/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-publication/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-publication/stdout.log.gz": {
+    "bytes": 295,
+    "mode": 420,
+    "sha256": "fc5fff773d9f728df892fb5cb50b21d0177a5c5cb43b3ed010c9bd07a444d51c"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/stderr.log.gz": {
+    "bytes": 319,
+    "mode": 420,
+    "sha256": "b0354d3ed8f4efbac5c04389a31ca0e917812c4ce4de878a656d649380e2e9c8"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified2/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified2/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified2/stdout.log.gz": {
+    "bytes": 541,
+    "mode": 420,
+    "sha256": "c11f472541a2f90c94d6992be6d8ce39155770fa3235a975382451f944c2eda8"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/publish_qualified2.py": {
+    "bytes": 24961,
+    "mode": 420,
+    "sha256": "6a192c23943f4b611a6e63b35e105850badfc25057621714fa729936c1bdb99e"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/review_publication_qualified2.py": {
+    "bytes": 4825,
+    "mode": 420,
+    "sha256": "a099875c44666ce4ea004b167bb3e958b334663ade5139c57a6cb79bde7707ac"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/run_publication_qualified2.py": {
+    "bytes": 5193,
+    "mode": 420,
+    "sha256": "07b8eac8672079deae7d3adb22d781f137f3dc36ef88a75d963abfb3227c57bb"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 371601,
+    "mode": 420,
+    "sha256": "e9223b05b49a99fadaaf89a1e2cc4d52f58d08aa43d6742ce006aafd10f555a6"
+  },
+  "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+    "bytes": 205970,
+    "mode": 420,
+    "sha256": "40f04b9c9d771a98fc823254dc0bc716642992495848cba431951cbcd8530135"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 167553,
+    "mode": 420,
+    "sha256": "d4cbd2c219d06a0207e261b2fa55196cecb82262e67f2b29fe670a50ddc8dab4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 683044,
+    "mode": 420,
+    "sha256": "5b30f62af9605f1a0ff4593e8d71e898f08140f03f82b4d3d439b6545428130b"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20001,
+    "mode": 420,
+    "sha256": "b911d2e60e14f446ebb829b489c3efa5b00cfaa8a5e7e6dfb7e2fac10987e390"
+  },
+  "git_message_brief.txt": {
+    "bytes": 0,
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

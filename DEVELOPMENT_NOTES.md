@@ -10,6 +10,25 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — Rust concat selector retains producer arity (TYPE-REFERENCE-BOOK.1.2.23.3.80.2)
+
+Public terminal/compiled observations precede diagnosis: count==2 in the result
+selector excludes existing unary/three-Array results. count>=1 plus one comment
+retains current producer/source effects while guarding later Hash consumers and
+persistent rejection. Rust keeps scalar operand elements, unlike Perl: two legacy
+continuations preserve SX and transfer separately;80 initial policies/eight invalid
+function calls stay exact. Two additional ordinary195 projections retain exact
+terminal Array/SX through same-path old/current probes; only missing508 checks
+complete combined1205 unique coverage after original direct1/193+2. Qualified2
+reader scopes new nested-kind intent by source origin and preserves its original
+reader1 collision/RED; original escaping-preparer1 remains too.
+Full published String errors/Bool versus Number/source
+snapshots are compared strictly. All504 source triples and actual pre-use execution
+products remain; qualified2 readonly25/current871/same-path18-current504/
+combined direct1205 pass. Publication query206/317 historical/zero live leaves original
+claim revisions untouched. Complete native/cache/transitive/toolchain/OS closure
+and full23.4 remain deferred. Evidence: docs/checkpoints/array-concat-open-arity-rust-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.29 — Existing epoch interface and dated hygiene source
 
 The published epoch writer accepts unpartitioned task roots and rejects an index-bearing target before mutation. The unactivated four-helper-node proposal is corrected to compatible REPO-HYGIENE; no tool/schema/cap expansion is needed. Exactbf01d855bf source has25 ordered IDs;22 closed narratives gain epoch pointers. All CORE fields, three whole unselected bodies (root,24 and shorter closed1), prefix and the complete22339-byte tail remain exact. Original110217 becomes61280 bytes, renewing48937 current-text bytes. Existing migration/all26 public queries/first independent recovery with ten effective corruptions/current target-manifest identity all pass.

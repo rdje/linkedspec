@@ -9252,7 +9252,7 @@ impl Engine {
             "take" | "take_last" | "drop_front" | "drop_back" => (1..=2).contains(&count),
             "slice" => (2..=3).contains(&count),
             "sorted" | "reversed" => count == 1,
-            "concat_arrays" => count == 2,
+            "concat_arrays" => count >= 1,
             _ => false,
         };
         canonical_arity
@@ -9266,7 +9266,7 @@ impl Engine {
 
     // Ordinary eager Array transforms share the existing typed value operand
     // boundary. Deferred/callback, traversal and unassessed function receivers
-    // retain their original routes; variadic concat gains no new authority.
+    // retain their original routes. Concat keeps its existing open arity.
     fn is_ordinary_array_transform_result_chain(
         &self,
         receiver: &Expr,

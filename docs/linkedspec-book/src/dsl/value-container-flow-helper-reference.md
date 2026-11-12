@@ -1280,21 +1280,21 @@ are preserved, and needed producer errors still propagate.
 
 The bounded Perl, Rust, Dart, Julia and installed Lua forms retain their existing arities: four take/drop helpers
 accept an optional count, `slice` requires a start and permits an omitted count,
-and `sorted`/`reversed` take no extra receiver operands. Perl guarded `concat_arrays`
-forms now retain the existing one-or-more Array signature; the bounded peer
-proof here covers free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
+and `sorted`/`reversed` take no extra receiver operands. Perl and Rust guarded
+`concat_arrays` forms now retain the existing one-or-more Array signature; the
+bounded Dart/Julia/Lua proof here covers free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
 mutation keep their existing contracts. Other backends are assessed
 independently; descriptor readiness alone does not establish execution behavior.
 
 The existing `concat_arrays` helper also supports several Array inputs, as in
 `concat_arrays(array("head"),["tail"],["end"])`, which returns
-`["head","tail","end"]`. Perl additionally accepts the single-Array terminal
+`["head","tail","end"]`. Perl and Rust additionally accept the single-Array terminal
 `concat_arrays(array("head"))` and receiver `array("head").concat_arrays()`;
 both return `["head"]`. Registered-function Array sources retain these terminal
 forms. Compatible `.last().uppercase()` and immediate `.with()` also pass the
-recorded one/two/three-Array Perl controls, including empty Arrays entering with.
+recorded one/two/three-Array Perl and independent Rust controls, including empty Arrays entering with.
 
-Perl80.1 now retains result guards/readiness through these existing arities for
+Perl80.1 and Rust80.2 now retain result guards through these existing arities for
 ordinary and valid fixed/rest function sources. Source S and additional Arrays
 T/U evaluate once in order; a later Hash consumer rejects before its K/V operands.
 Rejection persists through copy/logical/with and skips D/W. Needed source or
@@ -1314,8 +1314,19 @@ these are compatibility controls, without broader input-kind authority. Two
 already-rejected free function requests now retain the original bad callee's
 diagnostic and terminal operand effects; they remain unready and rejected.
 Helper signatures, producers and fixed/rest function acceptance are unchanged.
-Each remaining backend independently acquires its existing arity and producer
-policies before implementation. Full continuation/context admission is separate.
+Rust independently retains all80 initial-input controls and eight invalid-signature
+records. Its legacy terminal concat includes scalar operand elements; two old
+continuations now reject a later Hash consumer after preserving their terminal SX
+effects. These are separate compatibility controls, with no non-Array admission.
+Two additional older ordinary expectations at that same scalar-operand boundary
+are independently qualified by exact old/current terminal/composed probes; their
+terminal values/effects stay exact and their later Hash consumer now skips K/W.
+The original failed direct run remains recorded. These controls sit outside504.
+Its16 supported repairs retain source-once S/T/U, valid rest-argument X effects,
+needed complete error strings and snapshots through native/restored/plan/fresh
+execution. The original producer, function dispatch and source formats are
+unchanged. Rebuild Rust applications. Dart/Julia/Lua independently acquire their
+existing policies before implementation; full continuation/context admission is separate.
 
 Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
 shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
@@ -1538,7 +1549,7 @@ intact on these recorded routes. Lua also preserves the observer's named outer
 flags; this does not establish preservation of every raw native error-table field.
 Lua evaluates positional argument values before its invocation arity preparation,
 while rejecting keywords earlier; this repair keeps that order. Wider open-arity
-`concat_arrays` continuations are selected as bounded family80 after selection23.1.42; Perl80.1 has focused proof and independent peer lanes remain pending.
+`concat_arrays` continuations are selected as bounded family80 after selection23.1.42; Perl80.1 and independent Rust80.2 have focused proof; Dart/Julia/Lua lanes remain pending.
 
 Initial wrong-input policy remains separate from produced-result guards. The
 established constructor contrast uses `array(...)`; a direct literal Array with

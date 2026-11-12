@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/intake/native-exec",
+    "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/intake/fresh"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1"
+  }
+}

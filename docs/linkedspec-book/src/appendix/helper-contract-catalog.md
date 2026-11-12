@@ -688,23 +688,26 @@ Complete text/regex domains, contextual use and portable admission remain separa
 - **Returns**: array
 - **Behavior**: Returns a new array containing each input Array's elements in argument order. Inputs remain unchanged. For example, `concat_arrays(array("head"), ["tail"], ["end"])` returns `["head","tail","end"]`.
 
-Perl also accepts a single Array: `concat_arrays(array("head"))` returns
+Perl and Rust also accept a single Array: `concat_arrays(array("head"))` returns
 `["head"]`, and `array("head").concat_arrays()` is the corresponding receiver
 form. Valid registered-function sources support these terminal forms too.
 Compatible `.last().uppercase()` and immediate `.with()` are exercised in the
-bounded one/two/three-Array Perl intake. An empty concatenated Array still enters
+bounded one/two/three-Array Perl and independent Rust intakes. An empty concatenated Array still enters
 `with`; a block returning `value.count()` returns `0`.
 
-Perl result guards now cover the existing one-or-more Array signature, including
+Perl and Rust result guards now cover the existing one-or-more Array signature, including
 valid function results. For example,
 `concat_arrays(array("head"),["tail"],["end"]).set_key("k",1)` returns null:
 the Array producer runs before the incompatible Hash consumer rejects. That
 rejection persists through copy/logical/with tails, whose later operands do not
 run. Needed source and additional-Array errors still propagate. Compatible
 `.last().uppercase()` returns `"END"`; an empty Array still enters `with`.
-The bounded Perl80.1 checks preserve the existing initial-input and fixed/rest
-function policies. Independent Rust/Dart/Julia/Lua open-arity assessments remain
-with family80; complete source/context/portable admission is separate.
+The bounded Perl80.1 and Rust80.2 checks preserve their own initial-input and
+fixed/rest function policies. Rust keeps scalar operand elements in its legacy
+terminal producer; those compatibility controls grant no portable non-Array input
+authority. Rebuild Rust applications to use the corrected result guards. Independent
+Dart/Julia/Lua open-arity assessments remain with family80; complete
+source/context/portable admission is separate.
 See [Array transform continuations](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
 
 ### `push(Child)` / `push(Child, target)`

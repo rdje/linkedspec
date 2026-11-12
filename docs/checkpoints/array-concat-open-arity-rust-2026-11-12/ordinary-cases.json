@@ -1,0 +1,38 @@
+[
+  {
+    "id": "extra_concat_arrays_free_terminal",
+    "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"b\",\"a\"]},[\"z\"],{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "legacy-ordinary195",
+    "question": "terminal",
+    "profile_only": true
+  },
+  {
+    "id": "extra_concat_arrays_free_composed",
+    "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"b\",\"a\"]},[\"z\"],{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "legacy-ordinary195",
+    "question": "composed",
+    "profile_only": true
+  },
+  {
+    "id": "extra_concat_arrays_receiver_terminal",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.concat_arrays([\"z\"],{order=cat(order,\"X\");1});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "legacy-ordinary195",
+    "question": "terminal",
+    "profile_only": true
+  },
+  {
+    "id": "extra_concat_arrays_receiver_composed",
+    "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"b\",\"a\"]}.concat_arrays([\"z\"],{order=cat(order,\"X\");1}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "legacy-ordinary195",
+    "question": "composed",
+    "profile_only": true
+  }
+]

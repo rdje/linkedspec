@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/run_review_qualified2.py"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

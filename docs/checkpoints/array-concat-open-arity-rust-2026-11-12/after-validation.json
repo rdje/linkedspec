@@ -1,0 +1,10 @@
+{
+  "programs": 504,
+  "source_triples": 504,
+  "exact_records": 486,
+  "supported_targets": 16,
+  "separate_compatibility": 2,
+  "legacy_transfers": 2,
+  "before_sha256": "dc080ecf80e8f3c64255b1261287a746b9b64328cbe25d8dcf803f757523ca3a",
+  "after_sha256": "284b25fd0ddbb5a98de4cf358c931ca812b46f5d8f8f497ddb09a824aba35ae4"
+}

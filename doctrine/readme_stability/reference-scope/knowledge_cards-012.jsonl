@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4029,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selected-consumer-fixed-input-capsule.md","sha256":"03c23cead35a6b0a13c2747759876d9c7fca1416478d7913df9c3617e8442861","type":"member"}
 {"bytes":4906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selected-consumer-proof-input-closure-gap.md","sha256":"a3f5a799876ffbb57cc57f67a978f22d914b010fec86906b0e7d89c8dcb2a0b3","type":"member"}
 {"bytes":3921,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selective-end-to-end-parser-observability.md","sha256":"19591a8f7233770185826575dd1b0bec7c05e549855166a9afbcfb23437a3ccf","type":"member"}
 {"bytes":18586,"lines":320,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/self-hosted-grammar-ast-drift.md","sha256":"13e6bf3c3cbd9a8d385d026b2ab22e0a09bfc482d165dc39c99e15072ac4b249","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3768,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-return-type-method-chaining-split.md","sha256":"e81af12808acc382ef00dc4e60e95faf46348674e3e99dfa675390e3f32d323f","type":"member"}
 {"bytes":3310,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-target-kind-inference.md","sha256":"cc179ae4c1949271dfc4df636dd062a6f8973808d35b2f927bb1fb7f87797408","type":"member"}
 {"bytes":5799,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-type-inference-ground-truth.md","sha256":"ecec1d40410c6b69a9bd35b7a7bccdbf4d94757769757a94ee81a7533ccf8d20","type":"member"}
-{"bytes":2152,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-attached-if-parser-runtime-seam.md","sha256":"b004f1c278dedcdcf80c222572d3824c39f319f7b57dde09febb0d88efc7e328","type":"member"}

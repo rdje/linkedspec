@@ -1,0 +1,62 @@
+{
+  "CHANGES.md": {
+    "bytes": 39161,
+    "mode": 420,
+    "sha256": "deebb8c71e861a9e111ad4e252123b513364668191ed366f3c7d137f8abe115c"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 54992,
+    "mode": 420,
+    "sha256": "14f6808e0fba0d6d71455c7412d325ef7748a14ceaae8513a28a07821b5f80fe"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5091,
+    "mode": 420,
+    "sha256": "3932256a59bd45b41bfa57dda1e205ce9332af7a5c7018dfedf5386a072a4d47"
+  },
+  "MEMORY.md": {
+    "bytes": 2635,
+    "mode": 420,
+    "sha256": "2bde1e10170698dd7984303c448058e7925310b5985bc107698e19482f3110e4"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/REVIEW.md": {
+    "bytes": 5680,
+    "mode": 420,
+    "sha256": "e0775ec8633fabf8b7b12dccce61e3e284802c93688d39fbe1d8474adcc1204d"
+  },
+  "docs/knowledge/rust-open-arity-concat-result-guards.md": {
+    "bytes": 4269,
+    "mode": 420,
+    "sha256": "af2924cd2bbc8bf9a29cafb0ba8f06890f250b89074836f20040364f1b7cb826"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 372451,
+    "mode": 420,
+    "sha256": "a9c9fb16fc5df98fa4f9a9b0dd0375a828d795f3ff8eda012353c703a1b22be5"
+  },
+  "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+    "bytes": 206218,
+    "mode": 420,
+    "sha256": "af5da8b6fb989c265841ac07f230205a4adfc6f1a79a8568c8b20feda0905fef"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 168517,
+    "mode": 420,
+    "sha256": "3fd6c82bb3afb5a60019bbb04c582659f264e44583c314d9ab82cc5b745addf5"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 684353,
+    "mode": 420,
+    "sha256": "5ea50fa429e650db2384d5d7ce3390efe0431696bc2941a3a37ca00da329fe7e"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20151,
+    "mode": 420,
+    "sha256": "c4f8c7619b100e3eb9ed477c927c77ec20e5217e0901658c95e43c993c778baa"
+  },
+  "git_message_brief.txt": {
+    "bytes": 310,
+    "mode": 420,
+    "sha256": "fb6bf88ae390592c8a73e2129ad00aaf0cd484f6a24fa64af18696651deed8bf"
+  }
+}

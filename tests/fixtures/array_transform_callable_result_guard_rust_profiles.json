@@ -904,29 +904,29 @@
     },
     "fresh": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "native": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "plan": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "restored": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
-    "role": "preservation"
+    "role": "open-arity-operand-compatibility"
   },
   "own_extra_concat_arrays_free_terminal_probe": {
     "case": {
@@ -997,29 +997,29 @@
     },
     "fresh": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "native": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "plan": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
     "restored": {
       "value": [
-        "ran",
-        "SXKVW"
+        null,
+        "SX"
       ]
     },
-    "role": "preservation"
+    "role": "open-arity-operand-compatibility"
   },
   "own_extra_concat_arrays_receiver_terminal_probe": {
     "case": {

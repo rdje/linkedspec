@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "strip",
+    "-S",
+    "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/array_pipeline_callable_result_guard_composition-exec"
+  ],
+  "cwd": ".",
+  "environment": {
+    "CARGO_BUILD_JOBS": "1",
+    "RUST_TEST_THREADS": "1",
+    "LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/stderr.log.gz": {
+    "bytes": 319,
+    "mode": 420,
+    "sha256": "b0354d3ed8f4efbac5c04389a31ca0e917812c4ce4de878a656d649380e2e9c8"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/launches/review-qualified/stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/review_ordinary_qualified.py": {
+    "bytes": 9555,
+    "mode": 420,
+    "sha256": "10cd9ccc5a8c7d070cd2dac40fc7eb3d9c9be3179f958d587bf1d6ece03dea83"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/review_qualified.py": {
+    "bytes": 22434,
+    "mode": 420,
+    "sha256": "1ba3b7d759e3f5994ecfe1a1023dc9c44d7d9a40ef1b39106f3fcc3a1e777f56"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/review_qualified2.py": {
+    "bytes": 23777,
+    "mode": 420,
+    "sha256": "39321219f272da302635e7e79421fdab9621b912380ec7606cc2f4bcfe0690dd"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/run_review_qualified2.py": {
+    "bytes": 1905,
+    "mode": 420,
+    "sha256": "bbd0d1ef9e35b44af17fc79a4c9c512b50a256e9b3ffbf32c34954fab8e974b0"
+  },
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/sealed-identities.json": {
+    "bytes": 1129838,
+    "mode": 420,
+    "sha256": "f3170d98e733852641e65e9a65d726ed35af68b7d4ce665d358563f4f6f97de1"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

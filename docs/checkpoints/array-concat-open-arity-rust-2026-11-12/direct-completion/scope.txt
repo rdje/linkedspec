@@ -1,0 +1,1 @@
+Original completed504 normal snapshots persist before first use in the original instrument; these archive copies are recovered after the controller failed on ordinary expectations. Original direct actual1/ordinary101 and its custody/channels remain unchanged. No SDK replay or new native/cache/transitive closure.
