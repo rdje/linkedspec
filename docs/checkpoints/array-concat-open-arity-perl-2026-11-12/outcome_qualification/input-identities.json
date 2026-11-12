@@ -1,0 +1,92 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/after-failure-review.json": {
+    "bytes": 2547,
+    "mode": 420,
+    "sha256": "ed4fb7f6008a5b9522ffd7301d2ca6b94c732927845bf4a04b489c342fa3c229"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/baseline.json": {
+    "bytes": 1255406,
+    "mode": 420,
+    "sha256": "780ce711727860348cdc9d983ff460231a8db540d7cac58b58a8f90b30dd485f"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_epoch_qualified.py": {
+    "bytes": 5760,
+    "mode": 420,
+    "sha256": "0330189ffffee8a9aae046d3652fcace3e6c80fd404a78f4745156a82b8601f3"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/epoch-expectations.json": {
+    "bytes": 898396,
+    "mode": 420,
+    "sha256": "d65ea740867500dd61bb4ce28623aec700d4576e6b1128f82e87900b3bdb26f3"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/owner-after.pm.gz": {
+    "bytes": 78156,
+    "mode": 420,
+    "sha256": "394ecace7cc8cb016866973f07123fc0f5c0ea9cc1b222454c7151928b3a74bd"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/qualify_outcomes.py": {
+    "bytes": 8771,
+    "mode": 420,
+    "sha256": "1d3c6de7603dae13cc590ac690d563be915147349cf0452664cdf985833c3608"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/command.json": {
+    "bytes": 588,
+    "mode": 420,
+    "sha256": "493d11794823fa15a96172eca268513b3b91d9abb68dfe3d32023d67edf17106"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/input-identities.json": {
+    "bytes": 20569,
+    "mode": 420,
+    "sha256": "6ce5ac66c58a6efc811c99febcb6887a8f739ae8ddff0626ef610d120cd7e400"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/inputs-before-first-run.tar.gz": {
+    "bytes": 641332,
+    "mode": 420,
+    "sha256": "8f94eb9619e5b45a400deae38a8164aa4a45355d8a91cd9ecbe8e01830b0ae71"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/result.json": {
+    "bytes": 12164,
+    "mode": 420,
+    "sha256": "3b9521e9d9838ba28951e0b2e8227fab18c79f661d80bb0adcf005f756cea028"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/stderr.log.gz": {
+    "bytes": 209,
+    "mode": 420,
+    "sha256": "b33c2d931ff14e35784c1ae5f58d35ad352ee111ab10bc2d8c72030ba27cc360"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/stdout.log.gz": {
+    "bytes": 5638,
+    "mode": 420,
+    "sha256": "f67440ea3de010b7d0459761d51a26b07ba522115561b833a18684247791635d"
+  },
+  "perl/LinkedSpec/ActionIR/MethodLowering.pm": {
+    "bytes": 514233,
+    "mode": 420,
+    "sha256": "5169f917a17e77eb9acf96787eeebef85b12869b15010c7028bc469a387f4a21"
+  },
+  "t/array_concat_open_arity_result_guard_composition.t": {
+    "bytes": 5975,
+    "mode": 420,
+    "sha256": "4cdcf6155987942a12c40e449a10b2c88ccb8c818451cbad17094fab608d3ac8"
+  },
+  "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json": {
+    "bytes": 732738,
+    "mode": 420,
+    "sha256": "870f1792365c9adc2a6dd46a5e46a5a440cb5077f8f48f2a0a8e5b50ff07f8ee"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

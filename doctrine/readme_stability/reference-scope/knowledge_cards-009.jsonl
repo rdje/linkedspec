@@ -1,9 +1,11 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
 {"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
 {"bytes":2622,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-string-result-kinds.md","sha256":"07743a905ac3ea277b3d69e5befc246dd7c2f2719cfddac4368d7572374ef4b0","type":"member"}
+{"bytes":3838,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/perl-open-arity-concat-result-guards.md","sha256":"6ef3458baebb05abe62de6c8ea2ae25444d60cd1077de79ceaafbe62d1f2b4fc","type":"member"}
 {"bytes":1939,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-ordered-zero-width-continuation.md","sha256":"abb5207b282c998375cbba1e8f85650cfb6e7c5d1903bd1f4ebdc5bfd6e3b4aa","type":"member"}
 {"bytes":5264,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-original-event-input-grants.md","sha256":"bfc866945dbbc82b8fda1e7b37d62598ccd20c8d490c9e1a12d62b0f555426ce","type":"member"}
 {"bytes":2713,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-outward-descriptor-model-tag-drift.md","sha256":"449c33deb17e874f8b6bae6635f93f51f5616a0cd803e43a72558146c513ca62","type":"member"}
+{"bytes":2732,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/perl-owner-dispatch-runtime-paths.md","sha256":"1a853d04dda7e57626a8b38304a105c82862e709dc281f6ff25b36ea397c236c","type":"member"}
 {"bytes":3111,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pick-keys-conditional-local-reuse.md","sha256":"9dfac9fbab66bd2c37e72681619288c5c1eec5b327a697284e0414d6bac9654b","type":"member"}
 {"bytes":4618,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-regex-source-provenance.md","sha256":"c80620e4f8c15f04e82b678ac41fb36ddbdb5b4794d081262a1973459cbe8dfd","type":"member"}
 {"bytes":4694,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pipeline-source-provenance-diagnosis.md","sha256":"1cc7d554752fc7c28744448280968fbb9c30ac9fcdc763d5f6d8fb08ef67b914","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3056,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-capacity-publisher-replay.md","sha256":"3561ee7be352cf252c696aa329af2d0c83bb25dc5e355fec1cae545c5362f8a8","type":"member"}
 {"bytes":4540,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-consumer-artifact-binding-audit.md","sha256":"c488f4d6c44787bfde37684ea47a10e458a25ad80ec8d082ef3ca83d609c7b66","type":"member"}
 {"bytes":2257,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/producer-residual-change-history-capacity.md","sha256":"532ae16a01f36b0a9799e9a8dcff8d2c37e8e1e102feaf43421eb2575e6ad755","type":"member"}
-{"bytes":28298,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-audit-plan.md","sha256":"047f8992b45a80ed74df14ffcfd84c626e97fb0f32d82d66ca37f2b1ab164e07","type":"member"}
-{"bytes":3880,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-public-no-drift.md","sha256":"f78f8b2220d2ccbc2580665b55fa313ea7535a813cb337d2c92db5a747ddd0fc","type":"member"}

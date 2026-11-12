@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": ".",
+  "environment": {
+    "PERL5LIB": "",
+    "LINKEDSPEC_ARRAY_CONCAT_CAPTURE": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/direct"
+  },
+  "cleared_capture_variables": [
+    "LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_RESULT_CAPTURE"
+  ]
+}

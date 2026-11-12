@@ -695,10 +695,16 @@ Compatible `.last().uppercase()` and immediate `.with()` are exercised in the
 bounded one/two/three-Array Perl intake. An empty concatenated Array still enters
 `with`; a block returning `value.count()` returns `0`.
 
-Result guarding is currently focused-checked for free-two/receiver-one forms.
-Some wider one/three-Array compositions lose a later Hash rejection, source
-errors or readiness, including copy/logical/with tails. Bounded family80 owns the
-repair; this documented terminal support does not claim that repair is complete.
+Perl result guards now cover the existing one-or-more Array signature, including
+valid function results. For example,
+`concat_arrays(array("head"),["tail"],["end"]).set_key("k",1)` returns null:
+the Array producer runs before the incompatible Hash consumer rejects. That
+rejection persists through copy/logical/with tails, whose later operands do not
+run. Needed source and additional-Array errors still propagate. Compatible
+`.last().uppercase()` returns `"END"`; an empty Array still enters `with`.
+The bounded Perl80.1 checks preserve the existing initial-input and fixed/rest
+function policies. Independent Rust/Dart/Julia/Lua open-arity assessments remain
+with family80; complete source/context/portable admission is separate.
 See [Array transform continuations](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
 
 ### `push(Child)` / `push(Child, target)`

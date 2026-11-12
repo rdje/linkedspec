@@ -3274,7 +3274,7 @@
   Narrative: docs/checkpoints/array-transform-callable-result-perl-2026-11-11/REVIEW.md; exact pre-route task/log/patch in landing-pressure/.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80`
-  Status: `pending` / bounded open-arity concat result family
+  Status: `in_progress` / Perl80.1 focused-complete; independent Rust80.2 next
   Children: `.80.1`, `.80.2`, `.80.3`, `.80.4`, `.80.5`.
   Goal: Preserve result guards/readiness through existing open-arity concat_arrays ordinary and valid registered-function continuations.
   Dependencies: Clean selection23.1.42; all bounded78.6 implementations.
@@ -3283,14 +3283,26 @@
   Schedule: `.80.1` Perl, then independent Rust/Dart/Julia/installed Lua `.80.2`–`.80.5`; one focused normal commit per leaf before next. Full23.4 stays separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.1`
-  Status: `pending`
+  Status: `completed` / bounded focused proof; full admission separate
   Goal: Independently acquire and repair Perl existing-signature concat result continuations.
   Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
   Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
-  Planned verification tier: focused.
-  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
-  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+  Verification tier: `focused`
+  Focused checks: Refresh selection84 and own current supported producer/initial/extra/signature/snapshot/nested/error fences before production; new/direct-dependent ordinary/callable normals, exact loaded-owner old/current, full source/artifact/channel recovery/corruptions/current identities and docs/normal hooks. Acquire legacy concat exclusions explicitly before deciding any expected-profile transfer.
+  Canonical trigger: Full23.4/final clean push after agreed feature coverage; any actual signature/type/format/infrastructure movement splits before implementation.
+  Claim verification: none: Finite authored deterministic result/compatibility controls; no population, performance or completeness measurement.
+  Activation: Cleanb15ca562e8044d9a8a369e613926bf016598f708; full scoped recovery/progression is retained in REVIEW.md and landing-pressure/.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Own fresh504 intake/original normal28 RED preserve selection84/legacy312/own108; all26 supported targets have valid terminal oracles.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public dumps expose missing result ownership; _ordinary_array_transform_result_call near1883 bounds concat roles to exactlytwo despite existing helper[1,unbounded]. Exact-old/current same-path proof isolates the owner.
+  - [x] **FIX** — SDK5 insertions/four deletions including comment change only result-role bounds; original producers/helper/function signatures/invocation/formats remain exact.
+  - [x] **ADDRESSED (verified)** — Qualified current504/direct1028; same-path original30RED-current504; first independent strict readonly0/empty stderr/25 reason-sensitive controls/current186.
+  - [x] **NO REGRESSION** —474 full records/all80 initial policies exact; four separate compatibility movements retain terminal SX or still-rejected callee/TU. Other six bad-signature records stay exact; no non-Array/malformed-function product-RED/admission credit.
+  - [x] **LOCKSTEP** — Book/catalog/backend/Knowledge/roadmap/live/resume/task/index/scope/history align; normal clean commit precedes independent Rust80.2. Full23.4 stays separate.
+  Outcome: docs/checkpoints/array-concat-open-arity-perl-2026-11-12/REVIEW.md.504/26 supported/four separate compatibility/474 full preservation/80 initial policies; SDK result-role5/4 only. Exact-old30/current504/direct1028/first strict readonly25/qualified archive reader25/current186 pass.3024 epoch pairs/four original-owner oracle pairs remain. Original before28/after2-capture1/comparator1/qualification1 and first cached whitespace2 stay explicit; exact patch gzip/use/retirement changes no SDK observation or policy.
+  Landing: Book/Knowledge/reference scope1948 and memory/history checks pass; first mandatory commit fails task_evidence12590016/12582912. Preserve the complete rejected task candidate/log and route only this leaf's new commentary, with contracts/all other nodes exact. Normal retry follows; planned headroom29 precedes Rust80.2. No cap or SDK/proof source change.
+  Narrative: docs/checkpoints/array-concat-open-arity-perl-2026-11-12/REVIEW.md; exact whole pre-route part/leaf/candidate/log/producers and independent recovery in landing-pressure/.
+  Remaining: Full23.4/native4.2/SESSION5/source/context/isolation/discovery4.1/historical4.24/raw-error4.28/launcher4.22/SESSION7/shadowing32/literal/excluded/declared5.4/formatter stay owned. Older direct transient strings gain no custody credit; no peer verdict.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.2`
   Status: `pending`

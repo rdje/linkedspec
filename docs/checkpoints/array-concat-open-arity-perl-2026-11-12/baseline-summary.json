@@ -1,0 +1,9 @@
+{
+  "programs": 504,
+  "supported_targets": 26,
+  "separate_compatibility": 2,
+  "complete_preserved_records": 476,
+  "initial_policies": 80,
+  "invalid_signature_profiles": 8,
+  "actual_module_dump_pairs": 504
+}

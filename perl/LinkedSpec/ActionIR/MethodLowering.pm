@@ -1877,7 +1877,7 @@ sub _ordinary_hash_value_result_call {
  return 1
 }
 
-# Ordinary Array transforms retain their existing producers and optional arities.
+# Ordinary Array transforms retain their existing producers and accepted arities.
 # Only these canonical value forms gain result guards; list-splice roles stay out.
 sub _ordinary_array_transform_result_call {
  my ($call, $is_receiver) = @_;
@@ -1890,9 +1890,10 @@ sub _ordinary_array_transform_result_call {
   && ($is_receiver || (defined($call->{source}) && length($call->{source})))
   && ref($call->{args}) eq 'ARRAY';
  my $count = @{$call->{args}} + ($is_receiver ? 1 : 0);
- my $minimum = ($method eq 'slice' || $method eq 'concat_arrays') ? 2 : 1;
- my $maximum = $method eq 'slice' ? 3 : ($method eq 'sorted' || $method eq 'reversed') ? 1 : 2;
- return 0 if $count < $minimum || $count > $maximum;
+ my $minimum = $method eq 'slice' ? 2 : 1;
+ my $maximum = $method eq 'concat_arrays' ? undef
+  : $method eq 'slice' ? 3 : ($method eq 'sorted' || $method eq 'reversed') ? 1 : 2;
+ return 0 if $count < $minimum || (defined($maximum) && $count > $maximum);
  foreach my $value (@{$call->{args}}) {
   return 0 unless ref($value) eq 'HASH'
    && ($value->{kind} // '') =~ /\A(?:variable|string|number|boolean|undef|array_literal|hash_literal|block_value|call|fluent_chain|receiver_mutation_chain|indexed_var|nested_access|value_access|assign_scalar|assign_array_append|assign_hash_index|assign_nested_access|codeblock_literal)\z/o;

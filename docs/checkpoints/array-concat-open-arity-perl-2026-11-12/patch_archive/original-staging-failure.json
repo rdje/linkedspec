@@ -1,0 +1,13 @@
+{
+  "source": "Recovered exec_command session82450 combined staging/check result; not a fabricated new execution",
+  "failed_command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "actual_exit": 2,
+  "combined_output": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/source-and-profile.diff:6: trailing whitespace.\n+ \n",
+  "cause": "The required single-space blank context line in a retained unified diff triggers Git whitespace checking. Production source has no whitespace defect.",
+  "remedy": "Preserve exact original bytes/mode as gzip, qualify only its physical reader location, verify actual use, then retire the plain duplicate."
+}

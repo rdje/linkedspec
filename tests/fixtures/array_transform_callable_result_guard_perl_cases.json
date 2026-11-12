@@ -7027,31 +7027,29 @@
       "profile_only": true,
       "question": "excluded-helper-arity"
     },
-    "role": "preservation",
+    "role": "compatibility-result-guard",
     "expected_observation": {
       "build_error": null,
       "descriptor_error": null,
       "emission_error": null,
       "fresh": [
-        "ran",
-        "KVW"
+        null,
+        "SX"
       ],
       "fresh_cursor": 0,
       "fresh_error": null,
       "load_error": null,
       "loaded": 1,
       "metadata": {
-        "canonical_action_ir_fallback_count": 0,
-        "language_agnostic_action_ir_ready": 0,
+        "language_agnostic_action_ir_ready": 1,
         "raw_perl_dependency_count": 0,
-        "unresolved_helper_count": 1,
-        "unresolved_helpers": [
-          "concat_arrays"
-        ]
+        "canonical_action_ir_fallback_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
       },
       "native": [
-        "ran",
-        "KVW"
+        null,
+        "SX"
       ],
       "native_callable": 1,
       "native_cursor": 0,
@@ -7126,31 +7124,29 @@
       "profile_only": true,
       "question": "excluded-helper-arity"
     },
-    "role": "preservation",
+    "role": "compatibility-result-guard",
     "expected_observation": {
       "build_error": null,
       "descriptor_error": null,
       "emission_error": null,
       "fresh": [
         null,
-        ""
+        "SX"
       ],
       "fresh_cursor": 0,
       "fresh_error": null,
       "load_error": null,
       "loaded": 1,
       "metadata": {
-        "canonical_action_ir_fallback_count": 0,
-        "language_agnostic_action_ir_ready": 0,
+        "language_agnostic_action_ir_ready": 1,
         "raw_perl_dependency_count": 0,
-        "unresolved_helper_count": 1,
-        "unresolved_helpers": [
-          "with"
-        ]
+        "canonical_action_ir_fallback_count": 0,
+        "unresolved_helper_count": 0,
+        "unresolved_helpers": []
       },
       "native": [
         null,
-        ""
+        "SX"
       ],
       "native_callable": 1,
       "native_cursor": 0,

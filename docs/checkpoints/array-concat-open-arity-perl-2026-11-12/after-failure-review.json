@@ -1,0 +1,83 @@
+{
+  "actual_module_dump_pairs": 504,
+  "actual_records": 504,
+  "additional_rejected_signature_changes": [
+    "own80_signature_fixed_missing_free_composed",
+    "own80_signature_rest_missing_free_composed"
+  ],
+  "current_post_run_input_identities": "PASS",
+  "matching_frozen_current_records": 502,
+  "original_capture_exit": 1,
+  "original_normal_exit": 2,
+  "scope": "Companion review after original capture stopped at its GREEN assertion. Original producer did not reach its post-run verification; this current companion checks exact archive/current inputs and all504 products/records. No original PASS receipt, SDK replay, source rewrite or malformed-signature admission is inferred.",
+  "terminal_oracles": {
+    "own80_signature_fixed_missing_free_composed": {
+      "derived_projection": {
+        "build_error": null,
+        "descriptor_error": null,
+        "emission_error": null,
+        "fresh": [
+          null,
+          "TU"
+        ],
+        "fresh_cursor": 0,
+        "fresh_error": null,
+        "load_error": null,
+        "loaded": 1,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "pair"
+          ]
+        },
+        "native": [
+          null,
+          "TU"
+        ],
+        "native_callable": 1,
+        "native_cursor": 0,
+        "native_error": null,
+        "substitution_error": null,
+        "warnings": []
+      },
+      "terminal": "own80_signature_fixed_missing_free_terminal"
+    },
+    "own80_signature_rest_missing_free_composed": {
+      "derived_projection": {
+        "build_error": null,
+        "descriptor_error": null,
+        "emission_error": null,
+        "fresh": [
+          null,
+          "TU"
+        ],
+        "fresh_cursor": 0,
+        "fresh_error": null,
+        "load_error": null,
+        "loaded": 1,
+        "metadata": {
+          "canonical_action_ir_fallback_count": 0,
+          "language_agnostic_action_ir_ready": 0,
+          "raw_perl_dependency_count": 0,
+          "unresolved_helper_count": 1,
+          "unresolved_helpers": [
+            "keep"
+          ]
+        },
+        "native": [
+          null,
+          "TU"
+        ],
+        "native_callable": 1,
+        "native_cursor": 0,
+        "native_error": null,
+        "substitution_error": null,
+        "warnings": []
+      },
+      "terminal": "own80_signature_rest_missing_free_terminal"
+    }
+  }
+}

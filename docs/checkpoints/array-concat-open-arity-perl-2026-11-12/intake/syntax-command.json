@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "-c",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/observer.pl"
+  ],
+  "cwd": "."
+}

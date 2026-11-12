@@ -1,0 +1,12 @@
+{
+  "surface": "task_evidence",
+  "actual_bytes": 12590016,
+  "limit_bytes": 12582912,
+  "excess_bytes": 7104,
+  "observed_commit_exit": 1,
+  "observation": "Actual exec session57070; complete combined hook log retained, not complete hook PASS",
+  "original_leaf_bytes": 15068,
+  "compact_leaf_bytes": 4153,
+  "bytes_routed": 10915,
+  "scope": "Only own new80.1 progress narrative routed; Goal/Dependencies/Acceptance, actual verification fields/checklist and every other node/prefix/full future tail stay exact. No cap/SDK/test/expectation/proof source changes."
+}

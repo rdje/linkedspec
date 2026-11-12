@@ -1,0 +1,47 @@
+{
+  ".linkedspec-data/array-concat-open-arity-perl-commit.log": {
+    "bytes": 2739,
+    "mode": 420,
+    "sha256": "7157bcf4b91258c4ea1a44b9e2fbee7cb0cdeb23138f25abc557cc4af1776c8b"
+  },
+  "MEMORY.md": {
+    "bytes": 2912,
+    "mode": 420,
+    "sha256": "c1355efa63fa8a2cc52d2ad202045e77d8bfa8243048c2782c8a6634859fa3ed"
+  },
+  "README_POLICY.md": {
+    "bytes": 9670,
+    "mode": 420,
+    "sha256": "5fac3638e16d6aa110aad54fa857a04fb97281b7f4e27a74ac17e3da0dfcdf24"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/review_owned_narrative.py": {
+    "bytes": 4481,
+    "mode": 420,
+    "sha256": "c8ba97dd5c6720dea1114831b51f1cf8e89efe83633ae5f1a7042f66368d397d"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/route_owned_narrative.py": {
+    "bytes": 6050,
+    "mode": 420,
+    "sha256": "58d782d7355a07a881954e3765c024fd4242df5564fe05ded764472b14587d6e"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 689384,
+    "mode": 420,
+    "sha256": "935f4a8068e0c6507c54cf78696aec248a945d47671652cba04a50c4b4323dfd"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+    "bytes": 1294,
+    "mode": 420,
+    "sha256": "bae5317f3df267cabf784733b11be93d7e773abbea191c52c9944b00711cbd0c"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 509289,
+    "mode": 420,
+    "sha256": "931b5d8203c54b9e3b4ca8a11b84cfae906f5d80f601c6749a0e1a21518ab304"
+  },
+  "doctrine/readme_stability/routes.jsonl": {
+    "bytes": 25053,
+    "mode": 420,
+    "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248"
+  }
+}

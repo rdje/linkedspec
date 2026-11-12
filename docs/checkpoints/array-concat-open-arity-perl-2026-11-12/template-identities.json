@@ -1,0 +1,52 @@
+{
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/capture.py": {
+    "bytes": 4145,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-2.gz",
+    "sha256": "ed7692b8b86bace243054f276fb55a96ec441419e0476b3303dc1f6907ae5c0b"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/cases.json": {
+    "bytes": 57147,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-0.gz",
+    "sha256": "de2db0fa26b1be85c87bec29e2738ed3cdcac2a0046b479a670f6a2e6ff5ce52"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/observer.pl": {
+    "bytes": 3644,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-1.gz",
+    "sha256": "f5eac4b4f325f297ef09a90721a631dbc5d14b3b61b5a21b9b0ed08b0a1e03f4"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-3.gz",
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "t/array_transform_callable_result_guard_composition.t": {
+    "bytes": 5359,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-5.gz",
+    "sha256": "9bd4885270574805a452bf37ae12fa251f153cb173c3ff86139e1e3e0adab87d"
+  },
+  "t/array_transform_result_guard_composition.t": {
+    "bytes": 8168,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-6.gz",
+    "sha256": "9c2fc84ee72a8b083ee03279b6d100871537f98943bb101f595577a0a2e6fc49"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_perl_cases.json": {
+    "bytes": 440131,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-4.gz",
+    "sha256": "c219382868bbe1fa4c41dec991e268777797f101dbfa7ac9678770cb37cecb21"
+  },
+  "tests/fixtures/array_transform_result_guard_cases.json": {
+    "bytes": 15994,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-7.gz",
+    "sha256": "5be0d5ca5336aabe77b373ab59f5a1bd05310c569030a0a78fbd1690143d575e"
+  },
+  "tests/fixtures/array_transform_result_guard_perl_prefix_profiles.json": {
+    "bytes": 48432,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-9.gz",
+    "sha256": "f7b68f481951fc5f81f2b68ecfef03e930ab9842420cdf71a1a6bc40a1a3e351"
+  },
+  "tests/fixtures/array_transform_result_guard_perl_profiles.json": {
+    "bytes": 122384,
+    "image": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/template-8.gz",
+    "sha256": "d4c8897ceddeed4447cddd5c5971180478e1c358abf6543aca79baac119b0f3f"
+  }
+}

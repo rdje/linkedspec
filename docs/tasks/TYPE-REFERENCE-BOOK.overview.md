@@ -6,7 +6,7 @@
 - Status: `active` / remaining fluent-family and inter-type feature selection; full reference/admission open
 - Roadmap lane: `.spec language documentation / complete type and method reference`
 - Created: `2026-10-10`
-- Last updated: `2026-11-10`
+- Last updated: `2026-11-12`
 - Owner: LinkedSpec repo-local PNT
 - Priority: P1 discovered runtime repairs; P2 documentation completeness; P3 legacy status repair
 - Intake owner: `PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2`
@@ -1429,7 +1429,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`, `TYPE-REFERENCE-BOOK.1.2.23.4.29`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
@@ -1600,6 +1600,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `pending` / P1 canonical admission prerequisite
   Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
+  Addition80.1: Check exact canonical discovery for t/array_concat_open_arity_result_guard_composition.t and tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json before23.4/push. The new504/direct1028 focused groups do not establish canonical selection. Preserve original-v1/qualified-v2 expectations,26 supported/four separate compatibility/474 preserved scope and native-dump timing qualification.
   Addition78.6.5: Check exact canonical discovery for lua/test/array_transform_callable_result_guard_composition_test.lua, callable_array_transform_observation.lua and array_transform_callable_result_guard_lua_cases.json/profiles.json on each installed ABI and separately declared5.4 before admission/push. One run.lua group and focused1872/direct3939 per host do not establish canonical selection. Preserve published-error/selected-outer scope and raw-field4.28 qualification.
   Addition78.6.4: Check actual canonical discovery for julia/test/array_transform_callable_result_guard_composition_test.jl, its callable_array_transform_observation.jl include and array_transform_callable_result_guard_julia_cases.json/profiles.json fixtures before23.4/push. One local runner include and focused1248/direct2927 do not establish canonical selection. Preserve independent full error/producer fences and new first-use inputs; older direct transient strings gain no custody credit.
   Addition78.6.3: Check actual canonical discovery for dart/test/array_transform_callable_result_guard_composition_test.dart, tests/fixtures/array_transform_callable_result_guard_dart_profiles.json, its docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json input and probe/observation/trace tools before23.4/push. Focused312/private/direct647 are separate from canonical discovery; preserve full error wires/own policies and new parsed-before-compile custody, without upgrading historical4.24.
@@ -1811,6 +1812,16 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned focused checks: Contract/field/consumer old-current proof, historical recovery/corruptions, immutable originals, docs and normal hooks.
   Planned canonical trigger: Actual public/diagnostic/native admission or infrastructure change, before full23.4/push.
   Planned claim verification: none: This owner schedules the demonstrated projection/coverage boundary; declare actual producer/input and claim granularity at activation.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.29`
+  Status: `pending` / P1 capacity prerequisite before Rust80.2
+  Goal: Renew task-evidence headroom from closed callable-transform narratives without changing contracts or limits.
+  Dependencies: Clean Perl80.1 after its own new-commentary routing repair; no dirty pivot.
+  Scope: Review exact closed78.6.2-.5 nodes in helpers-60plus using the adopted task-narrative framework. Preserve all stable IDs/statuses/Goal/Dependencies/Acceptance, source/qualification/open-owner boundaries, the entire unselected part and full current/future80 tail. Retain exact before/after/producer/Git origin and public retrieval/corruption evidence. No SDK/pin/tool/schema/cap changes or historical parity promotion.
+  Trigger: First80.1 normal hook rejects task_evidence12590016/12582912; own10915-byte commentary route permits its clean landing, but further backend records need bounded headroom. Execute before Rust80.2, then resume it immediately.
+  Planned verification tier: focused; exact selected-source preservation/retrieval and changed-surface pressure gates, no runtime replay.
+  Planned canonical trigger: Full23.4/final clean push; actual policy/tool changes require a separate canonical owner.
+  Planned claim verification: Finite authored source/byte-preservation controls; declare exact producer and retained inputs at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.24`
   Status: `completed` / frozen arithmetic63

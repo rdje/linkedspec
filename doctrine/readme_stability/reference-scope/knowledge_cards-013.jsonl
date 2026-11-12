@@ -1,4 +1,6 @@
-{"member_count":81,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":83,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2416,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-colon-scalar-retired.md","sha256":"5c65b428a4e3f39910399ff4739f9e41dac592775542fd457401c5436bb8e556","type":"member"}
+{"bytes":4370,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-duck-typed-assignment-parity.md","sha256":"0f5d5f7943969bbda10898d03d87088d428e73f0609eff56868f0013f55d096f","type":"member"}
 {"bytes":3374,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-expression-valued-block-seams.md","sha256":"e799dc80fc98cdcfc2955f84b648f4dc57cf3e30c52c8eaf98a5d33f407b32bd","type":"member"}
 {"bytes":4232,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-remaining-fluent-continuation-split.md","sha256":"efc3e8028f2395d8b06c9d3ed0a4314727bae637e4f38528e25c146f66793520","type":"member"}
 {"bytes":2204,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-rhs-shape-target-kind-parity.md","sha256":"6d56523bb7aa80b2f2f06994206760d66bcb3023b18cbb28a733f29bc09ff170","type":"member"}

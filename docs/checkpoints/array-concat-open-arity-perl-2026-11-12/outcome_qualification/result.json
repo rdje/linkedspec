@@ -1,0 +1,14 @@
+{
+  "original_after_normal_exit": 2,
+  "original_after_capture_exit": 1,
+  "original_qualification_exit": 1,
+  "supported_targets": 26,
+  "separate_compatibility": 4,
+  "full_preserved_records": 474,
+  "qualified_rejected_signatures": [
+    "own80_signature_fixed_missing_free_composed",
+    "own80_signature_rest_missing_free_composed"
+  ],
+  "preparation_cause": "The original qualification asserted on two overlapping checker replacement keys before mutating the root fixture/normal or writing its checker. Prepared images/expectations were already correct; this separate completion verifies them and changes each distinct token once.",
+  "scope": "Only two rejected requests adopt independently acquired terminal/canonical-two diagnostics and TU; both stay unready/raw0/fallback0/unresolved1. No function/input admission or product-RED credit. Original normal2/capture1/qualification1 and all original source/data remain retained; SDK bytes unchanged. Private/direct normals validate qualified regression data."
+}

@@ -1,0 +1,11 @@
+{
+  "retained_record_recovery": "PASS",
+  "programs": 504,
+  "supported_targets": 26,
+  "separate_compatibility": 4,
+  "full_preserved_records": 474,
+  "original_normal_exit": 2,
+  "original_capture_exit": 1,
+  "current_sdk_sha256": "5169f917a17e77eb9acf96787eeebef85b12869b15010c7028bc469a387f4a21",
+  "scope": "Readonly comparison of retained after records to independently qualified expectations. Original normal2/capture1 remains; this is not a new passing normal execution. Private restored/direct normals must validate the current regression fixture."
+}

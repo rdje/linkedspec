@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle_runner.pl",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/MethodLowering.pm",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle_observer.pl",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/cases.json",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle"
+  ],
+  "cwd": "."
+}

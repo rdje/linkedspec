@@ -1,0 +1,47 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/after-failure-review.json": {
+    "bytes": 2547,
+    "mode": 420,
+    "sha256": "ed4fb7f6008a5b9522ffd7301d2ca6b94c732927845bf4a04b489c342fa3c229"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/baseline-qualified.json": {
+    "bytes": 1257564,
+    "mode": 420,
+    "sha256": "3981165df9614bb23a763eeb7f09875e128659cc119413bfbf424f3cbd64a5c2"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_epoch_qualified.py": {
+    "bytes": 5760,
+    "mode": 420,
+    "sha256": "0330189ffffee8a9aae046d3652fcace3e6c80fd404a78f4745156a82b8601f3"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/epoch-expectations-qualified.json": {
+    "bytes": 898366,
+    "mode": 420,
+    "sha256": "542e9959a3719fb7bfba263ffaad093dfff679c4c568ff67cfec36ec8fa6e44d"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/finish_outcome_qualification.py": {
+    "bytes": 6068,
+    "mode": 420,
+    "sha256": "83066bc4fbfed632925295d224b3ebdee9a73bf56ba2a9a27e8345e1eba8b7ee"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/fixture-qualified-v2.json.gz": {
+    "bytes": 16519,
+    "mode": 420,
+    "sha256": "917627437b3f713e2c67e6bba8ccdbfe9112fa336c3933563a8d9821f5ee76f1"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/normal-qualified-v2.t.gz": {
+    "bytes": 2304,
+    "mode": 420,
+    "sha256": "775b589cdeb00018dec8ed2e4f8d5720692ebc7e14a7070b68c56b6f5cae6a0b"
+  },
+  "t/array_concat_open_arity_result_guard_composition.t": {
+    "bytes": 5975,
+    "mode": 420,
+    "sha256": "4cdcf6155987942a12c40e449a10b2c88ccb8c818451cbad17094fab608d3ac8"
+  },
+  "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json": {
+    "bytes": 732738,
+    "mode": 420,
+    "sha256": "870f1792365c9adc2a6dd46a5e46a5a440cb5077f8f48f2a0a8e5b50ff07f8ee"
+  }
+}

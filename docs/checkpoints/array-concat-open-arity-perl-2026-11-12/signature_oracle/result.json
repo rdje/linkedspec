@@ -1,0 +1,188 @@
+{
+  "canonical_two_rejected_signature_oracle": "PASS",
+  "observed": {
+    "oracle_own80_signature_fixed_missing_free_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        "T"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 14515,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_fixed_missing_free_composed.handler.pl.gz",
+        "sha256": "1b6daf56102d83297b828342a9b9a1ebf0963294339ec370bc06b060b9463f8d"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pair"
+        ]
+      },
+      "module_input": {
+        "bytes": 14545,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_fixed_missing_free_composed.pm.gz",
+        "sha256": "e8c005167857e19561db659fa59e1f79fa6c4733ad76f2c7e8a7d0b8ade34438"
+      },
+      "native": [
+        null,
+        "T"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { my $__ls_copy_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:pair\"; undef }; ref($__ls_copy_value) eq 'ARRAY' ? [@{$__ls_copy_value}] : ref($__ls_copy_value) eq 'HASH' ? { %{$__ls_copy_value} } : !ref($__ls_copy_value) ? $__ls_copy_value : do { require JSON::PP; JSON::PP::is_bool($__ls_copy_value) ? $__ls_copy_value : [] } }); push @{$__ls_logical_values}, scalar(do { $order = do { my @__ls_cat_parts = ($order, \"D\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "oracle_own80_signature_fixed_missing_free_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "tail"
+        ],
+        "T"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10681,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_fixed_missing_free_terminal.handler.pl.gz",
+        "sha256": "8de8b0f1b0f9b98aab6b66c5dc5604481166c211b6cead44bd58eca2b2cdb72c"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "pair"
+        ]
+      },
+      "module_input": {
+        "bytes": 10711,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_fixed_missing_free_terminal.pm.gz",
+        "sha256": "9a5d79d4420a72c0a9bf809e069066f8cbd945f5af35c0fceb248e5f0625d635"
+      },
+      "native": [
+        [
+          "tail"
+        ],
+        "T"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = [do { my $__ls_concat_arrays = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:pair\"; undef }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"tail\"); @__ls_evaluated_values }] }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }];return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "oracle_own80_signature_rest_missing_free_composed": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        null,
+        "T"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 14515,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_rest_missing_free_composed.handler.pl.gz",
+        "sha256": "9b304dbef7e48681e4f5eedf30a372239eb434333d8ff1cc9ec17c52abf68c96"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "keep"
+        ]
+      },
+      "module_input": {
+        "bytes": 14545,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_rest_missing_free_composed.pm.gz",
+        "sha256": "9707c584a40d4c6e1fa45b0909d47472be9035b5687b34eb479c4f76767c0cbb"
+      },
+      "native": [
+        null,
+        "T"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = do { my $__ls_with_value = do { require LinkedSpec::RuntimeLogical; my $__ls_logical_values = []; push @{$__ls_logical_values}, scalar(do { my $__ls_copy_value = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:keep\"; undef }; ref($__ls_copy_value) eq 'ARRAY' ? [@{$__ls_copy_value}] : ref($__ls_copy_value) eq 'HASH' ? { %{$__ls_copy_value} } : !ref($__ls_copy_value) ? $__ls_copy_value : do { require JSON::PP; JSON::PP::is_bool($__ls_copy_value) ? $__ls_copy_value : [] } }); push @{$__ls_logical_values}, scalar(do { $order = do { my @__ls_cat_parts = ($order, \"D\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; do { require JSON::PP; JSON::PP::true } }); LinkedSpec::RuntimeLogical::evaluate('and', $__ls_logical_values) }; my $value = $__ls_with_value; do { $order = do { my @__ls_cat_parts = ($order, \"W\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; \"ran\" } };return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    },
+    "oracle_own80_signature_rest_missing_free_terminal": {
+      "build_error": null,
+      "descriptor_error": null,
+      "emission_error": null,
+      "fresh": [
+        [
+          "tail"
+        ],
+        "T"
+      ],
+      "fresh_cursor": 0,
+      "fresh_error": null,
+      "handler_input": {
+        "bytes": 10681,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_rest_missing_free_terminal.handler.pl.gz",
+        "sha256": "b209bf41b1afbb57236fdcc6d648d79d7eb9abbc005b7cdb290107d1214f4ce0"
+      },
+      "load_error": null,
+      "loaded": 1,
+      "metadata": {
+        "canonical_action_ir_fallback_count": 0,
+        "language_agnostic_action_ir_ready": 0,
+        "raw_perl_dependency_count": 0,
+        "unresolved_helper_count": 1,
+        "unresolved_helpers": [
+          "keep"
+        ]
+      },
+      "module_input": {
+        "bytes": 10711,
+        "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/oracle_own80_signature_rest_missing_free_terminal.pm.gz",
+        "sha256": "d16c6698ba3b997f4c5a36dbd8213622b955a2113fdb417bc6fc4124a8098a6f"
+      },
+      "native": [
+        [
+          "tail"
+        ],
+        "T"
+      ],
+      "native_callable": 1,
+      "native_cursor": 0,
+      "native_error": null,
+      "substitution": "$order = \"\";$out = [do { my $__ls_concat_arrays = do { my $__ls_actionir_unsupported_helper = \"LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:keep\"; undef }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }, do { my $__ls_concat_arrays = do { $order = do { my @__ls_cat_parts = ($order, \"T\"); my $__ls_cat_ok = 1; for my $__ls_cat_part (@__ls_cat_parts) { if (!defined($__ls_cat_part)) { $__ls_cat_ok = 0; last; } if (ref($__ls_cat_part)) { if (ref($__ls_cat_part) eq 'JSON::PP::Boolean') { $__ls_cat_part = $__ls_cat_part ? '1' : '0'; } else { $__ls_cat_ok = 0; last; } } else { $__ls_cat_part = \"$__ls_cat_part\"; $__ls_cat_part = '0' if $__ls_cat_part =~ /\\A-0(?:\\.0+)?\\z/; } } $__ls_cat_ok ? join('', @__ls_cat_parts) : undef }; [do { my @__ls_evaluated_values = (\"tail\"); @__ls_evaluated_values }] }; defined($__ls_concat_arrays) && ref($__ls_concat_arrays) eq 'ARRAY' ? @{$__ls_concat_arrays} : () }];return [do { my @__ls_evaluated_values = ($out); @__ls_evaluated_values }, do { my @__ls_evaluated_values = ($order); @__ls_evaluated_values }]",
+      "substitution_error": null,
+      "warnings": []
+    }
+  },
+  "original_loaded_owner": {
+    "bytes": 514203,
+    "path": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/signature_oracle/MethodLowering.pm",
+    "sha256": "64b1283b98a10991727b2c8f3c7a6b4a65583aa95a24628d7c54a8439051bf1c"
+  },
+  "programs": 4,
+  "scope": "Exact original owner already preserves bad-function unresolved markers/T in canonical-two compositions. This is rejected-request compatibility, not admitted functions or new input authority. Original after2 stays retained; no original SDK epoch is replayed."
+}

@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/run_stage.py",
+    "restored",
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/capture_epoch.py",
+    "restored"
+  ],
+  "cwd": "."
+}

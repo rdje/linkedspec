@@ -1,0 +1,54 @@
+[
+  {
+    "id": "oracle_own80_signature_fixed_missing_free_terminal",
+    "body": "order=\"\";out=concat_arrays(pair({order=cat(order,\"S\");[\"head\"]}),{order=cat(order,\"T\");[\"tail\"]});return([out,order])",
+    "source": "fn pair(left,right) {return(left)}\n\nValue:: I {order=\"\";out=concat_arrays(pair({order=cat(order,\"S\");[\"head\"]}),{order=cat(order,\"T\");[\"tail\"]});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "own",
+    "profile_only": true,
+    "question": "invalid-signature",
+    "form": "free",
+    "tail": "terminal",
+    "signature": "fixed_missing"
+  },
+  {
+    "id": "oracle_own80_signature_fixed_missing_free_composed",
+    "body": "order=\"\";out=concat_arrays(pair({order=cat(order,\"S\");[\"head\"]}),{order=cat(order,\"T\");[\"tail\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn pair(left,right) {return(left)}\n\nValue:: I {order=\"\";out=concat_arrays(pair({order=cat(order,\"S\");[\"head\"]}),{order=cat(order,\"T\");[\"tail\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "own",
+    "profile_only": true,
+    "question": "invalid-signature",
+    "form": "free",
+    "tail": "composed",
+    "signature": "fixed_missing"
+  },
+  {
+    "id": "oracle_own80_signature_rest_missing_free_terminal",
+    "body": "order=\"\";out=concat_arrays(keep(),{order=cat(order,\"T\");[\"tail\"]});return([out,order])",
+    "source": "fn keep(seed,...extras) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(keep(),{order=cat(order,\"T\");[\"tail\"]});return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "own",
+    "profile_only": true,
+    "question": "invalid-signature",
+    "form": "free",
+    "tail": "terminal",
+    "signature": "rest_missing"
+  },
+  {
+    "id": "oracle_own80_signature_rest_missing_free_composed",
+    "body": "order=\"\";out=concat_arrays(keep(),{order=cat(order,\"T\");[\"tail\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn keep(seed,...extras) {return(seed)}\n\nValue:: I {order=\"\";out=concat_arrays(keep(),{order=cat(order,\"T\");[\"tail\"]}).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).copy().and({order=cat(order,\"D\");true}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "origin": "own",
+    "profile_only": true,
+    "question": "invalid-signature",
+    "form": "free",
+    "tail": "composed",
+    "signature": "rest_missing"
+  }
+]

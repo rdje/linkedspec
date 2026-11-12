@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_epoch_outcomes_qualified.py",
+    "inverse"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

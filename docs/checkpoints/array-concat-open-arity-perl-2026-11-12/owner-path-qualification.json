@@ -1,0 +1,13 @@
+{
+  "original": "check_epoch.py",
+  "original_sha256": "82ad2e111e21733fe5ac3db38dc1244a71b9009cfb98b625e7377a673db0bd27",
+  "qualified": "check_epoch_qualified.py",
+  "qualified_sha256": "0330189ffffee8a9aae046d3652fcace3e6c80fd404a78f4745156a82b8601f3",
+  "original_actual_exit": 1,
+  "original_stderr_bytes": 484,
+  "original_stderr_sha256": "61b56224a8ca4309d183f159f6e6a8e07073d022f6f8ce8e057bde7d48923c36",
+  "relative_owner": "perl/LinkedSpec/ActionIR/MethodLowering.pm",
+  "runtime_root_sha256": "47b29543f2dca468397fe1e22b4208765830abd431f446a5f4974290630ddc94",
+  "cause": "The runtime reports its actual repo-root absolute INC path; the original checker required relative spelling. Captured body bytes/hash exactly match the declared owner.",
+  "correction": "Resolve the observed spelling against the actual current root for exact path equality, retaining byte/hash checks. Record relative owner/root-prefix digest so later historical recovery need not depend on the old checkout location. Original source/actual1/channels remain, no SDK replay."
+}

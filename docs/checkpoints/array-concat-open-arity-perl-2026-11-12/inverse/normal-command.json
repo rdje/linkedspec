@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "perl",
+    "-Iperl",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/private_runner.pl",
+    "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/control-owner/MethodLowering.pm",
+    "t/array_concat_open_arity_result_guard_composition.t"
+  ],
+  "cwd": ".",
+  "environment": {
+    "PERL5LIB": "",
+    "LINKEDSPEC_ARRAY_CONCAT_CAPTURE": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/inverse"
+  },
+  "cleared_capture_variables": [
+    "LINKEDSPEC_ARRAY_TRANSFORM_COMPOSITION_CAPTURE",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_RESULT_CAPTURE"
+  ]
+}

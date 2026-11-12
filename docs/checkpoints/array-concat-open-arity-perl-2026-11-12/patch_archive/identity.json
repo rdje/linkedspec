@@ -1,0 +1,7 @@
+{
+  "original": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/source-and-profile.diff",
+  "archive": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/patch_archive/source-and-profile.diff.gz",
+  "bytes": 5673,
+  "sha256": "393d82f580f0de9830438be8c2be6fd71be37112b0f35d24e8744424c0ca82ba",
+  "mode": 420
+}

@@ -8,7 +8,7 @@ answers:
   - "why does function concat_arrays set_key stay unresolved or retain raw DSL"
   - "why does concat receiver copy logical with run after Hash rejection"
 date: 2026-11-12
-status: focused selection42 frozen; bounded80 implementations pending
+status: focused selection42 frozen; Perl80.1 focused-complete, independent peers pending
 tags: [arrays, concat, arity, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.42; docs/checkpoints/array-concat-open-arity-selection-2026-11-12/REVIEW.md;84 own public Perl programs/66 contract passes/18 terminal-supported composition failures,84 actual module/dump pairs, first readonly0/empty stderr/fourteen corruptions/current126; no production change or peer verdict."
 reverify:
@@ -35,6 +35,12 @@ initial fallback/errors, snapshots/nested kinds and fixed/rest signatures stay
 fenced. Rejected Hash operands K/V and later D/W must skip after a valid Array
 result, while needed producer errors propagate. Each backend acquires its own
 supported policies; these Perl counts/errors are not peer authority.
+
+Perl80.1 now repairs the selected result-role boundary with focused504/26 supported
+targets/four separate compatibility/474 preserved records and direct1028. Its
+strict first historical reader passes25 controls/current186; original failures
+and qualification boundaries remain. See [[perl-open-arity-concat-result-guards]].
+Independent Rust80.2 is next; the selection evidence above is historical.
 
 All84 actual module/dump pairs and full records/fields/warnings survive source-
 bound archives. Emitted bytes persist/read back before fresh eval. Get's standalone

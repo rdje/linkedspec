@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/capture_current.py": {
+    "bytes": 2115,
+    "mode": 420,
+    "sha256": "e686cbcf751418eae4f808b10b8f4076001619a00c38e70ccbfca771f826136c"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_current_qualified.py": {
+    "bytes": 1841,
+    "mode": 420,
+    "sha256": "200d285e47a44f583bd8434e4600dea3e373a593e1d486a6dd4a1c33fc664001"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/direct/input-identities.json": {
+    "bytes": 33838,
+    "mode": 420,
+    "sha256": "41c47bcb205bb71c6bffb4715577ebcf387c3f96fe4ca1180baf8bf28b5ccb55"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

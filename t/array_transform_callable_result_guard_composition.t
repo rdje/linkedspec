@@ -99,8 +99,11 @@ for my $profile (@$profiles) {
    is_deeply($row->{metadata},{language_agnostic_action_ir_ready=>1,raw_perl_dependency_count=>0,
     canonical_action_ir_fallback_count=>0,unresolved_helper_count=>0,unresolved_helpers=>[]},'full-source canonical eligibility');
   } else {
-   is($json->encode(projection($row)),$json->encode($profile->{expected_observation}),
-    $profile->{role} eq 'needed-error-target' ? 'complete required producer error retained' : $profile->{role} eq 'compatibility-readiness' ? 'payload/error boundaries and disclosed readiness' : 'full acquired observation preserved');
+   my $label = $profile->{role} eq 'needed-error-target' ? 'complete required producer error retained'
+    : $profile->{role} eq 'compatibility-readiness' ? 'payload/error boundaries and disclosed readiness'
+    : $profile->{role} eq 'compatibility-result-guard' ? 'disclosed concat result-guard compatibility'
+    : 'full acquired observation preserved';
+   is($json->encode(projection($row)),$json->encode($profile->{expected_observation}),$label);
   }
  };
 }

@@ -1,0 +1,62 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/capture_current.py": {
+    "bytes": 2115,
+    "mode": 420,
+    "sha256": "e686cbcf751418eae4f808b10b8f4076001619a00c38e70ccbfca771f826136c"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/capture_current_qualified.py": {
+    "bytes": 2145,
+    "mode": 420,
+    "sha256": "b8272687c5745e7967f8a414429b6c1d6c3563b59bfe7f17628a4ccf1f47e1a1"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_current.py": {
+    "bytes": 1634,
+    "mode": 420,
+    "sha256": "a10b0cb7efe53bdf90100d5cc2ea6a6468381395ea2128aa6c2e880e057a1772"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/check_current_qualified.py": {
+    "bytes": 1841,
+    "mode": 420,
+    "sha256": "200d285e47a44f583bd8434e4600dea3e373a593e1d486a6dd4a1c33fc664001"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/patch_archive/identity.json": {
+    "bytes": 327,
+    "mode": 420,
+    "sha256": "255783840f59853c74ca378d38861c5edcdd4c8e4459340cb674b8067d316d3b"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/patch_archive/source-and-profile.diff.gz": {
+    "bytes": 1448,
+    "mode": 420,
+    "sha256": "94a5a5371e2c5e88bdf75a3b4cfa5c43efbfa89d9d37c356e58a8b6138fae5ca"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/qualify_patch_archive.py": {
+    "bytes": 6620,
+    "mode": 420,
+    "sha256": "914e1d7008e3b29488101fcde020cbd16d3f86a6e633598ce9a257a95b6ad570"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/review.py": {
+    "bytes": 29976,
+    "mode": 420,
+    "sha256": "1ad9a19c929a1c4ae9dd64f48580622a1dc23701a3548982b2b11112af27dc1c"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/review_qualified.py": {
+    "bytes": 30914,
+    "mode": 420,
+    "sha256": "5ee203ab8afc160f5900dae86142411b0a637467501191df9936904ea3e75746"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/source-and-profile.diff": {
+    "bytes": 5673,
+    "mode": 420,
+    "sha256": "393d82f580f0de9830438be8c2be6fd71be37112b0f35d24e8744424c0ca82ba"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

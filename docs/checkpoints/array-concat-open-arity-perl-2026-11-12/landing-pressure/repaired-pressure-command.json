@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_readme_stability.sh"
+  ],
+  "cwd": ".",
+  "actual_exit": 0,
+  "observed_exec_session": 19494,
+  "combined_log": "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/landing-pressure/repaired-pressure-check.log.gz",
+  "bytes": 325,
+  "sha256": "c5232f2749b69319b634ef0b75810f496d3343d5d55f8a32bfdc56a3bea05797",
+  "scope": "Actual focused post-routing pressure check, combined stdout/stderr log; no separated-channel claim or SDK execution."
+}

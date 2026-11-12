@@ -1,0 +1,8 @@
+{
+  "ids": [
+    "own_extra_concat_arrays_free",
+    "own_extra_concat_arrays_receiver"
+  ],
+  "unchanged_profiles": 310,
+  "scope": "Two non-Array excess-operand later continuations use their acquired terminal SX; no product-RED/input-domain credit. All authored cases and other310 profiles stay exact. Test-source change only names the disclosed compatibility comparison."
+}
