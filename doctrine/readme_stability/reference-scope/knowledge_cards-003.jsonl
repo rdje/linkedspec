@@ -26,6 +26,7 @@
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/historical-selector-diagnostic-classification.md","sha256":"42c21dc68a4622ee8c5a40ede14e3e487d2cbf935541f4a17188ac38bda79efc","type":"member"}
 {"bytes":3808,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hlink-scalarref-oracle-gap.md","sha256":"707ab66f1f39951b8cca2dd1b60508585c22172f7062bab3ed10482b899f79d5","type":"member"}
 {"bytes":1544,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/hosted-ci-disabled-run-local-gate.md","sha256":"beb23bbc37e7b1cd2a8fe8ea6359252b213ab0c93dd62d79cc133a221fdd50f9","type":"member"}
+{"bytes":2463,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.29","path":"docs/knowledge/hygiene-closed-task-narrative-headroom.md","sha256":"1656e7a3ad63d988772912ce50459226daf8fe6090255d07a1fdb42775f52faf","type":"member"}
 {"bytes":2231,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/if-statement-alias-shape-portability.md","sha256":"182aaeae8906d46c2e66a8dd46b43841759e0c0b30f380ab56411dc38fc401bc","type":"member"}
 {"bytes":9611,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/index-result-source-guards.md","sha256":"0c6ec2556c6eb54481cdd347970064e23e2e34a70889a41ae192d2173dcd1bbb","type":"member"}
 {"bytes":2968,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/input-boundary-mark-value-block-statements.md","sha256":"e9e69f1c9d99e1db330ef9c992add8d5b33f874444bf3284bc38f0966c19f40a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2900,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-result-source-guards.md","sha256":"a30bf842f3a1b4dfa329cd8256a36e6111f5dc8066e6fe8e407c8b42a124f1db","type":"member"}
 {"bytes":3207,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lossless-child-carrier-readiness.md","sha256":"025738b3174f412c9d228d4a4a1b53ada688f414ef601a3891bb96fa42d0c377","type":"member"}
 {"bytes":1629,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-marker-switch-chain-selection.md","sha256":"dd8b1d37b03ece0ed7a81b468804a2ae34f2cd1e6a14b584faf408d7efd35b8b","type":"member"}
-{"bytes":7670,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-decoded-server.md","sha256":"2b3aba91da0985a3db6f9e84f6cb6e46f9bb6d389b363fc4d779d12aa6f2a6ef","type":"member"}

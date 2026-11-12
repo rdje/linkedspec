@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Perl80.1 implements existing-signature open-arity concat result guards with focused proof; task headroom29 precedes independent Rust80.2. All bounded callable Array-transform78.6 lanes have recorded focused outcomes. Complete source/context/portable admission remains full23.4.
+Full PNT continues. Existing task-data epoch29 renews bounded headroom after the focused Perl80.1 concat repair. Independent Rust80.2 is next; complete source/context/portable admission remains full23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.80.1. Own504 programs/26 supported targets/four separate compatibility/474 preserved/all80 initial policies exact; SDK5/4 result-role repair. Exact-old30/current504/direct1028/first strict readonly25/current186 pass;3024 epoch pairs plus four original-owner oracle pairs. Original before28/after2 capture1/comparator1/qualification1 remain with minimal separate qualifications; no signature/input-policy expansion.
+TYPE-REFERENCE-BOOK.1.2.23.4.29. Existing REPO-HYGIENE epoch preserves25 ordered IDs/22 closed pointers/three whole unselected bodies/full22339-byte tail;110217 to61280 bytes renews48937. All26 public queries/first independent readonly0-ten controls/current identity0 pass. No SDK/tool/schema/limit change or new cleanup/parity claim.
 
 ## Next Action
 
-Activate bounded headroom29 after clean Perl80.1: preserve/route selected closed78.6.2-.5 narratives through the adopted framework, keeping contracts/full future tail/limits exact. Commit focused source/retrieval/pressure proof, then independently acquire Rust80.2 before production. Import no Perl verdict. Full23.4/native/source/context/registration/historical4.24/raw-error4.28/formatter/declared5.4 stay separate.
+Activate independent Rust80.2 after clean headroom29. Read frozen80 and own public helper/function/native/source contracts; independently acquire source-only questions and supported terminal/composed/initial/arity/signature/error/snapshot policies before production. Import no Perl verdict. Full23.4/native/source/context/discovery/historical4.24/raw-error4.28/formatter/declared5.4 stay owned.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.29 —25 IDs/22 closed/three unchanged/full22339-byte tail/48937 renewed bytes;26 exact public queries/first readonly10/current identity0; Rust80.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.1 —504/26 supported/four separate compatibility/474 preserved/80 initial policies; old30-current504/direct1028/first strict readonly25/current186; original failures qualified, headroom29 then Rust80.2.
 - TYPE-REFERENCE-BOOK.1.2.23.1.42 —84 valid-Array concat programs/66 contract passes/18 supported composition failures/84 pairs/first readonly14/current126; frozen80 and independent Perl80.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Each host312/four routes/1872 checks/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct3939/qualified2 readonly26/current531; raw-field4.28 explicit, concat42 next.
@@ -29,7 +30,6 @@ Activate bounded headroom29 after clean Perl80.1: preserve/route selected closed
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.25 — Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail exact;48537 bytes renewed/53 queries/first readonly ten controls; Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3 —194/four routes/private19RED-current194/175 full-wire records/direct383/readonly17/current497; Rust/Dart custody qualification4.24; Julia next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.2 —194/four routes/private11RED-current194/183 preserved/direct383/readonly13/current793; historical source-order4.24 qualified; Dart next.
 
 ## History
 

@@ -1,0 +1,15 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/task-headroom-hygiene-2026-11-12/check_candidate.py",
+    "--check"
+  ],
+  "producer_sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae",
+  "input_metadata_sha256": "59d0a3cf21e70375e1b6f18cb79a06b583c58474dae42bf072bf4e5c4cf65541"
+}

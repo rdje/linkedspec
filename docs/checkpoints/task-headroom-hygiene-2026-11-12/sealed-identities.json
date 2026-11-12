@@ -1,0 +1,638 @@
+{
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/candidate-command.json": {
+    "bytes": 408,
+    "sha256": "4051c11cb281f019ca3ae9a03a7abe9859d3ca9e48289e526da614dc2022118c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/candidate-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/candidate-result.json": {
+    "bytes": 115,
+    "sha256": "6fcdbc4e4afaafe272e880e3bcedf342752a8f657485834e602cce7e72779bb8"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/candidate-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/candidate-stdout.log.gz": {
+    "bytes": 121,
+    "sha256": "b862e1453a55fafc3d46e83418f714e8d50e97c989953bb43ed87bda706b6578"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/capture.py": {
+    "bytes": 6885,
+    "sha256": "c48ae061761406c15f9e7821d29b54157c76f43f3f77de9fb9643d80573dc4c4"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/check_candidate.py": {
+    "bytes": 2000,
+    "sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/migration/command.json": {
+    "bytes": 298,
+    "sha256": "ccf86196b00cf7b3cb428b7cfa446c737efe76a330445d0eb01527968b9037cf"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/migration/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/migration/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/migration/stdout.log.gz": {
+    "bytes": 132,
+    "sha256": "bb6e22f8264f5e19de26887a3f541246cfaf0f1ae6079092f195549ec8a3eccb"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.1/command.json": {
+    "bytes": 243,
+    "sha256": "aa74031d92284271243812e36ecedbacdabdaa0f2d589450a58514979413879b"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.1/stdout.log.gz": {
+    "bytes": 283,
+    "sha256": "f6a4407d4b8075c3f24ad4222e90c6f6319b2a530cd6d4592da2acbbc5970a38"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.10/command.json": {
+    "bytes": 244,
+    "sha256": "0c1f24e8f7b5a8e70a0f9c9b1610f59dd1b6363e761e8275436f985125dc11b6"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.10/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.10/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.10/stdout.log.gz": {
+    "bytes": 1653,
+    "sha256": "5c9120c64129582e010869b199878910385286dbb0d45be02250be0060f3cc9c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.11/command.json": {
+    "bytes": 244,
+    "sha256": "eb9a2b0b7f5da3dcf2e2bc2a75c30cf87fdb4a7a9baaf72baa9a4ed20cfbe86b"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.11/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.11/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.11/stdout.log.gz": {
+    "bytes": 1735,
+    "sha256": "3a271d27d18c03bdd5da2e0de7a01545739b2b60b8136b50c38a47eb21dbf4a5"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.12/command.json": {
+    "bytes": 244,
+    "sha256": "56ce146afec3b5355713ae5de14aa1d0be5fbfe28321313b6cba457f74dec8ff"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.12/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.12/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.12/stdout.log.gz": {
+    "bytes": 1477,
+    "sha256": "498088f83ce691ba9348ddc07ac89072737a00700e8ec2298dd2f964c4bc447b"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.13/command.json": {
+    "bytes": 244,
+    "sha256": "e2d569e5fdbf977b43dc001c28423d96e87316e95d5a41989464f56b07734dc3"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.13/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.13/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.13/stdout.log.gz": {
+    "bytes": 1697,
+    "sha256": "489b42d3045225eaed49a508668421d553908e3cafeea2b77f0b3e58b0901363"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.14/command.json": {
+    "bytes": 244,
+    "sha256": "3c2a440a22d3a9d88d35577d96988f220511b98c88efb1e3f2c79a7993bb1a38"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.14/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.14/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.14/stdout.log.gz": {
+    "bytes": 1473,
+    "sha256": "05082cc74440f5a16039018ab8269ce0b0133806819d0e55e7c9e1b4468cd142"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.15/command.json": {
+    "bytes": 244,
+    "sha256": "a6a9a77e18477e386b5dd9248b6569e39b3e13ea13b23a132aa46ad39dccd849"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.15/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.15/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.15/stdout.log.gz": {
+    "bytes": 2279,
+    "sha256": "fd2926b2a691ab1bad376692a10108a18d74fbaa289f054897d51e4c05e1f41f"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.16/command.json": {
+    "bytes": 244,
+    "sha256": "7dc677df3b29eaf75571fc69eaf9ebc3607f3fe12753e39f3f467bfe22b9f8c7"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.16/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.16/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.16/stdout.log.gz": {
+    "bytes": 2100,
+    "sha256": "2c30b23f7a02dd58689d7e5591b111b6b651336ff3c8902a441a29e40363d766"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.17/command.json": {
+    "bytes": 244,
+    "sha256": "ca89d288f83f626f7975149b3c53cbe1633f1f533196401a80531763ee738758"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.17/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.17/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.17/stdout.log.gz": {
+    "bytes": 2088,
+    "sha256": "9cb469ba308ebfd5feab96c8e9f843329ff161a6261121b862f5d648adc31ac6"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.18/command.json": {
+    "bytes": 244,
+    "sha256": "300b3ba49b75d5d28f67dd2b22210a2e34efa94fc83f0eb78d74fffb3567cf7a"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.18/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.18/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.18/stdout.log.gz": {
+    "bytes": 3011,
+    "sha256": "3be185435de51b5349a22cb6fbec0b466bd65b637bad2d550b3e9ac905b4dabe"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.19/command.json": {
+    "bytes": 244,
+    "sha256": "3169247d0557f83b36063142663dfb722075126374c35d75feb60df6a0245e21"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.19/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.19/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.19/stdout.log.gz": {
+    "bytes": 2608,
+    "sha256": "222174b07550d01c5ddd391b6f6a9e8d299985425e64fe9f704f66478088074d"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.2/command.json": {
+    "bytes": 243,
+    "sha256": "1dbde4bf1cd9ce990744a7c0a4fcf0ee00dbc6cd0f68a300be5fae54ac35e334"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.2/stdout.log.gz": {
+    "bytes": 617,
+    "sha256": "04e166391499eb653228598ec9f3dd70fd7abe299615b0a127be7d62cc91db4c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.20/command.json": {
+    "bytes": 244,
+    "sha256": "0f9ff21dee87c01fd1ac1e2eb4d9ffb57e783b178de9f6824eaaca708f2f02d5"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.20/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.20/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.20/stdout.log.gz": {
+    "bytes": 2431,
+    "sha256": "b0f6a7acbb223e9d32a20b930135bb6289cce7991214a3a45261d97c2995219e"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.21/command.json": {
+    "bytes": 244,
+    "sha256": "a00f5d95f5dfe2531c3f3a70eefe554efe1da4f221eb7230b34f9b08e3a0ee46"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.21/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.21/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.21/stdout.log.gz": {
+    "bytes": 1914,
+    "sha256": "37bd44ccf7fcfb5f03262909279be865f351aed9f043102660e03f20a1ab836c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.22/command.json": {
+    "bytes": 244,
+    "sha256": "0a0a947367d88c1df263a82ec4d79c6f8ed2fa99e011eb03bf7bb75ecbe7fe5c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.22/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.22/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.22/stdout.log.gz": {
+    "bytes": 1791,
+    "sha256": "6ef0e26074c74cfaf7cbcb7665cc0cbb5f751ea9a7226d33060fe3d13a6158b5"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.23/command.json": {
+    "bytes": 244,
+    "sha256": "fe09c49d7ca8e05deaa7978ff4c56f60e6cf2be4c372145819ad636943552de7"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.23/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.23/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.23/stdout.log.gz": {
+    "bytes": 3951,
+    "sha256": "6728b1d85d11c1e9d7a12c5873aa710633fa2d19bb65b1e77535066544485b00"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.24/command.json": {
+    "bytes": 244,
+    "sha256": "7b610efc66c6ea5fcbcded41229ff36b0de137c1a8fcac85d5701c4cc93875d1"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.24/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.24/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.24/stdout.log.gz": {
+    "bytes": 1267,
+    "sha256": "e05883dcc2c7e311d14226a0f59a3f01dc7b7e7979a71e31db0aec8e2d566da2"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.3/command.json": {
+    "bytes": 243,
+    "sha256": "f263c62d8872d20990392eaa92e2bc8cda090885ae268bf2dfb8ca85022c78c9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.3/stdout.log.gz": {
+    "bytes": 622,
+    "sha256": "e288ed5df4da87d52e9c26249c8026a897c31c451fa031621e587d0caba39ed4"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.4/command.json": {
+    "bytes": 243,
+    "sha256": "a7a7f57e951446d3cef8d8312bad0ec5a68093f0d53fe599e8ccbd26cbd08aad"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.4/stdout.log.gz": {
+    "bytes": 1063,
+    "sha256": "479698046343335417d2e1f49207782c39852ffaec1c9fdc0b40ba9b93ad116b"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.5/command.json": {
+    "bytes": 243,
+    "sha256": "69f2f7741c59c7c5b2b54c910929bff498d188b2ab9447dd46427d842acb034a"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.5/stdout.log.gz": {
+    "bytes": 1570,
+    "sha256": "0e5ef5c312e75ba8001368289c787a50f038ec387a41515297d4f831fb7856dc"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.6/command.json": {
+    "bytes": 243,
+    "sha256": "747c0e4b8b0b3c73873169192c3b82eae25ab7733f42373a5d23570ddae2acb9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.6/stdout.log.gz": {
+    "bytes": 1679,
+    "sha256": "6748b0885a7f3ccce204835bfbff462c3ad45cb0c2c6366e56cd557f075bfc35"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.7/command.json": {
+    "bytes": 243,
+    "sha256": "f2ca766e712410753e18228e9c3d2459f5d74bb057eac52a4866c262d776710e"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.7/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.7/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.7/stdout.log.gz": {
+    "bytes": 1264,
+    "sha256": "57cde92fec057277ae019381ffd05ec10ea9113dbbf0ba07101ea9c43bf23e72"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.8/command.json": {
+    "bytes": 243,
+    "sha256": "38b6e298568d93987dbe027a09ec12819c320110c0b8de341b6f3b6844a09195"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.8/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.8/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.8/stdout.log.gz": {
+    "bytes": 1574,
+    "sha256": "b8f0ec9e84990743b9e80a606fe4ac3b97ca258529861f99f2e2e29759d6464e"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.9/command.json": {
+    "bytes": 243,
+    "sha256": "975dd7733e4d8912353678363c3196776fccda491ef33f225f397e58dd930ee9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.9/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.9/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE.9/stdout.log.gz": {
+    "bytes": 1644,
+    "sha256": "e7f32d5d7644ebbed4fca1775b6b2f893bb4451adede84dfe6ceecf45f511136"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE/command.json": {
+    "bytes": 241,
+    "sha256": "9cf8a49c623a536f83291b3b8f686262429d985dcc7645f02c52de40ca0a44cc"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-REPO-HYGIENE/stdout.log.gz": {
+    "bytes": 219,
+    "sha256": "695fa33244c8cc4adab5d4fe267adc0008289cb9c8e05895adac4e9566ffea2a"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-all/command.json": {
+    "bytes": 222,
+    "sha256": "e93dd7a1bf83b8716d0a7a45f433ef967d984db4bde6b88c178960ee2ac68c22"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-all/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-all/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/commands/reader-all/stdout.log.gz": {
+    "bytes": 31745,
+    "sha256": "f231df1d917512f1e1e77159f7f0bb07136ee3607dc7b02eabe29926e64e493a"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/complete.txt": {
+    "bytes": 85,
+    "sha256": "4afbca80c72790971c406327cac9741e361026cfd2481af426e90ee344ee0f68"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-input-identities.json": {
+    "bytes": 2923,
+    "sha256": "c254d4177b327f526be9281ccef8f3df5e62aaf8e2428bd607acb21bae099bb7"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-0.log.gz": {
+    "bytes": 190693,
+    "sha256": "84d7c4731e8eb12a1ce76e9b28c64d5d8be5217998772c163b66909e408ac6c4"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-1.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-2.log.gz": {
+    "bytes": 40348,
+    "sha256": "d8309cb0b6d39830c250b429ba0bc97606cea7c6c77c348f6feaaea6f1773a47"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-3.log.gz": {
+    "bytes": 78838,
+    "sha256": "1e1957ab6ded9d58579d25575cdfffafc8b5032109c1826b845a1c5061b404b3"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-4.log.gz": {
+    "bytes": 65042,
+    "sha256": "ce612a1ea53994432b631204770250744531c5bb927d4431adaf2bcb9c1954ab"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-5.log.gz": {
+    "bytes": 51583,
+    "sha256": "033b376cf16356af03db224fd40e909f1bee49fcf95b66cc3c4a0d7e27a163ea"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/inputs-before-migration-identities.json": {
+    "bytes": 25862,
+    "sha256": "5c842ac30587ab209db2629c0b7e2fcf12b32a3eece5a53136d8df2eb71d3147"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/inputs-before-migration.tar.gz": {
+    "bytes": 3714912,
+    "sha256": "1abf4cbc879c1a95bd26e4319bf054085655d959a201ea256da3471f6b6f8039"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/command.json": {
+    "bytes": 230,
+    "sha256": "1985d82054ee8ad6233bc1d5aa048d55149f34f3863d1d590384d6a8eb11457e"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/identities.json": {
+    "bytes": 4123,
+    "sha256": "787735393b19b5dcd1ae4c684f263f8324d05916b822ebc3cda0c34620318f08"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/inputs.tar.gz": {
+    "bytes": 3767218,
+    "sha256": "bbf5c058ed012a9ddad61441e9566cd24dd6c6fcd988b8ae4dbfd2083fdcea94"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/candidate/stdout.log.gz": {
+    "bytes": 121,
+    "sha256": "b862e1453a55fafc3d46e83418f714e8d50e97c989953bb43ed87bda706b6578"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/command.json": {
+    "bytes": 222,
+    "sha256": "ea78a138303e4de5a01659c8ef1b6b435de609bd6ff5124120931f61433fc9e0"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/identities.json": {
+    "bytes": 2870,
+    "sha256": "cd24d370512a32aa1153a636b9469feaa0de69a86aaa0a0961b6571e7a57ca86"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/inputs.tar.gz": {
+    "bytes": 21593,
+    "sha256": "1a7e5e0365b06a739faf55747421bb6b0a21327e311b94189b0df14cd68e1727"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/capture/stdout.log.gz": {
+    "bytes": 191,
+    "sha256": "011eb9a322182efdf5ea41eb05c0a39dd066fb8bff9a5af63c22a7ceae3ee5fc"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/command.json": {
+    "bytes": 222,
+    "sha256": "5ba82275a9aa469fe8d4793f83db29b364bfb01b242106e5bbe77bd850a23636"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/identities.json": {
+    "bytes": 696,
+    "sha256": "c98b228c91975d8939bda42f92a8e23cbdfdd601fc74349550740095424367b7"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/inputs.tar.gz": {
+    "bytes": 7114,
+    "sha256": "0af2c69f049708628a6b9634b99a1621d622bda127bbdc3a637c08439e179d26"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/prepare/stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "9396e7cdb153991db6e5bbe1adc3c90593323af05257c41fc1c7939ef3a85905"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/seal/command.json": {
+    "bytes": 219,
+    "sha256": "8451b26d18af972bf0bce3ca5b2498821ebfdd849d9570bdeb1fb2505725cfbc"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/seal/identities.json": {
+    "bytes": 5122,
+    "sha256": "d930fe270ade61f5a71cf75f59a4f2735a02b89b4f83b4cc1b9e628fe9b850dc"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/launches/seal/inputs.tar.gz": {
+    "bytes": 3767711,
+    "sha256": "99e2bb5fd54742e950d5e4e5b5c3ac391455d8765d7dfe15bcbca47cfc6df510"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/outputs-before-reader-identities.json": {
+    "bytes": 360,
+    "sha256": "59d0a3cf21e70375e1b6f18cb79a06b583c58474dae42bf072bf4e5c4cf65541"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/outputs-before-reader.tar.gz": {
+    "bytes": 16389,
+    "sha256": "f3972fb8bb340ca277f724e68d9d2c8039ec1cdad56b2d17aa0fa68ec3b2850c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/prepare.py": {
+    "bytes": 1801,
+    "sha256": "7483e729da4a5c9d64fab7c5c9438c57fe1152281cd6db9c309c411493a59b41"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/review.py": {
+    "bytes": 9971,
+    "sha256": "6bccb75e7c7ce0a6fce0449b41020305f1120cff8d32ac69e1189773a7bc72b9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_review.py": {
+    "bytes": 1045,
+    "sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/seal.py": {
+    "bytes": 708,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-capture.py.gz": {
+    "bytes": 2376,
+    "sha256": "0bdea4d462fe8afba68b2763e1441289fb62986a81d83030a4aa4617d0121f79"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-check_candidate.py.gz": {
+    "bytes": 880,
+    "sha256": "258036c2a8f396b5aec39b8455b8462caf56a0757f911f8b2189d3c446c361ad"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-identities.json": {
+    "bytes": 1979,
+    "sha256": "c94a1105e17536bf83309a6a7957d2fa526ec7e01a9fe76f5dc6a8d35c6a1c9f"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-review.py.gz": {
+    "bytes": 3344,
+    "sha256": "1861fbbe44803859ec4c9b253cbeb1cd5350aca46cf68c3a0156885e968f09d2"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-run_review.py.gz": {
+    "bytes": 543,
+    "sha256": "99e1bc2663d320a3cd61cda2b0259b0934909f77140e912480c81719708dc059"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-seal.py.gz": {
+    "bytes": 444,
+    "sha256": "f3b6f880abfa2bf9666429f724f0e8a5e1344d7fa4e0960626d7bec298d79a1a"
+  }
+}

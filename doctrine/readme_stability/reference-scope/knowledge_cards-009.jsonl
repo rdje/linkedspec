@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5786,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-normalization-call-grammar.md","sha256":"a4ec8114e3f6c5f9c850747b023eacb8efb5d2b710cccfe654f51f2cb7bff492","type":"member"}
 {"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
 {"bytes":2622,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-string-result-kinds.md","sha256":"07743a905ac3ea277b3d69e5befc246dd7c2f2719cfddac4368d7572374ef4b0","type":"member"}
 {"bytes":3838,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/perl-open-arity-concat-result-guards.md","sha256":"6ef3458baebb05abe62de6c8ea2ae25444d60cd1077de79ceaafbe62d1f2b4fc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2552,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-utf8-process-boundary-gap.md","sha256":"65589f6e29405edb95d371d44f7fbb02352a11886dc6a9ab6b66967941d4bb61","type":"member"}
 {"bytes":3056,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-capacity-publisher-replay.md","sha256":"3561ee7be352cf252c696aa329af2d0c83bb25dc5e355fec1cae545c5362f8a8","type":"member"}
 {"bytes":4540,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-consumer-artifact-binding-audit.md","sha256":"c488f4d6c44787bfde37684ea47a10e458a25ad80ec8d082ef3ca83d609c7b66","type":"member"}
-{"bytes":2257,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/producer-residual-change-history-capacity.md","sha256":"532ae16a01f36b0a9799e9a8dcff8d2c37e8e1e102feaf43421eb2575e6ad755","type":"member"}

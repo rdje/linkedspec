@@ -10,6 +10,8 @@ answers:
   - "why does reference scope update reject a finished leaf when memory names the next leaf"
   - "why must the task narrative epoch fixture seed every retained source"
   - "why did the epoch fixture miss LUA-BACKEND-PARITY.md"
+  - "can task narrative epochs migrate partitioned TYPE helper parts"
+  - "which task narrative epoch sources must be unpartitioned"
   - "how does recurring factory review separate current semantics from historical source bytes"
   - "why does adding lookup aliases change the Knowledge Map question total"
 date: 2026-11-04
@@ -39,6 +41,8 @@ remain current; exact predecessor narrative is available through
 The archive explicitly names its historical source; it does not replace the current graph.
 
 Later unpartitioned-tree extraction uses an explicit `--epoch` without changing those original queries.
+The epoch writer requires an unpartitioned tree and rejects an index-bearing target
+before mutation; tools/migrate_task_narrative.py enforces this existing boundary.
 The bounded immutable manifest under `docs/history/task-narrative-epochs/` binds a retained ancestor commit,
 source path, Git blob/SHA-256 and selected IDs. Full-history Git supplies the complete original body.
 The current graph retains every CORE field and complete open/unselected bodies. The task metadata gate

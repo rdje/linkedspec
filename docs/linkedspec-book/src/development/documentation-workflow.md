@@ -454,6 +454,21 @@ owned; this source has the exact uppercase boundary.
 This renews the bounded current document collection. The full Git history remains
 retained, and the text reduction supplies no disk-reclamation or upload-size claim.
 
+The hygiene epoch uses the same unchanged data interface:
+
+```bash
+bash tools/run_python_project_data.sh tools/read_task_narrative.py \
+  --tree REPO-HYGIENE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.29 --all
+```
+
+All 25 IDs/contracts, three complete unselected bodies and the full 22339-byte
+frontier/trailing section stay exact; 22 closed narratives gain source pointers.
+All 26 public queries and independent recovery with ten corruption controls pass.
+Current text changes from 110217 to 61280 bytes, renewing 48937 under unchanged
+limits. The epoch interface requires an unpartitioned tree. Original cleanup dates,
+totals and frontier words remain historical; current work resumes from MEMORY.md.
+This preserves task data, with no new cleanup, runtime or parity claim.
+
 ## Public book
 
 This book is for:

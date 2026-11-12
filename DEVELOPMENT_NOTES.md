@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.29 — Existing epoch interface and dated hygiene source
+
+The published epoch writer accepts unpartitioned task roots and rejects an index-bearing target before mutation. The unactivated four-helper-node proposal is corrected to compatible REPO-HYGIENE; no tool/schema/cap expansion is needed. Exactbf01d855bf source has25 ordered IDs;22 closed narratives gain epoch pointers. All CORE fields, three whole unselected bodies (root,24 and shorter closed1), prefix and the complete22339-byte tail remain exact. Original110217 becomes61280 bytes, renewing48937 current-text bytes. Existing migration/all26 public queries/first independent recovery with ten effective corruptions/current target-manifest identity all pass.
+
+Current source/outputs/full modes and actual producers/commands/channels are retained before their consumers. The initial seal predates the first reader; later reader/launcher/prose/publication metadata are separate. Before shared book/card changes, all206 exact accepted claim records are enumerated:236 checked historical bindings intersect selected paths and zero are live. Original revisions/hashes/epochs/observations stay unchanged. This is task-data preservation, with dated cleanup totals/frontier words retained rather than re-admitted; no new cleanup, native custody, SDK/parity or physical reclamation follows. Canonical facts: hygiene-closed-task-narrative-headroom; general unpartitioned-source aliases route to normal-hook-archive-reference-contracts. Rust80.2 follows clean headroom.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.1 — Result arity and rejected-call evidence
 
 The helper already accepts concat_arrays[1,unbounded], but _ordinary_array_transform_result_call near1883 restricted result ownership to exactlytwo. Public Get/dumps expose missing Hash/rejection/function-result frames; SDK5/4 changes only those bounds/comment. Source-exact selection84/source-only legacy312/own108 precede production. Same-path old30/current504/direct1028 and strict independent recovery25/current186 isolate and protect the repair, with26 supported targets/four separate compatibility/474 full records/all80 initial policies exact.

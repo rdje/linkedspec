@@ -1814,14 +1814,31 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Planned claim verification: none: This owner schedules the demonstrated projection/coverage boundary; declare actual producer/input and claim granularity at activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.29`
-  Status: `pending` / P1 capacity prerequisite before Rust80.2
-  Goal: Renew task-evidence headroom from closed callable-transform narratives without changing contracts or limits.
+  Status: `completed` / bounded existing data epoch with focused proof
+  Goal: Renew task-evidence headroom from closed hygiene narratives without changing contracts or limits.
   Dependencies: Clean Perl80.1 after its own new-commentary routing repair; no dirty pivot.
-  Scope: Review exact closed78.6.2-.5 nodes in helpers-60plus using the adopted task-narrative framework. Preserve all stable IDs/statuses/Goal/Dependencies/Acceptance, source/qualification/open-owner boundaries, the entire unselected part and full current/future80 tail. Retain exact before/after/producer/Git origin and public retrieval/corruption evidence. No SDK/pin/tool/schema/cap changes or historical parity promotion.
+  Scope: Existing unpartitioned REPO-HYGIENE epoch only. Preserve all ordered IDs/CORE fields, complete open/unselected bodies, metadata and full Current Frontier/trailing bytes. Retain exact before/after/Git origin, actual producers/inputs/channels/public queries and independent corruptions. No SDK/pin/tool/schema/cap change, runtime/parity promotion or disk-reclamation claim.
   Trigger: First80.1 normal hook rejects task_evidence12590016/12582912; own10915-byte commentary route permits its clean landing, but further backend records need bounded headroom. Execute before Rust80.2, then resume it immediately.
   Planned verification tier: focused; exact selected-source preservation/retrieval and changed-surface pressure gates, no runtime replay.
   Planned canonical trigger: Full23.4/final clean push; actual policy/tool changes require a separate canonical owner.
   Planned claim verification: Finite authored source/byte-preservation controls; declare exact producer and retained inputs at activation.
+
+  Verification tier: `focused`
+  Focused checks: Existing epoch writer/public whole-source and every-ID query, exact source/CORE/open-body/full-tail recovery and corruptions/current identity; task metadata/pressure, book/history/scope/normal hooks. No SDK replay.
+  Canonical trigger: Full23.4/final clean push; data-only migration changes no infrastructure.
+  Claim verification: none: Finite authored task/byte preservation controls, no new runtime/performance/population/completeness measurement.
+  Activation: Cleanbf01d855bf913a5a839670669d9ad91e9c6314df/all10/post-pointer/brief0/clean. Original unactivated four-helper-node plan is incompatible with the published epoch API's explicit unpartitioned-tree requirement (tools/migrate_task_narrative.py, docs/TASK_TREE_README.md). Select eligible unpartitioned REPO-HYGIENE instead; source has exact uppercase frontier, no Scope/prior-epoch fields and no duplicate CORE labels. Existing framework/source contracts and relevant book reviewed; preserve dated cleanup claims without re-admission. Prepare before one-shot use; source equals activation Git.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Prior80.1 task-evidence cap failure and own-commentary route leave little feature-record headroom; exact bf01 REPO-HYGIENE source is independently retained.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Current collection reaches its fixed aggregate; existing unpartitioned data epochs retain closed commentary in Git while keeping current CORE/open obligations. Partitioned helper source is rejected by that interface, so the unactivated source proposal is corrected.
+  - [x] **FIX** — Existing epoch29 creates22 closed pointers, preserving25 ordered IDs/all CORE fields/three complete unselected bodies/prefix/full22339-byte tail;110217 becomes61280 bytes, renewing48937 under unchanged limits.
+  - [x] **ADDRESSED (verified)** — One-shot migration0 and all26 public whole-source/every-ID queries0/empty stderr match originals; first independent review0/ten effective corruptions/current target-manifest identity0.
+  - [x] **NO REGRESSION** — Every unselected byte/full tail and all statuses/contracts stay exact; source/tool/Git/full-mode/physical command channels recover. No SDK/cleanup execution, cache/source deletion, pin/schema/tool change or modern parity claim.
+  - [x] **LOCKSTEP** — Book/Knowledge/live/roadmap/resume/task/index/scope/history align; normal clean commit before independent Rust80.2. Full23.4 remains separate.
+  Outcome: docs/checkpoints/task-headroom-hygiene-2026-11-12/REVIEW.md. Actual original templates/input snapshots precede use and output snapshots precede queries. Seal precedes first historical review; later launcher/results/publication query/prose are outside it. Current identity is pre-staging only. Publication-input query0 enumerates206 exact accepted claim records/236 historical intersections/zero live bindings; original claims/hashes/revisions remain unchanged.
+  Remaining: All source/context/portable/full23.4/native4.2/SESSION5/discovery4.1/historical4.24/raw-error4.28/boundary4.17/routing18.2/launcher/declared5.4/formatter owners remain. Historical cleanup dates/totals/frontier words stay dated; current PNT is MEMORY.md. No disk-reclamation/upload-size/whole-repo-reading inference. Rust80.2 resumes after clean landing.
+  Landing checks: Task metadata0, memory architecture0, Knowledge1747 facts/12452 question keys, reference scope1949 members/17 pages, mdBook0 (existing15192999-byte search-index warning remains18.2-owned), bounded histories0 (231/38437 change shard;261/53969 engineering shard, existing warning below rollover) and whitespace0. Independent publication-input recovery0 rejects three injected live bindings; original claim rows stay exact. Mandatory normal pressure/doctrine hooks follow; no full CI or runtime replay.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.1.24`
   Status: `completed` / frozen arithmetic63

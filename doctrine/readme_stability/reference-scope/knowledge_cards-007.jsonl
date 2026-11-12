@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4493,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-toolchain-package-policy.md","sha256":"09dcfcb61d6091526b0766e4877882481ac5a9ef87eabaf3e27ace0ebcab4dfc","type":"member"}
 {"bytes":2777,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-trace-controls-sinks.md","sha256":"16173539ecda35cfa160551b18e08609d5a49daf76381694157be1c26be0e3aa","type":"member"}
 {"bytes":5975,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-compatibility-alias-gap.md","sha256":"b84ab4296e84cb043d1c057812a34f48a5b5f1a28e56b4af5789e26659ab0faa","type":"member"}
 {"bytes":11362,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-location-dormant-red.md","sha256":"07760887eecc55d0a08a2163a9063f49e71cf18b2105856330bdd9c3482ac3f8","type":"member"}
@@ -59,7 +60,7 @@
 {"bytes":6091,"lines":103,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/neutral-cli-fixture-runner.md","sha256":"93d1165949725d5190e865a488c3fcbb64ab881a24341c3dde5bf61b5944fee7","type":"member"}
 {"bytes":1774,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/non-codegen-capability-parity-closed.md","sha256":"42943d77c6686847f64b4cfe4d4d3191b1c4ab7f9a99ca8e6a4d9cd93f915bfb","type":"member"}
 {"bytes":6361,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/noncurrent-helper-code-purge-inventory.md","sha256":"766208f46523611e8d62082bee29dca9a3ec6c6c4b13357bab1d840318343819","type":"member"}
-{"bytes":8033,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/normal-hook-archive-reference-contracts.md","sha256":"60b0b1d5ed2d45d4ca73606225b54fcc67a7b5e61fe62636a5d93c408cab94b1","type":"member"}
+{"bytes":8332,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.29","path":"docs/knowledge/normal-hook-archive-reference-contracts.md","sha256":"ff578a1f1fe2c44f3ac03cdfe2acf749b400135523518deb158a07bd85edda84","type":"member"}
 {"bytes":5025,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/numeric-comparison-result-source-guards.md","sha256":"56e18a249441d2e53f58c2cb57cbc55f34e4c67871ac34c4f7e17efc1ce95518","type":"member"}
 {"bytes":3843,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/optional-native-parser-acceleration.md","sha256":"5d2959e255c45036e7930fc857fcdb503afc9159801245b0e0147bd5a962822d","type":"member"}
 {"bytes":9180,"lines":133,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ordinary-with-hash-result-continuation.md","sha256":"b3a058a6a1f153f9cc2de17b8aa527236474bfada2bdb61becd6396fba6e4706","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3597,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-result-guards.md","sha256":"0ad21f9ef608301a2ea952fcd8facb4ad698a4dd868e2e84cfb00dd77e63e540","type":"member"}
 {"bytes":3696,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-replay-instrument-recovery.md","sha256":"98edbe7275d3bbf18cd3f560caad7c74b510c3d0378eeac2756af5b7200b5f12","type":"member"}
 {"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}
-{"bytes":3577,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-value-conditional-execution.md","sha256":"56723591803ef22d72727d902f27843081cab835a32d9f8c4de949be577392f0","type":"member"}

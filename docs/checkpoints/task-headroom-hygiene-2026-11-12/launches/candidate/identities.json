@@ -1,0 +1,107 @@
+{
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/capture.py": {
+    "bytes": 6885,
+    "mode": 420,
+    "sha256": "c48ae061761406c15f9e7821d29b54157c76f43f3f77de9fb9643d80573dc4c4"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/check_candidate.py": {
+    "bytes": 2000,
+    "mode": 420,
+    "sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/complete.txt": {
+    "bytes": 85,
+    "mode": 420,
+    "sha256": "4afbca80c72790971c406327cac9741e361026cfd2481af426e90ee344ee0f68"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-input-identities.json": {
+    "bytes": 2923,
+    "mode": 420,
+    "sha256": "c254d4177b327f526be9281ccef8f3df5e62aaf8e2428bd607acb21bae099bb7"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/inputs-before-migration-identities.json": {
+    "bytes": 25862,
+    "mode": 420,
+    "sha256": "5c842ac30587ab209db2629c0b7e2fcf12b32a3eece5a53136d8df2eb71d3147"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/inputs-before-migration.tar.gz": {
+    "bytes": 3714912,
+    "mode": 420,
+    "sha256": "1abf4cbc879c1a95bd26e4319bf054085655d959a201ea256da3471f6b6f8039"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/outputs-before-reader-identities.json": {
+    "bytes": 360,
+    "mode": 420,
+    "sha256": "59d0a3cf21e70375e1b6f18cb79a06b583c58474dae42bf072bf4e5c4cf65541"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/outputs-before-reader.tar.gz": {
+    "bytes": 16389,
+    "mode": 420,
+    "sha256": "f3972fb8bb340ca277f724e68d9d2c8039ec1cdad56b2d17aa0fa68ec3b2850c"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/prepare.py": {
+    "bytes": 1801,
+    "mode": 420,
+    "sha256": "7483e729da4a5c9d64fab7c5c9438c57fe1152281cd6db9c309c411493a59b41"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/review.py": {
+    "bytes": 9971,
+    "mode": 420,
+    "sha256": "6bccb75e7c7ce0a6fce0449b41020305f1120cff8d32ac69e1189773a7bc72b9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_review.py": {
+    "bytes": 1045,
+    "mode": 420,
+    "sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/seal.py": {
+    "bytes": 708,
+    "mode": 420,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-capture.py.gz": {
+    "bytes": 2376,
+    "mode": 420,
+    "sha256": "0bdea4d462fe8afba68b2763e1441289fb62986a81d83030a4aa4617d0121f79"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-check_candidate.py.gz": {
+    "bytes": 880,
+    "mode": 420,
+    "sha256": "258036c2a8f396b5aec39b8455b8462caf56a0757f911f8b2189d3c446c361ad"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-identities.json": {
+    "bytes": 1979,
+    "mode": 420,
+    "sha256": "c94a1105e17536bf83309a6a7957d2fa526ec7e01a9fe76f5dc6a8d35c6a1c9f"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-review.py.gz": {
+    "bytes": 3344,
+    "mode": 420,
+    "sha256": "1861fbbe44803859ec4c9b253cbeb1cd5350aca46cf68c3a0156885e968f09d2"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-run_review.py.gz": {
+    "bytes": 543,
+    "mode": 420,
+    "sha256": "99e1bc2663d320a3cd61cda2b0259b0934909f77140e912480c81719708dc059"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/template-seal.py.gz": {
+    "bytes": 444,
+    "mode": 420,
+    "sha256": "f3b6f880abfa2bf9666429f724f0e8a5e1344d7fa4e0960626d7bec298d79a1a"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.20.2.json",
+    "source_commit": "659f19d748ddc9ddd6bc1c40c2c7b2d63107b138",
+    "source_path": "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+    "source_blob": "26b3f4da684cf5fef69db068a4b371a99b3a303a",
+    "sha256": "730e165295a55a345d9a884fec22e7406a7306b1c484079fae5193fd0abb3acc",
+    "bytes": 726526,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-0.log.gz"
+  },
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.16.json",
+    "source_commit": "2286c6606a9fb86290801e1c8a0053e59d342a1f",
+    "source_path": "docs/tasks/LUA-BACKEND-PARITY.md",
+    "source_blob": "16464a577419e8db593bfd7b40d8df261da04903",
+    "sha256": "a453820dcf298a68654df59bd7af193dbcdabf6cbb255f1c276c70e308ac55b2",
+    "bytes": 477660,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-1.log.gz"
+  },
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.21.json",
+    "source_commit": "3906078befb43dcc2c2536c516a81d46de37f8c5",
+    "source_path": "docs/tasks/DART-BACKEND-PARITY.md",
+    "source_blob": "42b920b73dd37fc22108a94caf89ada0995347df",
+    "sha256": "add1b2e49e5d93d2944847f0d19ddd9658bab0971fff696eaa17c1959bf2828d",
+    "bytes": 171451,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-2.log.gz"
+  },
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.23.json",
+    "source_commit": "d34acedac2583bd7ef7ab805880710cd806afbdd",
+    "source_path": "docs/tasks/JULIA-BACKEND-PARITY.md",
+    "source_blob": "e9f35d6f1c43e58b442f34c0ef51bc40a6d7cc0d",
+    "sha256": "522b514bd399133daa4d0d95cf6385518607434cebefcf1980ecfa1596e605fb",
+    "bytes": 298069,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-3.log.gz"
+  },
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.25.json",
+    "source_commit": "c97b864fe9e9de16eaff5bcc840e46e97afe1699",
+    "source_path": "docs/tasks/RUST-PARITY.md",
+    "source_blob": "3a5e8da62d9903da1228c167b495c47261f7e67a",
+    "sha256": "0ae92d2f6a2ac4b9c38d45a0612bc0b992ce182a3af26e4bbc44a0b9d0d59d8a",
+    "bytes": 212629,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-4.log.gz"
+  },
+  {
+    "manifest": "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.27.json",
+    "source_commit": "398d723bfb5e4e7960141944957e72a4335c7e35",
+    "source_path": "docs/tasks/SPEC-LANG-REFERENCE.md",
+    "source_blob": "510c50a8da3ffffbd14aac03761584949aa9cd88",
+    "sha256": "fc85c0be55d5d75aee150d2cdb403e2483ad498e5ba84cb1735f10e6dc28938e",
+    "bytes": 169647,
+    "retained_body": "docs/checkpoints/task-headroom-hygiene-2026-11-12/git-inputs/source-5.log.gz"
+  }
+]

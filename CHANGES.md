@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.29 — Closed hygiene narrative headroom
+
+- Existing unpartitioned REPO-HYGIENE epoch retains25 ordered IDs/CORE fields,22 closed pointers, three complete unselected bodies and the full22339-byte current/trailing section.110217 becomes61280 bytes, renewing48937 current-text bytes under unchanged limits/tools/schema.
+- Actual migration/all26 public source-node queries0/empty stderr and first independent recovery0/ten distinguishing corruption controls/current identity0 pass. Inputs/templates/Git bodies precede use; exact output bytes/full modes precede queries. Every original cleanup/date/frontier claim remains historical; no SDK/cleanup execution, modern parity or disk-reclamation claim.
+- Corrected only the unactivated source proposal: epoch API rejects partitioned TYPE, so compatible hygiene data uses the existing workflow. Shared-publication metadata query covers206 accepted claim records/236 historical intersections/zero live bindings; original claims/hashes/revisions stay untouched. Book/Knowledge/current frontier/live/resume/task/index/scope/history align; independent Rust80.2 follows clean landing. Evidence: docs/checkpoints/task-headroom-hygiene-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.1 — Perl open-arity concat result guards
 
 - Concat result-role recognition now follows its existing minimum-one/unbounded signature, including receivers and valid registered-function sources. SDK5 insertions/four deletions include one comment; terminal producers, invocation, function/helper signatures and formats remain exact. Later Hash rejection retains S/T/U and persists through copy/logical/with, skipping K/V/D/W; needed errors propagate.

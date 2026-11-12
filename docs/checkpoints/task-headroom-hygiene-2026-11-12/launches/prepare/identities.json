@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/prepare.py": {
+    "bytes": 1801,
+    "mode": 420,
+    "sha256": "7483e729da4a5c9d64fab7c5c9438c57fe1152281cd6db9c309c411493a59b41"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}
