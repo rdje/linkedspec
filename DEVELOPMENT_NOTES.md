@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — Exact daily log retirement (TYPE-REFERENCE-BOOK.1.2.23.4.31)
+
+Fresh1316 metadata rows/eight scopes remain retention-only. Three exact own
+Dart102ec3446/monitor952f8a022/Juliaa3faaf972 combined normal logs retain133480
+content bytes/full modes/Git markers before actual independent predelete use.
+Final identity/hash and three-path residue checks0; postdelete readonly16
+rejects metadata/source/log/channel/parent faults. Shared wrappers recover at
+accepted activation Git bytes, without future live-source freshness claims.
+Parent Children ended at29 despite indexed30; exact data adds30/31, two faults
+reject and three public queries pass. Shared publication209 accepted/249
+historical/zero live precedes book/frontier edits, not the earlier captured task
+data fix. Old claims/hashes/revisions stay exact. Full native/kernel/OS/transitive
+custody4.2/SESSION5 and auxiliary pack gaps30/4.2 remain. Remeasure after commit.
+Evidence: docs/checkpoints/artifact-review-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — Julia concat result-arity ownership (TYPE-REFERENCE-BOOK.1.2.23.3.80.4)
 
 Own source-only508 intake precedes a one-line count2 to count>=1 result guard,

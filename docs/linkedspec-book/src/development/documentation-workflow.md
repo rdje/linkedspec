@@ -558,6 +558,18 @@ push and independent ref/workflow responses. The later focused event record
 separately resumes feature work; publication proof stays bound to the actual
 published commit. Quiet test output alone establishes neither success nor a hang.
 
+The November12 review retains all1316 matching metadata rows in eight named
+scopes. Separately, three completed own normal-commit logs preserve133480
+content bytes/full modes in compressed evidence before independent recovery and
+removal of only their plain copies. Postdelete recovery and16 metadata/
+log/channel/task-link corruption controls pass. Caches, native products and other
+proof remain retained; no physical reclamation claim follows. The latest-only
+record is `docs/ARTIFACT_CLEANUP.md`. Review without rerunning capture/retirement:
+
+```sh
+bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-12/review.py
+```
+
 A daily review can retain every candidate. The November10 bounded review compares 1,181 rows in eight named artifact scopes with an independent metadata walk, verifies the configured Rust target is covered, and removes nothing: cache usefulness and unresolved proof obligations take precedence over filename, age or size. Its dated snapshot, complete command channels and readonly reader live under `docs/checkpoints/artifact-review-2026-11-10/`; earlier observations remain unchanged, and the latest-only record remains `docs/ARTIFACT_CLEANUP.md`. Project census producer bodies are retained before helper import and checked unchanged afterward. Five metadata and four channel counterexamples reject. Before editing this shared chapter, the eight checked claims of the accepted prior checkpoint are preserved at their actual Git capture; their original logical epochs, results and input hashes remain unchanged. The complete native/OS input-custody leg is separately owned and is not supplied by source or channel retention. The new declaration is authored directly, with its script-composition templates explicit. The November7 review retains its original draft and qualified prior-template disclosure. The earlier November4 review preserves its original publication messages; the separate `docs/checkpoints/publication-custody-2026-11-04/` record retains the original planner, actual ref-update logs and complete logical Git-object identities. Its readonly review distinguishes raw object bytes from packed estimates, original grouping fields from runtime counts, and repeated batch inputs from required-object coverage. Exact wire size and transitive toolchain closure remain unassessed. A rejected new task narrative can be shortened while retaining its full prior wording and unchanged acceptance fields; this preserves the fixed collection cap while its scheduled headroom task renews capacity. The accepted large-file warning has a dated assessment under `docs/checkpoints/artifact-growth-2026-11-05/`; prospective input reuse remains scheduled after feature coverage. Historical evidence stays retained.
 
 Continuity docs answer different questions:

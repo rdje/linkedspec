@@ -1,0 +1,162 @@
+{
+  "CHANGES.md": {
+    "bytes": 42417,
+    "mode": 420,
+    "sha256": "00c00078ff6051d05ae307019c3a80f6720e04556c905f5c2652da77bc2d1f63"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 32608,
+    "mode": 420,
+    "sha256": "6bd1a6d6147a1d0e9713a2548aafce3e6b225ac827a8521f81416e7f19e86917"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5236,
+    "mode": 420,
+    "sha256": "f2820b4a9bb00d30a8c92304bce01673152a2ababff165031b713b4fd58ef2b6"
+  },
+  "MEMORY.md": {
+    "bytes": 3537,
+    "mode": 420,
+    "sha256": "8a2671ce76ba801ff0fdfe99bb05b4ffb4f803cc32045d956224d4df57bdb095"
+  },
+  "ROADMAP.md": {
+    "bytes": 472147,
+    "mode": 420,
+    "sha256": "c19f939b3fa8b417b98373332f693e55ff50501d80ed942a0013aea90f5345b9"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273482,
+    "mode": 420,
+    "sha256": "32eb77585e795f22391dc5032b1ce80e6e237e5a10ee19070441e4f1f2d258ff"
+  },
+  "docs/ARTIFACT_CLEANUP.md": {
+    "bytes": 619,
+    "mode": 420,
+    "sha256": "78ad251309c9b373d4740b53338528704754ba5d34ff2d3702447035a58c9efb"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/readonly/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/readonly/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/readonly/stdout.log.gz": {
+    "bytes": 560,
+    "mode": 420,
+    "sha256": "e7b748e5b2042ae9e7b0043b99727d42cbb2c207415d40f585b02ddbbcb393ab"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/review-publication-query/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/review-publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/review-publication-query/stdout.log.gz": {
+    "bytes": 232,
+    "mode": 420,
+    "sha256": "b41b4a001fa1cd88df688f8e577a686f3aa98eac9b36697bbecdea0cd0b26604"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/task-links/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/task-links/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/launches/task-links/stdout.log.gz": {
+    "bytes": 237,
+    "mode": 420,
+    "sha256": "bb6082c6a637d19807bc98ca64b6555e6878ea12abc614456ad341791ae7b548"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/observation.json.gz": {
+    "bytes": 2882970,
+    "mode": 420,
+    "sha256": "c505c095ffe0633a88041f6c403d2c575becb55a653635f36d73d27fe9229f56"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/publish.py": {
+    "bytes": 22697,
+    "mode": 420,
+    "sha256": "0c3f8188afbc5aad2b62d0e61e676304febfb8d673a8fbeb3a889baae4be7fcd"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/push-monitor-current/result.json": {
+    "bytes": 1342,
+    "mode": 420,
+    "sha256": "ecf0b13f527322d78d5968a1c141e74cdf0d67a6fb9c1550eba82bfb291c21a7"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/retirement.json": {
+    "bytes": 540,
+    "mode": 420,
+    "sha256": "2a341c9328b5baa43abf2b685356a6e5bb4ce3265a2eefd674ccaeee5f523ca1"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/review_publication.py": {
+    "bytes": 6585,
+    "mode": 420,
+    "sha256": "63e974b8a38b351ea58c440e32355222891a8f5eb9f7bd2a71c9594a6521742c"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/run_publication.py": {
+    "bytes": 5342,
+    "mode": 420,
+    "sha256": "d1f590ce300c2c7d5c58aeb6e26228705d124cc470c9db730d4461a01a2ae29c"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/run_stage.py": {
+    "bytes": 2543,
+    "mode": 420,
+    "sha256": "8ce600ae443640f521ff7b871367e4e8780c395a19435902520966f1b4f5fd29"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.31.json": {
+    "bytes": 6116,
+    "mode": 420,
+    "sha256": "710dbf4dea2a764878fdb303e4b2a5c3acb67f43bc765c5dcdfb7143beb66567"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 374387,
+    "mode": 420,
+    "sha256": "67781877098719f4c1603e1cec60ec71c2da3139e0bd443689931175b58e5f49"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 59762,
+    "mode": 420,
+    "sha256": "98ceca49ffe8c96f40c3dfc8c493b98585f098de2ce29e860aad721e4bbab958"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20496,
+    "mode": 420,
+    "sha256": "cdeb0e6ed1b55515d0f759324b777ee2773343073d1ca9d4d9768f307f6d6b61"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 531794,
+    "mode": 420,
+    "sha256": "d40ac637b719c366aa5a59d8c62d4341be848979cad5d66e52862821c478520e"
+  },
+  "git_message_brief.txt": {
+    "bytes": 0,
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

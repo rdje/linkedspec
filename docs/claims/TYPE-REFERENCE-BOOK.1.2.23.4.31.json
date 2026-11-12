@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.31",
+  "claims": [
+    {
+      "name": "dated-named-scope-metadata-and-exact-owned-log-retirement",
+      "statement": "At2026-11-12T15:31:25.854467+00:00 the primary scanner and independent scandir/lstat walk agree on1316 matching metadata rows across eight named scopes, with every census candidate retained. Separately, three exact completed owned normal-commit logs totaling133480 content bytes are compressed, independently recovered before deletion and retired as plain duplicates at2026-11-12T15:32:21.895461+00:00. The three named plain paths are absent.",
+      "scope": "The eight explicit root/Rust/log scopes and the separate three-log manifest only, not unique whole-project files or arbitrary disposal authority. Configured Cargo target is covered; Dart/Julia conventions, caches/native products/unselected proof/other repositories/submodules remain retained. Original logs are combined, so former stdout/stderr separation is unavailable. Parent4 adds exactly its missing30 and new31 links with all other bytes preserved. No physical space reclamation, global process-liveness or concurrent-adversarial guarantee.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-12/census.py --capture\nbash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-12/retire.py",
+        "granularity": "Every dated path/suffix/byte row in each named scope and every selected log body/full original mode/Git completion identity. Actual commands and full separate child channels are retained under launches/; selected original log channels are combined.",
+        "result": "Actual census0/review0:1316 rows/eight scopes/zero census removals. Actual retirement0:three log copies/133480 content bytes, independent predelete0 before unlink, exact final identity/hash recheck and three absent plain paths. Source/template/index/metadata/commands/channels survive in docs/checkpoints/artifact-review-2026-11-12/."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Missing or changed metadata, fabricated complete logs, wrong modes/commits/channels or a lost/duplicated parent child link could be accepted as support for this dated cleanup.",
+        "oracle": "Independent per-file metadata plus retained-byte recovery, actual Git all10/post-pointer/commit markers, reason-sensitive producer/log/channel faults and exact parent child-link before/after contract.",
+        "red_control": "Both actual predelete and postdelete readonly return0/empty stderr and reject16 controls:five metadata/source, five log/body/mode/commit/hook, four command/channel and two parent-link corruptions. Actual commands: bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/artifact-review-2026-11-12/review.py --before-delete, then the same command without --before-delete. The original missing30 link is preserved in the before image; corrected parent and30/31 recover through three exact public task queries."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project producer/template/helper bodies precede execution/import, and dated metadata/index/full command channels/log bytes/modes/Git identities/parent images are retained and independently consumed before deletion. Historical recovery uses accepted activation Git source for changing shared wrappers. Full native interpreter/kernel/OS/transitive original filesystem input closure is not established;4.2/SESSION5 owns that explicit remaining leg. Logical recovery and source retention do not supply it."
+      }
+    },
+    {
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "statement": "At committed HEADa3faaf97292550ba1e3001604e1e379d478bcdd4 excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c, the actual one-worker explicit no-sparse non-thin pack is1287859376 bytes/104 outgoing commits/46075 logical and header objects. It leaves212140624 bytes before the director1500000000-byte trigger and excludes this uncommitted maintenance slice.",
+      "scope": "One local ref-bound operational artifact. Source/policy/project wrappers precede pack use; actual metadata/commands/channels survive under docs/checkpoints/artifact-review-2026-11-12/push-monitor-current/. Raw pack remains ignored and protected on this volume. No fresh remote, negotiated wire/server or future-size claim.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual serialized committed-range pack; stream/stat/PACK/footer/empty-range and unchanged source/ref/config controls.",
+        "result": "Actual0 at a3faaf972/base4683555e:1287859376 bytes/104 ahead/46075 logical and header objects;212140624-byte trigger margin. Empty range32 bytes; preparation/trigger false. Metadata retained in push-monitor-current/."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "The same committed producer has independent historical native/file validation and twelve RED controls at earlier102ec3446 refs. This new a3faaf972 artifact has not received its own independent actual-file/historical size falsification epoch; previous controls are not a new observation. Parent30 owns qualification with publication preparation."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Before-use logical producer/policy/wrapper and actual metadata/channels survive, but ignored raw-pack/native physical Git/cache/compressor/toolchain/OS custody is not tracked recoverable closure.4.2/SESSION5 owns it; later metadata retention is not original native first-use credit."
+      }
+    }
+  ]
+}

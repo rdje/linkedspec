@@ -1,0 +1,53 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.31",
+  "activation_commit": "a3faaf97292550ba1e3001604e1e379d478bcdd4",
+  "at_utc": "2026-11-12T15:32:20.898279+00:00",
+  "records": [
+    {
+      "path": ".linkedspec-data/array-concat-open-arity-dart-commit-qualified.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-12/combined-logs/array-concat-open-arity-dart-commit-qualified.log.gz",
+      "sha256": "c65ff6089973b08c49442c14042c0514d1a387627b4080350c9274757f094f41",
+      "metadata": {
+        "device": 16777244,
+        "inode": 853929669,
+        "bytes": 62760,
+        "mode": 420,
+        "mtime_ns": 1794486295126707880,
+        "links": 1
+      },
+      "commit": "102ec3446407543c5ef64f3222bd0fffb5eb3064",
+      "git": "102ec3446407543c5ef64f3222bd0fffb5eb3064\n1753884257bed7ce0b842bc406c665671403a828\nTYPE-REFERENCE-BOOK.1.2.23.3.80.3 - guard existing Dart concat arities\n"
+    },
+    {
+      "path": ".linkedspec-data/publication-size-monitor-commit-qualified.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-12/combined-logs/publication-size-monitor-commit-qualified.log.gz",
+      "sha256": "22eb5d9389cefcbfc809c9ac5da756cf6c7af897df791f245256eb88b88c0dde",
+      "metadata": {
+        "device": 16777244,
+        "inode": 854387158,
+        "bytes": 29606,
+        "mode": 420,
+        "mtime_ns": 1794493467640352739,
+        "links": 1
+      },
+      "commit": "952f8a022c59a478614ba1413e0e36e49e7e14e8",
+      "git": "952f8a022c59a478614ba1413e0e36e49e7e14e8\n102ec3446407543c5ef64f3222bd0fffb5eb3064\nTYPE-REFERENCE-BOOK.1.2.23.4.30.1 - monitor outgoing publication size\n"
+    },
+    {
+      "path": ".linkedspec-data/array-concat-open-arity-julia-commit.log",
+      "archive": "docs/checkpoints/artifact-review-2026-11-12/combined-logs/array-concat-open-arity-julia-commit.log.gz",
+      "sha256": "5d7b09ed152f1a9345335116e8f84639e2257df2797096644f7837094a1ad218",
+      "metadata": {
+        "device": 16777244,
+        "inode": 854621848,
+        "bytes": 41114,
+        "mode": 420,
+        "mtime_ns": 1794496593897993635,
+        "links": 1
+      },
+      "commit": "a3faaf97292550ba1e3001604e1e379d478bcdd4",
+      "git": "a3faaf97292550ba1e3001604e1e379d478bcdd4\n952f8a022c59a478614ba1413e0e36e49e7e14e8\nTYPE-REFERENCE-BOOK.1.2.23.3.80.4 - guard existing Julia concat arities\n"
+    }
+  ],
+  "scope": "Three exact combined logs from completed commands owned by this session. Original channel separation is unavailable; no global process-liveness or disk-free-space claim. All other files, caches, native products and historical proof remain retained."
+}

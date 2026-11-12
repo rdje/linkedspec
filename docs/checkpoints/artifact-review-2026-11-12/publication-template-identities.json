@@ -1,0 +1,14 @@
+{
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3269,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/publication-template-check_publication_inputs.py.gz",
+    "mode": 420,
+    "sha256": "4b5a25addf531457fcc54a11a7090221ab776dc3955554ad0a330114b3d72fc0"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/review_publication_inputs.py": {
+    "bytes": 2954,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/publication-template-review_publication_inputs.py.gz",
+    "mode": 420,
+    "sha256": "32a5645b9479b0065b3c4e6d0417b6338fecc69dfe897f021bb5ff260bc4bc59"
+  }
+}

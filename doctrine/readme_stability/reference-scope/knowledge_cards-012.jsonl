@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2243,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-live-surface-migrated.md","sha256":"30665c23d8e25c674893a834a9bb192cf1601501dbc515211a100fb9c5691fea","type":"member"}
 {"bytes":2048,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-directive.md","sha256":"08a5b053b77a04773c83de297a54a3b1618cf8ec56d386ffeb590989800efbb1","type":"member"}
 {"bytes":2277,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-inventory-contract.md","sha256":"0ad82935799fa5d495b3f9f4ccdc5a6e17df2c4b21d49ac8dbfff6381bc8cc0f","type":"member"}
 {"bytes":3497,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scanner-rule-family-architecture.md","sha256":"af73bf92a9e303c0b479f86957fa26b655e2863a45cf6279bf5bb1634447edd3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2302,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-colon-scalar-retired.md","sha256":"5e38e74e6985c2d1510878e8af126f34d7457781c931466daa8cb98d2bf3c6d8","type":"member"}
 {"bytes":2755,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-expression-valued-blocks.md","sha256":"67abde4f80437a8f74c2cade95033dffcf67953f8964aadcd8aada1bbc9220fb","type":"member"}
 {"bytes":5124,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-primitive-literal-parity.md","sha256":"62a0b4477b97362bc180ca8ec30f62b9da92a071321f5f929d6fd730ee1e6464","type":"member"}
-{"bytes":3207,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-retired-scalar-assign-spec-surface.md","sha256":"f9626386fba5c1e4b217d112768b0d172d44f67a87e729773585ab6a34d03879","type":"member"}

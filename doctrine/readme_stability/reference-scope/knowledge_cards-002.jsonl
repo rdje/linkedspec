@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}
 {"bytes":11898,"lines":215,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-nested-authority-gap.md","sha256":"adcccefbb33a33452ee27a4245d02a7f84e495e2610df50d75c4b22a1c584d4c","type":"member"}
 {"bytes":4918,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-admission.md","sha256":"a220a5c1c50619931d6583614688002119e10c0e6df97360c46966f7f2625249","type":"member"}
 {"bytes":10388,"lines":114,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-authority.md","sha256":"c0d14b4e0934eb65306de739db4ad39f9f6911d75ac3e950ca9f60a90c4d8b95","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5575,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-definition-staged-ast-audit.md","sha256":"b22f6d0b529c353ee920f9f3c1565af6674b6f971090348514ba37cd64fd0c32","type":"member"}
 {"bytes":4364,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/future-parity-task-partition-capacity.md","sha256":"694ca8cd8fa0928be8668f2c2a85026bd48646481ddb79895c4b1e9e7ee20124","type":"member"}
 {"bytes":4527,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/future-parity-task-partition-contract.md","sha256":"0ebf7cf9ce1591e6341825457a546764fa47b6bd38a9f577ba70d1d8514c1b12","type":"member"}
-{"bytes":4724,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-selected-match-ls-live-cursor-authority.md","sha256":"a193d3a9ccbfcfcc6de7b9740775c0848c81833c3bed52a710bce267c2c0e7f4","type":"member"}

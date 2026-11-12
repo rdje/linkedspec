@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "grep",
+    "--no-recurse-submodules",
+    "--threads=1",
+    "-q",
+    "-F",
+    "Agent bootstrap",
+    "--",
+    "AGENTS.md"
+  ],
+  "cwd": "."
+}

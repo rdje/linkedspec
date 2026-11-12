@@ -1,0 +1,37 @@
+{
+  "docs/checkpoints/artifact-review-2026-11-12/check_task_links.py": {
+    "bytes": 2987,
+    "mode": 420,
+    "sha256": "691754db9d4710c81e740c8bfded8cd47be3299abaad01e941b73601c9166c76"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+    "bytes": 1294,
+    "mode": 420,
+    "sha256": "e8d095c16ea0a3f085dc0a9e137175523f0c5e38adbe6375b204f5351a660978"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20496,
+    "mode": 420,
+    "sha256": "cdeb0e6ed1b55515d0f759324b777ee2773343073d1ca9d4d9768f307f6d6b61"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 530707,
+    "mode": 420,
+    "sha256": "e701379b72526942c91de12c54b511d21f2ea2aede021d02dfd19f058e4ca3da"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/read_task_tree.pl": {
+    "bytes": 5138,
+    "mode": 493,
+    "sha256": "370f3dac2f8252fc87bb958ee2de1592116c64529773ce8a3f5d790df23acf79"
+  }
+}

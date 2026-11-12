@@ -12,6 +12,14 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.31: daily artifact review and exact log retention
+
+1316 matching metadata rows/eight scopes retained; three exact completed own combined logs/133480 content bytes/full modes independently recovered before plain-copy retirement. Postdelete readonly0/empty stderr/16 corruption controls and three exact public task queries pass. All other proof/caches/native products/repositories remain retained; no physical reclamation claim.
+Parent30/31 links preserve every other byte. Book/Knowledge/latest cleanup/live
+docs synced; native4.2/SESSION5 and auxiliary telemetry30/4.2 gaps remain.
+Fresh size then independent Lua80.5; no SDK/full CI/push in this focused slice.
+Evidence: docs/checkpoints/artifact-review-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.4: Julia existing concat result arities
 
 One result-arity guard/one runner include preserve existing unary/multi-Array

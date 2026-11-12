@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "git",
+    "grep",
+    "--no-recurse-submodules",
+    "--threads=1",
+    "-n",
+    "-F",
+    "-e",
+    "array-concat-open-arity-dart-commit-qualified.log",
+    "-e",
+    "publication-size-monitor-commit-qualified.log",
+    "-e",
+    "array-concat-open-arity-julia-commit.log",
+    "--",
+    "."
+  ],
+  "cwd": "."
+}

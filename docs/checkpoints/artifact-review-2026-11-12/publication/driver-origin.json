@@ -1,0 +1,9 @@
+{
+  "source_revision": "a3faaf97292550ba1e3001604e1e379d478bcdd4",
+  "source_path": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/run_stage.py",
+  "source_bytes": 2035,
+  "source_sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa",
+  "actual_launcher_sha256": "8ce600ae443640f521ff7b871367e4e8780c395a19435902520966f1b4f5fd29",
+  "added_source_list_bytes": 508,
+  "scope": "Late explicit origin relation, not new original first-use credit. Source was already held at activation Git; actual modified launcher is byte-equal to the before-delegation prepare capsule. Native/toolchain/authoring closure remains4.2/SESSION5."
+}

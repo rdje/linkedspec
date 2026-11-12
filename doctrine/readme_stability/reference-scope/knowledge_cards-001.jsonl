@@ -15,6 +15,7 @@
 {"bytes":6757,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-transaction-authored-contract.md","sha256":"60e8ff8ad9d697dc535fe46657d94309d7aa52d6fc79cad39f8b5aa828003e93","type":"member"}
 {"bytes":7924,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cursor-transaction-safety-audit-plan.md","sha256":"fcb10e93fe092781ca66968dfc98032012d7d993a938bd19bbd53cb6ee749102","type":"member"}
 {"bytes":2388,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.26","path":"docs/knowledge/daily-artifact-log-archival-2026-11-11.md","sha256":"163e1206d709ca296b8461864a39adec2ed00cdc9e3c66b801a1c16495451e0a","type":"member"}
+{"bytes":2803,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.31","path":"docs/knowledge/daily-artifact-log-archival-2026-11-12.md","sha256":"547a86bdee6be25e43e3545a3cfb404b68b5f7bc3832820dd9abde354f3d8edf","type":"member"}
 {"bytes":2964,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-accepted-null-return-provenance.md","sha256":"b8aa43c0bb1bc1d8fb107bfbb86d1c5592dd895a30ab167e2028f81768a156ef","type":"member"}
 {"bytes":5503,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-actionir-ast-parser.md","sha256":"f26ce1a7630ddbeeadc4c144935c8d3e9e49051773499b56894caf12b3cfc980","type":"member"}
 {"bytes":5133,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-actionir-contract-resolver.md","sha256":"77d0ce119df06bc89d998683c142ce12941400ccc83a6922882af5c0a9b326ce","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2408,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-closeout.md","sha256":"c82d50cbe6d72693f3f2216c34d593c7fa81e4666925fefb84ae6eaede27dc2d","type":"member"}
 {"bytes":3095,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-mechanism-audit.md","sha256":"6be6d8f2012d1abfb232a6191113f76b67c6da69f2e610940c22aba7c1064b4b","type":"member"}
 {"bytes":2953,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-native-execution-canonical-json.md","sha256":"3a2c912d9dbf89734f4be0e6b43b434167acdc997499ddb48f5452583d6b713e","type":"member"}
-{"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}

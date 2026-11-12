@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/artifact-review-2026-11-11/census.py": {
+    "bytes": 9465,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/template-census.py.gz",
+    "mode": 420,
+    "sha256": "b586cc11c3100c1ba8cbd6a74b62835796c7b5825562299ad7ed834943545cfb"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/retire.py": {
+    "bytes": 5261,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/template-retire.py.gz",
+    "mode": 420,
+    "sha256": "2cfd3e6ea102890d000065f973311e0cc7b67cff795f15baeedbd1b1a2794a5f"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/review.py": {
+    "bytes": 11626,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/template-review.py.gz",
+    "mode": 420,
+    "sha256": "0b7ba3171e2ea28853be8a89e8e9756e0d657455fe88cabf79aa82f4dca34a45"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/run.py": {
+    "bytes": 2312,
+    "image": "docs/checkpoints/artifact-review-2026-11-12/template-run.py.gz",
+    "mode": 420,
+    "sha256": "cd7431f90debf1acf77a9fcfc970263be15892ca570a8e8d8dcdb481c9a5cf6a"
+  }
+}

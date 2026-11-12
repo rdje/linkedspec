@@ -1,0 +1,67 @@
+{
+  "docs/checkpoints/REPO-HYGIENE.18-census.py": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70"
+  },
+  "docs/checkpoints/REPO-HYGIENE.19/census.py": {
+    "bytes": 1483,
+    "mode": 420,
+    "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43"
+  },
+  "docs/checkpoints/artifact-review-2026-11-10/review.py": {
+    "bytes": 9184,
+    "mode": 420,
+    "sha256": "2aa497231ae02ce4381023685ff8ff886ecd43bf7ddd5ca7a8118b0c0200c165"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/census.py": {
+    "bytes": 9465,
+    "mode": 420,
+    "sha256": "b586cc11c3100c1ba8cbd6a74b62835796c7b5825562299ad7ed834943545cfb"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/retire.py": {
+    "bytes": 5261,
+    "mode": 420,
+    "sha256": "2cfd3e6ea102890d000065f973311e0cc7b67cff795f15baeedbd1b1a2794a5f"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/review.py": {
+    "bytes": 11626,
+    "mode": 420,
+    "sha256": "0b7ba3171e2ea28853be8a89e8e9756e0d657455fe88cabf79aa82f4dca34a45"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/run.py": {
+    "bytes": 2312,
+    "mode": 420,
+    "sha256": "cd7431f90debf1acf77a9fcfc970263be15892ca570a8e8d8dcdb481c9a5cf6a"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/prepare.py": {
+    "bytes": 8134,
+    "mode": 420,
+    "sha256": "7efc713c6f9a1f548730bd28fc0a958fa277c28bab41c95ef91d1f2cfac30c64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/run_stage.py": {
+    "bytes": 2543,
+    "mode": 420,
+    "sha256": "8ce600ae443640f521ff7b871367e4e8780c395a19435902520966f1b4f5fd29"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_lua_project_data.sh": {
+    "bytes": 1152,
+    "mode": 493,
+    "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

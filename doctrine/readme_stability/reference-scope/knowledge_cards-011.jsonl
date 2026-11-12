@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8480,"lines":130,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-classifier-child-status-gap.md","sha256":"16d9eccbbfc69a4abda5a7fa980257bbaea9e44a99d5997d698a480b3c4aaeb2","type":"member"}
 {"bytes":2767,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-default-or-acode-direct.md","sha256":"2c617cc52bc27c0df2bf1a921ac25bf9b40bc809b2017fcaf0116c2de8f2af91","type":"member"}
 {"bytes":2180,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-nonrep-matrix-closed.md","sha256":"317a543bb7be51f7e6039793d087aac15fd24a59d19cc098c3feb24161f7902f","type":"member"}
 {"bytes":4014,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-recognition-parse-adapter-gap.md","sha256":"14334774768c06009941ee1f3a73aa318586fd7d35c9611b74038d138d63cec7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1772,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-text-contract-home.md","sha256":"a922b674db3ffa61848cdb00f7968f378c46e12e6b320f7940664958983a7944","type":"member"}
 {"bytes":2856,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-to-text-coercion-cross-backend-gap.md","sha256":"bdb7e5fba0d469977543435241e08c7dd18a5479c15a85fa1ac0527cfd07cf58","type":"member"}
 {"bytes":2029,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-implementation-removed.md","sha256":"679a238cc99a524c06fc1da9d240e5029781a292d78785b2e18841d82abb6b15","type":"member"}
-{"bytes":2243,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-live-surface-migrated.md","sha256":"30665c23d8e25c674893a834a9bb192cf1601501dbc515211a100fb9c5691fea","type":"member"}

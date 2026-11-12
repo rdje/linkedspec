@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Perl/Rust/Dart/Julia existing concat family80 guards have focused proof; installed Lua80.5 follows fresh size and daily cleanup timing checks. Full source/context/admission remains23.4; canonical publication preempts cadence near1.4-1.5GB.
+Full PNT continues. Perl/Rust/Dart/Julia concat family80 has focused proof and daily31 is complete. Remeasure committed outgoing bytes, then independent installed Lua80.5 while margin permits; canonical publication preempts cadence near1.4-1.5GB.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.80.4. One result-arity guard/one runner include;508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures. Same-path old24-current508/direct4959 assertions/first readonly10/current516/3048 epoch pairs pass. Full native/cache/toolchain closure remains4.2/SESSION5.
+TYPE-REFERENCE-BOOK.1.2.23.4.31. 1316 matching metadata rows/eight scopes retained; three exact completed own combined logs/133480 content bytes/full modes independently recovered before plain-copy retirement. Postdelete readonly0/empty stderr/16 corruption controls and three exact public task queries pass. All other proof/caches/native products/repositories remain retained; no physical reclamation claim. Parent30/31 links exact; native custody4.2/SESSION5 remains.
 
 ## Next Action
 
-After clean Julia commit, remeasure current committed outgoing bytes, review daily cleanup timing before another long slice, then independent installed Lua80.5 while margin permits. Prepare near1.4GB; canonical discovery4.1/full CI/normal hooks/clean exact HEAD precede the around1,500,000,000-byte push regardless PNT/batch cadence.
+After clean daily31 commit, remeasure current committed outgoing bytes then acquire independent installed Lua80.5 concat policies while margin permits. Prepare near1.4GB; canonical discovery4.1/full CI/normal hooks/clean exact HEAD precede publication around1,500,000,000 bytes regardless cadence.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.31 —1316 rows/eight scopes retained; three exact own completed logs/133480 combined bytes/modes independently used before plain retirement; readonly16/three public queries/parent30-31 exact; fresh size then Lua80.5.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.4 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct4959 assertions/readonly10/current516/3048 pairs; fresh size/cleanup then Lua80.5.
 - TYPE-REFERENCE-BOOK.1.2.23.4.30.1 —HEAD102ec3446/cached base4683555e:1,257,281,519 bytes/102 commits/45,549 objects; qualified verify/12 REDs/historical recovery/three controls; native durability gap explicit, remeasure then Julia.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.3 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct1155/readonly9/current521; publication-budget30 next.
@@ -29,7 +30,6 @@ After clean Julia commit, remeasure current committed outgoing bytes, review dai
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0 —240+terminal48/288 pairs/35 valid targets/74 healthy intents/253 protected; readonly thirteen controls/current126; proposed marker change withdrawn, result1.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.1.41 — Original44/qualified45;13 supported targets/25 healthy/seven profiles/89 pairs/readonly fifteen controls/current128; frozen78.6/Perl intake next, literal policy separately owned.
-- TYPE-REFERENCE-BOOK.1.2.23.4.26 —1,235 dated metadata rows; four exact combined logs/124,012 content bytes/modes archived before duplicate retirement; readonly0/fourteen controls; assessment41 next.
 
 
 ## History

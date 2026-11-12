@@ -1,0 +1,2 @@
+Public Git grep contract: https://git-scm.com/docs/git-grep
+The query searches tracked working-tree files, explicitly disables submodule recursion and uses one worker. No textconv or untracked-file option is enabled.

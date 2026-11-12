@@ -1,4 +1,5 @@
-{"member_count":88,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":89,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3207,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-retired-scalar-assign-spec-surface.md","sha256":"f9626386fba5c1e4b217d112768b0d172d44f67a87e729773585ab6a34d03879","type":"member"}
 {"bytes":3768,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-return-type-method-chaining-split.md","sha256":"e81af12808acc382ef00dc4e60e95faf46348674e3e99dfa675390e3f32d323f","type":"member"}
 {"bytes":3310,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-target-kind-inference.md","sha256":"cc179ae4c1949271dfc4df636dd062a6f8973808d35b2f927bb1fb7f87797408","type":"member"}
 {"bytes":5799,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-type-inference-ground-truth.md","sha256":"ecec1d40410c6b69a9bd35b7a7bccdbf4d94757769757a94ee81a7533ccf8d20","type":"member"}

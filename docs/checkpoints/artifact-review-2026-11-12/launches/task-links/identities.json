@@ -1,0 +1,227 @@
+{
+  "docs/checkpoints/REPO-HYGIENE.18-census.py": {
+    "bytes": 4759,
+    "mode": 420,
+    "sha256": "f0bce50b58c288fa0324d20b93903131b41b00a3fdc366061fa38a4a85ccee70"
+  },
+  "docs/checkpoints/REPO-HYGIENE.19/census.py": {
+    "bytes": 1483,
+    "mode": 420,
+    "sha256": "5f6b4f0dd22f5e8dbaf7c80f53b99b9e158d67974af2ec85a6ff5bfffb620c43"
+  },
+  "docs/checkpoints/artifact-review-2026-11-10/review.py": {
+    "bytes": 9184,
+    "mode": 420,
+    "sha256": "2aa497231ae02ce4381023685ff8ff886ecd43bf7ddd5ca7a8118b0c0200c165"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/census.py": {
+    "bytes": 9465,
+    "mode": 420,
+    "sha256": "b586cc11c3100c1ba8cbd6a74b62835796c7b5825562299ad7ed834943545cfb"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/retire.py": {
+    "bytes": 5261,
+    "mode": 420,
+    "sha256": "2cfd3e6ea102890d000065f973311e0cc7b67cff795f15baeedbd1b1a2794a5f"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/review.py": {
+    "bytes": 11626,
+    "mode": 420,
+    "sha256": "0b7ba3171e2ea28853be8a89e8e9756e0d657455fe88cabf79aa82f4dca34a45"
+  },
+  "docs/checkpoints/artifact-review-2026-11-11/run.py": {
+    "bytes": 2312,
+    "mode": 420,
+    "sha256": "cd7431f90debf1acf77a9fcfc970263be15892ca570a8e8d8dcdb481c9a5cf6a"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/archive-manifest.json": {
+    "bytes": 2622,
+    "mode": 420,
+    "sha256": "a13a0b31df1ca14429108856203bc983667c600f2c1d7428fcf9ae31179d10ff"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/census.py": {
+    "bytes": 9471,
+    "mode": 420,
+    "sha256": "5143a43b8e09a83af567d7ab182994ce354826de599c66c7d4d8b72c61b4891e"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/check_task_links.py": {
+    "bytes": 2987,
+    "mode": 420,
+    "sha256": "691754db9d4710c81e740c8bfded8cd47be3299abaad01e941b73601c9166c76"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/composition-input.json.gz": {
+    "bytes": 3249,
+    "mode": 420,
+    "sha256": "b0e6709194938ad52d2bd858830014539f5a49f82210f859b533b04766b07304"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/composition.json": {
+    "bytes": 258,
+    "mode": 420,
+    "sha256": "a4c81088c550bb3c2c34534664b32f2f4312d74168520ef3f8494e41b68636f6"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/git-grep-contract.txt": {
+    "bytes": 217,
+    "mode": 420,
+    "sha256": "983b86f02711efd9c7e365b907746234a61aa29cb5c76d65866de0ee568c6b29"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/grep-preflight-command.json": {
+    "bytes": 176,
+    "mode": 420,
+    "sha256": "8e9155ec529290149e28894dc4339041aae18392828b62bb9107d8c8d780c69b"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/grep-preflight-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/grep-preflight-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/grep-preflight-stdout.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/observation.json.gz": {
+    "bytes": 2882970,
+    "mode": 420,
+    "sha256": "c505c095ffe0633a88041f6c403d2c575becb55a653635f36d73d27fe9229f56"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/predelete-command.json": {
+    "bytes": 238,
+    "mode": 420,
+    "sha256": "6df747a4e6c25e8899b33e72188c30ce82820ce3c8b84902ba34c66d70759986"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/predelete-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/predelete-stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/predelete-stdout.log.gz": {
+    "bytes": 562,
+    "mode": 420,
+    "sha256": "41541f7fc9a6a136ffb10e84d1b7455180a1b0459857b7c001f90c113d957e6c"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/prepare.py": {
+    "bytes": 8134,
+    "mode": 420,
+    "sha256": "7efc713c6f9a1f548730bd28fc0a958fa277c28bab41c95ef91d1f2cfac30c64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/references-command.json": {
+    "bytes": 333,
+    "mode": 420,
+    "sha256": "33be0a4dd73a617360af3ef755251d69d58b48909ee539a9c8b5ec34dcb0c8a9"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/references-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/references-stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/references-stdout.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/retire.py": {
+    "bytes": 5217,
+    "mode": 420,
+    "sha256": "74b2e2537da8625ed09f4d1405a988bca0d5ed272737795186a5e479edc9ac2d"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/retirement.json": {
+    "bytes": 540,
+    "mode": 420,
+    "sha256": "2a341c9328b5baa43abf2b685356a6e5bb4ce3265a2eefd674ccaeee5f523ca1"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/review.py": {
+    "bytes": 14311,
+    "mode": 420,
+    "sha256": "d7698f5932853a71cb06173f2077c49e08d238829a28db0227c9ed4921fe3c84"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/run_stage.py": {
+    "bytes": 2543,
+    "mode": 420,
+    "sha256": "8ce600ae443640f521ff7b871367e4e8780c395a19435902520966f1b4f5fd29"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/task-parent-after.json": {
+    "bytes": 173,
+    "mode": 420,
+    "sha256": "f4078bfdb5eddbda4b8b41bdf3f9359a9027d3c984d88a62bc121eb17939ed13"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/task-parent-after.md.gz": {
+    "bytes": 135565,
+    "mode": 420,
+    "sha256": "5afcd736760da3252da6a5add3345472e1931b5e2524c9573dcd564dc53d2df2"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/task-parent-before.json": {
+    "bytes": 173,
+    "mode": 420,
+    "sha256": "0bb28d6ad55514667d2bd339bb2b2d7c5f913c00a996cced353841a2667522e2"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/task-parent-before.md.gz": {
+    "bytes": 135560,
+    "mode": 420,
+    "sha256": "3f4c6d4ec0c9fab6ca29b40343c208e96c51d63ce77378929d1bf8b0b2b9f03d"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/template-census.py.gz": {
+    "bytes": 3249,
+    "mode": 420,
+    "sha256": "b0e6709194938ad52d2bd858830014539f5a49f82210f859b533b04766b07304"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/template-identities.json": {
+    "bytes": 1058,
+    "mode": 420,
+    "sha256": "ed90cfbc0282646d88d7be3d6f9eafe8e6b3a38230eed35e745a9167677d7d42"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/template-retire.py.gz": {
+    "bytes": 2115,
+    "mode": 420,
+    "sha256": "1c5fe6363a9eee57529eaf685ffd8aaed276b236042bfd4a610e3c940d8be17f"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/template-review.py.gz": {
+    "bytes": 3782,
+    "mode": 420,
+    "sha256": "3608cc8cf560088734debeaf25b9070230da0f1032ecc0423e04cfe22fc120b7"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/template-run.py.gz": {
+    "bytes": 1051,
+    "mode": 420,
+    "sha256": "13d219003753a14f7917c02cf17091586698350536bd00d3531c5d1cab0ee84a"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/tracked-before.gz": {
+    "bytes": 330365,
+    "mode": 420,
+    "sha256": "e5504ea5c56c48964e3f03e5d02826a84605ba9717af8a02cb6e07233f23e41e"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_lua_project_data.sh": {
+    "bytes": 1152,
+    "mode": 493,
+    "sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

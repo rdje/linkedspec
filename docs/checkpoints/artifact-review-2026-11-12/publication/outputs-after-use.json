@@ -1,0 +1,82 @@
+{
+  "CHANGES.md": {
+    "bytes": 43192,
+    "mode": 420,
+    "sha256": "2a419ae1cb31e74e8e5108b0e9bf4c34aaec3eab6a88414f4d10dd0e5bcc7194"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 33614,
+    "mode": 420,
+    "sha256": "0a21ee4a013f993870fde6a63c0ffb3daa584cb195dc9afb543abb19644f9661"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5361,
+    "mode": 420,
+    "sha256": "d6de01a9fd85ff91b4f10f8de92e59911222753089c47d250f9bdb70def55bde"
+  },
+  "MEMORY.md": {
+    "bytes": 3665,
+    "mode": 420,
+    "sha256": "a89845095b33a317e3ceb3c8b64ce105cf0ea8a843159710f524b177ec93648e"
+  },
+  "ROADMAP.md": {
+    "bytes": 472145,
+    "mode": 420,
+    "sha256": "1b09d46bfbcbee9a1f8e6c0b4316f0db649d4c7659375e08bcdd4546ab214390"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273480,
+    "mode": 420,
+    "sha256": "3cc0c5571d27470062dab29efc784a5954d5d8b8116df9450a84f2c2e8061630"
+  },
+  "docs/ARTIFACT_CLEANUP.md": {
+    "bytes": 595,
+    "mode": 420,
+    "sha256": "c96e998ab3435de4fa32a2bff0a7c7b595ab4553ad4170e1948717fbcd7e5460"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/REVIEW.md": {
+    "bytes": 4523,
+    "mode": 420,
+    "sha256": "9d8445d78ed9b647c2caa5d44d7d4ec768b0343d9f1d28d7da2fec605ee2f3a5"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/publication/driver-origin.json": {
+    "bytes": 660,
+    "mode": 420,
+    "sha256": "0659b670e09f9551b2d3c1662b85be6a7e82ca7e916af4efca52ea66af8607b3"
+  },
+  "docs/checkpoints/artifact-review-2026-11-12/publication/rotated-live-row.txt": {
+    "bytes": 203,
+    "mode": 420,
+    "sha256": "d71df4426b0e8f86718ce92f931a49011651df0e93cbc028fbdb4a6fedd60e30"
+  },
+  "docs/knowledge/daily-artifact-log-archival-2026-11-12.md": {
+    "bytes": 2803,
+    "mode": 420,
+    "sha256": "547a86bdee6be25e43e3545a3cfb404b68b5f7bc3832820dd9abde354f3d8edf"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 374706,
+    "mode": 420,
+    "sha256": "7e2afcdd9fff12c6dff07aed605b190be8b9877f5eaa34b502b077c4c9d9b023"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 60431,
+    "mode": 420,
+    "sha256": "0df232d8d85e9d0bf1df771803a60217afb24da77e5a1780cde1011df892a578"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20582,
+    "mode": 420,
+    "sha256": "cbbbdab6062056fc8122c519228e4d1036b7be066fb2d39a75437d72786119d4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 534135,
+    "mode": 420,
+    "sha256": "f9e801147e9125990cde755c9ac6a6f50ac9f75169ffbdde51b8009fddb16100"
+  },
+  "git_message_brief.txt": {
+    "bytes": 568,
+    "mode": 420,
+    "sha256": "f1bbbf4f259093ff8d021013d17933318e4767d6b180cc8efdd962a3c5fc21d3"
+  }
+}
