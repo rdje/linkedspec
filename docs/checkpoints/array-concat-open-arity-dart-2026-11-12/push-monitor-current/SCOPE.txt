@@ -1,0 +1,1 @@
+Operational committed-HEAD snapshot only; raw diagnostic pack remains ignored under the recorded evidence directory. Metadata/source Git IDs are retained, not a claim of complete physical Git pack/cache/toolchain or negotiated wire custody. No raw pack is added to repository history.

@@ -12,6 +12,23 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.3: Dart existing concat result arities
+
+One result-count guard retains existing unary/multi-Array concat continuations.
+Own508/four routes:20 supported/four separate legacy operand compatibility/484
+preserved;80 initial/eight invalid signatures exact. Old24-current508/direct1155
+named groups/first readonly9/current521/fatal analysis/format pass.
+Complete errors/source identities,1016 parsed/module pairs and2032 normal inputs
+remain. Four old continuation profile objects transfer without producer/signature/
+format changes. Book/Knowledge/live/task docs synced. Director1.5GB outgoing push
+trigger overrides batch cadence; canonical CI still precedes pushes. Full23.4/
+native closure stays separate. Evidence: docs/checkpoints/array-concat-open-arity-dart-2026-11-12/REVIEW.md.
+
+First normal landing1/eight PASS/two dependent doc failures is preserved; a
+separate ADR0066 correction rotates only the oldest of17 recent rows to restore16.
+Focused document-history0 passes; runtime proof is not replayed. Canonical Git
+publication knowledge now carries the new1.5GB threshold/sparse-scope qualification.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.2: Rust existing concat result arities
 
 Two selector/comment lines retain existing one-or-more Array concat result guards,

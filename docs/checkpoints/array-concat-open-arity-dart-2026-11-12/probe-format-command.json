@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_dart_project_data.sh",
+    "format",
+    "dart/tool/probe_open_arity_array_concat_results.dart"
+  ],
+  "cwd": ".",
+  "input_bytes": 4448,
+  "input_sha256": "e34abcf36ecc517e68e447cc849c516906ca8ab96cdd4185ab04d4bf575cd84f"
+}

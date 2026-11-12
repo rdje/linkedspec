@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "cat-file",
+    "--batch-check=%(objectname) %(objecttype) %(objectsize)"
+  ],
+  "cwd": "."
+}

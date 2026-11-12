@@ -1,4 +1,5 @@
-{"member_count":85,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":86,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5799,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-type-inference-ground-truth.md","sha256":"ecec1d40410c6b69a9bd35b7a7bccdbf4d94757769757a94ee81a7533ccf8d20","type":"member"}
 {"bytes":2152,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-attached-if-parser-runtime-seam.md","sha256":"b004f1c278dedcdcf80c222572d3824c39f319f7b57dde09febb0d88efc7e328","type":"member"}
 {"bytes":2666,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-attached-switch-parser-runtime-seam.md","sha256":"a03c7dcd1edfcdda5cc3637598efa148312ad6e4a369830f9513890a8f33473c","type":"member"}
 {"bytes":2416,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-colon-scalar-retired.md","sha256":"5c65b428a4e3f39910399ff4739f9e41dac592775542fd457401c5436bb8e556","type":"member"}

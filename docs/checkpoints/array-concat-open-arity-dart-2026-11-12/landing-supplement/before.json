@@ -1,0 +1,67 @@
+{
+  "CHANGES.md": {
+    "bytes": 40155,
+    "mode": 420,
+    "sha256": "302eac955f3e8cb6db3d73bf4114d14f2e0c4ab4f46c0ffa481a2795368cdf7f"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 56834,
+    "mode": 420,
+    "sha256": "1a7a150a42afdde68c235890b66892fca1d1f207972ec4232e09b9af7d825463"
+  },
+  "MEMORY.md": {
+    "bytes": 3283,
+    "mode": 420,
+    "sha256": "d26f9dd41815b3fd391b9a9f540958dcb29721454d3211a13f16d5d12ede13a9"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/REVIEW.md": {
+    "bytes": 5364,
+    "mode": 420,
+    "sha256": "3654ef1d611c290ac68aefd02d7d97a89a5d1b294d6ffcff574ae13d13a4ad6b"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/complete_landing_qualification.py": {
+    "bytes": 9432,
+    "mode": 420,
+    "sha256": "83469fbe91f15b7dd8a59edda96be19227bcd59bb45db5816aaa71b251541283"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/landing-pressure/result.json": {
+    "bytes": 680,
+    "mode": 420,
+    "sha256": "81dd96e981c03800e1abd5b9c36bb6c88307279b0179480ca7bf8e413827d941"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/launches/review-git-card-query/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/launches/review-git-card-query/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/launches/review-git-card-query/stdout.log.gz": {
+    "bytes": 207,
+    "mode": 420,
+    "sha256": "f7c251e93c77a881c2148cfe097993d6007bce433b6e0078ee12136b7f3730e9"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/publication-git-card-inputs/result.json": {
+    "bytes": 446,
+    "mode": 420,
+    "sha256": "037b81706b98807cbcc4328a4847ea2fbc1fc9f03b6fd5ac061c561f04a5b245"
+  },
+  "docs/knowledge/github-size-safe-publication.md": {
+    "bytes": 5702,
+    "mode": 420,
+    "sha256": "0ef25efa8f29ff99fef6e205609891dc8e0682047f2c9f22306d08eb4ddea7e8"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 373013,
+    "mode": 420,
+    "sha256": "8f9a61d238e23aed7d40dee20f665640e3a3ac6190568ed2a22e8cde0b7b1143"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 693809,
+    "mode": 420,
+    "sha256": "e51b82f98156d770d58243a0ef31734cec14018c0eeed8bd8328169a6c9f6c4d"
+  }
+}

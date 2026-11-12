@@ -116,6 +116,7 @@
 {"bytes":1963,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-nullable-match-state-preserves-absence.md","sha256":"95138ebeeb2b97e8ea01172dc52df4f7247dc6b7ccdb0e408965144d367e22d6","type":"member"}
 {"bytes":2665,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-numeric-comparison-source-guards.md","sha256":"2d9605f11057a2fce8c322063dfb77c1511f79b2eba9e96f3c4f9cd6e284bd40","type":"member"}
 {"bytes":3777,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-offline-generated-callers-require-dependency-free-package.md","sha256":"a7ee540f49939326050ad8f14eef4f2429c2a0ffcbfef97be4ef7ed633aae468","type":"member"}
+{"bytes":3299,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.3","path":"docs/knowledge/dart-open-arity-concat-result-guards.md","sha256":"e4023f03a011b14fca10bfad7970e6f60ddd5f27b4f29093a7506343a7a176eb","type":"member"}
 {"bytes":2158,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-blind-progress-authority-boundary.md","sha256":"bbb5903b150bb5379f7a9f71b848390bd5556c0d698a1ecfeb4c774e1abbaa54","type":"member"}
 {"bytes":2905,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-repetition-minimum-misses.md","sha256":"f568a085419623d42bfe51ce2fa21d85058f6b7a761fb95ec6ed569af38910b1","type":"member"}
 {"bytes":4071,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-perl-blind-postcall-return-gap.md","sha256":"3016f57f71fd8af5327ffb365b82be0610e3092e8959e7042a0ae4c9c57025a9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2953,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-native-execution-canonical-json.md","sha256":"3a2c912d9dbf89734f4be0e6b43b434167acdc997499ddb48f5452583d6b713e","type":"member"}
 {"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}
 {"bytes":11898,"lines":215,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-nested-authority-gap.md","sha256":"adcccefbb33a33452ee27a4245d02a7f84e495e2610df50d75c4b22a1c584d4c","type":"member"}
-{"bytes":4918,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-span-dispatch-admission.md","sha256":"a220a5c1c50619931d6583614688002119e10c0e6df97360c46966f7f2625249","type":"member"}

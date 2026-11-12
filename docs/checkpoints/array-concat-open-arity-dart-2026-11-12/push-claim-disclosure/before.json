@@ -1,0 +1,27 @@
+{
+  "MEMORY.md": {
+    "bytes": 3069,
+    "mode": 420,
+    "sha256": "38f51907fb3c2756663f7d9411d80069baef7406d98743136891f065a7bac4ac"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/REVIEW.md": {
+    "bytes": 5008,
+    "mode": 420,
+    "sha256": "34289ea815dff53f46cabc22cd1e80927c5fcce766cc8cd5b521fa1aa9ada1e1"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/disclose_push_claim.py": {
+    "bytes": 3370,
+    "mode": 420,
+    "sha256": "b358d2a42008cc6d6bdb9e8ecfaf54ef97a61d88b655c7651a02491c3dec8916"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.3.80.3.json": {
+    "bytes": 2795,
+    "mode": 420,
+    "sha256": "d4827fdd31e332daad7d1c9129c7dadf1aa7528e47b2e0e6d5d0400b55690ce1"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 692310,
+    "mode": 420,
+    "sha256": "90f59cecbb7fcdda8dcb0a3a710a4503c4b50f750a72c3636aec696ac1662c4a"
+  }
+}

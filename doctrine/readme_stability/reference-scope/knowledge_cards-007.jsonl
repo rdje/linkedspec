@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3630,"lines":19,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-predicate-source-guards.md","sha256":"36312db753f47c387cf974f8e4347c19d9df6ec9d2d8696ddc6bdaf73c853d1f","type":"member"}
 {"bytes":4493,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-toolchain-package-policy.md","sha256":"09dcfcb61d6091526b0766e4877882481ac5a9ef87eabaf3e27ace0ebcab4dfc","type":"member"}
 {"bytes":2777,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-trace-controls-sinks.md","sha256":"16173539ecda35cfa160551b18e08609d5a49daf76381694157be1c26be0e3aa","type":"member"}
 {"bytes":5975,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-compatibility-alias-gap.md","sha256":"b84ab4296e84cb043d1c057812a34f48a5b5f1a28e56b4af5789e26659ab0faa","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3643,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-intake-and-arity.md","sha256":"555a3b856e8c14ee423c9306595ef01d2eb5cc1253502d45a6440a6b748e32ca","type":"member"}
 {"bytes":3597,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-result-guards.md","sha256":"0ad21f9ef608301a2ea952fcd8facb4ad698a4dd868e2e84cfb00dd77e63e540","type":"member"}
 {"bytes":3696,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-replay-instrument-recovery.md","sha256":"98edbe7275d3bbf18cd3f560caad7c74b510c3d0378eeac2756af5b7200b5f12","type":"member"}
-{"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}

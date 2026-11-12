@@ -1,0 +1,32 @@
+[
+  {
+    "after_sha256": "7acda29e6781e4938ff6f666ac4249e132655785002b4aa782ca96ae58b89dd1",
+    "before_sha256": "4e19296ffb22dfa9e541b97a98ebed1d6f5680228c04654848202c061f29f339",
+    "fields_changed": [
+      "native",
+      "restored",
+      "plan",
+      "fresh"
+    ],
+    "keys": {
+      "own_extra_concat_arrays_free": "own_extra_concat_arrays_free",
+      "own_extra_concat_arrays_receiver": "own_extra_concat_arrays_receiver"
+    },
+    "path": "tests/fixtures/array_transform_callable_result_guard_dart_profiles.json"
+  },
+  {
+    "after_sha256": "3915eb4df0a06f7280e74cca9880e985e16fac4205c56cd0f977e8b1d281bd36",
+    "before_sha256": "c98a9e2738faa3870e9a47659d09f84704a3dda5c40431d0071b12274b1000c0",
+    "fields_changed": [
+      "native",
+      "restored",
+      "plan",
+      "fresh"
+    ],
+    "keys": {
+      "extra_concat_arrays_free": "ordinary_legacy_extra_concat_arrays_free_composed",
+      "extra_concat_arrays_receiver": "ordinary_legacy_extra_concat_arrays_receiver_composed"
+    },
+    "path": "tests/fixtures/array_transform_result_guard_dart_profiles.json"
+  }
+]

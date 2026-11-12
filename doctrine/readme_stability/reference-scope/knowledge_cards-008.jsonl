@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}
 {"bytes":3577,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-value-conditional-execution.md","sha256":"56723591803ef22d72727d902f27843081cab835a32d9f8c4de949be577392f0","type":"member"}
 {"bytes":2527,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-while-execution.md","sha256":"a4037f2b0ccda938746980f1b3a1c0eeaa03a401640324f7d4f869bc4f490269","type":"member"}
 {"bytes":2068,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-canonical-set-result-composition.md","sha256":"71294c4ec7ea36c74e90c44106ff0841af83bfd470bb9a4cc47f5220473e14b1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2885,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-spec-resolution.md","sha256":"51d45357f87f426207cb442feaf477b490d7feb45b66c88ffdf8c29675627bcc","type":"member"}
 {"bytes":4545,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-nested-raw-readiness-diagnosis.md","sha256":"b4aae022d9d8d6ebfa08a30e118546f9553fba964113e47c8375a94095d30a07","type":"member"}
 {"bytes":4784,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-statement-separator-coverage-gap.md","sha256":"346ebd8b7f649be9f2e13acaac841b56c615e4edcf940131c0771c637b66be1f","type":"member"}
-{"bytes":2961,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-switch-close-terminator-gap.md","sha256":"dad24ead2f364fe84ec7b5b3eba12dc84ea7c88e2782d8425efe514af59cf5e2","type":"member"}

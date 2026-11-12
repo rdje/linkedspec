@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "../../../../../tools/run_dart_project_data.sh",
+    "--version"
+  ],
+  "cwd": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/control-owner/dart",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1",
+    "LINKEDSPEC_ARRAY_CONCAT_DART_CAPTURE": "private-fixed"
+  }
+}

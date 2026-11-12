@@ -1,0 +1,10 @@
+{
+  "checked_intersections": [],
+  "claim_records": 206,
+  "live_intersections": [],
+  "prospective_paths": [
+    "docs/knowledge/github-size-safe-publication.md"
+  ],
+  "scope": "Every current claim record enumerated from exact accepted Git bytes before shared book/card edits; historical bindings stay at their original revisions. No SDK observation or claim hash is refreshed.",
+  "source_commit": "1753884257bed7ce0b842bc406c665671403a828"
+}

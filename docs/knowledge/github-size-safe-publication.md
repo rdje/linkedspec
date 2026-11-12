@@ -1,18 +1,51 @@
 ---
 id: github-size-safe-publication
-title: Publish oversized history through measured incremental packs on a temporary upload branch
+title: Monitor outgoing packs and publish around the director 1.5 GB budget
 answers:
   - "how can LinkedSpec publish a backlog above the GitHub push size limit"
   - "is the uncompressed Git object total the actual upload size"
   - "why use a temporary upload branch before updating main"
   - "where are the original backlog planner and actual publication records retained"
   - "are successive Git range object lists disjoint"
-date: 2026-11-04
-status: backlog published at d3a26a94f5c2; bounded logical input custody reviewed
+  - "when must LinkedSpec push before batch cadence completes"
+  - "what is the conservative GitHub outgoing push budget"
+  - "why can packed object count exceed the outgoing revision list"
+  - "how does sparse Git pack walking add already remote objects"
+date: 2026-11-12
+status: early-push policy adopted; November4 backlog historical; new operational custody gaps owned by23.4.30
 tags: [git, publication, pack, github, continuity]
 evidence: "Primary Git/GitHub contracts; original records, raw/normalized plans, actual publication logs/receipt and complete logical Git-object manifest in docs/checkpoints/publication-custody-2026-11-04/; scoped claim TYPE-REFERENCE-BOOK.1.2.23.4.7."
 reverify: "bash tools/run_python_project_data.sh docs/checkpoints/publication-custody-2026-11-04/review.py; optional --verify-objects repeats full opaque body hashes. Historical close_claim.py requires accepted eda3c81 Git inputs. The original mode-only preserve_publication_claim.py recipe is historical at accepted2286c6606 inputs. Later advisory-boundary preservation: bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-lua-2026-11-07/preserve_advisory_claim.py. Archived planners/publisher remain retired."
 ---
+
+
+Current director override, November12: monitor the estimated serialized outgoing
+pack after every leaf and before large growth. Publish around1,500,000,000 bytes
+(decimal1.5GB), even before a PNT/batch cadence boundary. Prepare with enough margin
+for canonical proof/receipts; every push still requires clean exact-HEAD canonical
+CI, normal hooks and observed remote acceptance. Commit count and repository disk
+usage do not substitute for outgoing pack size. Formal monitor/discovery/publication
+owner TYPE-REFERENCE-BOOK.1.2.23.4.30 follows clean Dart80.3. The old one-off uploader
+below remains retired; this directive does not authorize replaying it or rewriting
+history. Future estimates must bind actual refs and disclose remote freshness.
+
+The first operational HEAD1753884257bed7ce0b842bc406c665671403a828 versus cached
+origin4683555ec51f04b8977812ce4e984c5cc6e6f42c estimate is1,233,210,937 bytes/101
+commits. It excludes the uncommitted Dart slice and is not actual negotiated wire
+size. Source/commands/metadata live at docs/checkpoints/array-concat-open-arity-dart-2026-11-12/push-monitor-current/.
+The actual pack header45148 and outgoing revision-list45143 are different
+populations: all five additional blobs already occur at the base. A first
+added-delta-base hypothesis fails because none has delta children. Disabling only
+sparse walking removes exactly these five and yields the full45143 logical set.
+Git documents that sparse walking can include extra objects:
+https://git-scm.com/docs/git-pack-objects#Documentation/git-pack-objects.txt---sparse.
+Keep the larger conservative estimate. Raw packs/indexes stay ignored on this
+volume. The scoped operational claim at docs/claims/TYPE-REFERENCE-BOOK.1.2.23.3.80.3.json
+has checked re-derivation and explicitly missing independent historical size
+falsification/complete physical artifact/toolchain durability, owned by23.4.30.
+Logical metadata equality does not close these gaps or promise a future upload.
+
+The November4 workflow below is dated historical evidence.
 
 GitHub documents a maximum 2 GiB single push and successive smaller pushes as the
 workaround: https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit.

@@ -1,0 +1,33 @@
+{
+  "actual_red": [
+    "function_1_free_hash",
+    "function_1_free_later",
+    "function_1_receiver_hash",
+    "function_1_receiver_later",
+    "function_3_free_hash",
+    "function_3_free_later",
+    "function_3_receiver_hash",
+    "function_3_receiver_later",
+    "ordinary_1_free_hash",
+    "ordinary_1_free_later",
+    "ordinary_3_free_hash",
+    "ordinary_3_free_later",
+    "ordinary_legacy_extra_concat_arrays_free_composed",
+    "ordinary_legacy_extra_concat_arrays_receiver_composed",
+    "own80_signature_rest_empty_free_composed",
+    "own80_signature_rest_empty_receiver_composed",
+    "own80_signature_rest_multi_free_composed",
+    "own80_signature_rest_multi_receiver_composed",
+    "own80_snapshot_function_free_hash",
+    "own80_snapshot_function_receiver_hash",
+    "own80_snapshot_ordinary_free_hash",
+    "own80_snapshot_ordinary_receiver_hash",
+    "own_extra_concat_arrays_free",
+    "own_extra_concat_arrays_receiver"
+  ],
+  "after_sha256": "e24574b96cb7d9c823ffa1951a5cd7db8e326ebcdeb610638a686de0e5881e4f",
+  "before_sha256": "ffdd753063b7e804fbca5cd06ba517d5ee897de6085d0b5f037edecea9925cb7",
+  "change": "One result-chain count guard only: concat_arrays count == 2 becomes count >= 1; producer/function/signature/emitter unchanged.",
+  "preserved": 484,
+  "programs": 508
+}

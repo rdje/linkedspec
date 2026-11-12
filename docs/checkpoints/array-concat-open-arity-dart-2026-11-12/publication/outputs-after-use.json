@@ -1,0 +1,72 @@
+{
+  "CHANGES.md": {
+    "bytes": 40155,
+    "mode": 420,
+    "sha256": "302eac955f3e8cb6db3d73bf4114d14f2e0c4ab4f46c0ffa481a2795368cdf7f"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 56834,
+    "mode": 420,
+    "sha256": "1a7a150a42afdde68c235890b66892fca1d1f207972ec4232e09b9af7d825463"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5258,
+    "mode": 420,
+    "sha256": "21afba3adcaf72f622b2fae8471e94d7f3d5c9e567f9e6ddc4d0797873c7dacb"
+  },
+  "MEMORY.md": {
+    "bytes": 3069,
+    "mode": 420,
+    "sha256": "38f51907fb3c2756663f7d9411d80069baef7406d98743136891f065a7bac4ac"
+  },
+  "ROADMAP.md": {
+    "bytes": 472077,
+    "mode": 420,
+    "sha256": "47aa8e9c35dc0a5f0ebd17e14ca95a61abddfae56776bf5a7973a7af89f8f42f"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273412,
+    "mode": 420,
+    "sha256": "e71a949713db015e19fa12f72acb302c94f2639e3d6bdd06f960f2922c8a3002"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/REVIEW.md": {
+    "bytes": 5008,
+    "mode": 420,
+    "sha256": "34289ea815dff53f46cabc22cd1e80927c5fcce766cc8cd5b521fa1aa9ada1e1"
+  },
+  "docs/knowledge/dart-open-arity-concat-result-guards.md": {
+    "bytes": 3299,
+    "mode": 420,
+    "sha256": "e4023f03a011b14fca10bfad7970e6f60ddd5f27b4f29093a7506343a7a176eb"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 373013,
+    "mode": 420,
+    "sha256": "8f9a61d238e23aed7d40dee20f665640e3a3ac6190568ed2a22e8cde0b7b1143"
+  },
+  "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+    "bytes": 206465,
+    "mode": 420,
+    "sha256": "03133813d8161a1db16365668ceaca3bc4d0d18b556f09c041f09b19356aca4d"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 169195,
+    "mode": 420,
+    "sha256": "6e7d6b463831b0aeb757bba5ad2eec886c2914c40499d041c62856e744a417b7"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 692310,
+    "mode": 420,
+    "sha256": "90f59cecbb7fcdda8dcb0a3a710a4503c4b50f750a72c3636aec696ac1662c4a"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20285,
+    "mode": 420,
+    "sha256": "d6fb75d20159fb671f55bdeae59faeb1d7ddd682dcb59354daa6e69c5029dee2"
+  },
+  "git_message_brief.txt": {
+    "bytes": 467,
+    "mode": 420,
+    "sha256": "97c8afcbde284259f3975cf2513b8a7fa05e2e10867c7570ae802c908b3f05f0"
+  }
+}

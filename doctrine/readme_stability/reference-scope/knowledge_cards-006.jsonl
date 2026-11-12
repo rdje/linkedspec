@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1266,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-aggregate-reducers.md","sha256":"4598aaca951ced28b83d787d532d2d6e3bd5f05271e4796c565b40804f6aed68","type":"member"}
 {"bytes":2849,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-call-receiver-runtime.md","sha256":"f6e33fe4183c3d010ee8b9a53c516c197de313feb4ed26fbab29c9656f2ba43a","type":"member"}
 {"bytes":2778,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-comparison-source-guards.md","sha256":"04bebee808e9d2d6154765fd541807186fb4fb64bfe384c91cc9308266af2f04","type":"member"}
 {"bytes":1977,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-helper-preflight.md","sha256":"ae447ede5fd912d48ef63f968d73c62d918e456d1440ace2758a0e275fd69197","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2700,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-storage-census-failure-status.md","sha256":"124c2fb7e59e4a2826a0d760c8245eda3838b870512e374338e2b0525353fe93","type":"member"}
 {"bytes":2197,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-corpus-proof-routing.md","sha256":"d7be1ef70a61310b845c8eb7b9033256f8a44c26f23d8aee561c479d0dfa5d94","type":"member"}
 {"bytes":3792,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-helper-parity-closeout.md","sha256":"9f65c6846a60abe84a7765e0dd165d7227072bf4e8b73fb7e85e4dfd4220703a","type":"member"}
-{"bytes":3630,"lines":19,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-predicate-source-guards.md","sha256":"36312db753f47c387cf974f8e4347c19d9df6ec9d2d8696ddc6bdaf73c853d1f","type":"member"}

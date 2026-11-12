@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "format",
+    "--output=none",
+    "--set-exit-if-changed",
+    "lib/src/runtime/interpreter.dart",
+    "test/array_concat_open_arity_result_guard_composition_test.dart",
+    "tool/probe_open_arity_array_concat_results.dart"
+  ],
+  "cwd": "dart",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1"
+  }
+}

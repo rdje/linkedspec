@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4014,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-recognition-parse-adapter-gap.md","sha256":"14334774768c06009941ee1f3a73aa318586fd7d35c9611b74038d138d63cec7","type":"member"}
 {"bytes":3170,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-rep-matrix-closed.md","sha256":"8b1d3780bc4e8489be7bd0fc9aa5b7e3237e820c330675d86fa72b7404775221","type":"member"}
 {"bytes":3648,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-contract-v1-gap.md","sha256":"2dcde68f56a3eff78d13367cc4df6c0618a76b434ec9aa1e705325ef152b5145","type":"member"}
 {"bytes":5092,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-corpus-subset.md","sha256":"515c802cf0ff5e39876ace10a906f58b06e1622c577e4f21d8cc7e49367b3b83","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2243,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-live-surface-migrated.md","sha256":"30665c23d8e25c674893a834a9bb192cf1601501dbc515211a100fb9c5691fea","type":"member"}
 {"bytes":2048,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-directive.md","sha256":"08a5b053b77a04773c83de297a54a3b1618cf8ec56d386ffeb590989800efbb1","type":"member"}
 {"bytes":2277,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-inventory-contract.md","sha256":"0ad82935799fa5d495b3f9f4ccdc5a6e17df2c4b21d49ac8dbfff6381bc8cc0f","type":"member"}
-{"bytes":3497,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scanner-rule-family-architecture.md","sha256":"af73bf92a9e303c0b479f86957fa26b655e2863a45cf6279bf5bb1634447edd3","type":"member"}

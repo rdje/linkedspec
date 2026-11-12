@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "rev-parse",
+    "refs/remotes/origin/main"
+  ],
+  "cwd": "."
+}

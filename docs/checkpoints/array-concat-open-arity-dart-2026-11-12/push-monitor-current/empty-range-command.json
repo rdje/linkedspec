@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "git",
+    "pack-objects",
+    "--revs",
+    "--stdout",
+    "--delta-base-offset",
+    "--threads=1",
+    "--window-memory=64m"
+  ],
+  "cwd": "."
+}

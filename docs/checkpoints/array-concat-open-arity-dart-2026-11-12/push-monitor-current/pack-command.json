@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "pack-objects",
+    "--revs",
+    "--stdout",
+    "--delta-base-offset",
+    "--threads=1",
+    "--window-memory=64m",
+    "--progress"
+  ],
+  "cwd": ".",
+  "stdin": "revisions.txt",
+  "scope": "Conservative non-thin serialized range estimate; actual negotiated push may differ."
+}

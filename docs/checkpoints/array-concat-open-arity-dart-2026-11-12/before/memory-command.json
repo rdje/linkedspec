@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": ".",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1",
+    "LINKEDSPEC_ARRAY_CONCAT_DART_CAPTURE": "before"
+  }
+}

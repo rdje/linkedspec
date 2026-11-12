@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4540,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-consumer-artifact-binding-audit.md","sha256":"c488f4d6c44787bfde37684ea47a10e458a25ad80ec8d082ef3ca83d609c7b66","type":"member"}
 {"bytes":2257,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/producer-residual-change-history-capacity.md","sha256":"532ae16a01f36b0a9799e9a8dcff8d2c37e8e1e102feaf43421eb2575e6ad755","type":"member"}
 {"bytes":28298,"lines":164,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-audit-plan.md","sha256":"047f8992b45a80ed74df14ffcfd84c626e97fb0f32d82d66ca37f2b1ab164e07","type":"member"}
 {"bytes":3880,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/progressive-span-dispatch-public-no-drift.md","sha256":"f78f8b2220d2ccbc2580665b55fa313ea7535a813cb337d2c92db5a747ddd0fc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8480,"lines":130,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-classifier-child-status-gap.md","sha256":"16d9eccbbfc69a4abda5a7fa980257bbaea9e44a99d5997d698a480b3c4aaeb2","type":"member"}
 {"bytes":2767,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-default-or-acode-direct.md","sha256":"2c617cc52bc27c0df2bf1a921ac25bf9b40bc809b2017fcaf0116c2de8f2af91","type":"member"}
 {"bytes":2180,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-nonrep-matrix-closed.md","sha256":"317a543bb7be51f7e6039793d087aac15fd24a59d19cc098c3feb24161f7902f","type":"member"}
-{"bytes":4014,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-recognition-parse-adapter-gap.md","sha256":"14334774768c06009941ee1f3a73aa318586fd7d35c9611b74038d138d63cec7","type":"member"}

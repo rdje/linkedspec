@@ -1,0 +1,1822 @@
+{
+  "checked_intersections": [
+    {
+      "claim": "actual-factory-registration-and-native-dependency-framework",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "actual-factory-registration-and-native-dependency-framework",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-input-composition-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-input-composition-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-emitcontext-selection-and-native-dependency-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "actual-emitcontext-selection-and-native-dependency-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-framework-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-framework-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-contracts-private-bindings-and-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "actual-contracts-private-bindings-and-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-emitcontext-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-emitcontext-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-local-and-delegated-constructor-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "actual-local-and-delegated-constructor-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-contract-dependency-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-contract-dependency-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-default-native-reference-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-default-native-reference-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-constructor-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-constructor-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-trim-dependency-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-trim-dependency-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-method-default-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-method-default-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-assignment-declaration-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-assignment-declaration-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-trim-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-trim-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-inline-control-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-inline-control-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-inference-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-inference-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-block-component-side-effect-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-block-component-side-effect-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-inline-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-inline-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-local-return-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "revision": "de3b50dd06d4aff6babf379282f90368810d49e5",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-local-return-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "revision": "de3b50dd06d4aff6babf379282f90368810d49e5",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-block-value-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "revision": "b50ce085a63c8777973bc4c4e4a999a8840c462b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-block-value-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "revision": "b50ce085a63c8777973bc4c4e4a999a8840c462b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "5c439b3d48782470c2e9fff6898bab9f70ffd35b69f8274f9aec97a4806ebe5c"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "ecfc269cba04df509818ef7dde3ee28b5a6e350cf8bb247e1fe4ebb88fc2f694"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-hash-key-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "revision": "2e9e5443ea38789fe454ee7ee24a68be81d4546c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-ast-hash-key-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "revision": "2e9e5443ea38789fe454ee7ee24a68be81d4546c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-call-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "revision": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-ast-call-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "revision": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-array-end-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "revision": "4fde89c1958faf4057ab80eb7e7cd50962c7ac3c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-ast-array-end-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "revision": "4fde89c1958faf4057ab80eb7e7cd50962c7ac3c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-assignment-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "revision": "049e1ba537f2bde635b2c0fed31fe83f6b3c129b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "method-required-ast-assignment-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "revision": "049e1ba537f2bde635b2c0fed31fe83f6b3c129b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "main-method-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "revision": "4b48593b59acb7aba4d616ae1bdc4320fbbf5364",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "main-method-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "revision": "4b48593b59acb7aba4d616ae1bdc4320fbbf5364",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "bare-mutation-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "revision": "2c5f84092d91c808ab82b4b886b51e65fc1ac864",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "bare-mutation-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "revision": "2c5f84092d91c808ab82b4b886b51e65fc1ac864",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "general-return-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "revision": "2b1f949b897cc8fac8f87f7652ad67eb90241479",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "general-return-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "revision": "2b1f949b897cc8fac8f87f7652ad67eb90241479",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "assignment-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "revision": "ea6926fefee33cbf77fe512a821d7ba2a4ffc14f",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "assignment-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "revision": "ea6926fefee33cbf77fe512a821d7ba2a4ffc14f",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "set-key-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "revision": "d74c534853832f6286813d924e018bd1bc6c2239",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "set-key-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "revision": "d74c534853832f6286813d924e018bd1bc6c2239",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "push-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "revision": "ae65603bc5bee1f3abeab4d7a028546ddbc8da93",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "push-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "revision": "ae65603bc5bee1f3abeab4d7a028546ddbc8da93",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "regex-undef-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "revision": "2b4e484a9bf27471d23d86f72aa25c7616b2bd3b",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "regex-undef-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "revision": "2b4e484a9bf27471d23d86f72aa25c7616b2bd3b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "e12e8f9c5f1ee8b31af70fd3158da2e122b7374dc29b995d21c0cf56c9138499"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "bfc29282669d8ddee37b12aae8c1973474ba56e4e40fbc3e85cb848d0852da4a"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "legacy-hash-kind-selection-and-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "revision": "c90b99a831461e25adbc2b34d7da7d3deed11531",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "legacy-hash-kind-selection-and-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "revision": "c90b99a831461e25adbc2b34d7da7d3deed11531",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "array-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "revision": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "array-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "revision": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "scalar-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "scalar-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "hash-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "revision": "98990ffbc4a7150b20d0e416be3ea4f9938cfd10",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "hash-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "revision": "98990ffbc4a7150b20d0e416be3ea4f9938cfd10",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "array-end-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "array-end-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "hash-index-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "revision": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "hash-index-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "revision": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "current-admission-review-command",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "e4507973aff0a4ebcd09299d971a8d78a86c10b1",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "current-admission-review-command",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "e4507973aff0a4ebcd09299d971a8d78a86c10b1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "legacy-package-flow-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "revision": "91e972cfa0d214784b0172828f7baa378c25f23e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "legacy-package-flow-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "revision": "91e972cfa0d214784b0172828f7baa378c25f23e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "remaining-method-callback-ingress-inventory",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "revision": "354c15530fd1445ebfa8c6c0683e7b8d066caced",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "remaining-method-callback-ingress-inventory",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "revision": "354c15530fd1445ebfa8c6c0683e7b8d066caced",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "inline-required-dropped-value-trim-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "revision": "61cca1cccff6027461e120e4236431d1bc7d20b1",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "inline-required-dropped-value-trim-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "revision": "61cca1cccff6027461e120e4236431d1bc7d20b1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "fixed-original-claim-population-readonly-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "revision": "de02b83a1a794370b4071bb53677ab675745acc2",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "fixed-original-claim-population-readonly-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "revision": "de02b83a1a794370b4071bb53677ab675745acc2",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "dc71fbcb0d680e89b06d6555e94a7fef46adae20c7ee96778c800b2638ac5813"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "6fc3275058502b6f00333045aab2979742b3715d5f788f2d58032a1320f7ea1b"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "complete-supported-knowledge-metadata-projection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12.json",
+      "revision": "1a8b202018a387c87425442375f53c3ee5e820d4",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "complete-supported-knowledge-metadata-projection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12.json",
+      "revision": "1a8b202018a387c87425442375f53c3ee5e820d4",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "three-small-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "revision": "16c70eaab688a877053b1addde8f07bc548e1cbf",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "three-small-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "revision": "16c70eaab688a877053b1addde8f07bc548e1cbf",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "main-method-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "revision": "dd82f9cbced8311dca8ea8610282780e0c0adf3e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "main-method-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "revision": "dd82f9cbced8311dca8ea8610282780e0c0adf3e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "source-assignment-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.json",
+      "revision": "15197dfdf0f198a4eb25517e278edba491d12db7",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "source-assignment-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.json",
+      "revision": "15197dfdf0f198a4eb25517e278edba491d12db7",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "ast-optional-pipeline-assignment-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json",
+      "revision": "99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "ast-optional-pipeline-assignment-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json",
+      "revision": "99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "tracking-predicate-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json",
+      "revision": "b1133da422bbf19b54818c97c2b67a5e6a402012",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "tracking-predicate-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json",
+      "revision": "b1133da422bbf19b54818c97c2b67a5e6a402012",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "formal-trim-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7.json",
+      "revision": "22132b2b0eccb5ac38ef3c756f1b1e5b08992947",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "formal-trim-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7.json",
+      "revision": "22132b2b0eccb5ac38ef3c756f1b1e5b08992947",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "selected-named-helper-private-boundary",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json",
+      "revision": "328b11c5ed1d5ffbc870f6785448e3a8249fe882",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "selected-named-helper-private-boundary",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json",
+      "revision": "328b11c5ed1d5ffbc870f6785448e3a8249fe882",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "current-literal-container-target-recognition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "revision": "61a73324f06238418301eac88fd3f908665ecbe3",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "current-literal-container-target-recognition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "revision": "61a73324f06238418301eac88fd3f908665ecbe3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "required-flowexpr-callback-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+      "revision": "708c1afa04bb10aeacbdaf0a8133a95f380df434",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "required-flowexpr-callback-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+      "revision": "708c1afa04bb10aeacbdaf0a8133a95f380df434",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "flowexpr-exact-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.1.json",
+      "revision": "aa88233432976a019b41d05578f8e6a5f6e3c082",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "flowexpr-exact-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.1.json",
+      "revision": "aa88233432976a019b41d05578f8e6a5f6e3c082",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "optional-flowexpr-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json",
+      "revision": "98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "optional-flowexpr-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json",
+      "revision": "98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-required-foundation-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.0.json",
+      "revision": "9f9b47973f0d0be2ee5e048dd71a28f91e8016ed",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-required-foundation-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.0.json",
+      "revision": "9f9b47973f0d0be2ee5e048dd71a28f91e8016ed",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-branch-expansion-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+      "revision": "a4a9e5c503460a8bd7db06e57b827dd053724d00",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-branch-expansion-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+      "revision": "a4a9e5c503460a8bd7db06e57b827dd053724d00",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-attached-parser-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1.json",
+      "revision": "c7570b71642e1889ab03ee07c29273dabdf16989",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-attached-parser-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1.json",
+      "revision": "c7570b71642e1889ab03ee07c29273dabdf16989",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-single-statement-required-trim-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json",
+      "revision": "736c6a43efab526fe898ed5c72b061479955fc5c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-single-statement-required-trim-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json",
+      "revision": "736c6a43efab526fe898ed5c72b061479955fc5c",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-ifwhile-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.2.json",
+      "revision": "09000223f2dac822b2c0d75c69dce587f2b5b2c0",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-ifwhile-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.2.json",
+      "revision": "09000223f2dac822b2c0d75c69dce587f2b5b2c0",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-switch-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json",
+      "revision": "4a8e92aefba8a5ce8e83f6ff529685fe6f79c9cd",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-switch-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json",
+      "revision": "4a8e92aefba8a5ce8e83f6ff529685fe6f79c9cd",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-output-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json",
+      "revision": "dadce45ac8f0a4bc6d65a3497ac99fc735e9187c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-output-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json",
+      "revision": "dadce45ac8f0a4bc6d65a3497ac99fc735e9187c",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-print-each-optional-kind-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.5.json",
+      "revision": "2b35b77ea0e08d178ccb054a8f8310dbe0abb9c1",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-print-each-optional-kind-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.5.json",
+      "revision": "2b35b77ea0e08d178ccb054a8f8310dbe0abb9c1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-selected-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.6.json",
+      "revision": "ce9eaf32e19002c5fe11e22e5de3c3094270843d",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "controlflow-selected-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.6.json",
+      "revision": "ce9eaf32e19002c5fe11e22e5de3c3094270843d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "corrected-mixed-default-selection-and-native-package-targets",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.7.json",
+      "revision": "54bb5eb65178a57ac6e61e53324c9291863e716d",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "corrected-mixed-default-selection-and-native-package-targets",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.7.json",
+      "revision": "54bb5eb65178a57ac6e61e53324c9291863e716d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "pipeline-invocation-scopes-with-complete-supplied-evidence-context",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.6.json",
+      "revision": "f7e8b292f3334fb8d6a8b3a5c51b67605d1fa2bf",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "pipeline-invocation-scopes-with-complete-supplied-evidence-context",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.6.json",
+      "revision": "f7e8b292f3334fb8d6a8b3a5c51b67605d1fa2bf",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "complete-supplied-private-fixture-canonical-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.7.json",
+      "revision": "64b66167c2277533c2393899e3754e14a74f0b31",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "complete-supplied-private-fixture-canonical-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.7.json",
+      "revision": "64b66167c2277533c2393899e3754e14a74f0b31",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "dated-retained-metadata-public-warning-output",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/REPO-HYGIENE.19.json",
+      "revision": "858eba97c89239d187765c4af9ad18057d28a1b0",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "dated-retained-metadata-public-warning-output",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/REPO-HYGIENE.19.json",
+      "revision": "858eba97c89239d187765c4af9ad18057d28a1b0",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "normalization-call-grammar-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0.json",
+      "revision": "03e2bb9a7f48abbe58771f624cb6aba3a068fd35",
+      "sha256": "268ccfb066ba094bb44139f1273a85d3462424286037ac22add41193a8822905"
+    },
+    {
+      "claim": "callable-lazy-value-conditional-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3.json",
+      "revision": "e133707f99dbb057667f8f80fbd3c47327de9bec",
+      "sha256": "308b1826f41c554d57be6cf19cc4e458cfcf835b26f43ebf73f7c4ca9881212b"
+    },
+    {
+      "claim": "callable-null-return-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4.json",
+      "revision": "85e63d655b8c26ccb3146f9792462c94b2120c02",
+      "sha256": "edc01a521f46f3a5cd6be92a66fdc1d49f7d94d297cedee73a2a5eefde63f313"
+    },
+    {
+      "claim": "callable-while-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5.json",
+      "revision": "fdc21053294bfed95a26444d9e072ce69f205587",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "complete-legacy-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "revision": "3482a5d220bd7063a910c09de883faa903d24135",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "complete-legacy-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "revision": "3482a5d220bd7063a910c09de883faa903d24135",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-dedicated-producer-source-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "revision": "8a64493d96795ef7398926b508e07595d01ef26c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-dedicated-producer-source-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "revision": "8a64493d96795ef7398926b508e07595d01ef26c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "staged-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "staged-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "progressive-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "revision": "34f687c09e197cf0798ed01c3c760e63a0203513",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "progressive-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "revision": "34f687c09e197cf0798ed01c3c760e63a0203513",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "recognition-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "revision": "7dc393211a12d54d5986c8f6a5462c25615ccbc4",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "recognition-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "revision": "7dc393211a12d54d5986c8f6a5462c25615ccbc4",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "complete-dedicated-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "revision": "37401f576c517a91f49942893c41af020bcbfda4",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "complete-dedicated-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "revision": "37401f576c517a91f49942893c41af020bcbfda4",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-all-producer-population-and-representative-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-all-producer-population-and-representative-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "immutable-original-all-producer-and-representative-acceptance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "immutable-original-all-producer-and-representative-acceptance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "private-original-source-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "revision": "31395e440a38acec7a6712d470a90a90a6567863",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "private-original-source-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "revision": "31395e440a38acec7a6712d470a90a90a6567863",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "compiler-original-executable-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "revision": "af5d19971a1682f6895901fb769ff41b69842672",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "compiler-original-executable-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "revision": "af5d19971a1682f6895901fb769ff41b69842672",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "immutable-compiler-membership-checkpoint",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "immutable-compiler-membership-checkpoint",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "callable-signature-membership-precedence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "callable-signature-membership-precedence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "bounded-recurrence-and-grouped-pattern-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "revision": "78012b1e78bb114a41f54873f30ca63c421568c8",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "bounded-recurrence-and-grouped-pattern-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "revision": "78012b1e78bb114a41f54873f30ca63c421568c8",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "compiler-callable-grouped-pattern-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "revision": "5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "compiler-callable-grouped-pattern-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "revision": "5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "independent-committed-compiler-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "revision": "fa9b7608ed9e49712129bb5456d75d118e7207a0",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "independent-committed-compiler-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "revision": "fa9b7608ed9e49712129bb5456d75d118e7207a0",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "selected-original-and-rewritten-occurrence-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "revision": "11f6a87d136ce213899ca6a0cd98cf3f0833f720",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "selected-original-and-rewritten-occurrence-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "revision": "11f6a87d136ce213899ca6a0cd98cf3f0833f720",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "91e6a411c26d09f31a9caeacd90c0c6b57f384ee56f12f33a8e095c0e1787ffd"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "2c21e5922191b76a6d3172ed1f08a12ad00ebc48256fda876df914807bcc4b7f"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "98b35b397931cb4eebfddc31abfb6969da65be69175515b50d000a09de7c6b45"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "512e4ddde33ad5ab398c5d612886444b68ec1f4ae99668c41314087eeb1c528c"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "e4748b54e5c5888e1383edf65c83362de49da4084b465f8ddf8db10a9bb060d0"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "96198f7288642facf6fbe1fd06c3a99645f94c0e840b90a5c5217f223e62de39"
+    },
+    {
+      "claim": "actual-original-event-native-input-grants",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "actual-original-event-native-input-grants",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-event-input-proof-historical-recovery-capsule",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-event-input-proof-historical-recovery-capsule",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "independent-original-event-native-input-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "independent-original-event-native-input-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-input-join-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "original-input-join-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite-historical-consumer-qualification-and-complete-replacement",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "finite-historical-consumer-qualification-and-complete-replacement",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "911ef6bfa3ceed1b5a3cc7218eb7cd0a788a9e2486864afdb73c4a9b3ccf0030"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "5423a2d1aeb53896293bbc4a048d9f458eddd6bcd0d3627d9883d381196553bd"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "c167d66717fee425ae95db1f04d6849e12673224d4040bd116011c065504acd9"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "ec15c9ee2df4fd99f25ac43d9ccb53120e89341823d1927b4eeb0651c754fbf1"
+    },
+    {
+      "claim": "current-retired-return-migration-guidance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.1.json",
+      "revision": "cf4dceccd24bc6642fc9c7d8d10b329e136849b6",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "current-retired-return-migration-guidance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.1.json",
+      "revision": "cf4dceccd24bc6642fc9c7d8d10b329e136849b6",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "authority-population-and-value-model",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json",
+      "revision": "c053c9dcf24a78cc8b551187f47cdb7aefb03eb3",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "authority-population-and-value-model",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json",
+      "revision": "c053c9dcf24a78cc8b551187f47cdb7aefb03eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "perl-evaluated-list-values",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/backend-handoff.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.3.json",
+      "revision": "2fca7d8489038c226fe0454a105f12a2af696a1f",
+      "sha256": "9bef71e179e2e3e9e18474daea2814b021a105fee997df759d23df24387ac5e2"
+    },
+    {
+      "claim": "perl-evaluated-list-values",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.3.json",
+      "revision": "2fca7d8489038c226fe0454a105f12a2af696a1f",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    }
+  ],
+  "claim_records": 206,
+  "live_intersections": [],
+  "prospective_paths": [
+    "docs/linkedspec-book/src/appendix/backend-handoff.md",
+    "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md"
+  ],
+  "scope": "Every current claim record enumerated from exact accepted Git bytes before shared book/card edits; historical bindings stay at their original revisions. No SDK observation or claim hash is refreshed.",
+  "source_commit": "1753884257bed7ce0b842bc406c665671403a828"
+}

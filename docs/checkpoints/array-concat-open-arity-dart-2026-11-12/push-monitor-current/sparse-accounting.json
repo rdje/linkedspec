@@ -1,0 +1,36 @@
+{
+  "explanation": "Effective sparse revision walking adds five already-at-base blobs. Disabling only sparse inclusion removes exactly those five, with all declared objects present. The original delta-base-only hypothesis is falsified and its failure retained. Both serialized estimates remain below the conservative1.5GB trigger; neither is actual negotiated wire size.",
+  "logical_objects": 45143,
+  "no_sparse_pack_bytes": 1233210315,
+  "no_sparse_pack_objects": 45143,
+  "original_estimate_bytes": 1233210937,
+  "primary_contract": "https://git-scm.com/docs/git-pack-objects#Documentation/git-pack-objects.txt---sparse",
+  "sparse_extra_already_at_base": [
+    {
+      "bytes": 2,
+      "oid": "00750edc07d6415dcc07ae0351e9397b0222b7ba",
+      "type": "blob"
+    },
+    {
+      "bytes": 2,
+      "oid": "0cfbf08886fca9a91cb753ec8734c84fcbe52c9f",
+      "type": "blob"
+    },
+    {
+      "bytes": 37,
+      "oid": "9a22bc1191feaf6fd94bea580543ac3cb77647df",
+      "type": "blob"
+    },
+    {
+      "bytes": 372,
+      "oid": "b773693a1ebcf84d307bee81538940a5f413a9b7",
+      "type": "blob"
+    },
+    {
+      "bytes": 715,
+      "oid": "f6bcaec7007b0d97b32f95cb83d0b5f2ed32de54",
+      "type": "blob"
+    }
+  ],
+  "sparse_pack_objects": 45148
+}

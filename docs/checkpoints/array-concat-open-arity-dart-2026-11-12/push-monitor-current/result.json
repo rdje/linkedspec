@@ -1,0 +1,19 @@
+{
+  "ahead": 101,
+  "cached_origin_main": "4683555ec51f04b8977812ce4e984c5cc6e6f42c",
+  "decimal_gb": 1.233210937,
+  "early_push_trigger_bytes": 1500000000,
+  "estimated_non_thin_pack_bytes": 1233210937,
+  "evidence": ".linkedspec-data/push-monitor/20261112T103635Z",
+  "gib": 1.1485171848908067,
+  "head": "1753884257bed7ce0b842bc406c665671403a828",
+  "largest_outgoing_blob_bytes": 31374498,
+  "largest_outgoing_blob_oid": "0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1",
+  "limits": "Operational snapshot of committed HEAD against cached origin/main, excluding uncommitted Dart work. Logical bodies remain Git-addressed; raw pack stays ignored on the repository volume. Not actual wire/server storage or a future-size promise. Physical pack/cache/Git toolchain/remote negotiation closure remains unassessed; formal guard/publication owner23.4.30.",
+  "object_rows": 45143,
+  "pack_sha256": "c15b0b2f860ae170bcc0538a0d2c0143a20490a8ae9f9a371bb5f82583275be9",
+  "packed_objects": 45148,
+  "remaining_to_trigger_bytes": 266789063,
+  "trigger_reached": false,
+  "unique_object_ids": 45143
+}

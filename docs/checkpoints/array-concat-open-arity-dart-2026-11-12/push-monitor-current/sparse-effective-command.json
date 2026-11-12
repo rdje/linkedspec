@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "config",
+    "--type=bool",
+    "--default=true",
+    "--get",
+    "pack.useSparse"
+  ],
+  "cwd": "."
+}

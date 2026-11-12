@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "rev-parse",
+    "--show-object-format"
+  ],
+  "cwd": "."
+}

@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "index-pack",
+    "--threads=1",
+    "-o",
+    ".linkedspec-data/push-monitor/20261112T103635Z/outgoing-no-sparse.idx",
+    ".linkedspec-data/push-monitor/20261112T103635Z/outgoing-no-sparse.pack"
+  ],
+  "cwd": "."
+}

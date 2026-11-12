@@ -1,0 +1,50 @@
+{
+  "dart/tool/callable_array_transform_observation.dart": {
+    "bytes": 612,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-6.gz",
+    "mode": 420,
+    "sha256": "12ae4a5dff3b05a355f30fda45008abf89c635aa0ff3f64a85aa332db107f1b7"
+  },
+  "dart/tool/probe_callable_array_transform_results.dart": {
+    "bytes": 4283,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-5.gz",
+    "mode": 420,
+    "sha256": "5628063c4b42d6c78005c382cca39e078d217ec57436217508e8848e79c12043"
+  },
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/cases.json": {
+    "bytes": 277927,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-3.gz",
+    "mode": 420,
+    "sha256": "889d886f4d2a47ca0c6078fe53f74e9d5d6577e93d6d658cd7aa95d810246e87"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/cases.json": {
+    "bytes": 57147,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-0.gz",
+    "mode": 420,
+    "sha256": "de2db0fa26b1be85c87bec29e2738ed3cdcac2a0046b479a670f6a2e6ff5ce52"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/capture_intake.py": {
+    "bytes": 5551,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-7.gz",
+    "mode": 420,
+    "sha256": "99e72c7b534cbbdf88a0488be57db4de44741a5964f08817b7cfc97601182942"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json": {
+    "bytes": 155300,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-1.gz",
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_dart_profiles.json": {
+    "bytes": 468900,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-2.gz",
+    "mode": 420,
+    "sha256": "4e19296ffb22dfa9e541b97a98ebed1d6f5680228c04654848202c061f29f339"
+  },
+  "tests/fixtures/array_transform_result_guard_dart_profiles.json": {
+    "bytes": 54953,
+    "image": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/template-4.gz",
+    "mode": 420,
+    "sha256": "c98a9e2738faa3870e9a47659d09f84704a3dda5c40431d0071b12274b1000c0"
+  }
+}

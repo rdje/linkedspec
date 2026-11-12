@@ -1,0 +1,13 @@
+{
+  "corrected_recent_rows": 16,
+  "failed_doctrines": [
+    "DOCUMENT-HISTORY",
+    "README-STABILITY"
+  ],
+  "original_exec_session": 65235,
+  "original_observed_exec_exit": 1,
+  "original_recent_rows": 17,
+  "passed_doctrines": 8,
+  "rotated_row": "- TYPE-REFERENCE-BOOK.1.2.23.4.25 \u2014 Rust52 IDs/46 closed pointers/six unselected bodies/full112804-byte tail exact;48537 bytes renewed/53 queries/first readonly ten controls; Julia next.",
+  "scope": "Exact original combined commit log/full modes, views and oldest row retained. Original publisher and historical outputs are unchanged. Current view rotates one already accepted row under ADR0066; no SDK/fixture replay."
+}

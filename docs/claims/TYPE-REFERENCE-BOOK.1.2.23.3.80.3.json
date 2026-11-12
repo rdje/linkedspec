@@ -1,0 +1,27 @@
+{
+  "claims": [
+    {
+      "durability": {
+        "reason": "Actual scripts/commands/metadata/operational Git IDs are retained, but the raw diagnostic pack/index and exact physical Git/compressor/toolchain/cache inputs are not tracked recoverable artifact closure. The initial operational launch predates its later metadata capture. Formal ref-bound measurement closure, retained independent reader and recurring publication monitor belong to the scheduled clean owner.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "status": "gap"
+      },
+      "falsify": {
+        "reason": "Empty-range and sparse/no-sparse counterfactuals are retained and the initial delta-base-only explanation is falsified. A separate historical size reader with retained reason-sensitive bad-size/changed-ref RED controls has not run; do not infer that leg from matching copies or counters.",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "status": "gap"
+      },
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "rederive": {
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/array-concat-open-arity-dart-2026-11-12/measure_push_head.py",
+        "granularity": "The one actual serialized non-thin pack for the exact two committed refs, with explicit arguments, one worker/64m window, stream/stat equality, PACK header/footer and empty-range control.",
+        "result": "Actual0:1233210937 bytes;101 commits;45148 packed objects;45143 logical objects;266789063-byte margin. Empty-range standalone pack32 bytes. Both refs unchanged after measurement. Metadata in push-monitor-current/result.json; cached origin only, no remote refresh.",
+        "status": "checked"
+      },
+      "scope": "Operational telemetry only. Original source and metadata are retained under docs/checkpoints/array-concat-open-arity-dart-2026-11-12/. Git logical object history is addressable, but diagnostic packs/indexes remain ignored. The45148 sparse-pack objects and45143 revision-list objects are distinct scopes. One otherwise-identical no-sparse pack has45143 objects/1233210315 bytes and removes exactly five already-at-base blobs. Full native physical Git/cache/compression/toolchain/remote closure and independent historical size falsification are not claimed.",
+      "statement": "The local one-worker non-thin serialized pack for committed HEAD1753884257bed7ce0b842bc406c665671403a828 excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c is1233210937 bytes. It is below the director1500000000-byte early-publication trigger;101 commits are ahead. The estimate excludes uncommitted Dart and is not negotiated upload size."
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.80.3",
+  "version": 1
+}

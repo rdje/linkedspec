@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "git",
+    "rev-list",
+    "--objects",
+    "--no-object-names",
+    "4683555ec51f04b8977812ce4e984c5cc6e6f42c"
+  ],
+  "cwd": "."
+}

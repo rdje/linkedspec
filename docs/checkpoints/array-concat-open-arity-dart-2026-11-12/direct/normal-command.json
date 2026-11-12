@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "bash",
+    "../tools/run_dart_project_data.sh",
+    "test",
+    "--reporter",
+    "expanded",
+    "--concurrency=1",
+    "test/array_concat_open_arity_result_guard_composition_test.dart",
+    "test/array_transform_callable_result_guard_composition_test.dart",
+    "test/array_transform_result_guard_composition_test.dart",
+    "test/array_pipeline_callable_result_guard_composition_test.dart"
+  ],
+  "cwd": "dart",
+  "environment": {
+    "TERM": "dumb",
+    "NO_COLOR": "1",
+    "LINKEDSPEC_ARRAY_CONCAT_DART_CAPTURE": "direct"
+  }
+}

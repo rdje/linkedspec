@@ -10,6 +10,31 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## Dart concat selector preserves its producer arity (TYPE-REFERENCE-BOOK.1.2.23.3.80.3)
+
+Own cold508 source-only programs precede the one-line count==2 to count>=1
+result guard. Normal24RED/484PASS exactly matches intake. Repaired four routes
+match20 supported/four separate compatibility/484 preservation records;80 initial
+and eight invalid-signature records stay exact. Exact older callable SX and
+ordinary SA terminal/composed controls were included upfront, and only their four
+route objects transfer. Same-path private old24-current508/direct1155/first
+readonly9/current521/fatal analysis/format pass. Complete available
+error maps/field absence and actual source identities remain. Normalized emitted
+source state is not lowered typed IR. New parsed inputs precede compile/restore;
+1016 parsed/module pairs and2032 normal snapshots retain full modes. Full native/
+VM/cache/transitive/toolchain/OS closure stays4.2/SESSION5. Shared publication queries
+retain206 claims with zero live bindings; actual documentation producer and input/
+output chain is recoverable. Operational push estimate1,233,210,937 bytes excludes
+this uncommitted slice; sparse walking explains five extra base-reachable objects,
+and the original delta-base hypothesis failure remains. New director1,500,000,000-
+byte early trigger is durable; clean23.4.30 preparation/discovery/full CI governs
+publication before further growth. Evidence: docs/checkpoints/array-concat-open-arity-dart-2026-11-12/REVIEW.md.
+
+First normal landing1/eight PASS/two dependent doc failures is preserved; a
+separate ADR0066 correction rotates only the oldest of17 recent rows to restore16.
+Focused document-history0 passes; runtime proof is not replayed. Canonical Git
+publication knowledge now carries the new1.5GB threshold/sparse-scope qualification.
+
 ## 2026-11-12 — Rust concat selector retains producer arity (TYPE-REFERENCE-BOOK.1.2.23.3.80.2)
 
 Public terminal/compiled observations precede diagnosis: count==2 in the result

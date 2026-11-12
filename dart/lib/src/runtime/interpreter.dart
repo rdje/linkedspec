@@ -6611,7 +6611,7 @@ final class LinkedSpecRuntimeEngine {
       'drop_back' => count == 1 || count == 2,
       'slice' => count == 2 || count == 3,
       'sorted' || 'reversed' => count == 1,
-      'concat_arrays' => count == 2,
+      'concat_arrays' => count >= 1,
       _ => false,
     };
     return canonicalArity &&

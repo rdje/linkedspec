@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "pack-objects",
+    "--revs",
+    "--stdout",
+    "--delta-base-offset",
+    "--threads=1",
+    "--window-memory=64m",
+    "--progress",
+    "--no-sparse"
+  ],
+  "cwd": ".",
+  "stdin": "revisions.txt"
+}

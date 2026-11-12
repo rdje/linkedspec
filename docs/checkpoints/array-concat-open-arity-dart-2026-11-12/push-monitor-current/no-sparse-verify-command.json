@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "git",
+    "verify-pack",
+    "-v",
+    ".linkedspec-data/push-monitor/20261112T103635Z/outgoing-no-sparse.idx"
+  ],
+  "cwd": "."
+}

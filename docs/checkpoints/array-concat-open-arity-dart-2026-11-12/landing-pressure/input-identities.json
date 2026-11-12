@@ -1,0 +1,22 @@
+{
+  ".linkedspec-data/array-concat-open-arity-dart-commit.log": {
+    "bytes": 3462,
+    "mode": 420,
+    "sha256": "c15cdcfa832ed6ed9ee9f7ffa1c175d6f6f4481f88a5c0c9f15b94b83c421c07"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5258,
+    "mode": 420,
+    "sha256": "21afba3adcaf72f622b2fae8471e94d7f3d5c9e567f9e6ddc4d0797873c7dacb"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/qualify_live_status.py": {
+    "bytes": 3421,
+    "mode": 420,
+    "sha256": "998d6dcfbeacba08ba03466efa22691ded2086b619fe617ab8038ded36323ae6"
+  },
+  "docs/decisions/0066-bounded-live-document-store.md": {
+    "bytes": 12676,
+    "mode": 420,
+    "sha256": "b7d2039549ac408181aa7c3ab56164e82bb41a0be1f048be069678ab0416deed"
+  }
+}
