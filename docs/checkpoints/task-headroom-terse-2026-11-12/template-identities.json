@@ -1,0 +1,51 @@
+{
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3389,
+    "generated_sha256": "57e9e89c84ca8f48f317cddacef9e9e421b388b904d933a376f3cc065c42db34",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-check_publication_inputs.py.gz",
+    "mode": 420,
+    "sha256": "0656f4eda41e284ef7e90499cf0033fabf580e462537d96ce6b1b2c9bdffb837"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "generated_sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-review_publication_inputs.py.gz",
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/capture.py": {
+    "bytes": 6885,
+    "generated_sha256": "c1e8ef5027276bc4ed17577997a873d82d5d288c7d179d97b6f54caa1dc8532e",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-capture.py.gz",
+    "mode": 420,
+    "sha256": "c48ae061761406c15f9e7821d29b54157c76f43f3f77de9fb9643d80573dc4c4"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/check_candidate.py": {
+    "bytes": 2000,
+    "generated_sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-check_candidate.py.gz",
+    "mode": 420,
+    "sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/review.py": {
+    "bytes": 9971,
+    "generated_sha256": "3fae44ed96c2f09f04f176ffd4cbf5010798fbbf07a6d2cacb460a127a9b343f",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-review.py.gz",
+    "mode": 420,
+    "sha256": "6bccb75e7c7ce0a6fce0449b41020305f1120cff8d32ac69e1189773a7bc72b9"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/run_review.py": {
+    "bytes": 1045,
+    "generated_sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-run_review.py.gz",
+    "mode": 420,
+    "sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  },
+  "docs/checkpoints/task-headroom-hygiene-2026-11-12/seal.py": {
+    "bytes": 708,
+    "generated_sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963",
+    "image": "docs/checkpoints/task-headroom-terse-2026-11-12/template-seal.py.gz",
+    "mode": 420,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  }
+}

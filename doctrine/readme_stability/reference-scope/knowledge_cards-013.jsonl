@@ -1,4 +1,5 @@
-{"member_count":91,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":92,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2302,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-colon-scalar-retired.md","sha256":"5e38e74e6985c2d1510878e8af126f34d7457781c931466daa8cb98d2bf3c6d8","type":"member"}
 {"bytes":2755,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-expression-valued-blocks.md","sha256":"67abde4f80437a8f74c2cade95033dffcf67953f8964aadcd8aada1bbc9220fb","type":"member"}
 {"bytes":5124,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-primitive-literal-parity.md","sha256":"62a0b4477b97362bc180ca8ec30f62b9da92a071321f5f929d6fd730ee1e6464","type":"member"}
 {"bytes":3207,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-retired-scalar-assign-spec-surface.md","sha256":"f9626386fba5c1e4b217d112768b0d172d44f67a87e729773585ab6a34d03879","type":"member"}

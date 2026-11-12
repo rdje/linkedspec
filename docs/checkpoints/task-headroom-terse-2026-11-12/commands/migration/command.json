@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/migrate_task_narrative.py",
+    "--apply",
+    "--epoch",
+    "TYPE-REFERENCE-BOOK.1.2.23.4.32",
+    "--tree",
+    "SPEC-FORMAT-TERSE",
+    "--source-commit",
+    "9f11029e5af9d6168925f532d4c1911637421af3"
+  ],
+  "cwd": "."
+}

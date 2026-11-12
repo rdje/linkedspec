@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. All five bounded concat80 backend implementations have focused outcomes; broader source/context/admission remains. Remeasure outgoing bytes, then inspect remaining coverage/current discovery4.1 and before-push raw-error4.28; publication preempts cadence near1.4-1.5GB.
+Full PNT continues. Bounded concat80 has five focused backend outcomes and headroom32 is complete. Remeasure committed size, then resource4.14/current discovery and canonical publication preparation; broader source/context/admission remains.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.80.5. Each host508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; one selector line/one runner group. New3048 checks/private old24-current508/direct6987 checks/readonly11/current266/3048 pairs per host pass. Full published errors/absence and source effects remain; raw-native4.28/native4.2/SESSION5/full admission separate.
+TYPE-REFERENCE-BOOK.1.2.23.4.32. Existing rooting data epoch:22 IDs/all CORE/five unchanged bodies/full35225-byte tail,17 pointers/40587 current-text bytes renewed. Migration23 public queries/first independent readonly10/current identity pass. Terse refusal1 remains unchanged and independently recovered/three controls; no SDK, cleanup or parity claim.
 
 ## Next Action
 
-Remeasure current committed outgoing bytes after clean Lua80.5; renew task headroom before resource4.14/current canonical discovery4.1 and remaining coverage. Raw-error4.28 is required before admission AND push. Prepare near1.4GB; canonical full CI/normal hooks/clean exact HEAD precede publication around1,500,000,000 bytes regardless cadence.
+Remeasure current committed outgoing bytes, then repair both RAM preflight producers under resource4.14 before current canonical discovery4.1/full CI. Raw-error4.28 precedes admission AND push. Prepare near1.4GB and publish around1,500,000,000 bytes regardless cadence, with exact clean-HEAD canonical proof/normal hooks/fresh remote identity.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.5 — each host508/four routes/20 targets/four separate compatibility/484 preserved/80 initial/eight signatures; old24-current508/direct6987 checks/readonly11/current266/3048 pairs; fresh size then coverage/discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.31 —1316 rows/eight scopes retained; three exact own completed logs/133480 combined bytes/modes independently used before plain retirement; readonly16/three public queries/parent30-31 exact; fresh size then Lua80.5.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.4 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct4959 assertions/readonly10/current516/3048 pairs; fresh size/cleanup then Lua80.5.
@@ -29,7 +30,6 @@ Remeasure current committed outgoing bytes after clean Lua80.5; renew task headr
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.27 —45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/readonly ten controls/current identities; Rust next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0 —240+terminal48/288 pairs/35 valid targets/74 healthy intents/253 protected; readonly thirteen controls/current126; proposed marker change withdrawn, result1.2 next.
 
 
 ## History

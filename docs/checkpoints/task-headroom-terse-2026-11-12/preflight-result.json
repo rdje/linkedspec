@@ -1,0 +1,12 @@
+{
+  "activation": "9f11029e5af9d6168925f532d4c1911637421af3",
+  "bytes": 379669,
+  "exact_closed": 189,
+  "full_tail_bytes": 111437,
+  "ordered_ids": 189,
+  "prefix_bytes": 59187,
+  "preflight": "PASS",
+  "scope": "Source/vocabulary readiness only; no mutation, fresh SDK or renewed feature-admission claim. Actual migration independently decides eligible shorter closed bodies.",
+  "sha256": "dfb0421de17e164a23380c33b0a513bb595310fbae96bbcd8337fe835bd28946",
+  "source": "docs/tasks/SPEC-FORMAT-TERSE.md"
+}

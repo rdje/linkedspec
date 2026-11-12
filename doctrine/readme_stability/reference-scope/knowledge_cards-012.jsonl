@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1772,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-text-contract-home.md","sha256":"a922b674db3ffa61848cdb00f7968f378c46e12e6b320f7940664958983a7944","type":"member"}
 {"bytes":2856,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-to-text-coercion-cross-backend-gap.md","sha256":"bdb7e5fba0d469977543435241e08c7dd18a5479c15a85fa1ac0527cfd07cf58","type":"member"}
 {"bytes":2029,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-implementation-removed.md","sha256":"679a238cc99a524c06fc1da9d240e5029781a292d78785b2e18841d82abb6b15","type":"member"}
 {"bytes":2243,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-live-surface-migrated.md","sha256":"30665c23d8e25c674893a834a9bb192cf1601501dbc515211a100fb9c5691fea","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3167,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-symbol-callees.md","sha256":"6148ec0fdff975d1a15576dc88c1c7dc9662b01e49a1a29a5519f04c23b0a0da","type":"member"}
 {"bytes":2013,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-word-aliases.md","sha256":"7f5957d8864f38d054c8b216a88753c7acd0681572f53e8f87a4532307ebc7e7","type":"member"}
 {"bytes":3016,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-attached-if-statement-split-seam.md","sha256":"35c0e6b293f0b79ada3356d367435f8a64b6416402449c00e3f87d9362592f17","type":"member"}
-{"bytes":2302,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-colon-scalar-retired.md","sha256":"5e38e74e6985c2d1510878e8af126f34d7457781c931466daa8cb98d2bf3c6d8","type":"member"}

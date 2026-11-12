@@ -1,0 +1,546 @@
+{
+  "docs/checkpoints/task-headroom-terse-2026-11-12/capture.py": {
+    "bytes": 6890,
+    "sha256": "c1e8ef5027276bc4ed17577997a873d82d5d288c7d179d97b6f54caa1dc8532e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/check_candidate.py": {
+    "bytes": 2000,
+    "sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3337,
+    "sha256": "57e9e89c84ca8f48f317cddacef9e9e421b388b904d933a376f3cc065c42db34"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/commands/migration/command.json": {
+    "bytes": 303,
+    "sha256": "b62736443436e4c2b9e09f0b32aac7698b11695a46c12b6f67e316e29ef6e866"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/commands/migration/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/commands/migration/stderr.log.gz": {
+    "bytes": 268,
+    "sha256": "96ba37d0fb6d0b5d8966b44245a7ccd0cdbe63f427b3098100fbc3d363e31e2f"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/commands/migration/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/freeze_refusal.py": {
+    "bytes": 2690,
+    "sha256": "881a15b88bcde0008f23bc5fe7f03d6539f57e89bb67d5033e669fdd9a6de7be"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-input-identities.json": {
+    "bytes": 3389,
+    "sha256": "9039867ad5efc7a350dc860dd077268e7a54d71716bf7c68554d8d4aba29f738"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-0.log.gz": {
+    "bytes": 190693,
+    "sha256": "84d7c4731e8eb12a1ce76e9b28c64d5d8be5217998772c163b66909e408ac6c4"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-1.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-2.log.gz": {
+    "bytes": 40348,
+    "sha256": "d8309cb0b6d39830c250b429ba0bc97606cea7c6c77c348f6feaaea6f1773a47"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-3.log.gz": {
+    "bytes": 78838,
+    "sha256": "1e1957ab6ded9d58579d25575cdfffafc8b5032109c1826b845a1c5061b404b3"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-4.log.gz": {
+    "bytes": 65042,
+    "sha256": "ce612a1ea53994432b631204770250744531c5bb927d4431adaf2bcb9c1954ab"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-5.log.gz": {
+    "bytes": 51583,
+    "sha256": "033b376cf16356af03db224fd40e909f1bee49fcf95b66cc3c4a0d7e27a163ea"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/git-inputs/source-6.log.gz": {
+    "bytes": 31745,
+    "sha256": "f231df1d917512f1e1e77159f7f0bb07136ee3607dc7b02eabe29926e64e493a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/inputs-before-migration-identities.json": {
+    "bytes": 26839,
+    "sha256": "4cd0554ff63d5924e2c27c561ab47c94de4f1ed4b75ab6ff850695c3a4fba62b"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/inputs-before-migration.tar.gz": {
+    "bytes": 3751309,
+    "sha256": "66d6e6fac3248a920a59828902007ed07593979e8edea7c2a0dfb75c4fc0a701"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/command.json": {
+    "bytes": 220,
+    "sha256": "34d576ef743e4ad0df266674ab813de5af621c3b550c1b27de1fefa8f251ac61"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/identities.json": {
+    "bytes": 4287,
+    "sha256": "d0aef9c1c0d6969dfc77dcebebe37bfc5e753d3ada5584d0d96b252b18c02a60"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/inputs.tar.gz": {
+    "bytes": 129535,
+    "sha256": "22da75484ff0384a6327c2608c192a813128d86ae297596b881b3c170cf05118"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/stderr.log.gz": {
+    "bytes": 393,
+    "sha256": "aba8f61259eacddd4ec883a7cbff43b97c6eac3195984c2095a585f1262230e4"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/capture/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/freeze-refusal/command.json": {
+    "bytes": 227,
+    "sha256": "0da96af68cad646c1cb68436f2b427e159dd4c0baf68c5930bb49c2da0ad08f0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/freeze-refusal/identities.json": {
+    "bytes": 5313,
+    "sha256": "e537655ff34b428c41e44516a765cb91bd13a36ebac0a810089a3d2c98f414a4"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/freeze-refusal/inputs.tar.gz": {
+    "bytes": 3896483,
+    "sha256": "fe44ba43b1e04c84df2fd03db0f775df5615612eb43a8ecabce2045193ba7e6d"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/command.json": {
+    "bytes": 222,
+    "sha256": "fbb67b6dd33f3d1aaf7fc103541bcfa02944dcd7ca82b2612df7b910b388a665"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/identities.json": {
+    "bytes": 3880,
+    "sha256": "d0f1bf0f34d64f3103b3aa81a107ce29f9d29b4da8ef36123d90d5560b643d4e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/inputs.tar.gz": {
+    "bytes": 27737,
+    "sha256": "ed51eef2ed497c94c5a311551545a4a6df302999b36ba4b1680c4d6839ce570d"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/preflight/stdout.log.gz": {
+    "bytes": 365,
+    "sha256": "da22db137051c2da8166c5295d2bae072b958edba18c523ba13605e2a4c27906"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/command.json": {
+    "bytes": 220,
+    "sha256": "122eca561114ac8b5eef0b4e16e196d675da5b8862fc48adb0a681dabcdcb9cb"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/identities.json": {
+    "bytes": 692,
+    "sha256": "047bea9ce04e3f584647ba4ab6af31128687cab23ff5909c657313b774e12f31"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/inputs.tar.gz": {
+    "bytes": 7716,
+    "sha256": "25c92abbaaa4c12690ee8ba912c0cea051ba771f77ee6d643fb8a9138b57b597"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/prepare/stdout.log.gz": {
+    "bytes": 112,
+    "sha256": "88eb7814bf686cbbbdb73b7bec4b5f5aade3fee3f76a9e4a8c531da34cb03fb9"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/command.json": {
+    "bytes": 237,
+    "sha256": "0ece76403b13627c44a6f0bb379bacd09ae30bbc449164aacca1671e573f9d7e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/identities.json": {
+    "bytes": 4287,
+    "sha256": "d0aef9c1c0d6969dfc77dcebebe37bfc5e753d3ada5584d0d96b252b18c02a60"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/inputs.tar.gz": {
+    "bytes": 129535,
+    "sha256": "651cd0795f6e35a04c13df12be4d97842a3176d4dc3bf123a9bca74ee9846b9a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/publication-query/stdout.log.gz": {
+    "bytes": 78,
+    "sha256": "cc87f446da4fa467507ef24e9cdcad818228e6b180179d48e9e51fd12246108e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/command.json": {
+    "bytes": 238,
+    "sha256": "8a778b7853ee5481c71da1d5d6528456b3e7eeeebcd1f90e146f0882a2ce3f7c"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/identities.json": {
+    "bytes": 4287,
+    "sha256": "d0aef9c1c0d6969dfc77dcebebe37bfc5e753d3ada5584d0d96b252b18c02a60"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/inputs.tar.gz": {
+    "bytes": 129535,
+    "sha256": "8be36422602b221cc3cf004166a7fb0f555ab2e1224901095a407faef4049844"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/launches/review-publication-query/stdout.log.gz": {
+    "bytes": 247,
+    "sha256": "33a0618598a762d67f1648b863ab56f19b6e7f066afb20332f371dcd13f6297e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/preflight-result.json": {
+    "bytes": 509,
+    "sha256": "726db40f1ea5396adb7ab493fda2ea3e573e8073378aa5c0dae3fb9a033d014a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/preflight.py": {
+    "bytes": 2091,
+    "sha256": "bbd31d22dbf03d2fce01232a89be3ddcd0246e8c164d83893a9c117daef9097c"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/prepare.py": {
+    "bytes": 3205,
+    "sha256": "c0c0adf728424923ad9798779b381d75e2454d025a062fdb0baedf66cad5f5cb"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/publication-inputs/input-identities.json": {
+    "bytes": 40014,
+    "sha256": "9dea56b79b2be6cfc29a40b2c4e5c556372ae2e60a24e3992f61dc5a5633435c"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/publication-inputs/inputs-before-query.tar.gz": {
+    "bytes": 2776261,
+    "sha256": "569a89610a9f8f869702d286642d79f0bd2c41c4e50dd9d3bf949bc0fd43cb57"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/publication-inputs/result.json": {
+    "bytes": 80494,
+    "sha256": "9c2f6e04f75eede4ba5a49275e9dcfb21eb742d08d7278f81fa10c69d3b96bf2"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/ahead-command.json": {
+    "bytes": 268,
+    "sha256": "7db01ee433a8af06fa3f4ca0bb9a1268c3e652f03f13f220dd2f0e12264312f6"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/ahead-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/ahead-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/ahead-stdout.gz": {
+    "bytes": 24,
+    "sha256": "66f07ce8b54767549594dbd66b59c00017bbff961d637af937f55cbcfff08c87"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-after-command.json": {
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-after-stdout.gz": {
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-command.json": {
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/base-stdout.gz": {
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/empty-range-command.json": {
+    "bytes": 324,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/empty-range-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/empty-range-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/empty-range-stdin.gz": {
+    "bytes": 65,
+    "sha256": "2a645a4eb486bc3804890d9e2ab25089190600eb90ae84d45a79172652fa56af"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/empty-range-stdout.gz": {
+    "bytes": 50,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/git-version-command.json": {
+    "bytes": 164,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/git-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/git-version-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/git-version-stdout.gz": {
+    "bytes": 55,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-after-command.json": {
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-after-stdout.gz": {
+    "bytes": 59,
+    "sha256": "6770c7757efddf6144c6c0386039401e3083be9f0671eaee6dc426f042e48ea7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-command.json": {
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/head-stdout.gz": {
+    "bytes": 59,
+    "sha256": "6770c7757efddf6144c6c0386039401e3083be9f0671eaee6dc426f042e48ea7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/memory-command.json": {
+    "bytes": 204,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/memory-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/memory-stdout.gz": {
+    "bytes": 325,
+    "sha256": "32fc826eefc1247dda97d165f34b4ac9a5830b09d91f121c95120bc582dc76b1"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-format-command.json": {
+    "bytes": 192,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-format-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-format-stdout.gz": {
+    "bytes": 25,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-metadata-command.json": {
+    "bytes": 265,
+    "sha256": "2a29b2687be4be512ddf67e33a171b3ebf1c4ba8e9fa3b14ddcb459cfb75af45"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-metadata-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-metadata-stdin.gz": {
+    "bytes": 1109473,
+    "sha256": "03ad074203f9b2e3587bf5694e818274cbf2addbe3c535a050556847415ca2a7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/object-metadata-stdout.gz": {
+    "bytes": 1251742,
+    "sha256": "a53e0fc83b828c15ad6f13728a46b48ada54efaa22e4440bb4a1955a5c68227a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/objects-command.json": {
+    "bytes": 302,
+    "sha256": "0c322cf7575a681b384cc8db72db393cfcbc96fec81aaf0a1d7d8af72ea5f34b"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/objects-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/objects-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/objects-stdout.gz": {
+    "bytes": 1109473,
+    "sha256": "03ad074203f9b2e3587bf5694e818274cbf2addbe3c535a050556847415ca2a7"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-command.json": {
+    "bytes": 464,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-after-command.json": {
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-after-stdout.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-command.json": {
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-config-stdout.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-stderr.gz": {
+    "bytes": 1331,
+    "sha256": "6f21c525d2585ad5f0d2bf4ba766d4a978f3a7c6e453844b317a8cc865ef2f71"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/pack-stderr.log": {
+    "bytes": 8270,
+    "sha256": "a0d05eefe2ff80a1e49643781412c3fcebb59961bd9fb1214926b0d3507f497e"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/producer-input-identities.json": {
+    "bytes": 862,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/producer-inputs.tar.gz": {
+    "bytes": 9165,
+    "sha256": "6bb27e07a22afafa35d8bbd41a0e712208051566b34a60fe51b863918421fc7f"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/result.json": {
+    "bytes": 1342,
+    "sha256": "22e6182a8a8cacc028e08454520b86dc0f244d513cad0eab856bca0790cdff7b"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/push-monitor-current/revisions.txt": {
+    "bytes": 83,
+    "sha256": "445737433527432227c66c2e95007ef4db0e2b26cb17820cf2d16d3c3b447e19"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/refusal-result.json": {
+    "bytes": 870,
+    "sha256": "be3aa3368f41531b8cc9433057785029bb0e883f6888df8173fcab4f28cf6f4f"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/review.py": {
+    "bytes": 9974,
+    "sha256": "3fae44ed96c2f09f04f176ffd4cbf5010798fbbf07a6d2cacb460a127a9b343f"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/run_review.py": {
+    "bytes": 1045,
+    "sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/seal.py": {
+    "bytes": 708,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/source-after-refusal.md.gz": {
+    "bytes": 100654,
+    "sha256": "87c7364e26de6d6cb3f1491efeed279a2be5347ef40aff004b34770a75b2a6c0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/source-before-preflight.md.gz": {
+    "bytes": 100654,
+    "sha256": "87c7364e26de6d6cb3f1491efeed279a2be5347ef40aff004b34770a75b2a6c0"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-capture.py.gz": {
+    "bytes": 2378,
+    "sha256": "eba1550ed56c9f7759d4bdde03c9ff9d8a2c6941637d8f245cf418ab69ff02ca"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-check_candidate.py.gz": {
+    "bytes": 880,
+    "sha256": "258036c2a8f396b5aec39b8455b8462caf56a0757f911f8b2189d3c446c361ad"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-check_publication_inputs.py.gz": {
+    "bytes": 1479,
+    "sha256": "40f94b6192c2aea66fba2a3cf157dce1ae92be0ef0d2fe681d5cd4d10bc00a94"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-identities.json": {
+    "bytes": 2681,
+    "sha256": "42a592909966c06f63bf1a554002d8577f5b894c8a7b78b9834305a7717e66f3"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-review.py.gz": {
+    "bytes": 3341,
+    "sha256": "2f65135d442e60fb0149892813cda41887592665a2a4df8ca09c130b77980874"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-review_publication_inputs.py.gz": {
+    "bytes": 1171,
+    "sha256": "9091150022638adaf40d4b6c959e916e6aacbdd0134393625393a1c7c6523af3"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-run_review.py.gz": {
+    "bytes": 543,
+    "sha256": "99e1bc2663d320a3cd61cda2b0259b0934909f77140e912480c81719708dc059"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/template-seal.py.gz": {
+    "bytes": 444,
+    "sha256": "f3b6f880abfa2bf9666429f724f0e8a5e1344d7fa4e0960626d7bec298d79a1a"
+  },
+  "docs/checkpoints/task-headroom-terse-2026-11-12/wrapper-failure.log.gz": {
+    "bytes": 393,
+    "sha256": "aba8f61259eacddd4ec883a7cbff43b97c6eac3195984c2095a585f1262230e4"
+  }
+}

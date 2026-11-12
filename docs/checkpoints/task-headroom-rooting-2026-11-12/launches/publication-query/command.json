@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/task-headroom-rooting-2026-11-12/check_publication_inputs.py"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

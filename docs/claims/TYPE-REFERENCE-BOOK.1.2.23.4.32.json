@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.32",
+  "claims": [
+    {
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "statement": "At committed HEAD9f11029e5af9d6168925f532d4c1911637421af3 excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c, the one-worker explicit no-sparse non-thin pack is1352197517 bytes for106 outgoing commits. The director1500000000-byte trigger has147802483 bytes remaining; advisory1400000000 has47802483 bytes. This excludes all uncommitted headroom32 work and is not negotiated upload size.",
+      "scope": "One actual local ref-bound operational measurement, retained from the completed post-Lua run with before-use source/policy/wrappers, actual commands/channels, configuration, object metadata and result under docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/. Finite task-source/byte-preservation controls are separately described, without runtime/performance/population/completeness inference. No remote freshness, future size or full physical/native closure follows.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual serialized committed-range pack; streamed byte/stat equality, PACK header/footer, empty-range and unchanged-ref/config/source controls.",
+        "result": "Actual0 at9f11029e5/base4683555e:1352197517 bytes,46757 logical/header objects,106 commits,147802483-byte trigger margin and47802483-byte advisory margin. Stream/stat/header/footer/ref/config/source/empty32 checks pass; preparation/trigger false. Actual retained receipts are under push-monitor-current/."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "The committed producer retains historical independent native validation and twelve RED controls at102ec3446 refs. This new9f11029e5 raw artifact has not received a separate independent actual-file size falsification epoch. Parent30 owns that publication qualification; old controls are not new observations."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Before-use logical producer/policy/wrapper metadata and actual channels survive, but the ignored raw pack and native physical Git/cache/compressor/toolchain/OS closure are not tracked recoverable inputs. Broader4.2/SESSION5 owns this explicit custody gap; no late retention is described as original first-use closure."
+      }
+    }
+  ]
+}

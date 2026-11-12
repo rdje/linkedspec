@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/read_task_narrative.py",
+    "--tree",
+    "PROJECT-DATA-SSD-ROOTING",
+    "--epoch",
+    "TYPE-REFERENCE-BOOK.1.2.23.4.32",
+    "--id",
+    "PROJECT-DATA-SSD-ROOTING.2.2"
+  ],
+  "cwd": "."
+}

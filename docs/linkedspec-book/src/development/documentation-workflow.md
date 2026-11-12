@@ -469,6 +469,23 @@ limits. The epoch interface requires an unpartitioned tree. Original cleanup dat
 totals and frontier words remain historical; current work resumes from MEMORY.md.
 This preserves task data, with no new cleanup, runtime or parity claim.
 
+The storage-locality epoch preserves all22 IDs/CORE fields, five complete unselected
+bodies and the full35225-byte frontier/trailing section.17 closed narratives gain
+source pointers; current text changes from98757 to58170 bytes, renewing40587 under
+unchanged limits. Recover the exact original source with:
+
+```bash
+bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --all
+```
+
+All23 source/node queries and independent recovery with ten corruption controls
+pass. The first terse attempt is retained as a guarded refusal: its189 records
+already had original archive pointers, so it supplied no new capacity. Readiness
+checks must exclude both original and epoch pointers and confirm a shorter
+eligible body. Original source/producer/command/mode evidence remains exact.
+This data epoch preserves dated storage evidence; current deletion, SDK and parity authority stays with its existing owners.
+
+
 ## Public book
 
 This book is for:

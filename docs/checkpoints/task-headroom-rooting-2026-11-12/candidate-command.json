@@ -1,0 +1,15 @@
+{
+  "cwd": ".",
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/task-headroom-rooting-2026-11-12/check_candidate.py",
+    "--check"
+  ],
+  "producer_sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae",
+  "input_metadata_sha256": "8a3b2b72012e5f58bc8c4213cace104fe9b976ed9beab77ab0f1cc217d8e20a8"
+}

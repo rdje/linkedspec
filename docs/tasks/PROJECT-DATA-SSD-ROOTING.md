@@ -64,7 +64,6 @@ accessing the shared copy, and remove only records or directories provably owned
 - ID: `PROJECT-DATA-SSD-ROOTING.0`
   Status: `done` (2026-07-26; ownership, inventory, migration safety, and dependency order frozen)
   Goal: Freeze the complete storage-locality contract and exact migration inventory before changing behavior.
-  Depends on: `REPO-ROOT-PATH-PORTABILITY.2.1`
   Acceptance: Classify project-owned versus external/caller/inert data; inventory every tracked reader, writer,
     default, existing LinkedSpec-owned location outside the SSD, and cross-volume dependency; measure relevant
     artifact/cache sizes and source filesystems; prove why each retained external access is strictly necessary;
@@ -72,32 +71,7 @@ accessing the shared copy, and remove only records or directories provably owned
     enforcement lane below; synchronize roadmap, task index, mdBook, live docs, and memory; pass doctrine/book/
     canonical gates; commit, clear the brief, verify clean, and do not push.
   Commit: `PROJECT-DATA-SSD-ROOTING.0 - freeze SSD storage migration`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Completed `REPO-ROOT-PATH-PORTABILITY.2.1` at clean commit `6edf5c8a`,
-    cleared the commit brief, verified 22/300 with no push, then created this task tree before any storage change.
-  - [x] **FILESYSTEM RED** — The repository is on the 3.7-TB SSD filesystem while the inherited per-user OS
-    temporary root is on the internal root filesystem. All `.0` generators/gates use ignored SSD task scratch.
-  - [x] **LIVE DATA INVENTORY** — Froze 65 CLI workspaces plus two Julia depots, 67 directories/135,756 KiB total;
-    17 CLI files/1,590 bytes; two exact Dart checkout active-root records; and one LinkedSpec entry inside a shared
-    Julia usage log. The former checkout itself is absent.
-  - [x] **TRACKED MECHANISM INVENTORY** — Across 1,936 tracked parent files, found 100 temporary-allocation owners:
-    Perl 24, Rust 16, Dart 18, Julia 17, Lua 13, Python 3, shell 12 with overlap; 24 executable files carry explicit
-    off-repository defaults; 97 Knowledge cards carry 107 old temporary/home-depot lines; 26 path-fixture files are
-    inert and separately classified.
-  - [x] **CACHE / NECESSITY BOUNDARY** — Measured shared Cargo 845 MB, Dart 78 MB, and Julia 13 MB caches outside
-    the SSD plus existing SSD-local Rust target 2.9 GB and Dart tool state 31 MB. Eleven baseline required toolchain
-    entrypoints are externally installed on the internal filesystem; they and OS libraries are necessary read-only
-    dependencies, while project caches/depot/scratch are not exceptions.
-  - [x] **DELETE-OLD CONTRACT** — ADR `0053` requires copy/count-byte-hash verify/use/delete for retained exact
-    data, immediate deletion in the owning migration leaf, no duplicate old project data, and an independent empty-
-    residue closeout. Shared ambiguous caches stay untouched but cease to be LinkedSpec inputs.
-  - [x] **DEPENDENCY-COMPLETE SPLIT** — `.1-.5` own storage initialization/lifecycle, every backend/tool family,
-    per-leaf migration deletion, residue reconciliation, structural/process enforcement, and complete closeout.
-  - [x] **BEHAVIOR-FREE ALIGNMENT** — `.0` changes only planning/architecture/continuity/public documentation and
-    Knowledge facts. Verification may populate ignored SSD-local caches, but no supported runtime, test, tool,
-    cache-default, or old-data behavior changes before `.1.1`.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.0`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1`
   Status: `done` (2026-07-26; environment, routing, and managed-run lifecycle complete)
@@ -108,96 +82,32 @@ accessing the shared copy, and remove only records or directories provably owned
 - ID: `PROJECT-DATA-SSD-ROOTING.1.1`
   Status: `done` (2026-07-26; repo-derived storage roots and same-filesystem override validation implemented)
   Goal: Define root-relative scratch and reusable-cache directories plus one shell environment initializer.
-  Depends on: `.0`
   Acceptance: Choose ignored root-relative directories for ephemeral scratch and retained caches; derive absolute
     runtime values only from the current repository root; create directories safely; export standard temporary,
     Cargo, Dart, and Julia environment variables without persisting the SSD mount path; preserve explicit caller
     overrides only when they resolve to the repository filesystem; add focused shell tests and documentation;
     commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.1 - define repo-local storage roots`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — `.0` filesystem census plus `stat` proves inherited OS temp is on another device;
-    the frozen tracked inventory names temp/Cargo/Dart/Julia defaults that would keep writing there.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — No common pre-command environment owner existed. Standard runtime variables
-    inherited caller/OS values, while `tools/run_julia_local.sh:7` and related runners explicitly fell back to
-    external temp; `bash tools/test_project_data_env.sh` supplies the same hostile variables as an executable oracle.
-  - [x] **FIX** — `tools/project_data_env.sh` derives `BASH_SOURCE` checkout identity, creates ignored
-    `/.linkedspec-data/{scratch,cache}`, checks GNU/BSD device identity before and after creation, preserves only
-    same-filesystem overrides, and exports LinkedSpec/temp/Cargo/Dart/Julia roots without a mount literal.
-  - [x] **ADDRESSED (verified)** — `bash tools/test_project_data_env.sh` passes default creation/ignore/device checks,
-    same-volume custom and per-tool overrides, outside-cwd hostile cross-volume replacement, execute-vs-source
-    rejection, cleanup, and machine-path source scans.
-  - [x] **NO REGRESSION** — `bash -n tools/project_data_env.sh tools/test_project_data_env.sh`, the focused shell
-    proof, `bash scripts/check_doctrines.sh`, `mdbook build docs/linkedspec-book`, and `git diff --check` pass.
-    The canonical gate passes Rust 1/1 in 83.33s, Dart 1/1, Julia 416/416 in 30.2s, primary 66x2, and Phase 0
-    1,031/1,031 in 652s. Existing workflows are not behaviorally routed until `.1.2`.
-  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, dedicated Knowledge card, roadmaps, task/live/memory docs are
-    synchronized. Standard hooks/runners remain unchanged until their owning `.1.2` leaf.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.1.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1.2`
   Status: `done` (2026-07-26; 14 standard workflow boundaries route repo-filesystem project data)
   Goal: Route commit hooks, doctrine scripts, canonical CI, and standard backend runners through the initializer.
-  Depends on: `.1.1`
   Acceptance: Source the helper before any command can allocate temporary or cache data; cover local CI, pre-commit,
     Knowledge Map generation, mdBook verification, and Rust/Dart/Julia/Lua/Perl runner entrypoints; prove commands
     launched from outside the checkout still select the current repo's SSD-backed roots; commit cleanly without
     pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.2 - route standard workflows to SSD storage`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — An exact entrypoint scan shows the hook, doctrine/Knowledge Map scripts, canonical
-    gate, mdBook command, and four backend runners do not initialize the storage environment themselves; hostile
-    inherited temp/cache values therefore remain active unless every caller remembers a manual pre-step.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `.1.1` deliberately introduced only the sourceable mechanism. Supported
-    workflow boundaries still start child tools directly, and no routed mdBook wrapper exists; Julia computes its
-    old fallback before common initialization while Lua's explicit workspace remains separately `.2.5`-owned.
-  - [x] **FIX** — Route `tools/project_data_env.sh` immediately after self-root discovery in every standard shell
-    entrypoint, add a generic `KM_ENV_INITIALIZER` bundle hook plus repo config, a routed mdBook wrapper, and one
-    focused static/dynamic outside-cwd workflow oracle.
-  - [x] **ADDRESSED (verified)** — The workflow oracle rejects missing/late routes, launches Rust/Dart/Julia/Lua
-    preflights plus doctrine/Knowledge Map/mdBook from another filesystem with hostile inherited variables, and
-    proves every selected root uses the repository device; full canonical independently passes from that cwd.
-  - [x] **NO REGRESSION** — Bash syntax, the `.1.1` initializer oracle, the new workflow oracle, direct routed
-    doctrine/Knowledge Map/mdBook checks, `bash scripts/check_doctrines.sh`, `git diff --check`, and the complete
-    canonical gate pass; canonical is Rust 1/1 77.50s, Dart 1/1, Julia 416/416 27.1s, primary 66x2, Phase 0
-    1,031/1,031 662s.
-  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, Knowledge Map, roadmaps, task/live/memory docs describe the
-    routed standard workflow boundary and preserve `.1.3` lifecycle plus `.2.1-.2.6` migration ownership.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.1.2`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.1.3`
   Status: `done` (2026-07-26; managed-run cleanup, retention, concurrency, and recovery implemented)
   Goal: Define cleanup, retention, concurrency, and interrupted-run behavior for repo-local storage.
-  Depends on: `.1.2`
   Acceptance: Separate reusable caches from per-run scratch; use collision-safe run directories; clean successful
     scratch while retaining diagnostically useful failed-run state only under an explicit policy; prevent one
     checkout or concurrent process from deleting another's data; document recovery; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.1.3 - harden storage lifecycle`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — `.1.2` routes all standard commands to one shared `scratch/tmp` root but supplies no
-    invocation owner, success/failure policy, collision-proof run namespace, or guarded crash recovery; concurrent
-    commands cannot safely delete that shared root.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — `tools/project_data_env.sh` establishes filesystem locality, not lifetime.
-    Each routed shell file starts independently, nested scripts re-source the helper, and existing EXIT traps make
-    trap injection an unsafe generic ownership mechanism.
-  - [x] **FIX** — Add `tools/project_data_run.sh`, one persisted path-free checkout id, `mktemp` run leaves with
-    exact ownership/liveness markers, one foreground wrapper reused by nested routed commands, default deletion,
-    explicit failed-run retention, and separate list/recover/purge-failed operations. Extend the generic Knowledge
-    Map integration through `KM_RUN_INITIALIZER` without coupling its portable bundle to LinkedSpec.
-  - [x] **ADDRESSED (verified)** — `bash tools/test_project_data_lifecycle.sh` proves success/default-failure cleanup,
-    retained-cache survival, explicit failure retention/purge, non-executable shell handoff, two concurrent unique
-    live runs, live-child recovery refusal, dead interruption recovery, malformed-marker/namespace-symlink refusal,
-    and foreign-checkout isolation. The 14-entrypoint oracle requires environment then managed-run ordering/no residue.
-  - [x] **NO REGRESSION** — Bash syntax, initializer/lifecycle/routing oracles, generic Knowledge Map portability,
-    routed doctrines/Knowledge Map/mdBook, task/47-line memory, `git diff --check`, and complete canonical pass.
-    Canonical is Rust 1/1 82.78s, Dart 1/1, Julia 416/416 30.1s, primary 66x2, Phase 0 1,031/1,031 639s; zero runs
-    remain after both a real default-policy failure and the successful full gate.
-  - [x] **LOCKSTEP** — README, Toolbox, mdBook, ADR, dedicated Knowledge card, roadmaps, task/live/memory docs define
-    exact cleanup/recovery commands and keep `.2.1-.2.6` as the backend/tool migration owners.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.1.3`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2`
   Status: `done` (2026-07-26; every Perl/Rust/Dart/Julia/Lua/tool migration child is complete)
@@ -208,238 +118,59 @@ accessing the shared copy, and remove only records or directories provably owned
 - ID: `PROJECT-DATA-SSD-ROOTING.2.1`
   Status: `done` (2026-07-26; Perl allocators/traces/CLI workspaces rooted, 65 old workspaces migrated and deleted)
   Goal: Root Perl tests, CLI conformance, corpus generation, traces, and diagnostic logs on SSD storage.
-  Depends on: `.1.3`
   Acceptance: Cover `File::Temp`, explicit trace/log files, and tool subprocess workspaces while retaining inert
     path-value fixtures; move any retained Perl-owned data, verify it, and delete its exact old copy in this leaf;
     pass focused Perl suites and both primary CLI matrices; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.1 - root Perl workspaces on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — The frozen owner census identifies 24 tracked Perl `File::Temp` users, while the
-    internal operating-system temporary root still held 65 `linkedspec-cli-*` workspaces with 17 files/1,590
-    bytes. `tools/run_primary_cli_matrix.sh` was also the remaining primary-matrix boundary without self-routing.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — Perl `File::Temp` and the CLI/oracle capture owners correctly honor
-    initialized `TMPDIR`, but no Perl-specific executable oracle locked that invariant and the standalone five-
-    backend primary matrix could allocate before initialization. The 65 directories were interruption remnants
-    from the exact `tools/run_cli_conformance.pl` workspace template, not inert path fixtures or shared cache data.
-  - [x] **FIX** — The standalone primary matrix now enters the common managed run before any runtime or allocator.
-    New `tools/test_perl_project_data_storage.sh` proves default/named `File::Temp`, explicit trace output, and a
-    real CLI subprocess workspace share the repository device, clean up exactly, retain the 24-owner inventory,
-    and preserve inert `/tmp` privacy/path values. The canonical Perl gate runs the oracle on every invocation.
-  - [x] **COPY / VERIFY / USE / DELETE** — Copied all 65 exact manifest-owned directories to ignored root-relative
-    `/.linkedspec-data/cache/migrated/perl-cli-workspaces/`; both sides matched 65 directories, 17 files, 1,590
-    bytes, and canonical inventory SHA-256 `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`.
-    The copied nested-spec/input fixture executed with exact expected JSON before all 65 old directories were
-    deleted; the old census is zero and the verified SSD copy remains recoverable.
-  - [x] **FOCUSED REGRESSION** — Bash syntax, outside-cwd Perl storage proof, expanded workflow routing, focused
-    runner/trace suites, and both 66-case Perl primary environments pass; completed managed-run census is zero.
-  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and complete canonical
-    Perl gate pass. Canonical records Rust 1/1 in 77.61s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, and
-    Phase 0 1,031/1,031 in 625s. This commit lands at 27/300; the brief is cleared and no push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.2`
   Status: `done` (2026-07-26; Rust Cargo cache, 17 temporary owners, relocation, and full local gate proven on SSD)
   Goal: Root Rust build, Cargo package, test, generated-source, and relocated-oracle data on SSD storage.
-  Depends on: `.2.1`
   Acceptance: Configure project-local Cargo cache/build roots through runtime-derived environment, retain the
     checked-in target layout contract where required, cover temporary integration fixtures, and prove copied-
     binary relocation without an internal-volume write; verify migrated retained data and delete each exact old
     Rust-owned copy in this leaf; pass Rust local gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.2 - root Rust workspaces on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — The default SSD-local Cargo home initially held only two lock/tag files and a clean
-    `cargo fetch --locked --offline` failed at `serde_json`, proving that the 3.6-GiB SSD-local `rust/target` masked
-    a missing reusable dependency cache. The internal temporary roots hold no retained Rust-prefixed workspace.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — Common workflow routing initializes `TMPDIR`, `CARGO_HOME`, and
-    `CARGO_TARGET_DIR`, but no Rust-specific executable oracle proves Cargo cache completeness, all integration
-    scratch owners, generated child projects, traces, and copied-binary relocation. The frozen `Rust 16` count also
-    missed `rust/linkedspec-core/src/trace.rs` because that unit-test helper imports `env` and calls
-    `env::temp_dir()` rather than spelling `std::env::temp_dir()`; the corrected tracked owner count is 17. The
-    first routed proof also exposed a synthetic relocation test whose supposed external executable lived beneath
-    `std::env::temp_dir()`; after SSD rooting that path is correctly inside the real checkout, so ancestor discovery
-    found the real repository. Repository discovery needed a filesystem-predicate seam for topology-only testing.
-  - [x] **FIX** — `tools/run_cargo_local.sh` provides a self-rooted managed wrapper for targeted Cargo work.
-    `tools/test_rust_project_data_storage.sh` validates repository-device Cargo/temp/target roots, locks all 17
-    allocator owners including both `temp_dir` spellings, exercises traces and a generated child project, and runs
-    a copied primary binary from managed scratch without an off-volume write. The full Rust gate invokes it.
-  - [x] **CACHE / MIGRATION / DELETE** — The ignored repo-relative Cargo home now covers all 195 locked registry
-    packages: 195 compressed entries, 195 unpacked source directories, 12,741 files, 371,604 KiB, and canonical
-    compressed-cache hash `a51efb284d62287872f6cc2fd113b1f31c6c5c2e5c1e7d1dd5e52de1e735b399`.
-    Locked offline fetch and build pass without consulting the shared developer cache. Exact Rust-prefixed residue
-    across the inherited OS temporary roots is zero, so there was no unambiguous old Rust-owned source to delete;
-    the ambiguous shared Cargo cache remains untouched and is no longer a supported-workflow input.
-  - [x] **FOCUSED REGRESSION** — Standalone and full-gate Rust storage proofs, offline dependency resolution,
-    generated-source compilation, trace creation, copied-binary relocation, the complete Rust gate, the expanded
-    18-boundary outside-cwd routing oracle, the repository-path doctrine, and cleanup proofs pass with zero
-    completed managed runs.
-  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and warranted canonical
-    verification pass; this commit lands at 28/300, the brief is cleared, the tree is clean, and no push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.2`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.3`
   Status: `done` (2026-07-26; Dart cache, 18 temporary owners, generated/trace paths, and full gate proven on SSD)
   Goal: Root Dart package cache, test workspaces, and generated outputs on SSD storage.
-  Depends on: `.2.2`
   Acceptance: Configure a repo-derived package cache and temporary root, preserve package resolution and primary
     behavior, verify migrated retained data and delete each exact old Dart-owned copy in this leaf, pass Dart
     package/corpus/CLI gates from inside and outside the checkout; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.3 - root Dart workspaces on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / ISSUE** — Canonical execution with the default repo-local Dart cache passes Rust then fails
-    to locate package `test` offline, while a warmed noncanonical SSD cache passes. Read-only census finds 18
-    tracked `Directory.systemTemp` owners, an empty canonical Dart cache, a 79,480-KiB warmed SSD cache, a
-    79,484-KiB shared off-SSD cache, and exactly two shared `active_roots` records naming the current and absent
-    former checkout.
-  - [x] **ROOT CAUSE (WHY + WHERE)** — Common routing exports repo-device `TMPDIR` and `PUB_CACHE`, but Dart has no
-    executable storage oracle or targeted pub wrapper. The complete package cache was stranded below an earlier
-    ignored target-era storage root, the canonical cache was never populated, and Dart's shared cache retained
-    checkout-identity metadata. Package payload counts/bytes match; only fetched-at index metadata differs.
-  - [x] **FIX** — `tools/test_dart_project_data_storage.sh` locks all 18 temporary owners, validates actual repository-device
-    temp/pub/generated/trace paths, proves offline package resolution, and runs inside the complete Dart gate.
-    `native_pipeline_trace_test.dart` directly proves `Directory.systemTemp` equals routed `TMPDIR`, while the
-    shell oracle checks run/temp/cache device identity, exact package configuration, cleanup, and focused trace/
-    generated-source execution. `tools/run_dart_local.sh` invokes the oracle after its complete package tests.
-  - [x] **CACHE / MIGRATION / DELETE** — Atomically moved the 79,480-KiB warmed SSD package cache into canonical
-    ignored `/.linkedspec-data/cache/dart-pub/`; the old target-era cache path is absent. Shared and SSD caches
-    match at 5,903 payload files / 63,744,165 bytes / hash
-    `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; their 47 index files match after removing
-    only `_fetchedAt`, normalized hash `21e59ae7c96ad7a94b77f7e854a685d4729c22623486a1acea4ab444777f067b`.
-    Offline use and the full gate pass before the two exact current/former shared `active_roots` records and their
-    empty hash shards are deleted. Shared active-root residue is zero; ambiguous package payload remains untouched.
-  - [x] **FOCUSED REGRESSION** — Standalone/reused Dart storage, 47-package offline pub, 17 focused trace/generated
-    tests, complete format/analyzer/337-test package gate, primary 66x2, corpus 105/105, 19-boundary outside-cwd
-    routing, and cleanup proofs pass with zero managed runs.
-  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and warranted canonical
-    verification pass; this commit lands at 29/300, the brief is cleared, the tree is clean, and no push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.3`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.4`
   Status: `done` (2026-07-26; Julia depot, scratch, durable commands, metadata hygiene, and exact deletion complete)
   Goal: Root Julia depots, package precompile state, test scratch, and generated outputs on SSD storage.
-  Depends on: `.2.3`
   Acceptance: Replace operating-system-temp and developer-home depot composition with the repo-derived retained
     depot plus read-only tool/system depots; route `mktempdir` through the SSD temporary root; normalize every
     durable reverify command; verify the migrated project depots and delete their exact old copies in this leaf;
     pass complete Julia and affected semantic gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.4 - root Julia depots and scratch on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / INVENTORY** — Froze 17 tracked Julia `mktempdir`/`tempdir` owners, one empty canonical depot,
-    one 103,356-KiB same-SSD source-bearing depot, two exact old internal-volume depots, one exact former-checkout
-    stanza in a shared usage log, five external Manifest packages, 88 current Julia reverify cards, and eight
-    directly invocable Julia-consuming cross-backend checkers requiring managed routing.
-  - [x] **ROOT CAUSE / POLICY** — Julia follows routed `TMPDIR`; a trailing empty `JULIA_DEPOT_PATH` entry expands
-    to Julia-managed system depots, not the developer-home depot. Compiled cache alone cannot resolve JSON3 source.
-    Therefore the first writable depot must retain package source/registry/precompile state on the repository
-    filesystem; only interpreter-managed system depots remain strictly necessary read-only external dependencies.
-  - [x] **FIX / RECURRING ORACLE** — Added self-rooted `tools/run_julia_project_data.sh` and a complete-gate storage
-    oracle locking 17 owners, actual run/temp/depot/package devices, five exact package trees, no symlinks, offline
-    JSON3 loading, `tempdir()` routing, generated v2 source, trace output, cleanup, and absence of machine-path
-    usage metadata. Local/primary gates now require the initialized depot, default offline, and have no second
-    operating-system-temp or developer-home fallback. Eight cross-backend checkers now self-route before runtime,
-    and the already-routed primary matrix no longer carries a duplicate fallback; canonical tracks/syntax-checks
-    the new boundaries.
-  - [x] **DURABLE COMMAND MIGRATION** — Migrated 88 existing current Julia fact cards; with the new storage card,
-    89 current reverify commands now use the targeted wrapper, complete gate, or self-rooted primary checker. No
-    current Julia reverify command names a developer depot, concrete Julia executable, or OS-temp depot.
-  - [x] **COPY / VERIFY / USE / DELETE** — Atomically promoted the warm source-bearing SSD depot into canonical
-    retained cache. Copied both exact old depots to root-relative retained migration storage and verified the larger
-    at 346 directories / 256 files / 133,963,036 bytes / hash
-    `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8` and the query depot at 24 directories /
-    15 files / 4,284,303 bytes / hash `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`.
-    After full offline use, deleted both exact old sources and the one former-checkout shared-log stanza. The shared
-    developer depot remains untouched and unused; old exact residue is zero.
-  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash syntax, standalone/reused storage proof, complete Julia package
-    suite and affected semantic tests, primary process checker, corpus 105/105, and zero-run cleanup pass. The
-    30-boundary hostile outside-cwd routing proof also passes with every process reaching its selected runtime
-    preflight before work, and completed runs leave no residue.
-  - [x] **SIGNOFF / CLEAN PIVOT** — Doctrines, task/memory/Knowledge Map/mdBook/whitespace, and canonical pass.
-    Canonical records Rust semantic admission 1/1 in 77.66s, Dart 1/1, Julia 416/416 in 27.1s, primary 66x2,
-    and Phase 0 1,031/1,031 in 625s. This commit lands at 30/300; the brief is cleared, the tree is clean, and no
-    push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.4`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.5`
   Status: `done` (2026-07-26; both Lua ABIs, 13 allocation owners, generated/trace data, and exact residue proven)
   Goal: Root Lua native builds, tests, CLI matrices, and generated artifacts on SSD storage.
-  Depends on: `.2.4`
   Acceptance: Remove all hard-coded operating-system temporary roots from executable Lua harnesses; use safely
     quoted repo-derived scratch; move any retained Lua-owned data, verify it, and delete its exact old copy in this
     leaf; pass PUC Lua and LuaJIT package/corpus/primary gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.5 - root Lua workspaces on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / INVENTORY** — Froze 13 executable Lua-family allocation owners, every hard-coded
-    operating-system-temporary template/default, anonymous `io.tmpfile()` use, the direct native-build boundary,
-    five Lua-specific durable verification commands, and both exact old-root `linkedspec-lua-*` censuses.
-  - [x] **ROOT CAUSE / POLICY** — Routed `TMPDIR` governs standard Lua file paths but cannot rewrite hard-coded
-    templates or govern C `tmpfile()`. Named managed files replace anonymous storage, and caller-selected native
-    output is rejected against the repository device before directory creation. PUC Lua, LuaJIT, the C compiler,
-    `pkg-config`, ABI/PCRE2 headers and libraries, and OS libraries remain necessary read-only external inputs.
-  - [x] **FIX / RECURRING ORACLE** — Added self-rooted `tools/run_lua_project_data.sh` and
-    `tools/test_lua_project_data_storage.sh`; made the native builder self-rooted and pre/post-create guarded; and
-    routed both complete ABIs, all 13 owners, generated-source hosts, traces, and corpus capture streams through
-    managed repository scratch. The oracle uses a path containing a space, builds and executes two native modules
-    per ABI, rejects symlinks/device drift and hostile cross-volume output before creation, and proves cleanup.
-  - [x] **DURABLE COMMAND MIGRATION** — Replaced all five Lua-owned current Knowledge Map commands that named the
-    old temporary root or hand-built native adapters. The sole remaining composite command is explicitly `.2.6`-
-    owned because its non-Lua Python/Rust allocator is the writer requiring migration.
-  - [x] **COPY / VERIFY / USE / DELETE** — Both exact frozen old temporary roots contained zero retained
-    `linkedspec-lua-*` directories before implementation and after the complete/canonical gates, so no Lua payload
-    existed to copy or delete. Unrelated temporary data and installed toolchain resources were untouched.
-  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash syntax, standalone/reused storage proof, 33-boundary hostile
-    outside-cwd routing, both complete 177/177 PUC Lua and LuaJIT suites, primary 66x2, corpus 105/105, diagnostic,
-    logical-helper, root-selection, and cursor/identity/result checks pass with zero managed-run residue.
-  - [x] **SIGNOFF / CLEAN PIVOT** — ADR/roadmaps/task/live/memory/Knowledge Map/mdBook are synchronized; doctrines,
-    whitespace, and canonical pass. Canonical records Rust semantic admission 1/1 in 77.68s, Dart 1/1, Julia
-    416/416 in 27.4s, primary 66x2, and Phase 0 1,031/1,031 in 626s. This commit lands at 31/300; the brief is
-    cleared, the tree is clean, and no push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.5`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.2.6`
   Status: `done` (2026-07-26; Python, shell, Knowledge Map, mdBook, conformance, TAP, and oracle output rooted)
   Goal: Root Python, shell, mdBook, Knowledge Map, conformance, and miscellaneous tool artifacts on SSD storage.
-  Depends on: `.2.5`
   Acceptance: Cover Python `tempfile`, shell `mktemp`, explicit log/TAP/oracle outputs, generated book paths, and
     remaining supported writers; do not rewrite inert absolute-path privacy fixtures; move any retained tool-owned
     data, verify it, and delete its exact old copy in this leaf; pass focused tool and book gates; commit cleanly
     without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.2.6 - root tool artifacts on SSD`
-
-  #### Acceptance Checklist
-
-  - [x] **REPRODUCE / INVENTORY** — Froze the three Python temporary-allocation files, 12 actual shell `mktemp`
-    owners,
-    all 19 Python checker entrypoints and their bytecode behavior, Knowledge Map configured/temporary output,
-    mdBook generated output and destination overrides, conformance/TAP/oracle writers, three current off-volume
-    reverify commands, one stale Lua temporary-fallback statement, and exact old tool-prefix residue. Recorded the
-    accidental `/tmp/linkedspec_2_6_inventory.txt` diagnostic, its immediate exact deletion, and absence proof.
-  - [x] **ROOT CAUSE / POLICY** — Proved standard shell allocators were already routed after initialization while
-    direct Python `tempfile`, inherited `KM_OUTPUT`, mdBook destination overrides, and Python bytecode could bypass
-    that boundary. Preserved explicit caller inputs and inert privacy examples while denying project-owned output on an
-    external filesystem even when a caller requests it.
-  - [x] **FIX / RECURRING ORACLE** — Added `tools/run_python_project_data.sh`, retained Python bytecode, explicit
-    validated Unicode-generator scratch, generic Knowledge Map output validation, mdBook destination validation,
-    and `tools/test_tool_project_data_storage.sh`. The oracle locks all three/12/19 owner sets, real devices and
-    nonsymlink paths, rejected external/symlink destinations before creation, generated map/book/TAP/bytecode plus
-    conformance/oracle paths, cleanup, and outside-cwd use.
-  - [x] **DURABLE COMMAND / GUIDANCE MIGRATION** — All 177 maintained command references across 151 current
-    documents use the supported Python boundary; current mdBook commands use its wrapper; all three off-volume
-    reverify commands, the stale Lua fallback, and generic off-volume Knowledge Map example are removed. Historical
-    task/change evidence, inert fixtures, and nested-project records remain classified rather than rewritten.
-  - [x] **COPY / VERIFY / USE / DELETE** — The accidental `/tmp/linkedspec_2_6_inventory.txt` was deleted
-    immediately and proved absent. The pre-fix census found only the disposable 88-line/4,646-byte Julia audit
-    list; metadata, content, hash, and repository-reference checks proved ownership, the exact file was deleted,
-    and both frozen old-root censuses are zero. No retained tool payload required copy/hash migration.
-  - [x] **FOCUSED / COMPLETE REGRESSION** — Bash/Python syntax, initializer/lifecycle, 35-boundary routing, storage
-    oracle, every affected Python contract, Knowledge Map 716/5,653, actual mdBook, conformance/TAP/oracle checks,
-    doctrines, whitespace, and zero-run proof pass. Canonical passes Rust 1/1 in 77.49s, Dart 1/1, Julia 416/416 in
-    27.0s, primary 66x2, and Phase 0 1,031/1,031 in 624s.
-  - [x] **SIGNOFF / CLEAN PIVOT** — ADR/roadmaps/task/live/memory/Knowledge Map/mdBook are synchronized; this commit
-    lands at 32/300, clears the brief, leaves a clean exact old-data/run census, and does not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.2.6`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3`
   Status: `done` (2026-07-26; reconciliation, descendant remediation, and empty final residue proof complete)
@@ -456,52 +187,16 @@ accessing the shared copy, and remove only records or directories provably owned
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1.1`
   Status: `done` (2026-07-26; complete migration ledger, missed target-era root deletion, and descendant-risk split)
   Goal: Reconcile every frozen source against its verified SSD destination and deletion record.
-  Depends on: `.2.6`
   Acceptance: Re-run the frozen census; prove every exact LinkedSpec-owned source was moved, byte/count/hash checked
     where material, exercised from its SSD destination, and then deleted in its owning `.2` leaf; resolve any missed
     exact owner immediately; never move or delete a shared global cache wholesale; record every source/destination/
     deletion class without persisting a concrete mount path; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.3.1.1 - reconcile SSD migration records`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.2.6` commit `2c485819` at 32/300 with no push; froze this
-    reconciliation checklist before changing any audit record or implementation.
-  - [x] **FROZEN-SOURCE LEDGER** — Recovered the complete `.0` census and reconciled every exact project-owned source
-    class to one owning `.2` leaf, its repository-derived destination or disposable classification, and its
-    recorded count/byte/hash evidence where material.
-  - [x] **DESTINATION USE / DELETION LEDGER** — Proved every retained destination was exercised before exact-source
-    deletion; disposable sources and shared metadata were owner-classified; ambiguous shared caches remain
-    untouched and unused. The missed target-era root was deleted only after canonical cache comparison/use.
-  - [x] **INDEPENDENT RE-CENSUS** — Re-ran every frozen exact old-root and shared-metadata census without broad
-    deletion or concrete mount paths in durable records. All are zero; the one missed exact same-SSD owner was
-    resolved immediately, and `.3.2` inherits a reproducible empty-residue boundary after `.3.1.2`.
-  - [x] **SSD DESTINATION HEALTH** — Re-ran the repository-storage initializer/lifecycle and all six backend/tool
-    storage oracles needed to show retained caches, fixtures, depots, and writer destinations remain usable on the
-    repository filesystem with no managed-run residue.
-  - [x] **LOCKSTEP / CLEAN SIGNOFF** — Recorded the reconciled ledger and descendant RED in the task tree,
-    ADR/Knowledge layer, roadmaps, live docs, Toolbox, README, and mdBook; memory, Knowledge Map 718/5,675, all five
-    doctrines, book, whitespace, exact census, and relevant regression gates pass. This commit lands at 33/300,
-    clears the brief, remains clean, and does not push.
-
-  #### Reconciled Migration Ledger
-
-  | Frozen or discovered source class | Retained destination or disposition | Verification before source deletion | Independent `.3.1.1` result |
-  | --- | --- | --- | --- |
-  | 65 exact Perl CLI workspace directories in the inherited temporary root | `/.linkedspec-data/cache/migrated/perl-cli-workspaces/` | 65 directories, 17 files, 1,590 bytes, canonical hash `2a24e96043cf42b0c5e31d6b77064c64b07e36d6506ff9724d2c361f53ce8f49`, copied nested fixture executed | Destination remains 65/17/1,590; both frozen old-root `linkedspec-*` censuses are zero; Perl 24-owner oracle passes |
-  | Shared developer Cargo cache | Left untouched as ambiguous multi-project data; supported workflows use `/.linkedspec-data/cache/cargo-home/` | Canonical root covers 195 compressed packages and 195 sources / 12,741 files; locked offline fetch and Rust gate passed | Shared data remains untouched and unused; canonical locked fetch and 17-owner oracle pass |
-  | Missed exact target-era `rust/target/project-data-ssd-rooting/` root | Canonical Cargo cache retained; 13 scratch files disposable | Audit found 12,754 files / 2,376 directories / 371,656 KiB. Its 12,741-file Cargo cache and canonical cache each held 348,574,405 bytes; registry trees were byte-identical and only volatile root-local `.global-cache` content differed; canonical locked fetch passed | Exact old root deleted after no-process proof; it is absent; canonical locked fetch and complete Rust storage oracle pass afterward. Reusable payload remains recoverable from canonical cache; old scratch/identity is intentionally unrecoverable |
-  | Warmed Dart target-era cache | Atomically moved to `/.linkedspec-data/cache/dart-pub/` | 5,903 payload files / 63,744,165 bytes / hash `039c5fd8728ea44f23b028ee9400846c353e71a071d46da355b8e1e0d857f29e`; offline/full gate passed | Old target-era root remains absent; canonical 47-package/18-owner oracle passes |
-  | Two exact shared Dart checkout records and empty shards | Exact metadata deleted; ambiguous shared package payload untouched | Deleted only after canonical offline/full-gate use | Shared active-root scan has zero LinkedSpec match; shared payload remains untouched and unused |
-  | Two exact old Julia depots | `/.linkedspec-data/cache/migrated/julia-depots/` plus canonical source-bearing depot | 346 directories / 256 files / 133,963,036 bytes / hash `bddd661bcfb5e43b4cdb4f688d0de68530e8a94ee0b8f1c38ac873c89d8c9ed8`; 24 directories / 15 files / 4,284,303 bytes / hash `aa599da3058fc18240fad33792b0a2d006731abb8c2bc7f2348b78aeb4c3030c`; offline/full gate passed | Both retained copies still match directory/file/byte counts; exact old roots are absent; five-package/17-owner oracle passes |
-  | Exact former-checkout Julia usage-log stanza | Exact stanza deleted; ambiguous shared depot/log data untouched | Ownership classified before deletion; canonical package use passed | Shared usage-log scan has zero LinkedSpec match; shared depot remains untouched and unused |
-  | Lua old-root `linkedspec-lua-*` class | No retained payload existed | Initial and post-gate exact censuses zero | Both frozen old-root censuses remain zero; dual-ABI 13-owner oracle passes |
-  | Disposable tool audit list and accidental inventory | Exact files deleted after ownership/content classification | Audit list 88 lines / 4,646 bytes / SHA-256 `1d6cd0b5a6661dfc2e71eb43d0ff9ee64b32147735c9ec7b43767c7d4a350dce`; both exact paths absent | Both paths and all old-root `linkedspec-*` entries remain absent; three-Python/12-shell/19-entrypoint tool oracle passes |
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.3.1.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.1.2`
   Status: `done` (2026-07-26; marker-v2 process-group lifecycle and recovery proof complete)
   Goal: Make managed-run cleanup and recovery respect live descendants after wrapper/direct-child interruption.
-  Depends on: `.3.1.1`
   Acceptance: Retain the exact deterministic RED where a direct child exits after launching a descendant whose cwd
     remains inside managed scratch while the current wrapper deletes that run; bind each run to a portable process-
     group or equivalently complete descendant-liveness authority; forward interruption to the complete owned group;
@@ -510,52 +205,16 @@ accessing the shared copy, and remove only records or directories provably owned
     tests on the supported host families; update the lifecycle fact and public recovery guidance; pass routing,
     storage, doctrine, book, and warranted canonical gates; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.3.1.2 - guard managed-run descendants`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / RED FIRST** — Began from clean `.3.1.1` commit `7efd48b6` at 33/300 with no push; retained the
-    exact `descendant_live=yes` / `run_present=no` reproduction before lifecycle implementation changes.
-  - [x] **WHOLE-RUN AUTHORITY** — Launch the managed foreground command in one portable dedicated process group,
-    persist validated marker-v2 group identity, and preserve nested routed-run reuse without machine paths.
-  - [x] **CLEANUP / RECOVERY SAFETY** — Wait for the owned group to drain before ordinary success/default-failure
-    cleanup; require group death again immediately before recovery/purge deletion; treat a live or reused group id
-    conservatively as nondeletable; reject legacy/invalid markers rather than guessing.
-  - [x] **SIGNAL COMPLETENESS** — Forward HUP/INT/TERM to the complete owned group, preserve established exit status,
-    and prove direct child plus descendant stop before exact scratch removal.
-  - [x] **MUTATION-SENSITIVE PROOF** — Extended `tools/test_project_data_lifecycle.sh` with background-descendant wait,
-    abrupt wrapper/direct-child loss, live-group recovery refusal, group drain/recovery, signal forwarding,
-    marker-version/group-field rejection, concurrency, cache, namespace, and zero-residue checks.
-  - [x] **LOCKSTEP / SIGNOFF** — Updated lifecycle/SSD Knowledge facts, ADR/README/Toolbox/mdBook, roadmaps, task/live/
-    memory docs; Bash syntax, focused lifecycle/routing/environment, six storage oracles, all five doctrines,
-    Knowledge Map, book, whitespace, and canonical gates pass; this commit lands at 34/300 and does not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.3.1.2`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.3.2`
   Status: `done` (2026-07-26; independent pre/post-use off-repository residue census is zero)
   Goal: Prove no exact LinkedSpec-owned residue remains outside the repository filesystem.
-  Depends on: `.3.1`
   Acceptance: Delete any final exact disposable or byte-verified migrated LinkedSpec path immediately; leave
     unrelated temporary and shared global tool data untouched; prove the frozen off-SSD census is empty and the SSD
     copies remain usable; report deletion targets, verification, and recoverability; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.3.2 - retire internal-volume project data`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.3.1.2` commit `f471d5f3` at 34/300 with zero managed runs,
-    froze this checklist before census/document changes, and did not push.
-  - [x] **INDEPENDENT ROOT CENSUS** — Resolved the inherited system and per-user temporary roots at runtime, proved
-    their filesystem relation to the current repository, and independently enumerated exact LinkedSpec-prefixed
-    entries without persisting a machine-local mount or checkout path.
-  - [x] **EXACT METADATA / OLD-IDENTITY CENSUS** — Rechecked only the bounded shared Dart active-root and Julia usage-
-    log metadata surfaces for current/former LinkedSpec identity; proved every named disposable/off-repository and
-    superseded same-SSD exact path absent; do not scan-delete or mutate ambiguous shared package payload.
-  - [x] **DELETE-OR-ZERO DISPOSITION** — Pre-use and post-use censuses both found zero candidate: `.3.2` has zero
-    deletion targets, removes no external path, and leaves all unrelated/shared data untouched.
-  - [x] **RETAINED SSD HEALTH** — Recounted the retained Perl and Julia migration copies against their frozen directory/
-    file/byte boundaries, exercised their canonical storage paths through the relevant oracles, and proved all six
-    backend/tool destinations plus lifecycle leave zero managed-run residue.
-  - [x] **LOCKSTEP / CLEAN SIGNOFF** — Added the final-residue Knowledge fact and synchronized ADR/roadmaps/task/live/
-    memory/public book; pass census, storage, Knowledge Map, five doctrines, mdBook, memory, and whitespace gates;
-    commit at 35/300, clear the brief, remain clean, and do not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.3.2`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4`
   Status: `done` (2026-07-27; structural and relocated process enforcement complete)
@@ -566,121 +225,36 @@ accessing the shared copy, and remove only records or directories provably owned
 - ID: `PROJECT-DATA-SSD-ROOTING.4.1`
   Status: `done` (2026-07-26; structural storage-locality doctrine registered and mutation-sensitive)
   Goal: Add a fast structural doctrine for project storage locality.
-  Depends on: `.3.2`
   Acceptance: Scan tracked executable/config/documented command owners for forbidden internal-temp, developer-home,
     unrooted cache, and unproved cross-volume defaults while preserving inert caller path fixtures; require every
     external tool/system/caller access to match the frozen explicit necessity surface; self-test every rejected and
     accepted class; register exactly once in doctrine enforcement; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.4.1 - gate project storage locality`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.3.2` commit `5f603104` at 35/300 with a zero-byte brief and
-    zero managed runs; froze this checklist before enforcement-code changes; no push occurred.
-  - [x] **STRUCTURAL OWNER INVENTORY** — Derived the tracked executable/config/documented-command surface and
-    classified current storage spellings. The direct RED found exactly nine unsafe Toolbox artifact destinations;
-    inert fixtures, historical evidence, explicit caller inputs, and necessary tool/system paths remain distinct.
-  - [x] **EXACT POLICY CHECK** — Added `scripts/check_project_data_storage_locality.sh`, a self-rooted fast checker
-    over tracked code/test/tool/configuration owners, current README/Toolbox/mdBook commands, and Knowledge
-    `reverify:` lines. It rejects OS-temp, developer-home, unrooted storage, and concrete checkout defaults while
-    accepting repository-derived storage and the frozen explicit necessity classes.
-  - [x] **MUTATION-SENSITIVE SELF-TESTS** — Twenty-two embedded reject/accept cases cover every forbidden class,
-    persisted checkout identity, caller-owned absolute inputs, inert fixtures, necessary executable/library reads,
-    rejection probes, root-relative paths, and runtime-derived storage. The composed `REPO-ROOT-PATHS` doctrine
-    continues to reject every persisted current/former machine identity outside this storage-specific sink model.
-  - [x] **E3/E4 REGISTRY** — Registered `PROJECT-DATA-STORAGE` exactly once in `scripts/check_doctrines.sh`; the
-    existing pre-commit and local-CI paths consume that one driver. Enforcement/Toolbox guidance documents the
-    doctrine, and hostile outside-cwd routing now proves 36 standard entrypoints.
-  - [x] **LOCKSTEP / SIGNOFF** — Synchronized doctrine/storage/routing facts, ADR/roadmaps/task/live/memory/public
-    book. The checker reports 1,651 governed files / 366,343 lines / 22 cases; all six storage oracles, 36-boundary
-    routing, six doctrines, Knowledge Map, mdBook, memory, whitespace, and zero-run gates pass. No canonical rerun
-    is warranted after `.3.1.2`: this leaf changes only a structural checker/current guidance and reruns every
-    affected storage oracle. Commit at 36/300, clear the brief, and do not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.4.1`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.4.2`
   Status: `done` (2026-07-27; relocated six-family process containment is mutation-sensitive and canonical)
   Goal: Add process proof that representative workflows keep project IO on the repo filesystem.
-  Depends on: `.4.1`
   Acceptance: Run representative Perl/Rust/Dart/Julia/Lua/tool probes with hostile external temp/cache variables;
     trace or otherwise enumerate opened project/dependency paths; verify project-owned reads and writes resolve
     beneath the dynamic repo root and share its filesystem; allow only the frozen necessary system/tool/caller
     accesses; prove outside-cwd and relocated-checkout execution; commit cleanly without pushing.
   Commit: `PROJECT-DATA-SSD-ROOTING.4.2 - prove SSD-local project writes`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.4.1` commit `ae3b64f2` at 36/300 with a zero-byte brief
-    and zero managed runs; froze this checklist before process-oracle code; no push occurred.
-  - [x] **TRACE AUTHORITY / RED** — `fs_usage` and `dtruss` require root on the current macOS host; the narrower
-    non-root normal-terminal authority is `sandbox-exec`. The committed oracle kernel-denies external writes and
-    selected implicit project-data reads, and keeps deterministic old-volume-write/shared-cache REDs.
-  - [x] **OWNERSHIP / NECESSITY MODEL** — The oracle resolves project paths and filesystem identity, freezes
-    external interpreters to system/tool roots, denies developer HOME plus both OS temp roots for data reads, and
-    admits only one exact existing read-only caller input. System/runtime reads remain necessary, not project data.
-  - [x] **REPRESENTATIVE FIVE-BACKEND + TOOL PROOF** — The relocated driver requires the exact `caller-input dart
-    julia lua perl rust tool` set. Five primary commands write nonempty local traces; the Python checker writes local
-    bytecode. Hidden Dart HOME telemetry and Apple `cc`-shim `xcrun_db-*` writes were found and removed rather than
-    admitted; all eight affected multi-backend parity drivers pass.
-  - [x] **OUTSIDE-CWD / RELOCATED PROOF** — A collision-safe checkout view beneath managed SSD scratch receives
-    clone-copied Dart/Julia caches and the built Rust primary, then runs from the runtime-derived system-temp cwd on
-    another filesystem with hostile inherited temp/cache values. Root discovery replaces every hostile destination,
-    project outputs share the relocated root/device, and managed cleanup removes the view.
-  - [x] **MUTATION-SENSITIVE REGRESSION** — Retained mutations reject an old-volume output before creation, an
-    implicit shared Cargo-cache read, a symlink escape, and a missing tool-family probe. The exact caller input and
-    required external executables remain accepted; any denied-access or `xcrun_db-` diagnostic fails the driver.
-  - [x] **LOCKSTEP / SIGNOFF** — Synchronized process/storage/Dart/Lua/doctrine/routing facts, ADR/roadmaps/task/
-    live/memory/public book. Process oracle, 28-case structure, 38 routing, all six storage oracles, eight affected
-    parity drivers, Knowledge Map 721/5,713, six doctrines, mdBook, memory, and whitespace pass. Canonical passes
-    Rust semantic admission 1/1 in 78.09s, Dart 1/1, Julia 416/416 in 27.2s, primary 66x2, nested process proof, and
-    Phase 0 1,031/1,031 in 620s. Commit at 37/300, clear the brief, and do not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.4.2`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.5`
   Status: `done` (2026-07-27; complete backend/parity/census/canonical/public closeout)
   Goal: Close the migration with complete documentation, census, and regression proof.
-  Depends on: `.4`
   Acceptance: Run all backend local gates, five-backend matrices, mdBook, Knowledge Map, doctrines, and canonical
     local CI; prove no exact LinkedSpec-owned data remains on the internal volume; prove all retained project state
     is on the repository filesystem; align ADR/roadmaps/book/live/task/memory; close this tree; resume
     `REPO-ROOT-PATH-PORTABILITY.2.2`; commit, clear the brief, verify clean, and do not push.
   Commit: `PROJECT-DATA-SSD-ROOTING.5 - close SSD storage migration`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began from clean `.4.2` commit `8e341068`, empty commit brief, zero managed
-    runs, and 37/300 local commits with no push; froze this checklist before any closeout census or documentation
-    change.
-  - [x] **FRESH PRE/POST RESIDUE CENSUS** — Runtime-derived pre- and post-proof censuses confirm both off-repository
-    operating-system temporary roots contain zero bounded LinkedSpec candidate, shared Dart active-root and Julia
-    usage metadata contain zero LinkedSpec file, every named obsolete root is absent, and there are zero deletion
-    targets. Unrelated/shared data remains untouched. Retained Perl 65/17/1,590 and Julia
-    346/256/133,963,036 plus 24/15/4,284,303 inventories stay exact; six canonical roots share the repository
-    device; canonical Julia usage metadata is absent; zero runs remain.
-  - [x] **RETAINED DESTINATION / ENFORCEMENT HEALTH** — Frozen retained Perl/Julia inventories and all six canonical
-    roots remain exact/same-device. Environment, marker-v2 lifecycle, 38 routes, Perl 24, Rust 17/195, Dart 18/47,
-    Julia 17/5, Lua 13/dual-ABI, tool writers, 28 structural cases, relocated six-family kernel containment, its
-    four negative controls, and zero-run cleanup pass.
-  - [x] **ALL BACKEND LOCAL GATES** — Complete Rust passes core 193, runtime 149, corpus/generated 105 each,
-    integration 197, semantic admission 1/1 in 78.12s, storage, and primary 66x2. Dart passes format/analyze, 337,
-    storage, primary 66x2, and corpus 105. Julia passes 9,297, storage, primary process proof, and corpus 105.
-    PUC Lua and LuaJIT each pass 177 plus storage; PUC primary 66x2 and corpus 105 pass; zero runs remain.
-  - [x] **COMPLETE VARIANT-PARITY MATRIX** — Both five-backend primary manifests pass: the complete 66-case
-    default/POSIX matrix is 660/660 and the Unicode self-hosted manifest is 10/10. All seven maintained
-    diagnostic/logical/root/cursor/duplicate-slot/repeated-action/punctuation matrices pass their native,
-    generated, public, capability, and corpus boundaries; their selected primary cases are respectively
-    10/10, 10/10, 60/60, 50/50, 10/10, 10/10, and the complete maintained punctuation boundary. The six-runtime
-    scalar-numeric matrix is 55/55.
-  - [x] **CANONICAL / PUBLIC GATES** — Canonical passes all six doctrines, Rust semantic 1/1 in 80.02s, Dart 1/1,
-    Julia 416/416 in 28.3s, primary 66x2, relocated containment, and Phase 0 1,031/1,031 in 638s. mdBook and
-    Knowledge Map 722/5,724 pass; final doctrines, memory, whitespace, task metadata, and current-document no-drift
-    pass after complete backend/matrix proof.
-  - [x] **LOCKSTEP / CLEAN CLOSE** — ADR/roadmaps/task/live/change/development/memory/Knowledge facts and public book
-    carry the exact final results. This tree closes; `REPO-ROOT-PATH-PORTABILITY.2.2` is the next clean-pivot action;
-    this commit lands at 38/300, the brief is cleared, the tree and runs are clean, and no push occurs.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.5`.
 
 - ID: `PROJECT-DATA-SSD-ROOTING.6`
   Status: `done` (2026-07-27; exact post-routing host-temp discovery RED corrected and canonical green)
   Goal: Make the relocated process oracle identify host temporary storage independently of routed project scratch.
-  Depends on: `.5`, `FUTURE-PARITY-BACKLOG.10.7.3.2.1.1`
   Acceptance: Preserve the pre-routing inherited operating-system temporary root through the common initializer as
     invocation-local runtime state; do not persist it or use it for project output. Make the process oracle consume
     only that preserved host root, reject absent/same-device authority, and continue denying host-temp reads and all
@@ -688,28 +262,7 @@ accessing the shared copy, and remove only records or directories provably owned
     doctrine checks and the complete canonical local gate; synchronize the task/index, ADR-aligned Knowledge fact,
     live docs, memory, roadmaps, and mdBook; close the tree; commit, clear the brief, verify clean, and do not push.
   Commit: `PROJECT-DATA-SSD-ROOTING.6 - correct process host-temp discovery`
-
-  #### Acceptance Checklist
-
-  - [x] **CLEAN PIVOT / TASK FIRST** — Began only after semantic implementation child `.10.7.3.2.1.1` committed
-    cleanly at `3f878ad2`, cadence 40/300, with zero-byte brief, zero managed runs, and no push; this leaf exists
-    before initializer or oracle code changes.
-  - [x] **EXACT RED / ROOT CAUSE** — Direct process-oracle execution fails because its post-initialization
-    `getconf DARWIN_USER_TEMP_DIR` inherits SSD-routed `TMPDIR` and returns managed project scratch. Explicit
-    `getconf` under an SSD override reproduces the same path; removing temp variables leaves no resolvable
-    authority in this execution environment. The semantic implementation and backend rebuilds are uninvolved.
-  - [x] **PRE-ROUTING HOST AUTHORITY** — The common initializer captures inherited `TMPDIR` once behind an exported
-    marker before selecting any repository root. Default, same-volume, hostile cross-volume, and nested-source
-    tests prove capture/preservation while all project temp/cache destinations remain on the repository filesystem.
-  - [x] **ORACLE / MUTATION PROOF** — The process oracle requires an existing, non-symbolic, other-filesystem host
-    root and no longer calls post-routing `getconf`; embedded mutations reject missing and repository-device roots.
-    Real relocated containment passes all six families under macOS `sandbox-exec`, retaining system/per-user temp
-    denials, hostile external variables, exact caller exception, and zero off-repository project write.
-  - [x] **COMPLETE LOCAL REBUILD** — Environment, lifecycle, 39-route, repository-path, all six storage, structural,
-    and relocated process oracles pass. The full local gate passes all doctrines and semantic/backend owners,
-    primary 66/66 twice, and Phase 0 1,031/1,031 in 626 seconds; final documentation gates are green.
-  - [x] **LOCKSTEP / CLEAN CLOSE** — Record the exact correction and necessary read-only host-path role without
-    persisting a concrete path; close `.6`, commit at 41/300, clear the brief, leave zero runs, and do not push.
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.32`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PROJECT-DATA-SSD-ROOTING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.32 --id PROJECT-DATA-SSD-ROOTING.6`.
 
 ## Current Frontier
 

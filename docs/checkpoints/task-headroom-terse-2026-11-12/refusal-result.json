@@ -1,0 +1,13 @@
+{
+  "actual_migration_exit": 1,
+  "limits": "Guarded refusal and exact source state only; no migration, capacity, old archive re-admission, SDK or disk-reclamation credit.",
+  "manifest_present_after_refusal": false,
+  "records": 189,
+  "records_with_original_archive_pointer": 189,
+  "refusal": "EXPECTED GUARD",
+  "repair": "Keep this source untouched. Under the same headroom32 maintenance leaf select a fresh compatible unpartitioned source and check actual eligibility before its own new operation.",
+  "root_cause": "migrate_epoch excludes both original Narrative and later Narrative epoch pointers before selecting new capacity; the vocabulary-only preflight did not establish remaining capacity.",
+  "source": "docs/tasks/SPEC-FORMAT-TERSE.md",
+  "source_sha256": "dfb0421de17e164a23380c33b0a513bb595310fbae96bbcd8337fe835bd28946",
+  "source_unmodified": true
+}

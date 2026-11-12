@@ -1,0 +1,30 @@
+{
+  "activation": "9f11029e5af9d6168925f532d4c1911637421af3",
+  "bytes": 98757,
+  "eligible_closed": [
+    "PROJECT-DATA-SSD-ROOTING.0",
+    "PROJECT-DATA-SSD-ROOTING.1.1",
+    "PROJECT-DATA-SSD-ROOTING.1.2",
+    "PROJECT-DATA-SSD-ROOTING.1.3",
+    "PROJECT-DATA-SSD-ROOTING.2.1",
+    "PROJECT-DATA-SSD-ROOTING.2.2",
+    "PROJECT-DATA-SSD-ROOTING.2.3",
+    "PROJECT-DATA-SSD-ROOTING.2.4",
+    "PROJECT-DATA-SSD-ROOTING.2.5",
+    "PROJECT-DATA-SSD-ROOTING.2.6",
+    "PROJECT-DATA-SSD-ROOTING.3.1.1",
+    "PROJECT-DATA-SSD-ROOTING.3.1.2",
+    "PROJECT-DATA-SSD-ROOTING.3.2",
+    "PROJECT-DATA-SSD-ROOTING.4.1",
+    "PROJECT-DATA-SSD-ROOTING.4.2",
+    "PROJECT-DATA-SSD-ROOTING.5",
+    "PROJECT-DATA-SSD-ROOTING.6"
+  ],
+  "full_tail_bytes": 35225,
+  "ordered_ids": 22,
+  "prefix_bytes": 4233,
+  "preflight": "PASS",
+  "scope": "Independent original/epoch-pointer and strict shorter-body selection before the fresh qualified operation. Actual migration/query/recovery must still verify the resulting bytes; no SDK or cleanup execution.",
+  "sha256": "6a6ae8f525305e3a19289639805965fbfda3dd5e06fcac8528f05421fe70ed2d",
+  "source": "docs/tasks/PROJECT-DATA-SSD-ROOTING.md"
+}

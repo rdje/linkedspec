@@ -1,0 +1,990 @@
+{
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/candidate-command.json": {
+    "bytes": 408,
+    "sha256": "50c0ea3d3a1fd621503017fceff1ece47ac2fbd99714ee18e201379ffbdd93aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/candidate-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/candidate-result.json": {
+    "bytes": 115,
+    "sha256": "6fcdbc4e4afaafe272e880e3bcedf342752a8f657485834e602cce7e72779bb8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/candidate-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/candidate-stdout.log.gz": {
+    "bytes": 121,
+    "sha256": "b862e1453a55fafc3d46e83418f714e8d50e97c989953bb43ed87bda706b6578"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/capture.py": {
+    "bytes": 6897,
+    "sha256": "2f0ad73ea0bc7ef6d56e80c2c50fde8bfda2f3c0ff6be6362e895317e0a664d7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/check_candidate.py": {
+    "bytes": 2000,
+    "sha256": "a4ad95150311199b7ad06e028767e86ae08b806ce9d8bec7975f6fea2eb6ccae"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3344,
+    "sha256": "4328031becb8f533074ccd5c18871d40bfc764faf720aa43ec9ad466edbaa4c1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/check_selection.py": {
+    "bytes": 875,
+    "sha256": "8ece5b23ee60eefe2a88473ab14814a210c8a7d87cfc973b5a5b238e335d3c2d"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/migration/command.json": {
+    "bytes": 310,
+    "sha256": "f8970856c0941fb31ba3bae225ed7dc4b33aa721acbfeb831dc8537f8c85e67c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/migration/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/migration/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/migration/stdout.log.gz": {
+    "bytes": 143,
+    "sha256": "ba5b58081d4bb3c5e8ca06086836b4a6140ff385f1be3cd8f53bd4cb41b144d9"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.0/command.json": {
+    "bytes": 267,
+    "sha256": "f55bdc7b28b342a65947b54616af31544edf7c3695394eb6e31d3061dccb1477"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.0/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.0/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.0/stdout.log.gz": {
+    "bytes": 1845,
+    "sha256": "56e9851d5586c39b9d9769eb42abdba19ff7dd8f93154ba219d1bb3114c0c30c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.1/command.json": {
+    "bytes": 269,
+    "sha256": "df94b5d3275c4168782054e7d1111d20f981c3cb66420d7e55ee73de3f8eef99"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.1/stdout.log.gz": {
+    "bytes": 1392,
+    "sha256": "53f020cd02be25efa8990c3b1714811afb3179656bb9ab08103cfbb470ce83d1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.2/command.json": {
+    "bytes": 269,
+    "sha256": "16a118cb806b8ce19f31ea50c845ac849a4a0401c15cefa7c5d649d9ec2b4839"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.2/stdout.log.gz": {
+    "bytes": 1355,
+    "sha256": "fef1fdd2425286e985e174824820a8926304ccd9a166c610b98b91ae84cdba7d"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.3/command.json": {
+    "bytes": 269,
+    "sha256": "b602b376207f92e3257a5dfb979c23f672285ccd732f3131c498857adf3828e6"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1.3/stdout.log.gz": {
+    "bytes": 1508,
+    "sha256": "da1c7dafa1abf1be85a6903524f07d02556059d44cd0959e82295c5458f964b7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1/command.json": {
+    "bytes": 267,
+    "sha256": "e08d8089ea2c8b2b3db95214c815414ecbdcf13fa190efb95fd5f8c90a8fee2d"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.1/stdout.log.gz": {
+    "bytes": 218,
+    "sha256": "10aa4ccef38cfb6121ca8425f664484089ac0c8985ab8070b7f72a1d0867e510"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.1/command.json": {
+    "bytes": 269,
+    "sha256": "53724d622ee1802f63639f8961f63428a33af60286f0a59d868e6c4b5a9dbc74"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.1/stdout.log.gz": {
+    "bytes": 1606,
+    "sha256": "819bbdf8a0b683882a160a4fbb022b56b8ddc592c66521ec9aee66b26be5d2ef"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.2/command.json": {
+    "bytes": 269,
+    "sha256": "9be1aeadf0511b5d16dfa2de0631062d758c451833e7d173e5fb482747e6bc41"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.2/stdout.log.gz": {
+    "bytes": 1899,
+    "sha256": "fa4247135a909fc16cb5c8e06395f4ac6ba32a2acc0de5e81bc19ceee4078f70"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.3/command.json": {
+    "bytes": 269,
+    "sha256": "275ab5146982031ce44e197fd06ea96e2ec50432be6d7df956fac074a9f73868"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.3/stdout.log.gz": {
+    "bytes": 1765,
+    "sha256": "3b933ac4512987b797281948ba8c51fe0b9f072308e36e08137a56d65cc49df1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.4/command.json": {
+    "bytes": 269,
+    "sha256": "ded8e3e06573aea92b3feed9b97b3f8b2b054f36855d0b653f1e80f7bd363049"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.4/stdout.log.gz": {
+    "bytes": 2109,
+    "sha256": "9bd3a7815508254e1c84bd67f5877dc2bbcb8357032cdd9e1069f73e62e53a24"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.5/command.json": {
+    "bytes": 269,
+    "sha256": "68c87746777570e143c35a1abe5f33b23966624c7d9db9722512d0f8056a1552"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.5/stdout.log.gz": {
+    "bytes": 1775,
+    "sha256": "1b4fcfe4c35f311949fa21f64901cdb560dd99f80e152017539bf24f3f52e5e5"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.6/command.json": {
+    "bytes": 269,
+    "sha256": "f93fab91e7ee1b2d4e66d3de568d5f9e6a55aa7b6e2591de0a2b08584bb5c366"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2.6/stdout.log.gz": {
+    "bytes": 1869,
+    "sha256": "6241aed29fc9cb06c4404f39ea6b3a737fe1850cb4dae5d527bc10c144b25a02"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2/command.json": {
+    "bytes": 267,
+    "sha256": "81614f0f7a143dc2dd4c560a5767d04e40d51c2eebdeb67101d5f5208d0b8c8d"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.2/stdout.log.gz": {
+    "bytes": 231,
+    "sha256": "74e0bea4865bffd046c4b8edaf3df03a09bfc28727b1e95f0738ea20b35c712b"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.1/command.json": {
+    "bytes": 271,
+    "sha256": "43acef605267df5a6003bff650aada6a58dc5da01a880831e8d006ce49607e1f"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.1/stdout.log.gz": {
+    "bytes": 2795,
+    "sha256": "0dda80519457352e51b5d5f49a304fbd537cabeb716373bb5fffa586d821deb1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.2/command.json": {
+    "bytes": 271,
+    "sha256": "11568cc893d8d7176521d1227965c6fd4c0d05739e9ef903bca642e73d33c49e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1.2/stdout.log.gz": {
+    "bytes": 1449,
+    "sha256": "331b3c3004df3d0412ef03766b937843f3c71238d5d4b2a8eb1a3a5f71d63496"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1/command.json": {
+    "bytes": 269,
+    "sha256": "525c782585d2b83013d6bc4d024d819fe4f92247cd9fac39549e4b5a2f1232ce"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.1/stdout.log.gz": {
+    "bytes": 229,
+    "sha256": "20f562b83692d6f2a7a9926b4c9cccb2f807d1d1ec33cd77b7af76832cc0620e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.2/command.json": {
+    "bytes": 269,
+    "sha256": "946923a928fb2fb2fc4743683f41ddc8eb6966305e376a52c0f3c52abfecd7ed"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3.2/stdout.log.gz": {
+    "bytes": 1266,
+    "sha256": "862df0d60d7673c5bb3b6474a2c7051303cacd8b51afbd2190bcd88103b36369"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3/command.json": {
+    "bytes": 267,
+    "sha256": "b4996c05ff274249da1064224796e258b26bad31adda8a028e7733c2f03a927f"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.3/stdout.log.gz": {
+    "bytes": 223,
+    "sha256": "5615a2154a1c851bf55323ae8add0aa76e766ad35c57d285d15faf6378a2c954"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.1/command.json": {
+    "bytes": 269,
+    "sha256": "de8a20a893577141368c7a7a84135eaee295efca509f462a0e3577e82281fd9a"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.1/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.1/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.1/stdout.log.gz": {
+    "bytes": 1564,
+    "sha256": "9a3d95252d7034e7157a99dc3e44f2ad6c78330a4a76391cbd94dc45718228cc"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.2/command.json": {
+    "bytes": 269,
+    "sha256": "865541f047a76a12306ceeba010bda4b8b1f2432c1eb03bdcca72e077b1a7886"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.2/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.2/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4.2/stdout.log.gz": {
+    "bytes": 1813,
+    "sha256": "807f20e9f1d35068f11652067a4b268cfa382f8c42ea30de27a94aaef840c002"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4/command.json": {
+    "bytes": 267,
+    "sha256": "9df2c48746a7eec1ecaedf38f625558cc01cbd6eae5ec79efef85cf6fab9335f"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.4/stdout.log.gz": {
+    "bytes": 232,
+    "sha256": "5091d01223dfb59a3eb8f826965e4e77957b9784af763b03f5d9ddc4217bc288"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.5/command.json": {
+    "bytes": 267,
+    "sha256": "1c79c3adad0053e2ceb90e661c000d5605cf73b03907ed5e942368567058beb6"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.5/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.5/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.5/stdout.log.gz": {
+    "bytes": 1913,
+    "sha256": "cbf236d059063faca53d2eae775e8cc36f9d5a7c0dfe691f955ff297aff1d90e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.6/command.json": {
+    "bytes": 267,
+    "sha256": "f988a3a9f7ec2ab6f21328ba11d4cc940a9bba4dcf141ec5cc21892c017552fd"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.6/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.6/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-PROJECT-DATA-SSD-ROOTING.6/stdout.log.gz": {
+    "bytes": 1624,
+    "sha256": "7fb5ae5414c387940340da18b3e111967982223f1a9f469ce22b8d9909f45014"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-all/command.json": {
+    "bytes": 234,
+    "sha256": "6de50146586b8d01f3e65285688ec460c72dea24670555b384145cbda7aa08b0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-all/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-all/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/commands/reader-all/stdout.log.gz": {
+    "bytes": 28917,
+    "sha256": "797f7a4f5ee2c2f905328219fdda212b2de756871569932d245a3901cab6763c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/complete.txt": {
+    "bytes": 85,
+    "sha256": "4afbca80c72790971c406327cac9741e361026cfd2481af426e90ee344ee0f68"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-input-identities.json": {
+    "bytes": 3403,
+    "sha256": "43c692d521ffdbf74139fb847eb835092c793c98dcb6931b4e3ba6c3699d5b58"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-0.log.gz": {
+    "bytes": 190693,
+    "sha256": "84d7c4731e8eb12a1ce76e9b28c64d5d8be5217998772c163b66909e408ac6c4"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-1.log.gz": {
+    "bytes": 128703,
+    "sha256": "225e93d4801719fa1c9bf80519dd8eefecf46ff0ab9f52628e7e96777408ae10"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-2.log.gz": {
+    "bytes": 40348,
+    "sha256": "d8309cb0b6d39830c250b429ba0bc97606cea7c6c77c348f6feaaea6f1773a47"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-3.log.gz": {
+    "bytes": 78838,
+    "sha256": "1e1957ab6ded9d58579d25575cdfffafc8b5032109c1826b845a1c5061b404b3"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-4.log.gz": {
+    "bytes": 65042,
+    "sha256": "ce612a1ea53994432b631204770250744531c5bb927d4431adaf2bcb9c1954ab"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-5.log.gz": {
+    "bytes": 51583,
+    "sha256": "033b376cf16356af03db224fd40e909f1bee49fcf95b66cc3c4a0d7e27a163ea"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/git-inputs/source-6.log.gz": {
+    "bytes": 31745,
+    "sha256": "f231df1d917512f1e1e77159f7f0bb07136ee3607dc7b02eabe29926e64e493a"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/inputs-before-migration-identities.json": {
+    "bytes": 26875,
+    "sha256": "283f90ed1ac03dd515b51d94f804444da60c78c19f8eb98e73f45fda082e1255"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/inputs-before-migration.tar.gz": {
+    "bytes": 3751819,
+    "sha256": "6c625f2627276779c75e64d91d15d060adabba5bab0ed46ad64bd2d5df84cf4d"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/command.json": {
+    "bytes": 222,
+    "sha256": "ed4eb3a0c36d64d610d78b341d69bc3fbf09848d41a20052974b51b92e5886fe"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/identities.json": {
+    "bytes": 4739,
+    "sha256": "6fa6d542b9d43c633d7b47315346549066365c7460e4fa458bbe62c2fcb3f979"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/inputs.tar.gz": {
+    "bytes": 60023,
+    "sha256": "6a2b4fc94e2fae574c87e07b0995d820fac76a680ba65804a4f3b43bf7040d0c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/capture/stdout.log.gz": {
+    "bytes": 203,
+    "sha256": "c5509d0722141f6af108a9f359e59691ab2f060b1ead9647b7433e7b33cec282"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/command.json": {
+    "bytes": 230,
+    "sha256": "f9e69172bd2c1f942675b56b9362231cec7b733d1c0c583168be8d9b875576c0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/identities.json": {
+    "bytes": 6189,
+    "sha256": "44bc658f63d44d71bbc234f6ab8a25b3ccc781f2b3a8184b5e9e9bd7e39176c0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/inputs.tar.gz": {
+    "bytes": 3843018,
+    "sha256": "546bf734b8325fda7fac04898cb6fbf5f707b0be21532932ddb8b8ca802de8d9"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/check-selection/stdout.log.gz": {
+    "bytes": 209,
+    "sha256": "145ccad47273320ab581c0b06dd83ba3bd988b2517014086d908d3966cb06105"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/command.json": {
+    "bytes": 230,
+    "sha256": "eb8fdd30c15d9efebed4be1edd06d88a4d3ff372880dc5a1ec83f91ff0774374"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/identities.json": {
+    "bytes": 6189,
+    "sha256": "44bc658f63d44d71bbc234f6ab8a25b3ccc781f2b3a8184b5e9e9bd7e39176c0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/inputs.tar.gz": {
+    "bytes": 3843018,
+    "sha256": "e88cb2fa6abba6d14767ead7fc5463bd8bd13e0e078cfc2c7c4d86beb385f3cf"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/current/stdout.log.gz": {
+    "bytes": 121,
+    "sha256": "b862e1453a55fafc3d46e83418f714e8d50e97c989953bb43ed87bda706b6578"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/command.json": {
+    "bytes": 224,
+    "sha256": "5a6935ad6c3897e7ead8afe7e22f626c924fe93b96f318ca0305dae599b87390"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/identities.json": {
+    "bytes": 4328,
+    "sha256": "b18936c0b70b3c8c6b1575c29fd9cba888ad286dd95599acfe6061e04ef26897"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/inputs.tar.gz": {
+    "bytes": 30382,
+    "sha256": "b41418d1f5db8f8e651fb55b1bc625e08f57145603f2c40f21db56f5123d2c87"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/preflight/stdout.log.gz": {
+    "bytes": 111,
+    "sha256": "ca3174bdeecffaf4ce7ae4042ed95c67bc49cd209d9444f72eebb25efec48a57"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/command.json": {
+    "bytes": 222,
+    "sha256": "52fcdebbfb94d044b2187edc47ad00bf019dc82c2e73a7b59048807b7038c2ed"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/identities.json": {
+    "bytes": 1108,
+    "sha256": "43c7c905f3e9b15f03c9710b91e4d87e199e470ff90a0f4c173378994a3b7ea1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/inputs.tar.gz": {
+    "bytes": 10058,
+    "sha256": "a2370d025232c4e1bda8d26e946f9241db081b73d892b77153880ef3b8cbc0a8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/prepare/stdout.log.gz": {
+    "bytes": 113,
+    "sha256": "b00ce464eed3a9730ff785fd2d35fb7057388de5657534e0f85a13fd971a4bb2"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/command.json": {
+    "bytes": 239,
+    "sha256": "de28d6700fee817998ca49c73b544ed8547ab1286a1f259a360cecdb2b906e6c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/identities.json": {
+    "bytes": 4739,
+    "sha256": "6fa6d542b9d43c633d7b47315346549066365c7460e4fa458bbe62c2fcb3f979"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/inputs.tar.gz": {
+    "bytes": 60023,
+    "sha256": "54d0787f13c954dd1203eeb26aaa4390da8e042b3d214530fa6ce46f988c3634"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/publication-query/stdout.log.gz": {
+    "bytes": 78,
+    "sha256": "cc87f446da4fa467507ef24e9cdcad818228e6b180179d48e9e51fd12246108e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/command.json": {
+    "bytes": 240,
+    "sha256": "1c2939f16c2203848147031aadb04f61ad6ade571c5352dfd723531631b86a78"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/identities.json": {
+    "bytes": 4739,
+    "sha256": "6fa6d542b9d43c633d7b47315346549066365c7460e4fa458bbe62c2fcb3f979"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/inputs.tar.gz": {
+    "bytes": 60023,
+    "sha256": "7fea958d11b014f50ace63576fe1b3b71951352a1f6093732fd2351ac1e1df57"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/review-publication-query/stdout.log.gz": {
+    "bytes": 252,
+    "sha256": "7588dc2667a88897fdbfd7617bf813cc86d53b83f3512609aebd65b894024e47"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/seal/command.json": {
+    "bytes": 219,
+    "sha256": "a64c54ec42b1a4134254452759b85c96ca6f7c8ad7cdee713979950bf6cdf4ad"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/seal/identities.json": {
+    "bytes": 7188,
+    "sha256": "f858e9889901b24eed19db22246d328b6d77bd4510c5845df4ca14d7f8ed0015"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/launches/seal/inputs.tar.gz": {
+    "bytes": 3843571,
+    "sha256": "181c5bf3340d3889b0969922cd2e0339d040ec6a83c49d15dddd403fa8b4f6d1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/outputs-before-reader-identities.json": {
+    "bytes": 372,
+    "sha256": "8a3b2b72012e5f58bc8c4213cace104fe9b976ed9beab77ab0f1cc217d8e20a8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/outputs-before-reader.tar.gz": {
+    "bytes": 16505,
+    "sha256": "2d45fc9c4ddf4d05daa99f356015e174574f462e649d8e2a517fce744789284e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/preflight-result.json": {
+    "bytes": 1169,
+    "sha256": "9d4106ee6b1e314498c6477cbe2d2b05c7e2173f011e61b47d8accc65c89ea3c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/preflight.py": {
+    "bytes": 2791,
+    "sha256": "d47e544f3447a5c7cd4aebb25cbfa4e0a508b6272b1ea3863230fd1f52aa886e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/preparation-origin.json": {
+    "bytes": 517,
+    "sha256": "f7ba129ead7bf9627da4ee918bc58052349b83980b7a127b5ecc6696802687a9"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/prepare.py": {
+    "bytes": 3221,
+    "sha256": "886eca2a828e1fc07000f256020dbc66d2da31e9e5c2d9762242d36c4d36d88b"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/publication-inputs/input-identities.json": {
+    "bytes": 40016,
+    "sha256": "d10500aceadd976dfb1db3ed3e0943522de0b7be4b9886bfd782aefd0560f4a8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/publication-inputs/inputs-before-query.tar.gz": {
+    "bytes": 2776267,
+    "sha256": "d477909227f31eb610629a29a8737fb13c245509d8bee79e208e01a4a2cd31fa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/publication-inputs/result.json": {
+    "bytes": 80508,
+    "sha256": "00eb6237cc52912e630b9e56001ce702b324da3dd16618f3ee08cd718eba0fd5"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/ahead-command.json": {
+    "bytes": 268,
+    "sha256": "7db01ee433a8af06fa3f4ca0bb9a1268c3e652f03f13f220dd2f0e12264312f6"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/ahead-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/ahead-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/ahead-stdout.gz": {
+    "bytes": 24,
+    "sha256": "66f07ce8b54767549594dbd66b59c00017bbff961d637af937f55cbcfff08c87"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-after-command.json": {
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-after-stdout.gz": {
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-command.json": {
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/base-stdout.gz": {
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/empty-range-command.json": {
+    "bytes": 324,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/empty-range-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/empty-range-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/empty-range-stdin.gz": {
+    "bytes": 65,
+    "sha256": "2a645a4eb486bc3804890d9e2ab25089190600eb90ae84d45a79172652fa56af"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/empty-range-stdout.gz": {
+    "bytes": 50,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/git-version-command.json": {
+    "bytes": 164,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/git-version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/git-version-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/git-version-stdout.gz": {
+    "bytes": 55,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-after-command.json": {
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-after-stdout.gz": {
+    "bytes": 59,
+    "sha256": "6770c7757efddf6144c6c0386039401e3083be9f0671eaee6dc426f042e48ea7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-command.json": {
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/head-stdout.gz": {
+    "bytes": 59,
+    "sha256": "6770c7757efddf6144c6c0386039401e3083be9f0671eaee6dc426f042e48ea7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/memory-command.json": {
+    "bytes": 204,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/memory-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/memory-stdout.gz": {
+    "bytes": 325,
+    "sha256": "32fc826eefc1247dda97d165f34b4ac9a5830b09d91f121c95120bc582dc76b1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-format-command.json": {
+    "bytes": 192,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-format-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-format-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-format-stdout.gz": {
+    "bytes": 25,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-metadata-command.json": {
+    "bytes": 265,
+    "sha256": "2a29b2687be4be512ddf67e33a171b3ebf1c4ba8e9fa3b14ddcb459cfb75af45"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-metadata-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-metadata-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-metadata-stdin.gz": {
+    "bytes": 1109473,
+    "sha256": "03ad074203f9b2e3587bf5694e818274cbf2addbe3c535a050556847415ca2a7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/object-metadata-stdout.gz": {
+    "bytes": 1251742,
+    "sha256": "a53e0fc83b828c15ad6f13728a46b48ada54efaa22e4440bb4a1955a5c68227a"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/objects-command.json": {
+    "bytes": 302,
+    "sha256": "0c322cf7575a681b384cc8db72db393cfcbc96fec81aaf0a1d7d8af72ea5f34b"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/objects-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/objects-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/objects-stdout.gz": {
+    "bytes": 1109473,
+    "sha256": "03ad074203f9b2e3587bf5694e818274cbf2addbe3c535a050556847415ca2a7"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-command.json": {
+    "bytes": 464,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-after-command.json": {
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-after-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-after-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-after-stdout.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-command.json": {
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-stderr.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-config-stdout.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-stderr.gz": {
+    "bytes": 1331,
+    "sha256": "6f21c525d2585ad5f0d2bf4ba766d4a978f3a7c6e453844b317a8cc865ef2f71"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/pack-stderr.log": {
+    "bytes": 8270,
+    "sha256": "a0d05eefe2ff80a1e49643781412c3fcebb59961bd9fb1214926b0d3507f497e"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/producer-input-identities.json": {
+    "bytes": 862,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/producer-inputs.tar.gz": {
+    "bytes": 9165,
+    "sha256": "6bb27e07a22afafa35d8bbd41a0e712208051566b34a60fe51b863918421fc7f"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/result.json": {
+    "bytes": 1342,
+    "sha256": "22e6182a8a8cacc028e08454520b86dc0f244d513cad0eab856bca0790cdff7b"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/push-monitor-current/revisions.txt": {
+    "bytes": 83,
+    "sha256": "445737433527432227c66c2e95007ef4db0e2b26cb17820cf2d16d3c3b447e19"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/refused-prepare-template.py.gz": {
+    "bytes": 1555,
+    "sha256": "4e6d83775b56b168290864cf24ddb5c459500090ad5a51c0d768788586773aa2"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/review.py": {
+    "bytes": 9983,
+    "sha256": "8e2c5761ebc6715f447c5c07defce5464acfb509281b3c189a9346bfa3f77cd8"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/run_review.py": {
+    "bytes": 1045,
+    "sha256": "c1d5427cf73aae107b65b8f54071bdf26bd435caeba19fffc14b179c4e71d3af"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/seal.py": {
+    "bytes": 708,
+    "sha256": "0fac0fb7f493dcd5d601723e74b68744cb7dd75deace7ffc3208c7cfa3308963"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/source-before-preflight.md.gz": {
+    "bytes": 28917,
+    "sha256": "797f7a4f5ee2c2f905328219fdda212b2de756871569932d245a3901cab6763c"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-capture.py.gz": {
+    "bytes": 2378,
+    "sha256": "eba1550ed56c9f7759d4bdde03c9ff9d8a2c6941637d8f245cf418ab69ff02ca"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-check_candidate.py.gz": {
+    "bytes": 880,
+    "sha256": "258036c2a8f396b5aec39b8455b8462caf56a0757f911f8b2189d3c446c361ad"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-check_publication_inputs.py.gz": {
+    "bytes": 1479,
+    "sha256": "40f94b6192c2aea66fba2a3cf157dce1ae92be0ef0d2fe681d5cd4d10bc00a94"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-identities.json": {
+    "bytes": 2695,
+    "sha256": "68326bac9b64fe2b3b35b6d78f0b499b2d5981cf1e642028b63dca2c9efc98ee"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-review.py.gz": {
+    "bytes": 3341,
+    "sha256": "2f65135d442e60fb0149892813cda41887592665a2a4df8ca09c130b77980874"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-review_publication_inputs.py.gz": {
+    "bytes": 1171,
+    "sha256": "9091150022638adaf40d4b6c959e916e6aacbdd0134393625393a1c7c6523af3"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-run_review.py.gz": {
+    "bytes": 543,
+    "sha256": "99e1bc2663d320a3cd61cda2b0259b0934909f77140e912480c81719708dc059"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/template-seal.py.gz": {
+    "bytes": 444,
+    "sha256": "f3b6f880abfa2bf9666429f724f0e8a5e1344d7fa4e0960626d7bec298d79a1a"
+  }
+}

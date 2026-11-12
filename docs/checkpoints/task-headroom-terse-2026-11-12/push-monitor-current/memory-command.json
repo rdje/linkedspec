@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  }
+}

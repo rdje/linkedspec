@@ -1,0 +1,24 @@
+{
+  "preservation": "PASS",
+  "stable_ids": 22,
+  "selected_closed": 17,
+  "unchanged_short_bodies": 5,
+  "original_bytes": 98757,
+  "current_bytes": 58170,
+  "current_text_bytes_renewed": 40587,
+  "current_tail_bytes": 35225,
+  "actual_public_queries": 23,
+  "effective_corruptions": [
+    "current contract lost",
+    "closed status changed",
+    "stable ID omitted",
+    "metadata prefix altered",
+    "full current tail truncated",
+    "wrong epoch pointer",
+    "undeclared extracted member",
+    "unselected body changed",
+    "source identity changed",
+    "actual public source output drift"
+  ],
+  "limits": "Historical finite task-data preservation; tools/limits/runtime unchanged. No runtime host, feature/parity/native-custody/whole-project reading admission or disk-reclamation claim."
+}

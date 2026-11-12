@@ -1,0 +1,32 @@
+{
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/preparation-origin.json": {
+    "bytes": 517,
+    "mode": 420,
+    "sha256": "f7ba129ead7bf9627da4ee918bc58052349b83980b7a127b5ecc6696802687a9"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/prepare.py": {
+    "bytes": 3221,
+    "mode": 420,
+    "sha256": "886eca2a828e1fc07000f256020dbc66d2da31e9e5c2d9762242d36c4d36d88b"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/refused-prepare-template.py.gz": {
+    "bytes": 1555,
+    "mode": 420,
+    "sha256": "4e6d83775b56b168290864cf24ddb5c459500090ad5a51c0d768788586773aa2"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

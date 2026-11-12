@@ -1,0 +1,67 @@
+{
+  "CHANGES.md": {
+    "bytes": 46180,
+    "mode": 420,
+    "sha256": "1cc7bd3ad4cb9462606ea328b52c21823ad2813508ced0856b03a07424faa921"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 36564,
+    "mode": 420,
+    "sha256": "79bb7b90bb5a288c5fe07f07cf37d6739aef614fdbbcdd412155197238b41e64"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5340,
+    "mode": 420,
+    "sha256": "eaa85f767453c30b478d0798ff403c52e970b3acedb97a9dd308cf239856d7f6"
+  },
+  "MEMORY.md": {
+    "bytes": 4360,
+    "mode": 420,
+    "sha256": "53f1b4ba15830430ac2631f141c111e5c8185b771646a930f0dcbf4d2902624c"
+  },
+  "ROADMAP.md": {
+    "bytes": 471922,
+    "mode": 420,
+    "sha256": "a4b4f0586c37a460215b28d898f65772045b3783732dfed575281e913e5f3a3a"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273257,
+    "mode": 420,
+    "sha256": "30945f906f7518a31bc8bcb49e75019573b1ae611081fb2cddf9cada9f61bf51"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/REVIEW.md": {
+    "bytes": 3746,
+    "mode": 420,
+    "sha256": "7e2fdf6fb6ebff0d4da864def6eeba973d18375639e474b1300005dbfe1bbc0f"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/publication/rotated-live-row.txt": {
+    "bytes": 208,
+    "mode": 420,
+    "sha256": "4f7c8426a35d65c6d1c1fc2465d11697d24787cef3f4ed6128281200dbcfaada"
+  },
+  "docs/knowledge/rooting-closed-task-narrative-headroom.md": {
+    "bytes": 3219,
+    "mode": 420,
+    "sha256": "4f29220c5b35f1e6deac03237e0fcdaca02e06451507cf0eb80bceffdd841f66"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 61417,
+    "mode": 420,
+    "sha256": "74b1ed10ed49d23a276b44500e1f2bde875351922a147dc3866c5777dacd98f8"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20658,
+    "mode": 420,
+    "sha256": "501a4f77541f7f291d53cf358da9d2220d4d86149e266d396ca34f084228b82c"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 540289,
+    "mode": 420,
+    "sha256": "26e889997ffe3e96699bf55f4d72f6ce3a25e438c930f0f44b509d8fc4e2db8d"
+  },
+  "git_message_brief.txt": {
+    "bytes": 381,
+    "mode": 420,
+    "sha256": "036e8646812adff2cf07e7bd810022ecebcbd0822129d902f69c8df1057c64cd"
+  }
+}

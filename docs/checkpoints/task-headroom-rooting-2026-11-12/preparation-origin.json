@@ -1,0 +1,7 @@
+{
+  "source": "docs/checkpoints/task-headroom-terse-2026-11-12/prepare.py",
+  "retained_template": "docs/checkpoints/task-headroom-rooting-2026-11-12/refused-prepare-template.py.gz",
+  "sha256": "c0c0adf728424923ad9798779b381d75e2454d025a062fdb0baedf66cad5f5cb",
+  "actual_new_producer_sha256": "886eca2a828e1fc07000f256020dbc66d2da31e9e5c2d9762242d36c4d36d88b",
+  "qualification": "Fresh producer/output namespace and selected source after retained no-capacity refusal; no used producer or source data rewritten."
+}

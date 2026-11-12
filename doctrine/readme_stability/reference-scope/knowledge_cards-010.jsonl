@@ -63,6 +63,7 @@
 {"bytes":2913,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-rollout-roadmap-projection.md","sha256":"cc484f11d03bf9956ddeafc9d7d620f4c56e0806aab4c48d6ca3cdc71c94df13","type":"member"}
 {"bytes":3583,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-selection-five-backend-admission.md","sha256":"ec39b6b9278ee27d01fceb53bfda44133288fbc4533c56fdfb2b4cf1405c9c65","type":"member"}
 {"bytes":14167,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/root-rule-selection-precedence.md","sha256":"aecdcd2d93b397b3ffc4583a39ea830f539a61294572a628434b3eb3eb5ed8f0","type":"member"}
+{"bytes":3219,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.32","path":"docs/knowledge/rooting-closed-task-narrative-headroom.md","sha256":"4f29220c5b35f1e6deac03237e0fcdaca02e06451507cf0eb80bceffdd841f66","type":"member"}
 {"bytes":6182,"lines":80,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/routing-decision-accepted-state-gap.md","sha256":"a3ce75fceaee09dd127b5ca6db39806a19ce0e7fecc6bf3118875e22220cf178","type":"member"}
 {"bytes":6979,"lines":123,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/routing-verifier-child-signal-status-gap.md","sha256":"f93670d04e23b56bae427ace447cf707289c9ea4e23d49977f9e8eb74aa11994","type":"member"}
 {"bytes":6106,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rtlutils-regex-hang.md","sha256":"7c5ef8aba87826a8f3eb32d7000fadced8989bda23a85472b00d22b13ae5d788","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2104,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-free-default-result-guards.md","sha256":"285add86a44420c68ce5993f3881f255ce60a7b4ebe0a3818ba64c6107ff9ac9","type":"member"}
 {"bytes":2325,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-free-string-result-guards.md","sha256":"ca99b27a80d4f845051425815bdc33fb92b73c9079ba89d1946f11cdb91fccec","type":"member"}
 {"bytes":2774,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-gap-slot-record-selection-guard.md","sha256":"52cb8de7cb18251910c42e2802df97275cf580e3f6a7384198cc53b7b37c7d96","type":"member"}
-{"bytes":2023,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-gap-string-result-guards.md","sha256":"c194e7a396c4bdfb63d3f7cd229938855d38c63e6580cca3187d64b97afbb41c","type":"member"}
