@@ -1,0 +1,10 @@
+{
+  "compressed_bytes": 366,
+  "compressed_sha256": "4c0f1b8c887efc4096aeaa336b42d75bab01370d4f18a2a2666fe042fbbfa13e",
+  "original_bytes": 971,
+  "original_mode": 420,
+  "original_sha256": "01b0f8dfaac236cb9b6cb3f3b71cba2f5a6b9877d6423275e6e32e34ce42aa12",
+  "retained": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/source.diff.gz",
+  "scope": "Exact already-sealed unified diff bytes/full original mode. Readback precedes deletion of this one plain duplicate; original seal, producers, archives and first readonly0 remain unchanged.",
+  "source": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/source.diff"
+}

@@ -1,0 +1,72 @@
+{
+  "CHANGES.md": {
+    "bytes": 42195,
+    "mode": 420,
+    "sha256": "75b8f4dbc66e1d2566adb8f837b2cd313c42393d399806cca383ae35c41070ea"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 32386,
+    "mode": 420,
+    "sha256": "0e55fa5bd4201dfd68c36f2cbdf7234b820d443a6b97b125a5b2d114ff2f8764"
+  },
+  "MEMORY.md": {
+    "bytes": 3146,
+    "mode": 420,
+    "sha256": "2ec248d2d118bb2637901019fe15c678211541cc608bd5b162a0c463b33e2831"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/REVIEW.md": {
+    "bytes": 4486,
+    "mode": 420,
+    "sha256": "98def7a09dd33c8b9dfb4d3ea3462175f94af077ac6e577e58264c28575026d3"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/launches/review-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/launches/review-qualified/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/launches/review-qualified/stdout.log.gz": {
+    "bytes": 600,
+    "mode": 420,
+    "sha256": "1db3f8d6b17fbe8535b57c2e8aa32e3cc57314d8e3f94c8cdefe1ed0a84b1ec2"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/patch-retention.json": {
+    "bytes": 637,
+    "mode": 420,
+    "sha256": "d23d13d6b5bad7e25e610a26f108bd6c4ecec19e21c65f697b8bf4e0e1dab4fc"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/publish_patch_qualification.py": {
+    "bytes": 6731,
+    "mode": 420,
+    "sha256": "fe9c81055ab974a982736c3e1e556c58b807c61498e42485411ff28146111868"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/qualify_patch.py": {
+    "bytes": 1640,
+    "mode": 420,
+    "sha256": "95d03873bab682b248f625ae10f4ff4f2ca434f733238fd2bdf3e18f25f2c1fe"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/review_qualified.py": {
+    "bytes": 2445,
+    "mode": 420,
+    "sha256": "af2eecc02efab506886e0ce66e3cea819a526479286bad692865ca23738cd456"
+  },
+  "docs/knowledge/julia-open-arity-concat-result-guards.md": {
+    "bytes": 3169,
+    "mode": 420,
+    "sha256": "2e912e55fcb35335df1d45df056a106f8f1968da416a25c52ab8c5b6008eba2d"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 374260,
+    "mode": 420,
+    "sha256": "8b6b1e10b0fe4a4d6b1c69d44f38eca5ac7f71336a807512be2766a1cb0c5864"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 702670,
+    "mode": 420,
+    "sha256": "29ec75c25fb2036b9ce529ddf68bdaf7e013776fb58a4a6a1058d84d3170d3c8"
+  }
+}

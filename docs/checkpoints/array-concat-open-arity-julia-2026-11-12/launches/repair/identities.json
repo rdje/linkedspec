@@ -1,0 +1,152 @@
+{
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/baseline.json": {
+    "bytes": 937373,
+    "mode": 420,
+    "sha256": "55431e2ef10046136aa95975ee7d1cc4ca4c042bf3c2f088720127a309ae6423"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/capture.py": {
+    "bytes": 9457,
+    "mode": 420,
+    "sha256": "61674899d747abee6ce732cdaf814567992a6457afbb897e9a4b471f10ab13e3"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/capture_intake.py": {
+    "bytes": 5942,
+    "mode": 420,
+    "sha256": "5a2c6b3e08fa6471462de0815512554a1946ee5d71cf887f1b99360453748fd7"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/cases.json": {
+    "bytes": 294204,
+    "mode": 420,
+    "sha256": "d0d8c9cd5e638ddb9197a4daff9b026ae1fa6cda93ee3d6138cfb2262cb1a678"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze-template-array_transform_callable_result_guard_composition_test.jl.gz": {
+    "bytes": 1249,
+    "mode": 420,
+    "sha256": "ee927a131233e36e582c5e912a8571ac7807807e66f9c29394503421ec42d9bb"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze-template-capture.py.gz": {
+    "bytes": 3232,
+    "mode": 420,
+    "sha256": "1494ff08337e256570bda12999f6e834a4f091079eaf5f0fefd7552a9c9b9e53"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze-template-identities.json": {
+    "bytes": 655,
+    "mode": 420,
+    "sha256": "693999736b66d5a27af2d30e33ab1aa6c9453f829ae74a4b78c920e930dcd5a1"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze_policy.py": {
+    "bytes": 7429,
+    "mode": 420,
+    "sha256": "e42f686a66749361cbc06a30151fe93492675519f20eff6832bfae4eb34066ba"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/inspect_intake.py": {
+    "bytes": 10252,
+    "mode": 420,
+    "sha256": "e9d37096de10dd507d379de2d55eb1f62ab851f51d47a09768c8d2075fb97338"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/intake-assessment.json": {
+    "bytes": 575499,
+    "mode": 420,
+    "sha256": "b6965e5016223d88d6fb2164a1c8e6dad122a0ece4487261fdde6be41d67484b"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/observer.jl": {
+    "bytes": 3619,
+    "mode": 420,
+    "sha256": "86cd43bc6a4e1024c2bdacf9cbef668d213ff64f117bcae32e2d69ba8b6f27d1"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/own-questions.json": {
+    "bytes": 71799,
+    "mode": 420,
+    "sha256": "53d97c216ad6981f2997f12592d21a7a2e3dfc396f564c35aad327401ec6e9d7"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/owner-before.jl.gz": {
+    "bytes": 50089,
+    "mode": 420,
+    "sha256": "c91077671af1356f67d707034686d58f9a7d4f2716f2a74904a152614f60d121"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/prepare.py": {
+    "bytes": 6278,
+    "mode": 420,
+    "sha256": "8a41883417033cfa7fe0163164d79a03931f52553f86fadba1acc7d95475f372"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/repair.py": {
+    "bytes": 5950,
+    "mode": 420,
+    "sha256": "4a037de914cd452c44f6575ede8ffbce938698065e4e47903c32c9baf83b9189"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/runner-before.jl.gz": {
+    "bytes": 34658,
+    "mode": 420,
+    "sha256": "76cea4e88c45e9ee9347b629c615f8d4e9cff8acfb7533e870f8ec23ac056278"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-0.gz": {
+    "bytes": 1988,
+    "mode": 420,
+    "sha256": "fb250aea98b83e1ca18e7f36cf4ad64f4b55f9c544321f58490c9b8656d608d9"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-1.gz": {
+    "bytes": 6152,
+    "mode": 420,
+    "sha256": "9d99d035fc96d3e57cca24f35002cb547e857a035adb121f2bd51dd83f294936"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-2.gz": {
+    "bytes": 2420,
+    "mode": 420,
+    "sha256": "f983387613256ee76ce48891acc7156c91793fc570df05c39fd63288c383d19c"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-3.gz": {
+    "bytes": 2369,
+    "mode": 420,
+    "sha256": "07e5bc001d8b8f8a9fb7c898576150b9c973a247534431cdfd5442618552d8f4"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-4.gz": {
+    "bytes": 1240,
+    "mode": 420,
+    "sha256": "a9050bdd3b40663927f281e2892d7248a599bcb7f10b5c849f628e1763f8b98f"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-5.gz": {
+    "bytes": 2304,
+    "mode": 420,
+    "sha256": "d1dc68f165cf81e965f2e37b0f52d32e7e4e2f7dd847dbd735c853b88e7f1ed8"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-6.gz": {
+    "bytes": 924,
+    "mode": 420,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-7.gz": {
+    "bytes": 534,
+    "mode": 420,
+    "sha256": "aa864f17dfe6f9baf8f1fad0774cc22bdea67c659d0303bb21d93b94d175705f"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-8.gz": {
+    "bytes": 5998,
+    "mode": 420,
+    "sha256": "cba5e24edb62c93afb569831983cb874390789d0955ab23336a32f002eaf81fe"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-9.gz": {
+    "bytes": 1249,
+    "mode": 420,
+    "sha256": "ee927a131233e36e582c5e912a8571ac7807807e66f9c29394503421ec42d9bb"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-identities.json": {
+    "bytes": 2876,
+    "mode": 420,
+    "sha256": "161824217693d63905e87955c20bb1b2b5eb8bf41b8ce1cb308f1db9d502bc3b"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

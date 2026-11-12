@@ -1,0 +1,368 @@
+{
+  "ahead-command.json": {
+    "bytes": 268,
+    "retained_mode": 420,
+    "sha256": "8597c5b0312a5e8b6b442ea00607d4574d36e92eda253d95a65f8a40d0a179cb",
+    "source_mode": 420
+  },
+  "ahead-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "ahead-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "ahead-stdout.gz": {
+    "bytes": 24,
+    "retained_mode": 420,
+    "sha256": "b55656bb3c784f349d3fc27e6b9a7e98476297e0b8cd67cd57c0ca7991b39961",
+    "source_mode": 420
+  },
+  "base-after-command.json": {
+    "bytes": 196,
+    "retained_mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source_mode": 420
+  },
+  "base-after-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "base-after-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "base-after-stdout.gz": {
+    "bytes": 59,
+    "retained_mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source_mode": 420
+  },
+  "base-command.json": {
+    "bytes": 196,
+    "retained_mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source_mode": 420
+  },
+  "base-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "base-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "base-stdout.gz": {
+    "bytes": 59,
+    "retained_mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source_mode": 420
+  },
+  "empty-range-command.json": {
+    "bytes": 324,
+    "retained_mode": 420,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04",
+    "source_mode": 420
+  },
+  "empty-range-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "empty-range-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "empty-range-stdin.gz": {
+    "bytes": 65,
+    "retained_mode": 420,
+    "sha256": "fa6823a75b4f4bb86ec5e3f73915a6b1b4dd5559c9d4d1f01d63dff60bd100bd",
+    "source_mode": 420
+  },
+  "empty-range-stdout.gz": {
+    "bytes": 50,
+    "retained_mode": 420,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088",
+    "source_mode": 420
+  },
+  "git-version-command.json": {
+    "bytes": 164,
+    "retained_mode": 420,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110",
+    "source_mode": 420
+  },
+  "git-version-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "git-version-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "git-version-stdout.gz": {
+    "bytes": 55,
+    "retained_mode": 420,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240",
+    "source_mode": 420
+  },
+  "head-after-command.json": {
+    "bytes": 176,
+    "retained_mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source_mode": 420
+  },
+  "head-after-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "head-after-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "head-after-stdout.gz": {
+    "bytes": 60,
+    "retained_mode": 420,
+    "sha256": "a40b3a5940cc2523202896dab74a7674eb3b7c6f77b365e6f53bbadea57a15f6",
+    "source_mode": 420
+  },
+  "head-command.json": {
+    "bytes": 176,
+    "retained_mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source_mode": 420
+  },
+  "head-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "head-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "head-stdout.gz": {
+    "bytes": 60,
+    "retained_mode": 420,
+    "sha256": "a40b3a5940cc2523202896dab74a7674eb3b7c6f77b365e6f53bbadea57a15f6",
+    "source_mode": 420
+  },
+  "memory-command.json": {
+    "bytes": 204,
+    "retained_mode": 420,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8",
+    "source_mode": 420
+  },
+  "memory-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "memory-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "memory-stdout.gz": {
+    "bytes": 325,
+    "retained_mode": 420,
+    "sha256": "3f58d03789ce6b35ebc36ae9ffe3ac679d3ec6a4f2778eb51773c05a8839471f",
+    "source_mode": 420
+  },
+  "object-format-command.json": {
+    "bytes": 192,
+    "retained_mode": 420,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c",
+    "source_mode": 420
+  },
+  "object-format-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "object-format-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "object-format-stdout.gz": {
+    "bytes": 25,
+    "retained_mode": 420,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756",
+    "source_mode": 420
+  },
+  "object-metadata-command.json": {
+    "bytes": 265,
+    "retained_mode": 420,
+    "sha256": "2a29b2687be4be512ddf67e33a171b3ebf1c4ba8e9fa3b14ddcb459cfb75af45",
+    "source_mode": 420
+  },
+  "object-metadata-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "object-metadata-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "object-metadata-stdin.gz": {
+    "bytes": 1086521,
+    "retained_mode": 420,
+    "sha256": "a0a17ae15d0d038c962692a9f7fa3272874730bbe000c0151fec4cb9dbcb8296",
+    "source_mode": 420
+  },
+  "object-metadata-stdout.gz": {
+    "bytes": 1225353,
+    "retained_mode": 420,
+    "sha256": "c62ed6b6ecc0031fe16bb1979ea9078cecb74b855fa5e872e9818aab56b9d91b",
+    "source_mode": 420
+  },
+  "objects-command.json": {
+    "bytes": 302,
+    "retained_mode": 420,
+    "sha256": "dec7b9fb9f80238f4cdd2b67e49e5cde30a334b7208202e0a42cc72a7b02b5fc",
+    "source_mode": 420
+  },
+  "objects-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "objects-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "objects-stdout.gz": {
+    "bytes": 1086521,
+    "retained_mode": 420,
+    "sha256": "a0a17ae15d0d038c962692a9f7fa3272874730bbe000c0151fec4cb9dbcb8296",
+    "source_mode": 420
+  },
+  "pack-command.json": {
+    "bytes": 464,
+    "retained_mode": 420,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a",
+    "source_mode": 420
+  },
+  "pack-config-after-command.json": {
+    "bytes": 301,
+    "retained_mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source_mode": 420
+  },
+  "pack-config-after-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source_mode": 420
+  },
+  "pack-config-after-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "pack-config-after-stdout.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "pack-config-command.json": {
+    "bytes": 301,
+    "retained_mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source_mode": 420
+  },
+  "pack-config-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source_mode": 420
+  },
+  "pack-config-stderr.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "pack-config-stdout.gz": {
+    "bytes": 20,
+    "retained_mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source_mode": 420
+  },
+  "pack-exit.txt": {
+    "bytes": 2,
+    "retained_mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source_mode": 420
+  },
+  "pack-stderr.gz": {
+    "bytes": 1316,
+    "retained_mode": 420,
+    "sha256": "a784b168f63a8851c76a52a0d8861753aa7b86e445d1efdee5da84d8938a181a",
+    "source_mode": 420
+  },
+  "producer-input-identities.json": {
+    "bytes": 862,
+    "retained_mode": 420,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe",
+    "source_mode": 420
+  },
+  "producer-inputs.tar.gz": {
+    "bytes": 9165,
+    "retained_mode": 420,
+    "sha256": "c42c66ea788620bf8200ac246bb6f73878238021282c73f3bc85ec4b80ff52b3",
+    "source_mode": 420
+  },
+  "result.json": {
+    "bytes": 1342,
+    "retained_mode": 420,
+    "sha256": "a2286d3e965875a467b2b80c64d6198bc17d3642f9e9079aca433c335835503a",
+    "source_mode": 420
+  },
+  "revisions.txt": {
+    "bytes": 83,
+    "retained_mode": 420,
+    "sha256": "ba8e0c277e5377d765e2f271a65caee243786dca8dfe1fadae7f5c9412dc56fb",
+    "source_mode": 420
+  }
+}

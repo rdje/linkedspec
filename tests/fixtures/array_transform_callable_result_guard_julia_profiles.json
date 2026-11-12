@@ -5450,26 +5450,26 @@
     "expected": {
       "fresh": {
         "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
         ]
       },
       "native": {
         "value": [
-          "ran",
-          "SXKVW"
-        ]
-      },
-      "restored": {
-        "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          "SX"
         ]
       }
     },
@@ -5548,26 +5548,26 @@
     "expected": {
       "fresh": {
         "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
         ]
       },
       "native": {
         "value": [
-          "ran",
-          "SXKVW"
-        ]
-      },
-      "restored": {
-        "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SXKVW"
+          null,
+          "SX"
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          "SX"
         ]
       }
     },

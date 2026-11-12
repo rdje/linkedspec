@@ -14,6 +14,7 @@
 {"bytes":15360,"lines":272,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-null-selector-and-identifier-validation-gaps.md","sha256":"a3eaa1a2688c4657b2d80a55e3f57960032e65826cab8b13a6e21c7c9228b9d9","type":"member"}
 {"bytes":2340,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-nullable-match-state-preserves-absence.md","sha256":"901068df4f6bbd5207027e6f2b118f5b01a86d1e4d8e61e98286b12dfe15b2ce","type":"member"}
 {"bytes":2673,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-numeric-comparison-source-guards.md","sha256":"780b24ead4aca1ec409c57e730cfeacf2f669edafa5837e3bd652423447f5176","type":"member"}
+{"bytes":3652,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.4","path":"docs/knowledge/julia-open-arity-concat-result-guards.md","sha256":"976099f7bb76f7e64d73c0581e18f9318b199bdd153f6670f5137d935e838134","type":"member"}
 {"bytes":2874,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-ordinary-repetition-minimum-misses.md","sha256":"07c64bb427adb34fef3bb4019a2738f91e69103cc009612672d6286d13cd17fc","type":"member"}
 {"bytes":6181,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-package-readme-reading.md","sha256":"cffc90ce92d2c40bc5e6cf07311194b69f15585f9eb84bd09ab2b018b5534fbd","type":"member"}
 {"bytes":9364,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-parser-member-suffix-loss.md","sha256":"5ded33c3a4f4b8b3f6c969a35e76f39dc488f5d0b617b55510eacc87f1b71fc5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":19021,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-configuration-source-contracts.md","sha256":"1c0f0b7598896e951688f2750c022b1143b868322130692882cd0131fa826daf","type":"member"}
 {"bytes":3894,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-helper-retirement-split-inventory.md","sha256":"9aa9894fa1f4dd749d9ee052743f773ee4ad7fd5fe0309bf03a146bf5b36e90b","type":"member"}
 {"bytes":6325,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"d666797a6bad6ec1aca8b072dc166db61d91e17503c4c23564993aee043003a4","type":"member"}
-{"bytes":5024,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lexical-result-source-guards.md","sha256":"62a0640ccc503da74ac67a0d316cfd15e755ec23f182f8e4c9206dd84b9a46dd","type":"member"}

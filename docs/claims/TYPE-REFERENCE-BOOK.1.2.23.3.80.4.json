@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.80.4",
+  "claims": [
+    {
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "statement": "At committed HEAD952f8a022c59a478614ba1413e0e36e49e7e14e8 excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c, the one-worker explicit no-sparse non-thin serialized pack is1269685903 bytes. There are103 outgoing commits and230314097 bytes below the director1500000000-byte trigger. This excludes all uncommitted Julia work and is not negotiated upload size.",
+      "scope": "One actual local ref-bound operational measurement. Source/policy/project-wrapper inputs are retained before pack use by the committed monitor. Actual commands, separate channels, selected configuration, logical-object metadata and result survive under docs/checkpoints/array-concat-open-arity-julia-2026-11-12/push-monitor-current/. Raw diagnostic packs remain ignored on this volume. No remote freshness, native physical/toolchain closure, future size or backend feature completeness is claimed.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual serialized committed-range pack; streamed byte/stat equality, PACK header/footer, empty-range and unchanged-ref/config/source controls.",
+        "result": "Actual0 at952f8a022/base4683555e:1269685903 bytes,45789 logical and header objects,103 commits,230314097-byte trigger margin. Empty range32 bytes; preparation and trigger false. Result and source/command/channel receipts retained under push-monitor-current/."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "The same committed producer has retained historical independent validation and twelve RED controls at its prior102ec3446 refs. This new952f8a022 artifact has not received a separate independent actual-file/historical size falsification epoch; old controls are not credited as a new observation. Parent30 owns current telemetry qualification with publication preparation."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Before-use logical producer/policy/wrapper metadata and actual channels survive, but the ignored raw pack and native physical Git/cache/compressor/toolchain/OS closure are not tracked recoverable inputs. Broader4.2/SESSION5 owns this explicit custody gap; no late retention is described as original first-use closure."
+      }
+    }
+  ]
+}

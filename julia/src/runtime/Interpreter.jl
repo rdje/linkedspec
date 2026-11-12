@@ -6978,7 +6978,7 @@ function _runtime_is_canonical_array_transform_arity(helper, count)
     helper in ("take", "take_last", "drop_front", "drop_back") && return count in (1, 2)
     helper == "slice" && return count in (2, 3)
     helper in ("sorted", "reversed") && return count == 1
-    return helper == "concat_arrays" && count == 2
+    return helper == "concat_arrays" && count >= 1
 end
 
 function _runtime_is_ordinary_array_transform_receiver_call(call)

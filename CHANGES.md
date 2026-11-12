@@ -12,6 +12,21 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.4: Julia existing concat result arities
+
+One result-arity guard/one runner include preserve existing unary/multi-Array
+concat continuations. Own508/four routes:20 supported/four separately qualified
+legacy operand continuations/484 preserved;80 initial/eight invalid signatures
+exact. Old24-current508/direct4959 assertions/first readonly10/current516
+pass with3048 retained epoch pairs/full available errors. Four old route-profile
+objects transfer only; producer/signature/formats stay unchanged. Book/live/docs
+synced. Remeasure after commit;1.5GB early publication overrides cadence, with
+canonical proof first. Full native/source/context/admission stays separate.
+The initial staged whitespace2 on a plain diff context line is qualified by
+exact compressed retention and unchanged-reader recovery/ten original plus two
+patch controls. Original proof stays immutable; no runtime replay.
+Evidence: docs/checkpoints/array-concat-open-arity-julia-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.30.1: monitor outgoing push size
 
 Reusable one-worker measurement captures source/config/refs before pack use.

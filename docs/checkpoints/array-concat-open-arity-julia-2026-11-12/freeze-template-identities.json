@@ -1,0 +1,14 @@
+{
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture.py": {
+    "bytes": 9321,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze-template-capture.py.gz",
+    "mode": 420,
+    "sha256": "0b8188054114292e6e897ce7c637cf1a29bcf0e7201791bb84f63ef5477983fa"
+  },
+  "julia/test/array_transform_callable_result_guard_composition_test.jl": {
+    "bytes": 3503,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/freeze-template-array_transform_callable_result_guard_composition_test.jl.gz",
+    "mode": 420,
+    "sha256": "30a6e49cfd57d9c23753d060cb97e1ac9cfb22017cc9f07cce369adee0cc5d70"
+  }
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2197,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-corpus-proof-routing.md","sha256":"d7be1ef70a61310b845c8eb7b9033256f8a44c26f23d8aee561c479d0dfa5d94","type":"member"}
 {"bytes":3792,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-helper-parity-closeout.md","sha256":"9f65c6846a60abe84a7765e0dd165d7227072bf4e8b73fb7e85e4dfd4220703a","type":"member"}
 {"bytes":3630,"lines":19,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-predicate-source-guards.md","sha256":"36312db753f47c387cf974f8e4347c19d9df6ec9d2d8696ddc6bdaf73c853d1f","type":"member"}
 {"bytes":4493,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-toolchain-package-policy.md","sha256":"09dcfcb61d6091526b0766e4877882481ac5a9ef87eabaf3e27ace0ebcab4dfc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3094,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-null-return-execution.md","sha256":"b12c799a952629dfc5e50d7a49948eaa3497b06cda08982da8d6c078a86ad69a","type":"member"}
 {"bytes":3000,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1","path":"docs/knowledge/perl-callable-pipeline-first-call-arity.md","sha256":"4ee021263c42a67cf9f2e0d3651e2ac3ad2b3f229531cc92ef1f639d11a23c8a","type":"member"}
 {"bytes":3643,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-intake-and-arity.md","sha256":"555a3b856e8c14ee423c9306595ef01d2eb5cc1253502d45a6440a6b748e32ca","type":"member"}
-{"bytes":3597,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-result-guards.md","sha256":"0ad21f9ef608301a2ea952fcd8facb4ad698a4dd868e2e84cfb00dd77e63e540","type":"member"}

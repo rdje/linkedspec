@@ -1,0 +1,62 @@
+{
+  "docs/checkpoints/array-concat-open-arity-perl-2026-11-12/own-questions.json": {
+    "bytes": 70827,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-2.gz",
+    "mode": 420,
+    "sha256": "68764e93475c7c1eb2facc2ffc3aa07fea8319379461355efd35736279ac99d3"
+  },
+  "docs/checkpoints/array-concat-open-arity-selection-2026-11-12/cases.json": {
+    "bytes": 57147,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-0.gz",
+    "mode": 420,
+    "sha256": "de2db0fa26b1be85c87bec29e2738ed3cdcac2a0046b479a670f6a2e6ff5ce52"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture_intake.py": {
+    "bytes": 5951,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-5.gz",
+    "mode": 420,
+    "sha256": "84593f8c12d840ddeb0fe92ead126f7d17e35a6ca494ce0f6a7fbde91e29b167"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/cases.json": {
+    "bytes": 155300,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-1.gz",
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/observer.jl": {
+    "bytes": 3336,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-4.gz",
+    "mode": 420,
+    "sha256": "d63f7c8eca11d7b43c01ce7f52ecf5f1cd3fc4b894e5424ac642eaaff0407da4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-6.gz",
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "julia/test/array_transform_callable_result_guard_composition_test.jl": {
+    "bytes": 3503,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-9.gz",
+    "mode": 420,
+    "sha256": "30a6e49cfd57d9c23753d060cb97e1ac9cfb22017cc9f07cce369adee0cc5d70"
+  },
+  "julia/test/callable_array_transform_observation.jl": {
+    "bytes": 1387,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-7.gz",
+    "mode": 420,
+    "sha256": "1e8f79b12c4189f9b3f1a2439a1f4218ca4b16c18a0248ea7073029c82baec0f"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_julia_profiles.json": {
+    "bytes": 324935,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-8.gz",
+    "mode": 420,
+    "sha256": "010796d7d155e536d06326a2ae79882d6e8bbf5a8803e932177491aa6987dfe3"
+  },
+  "tests/fixtures/array_transform_result_guard_julia_profiles.json": {
+    "bytes": 72305,
+    "image": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/template-3.gz",
+    "mode": 420,
+    "sha256": "09cd230b31d3a8eda9889bd429fac34e822f63cb36813bea76a9a8ad8a89b4ef"
+  }
+}

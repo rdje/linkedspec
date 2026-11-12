@@ -1,0 +1,37 @@
+{
+  "CHANGES.md": {
+    "bytes": 42417,
+    "mode": 420,
+    "sha256": "00c00078ff6051d05ae307019c3a80f6720e04556c905f5c2652da77bc2d1f63"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 32608,
+    "mode": 420,
+    "sha256": "6bd1a6d6147a1d0e9713a2548aafce3e6b225ac827a8521f81416e7f19e86917"
+  },
+  "MEMORY.md": {
+    "bytes": 3323,
+    "mode": 420,
+    "sha256": "9ba4c163ba3ef5fe773f5d4cefe1fdabecb129a20e34d2378c75c8a0e2637516"
+  },
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/REVIEW.md": {
+    "bytes": 5287,
+    "mode": 420,
+    "sha256": "bb437ef1e94a0e951b959522bb02a563299c8195795c1d9217f3021cb6ecf6da"
+  },
+  "docs/knowledge/julia-open-arity-concat-result-guards.md": {
+    "bytes": 3652,
+    "mode": 420,
+    "sha256": "976099f7bb76f7e64d73c0581e18f9318b199bdd153f6670f5137d935e838134"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 374387,
+    "mode": 420,
+    "sha256": "67781877098719f4c1603e1cec60ec71c2da3139e0bd443689931175b58e5f49"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 703524,
+    "mode": 420,
+    "sha256": "54b603bffb45ac66cc7ee436135849229ae446cfd88153680f3609cf244e9338"
+  }
+}
