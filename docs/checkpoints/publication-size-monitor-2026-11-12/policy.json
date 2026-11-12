@@ -1,0 +1,8 @@
+{
+  "authority": "Director2026-11-12; preparation reserve100MB is advisory, not a bound on future slice/receipt growth. Monitor after every leaf and before large growth; canonical prerequisites before push.",
+  "early_push_trigger_bytes": 1500000000,
+  "minimum_free_memory_percent": 45,
+  "preparation_threshold_bytes": 1400000000,
+  "threads": 1,
+  "window_memory": "64m"
+}

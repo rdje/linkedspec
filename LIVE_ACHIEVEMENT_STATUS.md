@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Perl80.1/Rust80.2/Dart80.3 existing concat result guards are focused-complete. Publication-budget30 is next at the clean boundary, followed by independent Julia80.4/Lua80.5. Full source/context/portable admission remains23.4.
+Full PNT continues. Monitor30.1 is focused-complete; Perl80.1/Rust80.2/Dart80.3 concat proof remains. Remeasure current committed bytes before Julia80.4; canonical publication preempts cadence near1.4-1.5GB. Full source/context/admission remains23.4.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.3.80.3. One result-count line;508/four routes/20 supported/four separate compatibility/484 exact records;80 initial/eight invalid signatures exact. Old24-current508/direct1155 named groups/first readonly9/current521/format pass.1016 parsed/module pairs/2032 normal inputs retained.
+TYPE-REFERENCE-BOOK.1.2.23.4.30.1. HEAD102ec3446 versus cached origin4683555e:1,257,281,519 bytes/102 commits/45,549 required and packed objects,242,718,481 below1.5GB. Qualified native verify/12 controls/historical recovery/three controls/five current inputs pass. Original index-stem failure retained. Native/raw/toolchain durability remains4.2/SESSION5.
 
 ## Next Action
 
-After clean Dart80.3, remeasure outgoing pack and activate23.4.30. Monitor after each leaf/before large growth and push around1,500,000,000 estimated bytes even mid-PNT/batch, with clean exact-HEAD canonical CI first. Then resume independent Julia80.4; no peer verdict import. Broader owners remain separate.
+After clean monitor commit, remeasure before independent Julia80.4. Prepare canonical discovery/full CI/publication near1.4GB or earlier for next-slice/receipt growth; push around1,500,000,000 bytes even mid-PNT/batch with clean exact HEAD and normal hooks. Cached estimates are not fresh remote or wire-size promises.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.30.1 —HEAD102ec3446/cached base4683555e:1,257,281,519 bytes/102 commits/45,549 objects; qualified verify/12 REDs/historical recovery/three controls; native durability gap explicit, remeasure then Julia.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.3 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct1155/readonly9/current521; publication-budget30 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.2 —504/four routes/16 supported/two separate compatibility/486 preserved/80 initial/eight invalid signatures; old18-current504/combined direct1205/qualified2 readonly25/current871; Dart80.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.29 —25 IDs/22 closed/three unchanged/full22339-byte tail/48937 renewed bytes;26 exact public queries/first readonly10/current identity0; Rust80.2 next.
@@ -29,7 +30,6 @@ After clean Dart80.3, remeasure outgoing pack and activate23.4.30. Monitor after
 - TYPE-REFERENCE-BOOK.1.2.23.1.41 — Original44/qualified45;13 supported targets/25 healthy/seven profiles/89 pairs/readonly fifteen controls/current128; frozen78.6/Perl intake next, literal policy separately owned.
 - TYPE-REFERENCE-BOOK.1.2.23.4.26 —1,235 dated metadata rows; four exact combined logs/124,012 content bytes/modes archived before duplicate retirement; readonly0/fourteen controls; assessment41 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.79.6.5 — Each194/four routes1164PASS/private19RED-current194/175 full records/direct2254/1353 pairs/eight qualified traces/readonly18/current500; daily4.26 then selection41.
-- TYPE-REFERENCE-BOOK.1.2.23.3.79.6.4 —194/four routes776PASS/private20RED-current194/174 full-wire records/direct1866/1353 pairs/eight traces/readonly17/current482; installed Lua next.
 
 ## History
 

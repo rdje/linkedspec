@@ -1,0 +1,147 @@
+{
+  "CHANGES.md": {
+    "bytes": 40479,
+    "mode": 420,
+    "sha256": "86e7cb141508ac8f8b991868b9c09e9c91104dff37a285aa5c47e070e2c6cfbe"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 57158,
+    "mode": 420,
+    "sha256": "e428f7511433d47b1b2104f79e7364972638c80ef576beabf1440251d0ef5269"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5069,
+    "mode": 420,
+    "sha256": "ff555375621900f37e124ce898727676c2b635475bf7d7ef8b75ec1dbbe813b0"
+  },
+  "MEMORY.md": {
+    "bytes": 3596,
+    "mode": 420,
+    "sha256": "945013f5c537a065a764beb88a69f5364e73b5fd08368ee91634788e684bd52e"
+  },
+  "ROADMAP.md": {
+    "bytes": 472077,
+    "mode": 420,
+    "sha256": "47aa8e9c35dc0a5f0ebd17e14ca95a61abddfae56776bf5a7973a7af89f8f42f"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273412,
+    "mode": 420,
+    "sha256": "e71a949713db015e19fa12f72acb302c94f2639e3d6bdd06f960f2922c8a3002"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/current/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/current/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/current/stdout.log.gz": {
+    "bytes": 256,
+    "mode": 420,
+    "sha256": "2b608153edd823d2d17d4ec9bffc2e85c16070393d524d1f8bc595cf8d0905d3"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review-publication-query/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review-publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review-publication-query/stdout.log.gz": {
+    "bytes": 296,
+    "mode": 420,
+    "sha256": "1fedb9f37d9d76524b44f395e8589f5833cf481e802b9776e4a98958f51565a4"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/launches/review/stdout.log.gz": {
+    "bytes": 508,
+    "mode": 420,
+    "sha256": "85857c1b9a793cddacc99e717ecacce44d51692db618e9b818598f2f5251c079"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/measurement/result.json": {
+    "bytes": 1342,
+    "mode": 420,
+    "sha256": "ae2126a4224ca516e8c2f962e7f6b342db782b1a5d1765df5b5d28b7808576f2"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/publish.py": {
+    "bytes": 20665,
+    "mode": 420,
+    "sha256": "45ed4310daf8d9f33fb17df18071c98fda8ceb012391f8761ad9f2f91a5adb00"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/review_publication.py": {
+    "bytes": 4574,
+    "mode": 420,
+    "sha256": "0b6805403f258ff27c39fadc3ed026b74247e0fdba9c0417a053e58f053bd73c"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/run_publication.py": {
+    "bytes": 3515,
+    "mode": 420,
+    "sha256": "ed610b40a76a8ecf173977f9127031a151bba0d9112bdd9482db4fc98eac0c59"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/validation-qualified/result.json": {
+    "bytes": 1914,
+    "mode": 420,
+    "sha256": "534fb151c3b829ed31e03366728695b642f63871644ca027ea69d4da119e03d6"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.30.1.json": {
+    "bytes": 4727,
+    "mode": 420,
+    "sha256": "b7c85e90635580d3e49ed016cff4dacf042d4f2d598fa0b53d1da468302e5d81"
+  },
+  "docs/knowledge/github-size-safe-publication.md": {
+    "bytes": 8002,
+    "mode": 420,
+    "sha256": "28e993196ef82b577b36607de14c56cdd22cbc981ee83004eec369aad2675c08"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 373201,
+    "mode": 420,
+    "sha256": "d5eb99851f032aad45f6ffff443342d11d0f1fc993e2aa8cb82933ee21433aeb"
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 162943,
+    "mode": 420,
+    "sha256": "10b8ca3a20d453b8d73f08353dbabe2c74b0f56ac522bc84499a266a68b64a9f"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20300,
+    "mode": 420,
+    "sha256": "e6acd5f561a3364c622705ad262905e19cbf90c81f99c480f704481a2f0d2a32"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 522415,
+    "mode": 420,
+    "sha256": "d25edf417260178e6ae15ae288ff8f26bbebc71634790e56b38eda8a694b8c63"
+  },
+  "git_message_brief.txt": {
+    "bytes": 0,
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

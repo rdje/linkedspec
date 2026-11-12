@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/publication-size-monitor-2026-11-12/landing-pressure/checker-before.py.gz": {
+    "bytes": 4761,
+    "mode": 420,
+    "sha256": "18b271174f8fac67c5dfb457cff29b2bc6a433796e26fcdce68c1677ccc4e5c2"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/landing-pressure/overview-before.md.gz": {
+    "bytes": 133643,
+    "mode": 420,
+    "sha256": "22a1bb97c9d25e08c487ccbf98964456d256516fa632b33582dea50f4ffbdbcf"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/probe_owner_status.py": {
+    "bytes": 3766,
+    "mode": 420,
+    "sha256": "cdf6d0984e9d9e91659d4b144dc52cc081e754b74f3985ae177c2d611cca8ad7"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 525670,
+    "mode": 420,
+    "sha256": "6d6aa198f336ea1d787c53855659c55034118c08fab3e9dff202133def7ce312"
+  },
+  "tools/check_claim_verification.py": {
+    "bytes": 15261,
+    "mode": 420,
+    "sha256": "8ca565149654d95d38b225d9607fd74e7c59562cf84513cc6df784ad8d014a03"
+  }
+}

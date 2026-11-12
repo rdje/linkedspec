@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "git",
+    "rev-list",
+    "--objects",
+    "--no-object-names",
+    "102ec3446407543c5ef64f3222bd0fffb5eb3064",
+    "^4683555ec51f04b8977812ce4e984c5cc6e6f42c"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  }
+}

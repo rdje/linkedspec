@@ -1,0 +1,12 @@
+{
+  "observed_original_exec_exit": 1,
+  "original_exec_session": 56282,
+  "passed_doctrines": 8,
+  "failures": [
+    "README-STABILITY:2074/2048 CI lines",
+    "CLAIM-VERIFICATION:in_progress is outside the allowed repair-owner states"
+  ],
+  "ci_lines_before": 2074,
+  "workflow_lines_before": 984,
+  "scope": "Exact original combined log/source/full-mode images; no original producer/reviewer/claim observation is changed."
+}

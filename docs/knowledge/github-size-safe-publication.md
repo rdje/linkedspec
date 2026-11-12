@@ -11,6 +11,10 @@ answers:
   - "what is the conservative GitHub outgoing push budget"
   - "why can packed object count exceed the outgoing revision list"
   - "how does sparse Git pack walking add already remote objects"
+  - "where is the reusable current outgoing pack estimate producer"
+  - "why does verify pack look for a differently named missing pack"
+  - "where are the outgoing publication budget instructions in the book"
+  - "why can reference scope pass while the CI chapter exceeds2048 lines"
 date: 2026-11-12
 status: early-push policy adopted; November4 backlog historical; new operational custody gaps owned by23.4.30
 tags: [git, publication, pack, github, continuity]
@@ -44,6 +48,30 @@ volume. The scoped operational claim at docs/claims/TYPE-REFERENCE-BOOK.1.2.23.3
 has checked re-derivation and explicitly missing independent historical size
 falsification/complete physical artifact/toolchain durability, owned by23.4.30.
 Logical metadata equality does not close these gaps or promise a future upload.
+
+The bounded reusable monitor (30.1) is retained at
+docs/checkpoints/publication-size-monitor-2026-11-12/measure.py. Run it after every
+committed leaf and before large growth. It prints actual refs, packed bytes, the
+trigger margin and the advisory 1.4 GB preparation state. At committed HEAD
+`102ec3446` and cached base `4683555e`, 102 commits estimate 1,257,281,519 bytes,
+leaving 242,718,481 bytes before the 1.5 GB trigger. Explicit no-sparse output
+contains exactly 45,549 required objects. The original validator exits 1 because
+its index and pack stems differ. Qualified verification reuses the successful
+native index with a matching stem and passes 12 controls. Git pairs an index with
+its corresponding pack: https://git-scm.com/docs/git-verify-pack.
+Historical reverify: bash tools/project_data_run.sh env PYTHONPATH= python3 -P
+docs/checkpoints/publication-size-monitor-2026-11-12/review.py. Current identity
+is separate. Native/physical/raw-artifact durability remains a disclosed gap owned
+by 23.4.2/SESSION5; remote freshness and wire size remain unassessed. Source and
+proof: docs/checkpoints/publication-size-monitor-2026-11-12/REVIEW.md.
+
+The detailed byte-budget instructions are in the existing mdBook Documentation
+Workflow chapter, linked from Local CI. The CI page has a stricter2048-line
+diagnostics limit in addition to the5000-line public-reference limit; updating
+reference hashes does not replace that budget. The monitor's first normal1 is
+retained, and exact section routing restores CI2048 without raising limits. The
+same landing fixes the parent repair-task label under the existing claim schema;
+see [[claim-gap-owner-status-vocabulary]]. No measurement or claim hash is refreshed.
 
 The November4 workflow below is dated historical evidence.
 

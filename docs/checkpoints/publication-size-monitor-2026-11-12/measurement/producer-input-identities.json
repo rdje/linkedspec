@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/publication-size-monitor-2026-11-12/measure.py": {
+    "bytes": 7957,
+    "mode": 420,
+    "sha256": "1a9d0ead11c944cc7d30ba7038a18342631bda4a09d1a5342433d7bd37179668"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/policy.json": {
+    "bytes": 376,
+    "mode": 420,
+    "sha256": "026d932ed681bbffe8c2bfa6fd7a8aacbab4a0ce36116186682800fb4aa5f9ed"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

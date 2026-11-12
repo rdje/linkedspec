@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}
 {"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}
 {"bytes":6951,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-condition-truthiness-drift.md","sha256":"301f6357f60558247e52608f90f98ecde9ad48c4dc2ea72f8695a5d758e9adb5","type":"member"}
 {"bytes":7544,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-diagnostic-output-drift.md","sha256":"236df8fb490b2861619e7dfa099a753998d0e64d46f7ccf47557ee0d4244a043","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3095,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-mechanism-audit.md","sha256":"6be6d8f2012d1abfb232a6191113f76b67c6da69f2e610940c22aba7c1064b4b","type":"member"}
 {"bytes":2953,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-native-execution-canonical-json.md","sha256":"3a2c912d9dbf89734f4be0e6b43b434167acdc997499ddb48f5452583d6b713e","type":"member"}
 {"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}
-{"bytes":11898,"lines":215,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-progressive-nested-authority-gap.md","sha256":"adcccefbb33a33452ee27a4245d02a7f84e495e2610df50d75c4b22a1c584d4c","type":"member"}

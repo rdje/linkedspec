@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3207,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lossless-child-carrier-readiness.md","sha256":"025738b3174f412c9d228d4a4a1b53ada688f414ef601a3891bb96fa42d0c377","type":"member"}
 {"bytes":1629,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-marker-switch-chain-selection.md","sha256":"dd8b1d37b03ece0ed7a81b468804a2ae34f2cd1e6a14b584faf408d7efd35b8b","type":"member"}
 {"bytes":7670,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-decoded-server.md","sha256":"2b3aba91da0985a3db6f9e84f6cb6e46f9bb6d389b363fc4d779d12aa6f2a6ef","type":"member"}
 {"bytes":6775,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-implementation-admission.md","sha256":"796b38d8ec1b6b44f6ff8b7b9b70a58c1f76c33145a56e2e61a50b0f2c6c65b9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3894,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-helper-retirement-split-inventory.md","sha256":"9aa9894fa1f4dd749d9ee052743f773ee4ad7fd5fe0309bf03a146bf5b36e90b","type":"member"}
 {"bytes":6325,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"d666797a6bad6ec1aca8b072dc166db61d91e17503c4c23564993aee043003a4","type":"member"}
 {"bytes":5024,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lexical-result-source-guards.md","sha256":"62a0640ccc503da74ac67a0d316cfd15e755ec23f182f8e4c9206dd84b9a46dd","type":"member"}
-{"bytes":1468,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/linkedspec-pm-is-thin-facade.md","sha256":"751b9afd0a6182e38192313d9a443c31309f61464fc0b380c6314cebbedb413e","type":"member"}

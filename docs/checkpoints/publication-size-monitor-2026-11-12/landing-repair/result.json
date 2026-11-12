@@ -1,0 +1,23 @@
+{
+  "ci_lines": 2048,
+  "diagnostics": [
+    {
+      "bytes": 170063,
+      "lines": 1946,
+      "path": "TOOLBOX.md"
+    },
+    {
+      "bytes": 163064,
+      "lines": 2048,
+      "path": "docs/linkedspec-book/src/development/local-ci-and-regression.md"
+    }
+  ],
+  "parent_owner_status": "active",
+  "registry_changed": false,
+  "routed_section_lines": 26,
+  "routed_section_sha256": "9baf615f6b1a27c6f040baf0bed75fb103a8b79224ba97d810e337fc762ce002",
+  "scope": "Complete section routed with heading-only adjustment and a short CI pointer; existing page/limits/registry/SUMMARY retained. Claim owner uses existing accepted vocabulary; no checker, measurement, claim hash or SDK change.",
+  "source_section_sha256": "9ba371d8f35f872b3bac396f5ecf89e24b15764e0024fb1edc9da035bb469bf4",
+  "summary_changed": false,
+  "workflow_lines": 1013
+}

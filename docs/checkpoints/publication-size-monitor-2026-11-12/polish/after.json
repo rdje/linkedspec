@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/publication-size-monitor-2026-11-12/polish_publication.py": {
+    "bytes": 4920,
+    "mode": 420,
+    "sha256": "14205fbe9f1b3ad40cc00919c602633f72209b7cd490b1330b89ec1010800fca"
+  },
+  "docs/knowledge/github-size-safe-publication.md": {
+    "bytes": 9295,
+    "mode": 420,
+    "sha256": "565518a1b8418998298fef909d3fad348f914eac3fb4653ccbbc7f906af83e2f"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 373645,
+    "mode": 420,
+    "sha256": "cf07b4dba4be50b133b2eb3d0de1b054843af3ae29414d90f63ce1c8d10f2505"
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 164560,
+    "mode": 420,
+    "sha256": "b75bee00ae827353d34a4277450ebd3bb627c75acfd963e63ddcd62f0e6e47c5"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  ".linkedspec-data/publication-size-monitor-commit.log": {
+    "bytes": 2940,
+    "mode": 420,
+    "sha256": "e0dd32f10ff3caf9d68475f13c7f799393453976eb080b2638d78ba661704f49"
+  },
+  "MEMORY.md": {
+    "bytes": 3299,
+    "mode": 420,
+    "sha256": "1ef30abb6f8556e1b64ddda67f571bf7f7ee48bd885412b4a83a52872ed47ae3"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/capture_landing.py": {
+    "bytes": 2784,
+    "mode": 420,
+    "sha256": "925babaad1f5797210d122692822738d229677b9a1ce41227523ca08e4a77490"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 58022,
+    "mode": 420,
+    "sha256": "863012001603ee2bdb26bb6c191fd453f8965d61331b433364a3d97bb0f774c2"
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 164560,
+    "mode": 420,
+    "sha256": "b75bee00ae827353d34a4277450ebd3bb627c75acfd963e63ddcd62f0e6e47c5"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 524847,
+    "mode": 420,
+    "sha256": "0d4e1495d45a508e8c5821c704e5713e2ab67336f98e678593000300d2ea9fb7"
+  },
+  "doctrine/readme_stability/routes.jsonl": {
+    "bytes": 25053,
+    "mode": 420,
+    "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248"
+  },
+  "tools/check_claim_verification.py": {
+    "bytes": 15261,
+    "mode": 420,
+    "sha256": "8ca565149654d95d38b225d9607fd74e7c59562cf84513cc6df784ad8d014a03"
+  }
+}

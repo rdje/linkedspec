@@ -1,0 +1,9 @@
+{
+  "bytes": 1276444,
+  "mode": 292,
+  "original_native_index_exit": 0,
+  "reason": "Git verify-pack resolves the corresponding pack from the index stem; reuse the completed native index without reindexing or remeasuring.",
+  "sha256": "bdaec9c3dc6cc32ff6535924da6e58ac9bf2c61660feaa9fa95e9cffeb838bc2",
+  "source": ".linkedspec-data/push-monitor/20261112T123535.791408Z/independent.idx",
+  "target": ".linkedspec-data/push-monitor/20261112T123535.791408Z/outgoing-estimate.idx"
+}

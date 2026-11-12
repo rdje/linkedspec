@@ -1,0 +1,26 @@
+{
+  "actual_production_parser": "PASS",
+  "observations": {
+    "closed_control": {
+      "accepted": false,
+      "error": "gap repair owner is not open: TYPE-REFERENCE-BOOK.1.2.23.4.30",
+      "owner_matches": [
+        false
+      ]
+    },
+    "corrected_active": {
+      "accepted": true,
+      "owner_matches": [
+        true
+      ]
+    },
+    "original_in_progress": {
+      "accepted": false,
+      "error": "gap repair owner is not open: TYPE-REFERENCE-BOOK.1.2.23.4.30",
+      "owner_matches": [
+        false
+      ]
+    }
+  },
+  "scope": "Unchanged production InputSnapshot.check_owner on retained whole-task fixtures through its explicit git_reader seam. Original RED/fixed GREEN/closed RED; no real index scan, measurement, SDK or policy change."
+}

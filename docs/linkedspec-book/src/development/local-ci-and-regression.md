@@ -33,7 +33,7 @@ The staged task-tree delta changes verification declarations for exactly one sta
 
 Each task-tree leaf records its tier and exact focused checks. For canonical work, first stage the exact candidate and leave no unstaged tracked or untracked non-ignored files. The gate binds success to base `HEAD` and a read-only SHA-256 of Git's full-index binary staged diff in repository-local project data. The pre-commit doctrine rejects a missing or stale canonical receipt. After commit, an exact receipt can be promoted to committed `HEAD`; the pre-push hook reuses it only when it matches, otherwise it runs the complete gate once.
 
-This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a claim of literal impossibility.
+This means a normal batch pays for focused proof on each commit and full proof once before push. Local Git hooks remain bypassable, and hosted CI remains disabled, so this is strong normal-workflow enforcement rather than a claim of literal impossibility. Publish earlier when the [outgoing byte budget](documentation-workflow.md#outgoing-publication-byte-budget) requires it.
 
 ### Task-evidence coverage
 

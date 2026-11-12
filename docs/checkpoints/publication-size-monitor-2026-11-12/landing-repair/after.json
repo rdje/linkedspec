@@ -1,0 +1,42 @@
+{
+  "TOOLBOX.md": {
+    "bytes": 170063,
+    "mode": 420,
+    "sha256": "e4254544ec0f53971745fbdb1a5045a661ddcf2346ee4d63e5aead831bd9cb95"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/repair_landing.py": {
+    "bytes": 5643,
+    "mode": 420,
+    "sha256": "58391c5f615bad9d6f380b68398f85543a1071a86fb79f257204fcb4b550b716"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/workflow-inputs/result.json": {
+    "bytes": 52757,
+    "mode": 420,
+    "sha256": "8f9e3cffc9ca07541dd0b868e8d56666473707ad64b53129d894a35aa2047702"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 59762,
+    "mode": 420,
+    "sha256": "98ceca49ffe8c96f40c3dfc8c493b98585f098de2ce29e860aad721e4bbab958"
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 163064,
+    "mode": 420,
+    "sha256": "1bee58e8d9c13171be840a3127d692c72df8ff434507ac79a0fb05eb383d790d"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 525670,
+    "mode": 420,
+    "sha256": "6d6aa198f336ea1d787c53855659c55034118c08fab3e9dff202133def7ce312"
+  },
+  "doctrine/readme_stability/routes.jsonl": {
+    "bytes": 25053,
+    "mode": 420,
+    "sha256": "4e95ae25468fd01ebb57043f616a300cd0deda8cd319a8800d443e989a777248"
+  },
+  "tools/check_claim_verification.py": {
+    "bytes": 15261,
+    "mode": 420,
+    "sha256": "8ca565149654d95d38b225d9607fd74e7c59562cf84513cc6df784ad8d014a03"
+  }
+}

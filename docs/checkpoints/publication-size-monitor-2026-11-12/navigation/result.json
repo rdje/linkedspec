@@ -1,0 +1,8 @@
+{
+  "link": "documentation-workflow.html#outgoing-publication-byte-budget",
+  "rendered_navigation": "PASS",
+  "scope": "Actual rebuilt HTML images retained before inspection; command/budgets/link/target checked. No future render freshness or native toolchain closure claim.",
+  "source_ci_lines": 2048,
+  "source_workflow_lines": 1013,
+  "target_occurrences": 1
+}

@@ -1,0 +1,61 @@
+{
+  "cached_origin_main": "4683555ec51f04b8977812ce4e984c5cc6e6f42c",
+  "corruption_controls": [
+    {
+      "control": "wrong serialized size",
+      "observed_red": "serialized byte count"
+    },
+    {
+      "control": "wrong HEAD",
+      "observed_red": "HEAD snapshot"
+    },
+    {
+      "control": "wrong origin",
+      "observed_red": "cached origin snapshot"
+    },
+    {
+      "control": "failed producer",
+      "observed_red": "producer exit"
+    },
+    {
+      "control": "bad header",
+      "observed_red": "PACK header"
+    },
+    {
+      "control": "wrong file checksum",
+      "observed_red": "serialized SHA256"
+    },
+    {
+      "control": "wrong Git footer",
+      "observed_red": "Git footer"
+    },
+    {
+      "control": "wrong packed count",
+      "observed_red": "indexed object count"
+    },
+    {
+      "control": "missing required object",
+      "observed_red": "required object coverage"
+    },
+    {
+      "control": "wrong director budget",
+      "observed_red": "director budget"
+    },
+    {
+      "control": "wrong margin",
+      "observed_red": "byte margin"
+    },
+    {
+      "control": "wrong preparation decision",
+      "observed_red": "preparation decision"
+    }
+  ],
+  "empty_pack_bytes": 32,
+  "extra_objects": [],
+  "head": "102ec3446407543c5ef64f3222bd0fffb5eb3064",
+  "independent_validation": "PASS",
+  "logical_objects": 45549,
+  "pack_bytes": 1257281519,
+  "packed_objects": 45549,
+  "scope": "Original native index0/verify1 is retained; matching-stem qualification reuses index0 with current memory preflight and actual verify0. Actual file stream/stat/checksum plus independent Git index/verify and exact required-object coverage. Controls mutate receipt/fact fields, not a duplicate1.2GB file. Actual native inputs/raw pack/indexes remain ignored; full physical Git/cache/toolchain/OS durability stays4.2/SESSION5. No remote freshness/wire/future-size claim."
+}

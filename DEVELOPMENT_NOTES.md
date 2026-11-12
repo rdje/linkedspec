@@ -10,6 +10,21 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — Bounded outgoing-pack monitoring (TYPE-REFERENCE-BOOK.1.2.23.4.30.1)
+
+Measure committed refs rather than commit count/store size; source/policy/config
+precede one-worker/no-sparse packing. Actual1,257,281,519-byte artifact covers
+45,549 objects; independent index/qualified verify and12 metadata faults pass.
+Original index0/verify1 is a basename mismatch; reuse matching-stem index without
+repacking. Historical reader0/three controls and five current inputs pass. Full
+physical/native/toolchain/raw custody stays4.2/SESSION5. Advisory1.4GB preparation
+protects director1.5GB early publication; canonical discovery/full CI remain
+mandatory. Evidence: docs/checkpoints/publication-size-monitor-2026-11-12/REVIEW.md.
+
+Original normal1/eight PASS/two failures is retained. Exact section routing
+restores CI2048; the unchanged claim parser accepts the corrected active parent.
+Historical landing recovery/three controls and rebuilt navigation pass.
+
 ## Dart concat selector preserves its producer arity (TYPE-REFERENCE-BOOK.1.2.23.3.80.3)
 
 Own cold508 source-only programs precede the one-line count==2 to count>=1

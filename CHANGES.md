@@ -12,6 +12,20 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.4.30.1: monitor outgoing push size
+
+Reusable one-worker measurement captures source/config/refs before pack use.
+HEAD102ec3446/cached origin4683555e:1,257,281,519 bytes/102 commits/45,549 objects;
+242,718,481 below1.5GB. Qualified native verify/12 RED controls and historical
+recovery/three controls pass. Original index-stem failure remains; successful
+index reused. Trigger overrides PNT/batch cadence, with advisory1.4GB preparation
+and full canonical CI before every push. Native/raw/toolchain durability remains
+explicitly open. Book/Knowledge/live/docs synced. Evidence: docs/checkpoints/publication-size-monitor-2026-11-12/REVIEW.md.
+
+Original normal1/eight PASS/two failures is retained. Exact section routing
+restores CI2048; the unchanged claim parser accepts the corrected active parent.
+Historical landing recovery/three controls and rebuilt navigation pass.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.3: Dart existing concat result arities
 
 One result-count guard retains existing unary/multi-Array concat continuations.

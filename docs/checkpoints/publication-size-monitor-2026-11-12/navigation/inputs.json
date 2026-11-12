@@ -1,0 +1,14 @@
+{
+  "docs/linkedspec-book/book/development/documentation-workflow.html": {
+    "archive": "docs/checkpoints/publication-size-monitor-2026-11-12/navigation/input-1.html.gz",
+    "bytes": 88175,
+    "mode": 420,
+    "sha256": "90328d4f8027c8d46180a7173e85994ac0bcfc98f02de807c21987a8a45b6300"
+  },
+  "docs/linkedspec-book/book/development/local-ci-and-regression.html": {
+    "archive": "docs/checkpoints/publication-size-monitor-2026-11-12/navigation/input-0.html.gz",
+    "bytes": 201880,
+    "mode": 420,
+    "sha256": "2b019948574de629f8d4a9cd2cf5dbe8d9ac45adf88427ff241d40b3a6a2ce70"
+  }
+}

@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.30` | `pending` | After clean Dart80.3, remeasure outgoing pack and prepare1.5GB early-push monitoring/discovery/canonical publication; then Julia80.4. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.3.80.4` | `pending` | After clean monitor30.1, remeasure current outgoing bytes and acquire independent Julia concat policies; canonical publication takes priority near1.4-1.5GB. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.1.42` | `completed` | Own84/66 contract passes/18 terminal-supported concat composition failures;84 module-dump pairs/first readonly14/current126; frozen bounded80, no production change. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.1.41` | `completed` | Original44/qualified45 and exact qualification retained; frozen78.6 with independent backend owners. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |

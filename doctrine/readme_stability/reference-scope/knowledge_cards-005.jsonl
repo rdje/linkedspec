@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1468,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/linkedspec-pm-is-thin-facade.md","sha256":"751b9afd0a6182e38192313d9a443c31309f61464fc0b380c6314cebbedb413e","type":"member"}
 {"bytes":5018,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lispish-corpus-catastrophic-backtracking.md","sha256":"a15bd170d332f0165bf21f076439b95ec7ef179ec2b94241c54838323fb1caa7","type":"member"}
 {"bytes":3513,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lispish-multiline-quoted-payload.md","sha256":"216750740e6e28be3575b8059237fc388e828832cd86036284a59c896b02346c","type":"member"}
 {"bytes":8067,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-five-backend-audit.md","sha256":"f33ad59e58bd992d34bf46d5b0cf542e68b6ef2fa964a80ad418e357e7013abd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3281,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-loading-split.md","sha256":"edb1f82f788aa44056908076613fe41d1facf775a298803db5bd6debc4b0c9e2","type":"member"}
 {"bytes":3589,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-pipeline.md","sha256":"58c8f7a156ab1072d2cb7a33aac4496d4d16183b04b765eca092eb4f7f187410","type":"member"}
 {"bytes":3508,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-resolution.md","sha256":"ddb471f8d44c61b7d16ba6a02d0e90022b4d371a891081e1c08c4e7fecc3f2dc","type":"member"}
-{"bytes":4017,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-null-return-and-pure-observation-gaps.md","sha256":"227165e4274b88005859e58d1126177af1880776bf2b95370427bcee882c79c9","type":"member"}

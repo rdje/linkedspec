@@ -672,6 +672,32 @@ Closeout `.2` independently recomposed the committed checker, both hook views, a
 and historical documentation owners without implementation change; it found no current contradiction and made
 the only two unqualified historical task statements point explicitly to ADR `0065`.
 
+## Outgoing publication byte budget
+
+The director’s 1,500,000,000-byte early push trigger takes precedence over the batch
+or PNT cadence. Measure after each committed leaf and before large growth:
+
+```sh
+bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py
+```
+
+The command prints the actual committed HEAD/cached origin refs, non-thin pack
+estimate, byte margin and preparation state. It keeps raw diagnostics on the
+repository volume outside Git, with one pack worker and a `64m` window-memory limit. All
+uncommitted changes are excluded. Start canonical discovery/publication preparation
+around 1,400,000,000 bytes or earlier if the next slice or CI receipts need more
+margin; this 100 MB reserve is advisory. Publish around 1.5 GB even before the batch
+ends. GitHub's [single-push limit](https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit)
+is 2 GiB. Every push still requires current canonical test discovery, full CI and a
+clean exact HEAD through normal hooks. Check fresh remote identity before transfer.
+
+The estimate concerns a local serialized artifact; remote negotiation and wire
+bytes can differ. Source/config/ref/object metadata and independent validation are
+retained, while full native/physical/cache/toolchain custody remains separately
+owned. The canonical record at `docs/knowledge/github-size-safe-publication.md`
+links the scoped proof and preserved index-stem failure. The historical one-off
+backlog publisher remains retired. The publication task owns the required checks and transfer.
+
 ## Publishing a measured result
 
 A published measurement carries three different checks: re-derive it from the actual
@@ -696,6 +722,9 @@ require exact agreement. Explain differences from earlier adjudicated sibling ca
 ```bash
 bash scripts/check_claim_verification.sh
 ```
+
+A claim’s repair task uses status `pending`, `active`, or `blocked`. Use `active`
+while that repair work is in progress.
 
 The registered checker validates disclosure and declared regular tracked byte identities;
 it never executes commands from a record. `live` hashes watch index inputs; `historical`

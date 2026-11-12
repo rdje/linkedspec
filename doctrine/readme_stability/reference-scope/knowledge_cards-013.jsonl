@@ -1,4 +1,5 @@
-{"member_count":86,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":87,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3310,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-target-kind-inference.md","sha256":"cc179ae4c1949271dfc4df636dd062a6f8973808d35b2f927bb1fb7f87797408","type":"member"}
 {"bytes":5799,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-type-inference-ground-truth.md","sha256":"ecec1d40410c6b69a9bd35b7a7bccdbf4d94757769757a94ee81a7533ccf8d20","type":"member"}
 {"bytes":2152,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-attached-if-parser-runtime-seam.md","sha256":"b004f1c278dedcdcf80c222572d3824c39f319f7b57dde09febb0d88efc7e328","type":"member"}
 {"bytes":2666,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-attached-switch-parser-runtime-seam.md","sha256":"a03c7dcd1edfcdda5cc3637598efa148312ad6e4a369830f9513890a8f33473c","type":"member"}

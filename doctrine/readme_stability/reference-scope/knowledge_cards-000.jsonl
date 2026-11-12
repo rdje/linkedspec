@@ -93,6 +93,7 @@
 {"bytes":2505,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/change-history-twenty-sixth-member-capacity.md","sha256":"b297202fe1eb31655576d9eb9b99b27ec9800ef918313eebf27bb8106b8bd908","type":"member"}
 {"bytes":2955,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/change-history-twenty-third-member-capacity.md","sha256":"9e5543849de97e2feb0e470c913851a206155f506e90aec0a623bab68c4d5296","type":"member"}
 {"bytes":2552,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.0","path":"docs/knowledge/checkpoint-python-import-shadowing.md","sha256":"0b89bf44e22544a762979e4dae8d078c665960a820d2ff8888011ad73cf22985","type":"member"}
+{"bytes":2075,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.30.1","path":"docs/knowledge/claim-gap-owner-status-vocabulary.md","sha256":"64f64643121fd6ef98cf117ca536d0909bcc84ce985a867c0d504fdf4fdf7ef7","type":"member"}
 {"bytes":4029,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/claim-publishing-disclosure-identity.md","sha256":"d163cd29222cd0795531884a1cc80aa6508afb4ea60bb5e1961b86570055a269","type":"member"}
 {"bytes":2525,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/claim-verification-index-snapshot.md","sha256":"9813ce0b27a615c2751dc0ae6fff27cd220f54269ea4843ff2654809017a8ab4","type":"member"}
 {"bytes":2757,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/codeblock-matches-checkpoint-input-closure.md","sha256":"2641dddfe8fdc26164bdb999da8e8ba3f52b762693aef4a3cfee74461cb68a3b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4841,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"a28524918e7f1994d6fa51d7aa65594260712e6d706375cac309b6023292d8db","type":"member"}
 {"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}
 {"bytes":10751,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1","path":"docs/knowledge/count-result-source-guards.md","sha256":"2c29bb92618be0eb4e8bbdb5193a78a626c9760f3f73aeee5893989c1b7d455a","type":"member"}
-{"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}

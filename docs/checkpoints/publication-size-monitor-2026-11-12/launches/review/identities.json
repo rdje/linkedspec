@@ -1,0 +1,82 @@
+{
+  "docs/checkpoints/publication-size-monitor-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3311,
+    "mode": 420,
+    "sha256": "f954c562baf899f462f817db8f883407f3981eceb93aa0449d5db43bb3d2bafa"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/measure.py": {
+    "bytes": 7957,
+    "mode": 420,
+    "sha256": "1a9d0ead11c944cc7d30ba7038a18342631bda4a09d1a5342433d7bd37179668"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/original-validator.py.gz": {
+    "bytes": 3361,
+    "mode": 420,
+    "sha256": "a12d995c558aa23fdcdf75f1df1aa195c5992ba12ce41a484fef067f97b30108"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/policy.json": {
+    "bytes": 376,
+    "mode": 420,
+    "sha256": "026d932ed681bbffe8c2bfa6fd7a8aacbab4a0ce36116186682800fb4aa5f9ed"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/review.py": {
+    "bytes": 10949,
+    "mode": 420,
+    "sha256": "23b235c0fdf290e62267c6a08dfd5b5061c146ae50d90eb605bfc0d163d39d1d"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3190,
+    "mode": 420,
+    "sha256": "4d03e2c99109f130b9acf318b72a2c3c60f4a97305237927b51c1df422f21c1e"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/sealed-identities.json": {
+    "bytes": 29626,
+    "mode": 420,
+    "sha256": "4b17eeb850e9cee402a927f241eb7629d7e87534d18a411500e56c37f00ec5c1"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/template-check_publication_git_card.py.gz": {
+    "bytes": 1385,
+    "mode": 420,
+    "sha256": "81afcea3ad819232622d9fa967edd38568bd30f9e926925a34744a47297a233b"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/template-measure_push_head.py.gz": {
+    "bytes": 2322,
+    "mode": 420,
+    "sha256": "f9ab6e433866cdd503c03ec5247c1bf79a10e74d93b4f2de78e9381357b4b04b"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/template-review_publication_git_card.py.gz": {
+    "bytes": 1406,
+    "mode": 420,
+    "sha256": "8a5cc48d712a036c22e86dd535d10b21e230285a1b2713b8954ce8ade4eb8d15"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/template-run_stage.py.gz": {
+    "bytes": 924,
+    "mode": 420,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/validate_pack.py": {
+    "bytes": 10231,
+    "mode": 420,
+    "sha256": "c7678ef4235802d90f022309e946e316582fec60d50f7c7974130a3b283c7b31"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/validate_pack_qualified.py": {
+    "bytes": 11833,
+    "mode": 420,
+    "sha256": "24eea1e0ec0f8acfe2e051b0150bed90d460b4c8b1c3ab4340658d1622df0776"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

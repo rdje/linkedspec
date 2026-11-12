@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "verify-pack",
+    "-v",
+    ".linkedspec-data/push-monitor/20261112T123535.791408Z/independent.idx"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  }
+}

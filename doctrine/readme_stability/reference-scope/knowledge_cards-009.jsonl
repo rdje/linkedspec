@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4784,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-statement-separator-coverage-gap.md","sha256":"346ebd8b7f649be9f2e13acaac841b56c615e4edcf940131c0771c637b66be1f","type":"member"}
 {"bytes":2961,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-switch-close-terminator-gap.md","sha256":"dad24ead2f364fe84ec7b5b3eba12dc84ea7c88e2782d8425efe514af59cf5e2","type":"member"}
 {"bytes":5786,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-normalization-call-grammar.md","sha256":"a4ec8114e3f6c5f9c850747b023eacb8efb5d2b710cccfe654f51f2cb7bff492","type":"member"}
 {"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3545,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-four-backend-matrix.md","sha256":"fbbbd0acb2dbad4c2021c8cb281e91092858927162c319c0d997e83ce4bb767a","type":"member"}
 {"bytes":4094,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-strict-utf8-text-contract.md","sha256":"e9fdbc61164c3ffc9ee7214e69abb9d3adab4ff0e826772d3cdfe75b5dd21639","type":"member"}
 {"bytes":2552,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-utf8-process-boundary-gap.md","sha256":"65589f6e29405edb95d371d44f7fbb02352a11886dc6a9ab6b66967941d4bb61","type":"member"}
-{"bytes":3056,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-capacity-publisher-replay.md","sha256":"3561ee7be352cf252c696aa329af2d0c83bb25dc5e355fec1cae545c5362f8a8","type":"member"}

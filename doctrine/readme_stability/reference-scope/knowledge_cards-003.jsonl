@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5492,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-slot-record-selection-source-gap.md","sha256":"9daa47b44e79e3ac05672b026fd9b417e1c5674a769d5dd465a8f888cdb281e7","type":"member"}
 {"bytes":3758,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-string-result-source-guard-gap.md","sha256":"fd54891068ce814b0af851b6aa965f284b38fc3788017a9b3d410ba816c55311","type":"member"}
 {"bytes":3485,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gdcheck-signed-tolerance-duplicate-default-defects.md","sha256":"8401ab8f7ac9e7e110e63f232921c34d160338dca6bf5553fa52f5035af1e507","type":"member"}
 {"bytes":24411,"lines":172,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/general-staged-ast-current-boundary.md","sha256":"80a5c1c9e9dc9dcf841a8cab71efb1571097e1067ec4705681f5c5c59e53ce52","type":"member"}
@@ -8,7 +9,7 @@
 {"bytes":8583,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-parity-audit.md","sha256":"c3c2888677c1d0ea557319353e3539b5412327fcacfea91bb5e3b93e9d79e4de","type":"member"}
 {"bytes":3593,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generated-source-perl-rust-baseline-admitted.md","sha256":"127f55bdc3c242ace50d462edbcec89410b674ebacd1b52f59b13c258f7cf2df","type":"member"}
 {"bytes":4517,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/generic-trailing-codeblock-argument-correction.md","sha256":"aaee5c296afee746b7a3d41fadf993cd1d2fc0ba2745255559dee48b577ad874","type":"member"}
-{"bytes":8002,"lines":109,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.3","path":"docs/knowledge/github-size-safe-publication.md","sha256":"28e993196ef82b577b36607de14c56cdd22cbc981ee83004eec369aad2675c08","type":"member"}
+{"bytes":10002,"lines":137,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.30.1","path":"docs/knowledge/github-size-safe-publication.md","sha256":"7b1ee290f89af3057ceef2fac07b12ff71530b7196d4e9954107f551c2ad57d5","type":"member"}
 {"bytes":2087,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/governed-capture-helpers-missing-shared-inventory.md","sha256":"a86b37bcce7c3c5cf95e1d5a9f8f027fdeecebd3266b4a30914340b3ade7c69c","type":"member"}
 {"bytes":3427,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/grouped-edge-book-child-return-drift.md","sha256":"39f7b54a953ced79a47722da0a27002d1690d79b0711008b9fbdfec28450aebc","type":"member"}
 {"bytes":8749,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/guarded-ast-change-history-capacity.md","sha256":"4bb8cc5c47862a4ba3f035bf18fd06879452dcf705c8dd7dca37528d6b4ecd38","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3603,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-verification-gate.md","sha256":"4a6e04e60e3f4725fba415e68012f193357aa30fd816a4117e0cef204383dcae","type":"member"}
 {"bytes":5360,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-helper-execution.md","sha256":"81ceb7eb925528d4270fea9f95f289bb955edc9fbb8eb3a994ec8dcc36788796","type":"member"}
 {"bytes":2900,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-result-source-guards.md","sha256":"a30bf842f3a1b4dfa329cd8256a36e6111f5dc8066e6fe8e407c8b42a124f1db","type":"member"}
-{"bytes":3207,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lossless-child-carrier-readiness.md","sha256":"025738b3174f412c9d228d4a4a1b53ada688f414ef601a3891bb96fa42d0c377","type":"member"}

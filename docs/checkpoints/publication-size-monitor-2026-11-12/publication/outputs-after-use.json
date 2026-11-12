@@ -1,0 +1,67 @@
+{
+  "CHANGES.md": {
+    "bytes": 41166,
+    "mode": 420,
+    "sha256": "b17e7856fcdc108f7522a819916ceef60dddec8ab2847f3e1e31404a51b8fc92"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 57893,
+    "mode": 420,
+    "sha256": "ed65fc367251100a2da63dc1c1554079a34b6302de6483194b9eab8bb350a0de"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5180,
+    "mode": 420,
+    "sha256": "f4144fea1725d63b107f538dfd52786cfe2cf48788f94539bef6ee2b9bda4aca"
+  },
+  "MEMORY.md": {
+    "bytes": 3299,
+    "mode": 420,
+    "sha256": "1ef30abb6f8556e1b64ddda67f571bf7f7ee48bd885412b4a83a52872ed47ae3"
+  },
+  "ROADMAP.md": {
+    "bytes": 472033,
+    "mode": 420,
+    "sha256": "b65c41c0aaace22e82b8b0fe72e15c3fa87948ace6a68bd4692b07d4733fe876"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273368,
+    "mode": 420,
+    "sha256": "60cb2665d7ac14d7ef04a0954a367bc316879eb650665bfe13c682161da3258b"
+  },
+  "docs/checkpoints/publication-size-monitor-2026-11-12/REVIEW.md": {
+    "bytes": 4581,
+    "mode": 420,
+    "sha256": "2c26695bd74bc85466bd008836587c78e6cbb711d4dada4d0b6cbbc1b28a99cf"
+  },
+  "docs/knowledge/github-size-safe-publication.md": {
+    "bytes": 9241,
+    "mode": 420,
+    "sha256": "7332b7e90d60df317084b5f7eb6785c2c3b26760ed7c8b22183ae332fc4c1511"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 373562,
+    "mode": 420,
+    "sha256": "cf22067fd11bc60b9df873178009cbaa3820d565a3c066a448a1cdd5ec3c5736"
+  },
+  "docs/linkedspec-book/src/development/local-ci-and-regression.md": {
+    "bytes": 164527,
+    "mode": 420,
+    "sha256": "aeb108db2a12a24f42da70ff2c0c694ac4de18f6617e3fad8bf5680fd6187c25"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20310,
+    "mode": 420,
+    "sha256": "d645f7f8ae4c5b4e3b8bfa0d4185d88279b693a15d311e491bd8671324dd0a28"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 523524,
+    "mode": 420,
+    "sha256": "b7900735b132e02cb6129b933f718cc097992eb6ccfa9b8985a5d736379e9a68"
+  },
+  "git_message_brief.txt": {
+    "bytes": 552,
+    "mode": 420,
+    "sha256": "e73b3597e25735ea57fb0a8ed5c86ee79ceed5b14ff03cf9e4cba6ee577dc9f9"
+  }
+}

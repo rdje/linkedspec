@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2277,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalaref-retirement-inventory-contract.md","sha256":"0ad82935799fa5d495b3f9f4ccdc5a6e17df2c4b21d49ac8dbfff6381bc8cc0f","type":"member"}
 {"bytes":3497,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scanner-rule-family-architecture.md","sha256":"af73bf92a9e303c0b479f86957fa26b655e2863a45cf6279bf5bb1634447edd3","type":"member"}
 {"bytes":4029,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selected-consumer-fixed-input-capsule.md","sha256":"03c23cead35a6b0a13c2747759876d9c7fca1416478d7913df9c3617e8442861","type":"member"}
 {"bytes":4906,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selected-consumer-proof-input-closure-gap.md","sha256":"a3f5a799876ffbb57cc57f67a978f22d914b010fec86906b0e7d89c8dcb2a0b3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5124,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-primitive-literal-parity.md","sha256":"62a0b4477b97362bc180ca8ec30f62b9da92a071321f5f929d6fd730ee1e6464","type":"member"}
 {"bytes":3207,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-retired-scalar-assign-spec-surface.md","sha256":"f9626386fba5c1e4b217d112768b0d172d44f67a87e729773585ab6a34d03879","type":"member"}
 {"bytes":3768,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-return-type-method-chaining-split.md","sha256":"e81af12808acc382ef00dc4e60e95faf46348674e3e99dfa675390e3f32d323f","type":"member"}
-{"bytes":3310,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rhs-shape-target-kind-inference.md","sha256":"cc179ae4c1949271dfc4df636dd062a6f8973808d35b2f927bb1fb7f87797408","type":"member"}
