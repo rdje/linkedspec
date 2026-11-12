@@ -1,0 +1,8 @@
+{
+  "compact_leaf_bytes": 1668,
+  "corrected_heading": "2026-11-12 dated Lua80.5 heading",
+  "original_leaf_bytes": 8571,
+  "part_bytes_freed": 6903,
+  "root_pointer_bytes_freed": 323,
+  "scope": "Only own leaf commentary and two own current-root pointer texts route/shorten; all CORE fields and other task bytes exact. Full original retained in TASK-NOTES; no SDK replay/limit or infrastructure change. Focused gates and normal retry still required."
+}

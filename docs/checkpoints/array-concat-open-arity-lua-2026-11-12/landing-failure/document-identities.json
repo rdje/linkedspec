@@ -1,0 +1,22 @@
+{
+  "CHANGES.md": {
+    "bytes": 44677,
+    "mode": 420,
+    "sha256": "04ebeaa36e76c4185ae9d526642fbd2ffe6c38e9e565d7fb779c9d8c7af250d4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 711613,
+    "mode": 420,
+    "sha256": "2dfac157e7fe783a9c857cab7ecc739fb70ab3ec3ba1468f136fa6c7be017907"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20853,
+    "mode": 420,
+    "sha256": "3183616c47f6e41a63d980ec0b75cd9000014711243c83c2f9089ce221083f22"
+  },
+  "git_message_brief.txt": {
+    "bytes": 410,
+    "mode": 420,
+    "sha256": "84bd41cb22735bfa6efc4d3813a3cd7666dc63390ec80a74a68ddce0cde75368"
+  }
+}

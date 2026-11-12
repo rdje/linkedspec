@@ -1,0 +1,47 @@
+{
+  "CHANGES.md": {
+    "bytes": 44677,
+    "mode": 420,
+    "sha256": "04ebeaa36e76c4185ae9d526642fbd2ffe6c38e9e565d7fb779c9d8c7af250d4"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 35214,
+    "mode": 420,
+    "sha256": "998bf65844784eba7dc663fdbe5e91cfe4378467b2f7fc771ca8e46307a52de5"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5401,
+    "mode": 420,
+    "sha256": "785584cd25487aa39e2037b4608c7956e5073e7d8c4294984412c4fdc662fd54"
+  },
+  "MEMORY.md": {
+    "bytes": 4592,
+    "mode": 420,
+    "sha256": "51137d37b9913090077f9f46fc7734fe3bdfafd5782eadb523a3d3875182b307"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/REVIEW.md": {
+    "bytes": 6556,
+    "mode": 420,
+    "sha256": "ad453cb200848460df397293e850e58a14bd56ab1e27304c70b43cbf4a93db72"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/compact-node.txt": {
+    "bytes": 1668,
+    "mode": 420,
+    "sha256": "1604b78d487fbba82d0a3ce0ea6cf14fda6a71d06abef080e3f881c801a5db9d"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/landing-failure/result.json": {
+    "bytes": 499,
+    "mode": 420,
+    "sha256": "f7700a92c1d3edb12c37b6ee0ab873b884a01b85e418c6b023bae1dddade9097"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 711613,
+    "mode": 420,
+    "sha256": "2dfac157e7fe783a9c857cab7ecc739fb70ab3ec3ba1468f136fa6c7be017907"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20853,
+    "mode": 420,
+    "sha256": "3183616c47f6e41a63d980ec0b75cd9000014711243c83c2f9089ce221083f22"
+  }
+}

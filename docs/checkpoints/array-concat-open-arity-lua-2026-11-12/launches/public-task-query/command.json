@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "perl",
+    "tools/read_task_tree.pl",
+    "--tree",
+    "TYPE-REFERENCE-BOOK",
+    "--id",
+    "TYPE-REFERENCE-BOOK.1.2.23.3.80.5"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

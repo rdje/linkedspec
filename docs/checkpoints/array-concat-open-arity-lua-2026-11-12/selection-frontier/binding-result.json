@@ -1,0 +1,7 @@
+{
+  "claim_records": 210,
+  "impact": "A session following this current pointer could select already completed work; original selection evidence itself remains correct.",
+  "intersections": [],
+  "issue": "Current selection card still says independent peers pending and Rust80.2 next after all five backend outcomes are present.",
+  "source_commit": "fb613736f68f7d1f90df5ade3c0e73c98160ca3f"
+}

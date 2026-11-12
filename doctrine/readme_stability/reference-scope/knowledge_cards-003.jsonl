@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4527,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/future-parity-task-partition-contract.md","sha256":"0ebf7cf9ce1591e6341825457a546764fa47b6bd38a9f577ba70d1d8514c1b12","type":"member"}
 {"bytes":4724,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-selected-match-ls-live-cursor-authority.md","sha256":"a193d3a9ccbfcfcc6de7b9740775c0848c81833c3bed52a710bce267c2c0e7f4","type":"member"}
 {"bytes":5492,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-slot-record-selection-source-gap.md","sha256":"9daa47b44e79e3ac05672b026fd9b417e1c5674a769d5dd465a8f888cdb281e7","type":"member"}
 {"bytes":3758,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/gap-string-result-source-guard-gap.md","sha256":"fd54891068ce814b0af851b6aa965f284b38fc3788017a9b3d410ba816c55311","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3391,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-live-recognition-progress.md","sha256":"99e88650093684cd11362049dfc7730086f555624c19dc29247b88637826b0ad","type":"member"}
 {"bytes":2264,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-match-writer-presence-compatibility.md","sha256":"92a699c6e1ec2c93104ea5296c27e08ee9303dc332c5a4ebb241d1655d15b8c5","type":"member"}
 {"bytes":3603,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-verification-gate.md","sha256":"4a6e04e60e3f4725fba415e68012f193357aa30fd816a4117e0cef204383dcae","type":"member"}
-{"bytes":5360,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-helper-execution.md","sha256":"81ceb7eb925528d4270fea9f95f289bb955edc9fbb8eb3a994ec8dcc36788796","type":"member"}

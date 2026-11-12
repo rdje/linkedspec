@@ -1280,21 +1280,20 @@ are preserved, and needed producer errors still propagate.
 
 The bounded Perl, Rust, Dart, Julia and installed Lua forms retain their existing arities: four take/drop helpers
 accept an optional count, `slice` requires a start and permits an omitted count,
-and `sorted`/`reversed` take no extra receiver operands. Perl, Rust, Dart and Julia guarded
-`concat_arrays` forms now retain the existing one-or-more Array signature; the
-bounded Lua proof here covers free-two/receiver-one. Source, coercion, sorting, copy depth, splices and
+and `sorted`/`reversed` take no extra receiver operands. Perl, Rust, Dart, Julia and installed Lua
+guarded `concat_arrays` forms retain the existing one-or-more Array signature. Source, coercion, sorting, copy depth, splices and
 mutation keep their existing contracts. Other backends are assessed
 independently; descriptor readiness alone does not establish execution behavior.
 
 The existing `concat_arrays` helper also supports several Array inputs, as in
 `concat_arrays(array("head"),["tail"],["end"])`, which returns
-`["head","tail","end"]`. Perl, Rust, Dart and Julia additionally accept the single-Array terminal
+`["head","tail","end"]`. Perl, Rust, Dart, Julia and installed Lua additionally accept the single-Array terminal
 `concat_arrays(array("head"))` and receiver `array("head").concat_arrays()`;
 both return `["head"]`. Registered-function Array sources retain these terminal
 forms. Compatible `.last().uppercase()` and immediate `.with()` also pass the
-recorded one/two/three-Array Perl, independent Rust, Dart and Julia controls, including empty Arrays entering with.
+recorded one/two/three-Array Perl, independent Rust, Dart, Julia and installed Lua controls, including empty Arrays entering with.
 
-Perl80.1, Rust80.2, Dart80.3 and Julia80.4 retain result guards through these existing arities for
+Perl80.1, Rust80.2, Dart80.3, Julia80.4 and installed Lua80.5 retain result guards through these existing arities for
 ordinary and valid fixed/rest function sources. Source S and additional Arrays
 T/U evaluate once in order; a later Hash consumer rejects before its K/V operands.
 Rejection persists through copy/logical/with and skips D/W. Needed source or
@@ -1339,9 +1338,12 @@ operand continuations/484 preserved, with80 initial/eight invalid signatures exa
 Its callable SX and ordinary SA terminal effects remain before Hash rejection;
 terminal scalar elements stay compatibility observations. Complete available
 runtime/generated error JSON, source identities, source-once/additional Array/
-rest order, snapshots and nested kinds remain. Rebuild Julia applications. Lua
-acquires its own policies before implementation; full continuation/context
-admission is separate.
+rest order, snapshots and nested kinds remain. Rebuild Julia applications.
+Installed Lua independently passes508 programs/four routes with20 supported targets,
+four separately qualified legacy continuations and484 preserved records, including
+80 initial/eight invalid signatures. Callable SX/ordinary SA/scalar elements remain
+own terminal compatibility. Full published JSON/text/named flags and field absence
+survive, with raw-table4.28/declared5.4/full admission separate. Reload Lua applications.
 
 Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
 shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
@@ -1564,7 +1566,7 @@ intact on these recorded routes. Lua also preserves the observer's named outer
 flags; this does not establish preservation of every raw native error-table field.
 Lua evaluates positional argument values before its invocation arity preparation,
 while rejecting keywords earlier; this repair keeps that order. Wider open-arity
-`concat_arrays` continuations are selected as bounded family80 after selection23.1.42; Perl80.1, independent Rust80.2, Dart80.3 and Julia80.4 have focused proof; installed Lua80.5 remains pending.
+`concat_arrays` continuations now have focused family80 proof in Perl, Rust, Dart, Julia and installed Lua (PUC5.5.1/LuaJIT). Existing one-or-more Array forms retain guards; all initial and fixed/rest policies remain independently acquired. Lua preserves full published error JSON/text and named outer flags, with raw-table4.28/declared5.4/full admission separate. Reload Lua applications.
 
 Initial wrong-input policy remains separate from produced-result guards. The
 established constructor contrast uses `array(...)`; a direct literal Array with

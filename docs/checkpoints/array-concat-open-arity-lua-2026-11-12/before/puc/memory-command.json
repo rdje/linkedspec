@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/before/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_ARRAY_CONCAT_CAPTURE": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/before/puc",
+    "LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT": ""
+  }
+}

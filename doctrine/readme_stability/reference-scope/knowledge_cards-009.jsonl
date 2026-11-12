@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6740,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-mcp-server-plan.md","sha256":"a14234db56f129ecac389743695efdd520ad5e5d979fc026d42799f0d66b0b7f","type":"member"}
+{"bytes":2497,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.0","path":"docs/knowledge/perl-native-source-dump-custody.md","sha256":"1b755d82fd0a6e1f7747506ca88a839a565b05a9d5bff950d2cf04ba85feadcc","type":"member"}
 {"bytes":2885,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-spec-resolution.md","sha256":"51d45357f87f426207cb442feaf477b490d7feb45b66c88ffdf8c29675627bcc","type":"member"}
 {"bytes":4545,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-nested-raw-readiness-diagnosis.md","sha256":"b4aae022d9d8d6ebfa08a30e118546f9553fba964113e47c8375a94095d30a07","type":"member"}
 {"bytes":4784,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-statement-separator-coverage-gap.md","sha256":"346ebd8b7f649be9f2e13acaac841b56c615e4edcf940131c0771c637b66be1f","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2976,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-descriptor-ready-legacy-runtime-boundary.md","sha256":"cdaa04e9f1555d1f357817a0b40ec8c048851901642c27d1de0b73ec6be42d8b","type":"member"}
 {"bytes":6731,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-pluginbridge-transition-machinery.md","sha256":"12c408f5d68c9c4c6c30571d902c7aaae4e2fedc2215e088dc4f005719e3c24b","type":"member"}
 {"bytes":6081,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/presence-result-source-guards.md","sha256":"78af1e3e6ab12099cae98d4916b05a833a6f6ff38fb819a90243a30eaebaf4cd","type":"member"}
-{"bytes":3742,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/primary-cli-current-count-book-correction.md","sha256":"d5ece1ffe640149747ff49cc7ae657ed92fa0fe35917b90863f972a5df494480","type":"member"}
-{"bytes":3545,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-four-backend-matrix.md","sha256":"fbbbd0acb2dbad4c2021c8cb281e91092858927162c319c0d997e83ce4bb767a","type":"member"}

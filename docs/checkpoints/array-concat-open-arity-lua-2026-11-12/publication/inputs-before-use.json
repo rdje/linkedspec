@@ -1,0 +1,137 @@
+{
+  "CHANGES.md": {
+    "bytes": 43192,
+    "mode": 420,
+    "sha256": "2a419ae1cb31e74e8e5108b0e9bf4c34aaec3eab6a88414f4d10dd0e5bcc7194"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 33614,
+    "mode": 420,
+    "sha256": "0a21ee4a013f993870fde6a63c0ffb3daa584cb195dc9afb543abb19644f9661"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5361,
+    "mode": 420,
+    "sha256": "d6de01a9fd85ff91b4f10f8de92e59911222753089c47d250f9bdb70def55bde"
+  },
+  "MEMORY.md": {
+    "bytes": 3665,
+    "mode": 420,
+    "sha256": "a89845095b33a317e3ceb3c8b64ce105cf0ea8a843159710f524b177ec93648e"
+  },
+  "ROADMAP.md": {
+    "bytes": 472145,
+    "mode": 420,
+    "sha256": "1b09d46bfbcbee9a1f8e6c0b4316f0db649d4c7659375e08bcdd4546ab214390"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273480,
+    "mode": 420,
+    "sha256": "3cc0c5571d27470062dab29efc784a5954d5d8b8116df9450a84f2c2e8061630"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/current/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/current/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/current/stdout.log.gz": {
+    "bytes": 155,
+    "mode": 420,
+    "sha256": "9c54fe184d2d7f2b70f9fe4d3fd22a28c68c70979ab39bbaa07ad7d426e6bb31"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-publication-query/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-publication-query/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-publication-query/stdout.log.gz": {
+    "bytes": 266,
+    "mode": 420,
+    "sha256": "b681a458cc0f2c56c75301c3f3487880596ed7edb2fab4ce2a8df0000ed8a034"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review/stdout.log.gz": {
+    "bytes": 482,
+    "mode": 420,
+    "sha256": "4c6f54d4f4461ff92121b77607822a8dead189d1b2a7a571a51937a754a4004c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/publish.py": {
+    "bytes": 29642,
+    "mode": 420,
+    "sha256": "c37e388d02bef93ff42fbdc9a927c3748a14f915f5a401234699ae6f061121f8"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/review_publication.py": {
+    "bytes": 6304,
+    "mode": 420,
+    "sha256": "491aad3539ef72fedc1540424c038b65dc9afccb9456ee75aa577cb26fc6362d"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/run_publication.py": {
+    "bytes": 3633,
+    "mode": 420,
+    "sha256": "a3e8fb7670e354654e8dd1219277c214e213660f33cbc351dbf7ef642b1d8c23"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.3.80.5.json": {
+    "bytes": 2543,
+    "mode": 420,
+    "sha256": "2e76cf125353de78bc77956dfb2e17a5b73260d63600feef04bbc093c94e05ac"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 374706,
+    "mode": 420,
+    "sha256": "7e2afcdd9fff12c6dff07aed605b190be8b9877f5eaa34b502b077c4c9d9b023"
+  },
+  "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+    "bytes": 206730,
+    "mode": 420,
+    "sha256": "c056ac707ffa185de4a0883c856fda0fcd0eb06ccb5ca36a3b3aedc545113d72"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 169705,
+    "mode": 420,
+    "sha256": "aae2d75b476d06a5a7a6f25e3aeb01e5c1bc7409f609beea650a5b3b4bd79d5a"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 705371,
+    "mode": 420,
+    "sha256": "a24a8b6c3931be45f207b960be0751b48a09bb5919b369d8ad74ceedd991486d"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20582,
+    "mode": 420,
+    "sha256": "cbbbdab6062056fc8122c519228e4d1036b7be066fb2d39a75437d72786119d4"
+  },
+  "git_message_brief.txt": {
+    "bytes": 0,
+    "mode": 420,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

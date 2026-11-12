@@ -1,0 +1,10 @@
+{
+  "bytes": 4559,
+  "compressed_path": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/semantic_oracle.py.gz",
+  "compressed_sha256": "dcde9677b5c73070d7488bfceef77c2cf2971687c16962a808beaca57b94cbc3",
+  "issue": "Trailing extra blank line in used oracle blocks staged whitespace check; original contents and first passing outcomes remain immutable.",
+  "original_mode": 420,
+  "original_path": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/semantic_oracle.py",
+  "scope": "One exact owned plain duplicate only, after archived readback; no semantic source edit, SDK replay, native/global liveness or physical-reclaim claim.",
+  "sha256": "c5eccefa032f6503367101da39f4f2f8705fe001cd703c610815cf11c5c02837"
+}

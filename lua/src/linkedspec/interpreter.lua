@@ -4126,7 +4126,7 @@ function typed_source.receiver_mutation.is_canonical_array_transform_arity(name,
   end
   if name == "slice" then return count == 2 or count == 3 end
   if name == "sorted" or name == "reversed" then return count == 1 end
-  return name == "concat_arrays" and count == 2
+  return name == "concat_arrays" and count >= 1
 end
 
 function typed_source.receiver_mutation.is_ordinary_array_transform_receiver_call(call)

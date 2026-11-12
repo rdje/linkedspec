@@ -1,0 +1,11 @@
+{
+  "normal_exit": 1,
+  "passed": 8,
+  "failed": [
+    "DOCUMENT-HISTORY",
+    "README-STABILITY"
+  ],
+  "combined_log_sha256": "3b78b30a3db8e020974627e8bf97350ff8f44f72c2a9968a32b00d4f071b1c89",
+  "index_stdout_sha256": "614c59478c69bd5222b2dd0a92db4112930fad7de06da8a5add4717bc553b71e",
+  "scope": "Actual failed normal gate, exact index metadata and document/full-mode preimages; combined channels are not reconstructed as separate hook streams. No SDK replay or global/native liveness claim."
+}

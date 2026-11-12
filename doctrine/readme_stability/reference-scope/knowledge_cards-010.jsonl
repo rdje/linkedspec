@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3742,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/primary-cli-current-count-book-correction.md","sha256":"d5ece1ffe640149747ff49cc7ae657ed92fa0fe35917b90863f972a5df494480","type":"member"}
+{"bytes":3545,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-four-backend-matrix.md","sha256":"fbbbd0acb2dbad4c2021c8cb281e91092858927162c319c0d997e83ce4bb767a","type":"member"}
 {"bytes":4094,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-strict-utf8-text-contract.md","sha256":"e9fdbc61164c3ffc9ee7214e69abb9d3adab4ff0e826772d3cdfe75b5dd21639","type":"member"}
 {"bytes":2552,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/primary-cli-utf8-process-boundary-gap.md","sha256":"65589f6e29405edb95d371d44f7fbb02352a11886dc6a9ab6b66967941d4bb61","type":"member"}
 {"bytes":3056,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/private-capacity-publisher-replay.md","sha256":"3561ee7be352cf252c696aa329af2d0c83bb25dc5e355fec1cae545c5362f8a8","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2325,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-free-string-result-guards.md","sha256":"ca99b27a80d4f845051425815bdc33fb92b73c9079ba89d1946f11cdb91fccec","type":"member"}
 {"bytes":2774,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-gap-slot-record-selection-guard.md","sha256":"52cb8de7cb18251910c42e2802df97275cf580e3f6a7384198cc53b7b37c7d96","type":"member"}
 {"bytes":2023,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-gap-string-result-guards.md","sha256":"c194e7a396c4bdfb63d3f7cd229938855d38c63e6580cca3187d64b97afbb41c","type":"member"}
-{"bytes":2779,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-and-acode-direct.md","sha256":"8e90e5b3e0960853d258afa78deae65e875f426e9f161cd5a7da5a772b336c16","type":"member"}
-{"bytes":2656,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-bcode-direct.md","sha256":"8d4c415fe7893a141d5cf4cabc921044bc3e837cc77bd857f8d73d7d2b4e70a9","type":"member"}

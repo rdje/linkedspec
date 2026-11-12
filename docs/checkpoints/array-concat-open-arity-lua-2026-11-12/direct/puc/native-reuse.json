@@ -1,0 +1,5 @@
+{
+  "source": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake/puc/native-before-first-run.tar.gz",
+  "source_sha256": "67fc6acd934c0699e35df9cf25e60d7a6345d8840f0fddeca364875a6908b076",
+  "scope": "Exact retained opaque native products reused; no new compiler or native implementation claim."
+}

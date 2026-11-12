@@ -1,0 +1,77 @@
+{
+  "CHANGES.md": {
+    "bytes": 44263,
+    "mode": 420,
+    "sha256": "bc4adb4ff9de46f9b0044fe5b1031c12dfdc64b7af569fb2808480c7af0670e9"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 34767,
+    "mode": 420,
+    "sha256": "c0bf3c7ce9a46bdc3a26ce4d302a7a08ee9a74d8b8b93fd57b9f7e70bc579058"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5401,
+    "mode": 420,
+    "sha256": "785584cd25487aa39e2037b4608c7956e5073e7d8c4294984412c4fdc662fd54"
+  },
+  "MEMORY.md": {
+    "bytes": 4127,
+    "mode": 420,
+    "sha256": "944500e6e1c2d0ab3b1065a661e44716dfd4aaffb1799b2a0b361e7a7dfed906"
+  },
+  "ROADMAP.md": {
+    "bytes": 472001,
+    "mode": 420,
+    "sha256": "3297905e4f6c2a19a343b0be459d7c7e08d74a8112e52b55df87bd3e886da202"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273336,
+    "mode": 420,
+    "sha256": "1156006945254ea6b529bfd081ca92cb40cc87453cbd3fdf158bc10e7f6fb3d0"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/REVIEW.md": {
+    "bytes": 5412,
+    "mode": 420,
+    "sha256": "2602daee3555ec56bd909a52d930770563389b60b644dcfe5316ca65ab300bbd"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/publication/rotated-live-row.txt": {
+    "bytes": 217,
+    "mode": 420,
+    "sha256": "936c9c2c688e078076ba709e5be48f29204f2c7d49849abc269d0311f51cc26c"
+  },
+  "docs/knowledge/lua-open-arity-concat-result-guards.md": {
+    "bytes": 3093,
+    "mode": 420,
+    "sha256": "865c415cbe4c95da28b5df691985c1b59d0b342d24c132a110e3da863452ae63"
+  },
+  "docs/linkedspec-book/src/appendix/backend-handoff.md": {
+    "bytes": 375215,
+    "mode": 420,
+    "sha256": "2e2d165552481631e3278bd8122bf58b877ceef05e78438bb3edda49b30f9182"
+  },
+  "docs/linkedspec-book/src/appendix/helper-contract-catalog.md": {
+    "bytes": 207068,
+    "mode": 420,
+    "sha256": "521e031cfc79e0fd0dd6b717d6ec10f3001be7b95dec07f532bb6ddb69b89f20"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 170224,
+    "mode": 420,
+    "sha256": "57a4ce9dfef1c91fc9b31661cf04c71b6c1587d113cf11d1e0b401148ff2ddf4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 708666,
+    "mode": 420,
+    "sha256": "ae2d6c8178ed3f1199cd3bd748c37568c699d2fb50b1030db0daf561a6e2c91f"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20853,
+    "mode": 420,
+    "sha256": "3183616c47f6e41a63d980ec0b75cd9000014711243c83c2f9089ce221083f22"
+  },
+  "git_message_brief.txt": {
+    "bytes": 410,
+    "mode": 420,
+    "sha256": "84bd41cb22735bfa6efc4d3813a3cd7666dc63390ec80a74a68ddce0cde75368"
+  }
+}

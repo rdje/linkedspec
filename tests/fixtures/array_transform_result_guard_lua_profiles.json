@@ -3,28 +3,28 @@
     "extra_concat_arrays_free": {
       "fresh": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "input": "x",
       "native": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "profile_only": true,
       "restored": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"head\",\"tail\"]},[\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
@@ -32,28 +32,28 @@
     "extra_concat_arrays_receiver": {
       "fresh": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "input": "x",
       "native": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "profile_only": true,
       "restored": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.concat_arrays([\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
@@ -3202,28 +3202,28 @@
     "extra_concat_arrays_free": {
       "fresh": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "input": "x",
       "native": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "profile_only": true,
       "restored": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "source": "Value:: I {order=\"\";out=concat_arrays({order=cat(order,\"S\");[\"head\",\"tail\"]},[\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"
@@ -3231,28 +3231,28 @@
     "extra_concat_arrays_receiver": {
       "fresh": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "input": "x",
       "native": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "plan": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "profile_only": true,
       "restored": {
         "value": [
-          "ran",
-          "SAKW"
+          null,
+          "SA"
         ]
       },
       "source": "Value:: I {order=\"\";out={order=cat(order,\"S\");[\"head\",\"tail\"]}.concat_arrays([\"second\"],{order=cat(order,\"A\");0}).set_key({order=cat(order,\"K\");\"k\"},1).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n"

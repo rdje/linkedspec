@@ -1,0 +1,17 @@
+{
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/restored/puc/native/linkedspec_filesystem_native.so": {
+    "bytes": 50704,
+    "mode": 493,
+    "sha256": "55a526a6786ca94c682995416b54735d7d4c70071aae567f5f754ad8eb16a03c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/restored/puc/native/linkedspec_mcp_system.so": {
+    "bytes": 50680,
+    "mode": 493,
+    "sha256": "ba1217719f01363237182d684acce65a3cd4f0f5f1bbce77826e9eedf0b8fb25"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/restored/puc/native/linkedspec_regex_pcre2.so": {
+    "bytes": 51944,
+    "mode": 493,
+    "sha256": "fcf970378110054cda9f4496d88db9a17495f6b919f66c6d29c7618694ad4c6e"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/observer.lua",
+    "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake/cases.json",
+    "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake/puc"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_ARRAY_CONCAT_CAPTURE": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake/puc",
+    "LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT": ""
+  }
+}

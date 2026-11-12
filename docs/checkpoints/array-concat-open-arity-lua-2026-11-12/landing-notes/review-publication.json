@@ -1,0 +1,1 @@
+{"publication_recovery": "PASS", "inputs": 27, "outputs": 15, "corruptions": ["failed consumed report", "unfinished handoff", "lost derived counts"], "scope": "Historical producer/report/document bytes and full archived modes. No current document freshness, SDK replay or complete native closure."}

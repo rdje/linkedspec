@@ -1,0 +1,222 @@
+{
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/after-check.json": {
+    "bytes": 1248,
+    "mode": 420,
+    "sha256": "07bbd3473c38d9ef97577ac78b9cbb1373abeb720f3389ce55b3c0b307945fa4"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/baseline.json": {
+    "bytes": 2062466,
+    "mode": 420,
+    "sha256": "d66fa491ed9c0cd5349a656b73609988ce9968b3fa3c9f9283f6a576faae518c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/before-check.json": {
+    "bytes": 1254,
+    "mode": 420,
+    "sha256": "96f1142f8de5fa156eeee9a5b52643efe72c148d87a926316f0f9ee8a6e1a756"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/capture_epochs.py": {
+    "bytes": 7856,
+    "mode": 420,
+    "sha256": "e7dd723a0195d125b92f3237777ffb7299b9c0c0cda47e4736bdb691d096e6b1"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/capture_intake.py": {
+    "bytes": 4645,
+    "mode": 420,
+    "sha256": "b2223d82306aa3ceb5734e91bde4532eaa38149deef576d3406b1b8bced79e47"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/cases.json": {
+    "bytes": 294204,
+    "mode": 420,
+    "sha256": "36109a9274a05ceb04cb3da516c7d1d3781ea65cb5f26b038c9871e14a747ee3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/check-template.py.gz": {
+    "bytes": 1716,
+    "mode": 420,
+    "sha256": "76e62b8c528a9a00b02959f20a8520b38a8891b32fb63f87237605724f1b4b5c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/check_current.py": {
+    "bytes": 1008,
+    "mode": 420,
+    "sha256": "b3b58fc9de1b505f7a7c0cc59e0be6a8489df02bd79a9d3bfd304976c7303fbb"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/check_epoch.py": {
+    "bytes": 4288,
+    "mode": 420,
+    "sha256": "5e07f50658a90735effac54adb6f56eb667141cd7d117deceea4424c048bafe2"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/freeze-template-capture.py.gz": {
+    "bytes": 2785,
+    "mode": 420,
+    "sha256": "96aa9a38130000be9c51f70f5873e39818ce1659ab97731fe7cea147c0deda21"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/freeze_policy.py": {
+    "bytes": 5325,
+    "mode": 420,
+    "sha256": "979086496166b31b148ba1f958bb9c26298fda2e2ebe1f0b51b71329019145be"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/inspect_intake.py": {
+    "bytes": 9147,
+    "mode": 420,
+    "sha256": "f40f4c3ec6c018081b8e98ac20618321820a84ad3522c8efa1edd3d00db03d21"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake-assessment.json": {
+    "bytes": 1239050,
+    "mode": 420,
+    "sha256": "ff59a41a8da05cb808fe94f8fcd17fcf2583c7edf63494f7209f59d0ad70fa69"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/inverse-check.json": {
+    "bytes": 1254,
+    "mode": 420,
+    "sha256": "89df30fd97f9f3f19dc4078046124307caa7084eace10a5f89bdb9d9a1392235"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/observer.lua": {
+    "bytes": 3430,
+    "mode": 420,
+    "sha256": "a2bdcb707b2e0399c1772a75eaa72c65f4eb6351cb5d6f4072d8037f26ab9af2"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/oracle-template.py.gz": {
+    "bytes": 6059,
+    "mode": 420,
+    "sha256": "41ca2f28899ae2c4a263b2d70d0b0fbd776627d4216fce28e034c2a66f3aaca3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/owner-after.lua.gz": {
+    "bytes": 44710,
+    "mode": 420,
+    "sha256": "5eb5f0654bc43143fe7c7496dae1f9d7fca99bea37b1ad9904cc114176972691"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/owner-before.lua.gz": {
+    "bytes": 44709,
+    "mode": 420,
+    "sha256": "73c44b89629b4e888ec89fbb00d633cbb5cd9cdd717768a0854edaa0a16bd9fb"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/prepare.py": {
+    "bytes": 7102,
+    "mode": 420,
+    "sha256": "bdde59037307a16c13d41e475413f616ce50a03cab60d0c8fd23f8c527e2745d"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/prepare_checks.py": {
+    "bytes": 1266,
+    "mode": 420,
+    "sha256": "2d4339c8fd196d65ee3362deb3502c1de531775888de6f8af676f8d560fa30a7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/prepare_review.py": {
+    "bytes": 1112,
+    "mode": 420,
+    "sha256": "9c39d374537245218194068bdec18d03f9fe8575c9a931bdf722b619b0804db7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/proof_io.py": {
+    "bytes": 5087,
+    "mode": 420,
+    "sha256": "4c3adfd14b4f6bf3d0403b245ffeb0be4be06129b84e663cf00fadbe9aeafda7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/repair.py": {
+    "bytes": 4502,
+    "mode": 420,
+    "sha256": "8d1afbf5441f38037b854ca1835ed9201c79ce2abbb7676404ac9df5182ecb16"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/restored-check.json": {
+    "bytes": 1248,
+    "mode": 420,
+    "sha256": "07bbd3473c38d9ef97577ac78b9cbb1373abeb720f3389ce55b3c0b307945fa4"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/review.py": {
+    "bytes": 14729,
+    "mode": 420,
+    "sha256": "3207aa6c4020781a5400c873bf884db7e4f439040beef74e07385a6a3ad187a1"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/runner-after.lua.gz": {
+    "bytes": 80227,
+    "mode": 420,
+    "sha256": "a003ce1c9d351122cdb05c26e5d866eaf8e32301e510d0168287123715149746"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/runner-before.lua.gz": {
+    "bytes": 80207,
+    "mode": 420,
+    "sha256": "a5ee254f48f5fa1c14fc0b6c36fd68b48dd290a4373bcd701d388e48a11c6cb0"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/seal.py": {
+    "bytes": 802,
+    "mode": 420,
+    "sha256": "dfd7ca1501c63de74cee33b65626306b8f037f401372a10f55f633039cff7349"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/selected-inputs.json": {
+    "bytes": 10866,
+    "mode": 420,
+    "sha256": "69b6c6441b7e9449875c49a7cfda127b525f6c941001d6e79d7fda31e81fb1db"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/semantic_oracle.py": {
+    "bytes": 4559,
+    "mode": 420,
+    "sha256": "c5eccefa032f6503367101da39f4f2f8705fe001cd703c610815cf11c5c02837"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/source.diff.gz": {
+    "bytes": 380,
+    "mode": 420,
+    "sha256": "0a10fb63d36596778dbd9af68a64b6dda3d9384ea8115390c0a233b2307d8e58"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-0.gz": {
+    "bytes": 1988,
+    "mode": 420,
+    "sha256": "fb250aea98b83e1ca18e7f36cf4ad64f4b55f9c544321f58490c9b8656d608d9"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-1.gz": {
+    "bytes": 6152,
+    "mode": 420,
+    "sha256": "9d99d035fc96d3e57cca24f35002cb547e857a035adb121f2bd51dd83f294936"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-2.gz": {
+    "bytes": 2420,
+    "mode": 420,
+    "sha256": "f983387613256ee76ce48891acc7156c91793fc570df05c39fd63288c383d19c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-3.gz": {
+    "bytes": 4434,
+    "mode": 420,
+    "sha256": "b0819198c923c2605ab27b59c44c33088dcd988c6d499fb623ad11ab12e428c3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-4.gz": {
+    "bytes": 1823,
+    "mode": 420,
+    "sha256": "45afc1d65c6ebc53af90c4d0d4c42c22f98e1641b5ffff5d33378e295141ca35"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-5.gz": {
+    "bytes": 1203,
+    "mode": 420,
+    "sha256": "50faed9bcca33ed41d0fbde6e24afa0aee0ecaa8b87636a0911853ba908c5e14"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-6.gz": {
+    "bytes": 2028,
+    "mode": 420,
+    "sha256": "bc4c22988bb03506567cabbf8acf0f07d47c579f154d4e532c28ae8ce5facda7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-7.gz": {
+    "bytes": 1594,
+    "mode": 420,
+    "sha256": "72ac90d3e5784fa81b93940d1c8da9529d67e09ed07e7359b3df4f85a3b37ac3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-8.gz": {
+    "bytes": 350,
+    "mode": 420,
+    "sha256": "9a31706ec79b4b658ab259e95066fc2ccf8fc35850b6c2022d8ded91a619baac"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-identities.json": {
+    "bytes": 2554,
+    "mode": 420,
+    "sha256": "288c13c2f491c55557b5ff151dcd08e879ffecd7ae988b0566de00ba58fa0778"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

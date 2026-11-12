@@ -1,0 +1,102 @@
+{
+  "CHANGES.md": {
+    "bytes": 44461,
+    "mode": 420,
+    "sha256": "384f875a7fd815d577fd8f3c5507a0facdc21382ac8c2558dc07f1454e672168"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 34998,
+    "mode": 420,
+    "sha256": "aa6821ee228d664b2559f52f7427a8f90644863c12defc301044b5b8727bf781"
+  },
+  "MEMORY.md": {
+    "bytes": 4315,
+    "mode": 420,
+    "sha256": "b5e5725c1a4ddc36abc0d51130f2b974327b2f740a14779514215c7dda067173"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/REVIEW.md": {
+    "bytes": 5412,
+    "mode": 420,
+    "sha256": "2602daee3555ec56bd909a52d930770563389b60b644dcfe5316ca65ab300bbd"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/cached-whitespace/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/cached-whitespace/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/cached-whitespace/stdout.log.gz": {
+    "bytes": 114,
+    "mode": 420,
+    "sha256": "db30ca91ba9344bb869248447b5bd9df90cf244609ce1e5814edd98d1890ed7f"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-qualified/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-qualified/stderr.log.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/launches/review-qualified/stdout.log.gz": {
+    "bytes": 674,
+    "mode": 420,
+    "sha256": "cb750aa66296b1582f4cf3e55269edd826c2e61a8636a8c298760d9273bbd784"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/oracle-retention.json": {
+    "bytes": 728,
+    "mode": 420,
+    "sha256": "18bc6b010f9744ac75bbd10bc87bfbd5fe46fb3d963d26d42ff0da107eea20d1"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/publish_reader_qualification.py": {
+    "bytes": 7089,
+    "mode": 420,
+    "sha256": "a33ba9a7bbcb744f65406a39e88d62e6674a73efa1a46775241d275cee45a59d"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/review.py": {
+    "bytes": 14729,
+    "mode": 420,
+    "sha256": "3207aa6c4020781a5400c873bf884db7e4f439040beef74e07385a6a3ad187a1"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/review_qualified.py": {
+    "bytes": 3320,
+    "mode": 420,
+    "sha256": "3cedf0ad8449ebcb2eff683b809294514a7545d3c60fe49c3f9ba264573dbf49"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/sealed-identities.json": {
+    "bytes": 97372,
+    "mode": 420,
+    "sha256": "c683c27853ff66bb3121c9448b4e5b8a1f9937a1a361a52dc00bb8a490e993cc"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/semantic_oracle.py.gz": {
+    "bytes": 1493,
+    "mode": 420,
+    "sha256": "dcde9677b5c73070d7488bfceef77c2cf2971687c16962a808beaca57b94cbc3"
+  },
+  "docs/knowledge/lua-open-arity-concat-result-guards.md": {
+    "bytes": 3093,
+    "mode": 420,
+    "sha256": "865c415cbe4c95da28b5df691985c1b59d0b342d24c132a110e3da863452ae63"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 710610,
+    "mode": 420,
+    "sha256": "e14357374601108e86bbf294e2affcc1e6ef06d4443b12c7763f635b63ce70e2"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

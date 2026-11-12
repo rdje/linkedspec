@@ -1,0 +1,112 @@
+{
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/capture_intake.py": {
+    "bytes": 4645,
+    "mode": 420,
+    "sha256": "b2223d82306aa3ceb5734e91bde4532eaa38149deef576d3406b1b8bced79e47"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/cases.json": {
+    "bytes": 294204,
+    "mode": 420,
+    "sha256": "36109a9274a05ceb04cb3da516c7d1d3781ea65cb5f26b038c9871e14a747ee3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/freeze_policy.py": {
+    "bytes": 5325,
+    "mode": 420,
+    "sha256": "979086496166b31b148ba1f958bb9c26298fda2e2ebe1f0b51b71329019145be"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/inspect_intake.py": {
+    "bytes": 9147,
+    "mode": 420,
+    "sha256": "f40f4c3ec6c018081b8e98ac20618321820a84ad3522c8efa1edd3d00db03d21"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/intake-assessment.json": {
+    "bytes": 1239050,
+    "mode": 420,
+    "sha256": "ff59a41a8da05cb808fe94f8fcd17fcf2583c7edf63494f7209f59d0ad70fa69"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/observer.lua": {
+    "bytes": 3430,
+    "mode": 420,
+    "sha256": "a2bdcb707b2e0399c1772a75eaa72c65f4eb6351cb5d6f4072d8037f26ab9af2"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/prepare.py": {
+    "bytes": 7102,
+    "mode": 420,
+    "sha256": "bdde59037307a16c13d41e475413f616ce50a03cab60d0c8fd23f8c527e2745d"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/proof_io.py": {
+    "bytes": 5087,
+    "mode": 420,
+    "sha256": "4c3adfd14b4f6bf3d0403b245ffeb0be4be06129b84e663cf00fadbe9aeafda7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/selected-inputs.json": {
+    "bytes": 10866,
+    "mode": 420,
+    "sha256": "69b6c6441b7e9449875c49a7cfda127b525f6c941001d6e79d7fda31e81fb1db"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-0.gz": {
+    "bytes": 1988,
+    "mode": 420,
+    "sha256": "fb250aea98b83e1ca18e7f36cf4ad64f4b55f9c544321f58490c9b8656d608d9"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-1.gz": {
+    "bytes": 6152,
+    "mode": 420,
+    "sha256": "9d99d035fc96d3e57cca24f35002cb547e857a035adb121f2bd51dd83f294936"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-2.gz": {
+    "bytes": 2420,
+    "mode": 420,
+    "sha256": "f983387613256ee76ce48891acc7156c91793fc570df05c39fd63288c383d19c"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-3.gz": {
+    "bytes": 4434,
+    "mode": 420,
+    "sha256": "b0819198c923c2605ab27b59c44c33088dcd988c6d499fb623ad11ab12e428c3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-4.gz": {
+    "bytes": 1823,
+    "mode": 420,
+    "sha256": "45afc1d65c6ebc53af90c4d0d4c42c22f98e1641b5ffff5d33378e295141ca35"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-5.gz": {
+    "bytes": 1203,
+    "mode": 420,
+    "sha256": "50faed9bcca33ed41d0fbde6e24afa0aee0ecaa8b87636a0911853ba908c5e14"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-6.gz": {
+    "bytes": 2028,
+    "mode": 420,
+    "sha256": "bc4c22988bb03506567cabbf8acf0f07d47c579f154d4e532c28ae8ce5facda7"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-7.gz": {
+    "bytes": 1594,
+    "mode": 420,
+    "sha256": "72ac90d3e5784fa81b93940d1c8da9529d67e09ed07e7359b3df4f85a3b37ac3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-8.gz": {
+    "bytes": 350,
+    "mode": 420,
+    "sha256": "9a31706ec79b4b658ab259e95066fc2ccf8fc35850b6c2022d8ded91a619baac"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/template-identities.json": {
+    "bytes": 2554,
+    "mode": 420,
+    "sha256": "288c13c2f491c55557b5ff151dcd08e879ffecd7ae988b0566de00ba58fa0778"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

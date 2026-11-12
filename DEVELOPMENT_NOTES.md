@@ -10,6 +10,11 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.80.5: result arity and own Lua policies
+
+Public terminal/composed contrasts identify interpreter.lua4129 count2 result classification; the producer1882 already accepts own one/two/three-Array terminals. Admit count>=1 without new chunk locals, producer/signature/format movement. Only four own legacy continuation projections transfer per host, retaining terminal SX/SA/scalar elements. Complete published JSON/text/named flags and absence remain; eight signature diagnostics have no numeric actual/expected fields. Shared source-oracle logic imports no peer verdicts; source-origin identities avoid legacy nested-kind collisions. Six508-pair epochs per host preserve3048 parsed/emitted pairs and exact native-product reuse; older direct transient strings gain no new custody credit. Historical readonly11/current266 and direct6987 checks pass. Full native/toolchain4.2/SESSION5/raw-error4.28/current discovery/admission stay separate. Fresh size monitoring precedes further growth;1.5GB publication steering overrides cadence. Evidence: docs/checkpoints/array-concat-open-arity-lua-2026-11-12/REVIEW.md. The current selection card also needed two exact pointer replacements after all backend outcomes; its original selection evidence remains immutable in the correction packet, with independent query/recovery and a live-binding RED. Staged whitespace2 is resolved by exact used-oracle compression and a separate qualified read/import path; original reader/first0/seal remain, eleven original plus two qualification controls pass without SDK replay. First normal landing1 (eight doctrines pass) retains missing-date/task-pressure failures; the new heading date and own-commentary routing correct them under unchanged limits. Full CORE contracts/pre-route body and all prior task bytes survive in TASK-NOTES and landing-document-fix; focused document gates precede the normal retry.
+
+
 ## 2026-11-12 — Exact daily log retirement (TYPE-REFERENCE-BOOK.1.2.23.4.31)
 
 Fresh1316 metadata rows/eight scopes remain retention-only. Three exact own

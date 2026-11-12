@@ -18,7 +18,7 @@
 {"bytes":5262,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/and-return-edge-codegen-defect.md","sha256":"74c65b22fac67be2793c4f3577763d5ba20b167e65d68106b18159f4f7497a0d","type":"member"}
 {"bytes":1391,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/andplusplus-lx-parser-hang.md","sha256":"4261d729cc340da5ecff0d4888eb37a3309535505836ad35f273d095e6da37e6","type":"member"}
 {"bytes":34542,"lines":504,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/archogen-rust-lispish-integration.md","sha256":"4ed7bb435b765cfdd98278e1b67b2bc7934e66e926e26238059f0b379888b0c0","type":"member"}
-{"bytes":3913,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/array-concat-open-arity-result-selection.md","sha256":"5eb34f7ab8a32cded6f2db688062f37d0ea356a2a81cbf76d7d0a76050d6c757","type":"member"}
+{"bytes":4360,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.5","path":"docs/knowledge/array-concat-open-arity-result-selection.md","sha256":"d012eba5b1f8a255a5303dae56858a2e4e73e98e9c4a8b7f666ae446c2a6036b","type":"member"}
 {"bytes":3433,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-contains-result-handoff.md","sha256":"a99073d875f72cb6b89426e6957987888d893b931f147046acbf44b9e35c3c1c","type":"member"}
 {"bytes":2945,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-helper-return-shape-caveats.md","sha256":"29dedf6a9d767e54cbca3e97c5024f16340a04b8587686d2dce56f3ede020bc6","type":"member"}
 {"bytes":4862,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.41","path":"docs/knowledge/array-pipeline-callable-result-selection.md","sha256":"16698f38f6406da4047c03ad7768ab9950504d967730e643ec5b56567008cc8e","type":"member"}
@@ -52,6 +52,7 @@
 {"bytes":5093,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/callable-codeblock-four-backend-recurring-gate.md","sha256":"d0bf23809f936c7cd4cc283ba5c7a3af070908d9eca6cb254ef3cc698e370ee8","type":"member"}
 {"bytes":7863,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/callable-codeblock-literal-contract.md","sha256":"e5eec715088364e7ff3e017dd38abec4b8f3fbfc6e22bccebe9e41788448adec","type":"member"}
 {"bytes":2688,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/callable-mdbook-public-count-drift.md","sha256":"c3fcc0c0c54e623aa74f7516d84213a1f36a55962031d704c285026065c26061","type":"member"}
+{"bytes":2139,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.5","path":"docs/knowledge/canonical-ci-ram-fallback-prerequisite.md","sha256":"09474cc76633b018dae8c2816c8d8da670280cb3c132470a6163553a4fba4211","type":"member"}
 {"bytes":5230,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/canonical-primary-cli-trace-protocol.md","sha256":"a1269911b339d72c6876337c2d834389adc55858c737690d536a09ebc914dfb1","type":"member"}
 {"bytes":4899,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/capability-exclusion-freshness-gap.md","sha256":"b5a16ed3651e6f0a2fbf6900844f22099708c4a794025d9988b6e6dc6507eaaf","type":"member"}
 {"bytes":5780,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/capability-exclusion-freshness-model.md","sha256":"9202dabb62386d1b05814ea9f457458e588284a9de68a54cb6eec8c9446e278e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}
 {"bytes":4841,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"a28524918e7f1994d6fa51d7aa65594260712e6d706375cac309b6023292d8db","type":"member"}
 {"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}
-{"bytes":10751,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1","path":"docs/knowledge/count-result-source-guards.md","sha256":"2c29bb92618be0eb4e8bbdb5193a78a626c9760f3f73aeee5893989c1b7d455a","type":"member"}

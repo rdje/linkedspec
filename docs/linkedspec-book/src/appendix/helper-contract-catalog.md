@@ -688,21 +688,21 @@ Complete text/regex domains, contextual use and portable admission remain separa
 - **Returns**: array
 - **Behavior**: Returns a new array containing each input Array's elements in argument order. Inputs remain unchanged. For example, `concat_arrays(array("head"), ["tail"], ["end"])` returns `["head","tail","end"]`.
 
-Perl, Rust, Dart and Julia also accept a single Array: `concat_arrays(array("head"))` returns
+Perl, Rust, Dart, Julia and installed Lua also accept a single Array: `concat_arrays(array("head"))` returns
 `["head"]`, and `array("head").concat_arrays()` is the corresponding receiver
 form. Valid registered-function sources support these terminal forms too.
 Compatible `.last().uppercase()` and immediate `.with()` are exercised in the
-bounded one/two/three-Array Perl, independent Rust, Dart and Julia intakes. An empty concatenated Array still enters
+bounded one/two/three-Array Perl, independent Rust, Dart, Julia and installed Lua intakes. An empty concatenated Array still enters
 `with`; a block returning `value.count()` returns `0`.
 
-Perl, Rust, Dart and Julia result guards now cover the existing one-or-more Array signature, including
+Perl, Rust, Dart, Julia and installed Lua result guards now cover the existing one-or-more Array signature, including
 valid function results. For example,
 `concat_arrays(array("head"),["tail"],["end"]).set_key("k",1)` returns null:
 the Array producer runs before the incompatible Hash consumer rejects. That
 rejection persists through copy/logical/with tails, whose later operands do not
 run. Needed source and additional-Array errors still propagate. Compatible
 `.last().uppercase()` returns `"END"`; an empty Array still enters `with`.
-The bounded Perl80.1, Rust80.2, Dart80.3 and Julia80.4 checks preserve their own initial-input and
+The bounded Perl80.1, Rust80.2, Dart80.3, Julia80.4 and installed Lua80.5 checks preserve their own initial-input and
 fixed/rest function policies. Rust keeps scalar operand elements in its legacy
 terminal producer; those compatibility controls grant no portable non-Array input
 authority. Dart independently retains complete available error JSON and all80
@@ -712,8 +712,11 @@ and Dart applications to use the corrected result guards. Julia independently
 passes508/four routes with20 supported/four separate legacy operand/484 preserved
 records, all80 initial policies/eight invalid signatures exact. Its complete
 error JSON and source/operand/rest effects survive; rebuild Julia applications.
-Installed Lua80.5 remains with family80; complete
-source/context/portable admission is separate.
+Installed PUC5.5.1/LuaJIT independently pass508 programs/four routes, including
+20 guard targets/four separate legacy operand continuations and484 preserved
+records. Complete published JSON/text/named flags and field absence stay exact;
+raw-native fields4.28/declared5.4/full source/context/admission remain separate.
+Reload Lua applications to use the corrected guards.
 See [Array transform continuations](../dsl/value-container-flow-helper-reference.md#array-transform-continuations-guarded-perl-results).
 
 ### `push(Child)` / `push(Child, target)`

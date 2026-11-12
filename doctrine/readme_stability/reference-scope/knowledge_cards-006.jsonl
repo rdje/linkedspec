@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3281,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-loading-split.md","sha256":"edb1f82f788aa44056908076613fe41d1facf775a298803db5bd6debc4b0c9e2","type":"member"}
 {"bytes":3589,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-pipeline.md","sha256":"58c8f7a156ab1072d2cb7a33aac4496d4d16183b04b765eca092eb4f7f187410","type":"member"}
 {"bytes":3508,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-resolution.md","sha256":"ddb471f8d44c61b7d16ba6a02d0e90022b4d371a891081e1c08c4e7fecc3f2dc","type":"member"}
 {"bytes":4017,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-null-return-and-pure-observation-gaps.md","sha256":"227165e4274b88005859e58d1126177af1880776bf2b95370427bcee882c79c9","type":"member"}
@@ -6,6 +7,7 @@
 {"bytes":2849,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-call-receiver-runtime.md","sha256":"f6e33fe4183c3d010ee8b9a53c516c197de313feb4ed26fbab29c9656f2ba43a","type":"member"}
 {"bytes":2778,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-comparison-source-guards.md","sha256":"04bebee808e9d2d6154765fd541807186fb4fb64bfe384c91cc9308266af2f04","type":"member"}
 {"bytes":1977,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-helper-preflight.md","sha256":"ae447ede5fd912d48ef63f968d73c62d918e456d1440ace2758a0e275fd69197","type":"member"}
+{"bytes":3667,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.5","path":"docs/knowledge/lua-open-arity-concat-result-guards.md","sha256":"accd62244749e2720cf9dc9b3988f08056cbc036d2514007bf10ca65b613aecc","type":"member"}
 {"bytes":2990,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-ordinary-repetition-minimum-misses.md","sha256":"9d9ac439cdc15f81dc1caa548638658a3c910343565b959eb912ee31a220175e","type":"member"}
 {"bytes":3322,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-outward-function-descriptor-union.md","sha256":"c565f7510e8b74ecd9276e31e8f1db52e818dd428fdb42efe7f09f291e08de47","type":"member"}
 {"bytes":22824,"lines":219,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-completion-semantic-foundation-reading.md","sha256":"e31cd1b61d81881c32ca53c0afcaabdfa04879a21d908d665a361210faec2c9f","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":17366,"lines":209,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md","sha256":"b9457323ba4751bb3c2f0b674fa358bc41f518b5b4dc14000c7526371ad568de","type":"member"}
 {"bytes":11456,"lines":194,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-startup-reading-coverage.md","sha256":"54622403ad39a1c5855ad22d5ee8cb0cc14f1843ee144a0c0b68ca213a6e273c","type":"member"}
 {"bytes":2049,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-statement-regex-mutation.md","sha256":"dc492212e862e16377fa83f3ee56538655debc990ce1a90ba1a8126e563c8dc4","type":"member"}
-{"bytes":18297,"lines":189,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md","sha256":"b457a3d98fda911114f2090be8b48250fe2e8cf7b9d482994a1e8edd2b6bf2cf","type":"member"}
-{"bytes":16997,"lines":192,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md","sha256":"7ecbb1a4e7c8885e07e7dc8b56305f18d29474143beb1c218fb7fa915bf798b5","type":"member"}

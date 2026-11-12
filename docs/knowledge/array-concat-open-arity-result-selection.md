@@ -8,7 +8,7 @@ answers:
   - "why does function concat_arrays set_key stay unresolved or retain raw DSL"
   - "why does concat receiver copy logical with run after Hash rejection"
 date: 2026-11-12
-status: focused selection42 frozen; Perl80.1 focused-complete, independent peers pending
+status: focused selection42 frozen; all five bounded80 backend outcomes recorded; full admission separate
 tags: [arrays, concat, arity, results, guards, perl, selection, recovery]
 evidence: "TYPE-REFERENCE-BOOK.1.2.23.1.42; docs/checkpoints/array-concat-open-arity-selection-2026-11-12/REVIEW.md;84 own public Perl programs/66 contract passes/18 terminal-supported composition failures,84 actual module/dump pairs, first readonly0/empty stderr/fourteen corruptions/current126; no production change or peer verdict."
 reverify:
@@ -40,7 +40,13 @@ Perl80.1 now repairs the selected result-role boundary with focused504/26 suppor
 targets/four separate compatibility/474 preserved records and direct1028. Its
 strict first historical reader passes25 controls/current186; original failures
 and qualification boundaries remain. See [[perl-open-arity-concat-result-guards]].
-Independent Rust80.2 is next; the selection evidence above is historical.
+Rust80.2, Dart80.3, Julia80.4 and installed Lua80.5 now have independent focused
+outcomes too. See [[rust-open-arity-concat-result-guards]],
+[[dart-open-arity-concat-result-guards]], [[julia-open-arity-concat-result-guards]]
+and [[lua-open-arity-concat-result-guards]]. Remeasure committed outgoing bytes,
+then inspect remaining coverage/current canonical discovery before admission or
+size-driven publication. Raw-error4.28 remains before admission AND push. The
+selection evidence above is historical.
 
 All84 actual module/dump pairs and full records/fields/warnings survive source-
 bound archives. Emitted bytes persist/read back before fresh eval. Get's standalone

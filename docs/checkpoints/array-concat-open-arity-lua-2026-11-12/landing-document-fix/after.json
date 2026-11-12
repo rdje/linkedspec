@@ -1,0 +1,42 @@
+{
+  "CHANGES.md": {
+    "bytes": 45021,
+    "mode": 420,
+    "sha256": "2a4e3c60b2b669ec6136eb3448775cc442be77c5322ea411ce29e307a02cce45"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 35546,
+    "mode": 420,
+    "sha256": "1db59929e8b53bff609adcaa7da2ee536230bf77ed41b37da266439bf211e53d"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5425,
+    "mode": 420,
+    "sha256": "6bf8537e6a0cf9133134be0702fee3b59242ba581a9d37434d46ae62eae3717b"
+  },
+  "MEMORY.md": {
+    "bytes": 4834,
+    "mode": 420,
+    "sha256": "38fd00800c61a58e32e034f97ad79623763905f8c2d5fc9dca97abf7065f6aa3"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/REVIEW.md": {
+    "bytes": 7381,
+    "mode": 420,
+    "sha256": "4e117ed799ff76d2de6f5f3195315a0618055fe33ddfd9c550e854195a916589"
+  },
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/TASK-NOTES.md": {
+    "bytes": 10124,
+    "mode": 420,
+    "sha256": "2868a3a5df06bd8b92da837a4ba0ea505475c052b0d6dae277341ccc0c80b81d"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.helpers-60plus.md": {
+    "bytes": 704710,
+    "mode": 420,
+    "sha256": "c0f37fec46a2eedb902e7588851c443387ca2d946b2c185944c77b776c20217a"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20530,
+    "mode": 420,
+    "sha256": "eb975ec6389f37b14a171f7683b1347084998e61fd03f8167f5b29522425ccf8"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "luajit",
+    "-e",
+    "dofile(\"lua/test/array_concat_open_arity_result_guard_composition_test.lua\")"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/after/luajit/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+    "LINKEDSPEC_ARRAY_CONCAT_CAPTURE": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/after/luajit",
+    "LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT": ""
+  }
+}

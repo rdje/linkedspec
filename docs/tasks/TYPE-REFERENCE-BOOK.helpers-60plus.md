@@ -3274,7 +3274,7 @@
   Narrative: docs/checkpoints/array-transform-callable-result-perl-2026-11-11/REVIEW.md; exact pre-route task/log/patch in landing-pressure/.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80`
-  Status: `in_progress` / Perl80.1/Rust80.2/Dart80.3/Julia80.4 focused-complete; installed Lua80.5 next while publication margin permits
+  Status: `in_progress` / all five bounded backend children focused-complete; full23.4 admission remains separate
   Children: `.80.1`, `.80.2`, `.80.3`, `.80.4`, `.80.5`.
   Goal: Preserve result guards/readiness through existing open-arity concat_arrays ordinary and valid registered-function continuations.
   Dependencies: Clean selection23.1.42; all bounded78.6 implementations.
@@ -3427,11 +3427,20 @@
   Final qualification checks: Compressed patch retention0/qualified historical recovery0-empty stderr/ten original plus two patch controls; actual separate qualification publisher0. Current-landing516 inputs0 with no SDK replay. Rebuilt mdBook0/known18.2 warning, memory architecture0, Knowledge1751/12481 and scope1953/17 pass. Final pressure: changes290 lines/42417 bytes, notes184/32608; whitespace0. Shared-host memory preflight64% system-wide free before the normal gate. Original first cached2 is retained as staging evidence; no normal commit failure or runtime failure is implied. Normal hooks and exact post-pointer/brief0/clean checks still govern landing.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.80.5`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently acquire and repair installed Lua existing-signature concat result continuations.
   Dependencies: Clean preceding bounded80 owner and frozen selection23.1.42/80 contract.
   Acceptance: Parent80 contract in full, own actual supported arities/terminal/error/signature/initial policies before production, source-once/additional Array operand order and persistent rejection, full source/readiness/error/field-absence fences. Preserve producers/formats and qualify complete native/transitive custody; no peer outcome import.
-  Planned verification tier: focused.
-  Planned focused checks: Own public acquisition and producer contrasts, smallest new/direct-dependent normal, exact loaded-owner old/current if repaired, historical recovery/corruptions/current identities, docs/normal hooks.
-  Planned canonical trigger: Full23.4/final clean push after feature coverage; split actual contract/infrastructure changes before implementation.
-  Planned claim verification: none: Finite authored controls; declare actual producer/input/scope at activation.
+  Verification tier: `focused`
+  Focused checks: Lua SDK508/four routes; new/private/direct; readonly11+2/current266. Full proof in linked notes.
+  Canonical trigger: Full23.4/push; resource4.14 first.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.3.80.5.json`
+  Activation: Cleanfb613736f; full original body/continuity in linked notes.
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — SDK508; normal24RED/96 route failures.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Public contrasts: interpreter.lua4129 count2 selector.
+  - [x] **FIX** — count>=1/one runner group/four legacy projections per host.
+  - [x] **ADDRESSED (verified)** —3048 new/private old24-current508/direct6987 per host.
+  - [x] **NO REGRESSION** —484 full/80 initial/eight signatures/3048 pairs; errors exact; native4.2/full23.4 open.
+  - [x] **DOCUMENTATION** — Book/live/Knowledge/history/pointer; detailed landing notes retained.
+  Evidence: docs/checkpoints/array-concat-open-arity-lua-2026-11-12/TASK-NOTES.md (full body, qualifications and landing proof).

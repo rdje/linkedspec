@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "git",
+    "ls-files",
+    "--stage",
+    "-z"
+  ],
+  "cwd": ".",
+  "exit": 0
+}
