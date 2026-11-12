@@ -12,6 +12,13 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 — Julia callable Array-transform result guards
+
+- Four interpreter insertions/two deletions and one runner include let canonical registered-function transforms reach existing actual-kind guards; invocation/signatures/first producers/formats remain.
+- Independent312/four routes/nine traces freeze28 supported targets/three separate initial-source compatibility/281 preserved/104 initial policies exact. Original/private31RED-current312 and direct1248+903+776=2927 assertions pass, with complete available error maps and actual old/precompile channel roles retained.
+- First full historical reader0/empty stderr/24 controls/current519;1872 actual pairs/nine parsed trace inputs recover. Eighteen verified trace/input duplicates retire without proof loss. Older direct transient generated strings gain no new custody credit; full4.2/SESSION5/registration/full23.4 remain separate.
+- Book examples/backend/Knowledge/task/live/resume align; installed Lua78.6.5 follows clean landing. Evidence: docs/checkpoints/array-transform-callable-julia-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 — Dart callable Array-transform result guards
 
 - Four interpreter insertions/four deletions admit canonical first transforms from registered-function results to existing guards; invocation/producers/signatures/formats remain unchanged.

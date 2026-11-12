@@ -1,0 +1,621 @@
+{
+  "actual_parsed_module_pairs": 312,
+  "actual_stderr_bytes": {
+    "memory": 0,
+    "native": 0,
+    "version": 0
+  },
+  "limits": "Original Julia observations only; source-only authored questions. Shared intentions are assessed independently. Own targets/policies are not frozen and production is unchanged.",
+  "own_question_census": {
+    "additional-source-kind": 4,
+    "additional-source-kind-first-with": 4,
+    "earlier-owner": 6,
+    "excluded-helper-arity": 20,
+    "excluded-helper-arity-terminal": 20,
+    "function-arity-composed": 2,
+    "function-arity-terminal": 2,
+    "initial-first-with": 48,
+    "initial-terminal": 48,
+    "needed-operand-error": 12,
+    "needed-operand-error-terminal": 12,
+    "needed-source-error": 16,
+    "needed-source-error-terminal": 16,
+    "nested-kinds": 1,
+    "numeric-kind": 1,
+    "optional-default-composed": 10,
+    "optional-default-terminal": 10,
+    "positive-source-once-and-operand-order": 24,
+    "signature-invalid-signature": 6,
+    "signature-valid": 4,
+    "source-before-rejection": 1
+  },
+  "programs": 312,
+  "routes": 4,
+  "selected_full_records": {
+    "initial_hash_composed": {
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_null_composed": {
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_number_composed": {
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "initial_number_terminal": {
+      "fresh": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          []
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          []
+        ]
+      }
+    },
+    "own_extra_sorted_free": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      }
+    },
+    "own_extra_sorted_receiver": {
+      "fresh": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "SXKVW"
+        ]
+      }
+    },
+    "own_initial_hash_sorted_receiver_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    },
+    "own_initial_number_take_receiver_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    },
+    "own_needed_source_take_receiver": {
+      "fresh": {
+        "class": "GeneratedSourceException",
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "error_json": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "callable-array-transform/own_needed_source_take_receiver.spec",
+          "stage": "execute_generated",
+          "summary": "Generated Julia parser execution failed",
+          "type": "generated_source_error"
+        }
+      },
+      "native": {
+        "class": "RuntimeInterpreterException",
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "error_json": {
+          "diagnostic": {
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "rule_label": "Value",
+            "stage": "runtime_execution",
+            "summary": "Julia runtime interpreter failed",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          },
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      },
+      "plan": {
+        "class": "GeneratedSourceException",
+        "error": "Generated Julia parser execution failed: binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "error_json": {
+          "code": "generated_execution_failed",
+          "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "callable-array-transform/own_needed_source_take_receiver.spec",
+          "stage": "execute_generated",
+          "summary": "Generated Julia parser execution failed",
+          "type": "generated_source_error"
+        }
+      },
+      "restored": {
+        "class": "RuntimeInterpreterException",
+        "error": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+        "error_json": {
+          "diagnostic": {
+            "detail": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "rule_label": "Value",
+            "stage": "runtime_execution",
+            "summary": "Julia runtime interpreter failed",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          },
+          "message": "binding_kind_mismatch identifier=items expected_kind=array actual_kind=scalar"
+        }
+      }
+    },
+    "own_scalar_bool_free_with": {
+      "fresh": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "native": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "plan": {
+        "value": [
+          0,
+          "W"
+        ]
+      },
+      "restored": {
+        "value": [
+          0,
+          "W"
+        ]
+      }
+    },
+    "own_scalar_bool_receiver": {
+      "fresh": {
+        "value": null
+      },
+      "native": {
+        "value": null
+      },
+      "plan": {
+        "value": null
+      },
+      "restored": {
+        "value": null
+      }
+    },
+    "own_scalar_bool_receiver_with": {
+      "fresh": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          null,
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          null,
+          ""
+        ]
+      }
+    },
+    "own_signature_fixed_missing_composed": {
+      "fresh": {
+        "class": "GeneratedSourceException",
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "error_json": {
+          "code": "generated_execution_failed",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "callable-array-transform/own_signature_fixed_missing_composed.spec",
+          "stage": "execute_generated",
+          "summary": "Generated Julia parser execution failed",
+          "type": "generated_source_error"
+        }
+      },
+      "native": {
+        "class": "RuntimeInterpreterException",
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "error_json": {
+          "diagnostic": {
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "rule_label": "Value",
+            "stage": "runtime_execution",
+            "summary": "Julia runtime interpreter failed",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          },
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value"
+        }
+      },
+      "plan": {
+        "class": "GeneratedSourceException",
+        "error": "Generated Julia parser execution failed: user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "error_json": {
+          "code": "generated_execution_failed",
+          "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+          "handler_family": "default",
+          "rule_label": "Value",
+          "source_identity": "callable-array-transform/own_signature_fixed_missing_composed.spec",
+          "stage": "execute_generated",
+          "summary": "Generated Julia parser execution failed",
+          "type": "generated_source_error"
+        }
+      },
+      "restored": {
+        "class": "RuntimeInterpreterException",
+        "error": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+        "error_json": {
+          "diagnostic": {
+            "detail": "user function 'pair' expects 2 argument(s), got 1 in rule Value",
+            "handler_source_label": "julia_runtime:rule:Value",
+            "owner_stage": "julia_runtime",
+            "rule_label": "Value",
+            "stage": "runtime_execution",
+            "summary": "Julia runtime interpreter failed",
+            "top_rule": "Value",
+            "type": "runtime_parser"
+          },
+          "message": "user function 'pair' expects 2 argument(s), got 1 in rule Value"
+        }
+      }
+    },
+    "own_signature_variadic_empty_composed": {
+      "fresh": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "native": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "plan": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      },
+      "restored": {
+        "value": [
+          "ran",
+          "KVW"
+        ]
+      }
+    },
+    "own_signature_variadic_empty_terminal": {
+      "fresh": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "native": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "plan": {
+        "value": [
+          [],
+          ""
+        ]
+      },
+      "restored": {
+        "value": [
+          [],
+          ""
+        ]
+      }
+    },
+    "positive_concat_arrays_receiver_terminal": {
+      "fresh": {
+        "value": [
+          [
+            "b",
+            "a",
+            "c",
+            "d"
+          ],
+          "ST"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "b",
+            "a",
+            "c",
+            "d"
+          ],
+          "ST"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "b",
+            "a",
+            "c",
+            "d"
+          ],
+          "ST"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "b",
+            "a",
+            "c",
+            "d"
+          ],
+          "ST"
+        ]
+      }
+    },
+    "positive_slice_receiver_terminal": {
+      "fresh": {
+        "value": [
+          [
+            "a"
+          ],
+          "SNC"
+        ]
+      },
+      "native": {
+        "value": [
+          [
+            "a"
+          ],
+          "SNC"
+        ]
+      },
+      "plan": {
+        "value": [
+          [
+            "a"
+          ],
+          "SNC"
+        ]
+      },
+      "restored": {
+        "value": [
+          [
+            "a"
+          ],
+          "SNC"
+        ]
+      }
+    }
+  },
+  "shared_healthy": [
+    "take_compatible",
+    "take_free_hash_guard",
+    "take_last_compatible",
+    "take_last_free_hash_guard",
+    "drop_front_compatible",
+    "drop_front_free_hash_guard",
+    "drop_back_compatible",
+    "drop_back_free_hash_guard",
+    "slice_compatible",
+    "slice_free_hash_guard",
+    "sorted_compatible",
+    "sorted_free_hash_guard",
+    "reversed_compatible",
+    "reversed_free_hash_guard",
+    "concat_arrays_compatible",
+    "concat_arrays_free_hash_guard",
+    "source_once",
+    "source_snapshot",
+    "valid_empty_with",
+    "nested_kinds",
+    "selected_hash_bridge",
+    "needed_source_terminal",
+    "needed_source_composed",
+    "needed_count_terminal",
+    "needed_count_composed",
+    "established_constructor_guard"
+  ],
+  "shared_profiles": [
+    "constructor_rejection_oracle",
+    "initial_number_terminal",
+    "initial_number_composed",
+    "initial_null_terminal",
+    "initial_null_composed",
+    "initial_hash_terminal",
+    "initial_hash_composed"
+  ],
+  "shared_targets": [
+    "take_receiver_hash_guard",
+    "take_last_receiver_hash_guard",
+    "drop_front_receiver_hash_guard",
+    "drop_back_receiver_hash_guard",
+    "slice_receiver_hash_guard",
+    "sorted_receiver_hash_guard",
+    "reversed_receiver_hash_guard",
+    "concat_arrays_receiver_hash_guard",
+    "take_later_with",
+    "reverse_copy_later_with",
+    "drop_logical_later_with",
+    "source_effect_before_rejection"
+  ]
+}

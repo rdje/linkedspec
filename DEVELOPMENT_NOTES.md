@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 — Julia callable transform guards preserve own producer policies
+
+The registered-source denial in _runtime_is_ordinary_array_transform_result_chain bypasses existing actual-kind ownership. Admit canonical first transforms, preserving unregistered free-helper identity and existing fixed/minimum signature-before-argument checks. Source4/2 plus one normal runner include; no producer, source scope or generated format change. Independent312/four routes establish28 supported fixes/three separate initial continuations/281 preserved records and104 unchanged initial policies. Julia Boolean receiver take stays null/skip-with and free take stays[]/runs-with; both free and receiver sorted/reversed extras retain X, independently of Dart.
+
+Full available class/text/to_json maps, source identities/stages/absence and source/count/slice/concat order remain. Original/private31 failing groups move to312/1248 assertions passing; direct2927/first historical reader24/current519 pass.1872 actual pairs/nine trace inputs retain new parsed-before-compile/restore and emitted-before-include order. Fresh Modules share runtime/process; old direct transient strings receive no new custody credit. Expected old Test error and successful root precompile stderr stay exact. Full native4.2/SESSION5/historical4.24/source/context/isolation/registration/SESSION7/declared5.4/formatter/full23.4 remain separate. The new Julia Knowledge card and packet REVIEW.md own these facts.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 — Preserve Dart producer policy independently of later guards
 
 The registered-function exclusion in _isOrdinaryArrayTransformResultChain bypasses actual-kind result ownership. Canonical first-transform prefixes now reach existing guards while unregistered free-helper identity and signature-before-arguments invocation stay unchanged (4/4 source delta). Independent312 observations support28 repairs plus three separate initial-source continuation movements;281 complete records and104 initial policies remain exact. Dart Boolean receiver take yields null/skip-with, while free take yields[]/runs-with; peer input policies are not an oracle.

@@ -3092,7 +3092,7 @@
   Landing whitespace correction: Staged diff check exits2 for a blank line at EOF in the sealed reader. Exact first-reader bytes survive as first-review.py.gz with original first-use inputs/output/seal unchanged; qualified reader resolves only that historical alias and freezes its own inputs before repeat. No SDK/normal/oracle changes. Qualified actual reader0/empty stderr/same14 controls passes; exact failure/provenance: docs/checkpoints/array-pipeline-callable-result-perl-2026-11-11/LANDING.md.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6`
-  Status: `in_progress` / bounded Perl and Rust focused-checked; independent peers pending
+  Status: `in_progress` / bounded Perl/Rust/Dart/Julia focused-checked; installed Lua pending
   Children: `.78.6.1`, `.78.6.2`, `.78.6.3`, `.78.6.4`, `.78.6.5`.
   Goal: Preserve existing registered-function Array-transform receiver/result composition.
   Dependencies: Qualified selection23.1.41/shared45; normal clean selection landing before production.
@@ -3188,13 +3188,29 @@
   Landing checks: mdBook0 (existing search-index pressure warning remains18.2-owned), memory architecture0, bounded histories0 and reference scope1943 members/17 pages pass. A refresh overlapping own staging is rejected1 for changed index; retry while staged is rejected1 by the pre-staging boundary. Unstage only this owned candidate, rerun with stable index, actual0; no failed-attempt PASS credit. Mandatory normal hooks follow; no broad CI or peer verdict.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4`
-  Status: `pending`
+  Status: `completed`
   Goal: Independently acquire and repair Julia registered-function Array-transform result guards.
   Dependencies: Frozen78.6/shared45 and preceding clean owner.
   Acceptance: Parent78.6 contract and own initial/optional/excluded/function-signature/error fences before production on native/restored/plan/full emitted-fresh routes; no peer policy/verdict. Parsed inputs precede compile/restore and full available errors survive. Preserve formats and split prerequisites when required.
-  Planned verification: Focused own new/direct-dependent normal, exact loaded-owner inverse if repaired, readonly/current identities/docs/normal commit.
-  Planned canonical trigger: Full23.4/final clean push after coverage.
-  Planned claim verification: Declare actual finite source-bound proof at activation; no completeness claim.
+  Verification tier: `focused`
+  Focused checks: Independent312/four routes/full errors/nine public traces; original/private31RED-current312; direct1248+903+776=2927 assertions; rehearsal/apply0; first historical reader0/24 controls/current519; book/memory/history/normal hooks.
+  Canonical trigger: Full23.4/final clean push after coverage; source/format/infrastructure authority remains separately owned.
+  Claim verification: none: Finite authored deterministic source/result/preservation controls, no operation-population, completeness or performance measurement.
+  Activation: Clean3767c87c7167bdcb29b0092be35bc139520e3509/all10/post-pointer/brief0 confirmed before pivot. Frozen78.6/shared45, own Julia public integration/function registry/invocation/transform/pipeline/error/storage contracts, existing normals/observers and current book reviewed. Julia uses own Regex and needs no RGX/PGEN preparation. Reuse only authored source questions, never peer outcomes, initial-input/signature/error policies or failure counts. Acquire full available error maps, parsed snapshots before compile/restore, emitted bytes before fresh use and actual module path. Existing private controls disable compiled modules; retain source/wrapper/default grammar/fixture inputs before SDK use. Shared24GiB/memory_pressure free69 percent; serial jobs. Supplied read-only policy source hashes match the canonical recorded three; no policy update. No production change yet.
+
+  Intake/freeze: Actual original312/four public routes and312 parsed-module pairs/independent inspection/nine public traces/freeze0 with empty outer stderr. Shared45 independently finds12 targets/26 healthy/seven profiles. Own terminal/optional/valid-variadic/source/count/slice/concat contrasts freeze28 supported targets, three separate initial-source continuation movements and281 preserved complete records; all104 initial/additional scalar policies remain fences. Julia Boolean receiver-null/free-empty and free/receiver sorted-reversed excess SXKVW are independently acquired; no Dart input/ignored-extra policy import. Full available runtime/generated error maps and all actual traced parsed inputs match cold observations; no production edit. The upcoming unchanged older direct normals are semantic proof; no new native/artifact-custody credit for their transient generated strings. Existing4.2/SESSION5 owns complete closure, and old historical packet capture guards are preserved.
+
+  Reproduction/repair: Original normal1124PASS/124FAIL (31 groups times four routes) and check-before0 reproduce every cold312/full error wire/actual parsed-module pair. Nine public trace results/parsed inputs match original acquisition; scopes show lifecycle/output, not a per-helper guard event. _runtime_is_ordinary_array_transform_result_chain near6991 explicitly excludes registered sources from common result ownership; existing invocation already resolves fixed/minimum arity before argument effects and preserves source locals. Only classifier4 insertions/two deletions and one runner include change; rehearsal/apply0/empty outer stderr. Repaired normal1248 assertions and check-after0 preserve281 complete records/all104 initial policies/all312 pairs; actual successful package-precompile stderr is retained. Private old/current/direct2927 and historical recovery remain pending.
+
+  Acceptance Checklist
+  - [x] **REPRODUCE / ISSUE** — Original312 full wires/312 pairs/nine public traces and normal1124PASS/124FAIL; before comparison0 exactly matches cold data.
+  - [x] **ROOT CAUSE (WHY + WHERE)** — Registered-source exclusion near6991 bypasses existing actual-kind guard; invocation already resolves fixed/minimum signatures before arguments, and first-producer policy remains.
+  - [x] **FIX** — Classifier4 insertions/two deletions and one local runner include; unregistered free-helper identity, helper bodies/arity/formats/source scope remain.
+  - [x] **ADDRESSED (verified)** —312/four-route1248 assertions; same-path old31RED-current312; first full historical reader0/empty stderr/24 effective controls/current519.
+  - [x] **NO REGRESSION** —281 complete records/104 initial policies/1872 actual pairs/nine parsed trace inputs exact; unchanged direct normals give2927 assertions. Own Boolean receiver-null/free-empty and sorted/reversed SXKVW remain.
+  - [x] **LOCKSTEP** — Book/backend/Knowledge/live/resume/task/index/scope/history align; focused doc gates and normal landing precede independent installed Lua78.6.5. Full23.4 remains separate.
+  Outcome: docs/checkpoints/array-transform-callable-julia-2026-11-12/REVIEW.md. Only28 targets count as supported repair; three initial-source continuations are separate compatibility. First full readonly0 with24 reason-sensitive controls, with mutation preconditions outside rejection handlers; current519 is pre-staging. Eighteen exact plain trace/input duplicates retire after archive verification, retaining all proof. Expected old Test failure and successful root precompile stderr stay explicit; no new launcher notice in SDK proof. Older direct normals are semantic proof without new transient-generated/native-custody credit. Full4.2/SESSION5/historical4.24/source/context/isolation/registration4.1/safe-launcher4.22/SESSION7/shadowing32/declared5.4/formatter/full23.4 remain owned; no Julia policy is imported for Lua.
+  Landing checks: mdBook0 (existing search-index warning remains18.2-owned), memory architecture0, bounded histories0 (207/32448 change shard,229/45112 engineering shard), reference scope1944 members/17 pages0 and whitespace0. Mandatory normal hooks follow; no full CI or peer verdict.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5`
   Status: `pending`

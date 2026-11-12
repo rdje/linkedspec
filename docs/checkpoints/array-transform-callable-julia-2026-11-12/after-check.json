@@ -1,0 +1,16 @@
+{
+  "phase": "after",
+  "full_wire_records": "PASS",
+  "programs": 312,
+  "routes": 4,
+  "supported_targets": 28,
+  "separate_initial_compatibility": 3,
+  "preserved": 281,
+  "initial_policies_exact": 104,
+  "actual_parsed_module_pairs_exact": 312,
+  "actual_stderr": {
+    "bytes": 137,
+    "sha256": "5d0a7f0dcf4552f5b76ad7e71ff8baa5941d7dafc851b9c8ce6e3a5c8a754c33"
+  },
+  "scope": "Finite authored full-wire/pair comparison. Raw stderr is retained, never stripped; expected old Test failure is separate from any successful-precompile or launcher notices. Full native/cache/transitive4.2/SESSION5 and admission remain open."
+}

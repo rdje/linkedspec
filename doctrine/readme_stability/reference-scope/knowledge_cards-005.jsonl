@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4187,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-generated-primary-projection.md","sha256":"a7e8eb01ea2bf8cbbb4ae97288bd5662b627864c10a994e5a14b9f7ea7e96a36","type":"member"}
 {"bytes":12307,"lines":170,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-neutral-contract.md","sha256":"b5d0af72de1ede1f922bad8d0e6c31c6f364a3725b7d7fb729ba05bcae5e8936","type":"member"}
 {"bytes":2494,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-public-no-drift.md","sha256":"6cc0fca4e7dc7f21c610076e826e09480b395d86b801a0057e60c8d3be7aa92c","type":"member"}
 {"bytes":2930,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/logical-helper-recurring-five-backend-gate.md","sha256":"bd3a3743573d8aa18c758ebd69cc8d2e0a045246898f03dff5e8e35efc86d2c8","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2849,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-call-receiver-runtime.md","sha256":"f6e33fe4183c3d010ee8b9a53c516c197de313feb4ed26fbab29c9656f2ba43a","type":"member"}
 {"bytes":2778,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-comparison-source-guards.md","sha256":"04bebee808e9d2d6154765fd541807186fb4fb64bfe384c91cc9308266af2f04","type":"member"}
 {"bytes":1977,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-helper-preflight.md","sha256":"ae447ede5fd912d48ef63f968d73c62d918e456d1440ace2758a0e275fd69197","type":"member"}
-{"bytes":2990,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-ordinary-repetition-minimum-misses.md","sha256":"9d9ac439cdc15f81dc1caa548638658a3c910343565b959eb912ee31a220175e","type":"member"}

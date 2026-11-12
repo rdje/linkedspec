@@ -1,0 +1,26 @@
+--- julia/src/runtime/Interpreter.jl
++++ julia/src/runtime/Interpreter.jl
+@@ -7001,9 +7001,11 @@
+                 helper in _RUNTIME_HASH_HELPER_NAMES ||
+                 helper in ("copy", "with", "and", "or", "not", "coalesce", "coalesce_nonempty"))
+     end && return false
++    # Invocation keeps its arity checks and caller effects. A canonical transform
++    # prefix owns the produced result without becoming an unregistered free call.
+     if receiver isa ActionCallExpr
+-        has_user_function_name(engine.compiled_spec.function_registry, receiver.name) && return false
+-        if something(receiver.source_method, receiver.name) == receiver.name &&
++        if !has_user_function_name(engine.compiled_spec.function_registry, receiver.name) &&
++            something(receiver.source_method, receiver.name) == receiver.name &&
+             !receiver.trailing_block_arg &&
+             _runtime_is_canonical_array_transform_arity(receiver.name, length(receiver.args)) &&
+             _runtime_is_ordinary_array_transform_arguments(receiver.args)
+--- julia/test/runtests.jl
++++ julia/test/runtests.jl
+@@ -95,6 +95,7 @@
+ include("hash_view_result_guard_composition_test.jl")
+ include("hash_value_result_guard_composition_test.jl")
+ include("array_transform_result_guard_composition_test.jl")
++include("array_transform_callable_result_guard_composition_test.jl")
+ include("array_pipeline_result_guard_composition_test.jl")
+ include("array_pipeline_callable_result_guard_composition_test.jl")
+ include("count_source_fallback_test.jl")

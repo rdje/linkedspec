@@ -8,7 +8,7 @@ October19 artifact review: REPO-HYGIENE.19 retains metadata and public compiler-
 
 # ROADMAP
 
-November12 current fluent frontier: Independent Dart78.6.3 is implemented with focused312/four routes,28 supported targets/three separate initial-source compatibility continuations/281 preserved and104 initial policies exact. Same-path31RED-current312/direct647/qualified readonly24/current510 pass; original reader1 and exact outer launcher notice remain retained. Perl/Rust callable-transform slices are committed. Independent Julia78.6.4 is next, then installed Lua; open concat42 follows bounded78.6. Full23.4/native/source/context/registration/SESSION7/formatter/declared5.4 stay separate.
+November12 current fluent frontier: Independent Julia78.6.4 is implemented with focused312/four routes,28 supported targets/three separate initial-source compatibility/281 preserved and104 initial policies exact. Same-path31RED-current312/direct2927 assertions/first readonly24/current519 pass;1872 actual pairs/nine traces retain full available error maps and new first-use ordering. Classifier4/2 and one runner include only. Perl/Rust/Dart bounded slices are committed. Independent installed Lua78.6.5 is next; open concat42 follows bounded78.6. Full23.4/native/source/context/registration/historical4.24/SESSION7/formatter/declared5.4 stay separate.
 
 November6 Length74: selection23.1.35 preserves existing producer domains and freezes ordinary source/result guards. Perl74.1/74.6, Rust74.2, Dart74.3, Julia74.4 and installed Lua74.5 are implemented with independent focused checks. All bounded Length implementations are complete; full admission remains separate.
 

@@ -1,0 +1,1374 @@
+{
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after-check.json": {
+    "bytes": 630,
+    "sha256": "18b645e76ee886ebdde73e88e06d8cf545e1a80eb51af660cb759bd1b6734da1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/artifacts-inputs.tar.gz": {
+    "bytes": 58745,
+    "sha256": "306324a95bd2f63f26421609f838f1fb9e61ec9c1afba08599323018bfcb16a0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/custody.json": {
+    "bytes": 265661,
+    "sha256": "82660406fb7e07ce47b8126395bc44c065fb6a5d6df968d0c1676ad27a58a98f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "38258471a2f0c61fbde1f18764a17fdfc1c5ded357e1fbda5faae7dac7979d8a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/normal-command.json": {
+    "bytes": 711,
+    "sha256": "f2bf2c7a85abe401fd79917717fa5395d1f67c1e2973a7730a59ac6f0fd3fa53"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/normal-stderr.log.gz": {
+    "bytes": 131,
+    "sha256": "f728b7436f16f115461ccbcf46b5a5560c68f6cd26a70854565a9e4307c95978"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/normal-stdout.log.gz": {
+    "bytes": 6637,
+    "sha256": "7cec8c0c38c77b8552bc404ed00c4f9f4dc53f33065bd48e55e0bd9ec408df7c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/root-inputs.tar.gz": {
+    "bytes": 1195939,
+    "sha256": "70121826293ffd35c36453850310c993eb57c4d5e0ec5986e4825d19ba1f1edb"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/version-command.json": {
+    "bytes": 479,
+    "sha256": "d7615241c02ab7ddcd1d374ef0a64700e5bb254cb4b6fc588bd8baa9ab91b536"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/after/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/baseline.json": {
+    "bytes": 632675,
+    "sha256": "748f48526e248faa4c8543898ef9dfa42a4452057cff028ba55e6d38d7e3cbc9"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before-check.json": {
+    "bytes": 631,
+    "sha256": "ec5718d251b9c97b3f637cd6f74eb1900aa382f67bda1fa479761876b4c5dd1c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/artifacts-inputs.tar.gz": {
+    "bytes": 58661,
+    "sha256": "3d34e1301c3d32c5e656bb15872bb61a0d688213f5ac1473db369a49038a93a8"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/custody.json": {
+    "bytes": 265384,
+    "sha256": "95df1db54ea9acc748b7746e5334fed39860d9957efab3673c56fd1b2984ea31"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/memory-stdout.log.gz": {
+    "bytes": 327,
+    "sha256": "2dc9b03fbaf5b507626180bd0e573d9f17ff5301d48ee781adb6067f0318b328"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/normal-command.json": {
+    "bytes": 712,
+    "sha256": "2d53ceef05fcce483e3845634f0036f4e78b815789dfc2e06ad2a0bbb1c31ddc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/normal-stderr.log.gz": {
+    "bytes": 192,
+    "sha256": "f83dfefa6c01aae26c2e3ac540b02b17bc4536b43e3634721e8e2375b5381e7f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/normal-stdout.log.gz": {
+    "bytes": 11225,
+    "sha256": "b9967f5d62f9feafca97e6287ea06ae5fcdecd2e0d6183291ee755f1131510c7"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/root-inputs.tar.gz": {
+    "bytes": 1110253,
+    "sha256": "7d7e3644d6b5bc49f925a983233f189164a74f197fa31b31a550a7672d69d736"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/version-command.json": {
+    "bytes": 480,
+    "sha256": "c8509e39bf1c2d6bd294ad95bdd12001aef52efd3c4c9a0164ab58d473951f5e"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/before/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture.py": {
+    "bytes": 9321,
+    "sha256": "0b8188054114292e6e897ce7c637cf1a29bcf0e7201791bb84f63ef5477983fa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture_current.py": {
+    "bytes": 2023,
+    "sha256": "4bbb45041212fbf4926fe780c1298bebff6437bec9deaee09e62e7d5acd4ab92"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture_intake.py": {
+    "bytes": 5951,
+    "sha256": "84593f8c12d840ddeb0fe92ead126f7d17e35a6ca494ce0f6a7fbde91e29b167"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture_trace.py": {
+    "bytes": 4652,
+    "sha256": "5ff407f8759b2db39aa48fb05dda0a31815480d4e4fcff49a4a2d61c23107825"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/check_current.py": {
+    "bytes": 1242,
+    "sha256": "6af1c3638f954d91e3300d4682aa703cd3914baa4b3c17216ae7ecc28c4eaf86"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/check_epoch.py": {
+    "bytes": 3580,
+    "sha256": "56210b62444e0f79020044960212025971a1de0ae34efec79f389fac0154b23a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/command.json": {
+    "bytes": 216,
+    "sha256": "4237dac34e6f9eb234c08c64d1da5f19c3c56fa07eef34309a39fad79aeb0efc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/identities.json": {
+    "bytes": 1153,
+    "sha256": "819ed37c1f9cf5ec09973b28588a9e312d23d0767307bb0953666a7924541b1a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/inputs-before-reader.tar.gz": {
+    "bytes": 1256169,
+    "sha256": "bbf099a4b2f8a5c15d48d13280f6bca3fa1e8a143c5a2e12d9755eca46fb4f5b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/result.json": {
+    "bytes": 214,
+    "sha256": "d32d34e1545aae1c609bd4d965b974861585082a8b948580c15fdb2da54fcb68"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/current/stdout.log.gz": {
+    "bytes": 180,
+    "sha256": "568a512667202f3259cf66e3923eff11253a8bec09b4a4a6a6883524c4dcdfdd"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct-check.json": {
+    "bytes": 629,
+    "sha256": "0cd27eb4a71072bb09a327021ad4b222454efbe9ab1f5c0c54bd982ddb78e165"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/artifacts-inputs.tar.gz": {
+    "bytes": 58549,
+    "sha256": "8d4012b66b419162d7de98b667b99e268c1da9aa8c6bf1fd3d6bb70219b07241"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/custody.json": {
+    "bytes": 267198,
+    "sha256": "c1d20c486da97d095eb10fb7d2f376e8bb155cd7ee3c67b3f2cc3b4dcebbd2e5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/memory-stdout.log.gz": {
+    "bytes": 323,
+    "sha256": "1a95bc40ad92dc1664462fd151369a38a4f1f0769a8416c0f0faf02648720c9f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/normal-command.json": {
+    "bytes": 854,
+    "sha256": "5a0ef52ae981292cd5ab7d62623f921fc250d06131bc93c0f9527d5ce839449d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/normal-stdout.log.gz": {
+    "bytes": 13891,
+    "sha256": "916dccf95d8f6cc8cde7f733082e61f5f0a57a9a54a3400f12d0426994082d42"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/root-inputs.tar.gz": {
+    "bytes": 1197409,
+    "sha256": "202443d03ceb7c5fb60716e1ec81e36c6db87358ecd17f923078ee43bcd1f5cf"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/version-command.json": {
+    "bytes": 480,
+    "sha256": "95b7c0106d3fc47343367d72108486ed71abbb3da55678c44c213d9a56a2b32a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/direct/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/freeze_policy.py": {
+    "bytes": 8355,
+    "sha256": "a1125b1d8d5933ef702f395ea43e8f9877f733d2539f3410d205eff0ba94a0b8"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/inspect_intake.py": {
+    "bytes": 3884,
+    "sha256": "e707ef2aada90b59800e5a365758d580862b5f428d905e3cc35bbada7c6523c6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake-assessment.json": {
+    "bytes": 14532,
+    "sha256": "962fff61d8c492e78383facb14c1febe69f006e69ce865577e7b2effb1726d99"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/artifacts-inputs.tar.gz": {
+    "bytes": 58494,
+    "sha256": "c87d556c1634763949a2a2392cba47a4d42686277914e6cf693083fad962c494"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/custody.json": {
+    "bytes": 261578,
+    "sha256": "6326f84cfe5cc62a519774c160fd6dc61a6144a805272e6f7575ab1127644163"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "f0d1614faf93f4f858ce92c573d33af0c030d24f1216bd9ef5ac41df29ea1b84"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/native-command.json": {
+    "bytes": 532,
+    "sha256": "7a27af33e34e6475f0c799fa4858fe289cd9bdb138e7d41156b1b45cb55bc3b3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/native-stdout.log.gz": {
+    "bytes": 22953,
+    "sha256": "fd8307040f2c8bb3265951a15e4936cd56a8ea066fc89c53ecdf29f660b6f080"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/program-census.json": {
+    "bytes": 12866,
+    "sha256": "52e872d2ae7650a9cb94e24c56740808fada8648f782c86f3504f927c4ee8a6d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/root-inputs.tar.gz": {
+    "bytes": 986078,
+    "sha256": "77e744f39d2b3a0bb62e63d85778f70f1f0d18bf6c0c833973c075d5b9bd8746"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/intake/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/command.json": {
+    "bytes": 244,
+    "sha256": "9fbec78cbe5b4286eb67cfce7f57ac0f2ad281f2ba7711cc39cc6565c8de453f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/identities.json": {
+    "bytes": 9468,
+    "sha256": "c6aad3763d2f55fd2bc5a1631b129521c40f97b7affd89d7781a781d3ba6e4db"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/inputs.tar.gz": {
+    "bytes": 258505,
+    "sha256": "d592b6140ac911a4efc491ba544c45b5174a23e514dc013cea9b40973b495e48"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/after/stdout.log.gz": {
+    "bytes": 107,
+    "sha256": "9138939347b4936f31f4bc62c8da34c44ded204a75fb8f414150ac2370161c20"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/command.json": {
+    "bytes": 245,
+    "sha256": "d5df0703240c615060799bad4021826f4bed9014ca16aa3c1fb263b268ec2423"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/identities.json": {
+    "bytes": 8445,
+    "sha256": "d2a960075b179947ec45e74baa3ed6a21e7f350caa83ce1c0849982413f0eff1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/inputs.tar.gz": {
+    "bytes": 171429,
+    "sha256": "a64eb347f74c0aeaae36dd4f29834a7b286cf26a1af66ed4f516fcde5ae50b03"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/before/stdout.log.gz": {
+    "bytes": 108,
+    "sha256": "7d694f5cf8a70a1a209a57e42ffc5778c8b4e28e7d24947d61bb52947787cfd1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/command.json": {
+    "bytes": 248,
+    "sha256": "afafc643ec54ef828d9f1e77a82302bf35ab9ee82044b68f1733dc0e8b121fe0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/identities.json": {
+    "bytes": 9468,
+    "sha256": "c6aad3763d2f55fd2bc5a1631b129521c40f97b7affd89d7781a781d3ba6e4db"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/inputs.tar.gz": {
+    "bytes": 258505,
+    "sha256": "ac134d17fb70b9bb3ee833aea6862269669654b9fbc7e6d7931212cdad966662"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-after/stdout.log.gz": {
+    "bytes": 419,
+    "sha256": "55fff471d512a0939fec5eb95c171eab390e8bb4860b0c9c63ba339887fc08f7"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/command.json": {
+    "bytes": 249,
+    "sha256": "e96d216769b5530f6f773cbe3576cb6e4fa0a2dee5b1243e07f04b9b6252b5e3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/identities.json": {
+    "bytes": 8648,
+    "sha256": "26edd327d78083d6b28e4711f8613d7a0d30c4ec6784e674d841162fff92fdad"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/inputs.tar.gz": {
+    "bytes": 172402,
+    "sha256": "cbc6f1259ec4b9b46a50b9cd2a983677148ad1571b235094de8ce2145ad658b4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/check-before/stdout.log.gz": {
+    "bytes": 419,
+    "sha256": "a402b4e7fb2534dc4819b9f1da23fb8361ba92972d516f0636e9987bd08de20c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/command.json": {
+    "bytes": 239,
+    "sha256": "5c8cb33071b76bc7a37a7d936b550286a5680b31e0a1c256319061579b216ed5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/identities.json": {
+    "bytes": 11721,
+    "sha256": "f2e35f66724e7888fa5df13c6e21ef7af8bf7ed1677340f5312679fee05d73ee"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/inputs.tar.gz": {
+    "bytes": 272909,
+    "sha256": "c3e7d27f1861e861147faa94c8f6c8efb98b1228c6ffe6110a534a97e16cb74d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/current/stdout.log.gz": {
+    "bytes": 180,
+    "sha256": "568a512667202f3259cf66e3923eff11253a8bec09b4a4a6a6883524c4dcdfdd"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/command.json": {
+    "bytes": 249,
+    "sha256": "e48d64595bcac194677c1eec0261c74e2e34cf2488b4379f71b933a19ba00dae"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/identities.json": {
+    "bytes": 10299,
+    "sha256": "d971de1a09e5f4654863b7a29a191d60bfaf67ee3bb9f62199f82f4d363bf0f5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/inputs.tar.gz": {
+    "bytes": 259832,
+    "sha256": "8be690c53da940daa607534f08341ebad399dd988b65d5c1c6f4c6d7fedee557"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct-check/stdout.log.gz": {
+    "bytes": 419,
+    "sha256": "4659739e142a18b4766ba76d1006d588f990c27d67de34fe1aff7a09508ca309"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/command.json": {
+    "bytes": 245,
+    "sha256": "aad523bba12f2f917f68e24cf7db3cca6c49b8d6f070459c870a19728364b7d6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/identities.json": {
+    "bytes": 10299,
+    "sha256": "d971de1a09e5f4654863b7a29a191d60bfaf67ee3bb9f62199f82f4d363bf0f5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/inputs.tar.gz": {
+    "bytes": 259832,
+    "sha256": "d97d5eabd54737749fd99a0ea41c9aa0ee697b23ecf80911f20d0bdbfb4d8d03"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/direct/stdout.log.gz": {
+    "bytes": 108,
+    "sha256": "2f9006937d69a4c3444f6dccd1ad1c3bf56d159e1620d49bb5965c2881d950ff"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/command.json": {
+    "bytes": 237,
+    "sha256": "cb8b9121dfe7b25180af73eac56b9c029a5c2dc8e54c5a2d719a69be5b7ea41d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/identities.json": {
+    "bytes": 7019,
+    "sha256": "6fb4efb8716438ecc79527501edf057f061a1b602aecd065eaf3e6e7de4f8c75"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/inputs.tar.gz": {
+    "bytes": 66484,
+    "sha256": "cb4a54d927718d4a5d0a48e807d89fc35218b51ea578c522b059edbb8be2fb82"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/freeze-policy/stdout.log.gz": {
+    "bytes": 385,
+    "sha256": "454ef80616bc502b16414a52dafe9f90f419141a73c9e80016f282897e8913c4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/command.json": {
+    "bytes": 238,
+    "sha256": "47defc9b7efa46a8c9f3f03b6dc63b2efd09f25c785e8607ba1fd2fe89cf8997"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/identities.json": {
+    "bytes": 5993,
+    "sha256": "6360b80b1eebc19f176558c0b2e6adba2e6d95745045998f650eba6bfb30155d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/inputs.tar.gz": {
+    "bytes": 61564,
+    "sha256": "115d7179ce2f3b9a322abb507249c9b2004490931d98f81a5574960d5e4508c6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/inspect-intake/stdout.log.gz": {
+    "bytes": 1711,
+    "sha256": "52166169dfc35df19601c3dbe9fa6bb9e4478322f31602709ae89a465c2b19f3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/command.json": {
+    "bytes": 238,
+    "sha256": "f2c6434c2071464265e3a9aae026877a007822c430292ac51fb4a5f3ef2ad528"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/identities.json": {
+    "bytes": 5582,
+    "sha256": "5e0cccbfbe0d4b52a23b4296fcc20e27c0c5bc7ea1a35eed91e198679b61ea99"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/inputs.tar.gz": {
+    "bytes": 59719,
+    "sha256": "bded92cc6a52207544dc7e8baf3d25cc6143114ca0e2131a8463c162c2371614"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/intake/stdout.log.gz": {
+    "bytes": 118,
+    "sha256": "b23cf470c554330319bf4bc1783066e47402f54efa0b0422ef2bde9dc95049db"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/command.json": {
+    "bytes": 238,
+    "sha256": "c48bd0e635b9117de4b6226350f415bff2991244d19e45e6028ec3ea5f3bd739"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/identities.json": {
+    "bytes": 7846,
+    "sha256": "66cc46e8e9fd6125c2036456228b03aa62ecaef1758256e6a8977f93a961a238"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/inputs.tar.gz": {
+    "bytes": 168426,
+    "sha256": "8ccdb25954e5746ddbd66ad56f9e0121c93ed4433e2ece9ac25679fd5749c92b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-epochs/stdout.log.gz": {
+    "bytes": 125,
+    "sha256": "483395f649f45b85059edb0042fca9b3df85aca1c3195bbcc5667f939f0e8523"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/command.json": {
+    "bytes": 238,
+    "sha256": "c3322b0840a218121c6f9f9eb3b7cb74c575530d9aaed0902b92c61e624662ec"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/identities.json": {
+    "bytes": 10915,
+    "sha256": "4248b9fb55a2f3691c49e6ac19623026f51cd76a3b4e8d622de895a86ec27336"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/inputs.tar.gz": {
+    "bytes": 264752,
+    "sha256": "336c59badbe9c5a3eeac4c79596adf009d9338e6f88821c088e65e242f742548"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-review/stdout.log.gz": {
+    "bytes": 110,
+    "sha256": "0738d6575eb8ca294023b3c2e87558ed8f0f20890109c93a301cedd64566e2db"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/command.json": {
+    "bytes": 237,
+    "sha256": "d9e0da338602e460ad09addbc432d1a7b2f569137c14e77212985604a39c6dae"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/identities.json": {
+    "bytes": 6205,
+    "sha256": "836a996c0075764b89d117add482b113ccf5e322343121e97692a2d9cd168655"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/inputs.tar.gz": {
+    "bytes": 62913,
+    "sha256": "72d430c1639512209227a8e36ccedea2f8f0b0bd16a3667c3d09320411705b4d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare-trace/stdout.log.gz": {
+    "bytes": 86,
+    "sha256": "f465978741acefe34e1f3360702e6713444a9e2d1a78fc72abff536c29057531"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/command.json": {
+    "bytes": 231,
+    "sha256": "1a0a1e2ace69e766386305e99ae5fb406e0b04787b3f0c9cf4bb383e962d24d1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/identities.json": {
+    "bytes": 714,
+    "sha256": "a328745860a728dc7eadd708049e55f1433310b67ef92f7a0cf67181adc12ecd"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/inputs.tar.gz": {
+    "bytes": 7816,
+    "sha256": "44c64b7d7f0a057fad8ff948adc7d0abff73688b5a728c6b5259057447058f76"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/prepare/stdout.log.gz": {
+    "bytes": 126,
+    "sha256": "dc240df1871f6f9481bde45f3971279448be9be720a3d95544fa2077bdf60bdb"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/command.json": {
+    "bytes": 256,
+    "sha256": "bfa5cac3784a9f6e1d410da1f4bd72539d144295915d9963abde35dbaec99506"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/identities.json": {
+    "bytes": 10087,
+    "sha256": "b2727d86a4c1722768aa14f8585cd4f74d171f9ce1cb80ab891a12bbb2e60d4d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/inputs.tar.gz": {
+    "bytes": 259709,
+    "sha256": "0da408cf87faa372147b1339f0316cc43d75fc749069686d31411208d8fb71bd"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed-check/stdout.log.gz": {
+    "bytes": 424,
+    "sha256": "ce45c2d1a9d0d8a7383446edfd49b350c2a8dff365bba0e7d4eb4626e9366992"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/command.json": {
+    "bytes": 252,
+    "sha256": "7c675d8fb730ce41c147ea5f01d5f287e4cfd0336a64aa278130dfc5de47a252"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/identities.json": {
+    "bytes": 10087,
+    "sha256": "b2727d86a4c1722768aa14f8585cd4f74d171f9ce1cb80ab891a12bbb2e60d4d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/inputs.tar.gz": {
+    "bytes": 259709,
+    "sha256": "1598daf89bb5433313025c79c7de48e48659732e04fffbf414d818cd6ddb3040"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-fixed/stdout.log.gz": {
+    "bytes": 113,
+    "sha256": "1f619e86e83a6bdf003e6176a7f5084fdbabe2af134263f1d040767866d8a6e6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/command.json": {
+    "bytes": 254,
+    "sha256": "b4eabdf07805989589d656c971790d247bae83293e314e607b84989c3d903d13"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/identities.json": {
+    "bytes": 9877,
+    "sha256": "6c75cb04aa0b7dac2aeac38aac94dee09b6e32dac414b098a452c2e2f1321665"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/inputs.tar.gz": {
+    "bytes": 259355,
+    "sha256": "714c6ba107f4f0297027c8019270f60443213032e027dcb2f60311111492c097"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old-check/stdout.log.gz": {
+    "bytes": 424,
+    "sha256": "944331dd67b1a40c6b1293abee7bf6212eac39c42c731fe113dc7b40fc3f483f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/command.json": {
+    "bytes": 250,
+    "sha256": "0a6c712c4ee8ea58bf4bfe5983cd25af2a0c465d1a683d2cb9bb791d5fa7fbc9"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/identities.json": {
+    "bytes": 9877,
+    "sha256": "6c75cb04aa0b7dac2aeac38aac94dee09b6e32dac414b098a452c2e2f1321665"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/inputs.tar.gz": {
+    "bytes": 259355,
+    "sha256": "95c37fcc98a2e0868ba718a36826aa50b75a31f9f97dadc03845179e5ff1a5b1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/private-old/stdout.log.gz": {
+    "bytes": 111,
+    "sha256": "64bce99c8466ece9d8c6fee4a3bec8c5505da469e590c05f937c0947d44b126b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/command.json": {
+    "bytes": 237,
+    "sha256": "5a060e465ed269584f321dacc955f0e0bf5dc69c599994c379fc9fa5c3b8fd2a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/identities.json": {
+    "bytes": 9877,
+    "sha256": "6c75cb04aa0b7dac2aeac38aac94dee09b6e32dac414b098a452c2e2f1321665"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/inputs.tar.gz": {
+    "bytes": 259355,
+    "sha256": "95c37fcc98a2e0868ba718a36826aa50b75a31f9f97dadc03845179e5ff1a5b1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/remaining/stdout.log.gz": {
+    "bytes": 93,
+    "sha256": "48f254434b362e7a2609078ac66c1b96514ce80a8396dd37441c4786c06c2883"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/command.json": {
+    "bytes": 234,
+    "sha256": "ce3a5f61aac66bb479bdbcb68ab5dd49dad6cf379ec0d8be255f8cb13d1237af"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/identities.json": {
+    "bytes": 8853,
+    "sha256": "29925c3c1b299724c21a65abbe5190db4125aa5bbe284787fbee1d30ce0297af"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/inputs.tar.gz": {
+    "bytes": 172838,
+    "sha256": "23ed76ab37bd96c0d8352a59b5f7c3e812c1d2c171fe46265c3ad88c35f4ffe4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/repair/stdout.log.gz": {
+    "bytes": 93,
+    "sha256": "0934dd94009a4b8fa2483a3b93324293fa9aec91aa68314186a7888c6f1177b3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/command.json": {
+    "bytes": 236,
+    "sha256": "a6157286739ce39c9998ab16ac861f2fda4f49b27488b5a0e0f4860dc54d419a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/identities.json": {
+    "bytes": 11721,
+    "sha256": "ac757a6634d4ad9317fb2ac14029f3f68dd508038697355b390b34666d0d68de"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/inputs.tar.gz": {
+    "bytes": 273278,
+    "sha256": "c46e8732c774efa7934017cb1ae444198a3b7a61e275dfb17904292fa88098e2"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/retire-trace/stdout.log.gz": {
+    "bytes": 111,
+    "sha256": "39363c64edb7509b5a663a95f848ae92fc917c612a0ebe69c69f2ae3e83f3edc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/seal/command.json": {
+    "bytes": 228,
+    "sha256": "a150c7af6e0beaeaa8901b343f62deb0166994163f357b08013db19aeb840a03"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/seal/identities.json": {
+    "bytes": 11934,
+    "sha256": "e1c4154482d7e31053d486957118063d989f812942ef5e866f53d9c4310e4c0d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/seal/inputs.tar.gz": {
+    "bytes": 275548,
+    "sha256": "076da0c42e48c80eac5f1d39727de5c12b2b084c3dc121656511e101a030bd46"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/command.json": {
+    "bytes": 237,
+    "sha256": "b8b9b3c8205994d0a29956032cf8b73c8e8f061fbab97310e1470ba9ab4e465d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/identities.json": {
+    "bytes": 6814,
+    "sha256": "e51624dab10536dd7c07a203354a14d6e1e7b2bd5e8de1c4cde3430414acfbb3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/inputs.tar.gz": {
+    "bytes": 64647,
+    "sha256": "f2241467d00dfb6736d427bca0b3a0816eb0c24ec290a8e521af0224f2c568ca"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/launches/trace/stdout.log.gz": {
+    "bytes": 94,
+    "sha256": "979f567349323678e955b9731ee6f31c4af6a620eea10e27f891a4c7b0bbcc65"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/observer.jl": {
+    "bytes": 3336,
+    "sha256": "d63f7c8eca11d7b43c01ce7f52ecf5f1cd3fc4b894e5424ac642eaaff0407da4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/own-questions.json": {
+    "bytes": 133963,
+    "sha256": "ab40c5e88dd82990fd6fff17d6b5f5c5cf48e213a0703315840ea28221430873"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/owner-after.jl.gz": {
+    "bytes": 50089,
+    "sha256": "c91077671af1356f67d707034686d58f9a7d4f2716f2a74904a152614f60d121"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/owner-before.jl.gz": {
+    "bytes": 50085,
+    "sha256": "dfe0d8b8e39989d5cd863426caa0053bf0a4b0473fe8dcaafe0fbd8c25daca51"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/prepare.py": {
+    "bytes": 4306,
+    "sha256": "4c60397a9dfee384a32faba004e383bcdb8e48ceb175e56c68055c8ae4017c65"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/prepare_epochs.py": {
+    "bytes": 5651,
+    "sha256": "a46f443ad128c4932c98bd349b41c1b4a28e92e874a7c9687b75604b98569d80"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/prepare_review.py": {
+    "bytes": 16817,
+    "sha256": "9b34fbc7cb1149b8ee53ff97a9a043c9aecc25be8525e631e7ca1062a24f23dc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/prepare_trace.py": {
+    "bytes": 1322,
+    "sha256": "d3631232fcb15ffd3c2f999d3101c3691bc1bb73a5009b8a1dd2eeb0f9b3115e"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed-check.json": {
+    "bytes": 636,
+    "sha256": "71b2f3f33d64d9c2ccf491bba13188c0f78ac71b4c4a35048ab682b43977fe00"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/artifacts-inputs.tar.gz": {
+    "bytes": 57790,
+    "sha256": "71af8286c0d291f4818a7a60cfc5d43a5220e52bac8925fba774c28bbb615158"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/custody.json": {
+    "bytes": 398311,
+    "sha256": "18850488cf0743101d3d03d15d3b45b49fb488cdb5100f775618eebd85a9ac7f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/memory-stdout.log.gz": {
+    "bytes": 327,
+    "sha256": "b8cadeb77c6fa3e8f4c98734ea3324c1926a9ad809f63fda648a802306b9e344"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/normal-command.json": {
+    "bytes": 894,
+    "sha256": "266362cb8916365e840752dedd8e808ec05d1852b929557d81e2de32d5d5001b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/normal-stdout.log.gz": {
+    "bytes": 6684,
+    "sha256": "8c2defcd77cbcdf8a0e494ffd9ed9d56b33a2aaf76c53d8009786574e185dd13"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/root-inputs.tar.gz": {
+    "bytes": 2142003,
+    "sha256": "1991a804b67833f6424aeeb53038f587b4870f3604e44c6ccd95aeca645035fc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/version-command.json": {
+    "bytes": 589,
+    "sha256": "b77acd706d6f95e83c1733d95ae9da682bc1ca0ba4ddf74bec541f93b7ac4c2c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-fixed/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old-check.json": {
+    "bytes": 636,
+    "sha256": "f330a195d9f2dc61cf6f74f1f9ab609156514700af06961238818eb72758aa8f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/artifacts-inputs.tar.gz": {
+    "bytes": 57999,
+    "sha256": "d9a74167781d050a927ba4afef9da0b5c19c85b7b1d04818afb6c0bc93891ef3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/custody.json": {
+    "bytes": 396829,
+    "sha256": "377aa58b9e6f9ebe4db4463b741aad903fe0b93fa05e1782d6b3fa575709b3ca"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/memory-command.json": {
+    "bytes": 122,
+    "sha256": "a3ec9217dc15c379b5de828260bc169e728f08bc911e2604c213b6ba56f422e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "80c97f6d162a84bfbf70d8c83e6919975051238449a0c13ca59779091fe9d86b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/normal-command.json": {
+    "bytes": 892,
+    "sha256": "d76ee13fbefcbdbc27b0e413d36e96d36d0121cf125b4a9c8ef3fd349c5f9810"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/normal-stderr.log.gz": {
+    "bytes": 233,
+    "sha256": "199b25479ec0943a069ea1628b672f8c0794fcd9171b726b2a818dd540af1326"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/normal-stdout.log.gz": {
+    "bytes": 11893,
+    "sha256": "521e99a0fe80d3bdbc6c0f2339ab1a2394b028790cfa31acff9079259b80e4d9"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/root-inputs.tar.gz": {
+    "bytes": 2141582,
+    "sha256": "b9995ba595f858a76d4102bb5d5db070d6d9c3f52f833b4162264d3467271182"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/version-command.json": {
+    "bytes": 587,
+    "sha256": "43626906e1d96fc30806bcc232b629829da1a1148d9db5ae8bfa0968198ee551"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/private-old/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/complete.txt": {
+    "bytes": 99,
+    "sha256": "d535c0f0857d1cda13cc05a1eac044365492dba4929361d6ad75787b4d9e7521"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-check-command.json": {
+    "bytes": 427,
+    "sha256": "1e5e05c68e949b19ca7567efd0700beccb95a6b463149408b1cae9279440c2a9"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-check-stdout.log.gz": {
+    "bytes": 89,
+    "sha256": "136c39e14f733f1f0ee1c8e44aee17bea0ac5caafdf6937b73c049ea88bce4fc"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-command.json": {
+    "bytes": 417,
+    "sha256": "c12f6e1124e39a3cb6e8bfed0aabf49c3ca0100b100c53b63eda5fa459331aa4"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/direct-stdout.log.gz": {
+    "bytes": 82,
+    "sha256": "5180dd3910897a2df4981690ec705b7d16b035dcfed0129c70a942535bc179e5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-check-command.json": {
+    "bytes": 441,
+    "sha256": "81a18e6ccce684981710bfebeffe75f79b6307aa45ac66f3824bd5799281551b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-check-stdout.log.gz": {
+    "bytes": 96,
+    "sha256": "751638b9429389ea5547f4b36a4c0aee06182860267ba3b5ca70600b8b53413a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-command.json": {
+    "bytes": 431,
+    "sha256": "060090ed9ee44368c7f05e187c8dd2c718cb870bbc18d23b12312ec789e8fe0b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-fixed-stdout.log.gz": {
+    "bytes": 90,
+    "sha256": "5a9437a8287614481afbf280331d90624b97cab7a5e3a731613e2c7b03f79f3b"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-check-command.json": {
+    "bytes": 437,
+    "sha256": "3175b9855c6bc9677a7d6ebddf9176464f77dd8968fe7a4f4a95cdbe0eaef8e1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-check-stdout.log.gz": {
+    "bytes": 94,
+    "sha256": "f876837cd7fe07d65ab79f964a11c7a9865d272430d3c274788eb0f18b4cddfe"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-command.json": {
+    "bytes": 427,
+    "sha256": "4c4243d59093a2b859e48b24170278f3a9d5cd7f1cb9e1d86709b5005767a596"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/remaining/private-old-stdout.log.gz": {
+    "bytes": 88,
+    "sha256": "ccb25a01c0d2d7f4dfa067f7f40113dbfdcd2c7cffa16b67f33aa1d890ef4cc2"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/apply-command.json": {
+    "bytes": 224,
+    "sha256": "ce20a20ddfeca46a5858c91628187da91494f9490898e28a714fa6a500083aa5"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/apply-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/apply-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/apply-stdout.log.gz": {
+    "bytes": 96,
+    "sha256": "ff749c83bb058c5c520ca558923d80b9b949b0105f97bc4babe5012f8d997f3d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/identities.json": {
+    "bytes": 1444,
+    "sha256": "c1c80d6078917c61e1f0139a867e3b05a7527d263b3fabfff3776d7e10d78dc1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/inputs-before-writer.tar.gz": {
+    "bytes": 106856,
+    "sha256": "f506dd031ae1ac593fba0d59f8d739a0b8da4e3446053749c72c155ac1377866"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/rehearse-command.json": {
+    "bytes": 227,
+    "sha256": "e0da01eb5ef7966754f6b697548ba97bbc064025e76f93940a580b473c7f8835"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/rehearse-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/rehearse-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair-run/rehearse-stdout.log.gz": {
+    "bytes": 82,
+    "sha256": "20622b796887f1e6796119725d3eea20d25328ddbc99fc2e7347ed311bbab2e0"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/repair.py": {
+    "bytes": 4076,
+    "sha256": "0a933a467f64b115dcab436901d8aae74ed5b25252493dd21979e02ae8335f71"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/retire_trace.py": {
+    "bytes": 1391,
+    "sha256": "f576e1e1c61f48dffa61637c4e9f3171e7fefe656a59087b177fd3edea0afd7d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/retired-live-copies.json": {
+    "bytes": 6862,
+    "sha256": "0a0b7e739a18f4045759fe406feb3f4c3dd1b6e5c1d2b6eecdbcb0a8d19bba14"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/review.py": {
+    "bytes": 27651,
+    "sha256": "7a28d66e36b189e28ce1954113f6ee330bb0f4316a691f4a351f997bf5b32bec"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/run_remaining.py": {
+    "bytes": 1484,
+    "sha256": "fdb654e4dfd6d84a590cfac72e8b66dba8fc279fc179d71742f136aaee416eb8"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/run_repair.py": {
+    "bytes": 2283,
+    "sha256": "8031bb142dbee38be95e929dafd51d30f6baad7dfa2b00a2419b4446652b91f6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/runner-after.jl.gz": {
+    "bytes": 34658,
+    "sha256": "76cea4e88c45e9ee9347b629c615f8d4e9cff8acfb7533e870f8ec23ac056278"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/runner-before.jl.gz": {
+    "bytes": 34654,
+    "sha256": "17030a1e8ab0c4bd6f1227163522262d6c0bc90dd901377ed0061e14bceca941"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/seal.py": {
+    "bytes": 751,
+    "sha256": "80e999ba41615e7c42f03331b76c8ab27b089cd99b9bc8cd7518440463440afb"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/source.diff": {
+    "bytes": 1542,
+    "sha256": "dbaa94158ebf393d66250df00681619664731f2dd28c933fa795913b78c37909"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-0.gz": {
+    "bytes": 1238,
+    "sha256": "2782b46e773c5fd6de91dd8ab005ab45e30a9568dc3c0b7b4ce5b33710c28d44"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-1.gz": {
+    "bytes": 2031,
+    "sha256": "66defb2db65e1cd74f9336d1261b1d17c8431d244e1a1060c903e3b23eed773e"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-10.gz": {
+    "bytes": 700,
+    "sha256": "0672f79815e4c0d3a7f65974b457ad84caf4d08a5a08270fa1890d534a3565b3"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-11.gz": {
+    "bytes": 913,
+    "sha256": "10943d75d92cef202c5d325319fd853c073fbcf76d42fc6148182a38f4de156f"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-12.gz": {
+    "bytes": 880,
+    "sha256": "920bbd105e597f32d1023c9316d6b79376693feee97d72ec6584a155a971726d"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-13.gz": {
+    "bytes": 1681,
+    "sha256": "29d18f2dd11dd6f11330029bbff3e07f670960a8e28a2c4eed29ba3fd770c663"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-14.gz": {
+    "bytes": 532,
+    "sha256": "19bf99eae0d120257dc080cdd2258f0289ef25a3439822844ec2ee46818fd0f9"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-15.gz": {
+    "bytes": 1247,
+    "sha256": "32eb09ea040f73b604b794da786dd76f48f92aab9e095a6e78980a9ac6a82114"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-16.gz": {
+    "bytes": 1448,
+    "sha256": "3e5d89283fb92a286d03d354b7461d65ffafdce59b4613f6e91a57908e1c1fff"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-17.gz": {
+    "bytes": 5011,
+    "sha256": "1a3f1ff659d9edf1ac1ca88c0589ce12101bea05319817399ba306b199580f11"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-18.gz": {
+    "bytes": 924,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-2.gz": {
+    "bytes": 716,
+    "sha256": "13da822866ca7dcae69b2583b342a01b1c59ee345a98887acc2e60b46de807ab"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-3.gz": {
+    "bytes": 1909,
+    "sha256": "2d4457b6ebc91440aa7a4a8a38afee7eea9cd97c6c312f263e36bf920eb84482"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-4.gz": {
+    "bytes": 832,
+    "sha256": "5126b975b326632b3d138d9d1ddbd8306ed4a32d280630f08031fe9e638720aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-5.gz": {
+    "bytes": 3199,
+    "sha256": "49df127332a0d94292a5cfbe6251b0c22fa0d810721a9fa2df65d42d3379e015"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-6.gz": {
+    "bytes": 1446,
+    "sha256": "ffaa5b9f86852983e382787f80f9598b441ce22c68728fa540278b2a209c87e6"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-7.gz": {
+    "bytes": 1008,
+    "sha256": "f45c75d719ef8c92d43da71bd48bfd3dcc2b6390d8d1f6a8166e07ec3b48ffd2"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-8.gz": {
+    "bytes": 6039,
+    "sha256": "6e658e6c5aae8d45d748e2d7ce244b1bdbcf3c06a2d84c2d1b0547810f8f8106"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-9.gz": {
+    "bytes": 450,
+    "sha256": "44b5538b4b7120656895095fb3b53e56b21f7a10a9748247e46cd04025b765d8"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/template-identities.json": {
+    "bytes": 5173,
+    "sha256": "d997cb2fcad47840c405c9c9523543ec1349fd6e2127a10fe6f231df92d956f1"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace-sources.json": {
+    "bytes": 5410,
+    "sha256": "fcf7bbf96b7697eaffe8f4c8585b406d54a65731d34aefa6cdc96a8c6ec40170"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace.jl": {
+    "bytes": 1718,
+    "sha256": "e999370b41c85f694380734189874ceeffa9d91069781b0ff3fa2f245d45137e"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/activation.txt": {
+    "bytes": 41,
+    "sha256": "4170391b5ac0ea4c7b1acb0ae71a17d840b998de7d8e8c85801bd4e9dd897050"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/artifacts-inputs.tar.gz": {
+    "bytes": 5148,
+    "sha256": "edded9569e563eac9151edd7c79891f81b329af38e71f09ff585b72504e17871"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/custody.json": {
+    "bytes": 104913,
+    "sha256": "ef81dd0b6f65348e8743c1ebf4cb9f9abf24ad1a15eb7b7e201a23c3ea403e63"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/native-command.json": {
+    "bytes": 536,
+    "sha256": "bde2243e9240e4bb702e1cea497da843050c65e52902b5e5c19399f2e2333d6c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/native-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/native-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/native-stdout.log.gz": {
+    "bytes": 2068,
+    "sha256": "cabe3ce4edd040d58a8691237bc8d252d6a509c412beda98bd5c17758ddcb3c7"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/root-inputs.tar.gz": {
+    "bytes": 989826,
+    "sha256": "9a053000bd7ec9da64fa92d21fb2cce4fdd2650857cc89f79190f4aab4ddaf55"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/version-command.json": {
+    "bytes": 321,
+    "sha256": "860c1d1f17742a4a3d34b07f7520b9353bd1487e83dd88e9c39c2088fa2e4a4c"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-julia-2026-11-12/trace/version-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "45f177e92008f3908ce3d55b13f1c001cb18ae8c27421afcbe342095bc06542f"
+  }
+}

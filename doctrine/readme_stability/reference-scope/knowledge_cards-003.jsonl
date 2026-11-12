@@ -56,6 +56,7 @@
 {"bytes":4236,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-blind-fluent-parent-push.md","sha256":"42a2f847da6f4cc7258aebf9300909598f8b4244186632f019c30f9e6ac3c67e","type":"member"}
 {"bytes":2879,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-blind-postcall-iteration-outcomes.md","sha256":"167b450a9d75d984ebec9190b4080473c1d87fa1fa819a8b0fa6619923ad76c4","type":"member"}
 {"bytes":4600,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-blind-target-regex-projection.md","sha256":"ece5f5e21f2ca30abc454e268969169e27407432a165ab1cf498e90b69bd262c","type":"member"}
+{"bytes":4055,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4","path":"docs/knowledge/julia-callable-array-transform-result-guards.md","sha256":"851101415a9921e68d9ff5689f82b550a2db712c43cd9bc6ec137b9953b27c9c","type":"member"}
 {"bytes":4292,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-construction-gap.md","sha256":"9d17e65b08f43cc3bb3115f53ae6bd5287df9595c3efe24aaffb92efe913b21c","type":"member"}
 {"bytes":3483,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-dynamic-invocation-gap.md","sha256":"96ced49749a62b13528dbb443077b082e074ad79c3230507c11d6b629bfccc47","type":"member"}
 {"bytes":7485,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-callable-codeblock-dynamic-invocation.md","sha256":"4b5b0d495883903241058d8ee0d08f40f0b2cefa4bd3005e618d6f6cec7bd7f1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1629,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-marker-switch-chain-selection.md","sha256":"dd8b1d37b03ece0ed7a81b468804a2ae34f2cd1e6a14b584faf408d7efd35b8b","type":"member"}
 {"bytes":7670,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-decoded-server.md","sha256":"2b3aba91da0985a3db6f9e84f6cb6e46f9bb6d389b363fc4d779d12aa6f2a6ef","type":"member"}
 {"bytes":6775,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-implementation-admission.md","sha256":"796b38d8ec1b6b44f6ff8b7b9b70a58c1f76c33145a56e2e61a50b0f2c6c65b9","type":"member"}
-{"bytes":5401,"lines":96,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-mcp-pattern-terminal-newline-gap.md","sha256":"7f74ecf5e72f49056e6fcde82160f4de5b5df1c199791b42cf63c93dd31d6460","type":"member"}

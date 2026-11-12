@@ -1382,7 +1382,7 @@ Value:: I {
 }
 ```
 
-The corresponding receiver prefix now uses the same result-kind guards on Perl, Rust and Dart.
+The corresponding receiver prefix now uses the same result-kind guards on Perl, Rust, Dart and Julia.
 This covers the eight transform names above, later copy/logical/with rejection,
 needed errors and source effects. Source and required operands run once before
 result rejection; rejected Hash operands and later work remain skipped:
@@ -1409,8 +1409,8 @@ Perl implementation has passing focused normals, independent old/current control
 and historical recovery. Rust
 has independently passing native, restored, generated-plan and compiled emitted
 controls, same-path old/current proof, direct regressions and historical recovery.
-Dart independently passes the same four public route classes, its own old/current
-controls and focused regressions. Each remaining
+Dart and Julia independently pass the same four public route classes, their own
+old/current controls and focused regressions. Each remaining
 backend is assessed separately before any fix or support claim; complete portable
 admission remains separate.
 
@@ -1477,7 +1477,14 @@ Value:: I {
 Replacing the prefix with `take(supply(false),1)` returns `[0,"W"]`: the free
 helper produces an empty Array and the block runs. Both policies are unchanged
 by result guarding. Portable programs supply Arrays; these compatibility examples
-do not grant a new input domain or imply a policy for Julia or Lua.
+do not grant a new input domain or imply a policy for Lua.
+
+Julia independently preserves all of its initial producer and immediate-`with`
+observations, including `[null,""]` for Boolean receiver `take` and `[0,"W"]`
+for the corresponding free helper. Its Number/null/Hash inputs retain empty Arrays
+for the seven non-concat transforms, and `concat_arrays` retains an initial scalar
+or Hash as one element. Only the later rejected continuations change. These are
+compatibility observations; portable programs supply Arrays.
 
 Excluded argument shapes also keep their current behavior. On Perl, some receiver
 shapes fold directly to null before effects while free helper forms are unresolved;
@@ -1486,8 +1493,10 @@ Signature inventory1.2.1.4.3 owns that contextual question. Rust retains its obs
 missing/excess transform evaluation and fixed/minimum function-arity errors; those
 transform shapes gain no new guarded-result authority. Dart also retains its own
 missing/excess shapes: free `sorted`/`reversed` skip an ignored extra operand, while
-their receiver forms evaluate it. Function fixed/rest arity checks and complete
-available error fields remain intact. Wider open-arity
+their receiver forms evaluate it. Julia evaluates the extra operand in both
+free and receiver forms: its observed order remains `SXKVW` for the excluded
+Hash/with continuation. Function fixed/rest arity checks and complete available
+error fields remain intact. Wider open-arity
 `concat_arrays` continuations remain selection23.1.42 after bounded78.6.
 
 Initial wrong-input policy remains separate from produced-result guards. The

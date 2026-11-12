@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-julia-2026-11-12/capture.py",
+    "direct"
+  ],
+  "cwd": ".",
+  "environment": {}
+}
