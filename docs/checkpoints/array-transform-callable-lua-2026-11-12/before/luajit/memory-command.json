@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "memory_pressure"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT": ""
+  }
+}

@@ -9,7 +9,9 @@ answers:
   - "how do Lua callers attach spec name and path"
   - "how do Lua callers serialize runtime diagnostics"
   - "does Lua structured diagnostics change successful parse output"
-date: 2026-07-15
+  - "does Lua published error JSON preserve every raw native error field"
+  - "does Lua user function arity error have numeric expected and actual fields"
+date: 2026-11-12
 status: current
 tags: [lua, runtime, diagnostics, embedding, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.4.1 adds RuntimeDiagnostic, diagnostic-carrying RuntimeInterpreterException tables, optional engine spec_name/spec_path, rule/input/top-stage attribution, and focused dual-ABI proof at 126/126."
@@ -46,3 +48,15 @@ runtime-error JSON, and successful-result preservation. Public status is `runtim
 Related facts: [[lua-runtime-diagnostics-trace-split]], [[dart-runtime-structured-diagnostics]],
 [[julia-runtime-structured-diagnostics]], [[rust-runtime-structured-diagnostics]],
 [[trace-cross-variant-capability-contract]].
+
+The bounded78.6.5 two-case public probe on each installed PUC5.5.1/LuaJIT host
+confirms this projection: raw binding errors expose code/identifier/expected_kind/
+actual_kind in addition to message/diagnostic. Mutating expected_kind does not
+change published JSON; mutating message does. Raw function-arity errors expose
+code/stage/helper_name/rule_label/handler_source_label, without numeric
+expected_arity/actual_arity or expected/got. This is two-case evidence, not a full
+raw-field population or preservation claim. The callable observer preserves full
+published JSON/text and selected outer flags. Historical raw-field-claim/coverage
+audit TYPE-REFERENCE-BOOK.1.2.23.4.28 remains owned before admission. Source and
+first-use inputs/results: docs/checkpoints/array-transform-callable-lua-2026-11-12/
+REVIEW.md; readonly recovery uses review_qualified2.py in that packet.

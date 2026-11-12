@@ -1,0 +1,5 @@
+{
+  "source": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/native-before-first-run.tar.gz",
+  "source_sha256": "7e6989ce9d2756f2a1190bd6e034d2d5f9c05a42c68d55191db4927a66d5465f",
+  "scope": "Exact retained opaque native products reused; no new compiler or native implementation claim."
+}

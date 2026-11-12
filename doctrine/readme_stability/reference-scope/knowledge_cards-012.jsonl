@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6921,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-call-signature-and-container-projection-gaps.md","sha256":"99f4dd304b7ae7d4fc8c469d463ba2db73d493f1964551980c71458e8d3a01b5","type":"member"}
 {"bytes":6137,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-grouped-edge-source-correlation-gaps.md","sha256":"b83d7142790beae7ff74050e79c7d00e76c8520473a04d3084e6e235d034ffd6","type":"member"}
 {"bytes":15362,"lines":105,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-api-mcp-direction.md","sha256":"4cb2622a4acf7c31ddef5f32df2c59f9741c1d838c6a523ba40212d1973e9195","type":"member"}
 {"bytes":3820,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-introspection-generated-plan-authority.md","sha256":"b7fdbbfa13a2abe576b7a79d210161fc5b6fbaff5e25c8a394471ed0307f9da1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2416,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-colon-scalar-retired.md","sha256":"5c65b428a4e3f39910399ff4739f9e41dac592775542fd457401c5436bb8e556","type":"member"}
 {"bytes":4370,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-duck-typed-assignment-parity.md","sha256":"0f5d5f7943969bbda10898d03d87088d428e73f0609eff56868f0013f55d096f","type":"member"}
 {"bytes":3374,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-expression-valued-block-seams.md","sha256":"e799dc80fc98cdcfc2955f84b648f4dc57cf3e30c52c8eaf98a5d33f407b32bd","type":"member"}
-{"bytes":4232,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-remaining-fluent-continuation-split.md","sha256":"efc3e8028f2395d8b06c9d3ed0a4314727bae637e4f38528e25c146f66793520","type":"member"}

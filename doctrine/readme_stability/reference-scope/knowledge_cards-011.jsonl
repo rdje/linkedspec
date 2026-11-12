@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4349,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-full-manifest-classification.md","sha256":"3bdb46eb0b43a861c7e13bfde61514bb0919879fb88f09f53c4256b33a6d0c0b","type":"member"}
 {"bytes":3233,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-literal-encoding-gap.md","sha256":"15b220d76f67d6865a3f261916aabde71f68146b0b5c7342d6b9241cb6abccca","type":"member"}
 {"bytes":3109,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-metadata-errors.md","sha256":"1f579c434dc8db92459fb961e83a176704e3d1ed3d66194362d84d617c0a6389","type":"member"}
 {"bytes":3933,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-source-v1-result-projection.md","sha256":"922962b8b1c71ae0d238330e781fe0ead790c44936731f5e84690b3cf67e1c43","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3921,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/selective-end-to-end-parser-observability.md","sha256":"19591a8f7233770185826575dd1b0bec7c05e549855166a9afbcfb23437a3ccf","type":"member"}
 {"bytes":18586,"lines":320,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/self-hosted-grammar-ast-drift.md","sha256":"13e6bf3c3cbd9a8d385d026b2ab22e0a09bfc482d165dc39c99e15072ac4b249","type":"member"}
 {"bytes":3563,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/self-hosted-rule-label-physical-boundaries.md","sha256":"94d1b2905b4c11ba5e1338a0a458933c8c222e586dcf7e1fbd0190701d72c3e7","type":"member"}
-{"bytes":6921,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-call-signature-and-container-projection-gaps.md","sha256":"99f4dd304b7ae7d4fc8c469d463ba2db73d493f1964551980c71458e8d3a01b5","type":"member"}

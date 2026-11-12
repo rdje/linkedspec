@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5975,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-compatibility-alias-gap.md","sha256":"b84ab4296e84cb043d1c057812a34f48a5b5f1a28e56b4af5789e26659ab0faa","type":"member"}
 {"bytes":11362,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-location-dormant-red.md","sha256":"07760887eecc55d0a08a2163a9063f49e71cf18b2105856330bdd9c3482ac3f8","type":"member"}
 {"bytes":20067,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-casing-properties-and-rule-label-reading.md","sha256":"73a07473e19133768bfb44f6097f7834ae3107961fda95b5ca1d243435aca99d","type":"member"}
 {"bytes":13616,"lines":125,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-unicode-lower-completion-reading.md","sha256":"873eb4f90e3d816f9f18a437b1aa789148eb383e14b8eee645afd9a1bdf46659","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4709,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-signature-pipe-splitting.md","sha256":"1f57597474b9d1d39c6b6f6461bd560184407180a5fb99821cce642ff6f0d075","type":"member"}
 {"bytes":3577,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-value-conditional-execution.md","sha256":"56723591803ef22d72727d902f27843081cab835a32d9f8c4de949be577392f0","type":"member"}
 {"bytes":2527,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-while-execution.md","sha256":"a4037f2b0ccda938746980f1b3a1c0eeaa03a401640324f7d4f869bc4f490269","type":"member"}
-{"bytes":2068,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-canonical-set-result-composition.md","sha256":"71294c4ec7ea36c74e90c44106ff0841af83bfd470bb9a4cc47f5220473e14b1","type":"member"}

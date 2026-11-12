@@ -1,0 +1,21 @@
+[
+  {
+    "id": "own_needed_source_take_receiver",
+    "body": "order=\"\";return(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n",
+    "input": "x",
+    "rule": "Value",
+    "question": "needed-source-error",
+    "profile_only": true
+  },
+  {
+    "id": "own_signature_fixed_missing_composed",
+    "body": "order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x",
+    "rule": "Value",
+    "question": "signature-invalid-signature",
+    "form": "composed",
+    "profile_only": true
+  }
+]

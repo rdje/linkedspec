@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Installed Lua callable Array-transform result guards
+
+Canonical first transforms on registered-function results now retain actual-kind guards: interpreter classifier4/2 plus one three-line runner group, no chunk locals or invocation/producer/signature/format changes. Each installed host312/four routes/1872 checks passes;28 supported targets/three separate initial-source compatibility/281 full published records and104 initial policies exact. Same-path31RED-current312/direct3939, qualified2 historical26/current531 pass;1872 pairs/nine traces/two field probes per host survive.58 exact plain duplicates retire after archive verification. Original setup1 and two reader1 outcomes remain with minimal independent qualifications/no SDK replay. Full published JSON/text and named outer flags are proved; broader raw-native-field observability4.28 is owned before admission. Book/Knowledge/roadmap/live/task/index/scope align. Full23.4/native/canonical discovery/declared5.4 remain separate; open concat42 is next. Evidence: docs/checkpoints/array-transform-callable-lua-2026-11-12/REVIEW.md.
+
 ## 2026-11-12 — TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 — Julia callable Array-transform result guards
 
 - Four interpreter insertions/two deletions and one runner include let canonical registered-function transforms reach existing actual-kind guards; invocation/signatures/first producers/formats remain.

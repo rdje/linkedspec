@@ -1,0 +1,137 @@
+{
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/drop_logical_later_with.compiled.json": {
+    "bytes": 6984,
+    "mode": 420,
+    "sha256": "5f0628e429421a0254eb2f8c06011516c56f3dbc177fb6601f7b59c15a549aa2"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/drop_logical_later_with.parsed.json": {
+    "bytes": 2492,
+    "mode": 420,
+    "sha256": "c4220b73ded080c18f1616d9b91a1bc14f7554a980af823d61f01c8a246c227d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/drop_logical_later_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "e00578b664eed1238cbde7b004c261aec67399b1e167d0f9999eb3b0d8e5f8a8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/initial_number_composed.compiled.json": {
+    "bytes": 5412,
+    "mode": 420,
+    "sha256": "2ff849508f2fac10c469e02446ec7d22d8253d2ffbfcbade04d56f63fd8c6ee3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/initial_number_composed.parsed.json": {
+    "bytes": 2315,
+    "mode": 420,
+    "sha256": "51cfbd5b84b08bc5a992df6d0c7ba7636c92ee64f5542125003c7c77280ab487"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/initial_number_composed.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "84145a2fd23af6904e0116fcef41b8c2bccf2e6e8a62ce7d67554eb256db1635"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_needed_source_take_receiver.compiled.json": {
+    "bytes": 5121,
+    "mode": 420,
+    "sha256": "160af1d2e1c4a75e7795da77bb35ede9081eb312f623133c9efe35f0d733a9f6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_needed_source_take_receiver.parsed.json": {
+    "bytes": 2318,
+    "mode": 420,
+    "sha256": "ac9fde013521f6d0ab704c85c3088a262c8a0e8906095e03cf30a17f78c1e399"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_needed_source_take_receiver.trace.log": {
+    "bytes": 6873,
+    "mode": 420,
+    "sha256": "0e6ff52d765e3eb8308885193a5f8831a99ebfcbd4557b1d02f370f391f26490"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_scalar_bool_receiver_with.compiled.json": {
+    "bytes": 3833,
+    "mode": 420,
+    "sha256": "3b08e8282fe8ba9b4051c406b2798216e80f4a73f94470fb6a70b90044a70b15"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_scalar_bool_receiver_with.parsed.json": {
+    "bytes": 2198,
+    "mode": 420,
+    "sha256": "2644f8875e44dcae3e44626075158ec2ce3650a7acc0e4b4a58b58f35ac1693e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/own_scalar_bool_receiver_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "92e51037eb2cbe7f5bf8974b7ace56b780288a0a1d903103d6e5830ffd092f97"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/positive_slice_receiver_composed.compiled.json": {
+    "bytes": 10216,
+    "mode": 420,
+    "sha256": "ed8f7cfbdd527624cabdff2fd32171c480f609087702fa8e0c6f4b1c57a42eb5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/positive_slice_receiver_composed.parsed.json": {
+    "bytes": 2729,
+    "mode": 420,
+    "sha256": "f39c876923f73b124e64ab7929f579fa238140fb429105b92fc7fe5e0e37c6d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/positive_slice_receiver_composed.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "2a1b17c5251d5c4a9982eb5faf8926870b9c93b7892b5b57c660f577c45b88a1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/reverse_copy_later_with.compiled.json": {
+    "bytes": 5638,
+    "mode": 420,
+    "sha256": "4b2a339a0117f6f71384e3e08697e95694b1b9b379c429d46f903ca168a5ad6e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/reverse_copy_later_with.parsed.json": {
+    "bytes": 2372,
+    "mode": 420,
+    "sha256": "d048c3432c629aa9efd16842f9756411960de08c6948b57f548c381ca981254c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/reverse_copy_later_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "13cda3804d8fd02720ed67166296ff88fac8e2d5baaa74fd0de4d2f5274c2cce"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/source_effect_before_rejection.compiled.json": {
+    "bytes": 6585,
+    "mode": 420,
+    "sha256": "17673aec00583ba8193da105c2eb291d9fedc14fe6dc867bb68b4c232f661d16"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/source_effect_before_rejection.parsed.json": {
+    "bytes": 2417,
+    "mode": 420,
+    "sha256": "d6aee5f1d4cc1f1b3dda825bc460d14650b7ec7264d28b22bc6993d8afa14103"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/source_effect_before_rejection.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "679d34a9abc019bca795f9b0ca06ad001aa3c38fd810994caedfe8e0eb5608c4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_later_with.compiled.json": {
+    "bytes": 5580,
+    "mode": 420,
+    "sha256": "36952bf7117a208ac1c6b681401cff230b16f6a822561de3a963ca875c3a4641"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_later_with.parsed.json": {
+    "bytes": 2342,
+    "mode": 420,
+    "sha256": "9477dbaa673a04a6284817f6787481a8df50e752fb42f5ac49ca0f5f4044b489"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_later_with.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "d8f11ce498bb38364fc0c728b336feb9d660bef51ccee3520f80ef85e935d10d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_receiver_hash_guard.compiled.json": {
+    "bytes": 4220,
+    "mode": 420,
+    "sha256": "f751658fcaf26c6c99dcd093a5ac43c3ee732b5da724fc65563508bc77b875db"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_receiver_hash_guard.parsed.json": {
+    "bytes": 2228,
+    "mode": 420,
+    "sha256": "dd71c68e985f5ce8f7e9fd053fb4a0d0c3fd7d75b02fe26f3fb0f6247ded84b6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/take_receiver_hash_guard.trace.log": {
+    "bytes": 6852,
+    "mode": 420,
+    "sha256": "304916b180a1e577325e1662583b02501382c20bd17c95e88cb79d50ab05479d"
+  }
+}

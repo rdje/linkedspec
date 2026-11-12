@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-v"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT": ""
+  }
+}

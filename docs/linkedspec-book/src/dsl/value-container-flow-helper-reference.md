@@ -1382,7 +1382,7 @@ Value:: I {
 }
 ```
 
-The corresponding receiver prefix now uses the same result-kind guards on Perl, Rust, Dart and Julia.
+The corresponding receiver prefix now uses the same result-kind guards on Perl, Rust, Dart, Julia and the recorded installed Lua hosts.
 This covers the eight transform names above, later copy/logical/with rejection,
 needed errors and source effects. Source and required operands run once before
 result rejection; rejected Hash operands and later work remain skipped:
@@ -1409,10 +1409,10 @@ Perl implementation has passing focused normals, independent old/current control
 and historical recovery. Rust
 has independently passing native, restored, generated-plan and compiled emitted
 controls, same-path old/current proof, direct regressions and historical recovery.
-Dart and Julia independently pass the same four public route classes, their own
-old/current controls and focused regressions. Each remaining
-backend is assessed separately before any fix or support claim; complete portable
-admission remains separate.
+Dart, Julia and installed PUC Lua5.5.1/LuaJIT2.1.1788460057 independently pass
+the same four public route classes, their own old/current controls and focused
+regressions. Reload Lua applications with the updated runtime. Declared Lua5.4
+and complete portable admission remain separate.
 
 The recorded Perl initial-input policies differ by context. A registered function
 returning Number/Hash input to receiver `sorted` or `reversed` raises a typed
@@ -1477,14 +1477,20 @@ Value:: I {
 Replacing the prefix with `take(supply(false),1)` returns `[0,"W"]`: the free
 helper produces an empty Array and the block runs. Both policies are unchanged
 by result guarding. Portable programs supply Arrays; these compatibility examples
-do not grant a new input domain or imply a policy for Lua.
+do not grant a new input domain. Installed Lua independently retains the same
+Boolean receiver/free contrast, verified against its own runtime.
 
 Julia independently preserves all of its initial producer and immediate-`with`
 observations, including `[null,""]` for Boolean receiver `take` and `[0,"W"]`
 for the corresponding free helper. Its Number/null/Hash inputs retain empty Arrays
 for the seven non-concat transforms, and `concat_arrays` retains an initial scalar
 or Hash as one element. Only the later rejected continuations change. These are
-compatibility observations; portable programs supply Arrays.
+compatibility observations; portable programs supply Arrays. Installed Lua also
+retains its independently observed Number/null/Hash terminal and immediate-`with`
+policies. Its three changed later continuations are recorded separately from
+supported Array-input repairs. For example, the `supply(3).take(1).with()`
+program above returns `[0,"W"]` on each recorded installed Lua host; adding the
+rejected `set_key` continuation returns `[null,""]`.
 
 Excluded argument shapes also keep their current behavior. On Perl, some receiver
 shapes fold directly to null before effects while free helper forms are unresolved;
@@ -1495,8 +1501,12 @@ transform shapes gain no new guarded-result authority. Dart also retains its own
 missing/excess shapes: free `sorted`/`reversed` skip an ignored extra operand, while
 their receiver forms evaluate it. Julia evaluates the extra operand in both
 free and receiver forms: its observed order remains `SXKVW` for the excluded
-Hash/with continuation. Function fixed/rest arity checks and complete available
-error fields remain intact. Wider open-arity
+Hash/with continuation. Installed Lua independently preserves `SXKVW` in both
+forms. Function fixed/rest arity checks and complete published error JSON remain
+intact on these recorded routes. Lua also preserves the observer's named outer
+flags; this does not establish preservation of every raw native error-table field.
+Lua evaluates positional argument values before its invocation arity preparation,
+while rejecting keywords earlier; this repair keeps that order. Wider open-arity
 `concat_arrays` continuations remain selection23.1.42 after bounded78.6.
 
 Initial wrong-input policy remains separate from produced-result guards. The

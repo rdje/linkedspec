@@ -1,0 +1,11 @@
+{
+  "original": "review.py",
+  "original_sha256": "b9236d4367c7866575ed17163f088c4977ee7066e1d37a029e980ca30eea11f6",
+  "qualified": "review_qualified.py",
+  "qualified_sha256": "c531fb1acd840acf8e4ab2d08c03e925c3c6426d3906385bac3e3a66f4052e4c",
+  "original_actual_exit": 1,
+  "original_stderr_bytes": 1137,
+  "original_stderr_sha256": "d67a361a69253e4035c9f6b942d58d6147ebee0b5fa4a80bc708a15da76c2f34",
+  "cause": "Four-route objects serialize in sorted JSON key order, while the authored values helper inserts native/restored/plan/fresh. Object member ordering is not a semantic difference.",
+  "correction": "Only exact() permits unordered keys for objects whose keys are exactly the four routes. Complete case ordering, map census, types, values, flags and field absence still use the original oracle. Original sealed reader/source/channels remain unchanged; no SDK replay."
+}

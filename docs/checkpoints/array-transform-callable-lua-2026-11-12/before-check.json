@@ -1,0 +1,34 @@
+{
+  "luajit": {
+    "actual_parsed_module_pairs_exact": 312,
+    "actual_stderr": {
+      "bytes": 4985,
+      "sha256": "baf061750826a17246da7e9a4fe1b0205dfe52f683d68c3e2e63cad0738ab029"
+    },
+    "full_wire_records": "PASS",
+    "initial_policies_exact": 104,
+    "limits": "Finite own installed-host proof; no complete native/VM/cache/transitive/toolchain/OS4.2/SESSION5 or declared5.4/full23.4 admission. Older direct normals are semantic only.",
+    "opaque_native_images_exact": 3,
+    "preserved": 281,
+    "programs": 312,
+    "routes": 4,
+    "separate_initial_compatibility": 3,
+    "supported_targets": 28
+  },
+  "puc": {
+    "actual_parsed_module_pairs_exact": 312,
+    "actual_stderr": {
+      "bytes": 4967,
+      "sha256": "fb57441cae3e654b7b530c52a0bae06fa6425e9621730af786e1b412127d0a11"
+    },
+    "full_wire_records": "PASS",
+    "initial_policies_exact": 104,
+    "limits": "Finite own installed-host proof; no complete native/VM/cache/transitive/toolchain/OS4.2/SESSION5 or declared5.4/full23.4 admission. Older direct normals are semantic only.",
+    "opaque_native_images_exact": 3,
+    "preserved": 281,
+    "programs": 312,
+    "routes": 4,
+    "separate_initial_compatibility": 3,
+    "supported_targets": 28
+  }
+}

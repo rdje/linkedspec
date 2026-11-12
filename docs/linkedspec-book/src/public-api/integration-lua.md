@@ -300,7 +300,14 @@ the requested status is data for the application, not its process exit code.
 Previously written values and delivered events remain observable.
 
 A native helper arity failure retains its message, available error fields and
-structured source attribution. Missing files and invalid UTF-8 remain loader
+structured source attribution. For runtime interpreter errors,
+`linkedspec.interpreter.to_json(error)` publishes `message` plus optional
+`diagnostic`; it does not copy every raw error-table field. A binding error may
+also expose raw `code`, `identifier`, `expected_kind` and `actual_kind`. A user
+function arity error may expose raw `stage`, `helper_name`, `rule_label` and
+`handler_source_label` without numeric expected/actual-arity fields. Inspect
+those raw fields explicitly when needed; equal published JSON alone cannot
+establish that every raw field is unchanged. Missing files and invalid UTF-8 remain loader
 failures. A successful null or false value remains a successful JSON value.
 Module loading occurs before the handler and still uses the interpreter's native
 error output. These checks do not exercise the excluded malformed-regex path.

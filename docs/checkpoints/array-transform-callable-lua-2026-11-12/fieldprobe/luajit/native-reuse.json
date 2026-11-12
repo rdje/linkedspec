@@ -1,0 +1,5 @@
+{
+  "source": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/native-before-first-run.tar.gz",
+  "source_sha256": "597482683f037f0f7dbf8b5716878a305935bdda633ad2c830d7be27b2542651",
+  "scope": "Exact retained opaque native products reused; no new compiler or native implementation claim."
+}

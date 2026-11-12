@@ -1,0 +1,28 @@
+--- lua/src/linkedspec/interpreter.lua
++++ lua/src/linkedspec/interpreter.lua
+@@ -4148,9 +4148,11 @@
+       return false
+     end
+   end
++  -- Invocation keeps its arity checks and caller effects. A canonical transform
++  -- prefix owns the produced result without becoming an unregistered free call.
+   if expr ~= nil and expr.kind == "call" then
+-    if engine.compiled_spec.function_registry:has_name(expr.name) then return false end
+-    if (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg and
++    if not engine.compiled_spec.function_registry:has_name(expr.name) and
++      (expr.source_method or expr.name) == expr.name and not expr.trailing_block_arg and
+       typed_source.receiver_mutation.is_canonical_array_transform_arity(expr.name, #(expr.args or {})) and
+       typed_source.receiver_mutation.is_ordinary_array_transform_arguments(expr.args) then
+       return true
+--- lua/test/run.lua
++++ lua/test/run.lua
+@@ -9630,6 +9630,9 @@
+ test("Ordinary Array-transform result guards", function()
+   dofile("lua/test/array_transform_result_guard_composition_test.lua")
+ end)
++test("Callable Array-transform result guards", function()
++  dofile("lua/test/array_transform_callable_result_guard_composition_test.lua")
++end)
+ test("Ordinary Array-pipeline result guards", function()
+   dofile("lua/test/array_pipeline_result_guard_composition_test.lua")
+ end)

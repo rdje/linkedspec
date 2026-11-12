@@ -1,0 +1,2186 @@
+{
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after-check.json": {
+    "bytes": 1236,
+    "sha256": "91cb4f43df92ad8d5f8507daba30972d0cc7d0813101ca5a24d2e3157e30958a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/complete.txt": {
+    "bytes": 78,
+    "sha256": "4d393feabd42c9d67a1f3ecf608ddb45b7663b7a44497161329569807e3fa788"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/input-identities.json": {
+    "bytes": 94686,
+    "sha256": "19af52531eef7a81d39cfd792ddd53094826479c514fafd8c8cb1f791662f898"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/inputs-before-first-run.tar.gz": {
+    "bytes": 1388014,
+    "sha256": "e7d1bdd119f622acc521ff7dd7078d3162d8de64449a4715550af455c3cd2cd0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 63683,
+    "sha256": "2e9c58dda894d7b9a3d817f09350887c46cf7ad2c859a189dfeb10509a5aeef9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/artifact-identities.json": {
+    "bytes": 152883,
+    "sha256": "2eaaa03218638e3e4001f63e25c47011e879ff4ec9b2d8571641f69d4758c1eb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/memory-command.json": {
+    "bytes": 497,
+    "sha256": "d0a71e2e0a6701f04cc5e2e0679e82073aadbab047a271ab4c6e41810205cd08"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "ee0fe58be9f4be49a879a0530e231042ff0392372be3be193ecacc287c6f6c6f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7621,
+    "sha256": "fc6094651aabb707e9f82ef348c2da84fcf797a78c25fac3bfdd55d73204bfd7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/native-identities.json": {
+    "bytes": 707,
+    "sha256": "085541c017709a6b118715cdf6ec0de9c342cb88625bde63ab622cd5d0eebd36"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/normal-command.json": {
+    "bytes": 585,
+    "sha256": "7c0e274b6a002abf82b3d458c8cf2399376b3a5cdcafa848409d79078d0b4b68"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/normal-stdout.log.gz": {
+    "bytes": 6569,
+    "sha256": "ecaa2629be306d4b72d26890e195d9e4ce20f95536169dfa42ae48e58d9447d0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/version-command.json": {
+    "bytes": 498,
+    "sha256": "4fb2cfa7d961a981d6283142256bcd3d4978b62ee9114d9dd2c47700534ca77e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 64237,
+    "sha256": "482b785042c15399e995ad09a2a591e8dee70cbe1ffd049cb9e16bd604c52e46"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/artifact-identities.json": {
+    "bytes": 151011,
+    "sha256": "0bdbc439b43a2d638efe6efa5933b2ec425ebf82ba76973a911fcf57589c8926"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/memory-command.json": {
+    "bytes": 488,
+    "sha256": "176b079b409a0f2435631110f4c39037171ded1f3cc024c18fbec2788a603eb2"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "22c23643d1052a740b6e89c3405e0517bebecbf6a95bd868e8e2a755d2564cb3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/native-before-first-run.tar.gz": {
+    "bytes": 7683,
+    "sha256": "a1eef364e8cb635936e2d6a33d03b51de1dbbaab1af9d00cca12b85720821aaa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/native-identities.json": {
+    "bytes": 698,
+    "sha256": "39d126330282e0cdedf512d4d8562ad85417f4e966856915caba494dfda02dd9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/normal-command.json": {
+    "bytes": 573,
+    "sha256": "4d1c20b6dd79b81813346429d29d8622e53a209dabae9454d77ad75f19cbc1be"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/normal-stdout.log.gz": {
+    "bytes": 6547,
+    "sha256": "0a010c7985832e6314f0d29051ce5f3683c750c4ce98963909805f2655df5aaf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/version-command.json": {
+    "bytes": 486,
+    "sha256": "bdf09e452a55d1f8ad11f8b84debcb12433cb88955bc5840b82dc6211ddfbf13"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/after/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/baseline-summary.json": {
+    "bytes": 446,
+    "sha256": "b9727b16edc90bed09adc26b8e44796a9945fd052085d06b998c149d9f2ae01b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/baseline.json": {
+    "bytes": 1348340,
+    "sha256": "ab038cf0096bafea735e5d4af5fa9d00f87bac851270f0d098b6260c54e5de82"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before-check.json": {
+    "bytes": 1242,
+    "sha256": "a26f076050b7842198122fc5d73248b094f8afb668c6fb1376db2bbd43e5f959"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/complete.txt": {
+    "bytes": 78,
+    "sha256": "4d393feabd42c9d67a1f3ecf608ddb45b7663b7a44497161329569807e3fa788"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/input-identities.json": {
+    "bytes": 94069,
+    "sha256": "f62978af4df7fd7d65fd54084c07caea5d754207b7277f3c56d7571fe6827eec"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/inputs-before-first-run.tar.gz": {
+    "bytes": 1262532,
+    "sha256": "44035b92b1d10ceb1f786e1dd8fc4ea942b55fbcab39574992089da944750e8e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 63724,
+    "sha256": "64820eb9fb5eb5ac3ba6a5366ba27746fc4ad088fa1863b1c000fe2d702f9367"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/artifact-identities.json": {
+    "bytes": 153507,
+    "sha256": "dae6cf9a7457d372bf0c92f1e0257c66b5643109e1eeb4495ce50ec93e616245"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/memory-command.json": {
+    "bytes": 499,
+    "sha256": "088962723e879e59b380519cd7ebe02accbf9ace89407f11ac37dad834ad402c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/memory-stdout.log.gz": {
+    "bytes": 327,
+    "sha256": "c8f949fbd50e1e08b6b3a834490a05cd68a0db9e49f86f370734500ac919721b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7613,
+    "sha256": "0313f2ab388fc04811d3d22cfefc2b0b82b16973301b23d1704f8ffe00a88cdd"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/native-identities.json": {
+    "bytes": 710,
+    "sha256": "9def265f58c0fa820d2f20d6609ef03f9a5ebbee3f6f52d0b42be28fa32a9312"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/normal-command.json": {
+    "bytes": 587,
+    "sha256": "3aaa815eee8ad6483a521d92f9f338f1a8b06334b90ea32e56de6805a7474fd9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/normal-stderr.log.gz": {
+    "bytes": 736,
+    "sha256": "0234b11a3ef01be689d8463ff7b6c69b8a46be5063b7b8a75dd89d6b9e28047b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/normal-stdout.log.gz": {
+    "bytes": 6704,
+    "sha256": "23fbd5e25c096f01c6a0c5265740d1e6b8d9f00ae792f2df1050ef098a06f1e5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/version-command.json": {
+    "bytes": 500,
+    "sha256": "2fd9d4985af2b542a90049016d66d5a790737c03a1218dc61570cda7641a9285"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 64177,
+    "sha256": "ee7a01459feb669c0fd2e315a43c0c8eb5824fed8fc23775e9ace00b96fe135e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/artifact-identities.json": {
+    "bytes": 151635,
+    "sha256": "965f00cb516a37af045961c27cacd88a1dab95fdcf0d9412937c91911b368a2f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/memory-command.json": {
+    "bytes": 490,
+    "sha256": "4995ec8fd3c9c24491d1f9f6c588369c80c898cfd68eb7310909048311d3d0c0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/memory-stdout.log.gz": {
+    "bytes": 323,
+    "sha256": "96bf3b0c413837e949945d63cdea2a4a8e18161816848cc75af73f1b3973e3cf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/native-before-first-run.tar.gz": {
+    "bytes": 7686,
+    "sha256": "46619d8a2daed475daf60122bba618c79a793c72ccce6de3a7e84e284abed66d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/native-identities.json": {
+    "bytes": 701,
+    "sha256": "f2308b8697bd17389ccb1f0ad019d33f081dd88d1ff1c0f6bae83ffcf41410d0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/normal-command.json": {
+    "bytes": 575,
+    "sha256": "c5247a03249710c0992eb6bc4d31161b5a7a0d72c488bd21c29bf6a1d1051692"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/normal-stderr.log.gz": {
+    "bytes": 722,
+    "sha256": "a1070e07b97a255e27796ce1da715609716baa6aa875cafea5b91f6873505127"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/normal-stdout.log.gz": {
+    "bytes": 6681,
+    "sha256": "6e8190420850a1f665ea81d750f39a14cb58b5eb390ff77302e32dc26ed86876"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/version-command.json": {
+    "bytes": 488,
+    "sha256": "628253eca4233c2af7208855bd93ce99b8ff98c867b943ce364e018d733e41c0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/before/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_current.py": {
+    "bytes": 2119,
+    "sha256": "9120735f3d6b9a9cc2a5430478bf7332816b73a2189823ac6c25ca87830701ce"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_epochs.py": {
+    "bytes": 8000,
+    "sha256": "200afde19bb19bd5bfc2857d851781943615078c043d68b68950913a536b406f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_field_probe.py": {
+    "bytes": 2808,
+    "sha256": "3a8c0d7900dfd1d75d0067915dc778bb33394cde03afec694e6333b6a75f0038"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_intake.py": {
+    "bytes": 5050,
+    "sha256": "3aba206a960089585bc2d170d9c27f8c25d13d38aebf3a5c1b0c0872ddd7c456"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_trace.py": {
+    "bytes": 3698,
+    "sha256": "03b0676c3c71608537f362de49093c8a8d3100b39d246907aeb2cb30dd007d2c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/check_current.py": {
+    "bytes": 1567,
+    "sha256": "a77d9ecb755d0fedf5c39170fd024bf00a2d6ab05e48c82d5bc8b9765d487946"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/check_epoch.py": {
+    "bytes": 4292,
+    "sha256": "79d64a3a81491d7ac16bbce0c766542ba7f6a78eb6ab3b96f41885082941019b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/completed-launches.json": {
+    "bytes": 3534,
+    "sha256": "07fa8f7ab3639d4d5aa17ead25d1fa4bc31ae95b2470a3c9afb202a7402e2194"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/command.json": {
+    "bytes": 214,
+    "sha256": "ecc564696ec61fe0f262800444c535a74bfbe390daa27a3ebf041cd5449b0fa9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/identities.json": {
+    "bytes": 1593,
+    "sha256": "c335d34d3d05f05a59de4eee803fb3fe67b63fa16263620a63291e3f4a7df82e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/inputs-before-reader.tar.gz": {
+    "bytes": 1441447,
+    "sha256": "6ebce02e5f99014804c9947f59d082e6b093c949e3420853ecb465f04d30f884"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/result.json": {
+    "bytes": 214,
+    "sha256": "1064f986d926a6621f0726a203fee303e71cfc39adb153595176a76e582ac8b1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/current/stdout.log.gz": {
+    "bytes": 180,
+    "sha256": "6880686ae45ca7f26e44267c04d33ae7530bcc64383079a31e3fc6568ba6e11b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct-check.json": {
+    "bytes": 1236,
+    "sha256": "91cb4f43df92ad8d5f8507daba30972d0cc7d0813101ca5a24d2e3157e30958a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/complete.txt": {
+    "bytes": 78,
+    "sha256": "4d393feabd42c9d67a1f3ecf608ddb45b7663b7a44497161329569807e3fa788"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/input-identities.json": {
+    "bytes": 95503,
+    "sha256": "c607f1ef0e911483f9e5ef1e5973d408098572096bafd2e4fd751d4929ed38a5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 1390135,
+    "sha256": "8fa212eadc1cb89ef7e4dcc5e812ad784e79d7a8bb838d31eb4e94b6ca4415de"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 64102,
+    "sha256": "29197aac501307ceddd5af14a47b10beac024ea4df6a6caefe46bd769b6461eb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/artifact-identities.json": {
+    "bytes": 153507,
+    "sha256": "0e10a5f8afd26ac430ad4329636d319ebff024790e50c9ca78b84526cbe319e0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/memory-command.json": {
+    "bytes": 499,
+    "sha256": "06215e07204dae47b0d2c4dae5e535d3942de1f998b20426fc9670487c2b597d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "082b72043de6005b6b4445b36dab152ed5a983c9484f7450851419cd21aa2feb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7614,
+    "sha256": "48f6a67e097761a7cf43346be4e6f6114b15f911b343ebb05dc808b0457d909d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/native-identities.json": {
+    "bytes": 710,
+    "sha256": "5a145cfc858b80d1529f44d323fff2be3a7ba46bc147f340eb87a4ce84b58b6a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/normal-command.json": {
+    "bytes": 739,
+    "sha256": "65cd86eaa2a106d6507e3bf1b2dc3ed93a511557b481b193fb768942b4188d9d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/normal-stdout.log.gz": {
+    "bytes": 13874,
+    "sha256": "a6a327c5d5b9415b69367bf788be82adc289465e3272c9f630061e6d1691f334"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/version-command.json": {
+    "bytes": 500,
+    "sha256": "e45a968ac87375a8408c3a5914e8a3b0dc968d665b9d739952ca9e999716112f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 64206,
+    "sha256": "51bd92f6918859bf2db5a65bac8b4310a625ee133da7abfca1a5ab17552761bc"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/artifact-identities.json": {
+    "bytes": 151635,
+    "sha256": "1676eb70430884ee028de9088e4c5ed606a655baad9909b338364202538b7bc0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/memory-command.json": {
+    "bytes": 490,
+    "sha256": "1b920f5710b3f33fd370fb1614198f8bbbabe6568c08f16799ebaba6208deb6a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/memory-stdout.log.gz": {
+    "bytes": 326,
+    "sha256": "33d867ef21b6a68cfa4a3e34dfa634e36978548f579a2c5da36aa81b73c2aba8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/native-before-first-run.tar.gz": {
+    "bytes": 7683,
+    "sha256": "62f071e6608e7eabf0a9bac59dd8dc3fb9d45b7edd68ac166bbe6abba816c4d2"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/native-identities.json": {
+    "bytes": 701,
+    "sha256": "a59f60b5af9e68298310f32a15bfa26d88c01de5b6ebecb9e57369e21b2961e1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/normal-command.json": {
+    "bytes": 727,
+    "sha256": "a51622ead6d983ceb2796d3a4c939a09f988e45f3cc7ea1e2f22340dd6fa16a6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/normal-stdout.log.gz": {
+    "bytes": 13806,
+    "sha256": "527a7852bc3e4cc09979b2fd5accb9debb5ad1dc302488065f9ff292741f6c25"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/version-command.json": {
+    "bytes": 488,
+    "sha256": "7af4ea9c6617abc25253ff8d9e75e1f263498a1c358ae7f08dd72a8ace786fb5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/field_probe.lua": {
+    "bytes": 2877,
+    "sha256": "7febb1b27dd32258e797694a9a7efbe40e2ff8c4ff572b237dbf9b2c6d49d4f1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/cases.json": {
+    "bytes": 1256,
+    "sha256": "2a74e7c97cfe34416b8866d1d07ed30580f73d70d48357590a93e2cedadf5496"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/complete.txt": {
+    "bytes": 80,
+    "sha256": "6d96a7cc5de82676a3f5a183652ec99fdfe3c10eddc5b18016eefab985265d39"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/input-identities.json": {
+    "bytes": 85517,
+    "sha256": "fd14ee109b4dd5120faf336bcea4b7c02f812c63075af953e0ed18e0355b7ada"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/inputs-before-first-run.tar.gz": {
+    "bytes": 1009527,
+    "sha256": "749c8aa521bd1bc3149f067f30ae8e9a95b61b6f27edbb511d046b2351557c46"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/actual-parsed-inputs.tar.gz": {
+    "bytes": 1294,
+    "sha256": "2c4700ae7c1c421d9d8f7fa550028056b923fe369ecf934db6d0295e7e47df58"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/artifact-identities.json": {
+    "bytes": 504,
+    "sha256": "846539f6ac7e7be53691e6f347034941b84b656c3c5a17df92c3764509bfcc28"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7629,
+    "sha256": "9e730e6be1ed7d8fae08675fec6faf9e410d60f7f22c5b00e08c0a743e70a0d6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/native-identities.json": {
+    "bytes": 722,
+    "sha256": "8dc271b846949bfed17d545a900d0d4f341ef14f549208b62288280d33469a07"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/probe-command.json": {
+    "bytes": 571,
+    "sha256": "2138e0178cdcb2b9c10765ac21be876e326844802c2ec46ee84694edafcdfe5c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/probe-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/probe-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/luajit/probe-stdout.log.gz": {
+    "bytes": 531,
+    "sha256": "7410e71751fc80ce73366612fa24ace2b846f21177ac607bcc41fc435d3ac990"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/actual-parsed-inputs.tar.gz": {
+    "bytes": 1294,
+    "sha256": "758a608c2fc41d5b573e15985bcf166f293f3523a0c235194f0d5675325ea8c9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/artifact-identities.json": {
+    "bytes": 498,
+    "sha256": "06b9f7fca7608ec67089b1f0c958ecb0833e01220dd92c2750f22b93a642480c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/native-before-first-run.tar.gz": {
+    "bytes": 7718,
+    "sha256": "f7d752309af55a4966c8a6c6ab82ad857ab3ab047843c4b52bd2bf46db7fdda3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/native-identities.json": {
+    "bytes": 713,
+    "sha256": "0375a7bdfcf999d624834780b402221b6959d5619e03c241737b1177c5ce22ff"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/probe-command.json": {
+    "bytes": 559,
+    "sha256": "ed5327ee3ff22c389b9b44d746433961c5dfceb160c95184d009ecec7acdb928"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/probe-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/probe-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/probe-stdout.log.gz": {
+    "bytes": 531,
+    "sha256": "7410e71751fc80ce73366612fa24ace2b846f21177ac607bcc41fc435d3ac990"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/freeze_profiles.py": {
+    "bytes": 9185,
+    "sha256": "1029cc7c11579adc89db47aa1eceb734655cdcf42fa3fa101a9cffe1ddbe50ac"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inspect_intake.py": {
+    "bytes": 4534,
+    "sha256": "a4335e8f20b327da8f96eb3ab51e08565c2b0805c0e12c4249d84ae7cc3f738c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake-assessment.json": {
+    "bytes": 688285,
+    "sha256": "7d6dc9b9cae0adc577d703f77a8d01e9fb7a92c386396bc8f2ec4ecfa4d22b3a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/cases.json": {
+    "bytes": 155300,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/complete.txt": {
+    "bytes": 110,
+    "sha256": "734b50852ea446db897fb67da9c668c679e296286dbb5a3b80163636b2066d16"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/input-identities.json": {
+    "bytes": 89719,
+    "sha256": "18f23aaf8e10807dfc3bb20d519b02cd4204e1d145af4e77bc1415b2575a5d2c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/inputs-before-first-run.tar.gz": {
+    "bytes": 1053666,
+    "sha256": "453e36282691e87ce746ba7113d3938779316931a62ef2cc7527bfdf053f4e9a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 63756,
+    "sha256": "3c37dcacefa7ef9d2b3868bebc01a6d7307b2bec5319bf76f34fd7621c3c31bb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/artifact-identities.json": {
+    "bytes": 153507,
+    "sha256": "c2b4e56de8e285bf36af68943a20ead8c872c19712db35f6d6c11db9cbd1dece"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/build-command.json": {
+    "bytes": 575,
+    "sha256": "6f029966111bf3b4719c01c86551fb49185980cbd21951fa4e16d2d6845c0018"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/headers-command.json": {
+    "bytes": 546,
+    "sha256": "510cd70a57d08f0c297e4a8373bb39d90bb288b07439f7d262bde087873c3377"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/headers-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/headers-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/headers-stdout.log.gz": {
+    "bytes": 41,
+    "sha256": "d5ab9389b13297936f3262d3734d5393e0ca6b399ca5e36529f40fee7a7e2c99"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/memory-command.json": {
+    "bytes": 499,
+    "sha256": "364a9ec65954adeb2bc506aff9c9123e3c8d768458fb5b3889ee18db75dce932"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "ff0546b3340ca0e9098dff1f2d766c606da3d1704d32e9baba28519b54a18051"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7609,
+    "sha256": "597482683f037f0f7dbf8b5716878a305935bdda633ad2c830d7be27b2542651"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/native-identities.json": {
+    "bytes": 710,
+    "sha256": "d28568a686c7ece93c62a30470499d4b71beecd9b05f4aadc40a7d76c0a2a7df"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/normal-command.json": {
+    "bytes": 727,
+    "sha256": "766f107541647faef97d86853462e7aa3e5c4127b2e7abe6011fba8d43d177d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/normal-stdout.log.gz": {
+    "bytes": 22620,
+    "sha256": "7ac1776a0f3c9d993a65bd45584b4da3dcedea2b6b8ec8dbf851ca75b64639b3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/version-command.json": {
+    "bytes": 500,
+    "sha256": "ac0dff0459a26a90dcc33dda12e52994c480efe26b25bf8f047a81710cc631de"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 64014,
+    "sha256": "f3338c84b0dece46357789324fd22979cf09f547f1e1dde670885a96bd38da44"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/artifact-identities.json": {
+    "bytes": 151635,
+    "sha256": "8e17615a86cdefa79cb50c3f3f98dcb0813c1c28c5c3f4e9ffe1babe74277e78"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/build-command.json": {
+    "bytes": 560,
+    "sha256": "f6f4bb64fee49c6ea18b3f68e9eaac85ea30a6c2f50c531f97d2e7596bbe978d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/build-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/build-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/build-stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/headers-command.json": {
+    "bytes": 534,
+    "sha256": "3fae4e879f8ee5c5d6990e5b247b22ea70ac269798be32c2b3884152b23d5a90"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/headers-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/headers-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/headers-stdout.log.gz": {
+    "bytes": 32,
+    "sha256": "1f0ec07f4d4d69de8d36064244f5a9a5b186e9836960f00a421bc2fe40d1207d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/memory-command.json": {
+    "bytes": 490,
+    "sha256": "8fbf27c8442034a3acb68d8de95c006a0c1f9d4194c4b70ee0f902858080002e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "2c4e120ea61cc8ede73223820d91966e649abe484463783ecad426ac80f808c0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/native-before-first-run.tar.gz": {
+    "bytes": 7687,
+    "sha256": "7e6989ce9d2756f2a1190bd6e034d2d5f9c05a42c68d55191db4927a66d5465f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/native-identities.json": {
+    "bytes": 701,
+    "sha256": "00d13acfee82f5b749240aa4b64362c97664ce289e0ea3aea84a307fb1d188bd"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/normal-command.json": {
+    "bytes": 712,
+    "sha256": "c288667be9e2a8f94e3c72b250fca31396a7ae2aa8cb9da9298108bbd20d9778"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/normal-stdout.log.gz": {
+    "bytes": 22596,
+    "sha256": "772acaa23049b0f74c4ff408aac053b5dd38d4f891779033896409dcc78699e5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/version-command.json": {
+    "bytes": 488,
+    "sha256": "2028581b6c336ddb3076378e93a37b1a45998946efd24d8e6e981830c1838a8b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse-check.json": {
+    "bytes": 1242,
+    "sha256": "b8bfc66634dc1cdba4ce248604e7477205312933ce2d8060012f2c6c102dc564"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/complete.txt": {
+    "bytes": 78,
+    "sha256": "4d393feabd42c9d67a1f3ecf608ddb45b7663b7a44497161329569807e3fa788"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/input-identities.json": {
+    "bytes": 213008,
+    "sha256": "1ff3be153134025fdac9d6b7bce5833c35dc51833b85f2796babda7f65b3cefb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/inputs-before-first-run.tar.gz": {
+    "bytes": 2417907,
+    "sha256": "db1d0ec2aa96e7040ae7a99456c7c8928ce8c1c086c0920438f792f616779b01"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 64092,
+    "sha256": "09994ac3cfc798e7b97bc6cd079b7239faaf89efb81b2880507622d717faa97d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/artifact-identities.json": {
+    "bytes": 154131,
+    "sha256": "f70feedac7f0b9193b50f5104cbf6d1bcac214f1b7bcd0cbc2685b80a7a95d5a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/memory-command.json": {
+    "bytes": 714,
+    "sha256": "be4e83efe8cb40f79fc272c30e21352e99284ada1dd65b372801f7b0d3e48838"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/memory-stdout.log.gz": {
+    "bytes": 325,
+    "sha256": "ba9071354fb419f9bc5a8eab18e409e8f27f3b5288541292bffb892f06befa6a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7617,
+    "sha256": "644efd540a28bc325d51bcf8fb2bcddc51afc81df2567be9e799364a353ef0ab"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/native-identities.json": {
+    "bytes": 713,
+    "sha256": "e659c0ae8bca1f9c2d36fe3aeee5c94c36dfc9395758a723fcb204b6a31860de"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/normal-command.json": {
+    "bytes": 873,
+    "sha256": "13805f6700918b9f4b384d0827053784ec8800581617476da533a0531277886f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/normal-stderr.log.gz": {
+    "bytes": 734,
+    "sha256": "6533d8a7496d4b64f812c2ef1a1ea351bf2bd6ef3c9f227d9bd0c3cd8fcff3a9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/normal-stdout.log.gz": {
+    "bytes": 6748,
+    "sha256": "6f68458aa63c0106468cbc25cd6eeb7ecd1088534a996233a9142009a65aa00a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/version-command.json": {
+    "bytes": 715,
+    "sha256": "4faf70bc9d00ce3c3e545ff794a7b598f2a4b8f546981f9778fb0b02cc2f2ac7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 64028,
+    "sha256": "3870a660b38e6ca95becf1dfe72465cc4f4a81a1c7ccbf61a1865902da0b7cac"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/artifact-identities.json": {
+    "bytes": 152259,
+    "sha256": "b73977270d7653cd5bb09f83759e48cdc3d4d9f3a82f1f99a22bf5e3e3f8b2b9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/memory-command.json": {
+    "bytes": 705,
+    "sha256": "7bc2dca6ccf19d2c49045be082731ba5d7a3dc6525150eb2bce75a31ff6946f6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/memory-stdout.log.gz": {
+    "bytes": 323,
+    "sha256": "d4922264891c82ba59078ac14564cbb3f262625dd8fb1c5967097895354b8655"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/native-before-first-run.tar.gz": {
+    "bytes": 7700,
+    "sha256": "b9290178ee9ac05d8dc2e199e5953200ea685267fab162bf97beb7bfa3a0334f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/native-identities.json": {
+    "bytes": 704,
+    "sha256": "bb07026c6f50245a29ee2a4d4650fbdd6b684c82e354c4b62a47ed14893139c4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/normal-command.json": {
+    "bytes": 861,
+    "sha256": "c0d757a05ebbeb4f748e54b6e79bb7a319bea88e359ff08d9b1c9ec60364702d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/normal-stderr.log.gz": {
+    "bytes": 722,
+    "sha256": "a1070e07b97a255e27796ce1da715609716baa6aa875cafea5b91f6873505127"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/normal-stdout.log.gz": {
+    "bytes": 6727,
+    "sha256": "e8776da58caef3fb68306d276c1e5c2349046b607426e3133e0caf39ba074891"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/version-command.json": {
+    "bytes": 703,
+    "sha256": "db197563d30acf97c424af1f240105f7b3d49177c77fff3dbe977d8c334e2012"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/inverse/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/command.json": {
+    "bytes": 249,
+    "sha256": "bd02faeafb452815f46f0c1fff0af2f589927ce0d032eb832f599e5085c31477"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/identities.json": {
+    "bytes": 9401,
+    "sha256": "f24a0604b598875a5c7fef14bbdadafb1a52134694f282b69944ea3a4db9c3a6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/inputs.tar.gz": {
+    "bytes": 364655,
+    "sha256": "1582e4f31d5b96d5ffb4d1320c9140b6419c1131c45587985535840ce0a61fdf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/after/stdout.log.gz": {
+    "bytes": 98,
+    "sha256": "f6bc4205e2f447e83cb55194465c56f989919ff22a12f20133ece22bf3c97ea9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/command.json": {
+    "bytes": 250,
+    "sha256": "196693cb80718a6845742f112fb98f36a89368aa036933dd8870acd0b7bfdd2f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/identities.json": {
+    "bytes": 8586,
+    "sha256": "9d5feb3829859b29c6612dfea0af9e8230976c7e78ec3a94e786ccc093288d6a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/inputs.tar.gz": {
+    "bytes": 238036,
+    "sha256": "2aa4d863b463cb19d56930fd374f8ba4523af6e52e376bd6b00d226d483d3011"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/before/stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "1f67161db95b9987263e04649e0d1753e0bdda85f41907a3ce186c6ea76ac39c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/command.json": {
+    "bytes": 246,
+    "sha256": "1bf73710d437bc317f3669101448f720d89289ee8e8387c23ca550ebd7491868"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/identities.json": {
+    "bytes": 9401,
+    "sha256": "f24a0604b598875a5c7fef14bbdadafb1a52134694f282b69944ea3a4db9c3a6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/inputs.tar.gz": {
+    "bytes": 364655,
+    "sha256": "634c4a5c4122fc68dcd472bbfae40a2ab25b10a463b9eea9a3ee1692e8efd89d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-after/stdout.log.gz": {
+    "bytes": 423,
+    "sha256": "cf16d286e7b2c40909a04494c4b05e07d6c2091cfb9b9fecbd4130ca67177703"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/command.json": {
+    "bytes": 247,
+    "sha256": "ea08b87a04b0cf7243318be388d595a1d1abb079bd50bdbde139e5931bd9d7a8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/identities.json": {
+    "bytes": 8586,
+    "sha256": "9d5feb3829859b29c6612dfea0af9e8230976c7e78ec3a94e786ccc093288d6a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/inputs.tar.gz": {
+    "bytes": 238036,
+    "sha256": "be9734c5b605994b338e96033388dfee5dd5fcd329aed9746ea9a0f110a02848"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/check-before/stdout.log.gz": {
+    "bytes": 471,
+    "sha256": "637a987adcef6a299e8ea4ec43c3eecc664420bfb81a12a71b3d842c600c6d00"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/command.json": {
+    "bytes": 237,
+    "sha256": "a47842962510820ad6f4e2881809083c50c0aa3ca655aaa00d1aea81cf3fd5bf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/identities.json": {
+    "bytes": 12679,
+    "sha256": "c95405a496f2474148be11e2b155299e897b90bb3ab519fb8d94f8234e65940c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/inputs.tar.gz": {
+    "bytes": 379286,
+    "sha256": "c47cbf5ceebffaae484bc6d2d7fc90bd2f46e0dcb2b752a50325ac10f179e410"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/current/stdout.log.gz": {
+    "bytes": 180,
+    "sha256": "6880686ae45ca7f26e44267c04d33ae7530bcc64383079a31e3fc6568ba6e11b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/command.json": {
+    "bytes": 247,
+    "sha256": "6a369ba85cc254d0f11a5f2e16c697864488b6f67d1368537c47e567a2becc86"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/identities.json": {
+    "bytes": 10218,
+    "sha256": "4a07e9aa8953968ab6c5a34d5ec91b5c4fe5fd34a3c0d7f764cb1f962e802a99"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/inputs.tar.gz": {
+    "bytes": 366537,
+    "sha256": "edc0c52c4333d3a34d1cda21d0440689d041b5bc4feb2255492f6e8522d0025f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct-check/stdout.log.gz": {
+    "bytes": 423,
+    "sha256": "cf16d286e7b2c40909a04494c4b05e07d6c2091cfb9b9fecbd4130ca67177703"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/command.json": {
+    "bytes": 250,
+    "sha256": "d18d3f7ecf13ea81579a6732ac2c54d3e8c1577179d35fa854bf297004fe51ae"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/identities.json": {
+    "bytes": 10218,
+    "sha256": "4a07e9aa8953968ab6c5a34d5ec91b5c4fe5fd34a3c0d7f764cb1f962e802a99"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/inputs.tar.gz": {
+    "bytes": 366537,
+    "sha256": "7a4e76214c9f69d2264397fd87b9f38c22c0a59354405271c074e2e3fe08b8b3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/direct/stdout.log.gz": {
+    "bytes": 100,
+    "sha256": "62f9df4a024f37f0cb387fa4df5fa0d8141eac13da3c2abbbaf3906e2db27cd7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/command.json": {
+    "bytes": 241,
+    "sha256": "8b1a8ae7b0937ff83a53be61ffd9c633b4947b79977b903005b8fde48e05d6a5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/identities.json": {
+    "bytes": 10833,
+    "sha256": "1407787995b6d4cec2d9accf4c899969a676113d8988e6302be62a6bf8d2730c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/inputs.tar.gz": {
+    "bytes": 368506,
+    "sha256": "5f3d7642a8e99f1f5029cc717d9dce68d7fc72bc9bef0e1888913b6994cb5452"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/field-probe/stdout.log.gz": {
+    "bytes": 107,
+    "sha256": "efb79d50512a6da38a8f58fc187753d819203036c05e5e25fd076cf9baa8b718"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/command.json": {
+    "bytes": 237,
+    "sha256": "7ed18a70a0b0c35aa2e2bc7d1763651a3e27b16e60743bb3a6cbb9ff04a13687"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/identities.json": {
+    "bytes": 6756,
+    "sha256": "f900ec5d3db1ee68fa7425314fde11a63c46b7dfda7a221dbc7165be8dc3959f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/inputs.tar.gz": {
+    "bytes": 77774,
+    "sha256": "057ae70278fec76b0b8383930f49d41c172eff1c70ad1851ce5eb24fcb87abbb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/freeze-profiles/stdout.log.gz": {
+    "bytes": 172,
+    "sha256": "39e7cf6212818907a7da84b29a9c3d6ae2a6802cfd1d65506fe2c20ccbd75e63"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/command.json": {
+    "bytes": 236,
+    "sha256": "65fc2e51e1cd4a93d7273048219b988c4b0e671de9041617aa33c6db5983b2bf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/identities.json": {
+    "bytes": 5533,
+    "sha256": "5a7644f12fc8b808f3e6d377a43056f03aadf1a0d9020483578f27538b6b8ea4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/inputs.tar.gz": {
+    "bytes": 58768,
+    "sha256": "7555f49276a65385555778171243dab2b003f0151e2ece08cf1d8414b70d2c83"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inspect-intake/stdout.log.gz": {
+    "bytes": 1877,
+    "sha256": "5a1a41061aff7bc5859c32c9910fab11a865d1363e26ae6da5ba8e5049b6c990"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/command.json": {
+    "bytes": 236,
+    "sha256": "1141bd443ddad9478643df41a4270ac4a7d1fc64c5673a7b95a75fb8ad9639ee"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/identities.json": {
+    "bytes": 5329,
+    "sha256": "2d781fd5932d7c7ae11b6a106065b61968342338a981e292e4eeb9e784b6750a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/inputs.tar.gz": {
+    "bytes": 57057,
+    "sha256": "e4a2af6f23335c7d28996ff8eb3b71fb2f879986516851ff66b7c7d4eb563692"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/intake/stdout.log.gz": {
+    "bytes": 166,
+    "sha256": "605d9ddfa5f8cafbe809cb3d153aa17d0e1109b19d541fae3eb5dc7f6fbc375c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/command.json": {
+    "bytes": 248,
+    "sha256": "0b77c70d3221ef0c3b6367a37475efb935f0e207a597b6ee97aa1f58f1f16578"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/identities.json": {
+    "bytes": 9807,
+    "sha256": "ee4d63f95664c6e1a24228b2c91f0eda6ea71dcea5e65d0fa36574de45215b3c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/inputs.tar.gz": {
+    "bytes": 365474,
+    "sha256": "e711d1d5a07bd6784459a6026e271d79d417dd736cc5e5cd64ea8e6fac2d3f8d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse-check/stdout.log.gz": {
+    "bytes": 471,
+    "sha256": "8da55f163a72a247923d6dbb081dbe67434ec8f3838e4d34c2523f8289e48550"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/command.json": {
+    "bytes": 251,
+    "sha256": "1f19585bc82d4c65e9dd4a6a0d7e92213c11d36cfe6a837b6e4d2abb3403103c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/identities.json": {
+    "bytes": 9807,
+    "sha256": "ee4d63f95664c6e1a24228b2c91f0eda6ea71dcea5e65d0fa36574de45215b3c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/inputs.tar.gz": {
+    "bytes": 365474,
+    "sha256": "9ef91476d0c174b2554d3bca79beaf02b4af296dd959b25d1c7385ae2f6cbded"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/inverse/stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "628112d370161599193368788a8547cdbac84f2af9844eb0f9172074c24a9883"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/command.json": {
+    "bytes": 236,
+    "sha256": "5d5e3e723b9f61aa02e87eb100d757a9457d7bee23a416af1ef4b9b4e67b68e9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/identities.json": {
+    "bytes": 7986,
+    "sha256": "62be0bda20afb3f6a443f401b7d451a3b479fe2ec05603e98e6bc94b19c93864"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/inputs.tar.gz": {
+    "bytes": 234448,
+    "sha256": "ec300e5104903d6616e5e2162d8ffcfef80fed34e9d0cbfdd90e58b559020563"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-epochs/stdout.log.gz": {
+    "bytes": 125,
+    "sha256": "b228be3bbb26a2d3171e70f573af520a75f589cc619dd35949da7d9ec77c07fa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/command.json": {
+    "bytes": 238,
+    "sha256": "3bac26844823eddd35b0260399012f509cfccda8717a03cf48f1456213b83f9a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/exit.txt": {
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/identities.json": {
+    "bytes": 11437,
+    "sha256": "2671b94dc2b7c3c95d28b9c1525ae0d3522fc1277e8b9a7fcaeb85b6d59cba72"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/inputs.tar.gz": {
+    "bytes": 376606,
+    "sha256": "aca5658546dbf4b9d4077ab3867e15de0eb5d674c1283da61a18fbaa1b1b3683"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/stderr.log.gz": {
+    "bytes": 504,
+    "sha256": "373fc99e0e7d591588c76ca2bbf8b1943bb9508a7b9527e954f108b518d10cb0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-recovery/stdout.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/command.json": {
+    "bytes": 235,
+    "sha256": "0e90be0b7aa928cb922c5c7375dce9d14e1ae28a4cdbb8aa907679ff3f3942b9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/identities.json": {
+    "bytes": 6150,
+    "sha256": "b129f346fa46edd0059c2e373d13c691006db368a08a0fd50091e855e1dba017"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/inputs.tar.gz": {
+    "bytes": 73416,
+    "sha256": "2acd54685d928d40313dbed1d005d4a7f6ee988919997c7bbb2027fcfc40d50b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare-trace/stdout.log.gz": {
+    "bytes": 108,
+    "sha256": "223fd2d969155616be95a8dc3c81785fb577ec4f82c8734d4e7689ae86d463dc"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/command.json": {
+    "bytes": 229,
+    "sha256": "ea4548067748bfefe00c810fa611ba2b928b4c9fec7a55b642f40570a716749b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/identities.json": {
+    "bytes": 914,
+    "sha256": "83a42d2b53441e7ec5b0fd473264196c1ef2eec1ee26161f66ae0ad97788d0e3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/inputs.tar.gz": {
+    "bytes": 9030,
+    "sha256": "9fc02f0b52da07d3d51cfcf16cb69b022777efb69659934a5eb406abfefc246b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/prepare/stdout.log.gz": {
+    "bytes": 126,
+    "sha256": "bdb73514e76774b8b1e63e36bd411ca832828926accf3d2dc79ee8291068fe90"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/command.json": {
+    "bytes": 244,
+    "sha256": "7d5f27a331ed4024fe666bbba3a53ec2416c06f17c8fa2041c3234de1ee55ce8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/identities.json": {
+    "bytes": 12250,
+    "sha256": "1c064ba4197b13c4177daede05406581524dbe7f2d60b9b0e2ef7f643173bef4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/inputs.tar.gz": {
+    "bytes": 378856,
+    "sha256": "6f2c333125b372b90a72d9e72b681727fbfac7668e9253fa54868fe8a5770925"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/qualify-recovery-setup/stdout.log.gz": {
+    "bytes": 105,
+    "sha256": "09f5e1ebba564b20d30a3d7f926de5adee9897ce9ffaacfc4244602dfe9a30b5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/command.json": {
+    "bytes": 235,
+    "sha256": "ac5ae19e1698e4bc57e37767c8677c06152bcfd313fefd40d5969b3ae2997c3b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/identities.json": {
+    "bytes": 9807,
+    "sha256": "ee4d63f95664c6e1a24228b2c91f0eda6ea71dcea5e65d0fa36574de45215b3c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/inputs.tar.gz": {
+    "bytes": 365474,
+    "sha256": "6b954bbd12c61237cbba7043eaf58d9e4b085660cc135fd876d2f64591f2dace"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/remaining/stdout.log.gz": {
+    "bytes": 92,
+    "sha256": "2380f256a367c7601c7a1988434236bb4bcacf45e00563f2d66e7939fc43b156"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/command.json": {
+    "bytes": 232,
+    "sha256": "9d53f70bde5cb792ae17fc636251233a01e802434d9d170a96d798a8ca279862"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/identities.json": {
+    "bytes": 8790,
+    "sha256": "a81091a95f47d33d6f62e70eb0e9c14d4f53662abddeaa9f8c46fb364222ec29"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/inputs.tar.gz": {
+    "bytes": 238552,
+    "sha256": "eeede1c472e7130e05517cc5e1a3b0add8413b9a0002a9935b1233bc83cb6c55"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/repair/stdout.log.gz": {
+    "bytes": 93,
+    "sha256": "0934dd94009a4b8fa2483a3b93324293fa9aec91aa68314186a7888c6f1177b3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/command.json": {
+    "bytes": 249,
+    "sha256": "fe2c97cfb799dc075138e233de660436c3a116c74740e112de2e6b54f527a8db"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/identities.json": {
+    "bytes": 10012,
+    "sha256": "e7edd8c5329349e22cc73c4d52f6f95a6664796015c7bb1477b35ab404d694d3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/inputs.tar.gz": {
+    "bytes": 366043,
+    "sha256": "439c43a165268136006f4dff15070b54d9a624380ada123b6a62b4bae605faaa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored-check/stdout.log.gz": {
+    "bytes": 423,
+    "sha256": "cf16d286e7b2c40909a04494c4b05e07d6c2091cfb9b9fecbd4130ca67177703"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/command.json": {
+    "bytes": 252,
+    "sha256": "411d5df5a06c36a29c347210a99a2672b1556c3bff1c85b188da3f58d71b5e4c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/identities.json": {
+    "bytes": 10012,
+    "sha256": "e7edd8c5329349e22cc73c4d52f6f95a6664796015c7bb1477b35ab404d694d3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/inputs.tar.gz": {
+    "bytes": 366043,
+    "sha256": "7866116f3a36e334c2170f81c23e1db358fd36c06aae9f255658793fb4f0deed"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/restored/stdout.log.gz": {
+    "bytes": 101,
+    "sha256": "b62d9be338e36b981afca6cece027ea5e8293ae7368fb7d26e4addc039d5b0b7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/command.json": {
+    "bytes": 234,
+    "sha256": "5bf58ed3ffae632cd4205117b7c1f16ecc5b4c3261b1aeea4b1bea3178b87c6f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/identities.json": {
+    "bytes": 12679,
+    "sha256": "c95405a496f2474148be11e2b155299e897b90bb3ab519fb8d94f8234e65940c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/inputs.tar.gz": {
+    "bytes": 379286,
+    "sha256": "7e0799ee0dcf52873aceb51bcbe2ba9a136392211d96f2152944e39f66029048"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/retire-trace/stdout.log.gz": {
+    "bytes": 113,
+    "sha256": "1338020c567280d35a9b7e4f8363455c8c8b145b2de77f6e39106d0f3e2b0338"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/seal/command.json": {
+    "bytes": 226,
+    "sha256": "f7ad023289a31169a70b92b0c3a969d9514be2caa757ca32454734a5c483fd52"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/seal/identities.json": {
+    "bytes": 12891,
+    "sha256": "cbd7d7e5fcb35ba634a8f6215edf4ad04a58699b8484b42347bb4c89a4d9cf6f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/seal/inputs.tar.gz": {
+    "bytes": 383035,
+    "sha256": "b153b73f89a91fc6561cf2253e9e2c3637638aef6857a261381f19252c8752a0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/command.json": {
+    "bytes": 235,
+    "sha256": "28ac0baf9e541b4d5264b3a8c51d127d8bb3d3ba256a63ab0d2f6a368ba5eb09"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/identities.json": {
+    "bytes": 6551,
+    "sha256": "f1c524f7ea57a7ae3e05b1dd55eca029b56b56342f539ff19d828a9adbf68f42"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/inputs.tar.gz": {
+    "bytes": 75015,
+    "sha256": "ddb462b444a331ef95bb5c7039a655f449d61d55ce4bbb7c4a2e70c64287e189"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/launches/trace/stdout.log.gz": {
+    "bytes": 111,
+    "sha256": "ab7f76de27b480f3cdeabc61959843c8f5070d0c537588481157417b07b9e9ad"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/observer.lua": {
+    "bytes": 3268,
+    "sha256": "d76618f958e5cfeb51aaeaefcca09610b88d5e3065704c1e011c057780cafd30"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/own-questions.json": {
+    "bytes": 133963,
+    "sha256": "ab40c5e88dd82990fd6fff17d6b5f5c5cf48e213a0703315840ea28221430873"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/owner-after.lua.gz": {
+    "bytes": 44709,
+    "sha256": "73c44b89629b4e888ec89fbb00d633cbb5cd9cdd717768a0854edaa0a16bd9fb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/owner-before.lua.gz": {
+    "bytes": 44705,
+    "sha256": "58bf50e42f5ccf21fd9d9b73bbbbe1b0100414a4ef63d9cf9f73f52d21c4cc3c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/prepare.py": {
+    "bytes": 3229,
+    "sha256": "65d13eeef2637a694866322d15ecf183b6835fe2156508f8f77a2c4ece4f95db"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/prepare_epochs.py": {
+    "bytes": 5118,
+    "sha256": "5f4bc5fa6f540f3b93213287695763fcfa15fef66bb9af34754d94a3a17370ba"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/prepare_recovery.py": {
+    "bytes": 922,
+    "sha256": "0e4c1cb69c9d750834a1f3949a32965f75d20db7f4688810c39b04fc58646ee8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/prepare_trace.py": {
+    "bytes": 1198,
+    "sha256": "53011550ba52053f42b516eb4a322cac4bc597b76594110099c346c291764271"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/proof_io.py": {
+    "bytes": 5135,
+    "sha256": "d02659c9db54632b23a38614c675d25a41aa3e37eed1e1fc584117d1ee0f0846"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/qualify_recovery_setup.py": {
+    "bytes": 2132,
+    "sha256": "e4b9b04a918bf7fe011b47cbdd7f62ce11c9d5d5935460ac44b6370c60d6b33a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/recovery-setup-qualification.json": {
+    "bytes": 403,
+    "sha256": "1616eb94000bb8c4606945197add8f58bf50b5b005072e6e640bf11c8b62163f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/complete.txt": {
+    "bytes": 113,
+    "sha256": "1b5a69bdb0cc403d61511083653102d776922704f38349ba13c15b6ca3a2669c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-check-command.json": {
+    "bytes": 423,
+    "sha256": "9a15ef7b21206ac20b772429c272698d97db39672ce5435eb88e010555c56081"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-check-stdout.log.gz": {
+    "bytes": 90,
+    "sha256": "bd22830ae95a267ca756d1b21c9bfec7d2c2df4f15c3ddaf15f3add61f56f618"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-command.json": {
+    "bytes": 420,
+    "sha256": "f563dc630ee3a8c16834509ea15c9aee9a1c11e51acf887031fdde6585fa58cb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/direct-stdout.log.gz": {
+    "bytes": 83,
+    "sha256": "a421dff08d389fb5a7551d621f48c09ca02b918643cec60b7a59ad2c0454b4f9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-check-command.json": {
+    "bytes": 425,
+    "sha256": "5ff83bf864e353044f3b44f238a538eb0d5511684e89cb7c78d17fd9c44d7cde"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-check-stdout.log.gz": {
+    "bytes": 91,
+    "sha256": "75bbf5c28529b4aade61ac604b89a482a914cd2a112765d6654ca2adb5eaf4d9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-command.json": {
+    "bytes": 422,
+    "sha256": "e45cf2fb2dca76acf6f85d208b7c09f908100d04ddfb1a6b1789828c15c5b2e4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/inverse-stdout.log.gz": {
+    "bytes": 84,
+    "sha256": "7e5cc559f4f2ae9d2892375f5a29db4e429391dd681d83326830ceba58172d75"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-check-command.json": {
+    "bytes": 427,
+    "sha256": "1e6f0819bddefebe8f78b05ebc8ee7f69b2887fcabd958018bf5ec352f6ed9b6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-check-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-check-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-check-stdout.log.gz": {
+    "bytes": 92,
+    "sha256": "f24628b7e1f6961655bc9cc3a41679aee35e8237f1827225ee6b41c7e143eb1c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-command.json": {
+    "bytes": 424,
+    "sha256": "95a77972be5cbd1f9205ba9c050f15f4ade5b9ac62722509fee334d9478073cd"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/remaining/restored-stdout.log.gz": {
+    "bytes": 85,
+    "sha256": "3f9739022c37b53d695bf772db26d623a4331ab80eae44be35abd7248ef6ba3d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/apply-command.json": {
+    "bytes": 222,
+    "sha256": "f67159264620c611686c61a98adf1bdbfe2e68482d2ae5233119ac8e2237c518"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/apply-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/apply-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/apply-stdout.log.gz": {
+    "bytes": 98,
+    "sha256": "606167af41a752f9be7d75fbe5b60d42a7721a69ea8d1b9fb52221544a0ef340"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/identities.json": {
+    "bytes": 1853,
+    "sha256": "690f8a8ac7790660a5673509303cd46f26faf971c63f3d3a6877e5378ba686c2"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/inputs-before-writer.tar.gz": {
+    "bytes": 160886,
+    "sha256": "f2c201544e560f67b4bafc5c009e9a0a4ae89c704a76b47e9c8669a01a115147"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/rehearse-command.json": {
+    "bytes": 225,
+    "sha256": "769e604ba55cd516a47bce165c559edf6691004cfe953f9f4a9cf1c10b59b1bb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/rehearse-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/rehearse-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/rehearse-stdout.log.gz": {
+    "bytes": 78,
+    "sha256": "edcd2ffde90d624564684409cfc0fd8f51930d522c6c94ef910202e97c983cfc"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair.py": {
+    "bytes": 4315,
+    "sha256": "9b9c34ecdbb9f9a9502fb7f8b41eb664f2938de5fc73e275f7dd9270d4197d50"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored-check.json": {
+    "bytes": 1236,
+    "sha256": "91cb4f43df92ad8d5f8507daba30972d0cc7d0813101ca5a24d2e3157e30958a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/activation.txt": {
+    "bytes": 41,
+    "sha256": "da725b2aec86c9456f65462ad6491566f03238052f8c57a6ee0cf1e17c9c8007"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/complete.txt": {
+    "bytes": 78,
+    "sha256": "4d393feabd42c9d67a1f3ecf608ddb45b7663b7a44497161329569807e3fa788"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/input-identities.json": {
+    "bytes": 213211,
+    "sha256": "5665f8c04cc4921866ea814813006fc201a5a635d4094010b321d929e5dfb7a1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/inputs-before-first-run.tar.gz": {
+    "bytes": 2418272,
+    "sha256": "701490723505f1691ec754fda9f40cc270e758750301a64229310aaaf37b4584"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/actual-emitted-parsed.tar.gz": {
+    "bytes": 63694,
+    "sha256": "48c32dcd6a3fb1830f0c144524aa6167f3e54947b76e7b0627a67ee1bdd4979c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/artifact-identities.json": {
+    "bytes": 154755,
+    "sha256": "a284479900b5caf6b3ca9d68b39c01dfd57428bf30d595a42d2102e7eeb792e4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/memory-command.json": {
+    "bytes": 716,
+    "sha256": "acd07adf0a9975117438b580ae1ffcff63d90a56117f8042d8649423d42e222e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/memory-stdout.log.gz": {
+    "bytes": 321,
+    "sha256": "daa95cf83c149c483c5b7c9278d132b077fe8575f8164f99d971366c64f40844"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7624,
+    "sha256": "19841f817e5178d431509cdddcf7128a7d9f47d263d737c912457372f698ced9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/native-identities.json": {
+    "bytes": 716,
+    "sha256": "269768125b93ef5184c315f56f917c8b496d94cee3cd5479b9289055e71edca9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/normal-command.json": {
+    "bytes": 875,
+    "sha256": "4e1afb667ffe93882814030d2a6a921e68bf341ce7f839f2b608f5ff281b890f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/normal-stdout.log.gz": {
+    "bytes": 6614,
+    "sha256": "93a49c9b5b800e51eafb22659fce466dc07c1948368912558ee5acfd9f0f6fdc"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/version-command.json": {
+    "bytes": 717,
+    "sha256": "0008172b3f349874a0fb95d01eec91f7acc1a881d9bc374d662bec1be20970e9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/luajit/version-stdout.log.gz": {
+    "bytes": 99,
+    "sha256": "9b00eaaea300838d33b62d89d35ee6c95c528c6617d825e43da59ed4e03df0d7"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/actual-emitted-parsed.tar.gz": {
+    "bytes": 63990,
+    "sha256": "5df906db99c28223a1db94a66ade31085a3516f8a6d7a92763c2040d755e947d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/artifact-identities.json": {
+    "bytes": 152883,
+    "sha256": "59b5461cf0ecc4d762e58b2f4fd3c406af6e8ff083d4923cc08790824ba729b3"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/memory-command.json": {
+    "bytes": 707,
+    "sha256": "f6e667dc03d14184554fdef41e8eaf69fb39cdbc19984d7d4c8c5eec58c5fc52"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/memory-stdout.log.gz": {
+    "bytes": 326,
+    "sha256": "d5a11e157c93c4cbaca5152df1ad5e583f015a05cbd7cc2019a8a1264a9cecea"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/native-before-first-run.tar.gz": {
+    "bytes": 7710,
+    "sha256": "43d73980f8daec4db04392617aa422196ad2a97811dce0ad680ce6ffd574090e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/native-identities.json": {
+    "bytes": 707,
+    "sha256": "51d4bb72141d6f7555e411100e269250913b455c0d8494936a523ef824e1e773"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/normal-command.json": {
+    "bytes": 863,
+    "sha256": "9522d95c6bac40f47994c89737563bb545f0ec96ab13f9d044b024c0ce4cb2cd"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/normal-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/normal-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/normal-stdout.log.gz": {
+    "bytes": 6593,
+    "sha256": "3e028f5107c14339c1dffda3539cc55742c9ecdddf51ac901389310dd2a46084"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/version-command.json": {
+    "bytes": 705,
+    "sha256": "aa9ac4ebdbc3d923ca831c534eb677ffa5ad39301a8f2b0db7098dcfe95c6550"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/version-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/version-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/version-stdout.log.gz": {
+    "bytes": 72,
+    "sha256": "1612612513e49f2c79f53c37fe4f48570afde03e6a4dd03365e512247ed1ec4d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/retire_trace.py": {
+    "bytes": 1801,
+    "sha256": "3c20a9499accf1f7bcf061e427dcfd471da85678557b3dfb16a18e5c9134202c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/retired-live-copies.json": {
+    "bytes": 20355,
+    "sha256": "9ba816ad030e388eb1cfdfa52434740a1571420566f44c200196d86db83fa233"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/review.py": {
+    "bytes": 29302,
+    "sha256": "b9236d4367c7866575ed17163f088c4977ee7066e1d37a029e980ca30eea11f6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/run_remaining.py": {
+    "bytes": 1502,
+    "sha256": "072148d9d081cc8c954e377f2e43c9c5cb0802b4d16d3fc06a57ab170cb88866"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/run_repair.py": {
+    "bytes": 2348,
+    "sha256": "16766ccfe40779c54129f966b0bf747b7ef6bcf4de0d6aed3c43234c1e67e726"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/runner-after.lua.gz": {
+    "bytes": 80207,
+    "sha256": "a5ee254f48f5fa1c14fc0b6c36fd68b48dd290a4373bcd701d388e48a11c6cb0"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/runner-before.lua.gz": {
+    "bytes": 80197,
+    "sha256": "a2f767d6ffa9314bcf1bb0e21a789f88ec803d8b9ed838eff9fd1058e699749f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/seal.py": {
+    "bytes": 751,
+    "sha256": "80e999ba41615e7c42f03331b76c8ab27b089cd99b9bc8cd7518440463440afb"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/source.diff": {
+    "bytes": 1394,
+    "sha256": "0f0afb3ef2d8920177c724703dd28f802a7b583a8c8e8a9340239d31f693cddf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-0.gz": {
+    "bytes": 1818,
+    "sha256": "1a5e3848835303ef2bd50f73110d02d1ab71cbd042a5f311452e0275f2cc38c6"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-1.gz": {
+    "bytes": 2482,
+    "sha256": "13345a64bff7bcd0551208f670c4982f0f1671c4e78758ad208d313c401f7e35"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-10.gz": {
+    "bytes": 788,
+    "sha256": "cbeb55b404ae22cd6feff50bc4446db1044b2ff0ee915751d15595a91b524f20"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-11.gz": {
+    "bytes": 931,
+    "sha256": "fc57b72ae07feb668a01abec1b60770f1f6110335c8b59a6f8272a397e528776"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-12.gz": {
+    "bytes": 350,
+    "sha256": "9a31706ec79b4b658ab259e95066fc2ccf8fc35850b6c2022d8ded91a619baac"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-13.gz": {
+    "bytes": 1590,
+    "sha256": "1a95468b62e335f9edfdccf4647fb57c860386bde6e34a7ecf532b44d60ca41c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-14.gz": {
+    "bytes": 1448,
+    "sha256": "3e5d89283fb92a286d03d354b7461d65ffafdce59b4613f6e91a57908e1c1fff"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-15.gz": {
+    "bytes": 5011,
+    "sha256": "1a3f1ff659d9edf1ac1ca88c0589ce12101bea05319817399ba306b199580f11"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-16.gz": {
+    "bytes": 924,
+    "sha256": "e3211e8ca8073a893b767ef5d133514978398dfe0c6d2a69a1dcb495c68a051a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-2.gz": {
+    "bytes": 1199,
+    "sha256": "8643c5e0c3b27a44f8cf67c646269044f4f3fce96fbadfa6ea3d166abee05d3d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-3.gz": {
+    "bytes": 893,
+    "sha256": "6982a132dac5cb72fa1a35375ccea33ff7cf0dbbed87a88e784cbbf685805c08"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-4.gz": {
+    "bytes": 1372,
+    "sha256": "5afdb2403c41b4da159a054225218b7178ada3c15357d914159b0cd4f35214d5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-5.gz": {
+    "bytes": 1541,
+    "sha256": "eacc0861e3622fa820422c32ba34b858d9f9fa015d8b652ee3de8fb965bd3ba9"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-6.gz": {
+    "bytes": 1572,
+    "sha256": "2238d67b32d2cd7cef89630c61e4448dd7f6069adb5604e828bc4d585e09836a"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-7.gz": {
+    "bytes": 1028,
+    "sha256": "f4f13f9285355a3637bf7cc2a766e8118770eca91a84f4e79ebe5694fea9a3a5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-8.gz": {
+    "bytes": 5875,
+    "sha256": "107155074cae785ea5c485208b0bcae0f359f3af9aef8da0b065cb2ec2d6f758"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-9.gz": {
+    "bytes": 450,
+    "sha256": "44b5538b4b7120656895095fb3b53e56b21f7a10a9748247e46cd04025b765d8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/template-identities.json": {
+    "bytes": 4577,
+    "sha256": "a98dac907a903276b83f471b213ecdacf210efb8f7c2f19d17d908b9acb11200"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace-sources.json": {
+    "bytes": 5410,
+    "sha256": "fcf7bbf96b7697eaffe8f4c8585b406d54a65731d34aefa6cdc96a8c6ec40170"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace.lua": {
+    "bytes": 2143,
+    "sha256": "7fb455bf5b175444c2f6256f53936a1363ad04d4babdf1ccb95a1f3b8d3b1763"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/cases.json": {
+    "bytes": 5410,
+    "sha256": "fcf7bbf96b7697eaffe8f4c8585b406d54a65731d34aefa6cdc96a8c6ec40170"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/complete.txt": {
+    "bytes": 55,
+    "sha256": "de616aa477c24fd2f61f1270968ee67cb4317707e2d6ec149bf911201f313843"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/input-identities.json": {
+    "bytes": 91838,
+    "sha256": "b58668208dbd9ac77aeb76d7f4f8efcf2679d4eedb3775ad449f4fc055a7323b"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/inputs-before-first-run.tar.gz": {
+    "bytes": 1083315,
+    "sha256": "6015887ced40993838c7d5fff6f8a943db8666bf08273548b706a53d2357153c"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/actual-trace-inputs.tar.gz": {
+    "bytes": 8914,
+    "sha256": "b3ccf86ca9121fa2c6cf9f382dc15386da77dc15477d290d940a9846c512d813"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/artifact-identities.json": {
+    "bytes": 6418,
+    "sha256": "42a1c265c592ea3214baa671b2326022f94a6815c074ecd76d7808f9eb7be9b1"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/memory-command.json": {
+    "bytes": 327,
+    "sha256": "64484b7a8d8f0f95c0a177f21c54e92cf81a7902cb744d2a86964cd9b47105fe"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/memory-stdout.log.gz": {
+    "bytes": 327,
+    "sha256": "8532123c893348fd99dd2a50d5b909bfef0e3dfd2b3956520d4f49c98f7d5693"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/native-before-first-run.tar.gz": {
+    "bytes": 7615,
+    "sha256": "cb5cbf76f8475035d57edc742211a43e4e67a631e3a4b91ad766c7e9f8d57ebe"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/native-identities.json": {
+    "bytes": 707,
+    "sha256": "ca129f698cfdc4c5f444997f9aa762513f5204ab7dff47977ba73ba3a2f8ef88"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/native-reuse.json": {
+    "bytes": 315,
+    "sha256": "a6a6d0ca9946395d9cffe6eaa3d7c0de059c4c8318939be2cd55645595b1aacf"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/trace-command.json": {
+    "bytes": 550,
+    "sha256": "3aa643127db195a1aad9eb47b6cce0fd1478ed9d698db3e55ac1408b14349140"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/trace-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/trace-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/luajit/trace-stdout.log.gz": {
+    "bytes": 2053,
+    "sha256": "2935e519583385d8857f932cd2db2e6d78b91faae32d36875da16dc4f62ea49e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/actual-trace-inputs.tar.gz": {
+    "bytes": 8892,
+    "sha256": "07aedeec0a1aa1f1cb6bc6598d270651b95e1e1479a2d70e804e144a23e2a465"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/artifact-identities.json": {
+    "bytes": 6337,
+    "sha256": "838e98b920e490947f497dc01d4e373b832228fb4efe8ae907ea5fb80c6ac8d8"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/memory-command.json": {
+    "bytes": 321,
+    "sha256": "c2e2499cc1fb98aa975623813ab5508bb78c76184271f66f861294a68afbca6f"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/memory-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/memory-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/memory-stdout.log.gz": {
+    "bytes": 324,
+    "sha256": "7abbf9eff8e4cf3caff4becf2ca214e145862da7e146ca0877d947359c5b578e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/native-before-first-run.tar.gz": {
+    "bytes": 7682,
+    "sha256": "d4fd302f2740ed35aa531a9adf9daa5a7788e4e05ae5c4279ed0fefd93b00e5d"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/native-identities.json": {
+    "bytes": 698,
+    "sha256": "cad773efae4129fb6de5924a2a5e13b37896aa545d85335855302d5762e4b93e"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/native-reuse.json": {
+    "bytes": 312,
+    "sha256": "ee15520e8ac65fa31f562034842a5868a3dc1abf3d600d417001ef15dced9004"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/trace-command.json": {
+    "bytes": 538,
+    "sha256": "9c28696a6a100a71d79546b0b8a3e9d263cdddc69476ee5476de05ff0af2c7f4"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/trace-exit.txt": {
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/trace-stderr.log.gz": {
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/puc/trace-stdout.log.gz": {
+    "bytes": 2053,
+    "sha256": "2935e519583385d8857f932cd2db2e6d78b91faae32d36875da16dc4f62ea49e"
+  }
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":1977,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-helper-preflight.md","sha256":"ae447ede5fd912d48ef63f968d73c62d918e456d1440ace2758a0e275fd69197","type":"member"}
 {"bytes":2990,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-ordinary-repetition-minimum-misses.md","sha256":"9d9ac439cdc15f81dc1caa548638658a3c910343565b959eb912ee31a220175e","type":"member"}
 {"bytes":3322,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-outward-function-descriptor-union.md","sha256":"c565f7510e8b74ecd9276e31e8f1db52e818dd428fdb42efe7f09f291e08de47","type":"member"}
 {"bytes":22824,"lines":219,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-completion-semantic-foundation-reading.md","sha256":"e31cd1b61d81881c32ca53c0afcaabdfa04879a21d908d665a361210faec2c9f","type":"member"}
@@ -74,7 +75,7 @@
 {"bytes":3449,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-matching-state.md","sha256":"0085c2b423b80a7d9a629b9aabdb52f2cc08c8b9ac1453815b09d451b8c90940","type":"member"}
 {"bytes":2230,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-named-harray-mutation.md","sha256":"03cc2480fcb7903b4643e0f107b9c31d6a8c43bb63bd7cef6c6b379d319c7faf","type":"member"}
 {"bytes":2912,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-rule-interpreter.md","sha256":"623f3b167873b8737301e55e6b823acf2c6878e321ff1692127ffcf186766020","type":"member"}
-{"bytes":3082,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-structured-diagnostics.md","sha256":"dffada0a84c39a1b72ed8d3f3fd22b7835c0f3a319ad9af510098c6f8a01dd66","type":"member"}
+{"bytes":4112,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5","path":"docs/knowledge/lua-runtime-structured-diagnostics.md","sha256":"cc2a98ab08e115858052602cd7ed33f4e99fcca09ac6e1120806aedae049f367","type":"member"}
 {"bytes":2386,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-switch-statement-controls.md","sha256":"dcaf87a3d090a8a8fea13c8191f00fe82e86c71fd4974da0056fb7723fd43a9e","type":"member"}
 {"bytes":3358,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-tagged-record-construction.md","sha256":"16635bdb5391402cb9b270bfb8f74ebbe4021cf0e64a54d00763aa5378038ab2","type":"member"}
 {"bytes":2428,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-trace-events.md","sha256":"b23a25a2cce0a2b1c0ad338a008b19b1e07ed21047b77e2fb3959191581bd4f4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3630,"lines":19,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-string-predicate-source-guards.md","sha256":"36312db753f47c387cf974f8e4347c19d9df6ec9d2d8696ddc6bdaf73c853d1f","type":"member"}
 {"bytes":4493,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-toolchain-package-policy.md","sha256":"09dcfcb61d6091526b0766e4877882481ac5a9ef87eabaf3e27ace0ebcab4dfc","type":"member"}
 {"bytes":2777,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-trace-controls-sinks.md","sha256":"16173539ecda35cfa160551b18e08609d5a49daf76381694157be1c26be0e3aa","type":"member"}
-{"bytes":5975,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-typed-source-compatibility-alias-gap.md","sha256":"b84ab4296e84cb043d1c057812a34f48a5b5f1a28e56b4af5789e26659ab0faa","type":"member"}

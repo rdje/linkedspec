@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2068,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-canonical-set-result-composition.md","sha256":"71294c4ec7ea36c74e90c44106ff0841af83bfd470bb9a4cc47f5220473e14b1","type":"member"}
 {"bytes":2710,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-capture-endpoint-local-register-repair.md","sha256":"4d847d9576a2c849a98686ae08aa8d5cf8dfe0d235914968e4c4435f2f367766","type":"member"}
 {"bytes":2960,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-capture-slice-delimiter-seek-boundary.md","sha256":"a448dbc16227f14d91e34544efc624ed3397b5f2dce4c0bb0f3156338e847fa5","type":"member"}
 {"bytes":3470,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-codeblock-boolean-literal-kind-drift.md","sha256":"9141a3c3f4f56903229bf37f5e6cb6bf38d96619ba7a7ae0c93b4f20a84e8d1b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2961,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-newline-switch-close-terminator-gap.md","sha256":"dad24ead2f364fe84ec7b5b3eba12dc84ea7c88e2782d8425efe514af59cf5e2","type":"member"}
 {"bytes":5786,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-normalization-call-grammar.md","sha256":"a4ec8114e3f6c5f9c850747b023eacb8efb5d2b710cccfe654f51f2cb7bff492","type":"member"}
 {"bytes":6214,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-direct-read-rejection.md","sha256":"f5998287e7b5921d06653648985dfef5f7696e552d85a27c3ffb203803a1794c","type":"member"}
-{"bytes":2622,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-numeric-reducer-string-result-kinds.md","sha256":"07743a905ac3ea277b3d69e5befc246dd7c2f2719cfddac4368d7572374ef4b0","type":"member"}

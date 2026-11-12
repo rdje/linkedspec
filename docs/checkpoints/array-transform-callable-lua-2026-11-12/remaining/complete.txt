@@ -1,0 +1,1 @@
+Both installed Lua hosts complete inverse/restored/direct3939 and full-record/pair/native-image checks serially.

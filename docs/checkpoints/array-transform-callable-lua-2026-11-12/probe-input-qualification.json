@@ -1,0 +1,11 @@
+{
+  "original": "review_qualified.py",
+  "original_sha256": "c531fb1acd840acf8e4ab2d08c03e925c3c6426d3906385bac3e3a66f4052e4c",
+  "qualified": "review_qualified2.py",
+  "qualified_sha256": "32bc265a27a0f18b78e8f0739dc8ce8a11cb087a788aaf9783d9b268f43889da",
+  "original_actual_exit": 1,
+  "original_stderr_bytes": 515,
+  "original_stderr_sha256": "da6b3987b2c57b881a6f466859d119081e6349bdfb46ccb8fbd51ef15276011e",
+  "cause": "The narrow field probe used project_data_run directly and retained its three actual wrapper inputs; it never used the other two epoch convenience wrappers. The reader incorrectly required all five.",
+  "correction": "Permit only those two unused wrapper absences in fieldprobe. Keep every own Lua/fixture/grammar and all actual wrapper byte/mode checks. No SDK replay, capture expansion or missing-input custody credit."
+}

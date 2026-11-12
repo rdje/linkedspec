@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/own_needed_source_take_receiver.parsed.json": {
+    "bytes": 2318,
+    "mode": 420,
+    "sha256": "ac9fde013521f6d0ab704c85c3088a262c8a0e8906095e03cf30a17f78c1e399"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/fieldprobe/puc/own_signature_fixed_missing_composed.parsed.json": {
+    "bytes": 2665,
+    "mode": 420,
+    "sha256": "a7be847b63cd3dacbc3859ae62460726094e57a4e32be1d50e47689eca9f0256"
+  }
+}

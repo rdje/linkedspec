@@ -1,0 +1,6 @@
+{
+  "original": "launches/prepare-recovery",
+  "actual_exit": 1,
+  "cause": "The launch-list setup included its own unfinished launcher before exit.txt existed. Current/seal instruments were already created exactly.",
+  "correction": "Exclude only this qualifier in flight; include the original actual1 and exact stderr in the finite completed-launch list. No SDK epoch replay or instrument rewrite."
+}

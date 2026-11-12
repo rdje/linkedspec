@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "luajit",
+    "docs/checkpoints/array-transform-callable-lua-2026-11-12/observer.lua",
+    "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/cases.json",
+    "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-callable-lua-2026-11-12/intake/luajit",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT": ""
+  }
+}

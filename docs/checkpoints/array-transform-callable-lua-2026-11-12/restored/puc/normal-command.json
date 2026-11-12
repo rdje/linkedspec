@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-e",
+    "dofile(\"docs/checkpoints/array-transform-callable-lua-2026-11-12/control-owner/lua/test/array_transform_callable_result_guard_composition_test.lua\")"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "docs/checkpoints/array-transform-callable-lua-2026-11-12/control-owner/lua/src/?.lua;docs/checkpoints/array-transform-callable-lua-2026-11-12/control-owner/lua/src/?/init.lua;;",
+    "LUA_CPATH": "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc/native/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE": "docs/checkpoints/array-transform-callable-lua-2026-11-12/restored/puc",
+    "LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT": "docs/checkpoints/array-transform-callable-lua-2026-11-12/control-owner/"
+  }
+}

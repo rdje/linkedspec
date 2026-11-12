@@ -1,4 +1,5 @@
-{"member_count":79,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":80,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4232,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-remaining-fluent-continuation-split.md","sha256":"efc3e8028f2395d8b06c9d3ed0a4314727bae637e4f38528e25c146f66793520","type":"member"}
 {"bytes":2204,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-rhs-shape-target-kind-parity.md","sha256":"6d56523bb7aa80b2f2f06994206760d66bcb3023b18cbb28a733f29bc09ff170","type":"member"}
 {"bytes":2919,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-scalar-bare-read-parity.md","sha256":"92305c0bfd16150ebe93c8dcd33490a7526a98dd393cea1d4d222a226ae375de","type":"member"}
 {"bytes":2924,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-rust-shape-literal-value-parity.md","sha256":"ee2883f33d8b141b3ce94102e2b4bb877ee1ed154464fd47d67fc0fd0497ae09","type":"member"}

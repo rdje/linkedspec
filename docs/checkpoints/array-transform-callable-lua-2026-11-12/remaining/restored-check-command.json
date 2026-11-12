@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-lua-2026-11-12/run_stage.py",
+    "restored-check",
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/array-transform-callable-lua-2026-11-12/check_epoch.py",
+    "restored"
+  ],
+  "cwd": "."
+}

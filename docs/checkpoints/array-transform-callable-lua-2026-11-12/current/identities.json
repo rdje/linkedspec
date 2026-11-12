@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/capture_current.py": {
+    "bytes": 2119,
+    "mode": 420,
+    "sha256": "9120735f3d6b9a9cc2a5430478bf7332816b73a2189823ac6c25ca87830701ce"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/check_current.py": {
+    "bytes": 1567,
+    "mode": 420,
+    "sha256": "a77d9ecb755d0fedf5c39170fd024bf00a2d6ab05e48c82d5bc8b9765d487946"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/input-identities.json": {
+    "bytes": 95503,
+    "mode": 420,
+    "sha256": "c607f1ef0e911483f9e5ef1e5973d408098572096bafd2e4fd751d4929ed38a5"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/direct/inputs-before-first-run.tar.gz": {
+    "bytes": 1390135,
+    "mode": 420,
+    "sha256": "8fa212eadc1cb89ef7e4dcc5e812ad784e79d7a8bb838d31eb4e94b6ca4415de"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/repair-run/identities.json": {
+    "bytes": 1853,
+    "mode": 420,
+    "sha256": "690f8a8ac7790660a5673509303cd46f26faf971c63f3d3a6877e5378ba686c2"
+  },
+  "docs/checkpoints/array-transform-callable-lua-2026-11-12/trace/input-identities.json": {
+    "bytes": 91838,
+    "mode": 420,
+    "sha256": "b58668208dbd9ac77aeb76d7f4f8efcf2679d4eedb3775ad449f4fc055a7323b"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}
