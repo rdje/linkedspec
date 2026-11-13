@@ -1,0 +1,109 @@
+{
+  "changed_fields": [
+    "durability.mode",
+    "durability.revision"
+  ],
+  "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+  "rejected_controls": [
+    "statement",
+    "input-hash",
+    "omitted-input",
+    "wrong-revision",
+    "unselected-claim",
+    "boolean-version"
+  ],
+  "revision": "b370de8d31e3f38da6abf8ed4702a523aa3d6d97",
+  "selected_claim": "backend-task-evidence-path-scope",
+  "verified_inputs": [
+    {
+      "bytes": 4304,
+      "path": "scripts/check_diagnosis_evidence.sh",
+      "sha256": "62c8c93deedad85559ee1bc0c65417c71eb4a6837a133affc54e43bae7be90b3"
+    },
+    {
+      "bytes": 6353,
+      "path": "tools/test_diagnosis_evidence.py",
+      "sha256": "88b66a99e9967664181c3aca06fab20a782e072fcc06508d841440cf7e81cca2"
+    },
+    {
+      "bytes": 9311,
+      "path": "tools/project_data_env.sh",
+      "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+    },
+    {
+      "bytes": 11043,
+      "path": "tools/project_data_run.sh",
+      "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+    },
+    {
+      "bytes": 1486,
+      "path": "tools/run_python_project_data.sh",
+      "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+    },
+    {
+      "bytes": 191037,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/after.json",
+      "sha256": "8b203455ecdb65c83f17bc81c869d9d72cd38a6278759e158c2aba6230dd12d7"
+    },
+    {
+      "bytes": 184885,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/before.json",
+      "sha256": "c54f93b9b2f607e41ae77c76cf1b736ada39108088bfd8574b92bd85e2012474"
+    },
+    {
+      "bytes": 144,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/red-final.log.gz",
+      "sha256": "5f1735163de3bd2aaaa053331cbeff226555bff6fac1a846003edb173a2cfb0e"
+    },
+    {
+      "bytes": 375,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/red-initial.log.gz",
+      "sha256": "c2b481508480fe0b7c47fe54026567bf641a18ef41c1770761b3bf48ea8aaa27"
+    },
+    {
+      "bytes": 3074,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/preserve_claim.py",
+      "sha256": "6de848067fe56e7fb0f646d941a569006c7c08f7d85d6532b71594d10314934e"
+    },
+    {
+      "bytes": 97,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/claim-preservation.txt",
+      "sha256": "ac7ae8092d6f68f56204e9068b468c6200f75fafea5f2f031f8f6f92a3d39495"
+    },
+    {
+      "bytes": 122222,
+      "path": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "sha256": "6eb68abf9c754f6b2d9ea00f4dd49d5b9a1561862d6fb959884a6c6de4673d97"
+    },
+    {
+      "bytes": 76639,
+      "path": "docs/checkpoints/task-acceptance-backend-scope/book-cap-preparation.json.gz",
+      "sha256": "4dd80f12f9adbe9836e0211c7fae603be02ef01afe45b77ac0277fa16d68ea28"
+    },
+    {
+      "bytes": 90763,
+      "path": "tools/run_ci_local.sh",
+      "sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a"
+    },
+    {
+      "bytes": 10573,
+      "path": "docs/checkpoints/document-pressure-restoration/book_count.py",
+      "sha256": "b65b55b8558978889cd6ad47211391e20ae94aa025c774e9d19651426fc72a96"
+    },
+    {
+      "bytes": 11305,
+      "path": "docs/checkpoints/document-pressure-restoration/storage_inventory.py",
+      "sha256": "bc15ab0b8bcf28832053b3c41d9ddda1c80091a62eb08c8acfd35e761795130f"
+    },
+    {
+      "bytes": 2498,
+      "path": "doctrine/project_data_storage/python_entrypoints.json",
+      "sha256": "df58bb5d981a41f75216d1b9e0941f5b7a5527a2be4c25500186f8e51a8a4898"
+    },
+    {
+      "bytes": 630,
+      "path": "doctrine/project_data_storage/python_temporary_owners.json",
+      "sha256": "df4fd9296801d8345de44a87af4b22d94728c0f7a6d4eb2b2d881c8bd704e5d7"
+    }
+  ]
+}

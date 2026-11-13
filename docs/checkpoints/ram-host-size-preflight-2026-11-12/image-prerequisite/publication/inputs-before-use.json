@@ -1,0 +1,112 @@
+{
+  "CHANGES.md": {
+    "bytes": 47532,
+    "mode": 420,
+    "sha256": "cdf04e343e32782f1f52418fd4bfdcbfdfbc733eb90adf6851ff8cb14445b455"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 37775,
+    "mode": 420,
+    "sha256": "6b7582c785718d687d07edeadd16ef6ce541b524491f36cc2eb3a49abc22cb47"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5318,
+    "mode": 420,
+    "sha256": "39f6c255f5a8582c66023dc16688d34d98c98976f7df6fa0c2a357ce5235ef38"
+  },
+  "MEMORY.md": {
+    "bytes": 3460,
+    "mode": 420,
+    "sha256": "b081aeab65296467983cb54ee54b9fcc34546e70a95691f1ec7ef21e712fa750"
+  },
+  "ROADMAP.md": {
+    "bytes": 472107,
+    "mode": 420,
+    "sha256": "f14123d9cfa479fad9d1a27f310f294a93bf42fda6094cf7f8296b450cac7ec4"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273442,
+    "mode": 420,
+    "sha256": "8826fdc7e6febf3a4627798ae5182e1f405d1aac6985b525114111321341d0ae"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/LANDING.md": {
+    "bytes": 1242,
+    "mode": 420,
+    "sha256": "6508f7923b81c166fa2fc46f6e0394034fbf405ace1b32642650e703f6d5c2cb"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/REVIEW.md": {
+    "bytes": 4752,
+    "mode": 420,
+    "sha256": "78e072a601a16c9883071c148f0eb94f034648706f100c0f6555b6c8ae2101d9"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/isolated-recovery/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/isolated-recovery/stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/isolated-recovery/stdout.gz": {
+    "bytes": 49936,
+    "mode": 420,
+    "sha256": "d3a7a07b96164114499a73ebf15007dfa0c735b4a6bb9748cbaac717b2e8e511"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/proofs/historical-recovery-review/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/proofs/historical-recovery-review/stdout.gz": {
+    "bytes": 300,
+    "mode": 420,
+    "sha256": "df692855065d523565b067521d45dea6bac77466bd56bfa40457a8be83f74acc"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/proofs/population-review/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/proofs/population-review/stdout.gz": {
+    "bytes": 241,
+    "mode": 420,
+    "sha256": "3d6a4640dfd607477a42d36408a452094f32009eff6de299fce1da16ef875fbd"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/publish.py": {
+    "bytes": 23529,
+    "mode": 420,
+    "sha256": "a9d48cb9fcef5c2aa1761f31b300c6c940eaaf7cb794bb1fe9b86effa5c63cc5"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.14.json": {
+    "bytes": 5089,
+    "mode": 420,
+    "sha256": "d37b871a2e29774b959fa3347235789c1cb106fa72f414e7b1127a2b7fbeae2c"
+  },
+  "docs/knowledge/three-objective-language-readiness.md": {
+    "bytes": 12337,
+    "mode": 420,
+    "sha256": "17d0d1fcb145afaada0e1ca908cffd0fb828ce40951db0f69d7b8f67f78418ca"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 63408,
+    "mode": 420,
+    "sha256": "f859efaf80b51ca56e5931b3e140ee39620fe8d67b54ce02b88c386c35c9ecbe"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20820,
+    "mode": 420,
+    "sha256": "f137f3657ff1ea341a7a00484775999ac30cff79778d111955ae6c13930551a5"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 547082,
+    "mode": 420,
+    "sha256": "b04fb1421a7a43228b9c81a53f0d225e9194ea53c222a58e85dd5ca5b9e974ca"
+  },
+  "git_message_brief.txt": {
+    "bytes": 394,
+    "mode": 420,
+    "sha256": "3266dae5b8748937fc85d546d4222f67a2ea6ad221fb08ced8ceb371c044e727"
+  }
+}

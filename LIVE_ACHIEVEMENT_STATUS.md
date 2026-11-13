@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Bounded concat80 has five focused backend outcomes and headroom32 is complete. Remeasure committed size, then resource4.14/current discovery and canonical publication preparation; broader source/context/admission remains.
+Full PNT continues. Resource14 has focused RAM and historical-source prerequisite proof; exact staged canonical admission governs landing. Fresh size, raw-error4.28 then final discovery4.1/publication; wider source/context/admission remains.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.32. Existing rooting data epoch:22 IDs/all CORE/five unchanged bodies/full35225-byte tail,17 pointers/40587 current-text bytes renewed. Migration23 public queries/first independent readonly10/current identity pass. Terse refusal1 remains unchanged and independently recovered/three controls; no SDK, cleanup or parity claim.
+TYPE-REFERENCE-BOOK.1.2.23.4.14. Shared actual RAM capacity/single snapshot; original RED/source-bound/native recovery, exact CI-claim preservation and trend docs. First canonical1 remains nonpassing; four accepted runtime successors/nested report/exact RAM CI inverse now pass isolated recovery with all old controls preserved. New full canonical receipt is required.
 
 ## Next Action
 
-Remeasure current committed outgoing bytes, then repair both RAM preflight producers under resource4.14 before current canonical discovery4.1/full CI. Raw-error4.28 precedes admission AND push. Prepare near1.4GB and publish around1,500,000,000 bytes regardless cadence, with exact clean-HEAD canonical proof/normal hooks/fresh remote identity.
+Remeasure committed outgoing bytes, then focused raw-error4.28 before final current discovery4.1. Publish around1,500,000,000 bytes regardless cadence with clean exact-HEAD canonical proof/normal hooks/fresh remote identity; prepare near1.4GB or earlier for growth.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.5 — each host508/four routes/20 targets/four separate compatibility/484 preserved/80 initial/eight signatures; old24-current508/direct6987 checks/readonly11/current266/3048 pairs; fresh size then coverage/discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.31 —1316 rows/eight scopes retained; three exact own completed logs/133480 combined bytes/modes independently used before plain retirement; readonly16/three public queries/parent30-31 exact; fresh size then Lua80.5.
@@ -29,7 +30,6 @@ Remeasure current committed outgoing bytes, then repair both RAM preflight produ
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.27 —45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/readonly ten controls/current identities; Rust next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.
 
 
 ## History

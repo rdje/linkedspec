@@ -20,7 +20,9 @@ answers:
   - "why does historical recovery need the accepted Dart emitter test image"
   - "how can an uncommitted objective claim replay without a fictitious Git capture"
   - "where is the frozen objective input epoch replayed"
-date: 2026-11-02
+  - "why can nested successor verification report an intermediate image"
+  - "which exact RAM CI inverse preserves earlier objective controls"
+date: 2026-11-12
 status: bounded evidence reconciliation; exact canonical acceptance governs parent closure
 tags: [language-readiness, recursion, context, lossless, authoring, evidence]
 evidence: "Historical probes retain evidence, authoring costs and open defects; no completeness claim follows."
@@ -167,3 +169,29 @@ Phase020-assertion evolution is separately closed by sibling `phase0_review.py`:
 its exact inverse precedes every prior six-hunk/image stage and all prior denials,
 adding12 new exact-stage denials. The older direct reviewers require their supplied
 epoch; no frozen source identity is a fresh runtime/objective admission.
+
+
+## November12 later image and RAM CI stages
+
+Resource23.4.14's first canonical gate refuses the later Dart image. The complete
+149-source/19-image inventory isolates four accepted runtime successors at b370
+and the owned uncommitted RAM CI change. A second closed successor table retains
+the original18 table,728 successor layer, first-image entry and Phase0 activation.
+Nested reports now use effective successor reports and retain intermediate
+lineage; an actual old-report RED precedes the correction.
+
+The RAM CI stage has two exact hunks and closed support identities. It restores
+the actual b370 precursor before every older CI inverse/falsifier, without
+describing the owned candidate as a committed historical image. New source/data
+controls remain separate from the original714 governance mutations. Every old
+recovery/control field and134 recovered inputs match the previous capture;
+the existing Phase0-value predicate/source is unchanged and its12 controls pass.
+The actual current consumer has210 declared/199 observed inputs within213
+before-use retained bodies. Native/toolchain/OS closure remains4.2/SESSION5.
+
+Historical default recovery is image-prerequisite/review.py and
+review_population.py under docs/checkpoints/ram-host-size-preflight-2026-11-12/.
+The primary source/guard evidence remains separate. This admits exact source
+identities and historical integrity; current runtime/objective/feature admission
+does not follow. Later CI edits require a reviewed exact stage before these
+earlier inverses, preserving all old tables and denials.

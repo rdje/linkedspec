@@ -12,6 +12,7 @@
     "tools/test_document_history_rollover.py",
     "tools/test_knowledge_map_atomic_output.py",
     "tools/test_knowledge_map_projection.py",
+    "tools/test_ram_guard.py",
     "tools/test_task_narrative.py",
     "tools/update_reference_scope.py"
   ]

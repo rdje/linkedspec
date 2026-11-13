@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py"
+  ],
+  "cwd": ".",
+  "environment": {}
+}

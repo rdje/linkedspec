@@ -1,0 +1,295 @@
+{
+  "accepted_records": 212,
+  "intersections": [
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "7a3cfe817c0f49f74bdb186e8f817f947c9b99aeee4fcca7e4fec8b503d4726b"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "f9e5edf87ba37b7d41ad531c5fc7ee61c670d3eeb78dd0739538179594f06c60"
+    },
+    {
+      "claim": "complete-supplied-private-fixture-canonical-selection",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.7.json",
+      "revision": "64b66167c2277533c2393899e3754e14a74f0b31",
+      "sha256": "367c4ba74cdfbc941f951ebe3238cc41faae504b0599bd1bf34af44559aaaa38"
+    },
+    {
+      "claim": "normalization-call-grammar-diagnosis",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0.json",
+      "revision": "03e2bb9a7f48abbe58771f624cb6aba3a068fd35",
+      "sha256": "7044e24dc4a90a4fa11da1d5c53c939d35f8012d9db16584aaddc59311b50a7e"
+    },
+    {
+      "claim": "call-form-normalization-source-succession",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1.json",
+      "revision": "0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be",
+      "sha256": "d9023557fc778363bd5799b5f77bcdbe0e0e73c1861cc61f7f664fa0288e8b40"
+    },
+    {
+      "claim": "historical-objective-audit-byte-evolution",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1.json",
+      "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5",
+      "sha256": "1eed29928d004cf9c1daa8030a8c45c4fa8c5be524a833e99024d461155a2cb1"
+    },
+    {
+      "claim": "closed-historical-artifact-census",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0.json",
+      "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5",
+      "sha256": "1eed29928d004cf9c1daa8030a8c45c4fa8c5be524a833e99024d461155a2cb1"
+    },
+    {
+      "claim": "isolated-historical-artifact-recovery",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1.json",
+      "revision": "0075a5b163cd9690d4ad70b1c8ea1da796088ab5",
+      "sha256": "1eed29928d004cf9c1daa8030a8c45c4fa8c5be524a833e99024d461155a2cb1"
+    },
+    {
+      "claim": "pending-residual-scan-occurrence-order",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.6.1.json",
+      "revision": "834e0a3ddaf63789ea23dfac6c7cf273c01342e6",
+      "sha256": "d49362e909350685e17d464bc3c8dc9ab7bc9a108082b727df81b05de456f570"
+    },
+    {
+      "claim": "source-unit-raw-expression-readiness-reporting-repair",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.1.json",
+      "revision": "363c79109ea8498252927547438ade47117ae71e",
+      "sha256": "7d7e760af1cba6c47754ef8aeca5f833b4637cdcd13b95bfe3527436461d6adc"
+    },
+    {
+      "claim": "helper-scan-occurrence-mapping-ambiguity",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.0.json",
+      "revision": "8d71b3b5cbea894416c14a9fade10968a73a8a5f",
+      "sha256": "7d7e760af1cba6c47754ef8aeca5f833b4637cdcd13b95bfe3527436461d6adc"
+    },
+    {
+      "claim": "three-contract-private-helper-source-provenance",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.0.json",
+      "revision": "80ecf47f258a7f23a59598a1c5500a34fe662a7c",
+      "sha256": "7d7e760af1cba6c47754ef8aeca5f833b4637cdcd13b95bfe3527436461d6adc"
+    },
+    {
+      "claim": "basic-regex-private-source-provenance",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.0.json",
+      "revision": "3fc589f8494fd55b4f0154d6c226797a4fa2f711",
+      "sha256": "7d7e760af1cba6c47754ef8aeca5f833b4637cdcd13b95bfe3527436461d6adc"
+    },
+    {
+      "claim": "rollover-eof-and-pending-generation-recovery",
+      "mode": "historical",
+      "path": "docs/knowledge/three-objective-language-readiness.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1.json",
+      "revision": "65304aded7d1a096c701b768b076b29c4eb893b2",
+      "sha256": "fb9febccd8f32d6d7c11b51c25e034d7d881ca4f4e7bdc8f0127c0889dc245d0"
+    },
+    {
+      "claim": "rollover-eof-and-pending-generation-recovery",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.1.json",
+      "revision": "65304aded7d1a096c701b768b076b29c4eb893b2",
+      "sha256": "558c99de37dda8384f37efc447c666e97bd4ac74263a46f61833e70d223401dd"
+    },
+    {
+      "claim": "immutable-compiler-membership-checkpoint",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+      "sha256": "47026d9e2005b452d0aac7070333b37cff01d2d9384a23d38b40804897255b21"
+    },
+    {
+      "claim": "perl-codeblock-count-first",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.10.json",
+      "revision": "79c68715c04f06379bb18673b09d44dd90611439",
+      "sha256": "b0afe720310bda2bd2b8f135decbc852f1fef10476df340abfd018bef375e398"
+    },
+    {
+      "claim": "finite-selection-history-continuity",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.10.json",
+      "revision": "79c68715c04f06379bb18673b09d44dd90611439",
+      "sha256": "b0afe720310bda2bd2b8f135decbc852f1fef10476df340abfd018bef375e398"
+    },
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "tests/language-readiness/current-source-images.json.gz",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310"
+    },
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "d026bdb59fb77fcdd7dc25383753acfbe70b80bba5d7e99452886a8f116612cc"
+    },
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "tools/historical_objective_images.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "433df71f274a3e58447b0916496fdf3d022a3181ca26844928f7f40ca2d5f544"
+    },
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "tools/test_historical_objective_images.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "c87218b377e321e260dc53074cf7c9583d821e6dd91e2ce1a7842ff9e6bf6d52"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "tests/language-readiness/current-source-images.json.gz",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "d026bdb59fb77fcdd7dc25383753acfbe70b80bba5d7e99452886a8f116612cc"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "tools/historical_objective_images.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "433df71f274a3e58447b0916496fdf3d022a3181ca26844928f7f40ca2d5f544"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "tools/test_historical_objective_images.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "c87218b377e321e260dc53074cf7c9583d821e6dd91e2ce1a7842ff9e6bf6d52"
+    },
+    {
+      "claim": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "mode": "historical",
+      "path": "tests/language-readiness/additional-source-images.json.gz",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.1.json",
+      "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b",
+      "sha256": "33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e"
+    },
+    {
+      "claim": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "mode": "historical",
+      "path": "tests/language-readiness/current-source-images.json.gz",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.1.json",
+      "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b",
+      "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310"
+    },
+    {
+      "claim": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "mode": "historical",
+      "path": "tests/language-readiness/current-source-successors.json.gz",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.1.json",
+      "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b",
+      "sha256": "f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af"
+    },
+    {
+      "claim": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.1.json",
+      "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b",
+      "sha256": "95751aab02261dbe6076c27dfdc7aa9f2a213cadc832029375bde410c2fbb8de"
+    },
+    {
+      "claim": "phase0-value-oracle-and-exact-historical-stage-repair",
+      "mode": "historical",
+      "path": "tools/historical_objective_images.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.18.1.json",
+      "revision": "41ba410bbb03fe8e7e4dc1412331d069e258d70b",
+      "sha256": "96317a5b533cdd3731b49bdb5884acfae2ec1ad230bf97a48624f2b209058c22"
+    },
+    {
+      "claim": "task-evidence-ci-historical-inverse",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+      "revision": "f6295bc8fc76e7c6049f28397049f527fe8133d7",
+      "sha256": "0510f04541419d255fa92633cd46ea412e93a88421c8f8e1067ff79abcdd0a94"
+    },
+    {
+      "claim": "perl-evaluated-list-values",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.3.json",
+      "revision": "2fca7d8489038c226fe0454a105f12a2af696a1f",
+      "sha256": "5f7e0b598185ac8b86f219e34712155cb64616d6f58a7f40505ed4370026df5c"
+    },
+    {
+      "claim": "perl-generated-drop-key-evaluation",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.6.json",
+      "revision": "efad62ba7a70e0b9d930b761f9cacaad87a0210c",
+      "sha256": "bcb97a2baeb40521cfdc11328692bb9c8cb0b7b5cd96be89052d305c4b75beda"
+    },
+    {
+      "claim": "perl-deferred-aggregate-availability",
+      "mode": "historical",
+      "path": "tests/language-readiness/verify_objectives.py",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.7.json",
+      "revision": "49ce3fb472b01dc6a7987b0038fae22686dee7cd",
+      "sha256": "bcb97a2baeb40521cfdc11328692bb9c8cb0b7b5cd96be89052d305c4b75beda"
+    }
+  ],
+  "live_intersections": [],
+  "targets": [
+    "tools/historical_objective_images.py",
+    "tools/test_historical_objective_images.py",
+    "tests/language-readiness/verify_objectives.py",
+    "docs/knowledge/three-objective-language-readiness.md",
+    "tests/language-readiness/current-source-images.json.gz",
+    "tests/language-readiness/current-source-successors.json.gz",
+    "tests/language-readiness/additional-source-images.json.gz"
+  ]
+}

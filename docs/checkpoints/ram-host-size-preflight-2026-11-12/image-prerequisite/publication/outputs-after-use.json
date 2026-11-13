@@ -1,0 +1,77 @@
+{
+  "CHANGES.md": {
+    "bytes": 47481,
+    "mode": 420,
+    "sha256": "85245ffd149735b712b8b21cec7ed3fffc3bf3637fcc53910dd012498e89484d"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 37714,
+    "mode": 420,
+    "sha256": "168cd11c9d30c4f368098d3623f4a2fcfa8fad11d25d688a7fccc86e258b7143"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5356,
+    "mode": 420,
+    "sha256": "23c6cf1b9a5f0f79294170e49416c993202da11a788dd8c80b08ef199d04bbc2"
+  },
+  "MEMORY.md": {
+    "bytes": 3447,
+    "mode": 420,
+    "sha256": "65abecc729a0ec97843d6d059d656e56ac7412ab9e9dfc36eb29c024fa6e4ba7"
+  },
+  "ROADMAP.md": {
+    "bytes": 472178,
+    "mode": 420,
+    "sha256": "98b5f49dcda4ee6e01779dcb89c0c229d3c9ee3bbc4690cdf2d6a990a111ccb9"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273513,
+    "mode": 420,
+    "sha256": "14d1b9bdeec2bc79f78baa5791ccc7f2905a1e9ff4ef6034cd8d31ce76efe938"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/LANDING.md": {
+    "bytes": 1794,
+    "mode": 420,
+    "sha256": "a456cf8e7005786ecf489ddc41399285876b8391295eb008df32860d6a89ca1b"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/REVIEW.md": {
+    "bytes": 5379,
+    "mode": 420,
+    "sha256": "dd540800547a418d0f9e99c2d36c0992d89b03c19a51853bc362a32b584edc14"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/publication/prior-resource-claim.json.gz": {
+    "bytes": 2104,
+    "mode": 420,
+    "sha256": "02fce39b9f113cedff768f296ccd58ae92fe7e9dded6e6ff475ee73f529dcca1"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.14.json": {
+    "bytes": 8300,
+    "mode": 420,
+    "sha256": "89356adda05c0a17c00e2f85dc280f646bb3c546c71c34306fd56d2077fb38cd"
+  },
+  "docs/knowledge/three-objective-language-readiness.md": {
+    "bytes": 14045,
+    "mode": 420,
+    "sha256": "f04dc98d6d42bc93ed617997109902d9aeda7aaa94bf2a89963e2187d7ed7653"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 64886,
+    "mode": 420,
+    "sha256": "cd59c18e7d2f885fdc62b280e1c845aed77c2fb8ab98097ebfbdaccf603c6bdb"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20808,
+    "mode": 420,
+    "sha256": "d9daef831a1748a3fee251cb92ca5f097f43ff2d4abc6aadab24dea2f0cf04d9"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 548710,
+    "mode": 420,
+    "sha256": "01fda2e3ddafa243802bfc2f8f2d8c20184c8570754c35f922e79a89b056645a"
+  },
+  "git_message_brief.txt": {
+    "bytes": 430,
+    "mode": 420,
+    "sha256": "9cbeffc266ec5a7aa0bedcdbaa9839136132273dd2c6479f2c5219426ca12ced"
+  }
+}

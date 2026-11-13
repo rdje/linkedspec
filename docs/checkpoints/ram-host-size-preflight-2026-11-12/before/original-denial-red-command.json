@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "tools/test_ram_guard.py",
+    "--legacy-red",
+    "tools/ram_guard.sh"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LC_ALL": "C"
+  }
+}

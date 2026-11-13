@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "uname",
+    "-s"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LC_ALL": "C"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "/usr/bin/memory_pressure",
+    "-Q"
+  ],
+  "cwd": "."
+}

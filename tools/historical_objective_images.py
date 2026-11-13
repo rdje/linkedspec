@@ -147,14 +147,18 @@ class SuccessorImageAdmissions:
 
     def report(self):
         result=self.baseline.report()
+        successors={row['path']:row for row in self.successors.report()}
         for row in result:
             name=row['path']
             if name not in self.successors.rows:continue
+            successor=successors[name]
             row.update(previous_current_sha256=row['current_sha256'],
                        previous_image_owner=row['owner'],previous_activation_commit=row['activation_commit'],
-                       current_sha256=self.successors.rows[name]['current_sha256'],
-                       owner=self.successors.data['owner'],activation_commit=self.successors.data['activation_commit'],
+                       current_sha256=successor['current_sha256'],
+                       owner=successor['owner'],activation_commit=successor['activation_commit'],
                        source_stage='exact committed successor image; original predecessor checks remain historical')
+            if 'previous_current_sha256' in successor:
+                row['successor_admission']=successor
         return result
 
     def falsify(self,sources,read):
@@ -205,3 +209,68 @@ class AdditionalImageAdmissions:
 
     def falsify(self,sources,read):
         return ImageAdmissions.falsify(self,sources,read)
+
+
+class RamCIInverse:
+    """Restore one exact owned CI candidate to its committed precursor."""
+
+    SUPPORT = (
+        'doctrine/project_data_storage/python_entrypoints.json',
+        'doctrine/project_data_storage/python_temporary_owners.json',
+        'tools/host_ram_usage.sh', 'tools/ram_guard.sh', 'tools/test_ram_guard.py',
+    )
+    STAGE = 'owned candidate bytes; activation identifies committed precursor only'
+
+    def __init__(self,raw,expected_sha256,owner,activation,git,read):
+        require(sha(raw)==expected_sha256,'unreviewed RAM CI table')
+        require(len(raw)<=131072,'RAM CI table bound')
+        data=strict_json(gzip.decompress(raw))
+        require(isinstance(data,dict) and set(data)=={
+            'schema_version','owner','activation_commit','path','current_stage',
+            'before_sha256','after_sha256','hunks','support'},'RAM CI table schema')
+        require(type(data['schema_version']) is int and data['schema_version']==1,'RAM CI table version')
+        require(isinstance(data['owner'],str) and data['owner']==owner and
+                re.fullmatch(r'[A-Z][A-Z0-9-]*(?:\.[0-9]+)+',data['owner']),'RAM CI table owner')
+        require(data['activation_commit']==activation and isinstance(activation,str)
+                and re.fullmatch(r'[0-9a-f]{40}',activation),'RAM CI precursor revision')
+        require(data['path']=='tools/run_ci_local.sh' and data['current_stage']==self.STAGE,'RAM CI source boundary')
+        for field in ('before_sha256','after_sha256'):
+            require(isinstance(data[field],str) and re.fullmatch(r'[0-9a-f]{64}',data[field]),'RAM CI source digest')
+        require(data['before_sha256']!=data['after_sha256'],'RAM CI unchanged source')
+        require(isinstance(data['hunks'],list) and len(data['hunks'])==2,'RAM CI hunk population')
+        for row in data['hunks']:
+            require(isinstance(row,dict) and set(row)=={'before','after'} and
+                    all(isinstance(row[key],str) and row[key] for key in ('before','after')) and
+                    row['before']!=row['after'],'RAM CI hunk schema')
+        require(len({row['after'] for row in data['hunks']})==2,'RAM CI duplicate hunk')
+        require(isinstance(data['support'],list),'RAM CI support schema')
+        for row in data['support']:
+            require(isinstance(row,dict) and set(row)=={'path','sha256'},'RAM CI support schema')
+            safe_path(row['path'])
+            require(isinstance(row['sha256'],str) and re.fullmatch(r'[0-9a-f]{64}',row['sha256']),'RAM CI support digest')
+        require([row['path'] for row in data['support']]==list(self.SUPPORT),'RAM CI support population')
+        require(git('cat-file','-t',activation).strip()==b'commit','RAM CI precursor is not a commit')
+        entries=git('ls-tree','-z',activation,'--',data['path']).split(b'\0')
+        require(len(entries)==2 and entries[0],'RAM CI precursor missing')
+        header,name=entries[0].split(b'\t',1)
+        mode,kind,blob=header.decode().split()
+        require(name.decode()==data['path'] and mode in ('100644','100755') and kind=='blob','RAM CI precursor is not regular')
+        before=git('cat-file','blob',blob)
+        require(sha(before)==data['before_sha256'],'RAM CI committed precursor mismatch')
+        for row in data['support']:
+            require(sha(read(row['path']))==row['sha256'],'unreviewed RAM CI support: '+row['path'])
+        self.data=data;self.before=before
+
+    def restore(self,contents):
+        require(isinstance(contents,bytes) and sha(contents)==self.data['after_sha256'],'unreviewed RAM CI source')
+        restored=contents
+        for row in reversed(self.data['hunks']):
+            after=row['after'].encode();before=row['before'].encode()
+            require(restored.count(after)==1,'RAM CI hunk anchor')
+            restored=restored.replace(after,before,1)
+        require(restored==self.before,'RAM CI precursor reconstruction')
+        return restored
+
+    def report(self):
+        return {key:self.data[key] for key in (
+            'owner','activation_commit','path','current_stage','before_sha256','after_sha256')}

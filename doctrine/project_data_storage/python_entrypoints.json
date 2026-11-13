@@ -50,6 +50,7 @@
     "tools/read_task_narrative.py",
     "tools/test_claim_verification_staged.py",
     "tools/test_diagnosis_evidence.py",
+    "tools/test_ram_guard.py",
     "tools/test_task_narrative.py"
   ]
 }

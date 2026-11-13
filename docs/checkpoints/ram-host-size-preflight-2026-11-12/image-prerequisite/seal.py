@@ -1,0 +1,16 @@
+"""Seal the completed source-admission proof before independent recovery."""
+import hashlib
+import json
+from pathlib import Path
+
+BASE=Path(__file__).resolve().parent
+target=BASE/'sealed-identities.json'
+assert not target.exists()
+rows={}
+for path in sorted(BASE.rglob('*')):
+    if path.is_file():
+        assert not path.is_symlink()
+        raw=path.read_bytes()
+        rows[path.relative_to(BASE).as_posix()]=dict(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest(),mode=path.stat().st_mode&0o777)
+target.write_text(json.dumps(rows,indent=2,sort_keys=True)+'\n')
+print('Source-admission proof identities retained')

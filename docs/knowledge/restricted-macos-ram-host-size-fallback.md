@@ -7,13 +7,24 @@ answers:
   - "what RAM instruction supersedes the older86 percent card"
   - "does the Rust Cargo wrapper invoke the legacy RAM guard"
 date: 2026-11-06
-status: source defect owned P1 by TYPE-REFERENCE-BOOK.1.2.23.4.14; product work uses independent monitoring
+status: dated defect repaired under TYPE-REFERENCE-BOOK.1.2.23.4.14; focused proof passes, canonical admission required
 tags: [host, memory, ram, macos, permissions, resources]
 evidence: "Rust75.6.2 preflight: default-shell sysctl -n hw.memsize denied; memory_pressure -Q confirms the director24GiB host. At fb0cb2ce89004f93d2ae4153e28684422984c760, tools/ram_guard.sh falls back to17179869184 bytes if sysctl fails. Task4.14 owns retained reproduction/repair before memory-guarded full verification."
 reverify:
   - "git show fb0cb2ce89004f93d2ae4153e28684422984c760:tools/ram_guard.sh"
   - "memory_pressure -Q"
 ---
+
+Current repair, November12: both RAM guard and canonical CI share the validated
+tools/host_ram_usage.sh producer. The original denied query, wrong admission
+and three-snapshot mechanism remain retained. Source-bound deterministic and
+actual native single-snapshot arithmetic controls pass; default historical
+recovery is docs/checkpoints/ram-host-size-preflight-2026-11-12/review.py.
+Canonical staged admission is required for this infrastructure landing.
+Use [[shared-host-ram-budget]] for current trend policy; the following dated
+diagnosis describes the original source, not the repaired current code.
+
+## Original diagnosis (historical)
 
 The macOS _used_pct path reads host capacity with sysctl and substitutes16GiB
 on failure. Restricted-shell access was denied while a separate OS query matched

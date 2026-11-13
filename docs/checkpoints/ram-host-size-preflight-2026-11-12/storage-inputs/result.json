@@ -1,0 +1,60 @@
+{
+  "accepted_source": "docs/checkpoints/ram-host-size-preflight-2026-11-12/publication-inputs",
+  "intersections": [
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_entrypoints.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "891fd8d315b188c8f949e63d93fe68852cba3d58c7377e90ae3199f43fe138f3"
+    },
+    {
+      "claim": "approved-archive-reference-preservation",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_temporary_owners.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "2bc2d6c466e143ccca29d24fb46f2a9e66be703fe7bde6bf3b16d4298506d3d9"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_entrypoints.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "891fd8d315b188c8f949e63d93fe68852cba3d58c7377e90ae3199f43fe138f3"
+    },
+    {
+      "claim": "historical-objective-current-source-integrity",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_temporary_owners.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.20.1.10.json",
+      "revision": "cd3b6adc3e58fb64283ae4ae4a5a37823eabd891",
+      "sha256": "2bc2d6c466e143ccca29d24fb46f2a9e66be703fe7bde6bf3b16d4298506d3d9"
+    },
+    {
+      "claim": "backend-task-evidence-path-scope",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_entrypoints.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+      "revision": "b370de8d31e3f38da6abf8ed4702a523aa3d6d97",
+      "sha256": "df58bb5d981a41f75216d1b9e0941f5b7a5527a2be4c25500186f8e51a8a4898"
+    },
+    {
+      "claim": "backend-task-evidence-path-scope",
+      "mode": "historical",
+      "path": "doctrine/project_data_storage/python_temporary_owners.json",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+      "revision": "b370de8d31e3f38da6abf8ed4702a523aa3d6d97",
+      "sha256": "df4fd9296801d8345de44a87af4b22d94728c0f7a6d4eb2b2d881c8bd704e5d7"
+    }
+  ],
+  "live_intersections": [],
+  "prospective_paths": [
+    "doctrine/project_data_storage/python_entrypoints.json",
+    "doctrine/project_data_storage/python_temporary_owners.json"
+  ],
+  "qualified_mode_record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json",
+  "records": 212
+}

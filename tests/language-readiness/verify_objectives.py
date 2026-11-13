@@ -94,7 +94,20 @@ CURRENT_SUCCESSOR_TABLE = 'tests/language-readiness/current-source-successors.js
 CURRENT_SUCCESSOR_SHA256 = 'f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af'
 ADDITIONAL_IMAGE_TABLE = 'tests/language-readiness/additional-source-images.json.gz'
 ADDITIONAL_IMAGE_SHA256 = '33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e'
-IMAGE_EVOLUTION_INPUTS = (CURRENT_IMAGE_TABLE, CURRENT_IMAGE_HELPER, CURRENT_SUCCESSOR_TABLE, ADDITIONAL_IMAGE_TABLE)
+LATER_IMAGE_OWNER = 'TYPE-REFERENCE-BOOK.1.2.23.4.14'
+LATER_IMAGE_TABLE = 'tests/language-readiness/current-source-successors-2026-11-12.json.gz'
+LATER_IMAGE_SHA256 = '5e7435081d4653fa564464c03de2bce7c6f8c645fb1cc0514b507cb949d76899'
+RAM_CI_OWNER = LATER_IMAGE_OWNER
+RAM_CI_ACTIVATION = 'b370de8d31e3f38da6abf8ed4702a523aa3d6d97'
+RAM_CI_TABLE = 'tests/language-readiness/ram-preflight-ci-evolution.json.gz'
+RAM_CI_TABLE_SHA256 = 'a3ecce2d9a1157cbd86fffa065b07997008b83f9f3d15a40e917c74ca96ea2a7'
+RAM_CI_SUPPORT = (
+    'doctrine/project_data_storage/python_entrypoints.json',
+    'doctrine/project_data_storage/python_temporary_owners.json',
+    'tools/host_ram_usage.sh', 'tools/ram_guard.sh', 'tools/test_ram_guard.py',
+)
+IMAGE_EVOLUTION_INPUTS = (CURRENT_IMAGE_TABLE, CURRENT_IMAGE_HELPER, CURRENT_SUCCESSOR_TABLE,
+                          ADDITIONAL_IMAGE_TABLE, LATER_IMAGE_TABLE, RAM_CI_TABLE) + RAM_CI_SUPPORT
 STORAGE_INVENTORY_OWNER = 'TYPE-REFERENCE-BOOK.1.2.20.1.19'
 STORAGE_INVENTORY_TABLE = 'tests/language-readiness/perl-storage-inventory-evolution.json.gz'
 STORAGE_INVENTORY_TABLE_SHA256 = '99e0726f0a51a06d4e2d86e030ee9385ba83bac85f03c0656396f266f4dbe164'
@@ -120,6 +133,9 @@ def current_image_admissions(read):
     require(images.data['owner'] == CURRENT_IMAGE_OWNER, 'current image admission owner mismatch')
     successors = _IMAGE_MODULE.ImageAdmissions(read(CURRENT_SUCCESSOR_TABLE), CURRENT_SUCCESSOR_SHA256, git)
     require(successors.data['owner'] == CURRENT_SUCCESSOR_OWNER, 'successor image admission owner mismatch')
+    later = _IMAGE_MODULE.ImageAdmissions(read(LATER_IMAGE_TABLE), LATER_IMAGE_SHA256, git)
+    require(later.data['owner'] == LATER_IMAGE_OWNER, 'later image admission owner mismatch')
+    successors = _IMAGE_MODULE.SuccessorImageAdmissions(successors, later, protected=(PHASE0_FIXTURE,))
     layered = _IMAGE_MODULE.SuccessorImageAdmissions(images, successors, protected=(PHASE0_FIXTURE,))
     additional = _IMAGE_MODULE.ImageAdmissions(read(ADDITIONAL_IMAGE_TABLE), ADDITIONAL_IMAGE_SHA256, git)
     require(additional.data['owner'] == CURRENT_SUCCESSOR_OWNER, 'additional image admission owner mismatch')
@@ -647,7 +663,23 @@ def producing_commit(path):
     return commit
 
 
+def ram_ci_inverse(read=None):
+    read = read_relative if read is None else read
+    current_image_admissions(read)
+    return _IMAGE_MODULE.RamCIInverse(read(RAM_CI_TABLE), RAM_CI_TABLE_SHA256,
+                                    RAM_CI_OWNER, RAM_CI_ACTIVATION, git, read)
+
+
 def verify_governance_evolution(source, contents, historical_hash):
+    require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
+    inverse = ram_ci_inverse()
+    result = verify_governance_precursor(source, inverse.restore(contents), historical_hash)
+    result.update(current=digest(contents), ram_preflight_owner=RAM_CI_OWNER,
+                  ram_preflight_evolution=inverse.report())
+    return result
+
+
+def verify_governance_precursor(source, contents, historical_hash):
     require(source == "tools/run_ci_local.sh", f"unapproved governance source: {source}")
     normalized = contents
     # Strip the later insertions first: their anchors are earlier owned additions.
@@ -1497,6 +1529,30 @@ def falsify(report):
     images.verify(report['latest_source_inputs'], fixture_read)
     def evolution_source(path):
         return images.read_predecessor(path, fixture_read)
+    ram_controls = []
+    ram_source = evolution_source('tools/run_ci_local.sh')
+    inverse = ram_ci_inverse()
+    for name, candidate in (('source-appended', ram_source + b'# unreviewed\n'),
+                            ('source-missing', b''), ('source-prior-stage', inverse.before)):
+        try:
+            inverse.restore(candidate)
+        except ValueError as error:
+            require(str(error) == 'unreviewed RAM CI source', 'unrelated RAM CI source rejection')
+            ram_controls.append(name)
+        else:
+            raise ValueError('RAM CI source control did not reject')
+    for name in (RAM_CI_TABLE,) + RAM_CI_SUPPORT:
+        def corrupt_ram(path):
+            raw = read_relative(path)
+            return raw + b' ' if path == name else raw
+        try:
+            ram_ci_inverse(corrupt_ram)
+        except ValueError as error:
+            expected = 'unreviewed RAM CI table' if name == RAM_CI_TABLE else 'unreviewed RAM CI support: ' + name
+            require(str(error) == expected, 'unrelated RAM CI input rejection')
+            ram_controls.append(name)
+        else:
+            raise ValueError('RAM CI input control did not reject')
     governance_controls = 0
     controls_by_source = {}
     storage_controls = []
@@ -1535,6 +1591,8 @@ def falsify(report):
         source = row["path"]
         current = evolution_source(source)
         if source == "tools/run_ci_local.sh":
+            # Run every earlier CI falsifier at its original committed stage.
+            current = ram_ci_inverse().restore(current)
             altered = (
                 current + b"# unreviewed edit\n",
                 current.replace(CI_INSERTIONS[0][1], b"", 1),
@@ -1643,7 +1701,7 @@ def falsify(report):
                 altered += (current.replace(presence, b'', 1),
                             current.replace(execution, b'true\n', 1),
                             current.replace(execution, execution.replace(path.encode(), b'tools/unreviewed.py'), 1))
-            verify = verify_governance_evolution
+            verify = verify_governance_precursor
             reasons = ("governance registration mismatch:", "unreviewed governance drift:")
         elif source == "tools/test_perl_project_data_storage.sh":
             # Keep every original reason-sensitive falsifier on its actual old
@@ -1867,7 +1925,8 @@ def falsify(report):
             "storage_inventory_mutations_rejected": storage_controls,
             "current_image_mutations_rejected": images.falsify(report["latest_source_inputs"], fixture_read),
             "phase0_fixture_mutations_rejected": falsify_phase0_fixture(images),
-            "phase0_value_fixture_mutations_rejected": falsify_phase0_value_fixture(images)}
+            "phase0_value_fixture_mutations_rejected": falsify_phase0_value_fixture(images),
+            "ram_preflight_ci_mutations_rejected": ram_controls}
 
 
 def verify_summary(report, text):

@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.14",
+  "claims": [
+    {
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "statement": "At committed HEADb370de8d31e3f38da6abf8ed4702a523aa3d6d97 excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c, the one-worker explicit no-sparse non-thin pack is1376459879 bytes for107 outgoing commits. The director1500000000-byte trigger has123540121 bytes remaining; advisory1400000000 has23540121 bytes. All uncommitted resource14 work is excluded; this is not negotiated upload size.",
+      "scope": "One actual ref-bound operational measurement. Actual before-use source/policy/wrapper, commands/channels, configuration and metadata are retained under docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/. No remote freshness, future-size or full physical/native closure follows.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual serialized committed-range pack; streamed byte/stat equality, PACK header/footer, empty-range and unchanged-ref/config/source controls.",
+        "result": "Actual0 atb370de8d31e3f38da6abf8ed4702a523aa3d6d97/base4683555ec51f04b8977812ce4e984c5cc6e6f42c: 1376459879 bytes, 47042 logical/header objects, 107 commits, 123540121-byte trigger margin. Stream/stat/header/footer/ref/config/source/empty32 checks pass; preparation/trigger false. Actual receipts are under push-monitor-current/."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "The prior independent native validation/twelve REDs at102ec3446 do not qualify this newb370de8d31e3f38da6abf8ed4702a523aa3d6d97 raw artifact. Parent30 owns separate actual-file falsification before publication; old controls are not refreshed."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Before-use logical producer/policy/wrapper metadata and actual channels survive, but the ignored raw pack and native physical Git/cache/compressor/toolchain/OS closure are not tracked recoverable inputs. Broader4.2/SESSION5 owns this explicit custody gap; no late retention is described as original first-use closure."
+      }
+    },
+    {
+      "name": "actual-macos-availability-snapshot-arithmetic",
+      "statement": "One retained actual restricted-shell observation obtains25769803776 capacity bytes through the native fallback and reports58 percent used from one vm_stat snapshot. This is availability-based arithmetic, not live memory pressure or a peak/admission guarantee.",
+      "scope": "The retained native responses forwarded to the helper, shared source and finite deterministic cases only. Original-wrapper denied-query RED and current single-snapshot controls remain distinct; initial repaired controls have no original before-use source custody credit. Linux controls are simulated on this macOS host. Full canonical admission is separately receipt-bound.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/ram-host-size-preflight-2026-11-12/review.py",
+        "granularity": "Each retained actual native response, single snapshot arithmetic and finite named admission/exit controls.",
+        "result": "Actual source-bound controls0, native recorder0 and independent historical recovery0/eight effective corruptions. Original wrapper control1 retains25-percent/admitted child/three snapshots for the known24GiB/12GiB-available fixture; repaired fixture reports50-percent/refuses at40-percent with one snapshot."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The16GiB denied-query fallback or multiple VM reads already satisfies the declared capacity/single-snapshot admission contract.",
+        "oracle": "Independent known24GiB/12GiB-available fixture, actual old-wrapper behavior and independently parsed retained native capacity/page/count bytes; historical reader does not call the RAM producer.",
+        "red_control": "before/original-denial-red-exit.txt is1 with old actual child admission/code0/25-percent/three snapshots. Source-bound repaired controls pass. Historical recovery rejects changed native arithmetic/routing, erased original admission, omitted/accepted-denial/repeated-snapshot controls and wrong historical claim revision."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Direct source bodies, wrappers, deterministic fixture generators, actual native responses before forwarding, separate channels and full modes are retained. Complete physical/native executable/interpreter/cache/toolchain/OS closure is not; broader4.2/SESSION5 owns that gap. No late archive is described as original first-use custody."
+      }
+    },
+    {
+      "name": "exact-later-images-and-ram-ci-historical-inverse",
+      "statement": "The complete149-source historical population has four later committed runtime images at b370 and one exact owned RAM CI inverse. Original source-image tables, protected Phase0 fixture and predecessor stages remain; isolated historical recovery preserves the original134 inputs and every prior control field, including714 governance mutations. Source identity admission is separate from fresh runtime/objective/feature admission.",
+      "scope": "Actual source-bound intake, nested-report RED/GREEN, current and prior19-image controls, exact owned candidate-to-committed-precursor inverse and isolated historical consumer. The old comparison packet predates the existing Phase0-value field; its unchanged producer still passes12 controls. Nine RAM CI source/input denials are new. No runtime SDK body changes are made by this prerequisite.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/review.py; bash tools/run_python_project_data.sh docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/review_population.py",
+        "granularity": "Every named historical source, effective committed image and predecessor, actual retained consumer/input/channel/mode and specific original/new corruption control.",
+        "result": "Actual isolated consumer0/empty stderr, 210 declared/199 observed inputs within213 before-use bodies. Historical review0/six corruptions and population review0/three corruptions; all old recovery/control fields match. Original nested report1 is retained; repaired full image/RAM unit0 and focused exact predecessor/current controls0."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A generic hash refresh can admit later images without preserving intermediate stages, the old report already names a nested latest image, or accepting the RAM registration permits unrelated historical drift.",
+        "oracle": "Exact accepted b370 and728 Git images/modes, original closed tables and independent previous complete recovery report, original-stage and current19-image denials, strict two-hunk candidate inverse and retained actual channel comparison.",
+        "red_control": "Canonical-first.log.gz refuses current Dart before admission. Actual nested-report-red exits1 on incorrect intermediate report; repaired unit passes. Every earlier714 governance control still rejects at its original precursor stage, nine new RAM source/input controls reject, and independent six recovery/three membership corruptions reject."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "All direct own source/producer/table bodies, before-use213-input epoch, separate actual channels, full modes, failed candidate and independent recovery instruments survive under image-prerequisite/. Complete physical/native Git/Python/cache/toolchain/OS implementation closure remains4.2/SESSION5; source-only retention is not full native custody."
+      }
+    }
+  ]
+}

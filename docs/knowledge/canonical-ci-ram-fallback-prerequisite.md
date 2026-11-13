@@ -5,12 +5,23 @@ answers:
   - "does canonical CI share the denied sysctl RAM size fallback"
   - "which task repairs the canonical heavy-suite RAM preflight before push"
 date: 2026-11-12
-status: source-policy prerequisite owned by TYPE-REFERENCE-BOOK.1.2.23.4.14; no infrastructure change here
+status: both preflight producers repaired under TYPE-REFERENCE-BOOK.1.2.23.4.14; canonical admission required
 tags: [ci, ram, macos, resources, publication]
 evidence: "At fb613736f68f7d1f90df5ade3c0e73c98160ca3f, tools/run_ci_local.sh1323-1345 defines _ram_used_pct with the same17179869184-byte fallback after denied sysctl as tools/ram_guard.sh. Discovered during Lua80.5 publication preparation;4.14 owns both affected producers before memory-guarded canonical verification."
 reverify:
   - "git show fb613736f68f7d1f90df5ade3c0e73c98160ca3f:tools/run_ci_local.sh | sed -n '1323,1347p'"
 ---
+
+Current repair, November12: both RAM guard and canonical CI share the validated
+tools/host_ram_usage.sh producer. The original denied query, wrong admission
+and three-snapshot mechanism remain retained. Source-bound deterministic and
+actual native single-snapshot arithmetic controls pass; default historical
+recovery is docs/checkpoints/ram-host-size-preflight-2026-11-12/review.py.
+Canonical staged admission is required for this infrastructure landing.
+Use [[shared-host-ram-budget]] for current trend policy; the following dated
+diagnosis describes the original source, not the repaired current code.
+
+## Original diagnosis (historical)
 
 The existing4.14 resource-control prerequisite also applies to the heavy-suite
 preflight embedded in tools/run_ci_local.sh. Its Darwin branch substitutes16GiB

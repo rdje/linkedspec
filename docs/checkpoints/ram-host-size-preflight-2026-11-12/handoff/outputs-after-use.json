@@ -1,0 +1,52 @@
+{
+  "CHANGES.md": {
+    "bytes": 47532,
+    "mode": 420,
+    "sha256": "cdf04e343e32782f1f52418fd4bfdcbfdfbc733eb90adf6851ff8cb14445b455"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 37775,
+    "mode": 420,
+    "sha256": "6b7582c785718d687d07edeadd16ef6ce541b524491f36cc2eb3a49abc22cb47"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5318,
+    "mode": 420,
+    "sha256": "39f6c255f5a8582c66023dc16688d34d98c98976f7df6fa0c2a357ce5235ef38"
+  },
+  "MEMORY.md": {
+    "bytes": 3178,
+    "mode": 420,
+    "sha256": "c9229c247cd797e405a2f6a53e613d95b48e022b9cd6918427ef546f58f3c312"
+  },
+  "ROADMAP.md": {
+    "bytes": 472107,
+    "mode": 420,
+    "sha256": "f14123d9cfa479fad9d1a27f310f294a93bf42fda6094cf7f8296b450cac7ec4"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273442,
+    "mode": 420,
+    "sha256": "8826fdc7e6febf3a4627798ae5182e1f405d1aac6985b525114111321341d0ae"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/handoff/rotated-live-row.txt": {
+    "bytes": 192,
+    "mode": 420,
+    "sha256": "9c0d3ea33033e103bdffa00596f5dcb8d1b966a9c584470c0e998e68460e51ba"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20774,
+    "mode": 420,
+    "sha256": "816e80bef522951390531d79293f002ead6d5b051f459d17b94bdd77b45a21fb"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 544635,
+    "mode": 420,
+    "sha256": "b4043947127239717e40288cbfd81425bf592c4f589c1cd4d5d496e6074e46e4"
+  },
+  "git_message_brief.txt": {
+    "bytes": 394,
+    "mode": 420,
+    "sha256": "3266dae5b8748937fc85d546d4222f67a2ea6ad221fb08ced8ceb371c044e727"
+  }
+}

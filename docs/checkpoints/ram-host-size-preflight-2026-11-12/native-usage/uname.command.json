@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "/opt/homebrew/opt/coreutils/libexec/gnubin/uname",
+    "-s"
+  ],
+  "cwd": "."
+}

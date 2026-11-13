@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/capture_actual.py": {
+    "bytes": 4504,
+    "mode": 420,
+    "sha256": "59749df550e08e6246f4a99e20e44ba6b1d812dca4b5b6268151077ed01d68cb"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/native-usage/commands/memory_pressure": {
+    "bytes": 119,
+    "mode": 493,
+    "sha256": "d7773d466dba06b3d2c0079d896fa70e5d278132234a4912728af3b722c3b278"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/native-usage/commands/sysctl": {
+    "bytes": 102,
+    "mode": 493,
+    "sha256": "972a639f89bb8615915074a2c32d3be45acc360c842fb7bc7dfb200729be3f3e"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/native-usage/commands/uname": {
+    "bytes": 133,
+    "mode": 493,
+    "sha256": "0768a588ad87ff351acfd7ff4150e8e8d62297fe4fe42eafdc43460727f5aa64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/native-usage/commands/vm_stat": {
+    "bytes": 103,
+    "mode": 493,
+    "sha256": "7744661923a1d20ab9a03975859e2a5be732767e46128931688950a76e92cd0a"
+  },
+  "tools/host_ram_usage.sh": {
+    "bytes": 3101,
+    "mode": 420,
+    "sha256": "4cc355439d1c61cd6bf86cfa6aaafc86f79f08d697b3150e3a3c7cd0781e5131"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

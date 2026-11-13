@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "/usr/sbin/sysctl",
+    "-n",
+    "hw.memsize"
+  ],
+  "cwd": "."
+}

@@ -20,7 +20,7 @@
       },
       "durability": {
         "status": "checked",
-        "mode": "live",
+        "mode": "historical",
         "inputs": [
           {
             "path": "scripts/check_diagnosis_evidence.sh",
@@ -112,7 +112,8 @@
             "sha256": "df4fd9296801d8345de44a87af4b22d94728c0f7a6d4eb2b2d881c8bd704e5d7",
             "role": "input"
           }
-        ]
+        ],
+        "revision": "b370de8d31e3f38da6abf8ed4702a523aa3d6d97"
       }
     },
     {

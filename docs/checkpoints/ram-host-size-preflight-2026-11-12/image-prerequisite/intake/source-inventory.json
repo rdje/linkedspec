@@ -1,0 +1,1849 @@
+{
+  "activation_commit": "b370de8d31e3f38da6abf8ed4702a523aa3d6d97",
+  "effective_images": {
+    "dart/lib/src/action/action_parser.dart": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "86df15f3408ef87c0a41924274ec1b7ba9aac1a585185eca9aab047f37c37b5c",
+      "historical_sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "dart/lib/src/action/action_parser.dart",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "dart/lib/src/compiler/compiled_spec.dart": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "03a3f07cd7738db70de9f4cb660d33f5b9f04bdcb924f5860b90ce01718cb914",
+      "historical_sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "dart/lib/src/compiler/compiled_spec.dart",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "dart/lib/src/runtime/interpreter.dart": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "current_sha256": "2ffb24ad6bd1387d50cba13b5acc9c53a1585d42789a68876c5b86daa0727cc3",
+      "historical_sha256": "0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "dart/lib/src/runtime/interpreter.dart",
+      "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "previous_current_sha256": "cafcd15cdb4a5bc777e49e55b7cf2e3de7461b9a9fc8cf4a4cd1e6bd3f6e139b",
+      "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "prior_revision": "c2c4ab05de1e08de56bee77fd6671724720728c8",
+      "prior_sha256": "9f0ee7637d28e63592bfcf0968431e17d0465e4f45ef7d6390d896e678971823",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed successor image; original predecessor checks remain historical"
+    },
+    "dart/test/source_emitter_test.dart": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "current_sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+      "historical_sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "dart/test/source_emitter_test.dart",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed first image; original historical predecessor retained"
+    },
+    "julia/src/action/ActionParser.jl": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "71914b869e91fcaf8ff5f5c30ae431178c68ee23587b41687f406c37e73ad99f",
+      "historical_sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "julia/src/action/ActionParser.jl",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "julia/src/compiler/CompiledSpec.jl": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "88c8371112e7d71612c832bc7d63fbd9dd03c20559c77c9f510c228d5de327b0",
+      "historical_sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "julia/src/compiler/CompiledSpec.jl",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "julia/src/runtime/Interpreter.jl": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "current_sha256": "280bed5dbb54f7b4220647fc6cdcf8e98b45be75239b5f45c0f4ca9dc4d0779c",
+      "historical_sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "julia/src/runtime/Interpreter.jl",
+      "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "previous_current_sha256": "56abb2bdc7a643acef116d5fb8c8571657b84811a6c77fd9c9db64583a17cd35",
+      "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed successor image; original predecessor checks remain historical"
+    },
+    "lua/src/linkedspec/action_parser.lua": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc",
+      "historical_sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "lua/src/linkedspec/action_parser.lua",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "lua/src/linkedspec/compiled_spec.lua": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8",
+      "historical_sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "lua/src/linkedspec/compiled_spec.lua",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "lua/src/linkedspec/interpreter.lua": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "current_sha256": "3c1344d832ccff03538109b6b69d2ea4224743fd8bf5d06bae82d81a9abd76fc",
+      "historical_sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "lua/src/linkedspec/interpreter.lua",
+      "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "previous_current_sha256": "690fc41ab80a15a5a442c5ad3b089671fb4b0a482a41e3b7203a34f2ac689252",
+      "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed successor image; original predecessor checks remain historical"
+    },
+    "lua/src/linkedspec/recognition_transaction_runtime.lua": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683",
+      "historical_sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "lua/src/linkedspec/recognition_transaction_runtime.lua",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "lua/src/linkedspec/source_emitter.lua": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a",
+      "historical_sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "lua/src/linkedspec/source_emitter.lua",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "perl/LinkedSpec/ActionIR/Contracts.pm": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "1cf6d6f5606a1199234f9587650763a60088e25d1bd35cc0c2046e295b801f96",
+      "historical_sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+      "prior_revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "prior_sha256": "3be7560d2075870f124f2b746cebdc249c294362b23dca75decebda65abadd56",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "perl/LinkedSpec/Compiler.pm": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "6dfcf226b62c1707e7a1aa4248db7b43328125ccaa56f67ad9ec1051657c2732",
+      "historical_sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "perl/LinkedSpec/Compiler.pm",
+      "prior_revision": "8ea0c1107889b02e68eeb874970ecdbb4bb41ab2",
+      "prior_sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "rust/linkedspec-core/src/expr.rs": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf",
+      "historical_sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "rust/linkedspec-core/src/expr.rs",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "rust/linkedspec-runtime/src/engine.rs": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "current_sha256": "adc8d90faaeafff0fb45a7fd4856399352dff48d11837cf903551f2e00936884",
+      "historical_sha256": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "rust/linkedspec-runtime/src/engine.rs",
+      "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "previous_current_sha256": "f307ddb453c8e55159a5efbc13e6e41844cfd9fa6459f2db6c4e5d86386e0fa0",
+      "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "prior_revision": "4e6ece603bbdf7c77b83a2e8c1f79946e7da0490",
+      "prior_sha256": "b1c327a23ba03a6d345fe13002a2bacc9c5c67580551fd9d135e6c581247b3cf",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed successor image; original predecessor checks remain historical"
+    },
+    "rust/linkedspec-runtime/src/recognition_transaction.rs": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236",
+      "historical_sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "rust/linkedspec-runtime/src/recognition_transaction.rs",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "rust/linkedspec-runtime/src/runtime.rs": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc",
+      "historical_sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "rust/linkedspec-runtime/src/runtime.rs",
+      "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+      "prior_sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    },
+    "t/phase0_regression.t": {
+      "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+      "current_sha256": "2fd71cfcf901058a04f089a55f83fbd7872ffaeb01889c69bbb64b75461e5777",
+      "historical_sha256": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+      "path": "t/phase0_regression.t",
+      "prior_revision": "79c68715c04f06379bb18673b09d44dd90611439",
+      "prior_sha256": "1e71120c6f238e85948faa8a970882c0c3a945bf812b094ed6a173d5f5692e70",
+      "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+      "source_stage": "exact committed current image; predecessor checks remain historical"
+    }
+  },
+  "fixture_evolution": {
+    "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+    "actual_current_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d",
+    "exact_assertion_edits": 6,
+    "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.21",
+    "path": "t/phase0_regression.t",
+    "preserved_committed_sha256": "2fd71cfcf901058a04f089a55f83fbd7872ffaeb01889c69bbb64b75461e5777",
+    "prior_fixture_sha256": "c2d8dca7786c285e99b81802755aeb9d4563b0e62a55e0801e203d1e637d1d80",
+    "scope": "Fixture calibration only; historical runtime results unchanged; no fresh objective admission",
+    "source_stage": "actual current value fixture; twenty-assertion inverse, then prior six-assertion inverse and committed image admission",
+    "table_sha256": "4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e",
+    "value_calibration": {
+      "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+      "actual_current_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d",
+      "exact_assertion_edits": 20,
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+      "path": "t/phase0_regression.t",
+      "preserved_committed_sha256": "c2d8dca7786c285e99b81802755aeb9d4563b0e62a55e0801e203d1e637d1d80",
+      "scope": "Finite value/effect oracle calibration; every prior fixture/image stage remains; no historical runtime result change",
+      "table_sha256": "83a26ab17b802e800a44650b59e07d794a804bdf3d752936870c15f8e00b199c"
+    }
+  },
+  "historical_sources": [
+    {
+      "actual_sha256": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+      "bytes": 34648,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+      "historical_sha256": "f5901338a6dac92a56b7dd4089fd7b865f210571089fe6311e83f98c85e4dfdf",
+      "path": "capability_conformance/inter_match_gap_capture_contract.json"
+    },
+    {
+      "actual_sha256": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913",
+      "bytes": 42224,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913",
+      "historical_sha256": "3bc07c7968f8667d330c2c8b2f47d1f574750ab0699106385fdf8c3a852b5913",
+      "path": "capability_conformance/progressive_span_dispatch_contract.json"
+    },
+    {
+      "actual_sha256": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+      "bytes": 67723,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+      "historical_sha256": "578cd031fed01bb8d968a2b536e0d67430317c617a8296edb6c1beb5031bd882",
+      "path": "capability_conformance/staged_ast_enrichment_contract.json"
+    },
+    {
+      "actual_sha256": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978",
+      "bytes": 69285,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978",
+      "historical_sha256": "4f657eec1b6e0332d9eff6656d9868ad2b5b1fa13f9fddd15d1ba6dac7cb2978",
+      "path": "capability_conformance/typed_source_location_contract.json"
+    },
+    {
+      "actual_sha256": "ed9cb30217d06fab11232ae0f47a208fd29266b2f273adf3e5a7f9f82f61a07c",
+      "bytes": 9290,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "ed9cb30217d06fab11232ae0f47a208fd29266b2f273adf3e5a7f9f82f61a07c",
+      "historical_sha256": "ed9cb30217d06fab11232ae0f47a208fd29266b2f273adf3e5a7f9f82f61a07c",
+      "path": "dart/lib/linkedspec_dart.dart"
+    },
+    {
+      "actual_sha256": "46db9b5ad6e2e288feacf85807c13cdb9a4d01f82fc6b76d9d42e2d15080a5cd",
+      "bytes": 39937,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "46db9b5ad6e2e288feacf85807c13cdb9a4d01f82fc6b76d9d42e2d15080a5cd",
+      "historical_sha256": "46db9b5ad6e2e288feacf85807c13cdb9a4d01f82fc6b76d9d42e2d15080a5cd",
+      "path": "dart/lib/src/action/action_ast.dart"
+    },
+    {
+      "actual_sha256": "2dca43dae8e53cdfe6d5253e134e8fe05e8119decfa0a0496faaef45d231cc6f",
+      "bytes": 28147,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2dca43dae8e53cdfe6d5253e134e8fe05e8119decfa0a0496faaef45d231cc6f",
+      "historical_sha256": "2dca43dae8e53cdfe6d5253e134e8fe05e8119decfa0a0496faaef45d231cc6f",
+      "path": "dart/lib/src/action/action_contracts.dart"
+    },
+    {
+      "actual_sha256": "86df15f3408ef87c0a41924274ec1b7ba9aac1a585185eca9aab047f37c37b5c",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "86df15f3408ef87c0a41924274ec1b7ba9aac1a585185eca9aab047f37c37b5c",
+        "historical_sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "dart/lib/src/action/action_parser.dart",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 74259,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "86df15f3408ef87c0a41924274ec1b7ba9aac1a585185eca9aab047f37c37b5c",
+      "historical_sha256": "d458ac2c439c1fbfb212259cb762629626d8ac493968515bf7b37a0793b7d7af",
+      "path": "dart/lib/src/action/action_parser.dart"
+    },
+    {
+      "actual_sha256": "03a3f07cd7738db70de9f4cb660d33f5b9f04bdcb924f5860b90ce01718cb914",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "03a3f07cd7738db70de9f4cb660d33f5b9f04bdcb924f5860b90ce01718cb914",
+        "historical_sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "dart/lib/src/compiler/compiled_spec.dart",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 61236,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "03a3f07cd7738db70de9f4cb660d33f5b9f04bdcb924f5860b90ce01718cb914",
+      "historical_sha256": "99df8289f7c38adaa9b77a093f5054f9288b806c769375e424457fb145cc8938",
+      "path": "dart/lib/src/compiler/compiled_spec.dart"
+    },
+    {
+      "actual_sha256": "6c524a1bdc1e8330d538cf11c535d68f24c06819ae433b45d70b33e0f5ee6756",
+      "bytes": 44893,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6c524a1bdc1e8330d538cf11c535d68f24c06819ae433b45d70b33e0f5ee6756",
+      "historical_sha256": "6c524a1bdc1e8330d538cf11c535d68f24c06819ae433b45d70b33e0f5ee6756",
+      "path": "dart/lib/src/runtime/bounded_child_parse_authority.dart"
+    },
+    {
+      "actual_sha256": "e24574b96cb7d9c823ffa1951a5cd7db8e326ebcdeb610638a686de0e5881e4f",
+      "admitted": {
+        "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+        "current_sha256": "2ffb24ad6bd1387d50cba13b5acc9c53a1585d42789a68876c5b86daa0727cc3",
+        "historical_sha256": "0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+        "path": "dart/lib/src/runtime/interpreter.dart",
+        "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "previous_current_sha256": "cafcd15cdb4a5bc777e49e55b7cf2e3de7461b9a9fc8cf4a4cd1e6bd3f6e139b",
+        "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "prior_revision": "c2c4ab05de1e08de56bee77fd6671724720728c8",
+        "prior_sha256": "9f0ee7637d28e63592bfcf0968431e17d0465e4f45ef7d6390d896e678971823",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed successor image; original predecessor checks remain historical"
+      },
+      "bytes": 384437,
+      "classification": "changed-image",
+      "current_equals_activation": true,
+      "effective_sha256": "e24574b96cb7d9c823ffa1951a5cd7db8e326ebcdeb610638a686de0e5881e4f",
+      "historical_sha256": "0af1a72725fb2b3691ce57f97278439c63fbe23a153a490f0d51a3397f4a1e24",
+      "path": "dart/lib/src/runtime/interpreter.dart"
+    },
+    {
+      "actual_sha256": "4a8ae6e9367ab29817e18feb9df25e92a15171fa2456d4a7e18bacd455d12c57",
+      "bytes": 54292,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4a8ae6e9367ab29817e18feb9df25e92a15171fa2456d4a7e18bacd455d12c57",
+      "historical_sha256": "4a8ae6e9367ab29817e18feb9df25e92a15171fa2456d4a7e18bacd455d12c57",
+      "path": "dart/lib/src/runtime/matching.dart"
+    },
+    {
+      "actual_sha256": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+      "bytes": 101588,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+      "historical_sha256": "d1c8de14ec76eacab1f237435e8f6e0c807e5849ed5a4dba10a79af0514d2f48",
+      "path": "dart/lib/src/runtime/staged_ast_enrichment.dart"
+    },
+    {
+      "actual_sha256": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+      "bytes": 3910,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+      "historical_sha256": "dbff7065039118bdf7b6d323a38b8377436742d1a5940aef18a908a863987c70",
+      "path": "dart/lib/src/semantic/sha256.dart"
+    },
+    {
+      "actual_sha256": "62021b13b820cac79d2765a87a46254045ea1b253c84555d43fd7f8b74c81ecc",
+      "bytes": 25631,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "62021b13b820cac79d2765a87a46254045ea1b253c84555d43fd7f8b74c81ecc",
+      "historical_sha256": "62021b13b820cac79d2765a87a46254045ea1b253c84555d43fd7f8b74c81ecc",
+      "path": "dart/lib/src/source_emitter.dart"
+    },
+    {
+      "actual_sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+      "bytes": 10958,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+      "historical_sha256": "601c36466d20513d930c291c44143a801846349fda9ba13a8c6f63b15671a0c0",
+      "path": "dart/pubspec.lock"
+    },
+    {
+      "actual_sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+      "bytes": 190,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+      "historical_sha256": "5a116416db5b997aac698762cf57b4dba299f504ecc4ddf36ce416b75a0923b6",
+      "path": "dart/pubspec.yaml"
+    },
+    {
+      "actual_sha256": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+      "bytes": 45826,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+      "historical_sha256": "b2b49d1abad130045ec8449bc8cd1c2a8d6012fddc1b7d45c4f29d7757636a94",
+      "path": "dart/test/inter_match_gap_capture_contract_test.dart"
+    },
+    {
+      "actual_sha256": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+      "bytes": 8869,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+      "historical_sha256": "97c1f5a58038840f8ae12e0dcd1c543db6a999f2a1e992868b980fef0bd4bb3c",
+      "path": "dart/test/nested_tree_readiness_test.dart"
+    },
+    {
+      "actual_sha256": "3014fb4ae570c7393f2de6863585fb99ffeb438e165fcee8aaf1bf5a7e222b8c",
+      "bytes": 20175,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3014fb4ae570c7393f2de6863585fb99ffeb438e165fcee8aaf1bf5a7e222b8c",
+      "historical_sha256": "3014fb4ae570c7393f2de6863585fb99ffeb438e165fcee8aaf1bf5a7e222b8c",
+      "path": "dart/test/progressive_span_dispatch_contract_test.dart"
+    },
+    {
+      "actual_sha256": "cc4cac71e3924e77afd5f4c538a3efefc0323089aad13816dd762e87dca26249",
+      "bytes": 13325,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "cc4cac71e3924e77afd5f4c538a3efefc0323089aad13816dd762e87dca26249",
+      "historical_sha256": "cc4cac71e3924e77afd5f4c538a3efefc0323089aad13816dd762e87dca26249",
+      "path": "dart/test/recursive_observation_contract_test.dart"
+    },
+    {
+      "actual_sha256": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+      "bytes": 2456,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+      "historical_sha256": "d9f894bb807afbe04d22bd5bdcfe6e8c7e240cda6d03bb865b6e87ae1ee74fed",
+      "path": "dart/test/sexpr_document_v1_test.dart"
+    },
+    {
+      "actual_sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+      "admitted": {
+        "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+        "current_sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+        "historical_sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+        "path": "dart/test/source_emitter_test.dart",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed first image; original historical predecessor retained"
+      },
+      "bytes": 31069,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+      "historical_sha256": "ebfa150e20c7767b056a5bfa12a8e76bbef7ba97958f709e8b2657ddbd22bdad",
+      "path": "dart/test/source_emitter_test.dart"
+    },
+    {
+      "actual_sha256": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+      "bytes": 77550,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+      "historical_sha256": "b790a8b329d2f3b95607f2e26138202151575df5e02e837f998433e8da495f00",
+      "path": "dart/test/staged_ast_enrichment_contract_test.dart"
+    },
+    {
+      "actual_sha256": "455fd56c0dff306d8a4a392537a29189f78f72ebe258fe53e134c4fc59a68126",
+      "bytes": 12122,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "455fd56c0dff306d8a4a392537a29189f78f72ebe258fe53e134c4fc59a68126",
+      "historical_sha256": "455fd56c0dff306d8a4a392537a29189f78f72ebe258fe53e134c4fc59a68126",
+      "path": "dart/test/typed_source_location_contract_test.dart"
+    },
+    {
+      "actual_sha256": "3354802950d38421befdd200155e2c4515cfb194660c3b1162b0a07e3c09e75b",
+      "bytes": 101918,
+      "classification": "documentation-evolution",
+      "current_equals_activation": true,
+      "effective_sha256": "3354802950d38421befdd200155e2c4515cfb194660c3b1162b0a07e3c09e75b",
+      "historical_sha256": "03e96918d95d27d4de8584ee774f78830766d8a78e87b7f05e4a84e4f7f5a0cc",
+      "path": "docs/linkedspec-book/src/architecture/structured-format-program.md"
+    },
+    {
+      "actual_sha256": "4c4b2a97676cdaff4475bec5f13d0f11296b25dcf74d8f11cb700bbcfa29749a",
+      "bytes": 4818,
+      "classification": "documentation-evolution",
+      "current_equals_activation": true,
+      "effective_sha256": "4c4b2a97676cdaff4475bec5f13d0f11296b25dcf74d8f11cb700bbcfa29749a",
+      "historical_sha256": "ed58cbd9b48c87c15456a4e47e8a7a81a4ed1bf7f9da67679681883819110b5d",
+      "path": "docs/linkedspec-book/src/development/regression-fixtures.md"
+    },
+    {
+      "actual_sha256": "3b427e823d8d13b613949748ef105e9b22ad884d4a8d15bfb7603c19a8a21125",
+      "bytes": 100850,
+      "classification": "documentation-evolution",
+      "current_equals_activation": true,
+      "effective_sha256": "3b427e823d8d13b613949748ef105e9b22ad884d4a8d15bfb7603c19a8a21125",
+      "historical_sha256": "6873cd55dd6a0cf1f6ee41d2c4e99c7ea1544e2bb875d71687823c00eb6205af",
+      "path": "docs/linkedspec-book/src/dsl/capture-marks-and-source-locations.md"
+    },
+    {
+      "actual_sha256": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+      "bytes": 2202,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+      "historical_sha256": "2b4e4039b6d3bb76dd8bd9844f90f8083747982737572504198abd2cb64e48e4",
+      "path": "julia/Manifest.toml"
+    },
+    {
+      "actual_sha256": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+      "bytes": 447,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+      "historical_sha256": "45bff88352b342d6a3970b3ad2c5cf853a3ff5261034210025d1b8ffc2dd9fa1",
+      "path": "julia/Project.toml"
+    },
+    {
+      "actual_sha256": "5edaeffcc161cf7cc6d3fd604cc8db605d5c65435414ac08d9fe23266dba955f",
+      "bytes": 14580,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5edaeffcc161cf7cc6d3fd604cc8db605d5c65435414ac08d9fe23266dba955f",
+      "historical_sha256": "5edaeffcc161cf7cc6d3fd604cc8db605d5c65435414ac08d9fe23266dba955f",
+      "path": "julia/src/LinkedSpecJulia.jl"
+    },
+    {
+      "actual_sha256": "1aba267c5a5b1357392ceb0831945ff150f7fd311a847e3329360df5eeae797f",
+      "bytes": 47536,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "1aba267c5a5b1357392ceb0831945ff150f7fd311a847e3329360df5eeae797f",
+      "historical_sha256": "1aba267c5a5b1357392ceb0831945ff150f7fd311a847e3329360df5eeae797f",
+      "path": "julia/src/action/ActionAst.jl"
+    },
+    {
+      "actual_sha256": "231d2d83bc271adc6a29139d92775241caf87a83aa5cd5ccb20c2f90f60afb84",
+      "bytes": 30510,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "231d2d83bc271adc6a29139d92775241caf87a83aa5cd5ccb20c2f90f60afb84",
+      "historical_sha256": "231d2d83bc271adc6a29139d92775241caf87a83aa5cd5ccb20c2f90f60afb84",
+      "path": "julia/src/action/ActionContracts.jl"
+    },
+    {
+      "actual_sha256": "71914b869e91fcaf8ff5f5c30ae431178c68ee23587b41687f406c37e73ad99f",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "71914b869e91fcaf8ff5f5c30ae431178c68ee23587b41687f406c37e73ad99f",
+        "historical_sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "julia/src/action/ActionParser.jl",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 77953,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "71914b869e91fcaf8ff5f5c30ae431178c68ee23587b41687f406c37e73ad99f",
+      "historical_sha256": "be008f877f6b112a580902ac7b31c712429fbfb9bdab3b9be767b213ad34dc08",
+      "path": "julia/src/action/ActionParser.jl"
+    },
+    {
+      "actual_sha256": "d99f3eed32bd8f384bd932520b9afde21878c8b5e070ed8702889d37aa8fa757",
+      "bytes": 10206,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d99f3eed32bd8f384bd932520b9afde21878c8b5e070ed8702889d37aa8fa757",
+      "historical_sha256": "d99f3eed32bd8f384bd932520b9afde21878c8b5e070ed8702889d37aa8fa757",
+      "path": "julia/src/action/CallableContract.jl"
+    },
+    {
+      "actual_sha256": "88c8371112e7d71612c832bc7d63fbd9dd03c20559c77c9f510c228d5de327b0",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "88c8371112e7d71612c832bc7d63fbd9dd03c20559c77c9f510c228d5de327b0",
+        "historical_sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "julia/src/compiler/CompiledSpec.jl",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 69246,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "88c8371112e7d71612c832bc7d63fbd9dd03c20559c77c9f510c228d5de327b0",
+      "historical_sha256": "81073828ea41eda6206dd067d2c8cddbc1149398cef7429a60624e5afe7541d2",
+      "path": "julia/src/compiler/CompiledSpec.jl"
+    },
+    {
+      "actual_sha256": "d926a419d9aee216974b13ddeb9247cf3e44188aa92cbddce13f1eb78daa7359",
+      "bytes": 41503,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d926a419d9aee216974b13ddeb9247cf3e44188aa92cbddce13f1eb78daa7359",
+      "historical_sha256": "d926a419d9aee216974b13ddeb9247cf3e44188aa92cbddce13f1eb78daa7359",
+      "path": "julia/src/runtime/BoundedChildParseAuthority.jl"
+    },
+    {
+      "actual_sha256": "92ebdf61ace20947b4f29f20f1f362475003ea6c1aa8af183e8fc680499b2bff",
+      "admitted": {
+        "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+        "current_sha256": "280bed5dbb54f7b4220647fc6cdcf8e98b45be75239b5f45c0f4ca9dc4d0779c",
+        "historical_sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+        "path": "julia/src/runtime/Interpreter.jl",
+        "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "previous_current_sha256": "56abb2bdc7a643acef116d5fb8c8571657b84811a6c77fd9c9db64583a17cd35",
+        "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed successor image; original predecessor checks remain historical"
+      },
+      "bytes": 375326,
+      "classification": "changed-image",
+      "current_equals_activation": true,
+      "effective_sha256": "92ebdf61ace20947b4f29f20f1f362475003ea6c1aa8af183e8fc680499b2bff",
+      "historical_sha256": "c1dd49bd983d5e0f71307f19d7e1da0794869ae67774e1219a9874867c646875",
+      "path": "julia/src/runtime/Interpreter.jl"
+    },
+    {
+      "actual_sha256": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+      "bytes": 99664,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+      "historical_sha256": "679b231e6db72135ac624cb4cc7aa3298d8b7dcccbe30399069178d68f8cecd3",
+      "path": "julia/src/runtime/StagedAstEnrichment.jl"
+    },
+    {
+      "actual_sha256": "76828ce9b6ecfa995aace3e2e87620789d183bd0a24a005c97a505f22ad39567",
+      "bytes": 29367,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "76828ce9b6ecfa995aace3e2e87620789d183bd0a24a005c97a505f22ad39567",
+      "historical_sha256": "76828ce9b6ecfa995aace3e2e87620789d183bd0a24a005c97a505f22ad39567",
+      "path": "julia/src/source/SourceEmitter.jl"
+    },
+    {
+      "actual_sha256": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+      "bytes": 51375,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+      "historical_sha256": "79426ada8ed54a82f431a1b45c2a32ca5cf547ce6c2da5a9ad37154755cbbf0e",
+      "path": "julia/test/inter_match_gap_capture_contract_test.jl"
+    },
+    {
+      "actual_sha256": "62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1",
+      "bytes": 17357,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1",
+      "historical_sha256": "62deb068c34a67e71ef26b693c9097a11c2b54ef844f3988c19d4f3dbe1760e1",
+      "path": "julia/test/progressive_span_dispatch_contract_test.jl"
+    },
+    {
+      "actual_sha256": "f2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b",
+      "bytes": 13435,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "f2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b",
+      "historical_sha256": "f2a167b6d5014fdef9f5f7c00db07fd4f236b851856016236fe8163cae2cc11b",
+      "path": "julia/test/recursive_observation_contract_test.jl"
+    },
+    {
+      "actual_sha256": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+      "bytes": 1782,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+      "historical_sha256": "5cc6236377eaea944d5e5466c80e651c917a5272754d770400fd26ed766eec32",
+      "path": "julia/test/sexpr_document_v1_test.jl"
+    },
+    {
+      "actual_sha256": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+      "bytes": 28871,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+      "historical_sha256": "2c7ea5074d60ca80074756645b8fbda3b9aa26214bd10956f6654ae9f988d38a",
+      "path": "julia/test/source_emitter_test.jl"
+    },
+    {
+      "actual_sha256": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+      "bytes": 102459,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+      "historical_sha256": "0caa4731f7507dcedc177598204fba70d6c81a17aef323539dcc3388da140fc0",
+      "path": "julia/test/staged_ast_enrichment_contract_test.jl"
+    },
+    {
+      "actual_sha256": "c1f5b12f0b67aa69686a3a6f2a8951813f99401f9c1af2736b9a2fc99cccbf78",
+      "bytes": 15344,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "c1f5b12f0b67aa69686a3a6f2a8951813f99401f9c1af2736b9a2fc99cccbf78",
+      "historical_sha256": "c1f5b12f0b67aa69686a3a6f2a8951813f99401f9c1af2736b9a2fc99cccbf78",
+      "path": "julia/test/typed_source_location_contract_test.jl"
+    },
+    {
+      "actual_sha256": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5",
+      "bytes": 12084,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5",
+      "historical_sha256": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5",
+      "path": "lua/src/linkedspec/action_ast.lua"
+    },
+    {
+      "actual_sha256": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66",
+      "bytes": 25197,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66",
+      "historical_sha256": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66",
+      "path": "lua/src/linkedspec/action_contracts.lua"
+    },
+    {
+      "actual_sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc",
+        "historical_sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "lua/src/linkedspec/action_parser.lua",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 61463,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc",
+      "historical_sha256": "1dfb4a4f95262ba6c9ba6e00ecc1b1ce614db1f12b57eee40f24c1533534c43b",
+      "path": "lua/src/linkedspec/action_parser.lua"
+    },
+    {
+      "actual_sha256": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc",
+      "bytes": 42136,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc",
+      "historical_sha256": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc",
+      "path": "lua/src/linkedspec/bounded_child_parse_authority.lua"
+    },
+    {
+      "actual_sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8",
+        "historical_sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "lua/src/linkedspec/compiled_spec.lua",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 59337,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8",
+      "historical_sha256": "81ec56e81c87e3101ea2367c1ef018774e908e46e449d6c51d285bad8131f886",
+      "path": "lua/src/linkedspec/compiled_spec.lua"
+    },
+    {
+      "actual_sha256": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822",
+      "bytes": 17052,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822",
+      "historical_sha256": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822",
+      "path": "lua/src/linkedspec/init.lua"
+    },
+    {
+      "actual_sha256": "ecd3ef1ee80120d06aab980ef8cbca44bb6d57972f945b3263ab09392dc51098",
+      "admitted": {
+        "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+        "current_sha256": "3c1344d832ccff03538109b6b69d2ea4224743fd8bf5d06bae82d81a9abd76fc",
+        "historical_sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+        "path": "lua/src/linkedspec/interpreter.lua",
+        "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "previous_current_sha256": "690fc41ab80a15a5a442c5ad3b089671fb4b0a482a41e3b7203a34f2ac689252",
+        "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed successor image; original predecessor checks remain historical"
+      },
+      "bytes": 281483,
+      "classification": "changed-image",
+      "current_equals_activation": true,
+      "effective_sha256": "ecd3ef1ee80120d06aab980ef8cbca44bb6d57972f945b3263ab09392dc51098",
+      "historical_sha256": "f90e60a70b79b8a3a4dad4791be1528ce574fdbe02af29b02365c39a2aa11b4e",
+      "path": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "actual_sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683",
+        "historical_sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "lua/src/linkedspec/recognition_transaction_runtime.lua",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 17992,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683",
+      "historical_sha256": "e210172b953ec2056b01838fe2eabfd61d393390b891643f7b36b3561a2db3cf",
+      "path": "lua/src/linkedspec/recognition_transaction_runtime.lua"
+    },
+    {
+      "actual_sha256": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+      "bytes": 6017,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+      "historical_sha256": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e",
+      "path": "lua/src/linkedspec/sha256.lua"
+    },
+    {
+      "actual_sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a",
+        "historical_sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "lua/src/linkedspec/source_emitter.lua",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 30565,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a",
+      "historical_sha256": "0ff7d15d53e3b7302ff2b2c4125ec39581f64966a4adf56851e28af0607685cc",
+      "path": "lua/src/linkedspec/source_emitter.lua"
+    },
+    {
+      "actual_sha256": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+      "bytes": 82642,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+      "historical_sha256": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed",
+      "path": "lua/src/linkedspec/staged_ast_enrichment.lua"
+    },
+    {
+      "actual_sha256": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+      "bytes": 51693,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+      "historical_sha256": "323a3fca5c7d3e1a85af8f387b0efec3bff779feb5478974d195a5da930f05ce",
+      "path": "lua/test/inter_match_gap_capture_contract_test.lua"
+    },
+    {
+      "actual_sha256": "10ad5e29d40a8a2d486c8842850cf1528aba9797bd4f16d3652cd5db9eef926b",
+      "bytes": 19030,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "10ad5e29d40a8a2d486c8842850cf1528aba9797bd4f16d3652cd5db9eef926b",
+      "historical_sha256": "10ad5e29d40a8a2d486c8842850cf1528aba9797bd4f16d3652cd5db9eef926b",
+      "path": "lua/test/progressive_span_dispatch_contract_test.lua"
+    },
+    {
+      "actual_sha256": "e8f3175908c89f98579020e11a7b5961f4cde6d48a39a19bfb1c9f1ad9b2b320",
+      "bytes": 16151,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e8f3175908c89f98579020e11a7b5961f4cde6d48a39a19bfb1c9f1ad9b2b320",
+      "historical_sha256": "e8f3175908c89f98579020e11a7b5961f4cde6d48a39a19bfb1c9f1ad9b2b320",
+      "path": "lua/test/recursive_observation_contract_test.lua"
+    },
+    {
+      "actual_sha256": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+      "bytes": 24021,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+      "historical_sha256": "596a393f0be6e010d6be717c58656dcfc56a26c0acb27ff25db8f7296abd014f",
+      "path": "lua/test/rule_local_cursor_generated_source_test.lua"
+    },
+    {
+      "actual_sha256": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+      "bytes": 2433,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+      "historical_sha256": "2ebd290a9ddb7f10c1ead3177f7b6eecc3e259e903ddd9ff9b3d84df7ffb79ab",
+      "path": "lua/test/sexpr_document_v1_test.lua"
+    },
+    {
+      "actual_sha256": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+      "bytes": 86201,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+      "historical_sha256": "44dc32b99b50e051fb45fced11f3ede32afcc7d84a1124b90d10883485e03fee",
+      "path": "lua/test/staged_ast_enrichment_contract_test.lua"
+    },
+    {
+      "actual_sha256": "8943b4fd6e78f0ea9b71ee3e3458aa044301e51e520652ef2a9ca905e693aebc",
+      "bytes": 14020,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "8943b4fd6e78f0ea9b71ee3e3458aa044301e51e520652ef2a9ca905e693aebc",
+      "historical_sha256": "8943b4fd6e78f0ea9b71ee3e3458aa044301e51e520652ef2a9ca905e693aebc",
+      "path": "lua/test/typed_source_location_contract_test.lua"
+    },
+    {
+      "actual_sha256": "1cf6d6f5606a1199234f9587650763a60088e25d1bd35cc0c2046e295b801f96",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "1cf6d6f5606a1199234f9587650763a60088e25d1bd35cc0c2046e295b801f96",
+        "historical_sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "perl/LinkedSpec/ActionIR/Contracts.pm",
+        "prior_revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+        "prior_sha256": "3be7560d2075870f124f2b746cebdc249c294362b23dca75decebda65abadd56",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 132754,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "1cf6d6f5606a1199234f9587650763a60088e25d1bd35cc0c2046e295b801f96",
+      "historical_sha256": "f062292c073f37817484fd77e54d763f9595618ecd7d05a5d592a4eca621c361",
+      "path": "perl/LinkedSpec/ActionIR/Contracts.pm"
+    },
+    {
+      "actual_sha256": "6dfcf226b62c1707e7a1aa4248db7b43328125ccaa56f67ad9ec1051657c2732",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "6dfcf226b62c1707e7a1aa4248db7b43328125ccaa56f67ad9ec1051657c2732",
+        "historical_sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "perl/LinkedSpec/Compiler.pm",
+        "prior_revision": "8ea0c1107889b02e68eeb874970ecdbb4bb41ab2",
+        "prior_sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 85481,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "6dfcf226b62c1707e7a1aa4248db7b43328125ccaa56f67ad9ec1051657c2732",
+      "historical_sha256": "da360b1080a830e693cfd24f1e96f516c15d288363f8c9b6c59187d6b64370d5",
+      "path": "perl/LinkedSpec/Compiler.pm"
+    },
+    {
+      "actual_sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+      "bytes": 6254,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+      "historical_sha256": "d6f430b97936639be7c00711af796c493b95c65e6b9c168c965942dd8bab4b26",
+      "path": "perl/LinkedSpec/Runtime.pm"
+    },
+    {
+      "actual_sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+      "bytes": 65206,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+      "historical_sha256": "6a69d39e1d9de7b849ea429e532232d61f112755cf9b87ba2d16e1291e603f53",
+      "path": "perl/LinkedSpec/StagedASTEnrichment.pm"
+    },
+    {
+      "actual_sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+      "bytes": 4006,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+      "historical_sha256": "7d01e18c88ef9de45bf9049a2f3607800a4014aba8a1b4e8ad3fbc99cfac27b3",
+      "path": "perl/LinkedSpec/StagedASTEnrichmentRuntime.pm"
+    },
+    {
+      "actual_sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+      "bytes": 10477,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+      "historical_sha256": "c9ecca71a9e4a79c48ca94d3569be2ff4560443363cf594d70269f060daf2407",
+      "path": "perl/LinkedSpec/StagedParseJob.pm"
+    },
+    {
+      "actual_sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+      "bytes": 47424,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+      "historical_sha256": "f225ab48d91b1c2eb3bec063f961d255d9e97b340d0ce300e749ca58ec155428",
+      "path": "rust/Cargo.lock"
+    },
+    {
+      "actual_sha256": "412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8",
+      "bytes": 473,
+      "classification": "preserved-inverse",
+      "current_equals_activation": true,
+      "effective_sha256": "412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8",
+      "historical_sha256": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+      "inverse": {
+        "activation": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+        "activation_commit": "f0d974aa1b337bbf2ee16e51c0297182e1e94f82",
+        "current": "412b4ca6561744edee837a4096961a305de9be391cfbc3e06184ee106d9df7f8",
+        "historical": "4f85f31df8b2228a18e44f22e9a9e276f6ca91943becea7f7025b70d564cbe81",
+        "owner": "SESSION-STARTUP-READING.55.1",
+        "path": "rust/Cargo.toml",
+        "predecessors": [],
+        "scope": "exact numeric source image; original historical and signed-selector results unchanged; fresh runtime/readiness compatibility is separately retained",
+        "support_sources": {
+          "rust/linkedspec-core/src/lib.rs": "c2cca39ba3ec0e03606737486361b24d0255566167020f4ebeb0df1469e986a3",
+          "rust/linkedspec-core/src/numeric.rs": "65ad021924defd8dd6a623edf5adc7dcdd43d32fc4dad65460b01944035f8072",
+          "rust/linkedspec-core/src/types.rs": "836a7fd0de6fdf1d351283476074a63cb16d1cb7a6c9ca1d3d7428735dac0ced",
+          "rust/linkedspec-runtime/src/spec_parser.rs": "d25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560",
+          "rust/linkedspec-runtime/src/staged_parser_registry.rs": "8fdd3a75fbb411a1783d19201678b4c5df66f9f7198b8b469c475366770b1a89"
+        }
+      },
+      "path": "rust/Cargo.toml"
+    },
+    {
+      "actual_sha256": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605",
+      "bytes": 13968,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605",
+      "historical_sha256": "2b24993078757eb4005d71a22fa2e1d1e7266ab34eb80f8275b4b37bfb247605",
+      "path": "rust/linkedspec-core/src/callable_contract.rs"
+    },
+    {
+      "actual_sha256": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda",
+      "bytes": 83853,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda",
+      "historical_sha256": "7a1a92eaf5ed7bc93392bc5666ac5cb061c573ac04fde3499139d2fc055dccda",
+      "path": "rust/linkedspec-core/src/compiler.rs"
+    },
+    {
+      "actual_sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf",
+        "historical_sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "rust/linkedspec-core/src/expr.rs",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 227344,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf",
+      "historical_sha256": "45f3b40a548c76ba4a11f0cedd8ee6dc988bf711da30e78ba2bc28f8ffd3e706",
+      "path": "rust/linkedspec-core/src/expr.rs"
+    },
+    {
+      "actual_sha256": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787",
+      "bytes": 54345,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787",
+      "historical_sha256": "853515c34ea04dc7cffb073e7946d668dc23d32e5a545294bcf0418f6b65e787",
+      "path": "rust/linkedspec-runtime/src/bounded_child_parse_authority.rs"
+    },
+    {
+      "actual_sha256": "7b4a57ff08dc97b80975d6e26c838d8c70766d54f3bd0d25d672fe11d008ebbb",
+      "admitted": {
+        "activation_commit": "7289836f28e4873463ad1c50d354d8e66c77af8d",
+        "current_sha256": "adc8d90faaeafff0fb45a7fd4856399352dff48d11837cf903551f2e00936884",
+        "historical_sha256": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+        "path": "rust/linkedspec-runtime/src/engine.rs",
+        "previous_activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "previous_current_sha256": "f307ddb453c8e55159a5efbc13e6e41844cfd9fa6459f2db6c4e5d86386e0fa0",
+        "previous_image_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "prior_revision": "4e6ece603bbdf7c77b83a2e8c1f79946e7da0490",
+        "prior_sha256": "b1c327a23ba03a6d345fe13002a2bacc9c5c67580551fd9d135e6c581247b3cf",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed successor image; original predecessor checks remain historical"
+      },
+      "bytes": 651848,
+      "classification": "changed-image",
+      "current_equals_activation": true,
+      "effective_sha256": "7b4a57ff08dc97b80975d6e26c838d8c70766d54f3bd0d25d672fe11d008ebbb",
+      "historical_sha256": "5d1c572c2c310f5dd0aa4f62bb07020cf5c416a8483799cd1c85f13ffeb68009",
+      "path": "rust/linkedspec-runtime/src/engine.rs"
+    },
+    {
+      "actual_sha256": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c",
+      "bytes": 2440,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c",
+      "historical_sha256": "3f69d8e02549bf76d3f3495935403b6f87b65f0e9a14c74885f4412b2f64112c",
+      "path": "rust/linkedspec-runtime/src/lib.rs"
+    },
+    {
+      "actual_sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236",
+        "historical_sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "rust/linkedspec-runtime/src/recognition_transaction.rs",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 53003,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236",
+      "historical_sha256": "1b45e9729f4ede18de2182e7947f5eb478ddc944641886442aea06b36a7f8962",
+      "path": "rust/linkedspec-runtime/src/recognition_transaction.rs"
+    },
+    {
+      "actual_sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc",
+        "historical_sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "rust/linkedspec-runtime/src/runtime.rs",
+        "prior_revision": "2aeed31ff571025cff1040593015683400caa7c0",
+        "prior_sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 100613,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc",
+      "historical_sha256": "b8140cc4bac2d75f3bbb070f19924b505f36899b06dcf3196efa8595c6a8d609",
+      "path": "rust/linkedspec-runtime/src/runtime.rs"
+    },
+    {
+      "actual_sha256": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+      "bytes": 54538,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+      "historical_sha256": "4cf298eadd4603690d57794d76f8397e5bf026a70ac617377360650e4880b64b",
+      "path": "rust/linkedspec-runtime/src/source_emitter.rs"
+    },
+    {
+      "actual_sha256": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+      "bytes": 107442,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+      "historical_sha256": "123448aa6cd3c5c7d3802b2c4043dbc2fc217b43882087354dd10e189389e245",
+      "path": "rust/linkedspec-runtime/src/staged_ast_enrichment.rs"
+    },
+    {
+      "actual_sha256": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+      "bytes": 46007,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+      "historical_sha256": "88464bdfd412b91f4e9cebd2424ee78581f17132498e4113e9e5e008ce43a84d",
+      "path": "rust/linkedspec-runtime/tests/inter_match_gap_capture_contract.rs"
+    },
+    {
+      "actual_sha256": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+      "bytes": 12964,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+      "historical_sha256": "698dd4b525296f490890073857dac200be13277e769ae5b7351aab10a549275c",
+      "path": "rust/linkedspec-runtime/tests/nested_tree_readiness.rs"
+    },
+    {
+      "actual_sha256": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9",
+      "bytes": 22204,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9",
+      "historical_sha256": "d42ccfbe4c8a6307b568db3637cea1cc83868aeac8b6ec17b5ee06958db6e9b9",
+      "path": "rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs"
+    },
+    {
+      "actual_sha256": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71",
+      "bytes": 14106,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71",
+      "historical_sha256": "57caf58049aca5008ad8d03676b101c6a4704b4abe8eadeb24a976869d529b71",
+      "path": "rust/linkedspec-runtime/tests/recursive_observation_contract.rs"
+    },
+    {
+      "actual_sha256": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+      "bytes": 85781,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+      "historical_sha256": "9bad6d2f0bbf43ade705b8d1bc2d2bead4058ef6d8222d2448dfd8e9289ace90",
+      "path": "rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs"
+    },
+    {
+      "actual_sha256": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc",
+      "bytes": 18065,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc",
+      "historical_sha256": "15df79dba072f82fecd0cf02f47edb9b31da850baaa1fdfe20334b7706773cfc",
+      "path": "rust/linkedspec-runtime/tests/typed_source_location_contract.rs"
+    },
+    {
+      "actual_sha256": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+      "bytes": 63999,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+      "historical_sha256": "4f4620c2d605d62ff3f6afd65930452a0e6fb74dc5f7e634d2aaa6da2ef6168a",
+      "path": "t/generated_source_contract.t"
+    },
+    {
+      "actual_sha256": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+      "bytes": 44838,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+      "historical_sha256": "4604ccc0cf68949146a3778ea5627d4a470fdb3925f4b5f1114a2cbe5eb90e52",
+      "path": "t/inter_match_gap_capture_perl_contract.t"
+    },
+    {
+      "actual_sha256": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+      "bytes": 20238,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+      "historical_sha256": "3185033387def9d5d968ed45dfcec22d5fd9d2b9171347bd7575cb7f9cbc649f",
+      "path": "t/lossless_child_readiness.t"
+    },
+    {
+      "actual_sha256": "03ac99abc020e6df8df0501a055df874994eb6891910b60b3bed973d59dae221",
+      "bytes": 3240,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "03ac99abc020e6df8df0501a055df874994eb6891910b60b3bed973d59dae221",
+      "historical_sha256": "03ac99abc020e6df8df0501a055df874994eb6891910b60b3bed973d59dae221",
+      "path": "t/lua_legacy_temp_residue.t"
+    },
+    {
+      "actual_sha256": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+      "bytes": 22199,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+      "historical_sha256": "07b90b1b5d2c9b70073a4842b381c5798d785e421949c93a52b6b48b6c72d6ce",
+      "path": "t/nested_tree_readiness.t"
+    },
+    {
+      "actual_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d",
+      "admitted": {
+        "activation_commit": "0db5e9e87b7c1cfaf09936b9629974787038f5e3",
+        "current_sha256": "2fd71cfcf901058a04f089a55f83fbd7872ffaeb01889c69bbb64b75461e5777",
+        "historical_sha256": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41",
+        "owner": "TYPE-REFERENCE-BOOK.1.2.20.1.11",
+        "path": "t/phase0_regression.t",
+        "prior_revision": "79c68715c04f06379bb18673b09d44dd90611439",
+        "prior_sha256": "1e71120c6f238e85948faa8a970882c0c3a945bf812b094ed6a173d5f5692e70",
+        "scope": "Source identity admission only; original runtime executions/results unchanged; no fresh objective compatibility or feature promotion",
+        "source_stage": "exact committed current image; predecessor checks remain historical"
+      },
+      "bytes": 2805253,
+      "classification": "preserved-image",
+      "current_equals_activation": true,
+      "effective_sha256": "2fd71cfcf901058a04f089a55f83fbd7872ffaeb01889c69bbb64b75461e5777",
+      "historical_sha256": "5804c7dd003972469d85d2baf3ba0555d05356f9411c1f3fdcae63db00db0c41",
+      "path": "t/phase0_regression.t"
+    },
+    {
+      "actual_sha256": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+      "bytes": 20534,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+      "historical_sha256": "9180f6ac7b5e64d2adc8db8dac11637f8054e0c02eb9cd3e05cfcb5e8ccd3ded",
+      "path": "t/progressive_span_dispatch_perl_contract.t"
+    },
+    {
+      "actual_sha256": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+      "bytes": 17899,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+      "historical_sha256": "e2a343f059c2837dba157605e2e74d6b2c2ae2fb91aeb8bc27814ea704a7589b",
+      "path": "t/recursive_observation_perl_contract.t"
+    },
+    {
+      "actual_sha256": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+      "bytes": 74399,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+      "historical_sha256": "1d86d958fbe159411b8e744522a58bebea66f299f253e2e013e989ba889360e5",
+      "path": "t/staged_ast_enrichment_perl_contract.t"
+    },
+    {
+      "actual_sha256": "5de84cc3b09107966c35cb4c97dc8089341fd5730b9d712836e88bed8e7af16e",
+      "bytes": 9253,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5de84cc3b09107966c35cb4c97dc8089341fd5730b9d712836e88bed8e7af16e",
+      "historical_sha256": "5de84cc3b09107966c35cb4c97dc8089341fd5730b9d712836e88bed8e7af16e",
+      "path": "t/typed_source_location_perl_contract.t"
+    },
+    {
+      "actual_sha256": "bb96fade4baadcb4142ff54e43eb9ff71db665b1929cfa7ba092cf5804b57e56",
+      "bytes": 8337,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "bb96fade4baadcb4142ff54e43eb9ff71db665b1929cfa7ba092cf5804b57e56",
+      "historical_sha256": "bb96fade4baadcb4142ff54e43eb9ff71db665b1929cfa7ba092cf5804b57e56",
+      "path": "t/typed_source_location_values.t"
+    },
+    {
+      "actual_sha256": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "bytes": 7397,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "historical_sha256": "3e7f25083e791db8048bed844523e85fbc53763eeaabd1253001a2b2650575ef",
+      "path": "tests/language-readiness/context-names/cases.json"
+    },
+    {
+      "actual_sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "bytes": 988,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "historical_sha256": "8f408e81e2871b3b76c1a7fc7f99e059dad1c19dd03e91449a05fc9b88fff4b0",
+      "path": "tests/language-readiness/context-names/grammar.spec"
+    },
+    {
+      "actual_sha256": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+      "bytes": 3772,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+      "historical_sha256": "e7a01a4fc4465c4a1e7933b54b5dc599249a000c356532168d8cbe6093246b43",
+      "path": "tests/language-readiness/context-names/rust_checks.rs"
+    },
+    {
+      "actual_sha256": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+      "bytes": 536,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+      "historical_sha256": "2589ef997c978ea9fa1e80f886106df7235839d6a89439b88ece328d58e3b3c7",
+      "path": "tests/language-readiness/lossless-child/cases.json"
+    },
+    {
+      "actual_sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+      "bytes": 516,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+      "historical_sha256": "34c5f109d401f83fa600a225682599fe924957fdbf45ad2136f55450248badd9",
+      "path": "tests/language-readiness/lossless-child/child.spec"
+    },
+    {
+      "actual_sha256": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+      "bytes": 10187,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+      "historical_sha256": "e6a8b4d502aeb7b9152cb5bc22aade234772fba558bab15b25e3e0e65e40a7dd",
+      "path": "tests/language-readiness/lossless-child/dart_carriers.dart"
+    },
+    {
+      "actual_sha256": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+      "bytes": 13892,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+      "historical_sha256": "708d3c8d5ca9683185e26e099525df6198d2c775e5679dd221393edef7228f63",
+      "path": "tests/language-readiness/lossless-child/dart_checks.dart"
+    },
+    {
+      "actual_sha256": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+      "bytes": 9132,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+      "historical_sha256": "9b308b17b62cac150df88b5d256ea379db697fd393fb3237f1d2f65caa6ea317",
+      "path": "tests/language-readiness/lossless-child/julia_carriers.jl"
+    },
+    {
+      "actual_sha256": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+      "bytes": 11289,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+      "historical_sha256": "3ca60f296b06cf0c07132fbe117dda155729cf12a599ff53b97b233e6c4c26cb",
+      "path": "tests/language-readiness/lossless-child/julia_checks.jl"
+    },
+    {
+      "actual_sha256": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+      "bytes": 9413,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+      "historical_sha256": "1cd379ca959bcd4d92eec68ebe8f3e20e02d80e7b356adbc5d67db0785697456",
+      "path": "tests/language-readiness/lossless-child/lua_carriers.lua"
+    },
+    {
+      "actual_sha256": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+      "bytes": 10964,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+      "historical_sha256": "67a59f580f1daf5ad0c6d0f9a425ab1d8e8445e6d748dffa0a14ad0a63fa4367",
+      "path": "tests/language-readiness/lossless-child/lua_checks.lua"
+    },
+    {
+      "actual_sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+      "bytes": 909,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+      "historical_sha256": "8b19299a5d3715cba7f44dac266954e8b34497920a308f956f6e35b286ae6435",
+      "path": "tests/language-readiness/lossless-child/parent.spec"
+    },
+    {
+      "actual_sha256": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+      "bytes": 11100,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+      "historical_sha256": "6a461b9f86525d5ab4d75a74d4395869048e3c146e674badb31d3f652b6cd9cd",
+      "path": "tests/language-readiness/lossless-child/rust_carriers.rs"
+    },
+    {
+      "actual_sha256": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+      "bytes": 14933,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+      "historical_sha256": "e26105539eafd80fb870d4959881a086a81f57839018685ff8d84ce8f2bf6f20",
+      "path": "tests/language-readiness/lossless-child/rust_checks.rs"
+    },
+    {
+      "actual_sha256": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+      "bytes": 10884,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+      "historical_sha256": "fd4fe58d6bb0efa7bcb609b863c3d9a2238bb5c62fa9a1814a143e04416bd89c",
+      "path": "tests/language-readiness/lossless-segments/cases.json"
+    },
+    {
+      "actual_sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+      "bytes": 669,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+      "historical_sha256": "8f20d242b0f2ea0eee1d70b6f289cf96362cdf3b64ef4cbcc77f5631ffe3eb36",
+      "path": "tests/language-readiness/lossless-segments/grammar.spec"
+    },
+    {
+      "actual_sha256": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "bytes": 1259,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "historical_sha256": "7a36a4b32d8a5ac8a1d2f17d6d000a68c707bfc15a4b3a1e93e3e4ddaf4147c7",
+      "path": "tests/language-readiness/nested-tree/cases.json"
+    },
+    {
+      "actual_sha256": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "bytes": 4661,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "historical_sha256": "5ae819cccaf0dc2cfb2a1753f5351148307cebc8797ff605fc4ba8c65c15df4a",
+      "path": "tests/language-readiness/nested-tree/dart_checks.dart"
+    },
+    {
+      "actual_sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "bytes": 831,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "historical_sha256": "498ffda35b05222388c64d99b0acb132a56996e97de3ffa9312f7dda6ee0ed72",
+      "path": "tests/language-readiness/nested-tree/grammar.spec"
+    },
+    {
+      "actual_sha256": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "bytes": 4458,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "historical_sha256": "a0511244a5ae78c39e6d68c116a03ab1dcb08610ff8f01f75079551eb3825c62",
+      "path": "tests/language-readiness/nested-tree/julia_checks.jl"
+    },
+    {
+      "actual_sha256": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "bytes": 3351,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "historical_sha256": "0cf52abd24227574f5e93389836176452332f75c1d751b823f1c70d2c31af435",
+      "path": "tests/language-readiness/nested-tree/lua_checks.lua"
+    },
+    {
+      "actual_sha256": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+      "bytes": 3484,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+      "historical_sha256": "9d805a415bc2f63e057910af0d1e679e46fd84533bfe2c6c126d912b8ec16b68",
+      "path": "tests/language-readiness/nested-tree/rust_checks.rs"
+    },
+    {
+      "actual_sha256": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+      "bytes": 6470,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+      "historical_sha256": "a177b58c22777cdcbd128e2d6147fd63da95c33654f6baaf8c5d28d0080deb6c",
+      "path": "tests/language-readiness/nested-tree/verify_native.py"
+    },
+    {
+      "actual_sha256": "e1a2848fb28ccbffd32edf7d4ed2b0ffcac98ad725fa23f16e5204985aca95c1",
+      "bytes": 116545,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e1a2848fb28ccbffd32edf7d4ed2b0ffcac98ad725fa23f16e5204985aca95c1",
+      "historical_sha256": "e1a2848fb28ccbffd32edf7d4ed2b0ffcac98ad725fa23f16e5204985aca95c1",
+      "path": "tools/check_inter_match_gap_capture_contract.py"
+    },
+    {
+      "actual_sha256": "9747819b7aa8356ca29c16ff7b88088c1d220e5f2aa1bb14f834a65e0f22e9e6",
+      "bytes": 1925,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "9747819b7aa8356ca29c16ff7b88088c1d220e5f2aa1bb14f834a65e0f22e9e6",
+      "historical_sha256": "9747819b7aa8356ca29c16ff7b88088c1d220e5f2aa1bb14f834a65e0f22e9e6",
+      "path": "tools/check_inter_match_gap_capture_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "5a453c58fe970d7ea2823f700d6875d34aeb9b989325bb1577cf319550fe0d44",
+      "bytes": 1133,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "5a453c58fe970d7ea2823f700d6875d34aeb9b989325bb1577cf319550fe0d44",
+      "historical_sha256": "5a453c58fe970d7ea2823f700d6875d34aeb9b989325bb1577cf319550fe0d44",
+      "path": "tools/check_lua_legacy_temp_residue.pl"
+    },
+    {
+      "actual_sha256": "6dce83e027486c5ea2f4e81027dce9b6cae97ad54e53b1e86c4daf3f05696194",
+      "bytes": 15224,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6dce83e027486c5ea2f4e81027dce9b6cae97ad54e53b1e86c4daf3f05696194",
+      "historical_sha256": "6dce83e027486c5ea2f4e81027dce9b6cae97ad54e53b1e86c4daf3f05696194",
+      "path": "tools/check_mutation_public_surface.py"
+    },
+    {
+      "actual_sha256": "329d04e3f153f54d78180ce9b8256135f95bb06dee2c742880958af26b019990",
+      "bytes": 83177,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "329d04e3f153f54d78180ce9b8256135f95bb06dee2c742880958af26b019990",
+      "historical_sha256": "329d04e3f153f54d78180ce9b8256135f95bb06dee2c742880958af26b019990",
+      "path": "tools/check_progressive_span_dispatch_contract.py"
+    },
+    {
+      "actual_sha256": "e2b05730fdf38fa137b36e9365a1b268b5d4a9073fa1815766e16238e4e361f7",
+      "bytes": 2637,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e2b05730fdf38fa137b36e9365a1b268b5d4a9073fa1815766e16238e4e361f7",
+      "historical_sha256": "e2b05730fdf38fa137b36e9365a1b268b5d4a9073fa1815766e16238e4e361f7",
+      "path": "tools/check_progressive_span_dispatch_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "0392f3a611a5e45fd54c52808a58669cac346f7dc701f66918a871d52b9595f6",
+      "bytes": 14743,
+      "classification": "preserved-inverse",
+      "current_equals_activation": true,
+      "effective_sha256": "0392f3a611a5e45fd54c52808a58669cac346f7dc701f66918a871d52b9595f6",
+      "historical_sha256": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808",
+      "inverse": {
+        "current": "0392f3a611a5e45fd54c52808a58669cac346f7dc701f66918a871d52b9595f6",
+        "historical": "a5991e8dbdfd6bdfd3226c8368ba9e341e741904280f21ee3fe870f26bad5808",
+        "literal_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.13.2",
+        "owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0",
+        "path": "tools/check_public_aggregate_selector_surface.py",
+        "scope": "exact public census and literal-token inverses; every original checker byte preserved"
+      },
+      "path": "tools/check_public_aggregate_selector_surface.py"
+    },
+    {
+      "actual_sha256": "1e3b87a7ade8770997cd816742bbce89fc6d8f5f448544dbb4bb2b68de93f9c8",
+      "bytes": 96917,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "1e3b87a7ade8770997cd816742bbce89fc6d8f5f448544dbb4bb2b68de93f9c8",
+      "historical_sha256": "1e3b87a7ade8770997cd816742bbce89fc6d8f5f448544dbb4bb2b68de93f9c8",
+      "path": "tools/check_recognition_transaction_contract.py"
+    },
+    {
+      "actual_sha256": "ce51cf3e9a8dc94f9fb853927e4fd4e9b315d65dff08a941fd2bedb04a81d6c4",
+      "bytes": 2428,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "ce51cf3e9a8dc94f9fb853927e4fd4e9b315d65dff08a941fd2bedb04a81d6c4",
+      "historical_sha256": "ce51cf3e9a8dc94f9fb853927e4fd4e9b315d65dff08a941fd2bedb04a81d6c4",
+      "path": "tools/check_recognition_transaction_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "6bbfc2723bb9c536dd55be5f51006bff6e97540ba6bfd28dba7f71d5332633bb",
+      "bytes": 2416,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6bbfc2723bb9c536dd55be5f51006bff6e97540ba6bfd28dba7f71d5332633bb",
+      "historical_sha256": "6bbfc2723bb9c536dd55be5f51006bff6e97540ba6bfd28dba7f71d5332633bb",
+      "path": "tools/check_recursive_observation_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "0f0d0c2b80ae46a8b2cf48bf29359eb246c5010395a43ae2db4f0472764890b5",
+      "bytes": 108290,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "0f0d0c2b80ae46a8b2cf48bf29359eb246c5010395a43ae2db4f0472764890b5",
+      "historical_sha256": "0f0d0c2b80ae46a8b2cf48bf29359eb246c5010395a43ae2db4f0472764890b5",
+      "path": "tools/check_staged_ast_enrichment_contract.py"
+    },
+    {
+      "actual_sha256": "cc1b2fb80ae1ebb4ffeab9af5de2432f55ad5c3a053d6b42ed6f1fef26fb7ca8",
+      "bytes": 2507,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "cc1b2fb80ae1ebb4ffeab9af5de2432f55ad5c3a053d6b42ed6f1fef26fb7ca8",
+      "historical_sha256": "cc1b2fb80ae1ebb4ffeab9af5de2432f55ad5c3a053d6b42ed6f1fef26fb7ca8",
+      "path": "tools/check_staged_ast_enrichment_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "6f94228c95e2ea33beeb366679724e9ed9d0d69a768dbf8055a25e3f9f8e92b8",
+      "bytes": 1267,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "6f94228c95e2ea33beeb366679724e9ed9d0d69a768dbf8055a25e3f9f8e92b8",
+      "historical_sha256": "6f94228c95e2ea33beeb366679724e9ed9d0d69a768dbf8055a25e3f9f8e92b8",
+      "path": "tools/check_typed_authoring_model_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "a2ced10cbce57cbe32cc6420b2b903da92866613aa4a6516192b9cc956481dba",
+      "bytes": 1074,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a2ced10cbce57cbe32cc6420b2b903da92866613aa4a6516192b9cc956481dba",
+      "historical_sha256": "a2ced10cbce57cbe32cc6420b2b903da92866613aa4a6516192b9cc956481dba",
+      "path": "tools/check_typed_gap_composition_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "06bf3d142a14cf4997fec57c9cbcb6a00df16bcaff1745b7ad7a8e6d17a3cf40",
+      "bytes": 214269,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "06bf3d142a14cf4997fec57c9cbcb6a00df16bcaff1745b7ad7a8e6d17a3cf40",
+      "historical_sha256": "06bf3d142a14cf4997fec57c9cbcb6a00df16bcaff1745b7ad7a8e6d17a3cf40",
+      "path": "tools/check_typed_source_location_contract.py"
+    },
+    {
+      "actual_sha256": "a0ff216ffdd4f41d12345809e13fd5ad35e16736e8c80e4a59995ed3befa2de7",
+      "bytes": 2967,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a0ff216ffdd4f41d12345809e13fd5ad35e16736e8c80e4a59995ed3befa2de7",
+      "historical_sha256": "a0ff216ffdd4f41d12345809e13fd5ad35e16736e8c80e4a59995ed3befa2de7",
+      "path": "tools/check_typed_source_location_six_runtime.sh"
+    },
+    {
+      "actual_sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "bytes": 9311,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "historical_sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+      "path": "tools/project_data_env.sh"
+    },
+    {
+      "actual_sha256": "c711aeea21c61280a7b38b09e01892ebd86e47c53d5c1c53d03efc40c953e76f",
+      "bytes": 90256,
+      "classification": "unadmitted-executable",
+      "current_equals_activation": false,
+      "effective_sha256": "c711aeea21c61280a7b38b09e01892ebd86e47c53d5c1c53d03efc40c953e76f",
+      "historical_sha256": "20d82473dfff48d79290a2ebef4ebab5e84e248638ae023f504db4638f208a41",
+      "path": "tools/run_ci_local.sh",
+      "refusal": "unreviewed governance drift: tools/run_ci_local.sh"
+    },
+    {
+      "actual_sha256": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7",
+      "bytes": 14371,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7",
+      "historical_sha256": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7",
+      "path": "tools/run_lua_local.sh"
+    },
+    {
+      "actual_sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+      "bytes": 1152,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+      "historical_sha256": "e073a655dae2be873f465fd6b7a0ad6266e8edb1f4faf7c75fc7817cd958b84b",
+      "path": "tools/run_lua_project_data.sh"
+    },
+    {
+      "actual_sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "bytes": 1486,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "historical_sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+      "path": "tools/run_python_project_data.sh"
+    },
+    {
+      "actual_sha256": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+      "bytes": 5605,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+      "historical_sha256": "a0366a7749aae0ca0154e39c3c8f1108053c1bd3a1ebc8a7f986bbbc2058ceff",
+      "path": "tools/test_dart_project_data_storage.sh"
+    },
+    {
+      "actual_sha256": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+      "bytes": 8509,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+      "historical_sha256": "919f3d62c9b9097cc6586f402d050823ce759ffff50452f775ba4363eb486ec4",
+      "path": "tools/test_julia_project_data_storage.sh"
+    },
+    {
+      "actual_sha256": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+      "bytes": 7804,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+      "historical_sha256": "8e5fbcae1498a5bb864907e5a6c9d55fab8f2b760bf334fbdc96ff0a839d48d8",
+      "path": "tools/test_lua_project_data_storage.sh"
+    },
+    {
+      "actual_sha256": "c07f4297c7ba237d70021f2e756d42ae27c3cba4f25b7d473b95ca8cd295c1ce",
+      "bytes": 6601,
+      "classification": "preserved-inverse",
+      "current_equals_activation": true,
+      "effective_sha256": "c07f4297c7ba237d70021f2e756d42ae27c3cba4f25b7d473b95ca8cd295c1ce",
+      "historical_sha256": "b76865efed9fd63d38b42b4e3a2c0ab6aa912a8cc5d22b7f9b98b7318a4c454f",
+      "inverse": {
+        "current": "c07f4297c7ba237d70021f2e756d42ae27c3cba4f25b7d473b95ca8cd295c1ce",
+        "historical": "b76865efed9fd63d38b42b4e3a2c0ab6aa912a8cc5d22b7f9b98b7318a4c454f",
+        "inventory_owner": "TYPE-REFERENCE-BOOK.1.2.20.1.19",
+        "inventory_table_sha256": "99e0726f0a51a06d4e2d86e030ee9385ba83bac85f03c0656396f266f4dbe164",
+        "knowledge_header_gate_owner": "PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11",
+        "owner": "SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.1",
+        "path": "tools/test_perl_project_data_storage.sh",
+        "scope": "exact reviewed manifest/source stage, then original 27-to-29 census inverse; runtime proof separate"
+      },
+      "path": "tools/test_perl_project_data_storage.sh"
+    },
+    {
+      "actual_sha256": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
+      "bytes": 6235,
+      "classification": "historical-exact",
+      "current_equals_activation": true,
+      "effective_sha256": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
+      "historical_sha256": "82fa3cf790b26f39e743524a9c6d5d113d8ee8fcce59f4f2df9f759674ba97d6",
+      "path": "tools/test_rust_project_data_storage.sh"
+    }
+  ],
+  "scope": "Source identity/inverse classification only; no new runtime execution, historical hash refresh or feature admission."
+}

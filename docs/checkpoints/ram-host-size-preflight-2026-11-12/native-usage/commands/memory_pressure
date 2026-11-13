@@ -1,0 +1,2 @@
+#!/bin/bash
+exec "$RAM_CAPTURE_PYTHON" -P "$RAM_CAPTURE_SCRIPT" record memory_pressure '/usr/bin/memory_pressure' "$@"

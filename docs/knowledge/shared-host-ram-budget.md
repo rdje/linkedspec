@@ -1,6 +1,6 @@
 ---
 id: shared-host-ram-budget
-title: Shared host memory uses director86/90 percent thresholds
+title: Shared host RAM uses snapshot admission and director trend monitoring
 answers:
   - "how much RAM is available on the shared macOS host"
   - "are the86 and90 percent memory limits per process or host wide"
@@ -8,32 +8,44 @@ answers:
   - "may an agent stop another project's jobs for RAM"
   - "does tools ram_guard monitor memory during a running job"
   - "why should RAM guard admission use danger pct86"
-date: 2026-11-05
-status: director operating constraint; existing preflight wrapper unchanged
+  - "how do RAM guard and canonical CI acquire host capacity"
+date: 2026-11-12
+status: current director trend policy; resource14 focused repair with canonical admission required
 tags: [host, memory, ram, resources, locality, operations]
-evidence: "Director session-startup paragraph23; current verification under TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3. tools/ram_guard.sh supplies configurable admission and a virtual-memory ceiling, not continuous host monitoring."
-reverify: "bash tools/ram_guard.sh --danger-pct 86 --ceiling-mb 512 -- true"
+evidence: "TYPE-REFERENCE-BOOK.1.2.23.4.14; retained original/native/source-bound controls and historical recovery in docs/checkpoints/ram-host-size-preflight-2026-11-12/. The prior November5 hard86/90 card is retained at b370de8d3 and in the before-edit proof capsules."
+reverify:
+  - "bash tools/run_python_project_data.sh docs/checkpoints/ram-host-size-preflight-2026-11-12/review.py"
+  - "bash tools/run_python_project_data.sh tools/test_ram_guard.py"
 ---
 
 The director identifies this macOS host as24GB shared across projects and agents.
-Thresholds apply to total host usage. Before intensive work, check headroom for
-the expected peak, use conservative workers/batches and run at most one intensive
-job of our own. Monitor during execution frequently enough to catch growth.
+Thresholds concern total host usage. Before intensive work, check enough headroom
+for the expected peak, use conservative workers/batches and run at most one
+intensive job of our own. Observe the trend while it runs. If usage exceeds90%
+and keeps increasing, tell the director and reduce or stop our driving jobs.
+Otherwise, stable high80s alone do not require intervention. After a pressure
+stop, resume only with stable sufficient headroom, aiming for80% or less and
+using lower concurrency or smaller batches. Never stop another project's jobs.
+If other projects keep usage above90%, defer our intensive work and report why.
 
-At86%, defer new intensive work and promptly reduce our running job's usage.
-At90%, act immediately: stop our driving jobs if reduction cannot quickly restore
-usage below86%. Intervene only in jobs we started. If other projects keep usage
-at or above86%, defer our intensive work and report the specific blocker.
-Restart only with stable sufficient headroom and reduced concurrency/batches;
-aim for80% or less after a memory-triggered stop.
+Request a quiet window when the job needs unavailable headroom or background
+activity could skew a measurement. State purpose, proposed start/duration and
+required free memory or background limit; wait for confirmation, verify readiness
+and announce when the window is no longer needed. Adequate headroom does not
+require an unsolicited quiet-window pause.
 
-If headroom is insufficient, or background activity could skew a benchmark,
-request a quiet window. State the command/purpose, proposed start/duration and
-required free memory or background-activity limit. Wait for explicit confirmation,
-verify the host before starting, and notify the director when the window ends.
+tools/host_ram_usage.sh supplies the shared snapshot producer. On Darwin it uses
+positive sysctl capacity, falling back to actual memory_pressure -Q capacity when
+the first query fails or is invalid. It parses page size and free/inactive/
+speculative pages from one vm_stat response. On Linux it uses one /proc/meminfo
+response. Missing/invalid capacity or snapshots fail clearly. The upward-rounded
+used estimate is100 minus the available-byte percentage rounded down; it is not
+memory_pressure's free indicator, a peak bound or continuous trend monitoring.
 
-Use the explicit86% admission option with the existing wrapper; its default88%
-does not replace this director constraint. The wrapper checks before a command
-and attempts a virtual-memory ceiling. It does not perform live host monitoring;
-the agent remains responsible for that monitoring and timely intervention. Keep
-all project-owned monitoring logs and scratch on the repository volume.
+tools/ram_guard.sh and canonical CI use that same producer. Their configurable88%
+default is conservative job admission, not the superseded director86% global
+rule. The wrapper refuses unknown usage or a reached threshold with77, preserves
+the admitted child's exit code and attempts a virtual-memory ceiling; it does not
+guarantee an RSS ceiling or monitor the child. The agent remains responsible for
+current headroom and live host trends. Keep project logs and scratch in managed
+repository storage. Historical November5 measurements and evidence stay unchanged.

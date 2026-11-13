@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "memory_pressure",
+    "-Q"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LC_ALL": "C"
+  }
+}

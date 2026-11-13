@@ -1,0 +1,57 @@
+{
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/intake/source-inventory.json": {
+    "bytes": 105826,
+    "mode": 420,
+    "sha256": "3b7ed7bd252b583717fe492f22bf6bca1c09860fa3cdfed019263de682505461"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/prepare_tables.py": {
+    "bytes": 5531,
+    "mode": 420,
+    "sha256": "3107bc9cca416caefdf09619809b48f8cc87c1a6df5d1a5aa3575123c6dffe74"
+  },
+  "doctrine/project_data_storage/python_entrypoints.json": {
+    "bytes": 2529,
+    "mode": 420,
+    "sha256": "ed0849fc2f2684414e8db2ea62caa5c9de9c665612aee7a63b3ac625f00d3dbb"
+  },
+  "doctrine/project_data_storage/python_temporary_owners.json": {
+    "bytes": 661,
+    "mode": 420,
+    "sha256": "d5c21245129f9c677979662d651e03a1c3f14d9e5c4756c730f9f6cd46c49366"
+  },
+  "tests/language-readiness/additional-source-images.json.gz": {
+    "bytes": 328,
+    "mode": 420,
+    "sha256": "33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e"
+  },
+  "tests/language-readiness/current-source-images.json.gz": {
+    "bytes": 2325,
+    "mode": 420,
+    "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310"
+  },
+  "tests/language-readiness/current-source-successors.json.gz": {
+    "bytes": 792,
+    "mode": 420,
+    "sha256": "f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af"
+  },
+  "tools/host_ram_usage.sh": {
+    "bytes": 3101,
+    "mode": 420,
+    "sha256": "4cc355439d1c61cd6bf86cfa6aaafc86f79f08d697b3150e3a3c7cd0781e5131"
+  },
+  "tools/ram_guard.sh": {
+    "bytes": 2009,
+    "mode": 493,
+    "sha256": "e16447add7d7418c56140e973dea8ef6c7b40820c51938570b32b5864d1f7f7b"
+  },
+  "tools/run_ci_local.sh": {
+    "bytes": 90256,
+    "mode": 420,
+    "sha256": "c711aeea21c61280a7b38b09e01892ebd86e47c53d5c1c53d03efc40c953e76f"
+  },
+  "tools/test_ram_guard.py": {
+    "bytes": 7081,
+    "mode": 420,
+    "sha256": "ded4785a18302a198d2a0fb6ca24dd42ce0d9e0fb36a53ed621434a4c0e2b01f"
+  }
+}

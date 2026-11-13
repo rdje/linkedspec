@@ -1,0 +1,1 @@
+- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2 —312PASS/43 targets+three metadata/266 preserved; old46/current312/direct400/1872 pairs/readonly17/current165; original failures retained, Rust next.

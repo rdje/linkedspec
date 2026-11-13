@@ -1,0 +1,15 @@
+{
+  "changed_paths": [
+    "dart/lib/src/runtime/interpreter.dart",
+    "julia/src/runtime/Interpreter.jl",
+    "lua/src/linkedspec/interpreter.lua",
+    "rust/linkedspec-runtime/src/engine.rs"
+  ],
+  "ci_after_sha256": "8dfa284f749f22171167fa3138b2f97763d386c9f96f5f01af7f8f38852b8651",
+  "ci_precursor_sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a",
+  "later_sha256": "5e7435081d4653fa564464c03de2bce7c6f8c645fb1cc0514b507cb949d76899",
+  "later_table": "tests/language-readiness/current-source-successors-2026-11-12.json.gz",
+  "ram_sha256": "a3ecce2d9a1157cbd86fffa065b07997008b83f9f3d15a40e917c74ca96ea2a7",
+  "ram_table": "tests/language-readiness/ram-preflight-ci-evolution.json.gz",
+  "scope": "Exact later committed identities and exact owned candidate inverse; original tables, runtime bodies and historical results unchanged."
+}

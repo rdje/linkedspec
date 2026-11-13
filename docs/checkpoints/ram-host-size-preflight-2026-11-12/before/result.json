@@ -1,0 +1,22 @@
+[
+  {
+    "name": "uname",
+    "exit": 0
+  },
+  {
+    "name": "sysctl",
+    "exit": 1
+  },
+  {
+    "name": "memory-pressure",
+    "exit": 0
+  },
+  {
+    "name": "vm-stat",
+    "exit": 0
+  },
+  {
+    "name": "original-denial-red",
+    "exit": 1
+  }
+]

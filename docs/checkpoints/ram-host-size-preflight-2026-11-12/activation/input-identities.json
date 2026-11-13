@@ -1,0 +1,42 @@
+{
+  "MEMORY.md": {
+    "bytes": 4549,
+    "mode": 420,
+    "sha256": "51a89c1e850abe6c03b648f57603776e7ae718fbabe52406c5a1c384847926b9"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/PLAN.md": {
+    "bytes": 1542,
+    "mode": 420,
+    "sha256": "454ab2e72563d2e44da2836aecf198b3b77549380361c8bf983e82fc9058e919"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/prepare.py": {
+    "bytes": 5152,
+    "mode": 420,
+    "sha256": "1b94e352efb65578a72fe1a75f4007f99bde5a911290d42da6ce1eca4fe7d88a"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3344,
+    "mode": 420,
+    "sha256": "4328031becb8f533074ccd5c18871d40bfc764faf720aa43ec9ad466edbaa4c1"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/task-headroom-rooting-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "tools/ram_guard.sh": {
+    "bytes": 2338,
+    "mode": 493,
+    "sha256": "0dd6ca4161f7ba9684fa10abb9659c0456c5ba991da91db6cb844db6cf62d939"
+  },
+  "tools/run_ci_local.sh": {
+    "bytes": 90763,
+    "mode": 420,
+    "sha256": "daadcf4af84c6da1f0ab55232e821dcaac83f5ea893bfd54bd8c02b46f792f3a"
+  }
+}

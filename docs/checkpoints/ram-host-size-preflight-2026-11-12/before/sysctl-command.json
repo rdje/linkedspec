@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "sysctl",
+    "-n",
+    "hw.memsize"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LC_ALL": "C"
+  }
+}

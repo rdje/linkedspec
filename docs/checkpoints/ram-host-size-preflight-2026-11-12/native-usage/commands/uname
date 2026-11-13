@@ -1,0 +1,2 @@
+#!/bin/bash
+exec "$RAM_CAPTURE_PYTHON" -P "$RAM_CAPTURE_SCRIPT" record uname '/opt/homebrew/opt/coreutils/libexec/gnubin/uname' "$@"

@@ -270,6 +270,8 @@ for fixture in tools/test_knowledge_map_projection.py tools/test_claim_verificat
 done
 require_tracked_file tools/historical_objective_images.py
 require_tracked_file tests/language-readiness/current-source-images.json.gz
+require_tracked_file tests/language-readiness/current-source-successors-2026-11-12.json.gz
+require_tracked_file tests/language-readiness/ram-preflight-ci-evolution.json.gz
 log "checking paged exact document-history catalogs"
 require_tracked_file t/document_history_catalog.t
 PERL5LIB= prove t/document_history_catalog.t
@@ -1321,25 +1323,16 @@ POSIXLY_CORRECT=1 PERL5LIB= perl tools/run_cli_conformance.pl \
  --display-command 'perl bin/linkedspec' \
  -- perl -I{{REPO_ROOT}}/perl {{REPO_ROOT}}/bin/linkedspec
 
-# Memory guard — bail if system RAM is critically low before running the heavy suite
-_ram_used_pct() {
-  if [[ "$(uname -s)" == "Darwin" ]]; then
-    local page_size free_pages inactive_pages speculative_pages total_ram avail_pages
-    page_size=$(pagesize 2>/dev/null || echo 16384)
-    free_pages=$(vm_stat 2>/dev/null | awk '/Pages free/               {print $NF}' | tr -d '.')
-    inactive_pages=$(vm_stat 2>/dev/null | awk '/Pages inactive/         {print $NF}' | tr -d '.')
-    speculative_pages=$(vm_stat 2>/dev/null | awk '/Pages speculative/    {print $NF}' | tr -d '.')
-    avail_pages=$(( ${free_pages:-0} + ${inactive_pages:-0} + ${speculative_pages:-0} ))
-    total_ram=$(sysctl -n hw.memsize 2>/dev/null || echo 17179869184)
-    echo $(( 100 - (avail_pages * page_size * 100 / total_ram) ))
-  else
-    awk '/MemTotal/{t=$2} /MemAvailable/{a=$2} END{printf "%d", 100-(a*100/t)}' /proc/meminfo 2>/dev/null || echo 0
-  fi
-}
-GUARD_PCT=$(_ram_used_pct)
+# Snapshot admission is separate from live host-wide trend monitoring.
+require_tracked_file tools/host_ram_usage.sh
+require_tracked_file tools/test_ram_guard.py
+log "checking RAM capacity, snapshot arithmetic and command admission"
+bash "$REPO_ROOT/tools/run_python_project_data.sh" tools/test_ram_guard.py
+source "$REPO_ROOT/tools/host_ram_usage.sh"
+GUARD_PCT=$(linkedspec_host_ram_used_pct) || fail "host RAM usage unavailable — refusing to run heavy suite"
 DANGER_PCT="${LINKEDSPEC_TEST_DANGER_PCT:-88}"
 if [[ "${GUARD_PCT}" -ge "${DANGER_PCT}" ]]; then
-  fail "RAM ${GUARD_PCT}% used (danger threshold ${DANGER_PCT}%) — refusing to run heavy suite. Free RAM and retry, or set LINKEDSPEC_TEST_DANGER_PCT higher."
+  fail "RAM ${GUARD_PCT}% used (configured admission threshold ${DANGER_PCT}%) — refusing to run heavy suite. Review available headroom before retrying."
 fi
 log "RAM ${GUARD_PCT}% used — within threshold (${DANGER_PCT}%)"
 

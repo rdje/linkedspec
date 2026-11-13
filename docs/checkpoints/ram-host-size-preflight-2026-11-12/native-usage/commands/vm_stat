@@ -1,0 +1,2 @@
+#!/bin/bash
+exec "$RAM_CAPTURE_PYTHON" -P "$RAM_CAPTURE_SCRIPT" record vm_stat '/usr/bin/vm_stat' "$@"

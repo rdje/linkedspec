@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "vm_stat"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LC_ALL": "C"
+  }
+}

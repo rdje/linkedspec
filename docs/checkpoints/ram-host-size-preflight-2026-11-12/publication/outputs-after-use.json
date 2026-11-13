@@ -1,0 +1,337 @@
+{
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/ahead-command.json": {
+    "bytes": 268,
+    "mode": 420,
+    "sha256": "0a348847ab3d7be476a7a55aa04cf6ee2be3b9adec158c54e9c4ebb0f6d075c5"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/ahead-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/ahead-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/ahead-stdout.gz": {
+    "bytes": 24,
+    "mode": 420,
+    "sha256": "8661bf4bf541de9609b224796aa7192559ffbe54c0613c5d9c1f8f2bf11b9932"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-after-command.json": {
+    "bytes": 196,
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-after-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-after-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-after-stdout.gz": {
+    "bytes": 59,
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-command.json": {
+    "bytes": 196,
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/base-stdout.gz": {
+    "bytes": 59,
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/empty-range-command.json": {
+    "bytes": 324,
+    "mode": 420,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/empty-range-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/empty-range-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/empty-range-stdin.gz": {
+    "bytes": 65,
+    "mode": 420,
+    "sha256": "8d7b135b68c6fcdd5fe1f2499e2a4a0374fffd66798e038742efc11e0b34cc2d"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/empty-range-stdout.gz": {
+    "bytes": 50,
+    "mode": 420,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/git-version-command.json": {
+    "bytes": 164,
+    "mode": 420,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/git-version-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/git-version-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/git-version-stdout.gz": {
+    "bytes": 55,
+    "mode": 420,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-after-command.json": {
+    "bytes": 176,
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-after-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-after-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-after-stdout.gz": {
+    "bytes": 59,
+    "mode": 420,
+    "sha256": "496f2a82ade0119443b5df82744dbab7b727f5feb903f062131f957e91172307"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-command.json": {
+    "bytes": 176,
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/head-stdout.gz": {
+    "bytes": 59,
+    "mode": 420,
+    "sha256": "496f2a82ade0119443b5df82744dbab7b727f5feb903f062131f957e91172307"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/memory-command.json": {
+    "bytes": 204,
+    "mode": 420,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/memory-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/memory-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/memory-stdout.gz": {
+    "bytes": 323,
+    "mode": 420,
+    "sha256": "bbf5a42567b7cc8f45be7a8d53b714a3bd413ec95e517e6d8af59901d3660ee4"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-format-command.json": {
+    "bytes": 192,
+    "mode": 420,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-format-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-format-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-format-stdout.gz": {
+    "bytes": 25,
+    "mode": 420,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-metadata-command.json": {
+    "bytes": 265,
+    "mode": 420,
+    "sha256": "2a29b2687be4be512ddf67e33a171b3ebf1c4ba8e9fa3b14ddcb459cfb75af45"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-metadata-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-metadata-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-metadata-stdin.gz": {
+    "bytes": 1116231,
+    "mode": 420,
+    "sha256": "1904b615e0fbaaadd18ea174eb7e81d82a5269c3489f0e26d872c7710e777f80"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/object-metadata-stdout.gz": {
+    "bytes": 1259444,
+    "mode": 420,
+    "sha256": "75108c2f960e2fd5f785ccfbc4efada3cd0f136e31fcc2a767d54868af68b638"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/objects-command.json": {
+    "bytes": 302,
+    "mode": 420,
+    "sha256": "07f66007c1eb20e23568ae63246e53794e06dd4f872366089a435824a2f963d3"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/objects-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/objects-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/objects-stdout.gz": {
+    "bytes": 1116231,
+    "mode": 420,
+    "sha256": "1904b615e0fbaaadd18ea174eb7e81d82a5269c3489f0e26d872c7710e777f80"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-command.json": {
+    "bytes": 464,
+    "mode": 420,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-after-command.json": {
+    "bytes": 301,
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-after-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-after-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-after-stdout.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-command.json": {
+    "bytes": 301,
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-config-stdout.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-stderr.gz": {
+    "bytes": 1370,
+    "mode": 420,
+    "sha256": "5f899bdae5644dce4b7db7e77ee38eac5533772ba30e5854e9980f7c2df02212"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/pack-stderr.log": {
+    "bytes": 8349,
+    "mode": 420,
+    "sha256": "c6ea41bf5c23309c6282dc045875b78845b3dbff3b6a81c2a9d820ed5118b2a0"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/producer-input-identities.json": {
+    "bytes": 862,
+    "mode": 420,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/producer-inputs.tar.gz": {
+    "bytes": 9165,
+    "mode": 420,
+    "sha256": "deeab583f7c7b35e3f914dac14d68fe729ff6c6d314dffe7fb039817f8c014ce"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/result.json": {
+    "bytes": 1340,
+    "mode": 420,
+    "sha256": "d98b9d09f20e9c34c3f16a2f1ef15e13fdbc5e5982749ce8929f4b6572f91cbc"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/push-monitor-current/revisions.txt": {
+    "bytes": 83,
+    "mode": 420,
+    "sha256": "9302c46727c5fad7ade36111d49eb8c4fe87c032afef79714408820c24a4f0f0"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.14.json": {
+    "bytes": 5089,
+    "mode": 420,
+    "sha256": "d37b871a2e29774b959fa3347235789c1cb106fa72f414e7b1127a2b7fbeae2c"
+  },
+  "docs/knowledge/canonical-ci-ram-fallback-prerequisite.md": {
+    "bytes": 2784,
+    "mode": 420,
+    "sha256": "f6f4480b51b7d2685fdfc8a4ad08a8af1812bd2dee275546f9362bac77368a33"
+  },
+  "docs/knowledge/restricted-macos-ram-host-size-fallback.md": {
+    "bytes": 3075,
+    "mode": 420,
+    "sha256": "469aec551a2e4bb4ce1338b416e30dc9f93add0c2361f10a99fb9eda501b98ad"
+  },
+  "docs/knowledge/shared-host-ram-budget.md": {
+    "bytes": 3361,
+    "mode": 420,
+    "sha256": "4ade2a571c0117a26b3f1d506e3fe0fe8c04d6c1ff508a54afe918c415946a8b"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 63408,
+    "mode": 420,
+    "sha256": "f859efaf80b51ca56e5931b3e140ee39620fe8d67b54ce02b88c386c35c9ecbe"
+  }
+}

@@ -27,7 +27,7 @@
 {"bytes":4241,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/semantic-source-ceiling-boundary.md","sha256":"dfd69ee4858798625bc2212c102695b128f4b85c8ccacc8fca112ea3df7ab831","type":"member"}
 {"bytes":14703,"lines":237,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-design.md","sha256":"e7bac80a9de1cec446fc5494a60e5253f7bb0e62158c3fbae7c6a65534409780","type":"member"}
 {"bytes":3069,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/sexpr-document-entry-prefix-validation.md","sha256":"35a2d3071da04997e183d7bcb75950da8259d8eadad7607ca4705d8fef4999f2","type":"member"}
-{"bytes":2388,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.3","path":"docs/knowledge/shared-host-ram-budget.md","sha256":"8278098261274805f1781d7666cd88faf5a699816c35a1e7cf93aec4f8672e1d","type":"member"}
+{"bytes":3361,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.14","path":"docs/knowledge/shared-host-ram-budget.md","sha256":"4ade2a571c0117a26b3f1d506e3fe0fe8c04d6c1ff508a54afe918c415946a8b","type":"member"}
 {"bytes":1948,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/short-wrapper-alias-retirement-policy.md","sha256":"1e7869aef2373a7ad165b8fe9ae83e32c84227444d99ee23f8a53773e75f855b","type":"member"}
 {"bytes":4672,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/simenv-variable-dispatch-mismatch.md","sha256":"4687335776d8d9e699559fb611cf53b3bead6feb27ac591ae34c2689fee1873f","type":"member"}
 {"bytes":3648,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/single-quoted-action-strings-variant-contract.md","sha256":"647376592e9322f8678f5cc2f7cd36cdd25187f48db0157f15e07526ed3f5870","type":"member"}

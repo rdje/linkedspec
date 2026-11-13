@@ -1,0 +1,177 @@
+{
+  "dart/lib/src/action/action_parser.dart": {
+    "bytes": 74259,
+    "mode": 420,
+    "sha256": "86df15f3408ef87c0a41924274ec1b7ba9aac1a585185eca9aab047f37c37b5c"
+  },
+  "dart/lib/src/compiler/compiled_spec.dart": {
+    "bytes": 61236,
+    "mode": 420,
+    "sha256": "03a3f07cd7738db70de9f4cb660d33f5b9f04bdcb924f5860b90ce01718cb914"
+  },
+  "dart/lib/src/runtime/interpreter.dart": {
+    "bytes": 384437,
+    "mode": 420,
+    "sha256": "e24574b96cb7d9c823ffa1951a5cd7db8e326ebcdeb610638a686de0e5881e4f"
+  },
+  "dart/test/source_emitter_test.dart": {
+    "bytes": 31069,
+    "mode": 420,
+    "sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/image-prerequisite/focused_evolution.py": {
+    "bytes": 5139,
+    "mode": 420,
+    "sha256": "097fb2af14ac6c2301e18d27a637f2542eaa03a61d4e6967d67daa8810fdc127"
+  },
+  "doctrine/project_data_storage/python_entrypoints.json": {
+    "bytes": 2529,
+    "mode": 420,
+    "sha256": "ed0849fc2f2684414e8db2ea62caa5c9de9c665612aee7a63b3ac625f00d3dbb"
+  },
+  "doctrine/project_data_storage/python_temporary_owners.json": {
+    "bytes": 661,
+    "mode": 420,
+    "sha256": "d5c21245129f9c677979662d651e03a1c3f14d9e5c4756c730f9f6cd46c49366"
+  },
+  "julia/src/action/ActionParser.jl": {
+    "bytes": 77953,
+    "mode": 420,
+    "sha256": "71914b869e91fcaf8ff5f5c30ae431178c68ee23587b41687f406c37e73ad99f"
+  },
+  "julia/src/compiler/CompiledSpec.jl": {
+    "bytes": 69246,
+    "mode": 420,
+    "sha256": "88c8371112e7d71612c832bc7d63fbd9dd03c20559c77c9f510c228d5de327b0"
+  },
+  "julia/src/runtime/Interpreter.jl": {
+    "bytes": 375326,
+    "mode": 420,
+    "sha256": "92ebdf61ace20947b4f29f20f1f362475003ea6c1aa8af183e8fc680499b2bff"
+  },
+  "lua/src/linkedspec/action_parser.lua": {
+    "bytes": 61463,
+    "mode": 420,
+    "sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc"
+  },
+  "lua/src/linkedspec/compiled_spec.lua": {
+    "bytes": 59337,
+    "mode": 420,
+    "sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8"
+  },
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 281483,
+    "mode": 420,
+    "sha256": "ecd3ef1ee80120d06aab980ef8cbca44bb6d57972f945b3263ab09392dc51098"
+  },
+  "lua/src/linkedspec/recognition_transaction_runtime.lua": {
+    "bytes": 17992,
+    "mode": 420,
+    "sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683"
+  },
+  "lua/src/linkedspec/source_emitter.lua": {
+    "bytes": 30565,
+    "mode": 420,
+    "sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a"
+  },
+  "perl/LinkedSpec/ActionIR/Contracts.pm": {
+    "bytes": 132754,
+    "mode": 420,
+    "sha256": "1cf6d6f5606a1199234f9587650763a60088e25d1bd35cc0c2046e295b801f96"
+  },
+  "perl/LinkedSpec/Compiler.pm": {
+    "bytes": 85481,
+    "mode": 420,
+    "sha256": "6dfcf226b62c1707e7a1aa4248db7b43328125ccaa56f67ad9ec1051657c2732"
+  },
+  "rust/linkedspec-core/src/expr.rs": {
+    "bytes": 227344,
+    "mode": 420,
+    "sha256": "81e72383a971ce6c8c306a8d6a7550ac1304b7cd5be31781daa72506ce8127bf"
+  },
+  "rust/linkedspec-runtime/src/engine.rs": {
+    "bytes": 651848,
+    "mode": 420,
+    "sha256": "7b4a57ff08dc97b80975d6e26c838d8c70766d54f3bd0d25d672fe11d008ebbb"
+  },
+  "rust/linkedspec-runtime/src/recognition_transaction.rs": {
+    "bytes": 53003,
+    "mode": 420,
+    "sha256": "939d533b52739d45f7e7c16f29761357385ae6b9ffa40bf20212835d4b2f5236"
+  },
+  "rust/linkedspec-runtime/src/runtime.rs": {
+    "bytes": 100613,
+    "mode": 420,
+    "sha256": "0f95699ecd6ba0a37729d85b7023ffcff5d4950650232725ae447b1790f2a9dc"
+  },
+  "t/phase0_regression.t": {
+    "bytes": 2805253,
+    "mode": 420,
+    "sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+  },
+  "tests/language-readiness/additional-source-images.json.gz": {
+    "bytes": 328,
+    "mode": 420,
+    "sha256": "33e71bf5506e09a50940f2a196ad0388f552448e77f3ed5156f37c816340c18e"
+  },
+  "tests/language-readiness/current-source-images.json.gz": {
+    "bytes": 2325,
+    "mode": 420,
+    "sha256": "1b36eab6308b311933775c31da8bcb522f6dd18acb2be0a467790f3112a3f310"
+  },
+  "tests/language-readiness/current-source-successors-2026-11-12.json.gz": {
+    "bytes": 790,
+    "mode": 420,
+    "sha256": "5e7435081d4653fa564464c03de2bce7c6f8c645fb1cc0514b507cb949d76899"
+  },
+  "tests/language-readiness/current-source-successors.json.gz": {
+    "bytes": 792,
+    "mode": 420,
+    "sha256": "f9ebc109d910119055847c19dc42e4efa1e6b83b0bf4195132b530f7ea6915af"
+  },
+  "tests/language-readiness/phase0-fixture-calibration.json.gz": {
+    "bytes": 1509,
+    "mode": 420,
+    "sha256": "4d16bd8b938d30f5f5fa7885931242ea195ed8316be60e36d54d282b452ef45e"
+  },
+  "tests/language-readiness/phase0-value-calibration.json.gz": {
+    "bytes": 3130,
+    "mode": 420,
+    "sha256": "83a26ab17b802e800a44650b59e07d794a804bdf3d752936870c15f8e00b199c"
+  },
+  "tests/language-readiness/ram-preflight-ci-evolution.json.gz": {
+    "bytes": 1544,
+    "mode": 420,
+    "sha256": "a3ecce2d9a1157cbd86fffa065b07997008b83f9f3d15a40e917c74ca96ea2a7"
+  },
+  "tests/language-readiness/verify_objectives.py": {
+    "bytes": 114843,
+    "mode": 420,
+    "sha256": "15b58d9ceef69003e7089940377c24d70ad6240ce5b1ae57948f609a4f23a49d"
+  },
+  "tools/historical_objective_images.py": {
+    "bytes": 14539,
+    "mode": 420,
+    "sha256": "853f1566ff0bb755f293c112e3440152cf65c5ce1668f5239884c7398bb414ad"
+  },
+  "tools/host_ram_usage.sh": {
+    "bytes": 3101,
+    "mode": 420,
+    "sha256": "4cc355439d1c61cd6bf86cfa6aaafc86f79f08d697b3150e3a3c7cd0781e5131"
+  },
+  "tools/ram_guard.sh": {
+    "bytes": 2009,
+    "mode": 493,
+    "sha256": "e16447add7d7418c56140e973dea8ef6c7b40820c51938570b32b5864d1f7f7b"
+  },
+  "tools/run_ci_local.sh": {
+    "bytes": 90428,
+    "mode": 420,
+    "sha256": "8dfa284f749f22171167fa3138b2f97763d386c9f96f5f01af7f8f38852b8651"
+  },
+  "tools/test_ram_guard.py": {
+    "bytes": 7081,
+    "mode": 420,
+    "sha256": "ded4785a18302a198d2a0fb6ca24dd42ce0d9e0fb36a53ed621434a4c0e2b01f"
+  }
+}

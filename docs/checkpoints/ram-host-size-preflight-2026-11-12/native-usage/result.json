@@ -1,0 +1,14 @@
+{
+  "result": "PASS",
+  "capacity_bytes": 25769803776,
+  "page_size": 16384,
+  "available_page_counts": [
+    181890,
+    470497,
+    20858
+  ],
+  "observed_used_percent": 58,
+  "sysctl_exit": 1,
+  "vm_stat_calls": 1,
+  "scope": "One actual availability snapshot; capacity fallback is independently parsed. Not memory_pressure free percentage or live trend/peak safety. Native executable/toolchain/OS closure remains4.2/SESSION5."
+}

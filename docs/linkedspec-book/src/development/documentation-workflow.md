@@ -1040,3 +1040,65 @@ CI runs this control before doctrines. If initialization is denied, rerun the co
 in approved host execution with `bash tools/run_ci_local.sh`. Preserve the oracle's containment profile and
 negative checks. An early failure supplies no canonical receipt; a focused host pass does not replace the
 complete run. The execution requirement is canonical in `docs/knowledge/project-data-process-locality-proof.md`.
+
+
+### Host RAM admission and trend monitoring
+
+RAM guard and canonical CI share tools/host_ram_usage.sh. On macOS, a denied or
+invalid sysctl query falls back to actual capacity from memory_pressure -Q.
+Page size and available free/inactive/speculative pages come from one vm_stat
+response. Linux uses one /proc/meminfo response. Missing or invalid data refuses
+admission rather than substituting an invented host size.
+
+```sh
+bash tools/host_ram_usage.sh
+bash tools/ram_guard.sh --ceiling-mb 4096 --danger-pct 88 -- bash tools/run_python_project_data.sh tools/test_ram_guard.py
+```
+
+The first command prints the upward-rounded availability-based used percentage.
+The wrapper's configured threshold defaults to88%; it exits77 without starting
+the child when usage is unknown or reaches that threshold, otherwise preserves
+the child's exit code. Its attempted virtual-memory ceiling is not an RSS bound.
+Canonical CI runs the capacity/arithmetic/admission controls before its heavy
+suite and uses the same producer with LINKEDSPEC_TEST_DANGER_PCT.
+
+These are snapshot admission checks. Check headroom for the expected peak, use
+conservative concurrency and run at most one intensive job of our own. Observe
+host-wide trends while it runs. If usage exceeds90% and keeps increasing, tell
+the director and reduce or stop our driving jobs; stable high80s alone do not
+require intervention. After a pressure stop, aim for stable80% or less before
+resuming with lower concurrency or smaller batches. Never stop another project's
+jobs. If other projects keep usage above90%, defer our intensive work.
+
+Request a confirmed quiet window only when required headroom is unavailable or
+background activity could skew a measurement. State purpose, proposed start and
+duration, and required free memory/background limit; verify readiness and announce
+when the window ends. Keep all monitoring data in managed repository storage.
+The current operating authority is docs/knowledge/shared-host-ram-budget.md.
+
+
+### Later source images and exact CI inverses
+
+Historical objective recovery checks source identities separately from fresh
+runtime results. A later accepted runtime image needs a closed successor entry:
+retain the original image and intermediate committed predecessor, then bind the
+latest path, commit, regular mode and full digest. Keep the original Phase0
+activation and calibration. Nested reports must identify the effective latest
+image while exposing the intermediate lineage.
+
+An owned CI change can instead have an exact source inverse. The RAM preflight
+stage restores its two reviewed hunks to committed b370 bytes before exercising
+every older CI falsifier. Current candidate bytes are distinct from a committed
+historical image. Missing registration, unrelated edits and changed support
+inputs reject; old tables, recovered logs and runtime observations stay intact.
+
+```sh
+bash tools/run_python_project_data.sh tools/test_historical_objective_images.py
+bash tools/run_python_project_data.sh docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py
+```
+
+The first command checks source-admission/inverse mechanics. The second performs
+actual isolated historical recovery under original-log/tracked-write denial.
+Neither reruns the historical runtime objectives or promotes feature coverage.
+Source/data integrity, current runtime proof and the exact canonical receipt
+remain separate. New CI stages must preserve the earlier inverses and controls.

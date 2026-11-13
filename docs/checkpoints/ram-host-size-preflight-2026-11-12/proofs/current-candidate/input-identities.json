@@ -1,0 +1,172 @@
+{
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/LANDING.md": {
+    "bytes": 1242,
+    "mode": 420,
+    "sha256": "6508f7923b81c166fa2fc46f6e0394034fbf405ace1b32642650e703f6d5c2cb"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/PLAN.md": {
+    "bytes": 1542,
+    "mode": 420,
+    "sha256": "454ab2e72563d2e44da2836aecf198b3b77549380361c8bf983e82fc9058e919"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/REVIEW.md": {
+    "bytes": 4752,
+    "mode": 420,
+    "sha256": "78e072a601a16c9883071c148f0eb94f034648706f100c0f6555b6c8ae2101d9"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/capture_actual.py": {
+    "bytes": 4504,
+    "mode": 420,
+    "sha256": "59749df550e08e6246f4a99e20e44ba6b1d812dca4b5b6268151077ed01d68cb"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/capture_before.py": {
+    "bytes": 2827,
+    "mode": 420,
+    "sha256": "f6cd6560e693bfa0b040609a14000aeeb5628ba64b8f825c9b25a8cf91e7ad5b"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/check_candidate.py": {
+    "bytes": 1402,
+    "mode": 420,
+    "sha256": "62eeecb87f2a11fc25388ac334011d0b0083db53dbd49eb7e4daa0ce57c77dfa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3568,
+    "mode": 420,
+    "sha256": "c78d677ab27cacb99874bb5ade01a2d8134966f99b02c64faf36c0e0402ff77b"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/check_storage_inputs.py": {
+    "bytes": 2411,
+    "mode": 420,
+    "sha256": "287cc7d6c06741f7c62ad4093e95243b453cc64bc15657269286e94273a15055"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/prepare.py": {
+    "bytes": 5152,
+    "mode": 420,
+    "sha256": "1b94e352efb65578a72fe1a75f4007f99bde5a911290d42da6ce1eca4fe7d88a"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/preserve_ci_claim.py": {
+    "bytes": 4115,
+    "mode": 420,
+    "sha256": "75d66510be7f7a004a9c505f37ec730444917152b39ca76efc756c7701c78899"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/publish.py": {
+    "bytes": 14053,
+    "mode": 420,
+    "sha256": "3d90e2cb8f5e1feb7a1046964f798492a523e835a2728325cb1af129e760738b"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/publish_handoff.py": {
+    "bytes": 14558,
+    "mode": 420,
+    "sha256": "c0f5f24812e7f5c88744c1bb6d9820c6062d9c0117bbe4758b32d5b0270e297a"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/review.py": {
+    "bytes": 7921,
+    "mode": 420,
+    "sha256": "27334dafa05d62d3c3dc845fced8aa5d17fe40a9bb4db2877e3c1a43c2fa71b6"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/review_publication.py": {
+    "bytes": 5333,
+    "mode": 420,
+    "sha256": "e346833d8aa365210caee42cdc249fc5028d34a99d910e67662e8b7149358295"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/review_publication_qualified.py": {
+    "bytes": 2597,
+    "mode": 420,
+    "sha256": "362782bb3c37eadcb2e4719ecc95f5d821cc8b7f9026b552ceb89ff93a4f28f9"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/run_proof.py": {
+    "bytes": 2598,
+    "mode": 420,
+    "sha256": "2828d7eaf609eae599908469869b957932277fe6c375e58fbbada809035206b6"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/run_stage.py": {
+    "bytes": 2035,
+    "mode": 420,
+    "sha256": "8ffdbee56d613e6e87c2a468e1f0cd16b465d6be29ecc39cd935a3abb24b7ffa"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/seal.py": {
+    "bytes": 639,
+    "mode": 420,
+    "sha256": "17ef60e880c67571842a6916a391f7c1657a48523f3ed2a412b6967ca6a82902"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/sealed-identities.json": {
+    "bytes": 19305,
+    "mode": 420,
+    "sha256": "27993ec5c49ec5c38b052834549244748b1ad15e60f397f4aeb931be038c68d8"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.3.json": {
+    "bytes": 34559,
+    "mode": 420,
+    "sha256": "7ccf7ed112d36223204f96c11ed4a0cc690f549ccf1b5110f7c8f130ab3cdc96"
+  },
+  "docs/knowledge/canonical-ci-ram-fallback-prerequisite.md": {
+    "bytes": 2784,
+    "mode": 420,
+    "sha256": "f6f4480b51b7d2685fdfc8a4ad08a8af1812bd2dee275546f9362bac77368a33"
+  },
+  "docs/knowledge/restricted-macos-ram-host-size-fallback.md": {
+    "bytes": 3075,
+    "mode": 420,
+    "sha256": "469aec551a2e4bb4ce1338b416e30dc9f93add0c2361f10a99fb9eda501b98ad"
+  },
+  "docs/knowledge/shared-host-ram-budget.md": {
+    "bytes": 3361,
+    "mode": 420,
+    "sha256": "4ade2a571c0117a26b3f1d506e3fe0fe8c04d6c1ff508a54afe918c415946a8b"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 63408,
+    "mode": 420,
+    "sha256": "f859efaf80b51ca56e5931b3e140ee39620fe8d67b54ce02b88c386c35c9ecbe"
+  },
+  "doctrine/project_data_storage/python_entrypoints.json": {
+    "bytes": 2529,
+    "mode": 420,
+    "sha256": "ed0849fc2f2684414e8db2ea62caa5c9de9c665612aee7a63b3ac625f00d3dbb"
+  },
+  "doctrine/project_data_storage/python_temporary_owners.json": {
+    "bytes": 661,
+    "mode": 420,
+    "sha256": "d5c21245129f9c677979662d651e03a1c3f14d9e5c4756c730f9f6cd46c49366"
+  },
+  "tools/host_ram_usage.sh": {
+    "bytes": 3101,
+    "mode": 420,
+    "sha256": "4cc355439d1c61cd6bf86cfa6aaafc86f79f08d697b3150e3a3c7cd0781e5131"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/ram_guard.sh": {
+    "bytes": 2009,
+    "mode": 493,
+    "sha256": "e16447add7d7418c56140e973dea8ef6c7b40820c51938570b32b5864d1f7f7b"
+  },
+  "tools/run_ci_local.sh": {
+    "bytes": 90256,
+    "mode": 420,
+    "sha256": "c711aeea21c61280a7b38b09e01892ebd86e47c53d5c1c53d03efc40c953e76f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "tools/test_ram_guard.py": {
+    "bytes": 7081,
+    "mode": 420,
+    "sha256": "ded4785a18302a198d2a0fb6ca24dd42ce0d9e0fb36a53ed621434a4c0e2b01f"
+  }
+}
