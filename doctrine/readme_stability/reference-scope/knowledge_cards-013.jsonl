@@ -1,4 +1,5 @@
-{"member_count":92,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":93,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3016,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-attached-if-statement-split-seam.md","sha256":"35c0e6b293f0b79ada3356d367435f8a64b6416402449c00e3f87d9362592f17","type":"member"}
 {"bytes":2302,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-colon-scalar-retired.md","sha256":"5e38e74e6985c2d1510878e8af126f34d7457781c931466daa8cb98d2bf3c6d8","type":"member"}
 {"bytes":2755,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-expression-valued-blocks.md","sha256":"67abde4f80437a8f74c2cade95033dffcf67953f8964aadcd8aada1bbc9220fb","type":"member"}
 {"bytes":5124,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-primitive-literal-parity.md","sha256":"62a0b4477b97362bc180ca8ec30f62b9da92a071321f5f929d6fd730ee1e6464","type":"member"}

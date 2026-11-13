@@ -52,3 +52,6 @@ safe-launcher/routing/historical4.24, native formatter2.3/declared5.4/full23.4 r
 separate. Related: [[lua-array-pipeline-result-guards]],
 [[lua-callable-key-count-preservation]], [[lua-runtime-structured-diagnostics]],
 [[array-pipeline-callable-result-selection]].
+
+
+November13 selected-field qualification: [[lua-raw-error-observation-scope]] records the eight-case/four-route old-current companion and the original scopes of eight function-grammar result-guard normals. Earlier counts/observations remain dated; no all-native-field, retrospective custody or fresh-process credit is added. Selected normal128 per installed host and specific legacyRED1/rawGREEN0 pass; broader native4.2/SESSION5 and current discovery4.1 remain separate.

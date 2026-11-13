@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Full PNT continues. Resource14 has focused RAM and historical-source prerequisite proof; exact staged canonical admission governs landing. Fresh size, raw-error4.28 then final discovery4.1/publication; wider source/context/admission remains.
+Director-requested stop at the next handoff-ready checkpoint. Raw28 focused implementation/evidence/docs complete; normal clean landing and final size check govern the stop. Full current discovery/publication remains pending.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.14. Shared actual RAM capacity/single snapshot; original RED/source-bound/native recovery, exact CI-claim preservation and trend docs. First canonical1 remains nonpassing; four accepted runtime successors/nested report/exact RAM CI inverse now pass isolated recovery with all old controls preserved. New full canonical receipt is required.
+TYPE-REFERENCE-BOOK.1.2.23.4.28. Lua selected raw-error coverage is focused-checked: eight source questions/two installed hosts/four routes/old-current128 records;2896 field controls with384 named native misses in the older projection. Each new standalone normal128PASS, specific legacyRED1/rawGREEN0 and first historical recovery0/ten controls pass. Complete source census204 identifies eight function-grammar guard normals: three full public-JSON helpers and five older partial named-field observers. Native/restored and generated envelopes keep distinct contracts. No SDK/serializer or old observation/hash changes; native/source/preparation-origin4.2/SESSION5 and declared5.4/full admission remain separate.
 
 ## Next Action
 
-Remeasure committed outgoing bytes, then focused raw-error4.28 before final current discovery4.1. Publish around1,500,000,000 bytes regardless cadence with clean exact-HEAD canonical proof/normal hooks/fresh remote identity; prepare near1.4GB or earlier for growth.
+Await explicit resume; remeasure current committed outgoing bytes, then current discovery4.1 including the new raw-error normal and early publication30.2 after all before-push owners. Prepare near1.4GB and publish around1.5GB regardless cadence, with fresh remote/exact-HEAD canonical proof/normal hooks/clean tree.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.5 — each host508/four routes/20 targets/four separate compatibility/484 preserved/80 initial/eight signatures; old24-current508/direct6987 checks/readonly11/current266/3048 pairs; fresh size then coverage/discovery.
@@ -29,7 +30,6 @@ Remeasure committed outgoing bytes, then focused raw-error4.28 before final curr
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct2927 assertions/first readonly24/current519/1872 pairs/nine traces; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.27 —45 IDs/42 closed/three unchanged/full71681-byte tail;52253 bytes renewed/46 exact queries/readonly ten controls/current identities; Rust next.
 
 
 ## History

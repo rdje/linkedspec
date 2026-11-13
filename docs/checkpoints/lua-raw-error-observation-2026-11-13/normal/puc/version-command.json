@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-v"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": ".linkedspec-data/raw-error-audit/native/puc/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua"
+  }
+}

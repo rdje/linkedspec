@@ -1,0 +1,10 @@
+{
+  "cases.json": {
+    "bytes": 2216,
+    "sha256": "f9f02b669f49b4321427cd5e1175ebcea023ea90b1efbd9ccde89d773dded75f"
+  },
+  "old-profiles.json": {
+    "bytes": 256550,
+    "sha256": "f355ddcd0c2b49c9a87226afbb112510dd5a1caeda4f10a60d307aa065f4bde3"
+  }
+}

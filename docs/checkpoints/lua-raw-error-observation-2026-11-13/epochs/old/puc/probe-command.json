@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/probe.lua",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/cases.json",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/epochs/old/puc",
+    ".linkedspec-data/raw-error-audit/old/"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": ".linkedspec-data/raw-error-audit/old/lua/src/?.lua;.linkedspec-data/raw-error-audit/old/lua/src/?/init.lua;;",
+    "LUA_CPATH": ".linkedspec-data/raw-error-audit/native/puc/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua"
+  }
+}

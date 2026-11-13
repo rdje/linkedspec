@@ -1,0 +1,42 @@
+[
+  {
+    "id": "own_needed_source_take_free",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(take(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}),1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n",
+    "input": "x"
+  },
+  {
+    "id": "own_needed_source_take_receiver",
+    "source": "fn supply(seed) {return(seed)}\n\nValue:: I {order=\"\";return(supply({items=\"bad\";items+=1;[\"head\",\"tail\"]}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).coalesce(\"masked\"))}\n",
+    "input": "x"
+  },
+  {
+    "id": "own_signature_fixed_missing_terminal",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).take(1);return([out,order])}\n",
+    "input": "x"
+  },
+  {
+    "id": "own_signature_fixed_missing_composed",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair({order=cat(order,\"S\");\"head\"}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x"
+  },
+  {
+    "id": "own_signature_fixed_extra_composed",
+    "source": "fn pair(left,right) {return([left,right])}\n\nValue:: I {order=\"\";out=pair(\"head\",\"tail\",{order=cat(order,\"X\");\"extra\"}).take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x"
+  },
+  {
+    "id": "own_signature_variadic_missing_composed",
+    "source": "fn collect(head,...rest) {return([head])}\n\nValue:: I {order=\"\";out=collect().take(1).set_key({order=cat(order,\"K\");\"k\"},{order=cat(order,\"V\");1}).with(){order=cat(order,\"W\");return(\"ran\")};return([out,order])}\n",
+    "input": "x"
+  },
+  {
+    "id": "nested_binding",
+    "input": "x",
+    "source": "Top::\n -> Child\n\nChild:\n /x/\n E {items=\"bad\";items+=1;return(items)}\n"
+  },
+  {
+    "id": "nested_fixed_arity",
+    "input": "x",
+    "source": "fn pair(left,right) {return([left,right])}\n\nTop::\n -> Child\n\nChild:\n /x/\n E {return(pair(\"head\"))}\n"
+  }
+]

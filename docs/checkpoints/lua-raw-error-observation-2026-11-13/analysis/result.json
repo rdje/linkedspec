@@ -1,0 +1,102 @@
+{
+  "activation_lua_files": 204,
+  "consumers": [
+    "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_result_guard_composition_test.lua",
+    "lua/test/array_transform_callable_result_guard_composition_test.lua",
+    "lua/test/array_transform_result_guard_composition_test.lua",
+    "lua/test/hash_value_result_guard_composition_test.lua",
+    "lua/test/hash_view_result_guard_composition_test.lua",
+    "lua/test/key_count_callable_result_guard_composition_test.lua"
+  ],
+  "counterfactual_controls": [
+    {
+      "expected": "binding fields",
+      "label": "binding-value",
+      "observed": "binding fields",
+      "rejected": true
+    },
+    {
+      "expected": "case population",
+      "label": "missing-case",
+      "observed": "case population",
+      "rejected": true
+    },
+    {
+      "expected": "route population",
+      "label": "missing-route",
+      "observed": "route population",
+      "rejected": true
+    },
+    {
+      "expected": "published native projection",
+      "label": "public-raw-promotion",
+      "observed": "published native projection",
+      "rejected": true
+    },
+    {
+      "expected": "mutation population",
+      "label": "missing-control",
+      "observed": "mutation population",
+      "rejected": true
+    },
+    {
+      "expected": "prior observer distinction",
+      "label": "claimed-prior-coverage",
+      "observed": "prior observer distinction",
+      "rejected": true
+    },
+    {
+      "expected": "raw observer distinguishes control",
+      "label": "lost-raw-detection",
+      "observed": "raw observer distinguishes control",
+      "rejected": true
+    },
+    {
+      "expected": "duplicate raw field",
+      "label": "duplicate-raw-field",
+      "observed": "duplicate raw field",
+      "rejected": true
+    }
+  ],
+  "field_controls": 2896,
+  "full_public_consumers": [
+    "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+    "lua/test/array_transform_callable_result_guard_composition_test.lua"
+  ],
+  "named_native_misses": 384,
+  "partial_consumers": [
+    "lua/test/array_pipeline_result_guard_composition_test.lua",
+    "lua/test/array_transform_result_guard_composition_test.lua",
+    "lua/test/hash_value_result_guard_composition_test.lua",
+    "lua/test/hash_view_result_guard_composition_test.lua",
+    "lua/test/key_count_callable_result_guard_composition_test.lua"
+  ],
+  "population_controls": [
+    {
+      "label": "omitted-source",
+      "observed": "complete activation Lua source population",
+      "rejected": true
+    },
+    {
+      "label": "extra-source",
+      "observed": "complete activation Lua source population",
+      "rejected": true
+    },
+    {
+      "label": "changed-body",
+      "observed": "actual Git source identity",
+      "rejected": true
+    },
+    {
+      "label": "changed-mode",
+      "observed": "actual Git source identity",
+      "rejected": true
+    }
+  ],
+  "prior_misses": 512,
+  "records": 128,
+  "scope": "Selected observed field names/values, eight authored cases and four route-specific channels; historical observers retain their original narrower scopes. No all-error/table-identity/native-toolchain completeness."
+}

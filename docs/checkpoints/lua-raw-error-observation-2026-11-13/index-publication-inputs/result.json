@@ -1,0 +1,83 @@
+{
+  "checked_intersections": [
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/REPO-HYGIENE.13.json",
+      "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+      "sha256": "e791fad1284b690e6d7f7e1bda0efb5bf1e0990b7e490b07887451de8232fe4b"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/REPO-HYGIENE.14.json",
+      "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+      "sha256": "8718c5bd42051fb6bd7c090f8651e229b9b9b006a6f6b09cc3b214ce68b1e09e"
+    },
+    {
+      "claim": "call-form-normalization-source-succession",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1.json",
+      "revision": "0f15e194febbe0e6099fba5ae5f9bca8a1b1d7be",
+      "sha256": "be247a9141d5f40556554eec99abd34057381a8c6bb5e8d659b8320ab688be24"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "0a64581f59f3d53d4d1a551570e2da81af1d4b413205a7ea37942f12534ea72f"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "0b84c120475298776f9db34e60b4de40ea4a97b9d44cf5f5f124879eefcc0224"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "07b5200eb37a05aa81d25f44338e08d9dfcb1d29ae7fd4c9ed37b2b093e53efe"
+    },
+    {
+      "claim": "exact-historical-capacity-publisher-fixture-inputs",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "bda2e8b22fa4c305add2dcf85518486e0034e5f61be318101372a92989ba881f"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "e99b3c4e4cdd19ae1b870725ff10ca4c291013d32550a8e025d4efd5047a19db"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "docs/TASK_TREE.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "8304141591af476b6f7fab11001ae83f547fc4f6099303caf41cc731cabf2d86"
+    }
+  ],
+  "claim_records": 213,
+  "live_intersections": [],
+  "prospective_paths": [
+    "docs/TASK_TREE.md"
+  ],
+  "scope": "Exact accepted Git records only. The new raw-field record is not yet accepted; native custody and current pack falsification remain explicit gaps. Historical bindings keep their original hashes/revisions; no SDK or old claim is refreshed.",
+  "source_commit": "e0a1bb47571b75b800546c3d4522e0d2ca5f778c"
+}

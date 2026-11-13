@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3520,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-marker-conditional-execution.md","sha256":"6cb5c77bd8e8d01e918609bfd0562050ebe23635497bfaa4fa253cbbc0131c9b","type":"member"}
 {"bytes":3094,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-null-return-execution.md","sha256":"b12c799a952629dfc5e50d7a49948eaa3497b06cda08982da8d6c078a86ad69a","type":"member"}
 {"bytes":3000,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.1","path":"docs/knowledge/perl-callable-pipeline-first-call-arity.md","sha256":"4ee021263c42a67cf9f2e0d3651e2ac3ad2b3f229531cc92ef1f639d11a23c8a","type":"member"}
 {"bytes":3643,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.1.2","path":"docs/knowledge/perl-callable-pipeline-intake-and-arity.md","sha256":"555a3b856e8c14ee423c9306595ef01d2eb5cc1253502d45a6440a6b748e32ca","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":33972,"lines":402,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-trim-capture.md","sha256":"a9c6455169cf69c6fb61d31dc012f5f2e12c2c8e43268a9e0af9bfd2151e4015","type":"member"}
 {"bytes":7667,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-helper-pattern-validation.md","sha256":"67889cacac1f2bc6ce15c6a391989ac4c442e565f78ba67e3f3c6d6044738a5e","type":"member"}
 {"bytes":12613,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-regex-scanner-boundaries.md","sha256":"00ea459ee6aee0312c5479453d6e31400010cf00db75da79a0a3ab2df4895c22","type":"member"}
-{"bytes":2451,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-named-capture-endpoint-presence-repair.md","sha256":"4158a9a78d2f42cee8116e1843072daf4feb3c228ec9374343b0916f826a9f81","type":"member"}

@@ -1,0 +1,9 @@
+{
+  "original_sha256": "90981bfa9712cff2328029fd44d7d15680c13405000c37926bbe46d1209a12c8",
+  "execution_sha256": "640025eac1ce599ea0dc786366c22586444224e4b2a030954a67760bc0254a43",
+  "exact_change": [
+    "bodies[member.name] = body.decode()",
+    "bodies[member.name] = body.decode() if member.name.endswith(('.md', '.py', '.json', '.txt')) else body"
+  ],
+  "scope": "All archive membership/hash/mode checks remain; only known text suffixes decode. Original reader1 stays intact."
+}

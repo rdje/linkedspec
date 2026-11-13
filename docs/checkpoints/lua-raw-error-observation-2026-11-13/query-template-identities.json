@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/check_publication_inputs.py": {
+    "bytes": 3568,
+    "mode": 420,
+    "sha256": "c78d677ab27cacb99874bb5ade01a2d8134966f99b02c64faf36c0e0402ff77b"
+  },
+  "docs/checkpoints/ram-host-size-preflight-2026-11-12/review_publication_inputs.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  }
+}

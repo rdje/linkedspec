@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PYTHONPATH=",
+    "python3",
+    "-P",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/review_index_inputs.py"
+  ],
+  "cwd": "."
+}

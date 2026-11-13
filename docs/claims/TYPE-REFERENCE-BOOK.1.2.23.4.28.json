@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.28",
+  "claims": [
+    {
+      "name": "operational-committed-head-outgoing-pack-estimate",
+      "statement": "At committed HEADe0a1bb47571b75b800546c3d4522e0d2ca5f778c excluding cached origin/main4683555ec51f04b8977812ce4e984c5cc6e6f42c, the explicit no-sparse one-worker non-thin estimate is1415327104 bytes/108 outgoing commits/47344 objects. The1500000000-byte trigger has84672896 bytes remaining and preparation is due. All uncommitted raw28 work is excluded; no negotiated upload size is claimed.",
+      "scope": "One actual e0 committed-range operational measurement; exact producer/policy/refs/config/metadata/channels are recovered from this checkpoint intake. Raw pack remains ignored, current artifact falsification30/native custody4.2 explicit.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual serialized committed-range pack; streamed byte/stat equality, PACK header/footer, empty-range and unchanged-ref/config/source controls.",
+        "result": "Actual monitor0 at e0a1bb47571b75b800546c3d4522e0d2ca5f778c/base4683555ec51f04b8977812ce4e984c5cc6e6f42c:1415327104 bytes/108 commits/47344 logical-header objects,84672896 trigger margin. Stream/stat/PACK/footer/empty32/source/config/ref guards0; preparation true/trigger false. Retained exact metadata/channels are in intake/inputs-before-use.tar.gz."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Prior native verification and twelve REDs at102ec3446 do not independently qualify this actual e0 raw pack. Parent30 owns actual-file falsification before publication; no old result is refreshed."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Before-use logical producer/policy/wrapper metadata and actual channels survive, but the ignored raw pack and native physical Git/cache/compressor/toolchain/OS closure are not tracked recoverable inputs. Broader4.2/SESSION5 owns this explicit custody gap; no late retention is described as original first-use closure."
+      }
+    },
+    {
+      "name": "selected-lua-error-fields-and-observer-scope",
+      "statement": "Lua selected raw-error coverage is focused-checked: eight source questions/two installed hosts/four routes/old-current128 records;2896 field controls with384 named native misses in the older projection. Each new standalone normal128PASS, specific legacyRED1/rawGREEN0 and first historical recovery0/ten controls pass. Complete source census204 identifies eight function-grammar guard normals: three full public-JSON helpers and five older partial named-field observers. Native/restored and generated envelopes keep distinct contracts. No SDK/serializer or old observation/hash changes; native/source/preparation-origin4.2/SESSION5 and declared5.4/full admission remain separate.",
+      "scope": "Eight authored binding/fixed-minimum-arity cases on recorded PUC5.5.1/LuaJIT, four route-specific channels and old/current SDKs.204 activation Lua files/eight explicitly selected guard consumers; this is not all tests/errors/native state or fresh-process coverage. The new normal awaits4.1 registration.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-raw-error-observation-2026-11-13/review.py",
+        "granularity": "Each retained selected raw field/value/absence, actual before-use input/body/mode, corresponding old/current record, consumer source and recurring/oracle channel.",
+        "result": "Actual capture0/empty SDK stderr, independent analysis0 with eight evidence/four source corruptions, each-host normal128PASS/specific legacyRED1/rawGREEN0, first historical recovery0/ten effective controls.128 records/2896 field controls/384 named native blind changes; native/restored and generated envelopes remain distinct."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Equal published JSON and selected flags already distinguish every selected raw native field change, or new coverage retroactively expands older observers.",
+        "oracle": "Change/remove only native binding/function metadata while keeping public message/diagnostic equal; compare old projection with exact field snapshot. Independent source-derived schemas, complete selected Git membership and separate actual per-host old/current/recurring observations distinguish the alternatives.",
+        "red_control": "oracles/puc/legacy/oracle-exit.txt and luajit counterpart are1 specifically on projection misses expected_kind; raw counterparts0 distinguish binding and function attribution. Actual2896 controls show384 named native omissions plus128 separate unknown-field additions. Eight analysis/four source/ten historical corruptions reject for their specified reasons."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Direct SDK/observer/normal/oracle source, actual parsed-emitted inputs, full channels and opaque native body/mode archives precede those loads. Complete physical/native/cache/interpreter/toolchain/OS and wider module-source closure are not proved. Source-only initial preparation outer channels and late query-preparer self image receive no original first-use credit; CUSTODY.md and4.2/SESSION5 own these named origin gaps."
+      }
+    }
+  ]
+}

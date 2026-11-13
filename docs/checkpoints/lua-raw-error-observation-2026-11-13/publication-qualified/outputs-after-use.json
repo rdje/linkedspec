@@ -1,0 +1,92 @@
+{
+  "CHANGES.md": {
+    "bytes": 48729,
+    "mode": 420,
+    "sha256": "614f7210fd70e4b3e68642dbcd5fede37bd22934aa9e6d14221046ad31150843"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 38780,
+    "mode": 420,
+    "sha256": "2a9261d0f1e57f08359551409757c8f46423272fd8cb40c002a047f91ed82f60"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5812,
+    "mode": 420,
+    "sha256": "788613fbf024ac87d4482e0aadb6ca1a918f2a509cac363191d26b689bb3942d"
+  },
+  "MEMORY.md": {
+    "bytes": 3185,
+    "mode": 420,
+    "sha256": "d7f497c19d60f30539600f533b847cae13f7e1abaeaa79993307ceffdfe23131"
+  },
+  "ROADMAP.md": {
+    "bytes": 472361,
+    "mode": 420,
+    "sha256": "b64dbe2db3c49bc14e7e56b8018839babe0a43c703069a7145d57cd135aada05"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273696,
+    "mode": 420,
+    "sha256": "4558a88c57b6adee6fc5a618a49f95ba36655e5eb627cbfe9d27bdc9c8d12f0f"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 348022,
+    "mode": 420,
+    "sha256": "2f26caf262ce12ea007cdee00049ae5bd54dc40f4a2ceb59abbf93ee140ef946"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publication-qualified/retired-recent-rows.json": {
+    "bytes": 191,
+    "mode": 420,
+    "sha256": "e41b3d259e675de0ded08919c870a710ccec01fe684d961b239e1f79182e378c"
+  },
+  "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.28.json": {
+    "bytes": 5685,
+    "mode": 420,
+    "sha256": "26c2f6c1cb286c4cedb6b13c49d767f0af53e8d651d853353dea0de9de390031"
+  },
+  "docs/knowledge/lua-callable-array-transform-result-guards.md": {
+    "bytes": 4400,
+    "mode": 420,
+    "sha256": "d2b6d77ba2bb1d1bbe45496f127e13838fb3304974532e8f20b06d09633dc247"
+  },
+  "docs/knowledge/lua-callable-key-count-preservation.md": {
+    "bytes": 3319,
+    "mode": 420,
+    "sha256": "b752243136e16e7173188fad7a67db369a1cde7e8cac31ff1d3902b3c802339a"
+  },
+  "docs/knowledge/lua-callable-pipeline-result-guards.md": {
+    "bytes": 4500,
+    "mode": 420,
+    "sha256": "67becff310f2eb49a233e6f920f286a3e442c2913aedaa170dfde9ee4b9fcdd2"
+  },
+  "docs/knowledge/lua-raw-error-observation-scope.md": {
+    "bytes": 3850,
+    "mode": 420,
+    "sha256": "f1f6e3f9b29633199d6ad74a05b9f90be2881e7fc730aa1789c9037f70587f31"
+  },
+  "docs/knowledge/lua-runtime-structured-diagnostics.md": {
+    "bytes": 4931,
+    "mode": 420,
+    "sha256": "84819948d79a4a153149160eaf93152de18128d3b81191242abd6637e0e7768e"
+  },
+  "docs/linkedspec-book/src/appendix/runtime-semantics.md": {
+    "bytes": 45214,
+    "mode": 420,
+    "sha256": "83c58b939ff8f33fc4cc5f891790f161edf022f0f2d0b6ba49335685c5129907"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 170320,
+    "mode": 420,
+    "sha256": "73385499f7797b436bdaecc751e3f5732a17418ffd85c2e0d76eb159805f1973"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20890,
+    "mode": 420,
+    "sha256": "b41c95d2db8386e53460f8e87a42f8e988bada3a65225adb8d746850de2cdb8f"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 554037,
+    "mode": 420,
+    "sha256": "212ec4d8ed39a988c11a2506dafb38255c310dc9c5b971b36ff20d629ba566e2"
+  }
+}

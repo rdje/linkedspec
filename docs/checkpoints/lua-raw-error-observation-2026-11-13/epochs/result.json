@@ -1,0 +1,17 @@
+{
+  "activation": "e0a1bb47571b75b800546c3d4522e0d2ca5f778c",
+  "cases": 8,
+  "hosts": [
+    "puc",
+    "luajit"
+  ],
+  "old_current_equal": true,
+  "old_sdk": "fff959ef7e8896b5b97f311a276cabc4f5034551",
+  "routes": [
+    "native",
+    "restored",
+    "plan",
+    "fresh"
+  ],
+  "scope": "Complete observed acyclic field names/finite values, not Lua identity/metatable/all-error completeness. Reused retained opaque native products; native/cache/toolchain/OS and wider module-source closure remain4.2/SESSION5."
+}

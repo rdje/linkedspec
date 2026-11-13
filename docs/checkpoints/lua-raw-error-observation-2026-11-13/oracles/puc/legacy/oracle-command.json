@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/field_oracle.lua",
+    "legacy",
+    "docs/checkpoints/lua-raw-error-observation-2026-11-13/oracles/puc/legacy"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": "lua/src/?.lua;lua/src/?/init.lua;;",
+    "LUA_CPATH": ".linkedspec-data/raw-error-audit/native/puc/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "lua"
+  }
+}

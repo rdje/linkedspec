@@ -1,0 +1,17 @@
+{
+  ".linkedspec-data/raw-error-audit/native/luajit/linkedspec_filesystem_native.so": {
+    "bytes": 50704,
+    "mode": 493,
+    "sha256": "55a526a6786ca94c682995416b54735d7d4c70071aae567f5f754ad8eb16a03c"
+  },
+  ".linkedspec-data/raw-error-audit/native/luajit/linkedspec_mcp_system.so": {
+    "bytes": 50552,
+    "mode": 493,
+    "sha256": "a8c377a68cbe1e63cfeee215c9916356b9007e0a5bcbfeb2ed54dab74b9069e9"
+  },
+  ".linkedspec-data/raw-error-audit/native/luajit/linkedspec_regex_pcre2.so": {
+    "bytes": 51928,
+    "mode": 493,
+    "sha256": "c56f3d966e591b036488883629142910d0762b5823f0dcd93e75f9eab2d9671d"
+  }
+}

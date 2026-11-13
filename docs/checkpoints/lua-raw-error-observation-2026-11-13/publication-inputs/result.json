@@ -1,0 +1,2312 @@
+{
+  "checked_intersections": [
+    {
+      "claim": "actual-factory-registration-and-native-dependency-framework",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "actual-factory-registration-and-native-dependency-framework",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-input-composition-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-input-composition-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.1.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-emitcontext-selection-and-native-dependency-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "actual-emitcontext-selection-and-native-dependency-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-framework-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-framework-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.0.json",
+      "revision": "b21b3bb9f6a414d50c71468c3e4193d04ad9b56a",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-contracts-private-bindings-and-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "actual-contracts-private-bindings-and-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-emitcontext-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-emitcontext-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.0.json",
+      "revision": "2d878478028fc417ac5b7790c016543c18c1f48b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "actual-local-and-delegated-constructor-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "actual-local-and-delegated-constructor-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-contract-dependency-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-contract-dependency-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.2.1.1.json",
+      "revision": "be7d70719856e76b7cb5a427ad6061a7109028ea",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-default-native-reference-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-default-native-reference-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-constructor-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-constructor-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.0.json",
+      "revision": "33e57deee73e27b97e9c21116bc70942f3f33772",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-trim-dependency-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-trim-dependency-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-method-default-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-method-default-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.0.json",
+      "revision": "89a4ede6fbbb0f3b7a4e4f98a4b477b79c0cfeb7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-assignment-declaration-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-assignment-declaration-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-trim-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-trim-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.1.json",
+      "revision": "429d0c6d959e883304bc06d8c569c76e7bdcedfc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-inline-control-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-inline-control-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-inference-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-inference-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.0.json",
+      "revision": "9032b20e921540833ee0b5204594835b10e7b55b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-block-component-side-effect-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-block-component-side-effect-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-inline-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-inline-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.1.json",
+      "revision": "65bd00faa0b10abc106a6da2283391c268ee88fa",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-local-return-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "revision": "de3b50dd06d4aff6babf379282f90368810d49e5",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-local-return-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.0.json",
+      "revision": "de3b50dd06d4aff6babf379282f90368810d49e5",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-block-value-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "revision": "b50ce085a63c8777973bc4c4e4a999a8840c462b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-block-value-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.2.1.json",
+      "revision": "b50ce085a63c8777973bc4c4e4a999a8840c462b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "9a80187ac02126a9af9437a729064f05ed4d203bbab408988da11d5d6b0b8761"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "df1e142fc157f06d1c1d4b69ea60388aaada2336d80be44ed674a795eb4c7ca3"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "a5efead8f192c785c11f664dcd0a462ff3e6a13043bb7769146890854a0d20d8"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "cdc45f9cbddbc53603e885225af2a35688657292",
+      "sha256": "5adacfc162ffec34d6da5a01d76f8a81a73d1c539b4ad81f99984ccc6c246d86"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "5c439b3d48782470c2e9fff6898bab9f70ffd35b69f8274f9aec97a4806ebe5c"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "ecfc269cba04df509818ef7dde3ee28b5a6e350cf8bb247e1fe4ebb88fc2f694"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "contracts-factory-historical-inverse",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+      "revision": "268891fdf948b1ccf875087416b62100e0ddc059",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-hash-key-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "revision": "2e9e5443ea38789fe454ee7ee24a68be81d4546c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-ast-hash-key-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.0.json",
+      "revision": "2e9e5443ea38789fe454ee7ee24a68be81d4546c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-call-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "revision": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-ast-call-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.1.json",
+      "revision": "9085eb1e5075146ca00dab52304f85937cf7ea05",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-array-end-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "revision": "4fde89c1958faf4057ab80eb7e7cd50962c7ac3c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-ast-array-end-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.2.json",
+      "revision": "4fde89c1958faf4057ab80eb7e7cd50962c7ac3c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "method-required-ast-assignment-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "revision": "049e1ba537f2bde635b2c0fed31fe83f6b3c129b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "method-required-ast-assignment-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.3.json",
+      "revision": "049e1ba537f2bde635b2c0fed31fe83f6b3c129b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "e0e5df8143b8890b6b885d87603386389918414dfa1424e13203659973ecbe1e"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "424728e2911a8e7f6cb4a3e17e4de769350e0366946a2eccdfdfb20cbcd3639c"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "guarded-ast-finite-change-history-capacity",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+      "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "main-method-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "revision": "4b48593b59acb7aba4d616ae1bdc4320fbbf5364",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "main-method-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.4.json",
+      "revision": "4b48593b59acb7aba4d616ae1bdc4320fbbf5364",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "bare-mutation-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "revision": "2c5f84092d91c808ab82b4b886b51e65fc1ac864",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "bare-mutation-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.0.json",
+      "revision": "2c5f84092d91c808ab82b4b886b51e65fc1ac864",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "general-return-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "revision": "2b1f949b897cc8fac8f87f7652ad67eb90241479",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "general-return-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.1.json",
+      "revision": "2b1f949b897cc8fac8f87f7652ad67eb90241479",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "assignment-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "revision": "ea6926fefee33cbf77fe512a821d7ba2a4ffc14f",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "assignment-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.2.json",
+      "revision": "ea6926fefee33cbf77fe512a821d7ba2a4ffc14f",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "set-key-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "revision": "d74c534853832f6286813d924e018bd1bc6c2239",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "set-key-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.0.json",
+      "revision": "d74c534853832f6286813d924e018bd1bc6c2239",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "push-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "revision": "ae65603bc5bee1f3abeab4d7a028546ddbc8da93",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "push-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.1.json",
+      "revision": "ae65603bc5bee1f3abeab4d7a028546ddbc8da93",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "regex-undef-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "revision": "2b4e484a9bf27471d23d86f72aa25c7616b2bd3b",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "regex-undef-required-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.5.3.2.json",
+      "revision": "2b4e484a9bf27471d23d86f72aa25c7616b2bd3b",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "e12e8f9c5f1ee8b31af70fd3158da2e122b7374dc29b995d21c0cf56c9138499"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "bfc29282669d8ddee37b12aae8c1973474ba56e4e40fbc3e85cb848d0852da4a"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "scalar-copy-runtime-ci-book-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.0.json",
+      "revision": "770cffcccea44df8d0e578ed68ad6f9a4b5e0b0e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "legacy-hash-kind-selection-and-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "revision": "c90b99a831461e25adbc2b34d7da7d3deed11531",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "legacy-hash-kind-selection-and-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1.json",
+      "revision": "c90b99a831461e25adbc2b34d7da7d3deed11531",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "array-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "revision": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "array-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.1.json",
+      "revision": "5bf068c924f190fdc7b9f904b9b9720cc638f2e9",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "scalar-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "scalar-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.2.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "hash-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "revision": "98990ffbc4a7150b20d0e416be3ea4f9938cfd10",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "hash-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.3.json",
+      "revision": "98990ffbc4a7150b20d0e416be3ea4f9938cfd10",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "array-end-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "array-end-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.4.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "hash-index-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "revision": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "hash-index-required-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.5.json",
+      "revision": "4cc0b5a2a39ef3eec8baafbf874e43bd855e8b31",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "current-admission-review-command",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "e4507973aff0a4ebcd09299d971a8d78a86c10b1",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "current-admission-review-command",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "e4507973aff0a4ebcd09299d971a8d78a86c10b1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "3551fb4172778b16e4516f0489b701bf93350b4b4ecaf28d86d28b860d79701b"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "ddaaf30eca26282a59b687e15a979699332dbc746fe97b21c36ca7860cbeea2d"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "accepted-admission-publication-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "3551fb4172778b16e4516f0489b701bf93350b4b4ecaf28d86d28b860d79701b"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-engineering-history-member",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3",
+      "sha256": "ddaaf30eca26282a59b687e15a979699332dbc746fe97b21c36ca7860cbeea2d"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "19a55a1a39b8be4a9f9713be16b553e2bd7c6dfb00bed6110287908d24ef49eb"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+      "revision": "d8418423e7461235280e9a34b9d90f4571fc9490",
+      "sha256": "9a8bc06fcfbfc034c7dcd14b451795cadf59ab7d035ac2db590f171b8761ad97"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "2d7bde548b76e8a617c484b7497c62192bf5af6738c501c82e092fb70fb100d2"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "159d2da70ed8e97209e304668be1cf086bf14c9ebd276f781488e9d1f094d34d"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "finite-change-history-with-portable-evidence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "04684df57f648696782703cb0731833c35838e03e6c1d4a034014c9c851620cd"
+    },
+    {
+      "claim": "original-capacity-input-boundary",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+      "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d",
+      "sha256": "58bd55a8e34345089769c16fa08dbaa62204867be2dfa7da525c8e4c58721f55"
+    },
+    {
+      "claim": "legacy-package-flow-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "revision": "91e972cfa0d214784b0172828f7baa378c25f23e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "legacy-package-flow-callback-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.0.json",
+      "revision": "91e972cfa0d214784b0172828f7baa378c25f23e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "remaining-method-callback-ingress-inventory",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "revision": "354c15530fd1445ebfa8c6c0683e7b8d066caced",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "remaining-method-callback-ingress-inventory",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.0.json",
+      "revision": "354c15530fd1445ebfa8c6c0683e7b8d066caced",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "inline-required-dropped-value-trim-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "revision": "61cca1cccff6027461e120e4236431d1bc7d20b1",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "inline-required-dropped-value-trim-isolation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.1.json",
+      "revision": "61cca1cccff6027461e120e4236431d1bc7d20b1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "fixed-original-claim-population-readonly-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "revision": "de02b83a1a794370b4071bb53677ab675745acc2",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "fixed-original-claim-population-readonly-recovery",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.10.json",
+      "revision": "de02b83a1a794370b4071bb53677ab675745acc2",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "dc71fbcb0d680e89b06d6555e94a7fef46adae20c7ee96778c800b2638ac5813"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "6fc3275058502b6f00333045aab2979742b3715d5f788f2d58032a1320f7ea1b"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "knowledge-list-association-and-registration",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.11.json",
+      "revision": "81b356cef997ea2bb65a8fb120c77506fed9241e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "complete-supported-knowledge-metadata-projection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12.json",
+      "revision": "1a8b202018a387c87425442375f53c3ee5e820d4",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "complete-supported-knowledge-metadata-projection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.12.json",
+      "revision": "1a8b202018a387c87425442375f53c3ee5e820d4",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "three-small-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "revision": "16c70eaab688a877053b1addde8f07bc548e1cbf",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "three-small-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.2.json",
+      "revision": "16c70eaab688a877053b1addde8f07bc548e1cbf",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "main-method-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "revision": "dd82f9cbced8311dca8ea8610282780e0c0adf3e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "main-method-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.3.json",
+      "revision": "dd82f9cbced8311dca8ea8610282780e0c0adf3e",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "source-assignment-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.json",
+      "revision": "15197dfdf0f198a4eb25517e278edba491d12db7",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "source-assignment-optional-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.4.json",
+      "revision": "15197dfdf0f198a4eb25517e278edba491d12db7",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "ast-optional-pipeline-assignment-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json",
+      "revision": "99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "ast-optional-pipeline-assignment-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.5.json",
+      "revision": "99f2939ac1d5e543bc2aa7f9c38b8166d5d510cc",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "tracking-predicate-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json",
+      "revision": "b1133da422bbf19b54818c97c2b67a5e6a402012",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "tracking-predicate-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.6.json",
+      "revision": "b1133da422bbf19b54818c97c2b67a5e6a402012",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "formal-trim-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7.json",
+      "revision": "22132b2b0eccb5ac38ef3c756f1b1e5b08992947",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "formal-trim-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.7.json",
+      "revision": "22132b2b0eccb5ac38ef3c756f1b1e5b08992947",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "selected-named-helper-private-boundary",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json",
+      "revision": "328b11c5ed1d5ffbc870f6785448e3a8249fe882",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "selected-named-helper-private-boundary",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8.json",
+      "revision": "328b11c5ed1d5ffbc870f6785448e3a8249fe882",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "current-literal-container-target-recognition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "revision": "61a73324f06238418301eac88fd3f908665ecbe3",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "current-literal-container-target-recognition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.9.json",
+      "revision": "61a73324f06238418301eac88fd3f908665ecbe3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "required-flowexpr-callback-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+      "revision": "708c1afa04bb10aeacbdaf0a8133a95f380df434",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "required-flowexpr-callback-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.0.json",
+      "revision": "708c1afa04bb10aeacbdaf0a8133a95f380df434",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "flowexpr-exact-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.1.json",
+      "revision": "aa88233432976a019b41d05578f8e6a5f6e3c082",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "flowexpr-exact-native-default-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.1.json",
+      "revision": "aa88233432976a019b41d05578f8e6a5f6e3c082",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "optional-flowexpr-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json",
+      "revision": "98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "optional-flowexpr-kind-private-boundaries",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.4.2.json",
+      "revision": "98f8d5d7fabdc9b1ac074ca0d8f3c53d218c8ccb",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-required-foundation-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.0.json",
+      "revision": "9f9b47973f0d0be2ee5e048dd71a28f91e8016ed",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-required-foundation-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.0.json",
+      "revision": "9f9b47973f0d0be2ee5e048dd71a28f91e8016ed",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-branch-expansion-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+      "revision": "a4a9e5c503460a8bd7db06e57b827dd053724d00",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-branch-expansion-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.0.json",
+      "revision": "a4a9e5c503460a8bd7db06e57b827dd053724d00",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-attached-parser-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1.json",
+      "revision": "c7570b71642e1889ab03ee07c29273dabdf16989",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-attached-parser-required-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.1.json",
+      "revision": "c7570b71642e1889ab03ee07c29273dabdf16989",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-single-statement-required-trim-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json",
+      "revision": "736c6a43efab526fe898ed5c72b061479955fc5c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-single-statement-required-trim-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.2.json",
+      "revision": "736c6a43efab526fe898ed5c72b061479955fc5c",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "fb6bb25de9881e852f48ba574b7393b8da14b2a6dc0f239c2687cd68cd527ed9"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "544a41d2f8e39b1a8e4b906ad1ec5d8cd602dd422355139d311a138a6846cb66"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "finite-engineering-history-member-0135",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+      "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-ifwhile-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.2.json",
+      "revision": "09000223f2dac822b2c0d75c69dce587f2b5b2c0",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-ifwhile-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.2.json",
+      "revision": "09000223f2dac822b2c0d75c69dce587f2b5b2c0",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-switch-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json",
+      "revision": "4a8e92aefba8a5ce8e83f6ff529685fe6f79c9cd",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-switch-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.3.json",
+      "revision": "4a8e92aefba8a5ce8e83f6ff529685fe6f79c9cd",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-output-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json",
+      "revision": "dadce45ac8f0a4bc6d65a3497ac99fc735e9187c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-output-required-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.4.json",
+      "revision": "dadce45ac8f0a4bc6d65a3497ac99fc735e9187c",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-print-each-optional-kind-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.5.json",
+      "revision": "2b35b77ea0e08d178ccb054a8f8310dbe0abb9c1",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-print-each-optional-kind-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.5.json",
+      "revision": "2b35b77ea0e08d178ccb054a8f8310dbe0abb9c1",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "controlflow-selected-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.6.json",
+      "revision": "ce9eaf32e19002c5fe11e22e5de3c3094270843d",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "controlflow-selected-callback-capture",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.6.json",
+      "revision": "ce9eaf32e19002c5fe11e22e5de3c3094270843d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "corrected-mixed-default-selection-and-native-package-targets",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.7.json",
+      "revision": "54bb5eb65178a57ac6e61e53324c9291863e716d",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "corrected-mixed-default-selection-and-native-package-targets",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.7.json",
+      "revision": "54bb5eb65178a57ac6e61e53324c9291863e716d",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "5144687086967def18e9ae4eb8e35d6b85c771445a1bd6e0d4ee71928ea7c145"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "b5e4a496837ba2e0412f0607c2067b402e9fde3b03a4300a085ed64fd1c020ee"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "finite-continuity-capacity-0136",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+      "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "pipeline-invocation-scopes-with-complete-supplied-evidence-context",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.6.json",
+      "revision": "f7e8b292f3334fb8d6a8b3a5c51b67605d1fa2bf",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "pipeline-invocation-scopes-with-complete-supplied-evidence-context",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.6.json",
+      "revision": "f7e8b292f3334fb8d6a8b3a5c51b67605d1fa2bf",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "complete-supplied-private-fixture-canonical-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.7.json",
+      "revision": "64b66167c2277533c2393899e3754e14a74f0b31",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "complete-supplied-private-fixture-canonical-selection",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.7.json",
+      "revision": "64b66167c2277533c2393899e3754e14a74f0b31",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/REPO-HYGIENE.13.json",
+      "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+      "sha256": "3591be9ca52b85396e266b07533b388ff66907d1afa4ab8e1e29113471cd10bc"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/REPO-HYGIENE.13.json",
+      "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+      "sha256": "cc6ef0910de7f2f4f21807a15ad3ff02569fde873dd416d2fdffd34f89612be6"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/REPO-HYGIENE.13.json",
+      "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+      "sha256": "ee96cc24f77b3ea2336fcab2c7549291e0d19b8e50c0010f1a5d50586223f730"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/REPO-HYGIENE.13.json",
+      "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780",
+      "sha256": "e9f3e82577d62ed8fce0c36c828afc80397df1d0bcbb5ba78fb4368716d5e3f5"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/REPO-HYGIENE.14.json",
+      "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+      "sha256": "4580c30c67aac13dcda7372434e9c08ac94c51e64d7b5c9b556cb6561e072f60"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/REPO-HYGIENE.14.json",
+      "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+      "sha256": "b9740fb5c80c1b71adf8268f087947b22c33e40fb35e0aeecf8c10019cf8647b"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/REPO-HYGIENE.14.json",
+      "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+      "sha256": "fa0d167887a741f97792a364f4e2842d4427b520a1c9a9ad1440f39ccabdc2b2"
+    },
+    {
+      "claim": "dated-retained-artifact-review",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/REPO-HYGIENE.14.json",
+      "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6",
+      "sha256": "b2aebb7b2ed153d37f8f5d166e8c75fb91ee4749d61da9b38e096bd043f43c17"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "7a355580fbeee8063d95a0657af26a935184a84eb869c9cbc1f8aa300d2cb6e6"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "17cdcbd1aa1c8c0cdab6958eb7ddfaa7e0528251e6caecede8bfa0c0152bc804"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "dated-retained-artifact-review-and-current-custody",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/REPO-HYGIENE.18.json",
+      "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "dated-retained-metadata-public-warning-output",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/REPO-HYGIENE.19.json",
+      "revision": "858eba97c89239d187765c4af9ad18057d28a1b0",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "dated-retained-metadata-public-warning-output",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/REPO-HYGIENE.19.json",
+      "revision": "858eba97c89239d187765c4af9ad18057d28a1b0",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "normalization-call-grammar-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.0.json",
+      "revision": "03e2bb9a7f48abbe58771f624cb6aba3a068fd35",
+      "sha256": "268ccfb066ba094bb44139f1273a85d3462424286037ac22add41193a8822905"
+    },
+    {
+      "claim": "callable-lazy-value-conditional-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.3.json",
+      "revision": "e133707f99dbb057667f8f80fbd3c47327de9bec",
+      "sha256": "308b1826f41c554d57be6cf19cc4e458cfcf835b26f43ebf73f7c4ca9881212b"
+    },
+    {
+      "claim": "callable-null-return-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.4.json",
+      "revision": "85e63d655b8c26ccb3146f9792462c94b2120c02",
+      "sha256": "edc01a521f46f3a5cd6be92a66fdc1d49f7d94d297cedee73a2a5eefde63f313"
+    },
+    {
+      "claim": "callable-while-execution",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.5.5.json",
+      "revision": "fdc21053294bfed95a26444d9e072ce69f205587",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "nested-boundary-lexical-repair",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json",
+      "revision": "d52add3e5e070b243eb3a2a532d061b51994a36a",
+      "sha256": "81bf59977fae27ac86f91f2914f09741f45f1afd5ce3a1dca54a55dbbd58d7e2"
+    },
+    {
+      "claim": "original-legacy-source-producer-diagnosis",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.json",
+      "revision": "f3a49dd82794c494625e33fe83ccf6cf01b4df8e",
+      "sha256": "29f362ac64eb3e69c8ab11682eaacc85f8b138469782e60d827908993b2e62b2"
+    },
+    {
+      "claim": "granted-finite-engineering-note-rollover",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.json",
+      "revision": "f3a49dd82794c494625e33fe83ccf6cf01b4df8e",
+      "sha256": "29f362ac64eb3e69c8ab11682eaacc85f8b138469782e60d827908993b2e62b2"
+    },
+    {
+      "claim": "complete-legacy-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "revision": "3482a5d220bd7063a910c09de883faa903d24135",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "complete-legacy-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.7.json",
+      "revision": "3482a5d220bd7063a910c09de883faa903d24135",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-dedicated-producer-source-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "revision": "8a64493d96795ef7398926b508e07595d01ef26c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-dedicated-producer-source-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.0.json",
+      "revision": "8a64493d96795ef7398926b508e07595d01ef26c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "staged-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "staged-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.1.json",
+      "revision": "ef2dd019bae121674a6e37a2b14d223bf6c7088c",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "progressive-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "revision": "34f687c09e197cf0798ed01c3c760e63a0203513",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "progressive-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.2.json",
+      "revision": "34f687c09e197cf0798ed01c3c760e63a0203513",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "recognition-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "revision": "7dc393211a12d54d5986c8f6a5462c25615ccbc4",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "recognition-annotation-original-statement-origins",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.3.json",
+      "revision": "7dc393211a12d54d5986c8f6a5462c25615ccbc4",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "complete-dedicated-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "revision": "37401f576c517a91f49942893c41af020bcbfda4",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "complete-dedicated-family-immutable-recurrence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.5.4.json",
+      "revision": "37401f576c517a91f49942893c41af020bcbfda4",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-all-producer-population-and-representative-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-all-producer-population-and-representative-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.0.json",
+      "revision": "56c8f38d12a799e4f4fb8c5b0cfe27690d27f1fc",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "immutable-original-all-producer-and-representative-acceptance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "immutable-original-all-producer-and-representative-acceptance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.6.1.json",
+      "revision": "5f700625ef4bce962285ece583b088c457f2dd63",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "private-original-source-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "revision": "31395e440a38acec7a6712d470a90a90a6567863",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "private-original-source-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.0.json",
+      "revision": "31395e440a38acec7a6712d470a90a90a6567863",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "compiler-original-executable-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "revision": "af5d19971a1682f6895901fb769ff41b69842672",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "compiler-original-executable-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.1.json",
+      "revision": "af5d19971a1682f6895901fb769ff41b69842672",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "immutable-compiler-membership-checkpoint",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "immutable-compiler-membership-checkpoint",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.0.json",
+      "revision": "484fe128f945af9c53d82fe44f6498002dcfd771",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "callable-signature-membership-precedence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "callable-signature-membership-precedence",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.1.json",
+      "revision": "0f31461d696186775585e19355a0bc5c41849dfb",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "bounded-recurrence-and-grouped-pattern-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "revision": "78012b1e78bb114a41f54873f30ca63c421568c8",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "bounded-recurrence-and-grouped-pattern-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.0.json",
+      "revision": "78012b1e78bb114a41f54873f30ca63c421568c8",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "compiler-callable-grouped-pattern-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "revision": "5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "compiler-callable-grouped-pattern-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.1.json",
+      "revision": "5b4a9a8ca2203f651d3c9d3a36cc9836c30a5375",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "independent-committed-compiler-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "revision": "fa9b7608ed9e49712129bb5456d75d118e7207a0",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "independent-committed-compiler-membership",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.2.2.2.2.json",
+      "revision": "fa9b7608ed9e49712129bb5456d75d118e7207a0",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "selected-original-and-rewritten-occurrence-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "revision": "11f6a87d136ce213899ca6a0cd98cf3f0833f720",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "selected-original-and-rewritten-occurrence-diagnosis",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.0.json",
+      "revision": "11f6a87d136ce213899ca6a0cd98cf3f0833f720",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "ab5c905206af39cd389dc8987e9a3e71d7476757c807200a0f0e7563288937c2"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "77985adbbbdca061d6688cdb84f7629d5cf1ca682db7c4644bc8d7de8e9a7c4c"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "839789ff1e9fb20940ba0fb11966d97b34ae19add2f18babbb214d6f919b6c3e"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "1fb3f19cd316e779ea5380e4706f0280e81eac9a9706cb1c9712c4d546aeb059"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "91e6a411c26d09f31a9caeacd90c0c6b57f384ee56f12f33a8e095c0e1787ffd"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "2c21e5922191b76a6d3172ed1f08a12ad00ebc48256fda876df914807bcc4b7f"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "private-original-occurrence-handoff",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+      "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "ef9d121f25e72c77523189c1180ef3f17ffc906b43511a3bca8cbb9ff4a620f0"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "8ac4f7bf8bed0e14854106c0b20323b73593fed698ea94d2750d62315923e1e2"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "55af65044174b3494d6745079212081e63d9d48389d8a261893621a84e04ab15"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "ba6cb601f09da41c55fdb638014252c4b3c9093ca5e0a458f8c1c0d74b63c0c3"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "98b35b397931cb4eebfddc31abfb6969da65be69175515b50d000a09de7c6b45"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "512e4ddde33ad5ab398c5d612886444b68ec1f4ae99668c41314087eeb1c528c"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "rejected-mapped-interval-candidate",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+      "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite_lossless_change_history_admission",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+      "revision": "60e8ef2ab571bab5d951e0d6f701daf1752df36e",
+      "sha256": "b179860bbcebd0a8339a91f5f8ac5e8a21d3ffa48c93819dfcc9caa025b6fbdc"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "903ca973c1de0121aded5f612ffa1e249b9c9a7ab773288773fbbd6cce945ab5"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "742ba84ba61578c74a5dffc516c70f6cba463112b7811a12a538158d0f96af2e"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "c2953add33470f64f50d1ab9b2736ead090b46a7422e5e3a662cf0c53471778c"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "118266d2d16c1476b0fe8370f0606881b2182dbf0c02f562cece4be5e015aeee"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "e4748b54e5c5888e1383edf65c83362de49da4084b465f8ddf8db10a9bb060d0"
+    },
+    {
+      "claim": "actual-typed-and-raw-producer-diagnosis",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+      "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383",
+      "sha256": "96198f7288642facf6fbe1fd06c3a99645f94c0e840b90a5c5217f223e62de39"
+    },
+    {
+      "claim": "actual-original-event-native-input-grants",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "actual-original-event-native-input-grants",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-event-input-proof-historical-recovery-capsule",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-event-input-proof-historical-recovery-capsule",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.2.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "independent-original-event-native-input-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "independent-original-event-native-input-composition",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "02345ee21f9cd674dea073b5e25f6200bd0a6ead",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "original-input-join-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "original-input-join-boundary-preservation",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.3.json",
+      "revision": "4f0499d2634e9c04e6a3d07ee85f4159f5380834",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite-historical-consumer-qualification-and-complete-replacement",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "finite-historical-consumer-qualification-and-complete-replacement",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.5.json",
+      "revision": "3dbe7b10a8b6cbe1f6ea92afcb235cc1a71cd59e",
+      "sha256": "71a5cdd50639370943d1e3f05312a48121420eb062a3e533624899a975089d57"
+    },
+    {
+      "claim": "finite-three-scalar-engineering-notes-aggregate-admission",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "61767bcb30ba463e62741f503859ef1516f42a3c46f2240fbb6bcf62c84951f7"
+    },
+    {
+      "claim": "finite-three-scalar-engineering-notes-aggregate-admission",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "58676ab56cdf14f18d40574d9a6d134487348569b28faf8cc4a1d37857b621ef"
+    },
+    {
+      "claim": "exact-historical-capacity-publisher-fixture-inputs",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "61767bcb30ba463e62741f503859ef1516f42a3c46f2240fbb6bcf62c84951f7"
+    },
+    {
+      "claim": "exact-historical-capacity-publisher-fixture-inputs",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "58676ab56cdf14f18d40574d9a6d134487348569b28faf8cc4a1d37857b621ef"
+    },
+    {
+      "claim": "exact-historical-capacity-publisher-fixture-inputs",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "24d7486b2858040ddf6e8206d80677c2f08a7657465d1155de4a03cc5430e0b4"
+    },
+    {
+      "claim": "exact-historical-capacity-publisher-fixture-inputs",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+      "revision": "31fe4fd3655466018a509d894fc6bca3a331944d",
+      "sha256": "44b1424a3e325aec7217bf3c79b47944c7df6bb9073cb1783114149a09ad1d3e"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "b4f7cd2dde29b99dcae81b1d0b56f40527f7b0c6fcc270f5ea93b4dc84b04f4c"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "2539104199fd25ad15598db2fda8617417e58da2a8dd00724d0023ab36060214"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "8820b626a09fd7fda299b612e4c90b62a500a8bdb375b8e674b1e5932eabea9e"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "6b66c0075bfc317a72c0afbd5d57c501a91470191903f06fbc223b3d07c034a8"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "911ef6bfa3ceed1b5a3cc7218eb7cd0a788a9e2486864afdb73c4a9b3ccf0030"
+    },
+    {
+      "claim": "finite-composed-engineering-and-decision-capacity",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+      "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb",
+      "sha256": "5423a2d1aeb53896293bbc4a048d9f458eddd6bcd0d3627d9883d381196553bd"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "CHANGES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "21e0bde9818efaa0b5d9312d33900e7618a92319b88a6ed9216f089be3583fdf"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "DEVELOPMENT_NOTES.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "c50407a66af1c9b870762e661c8dcee4fd7c531a7ddb7ec77b1e5da65c44a25c"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "LIVE_ACHIEVEMENT_STATUS.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "4144fbde56570fb7c2df9475895b43201ce32a60aaa7b3a00a15f2eededa06e8"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "MEMORY.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "1ddf26c9ce2f4fbc6d3fa31af6329b80750e195f57636052674e9986bbe3ee7f"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "c167d66717fee425ae95db1f04d6849e12673224d4040bd116011c065504acd9"
+    },
+    {
+      "claim": "unique-accepted-readme-routing-authority",
+      "mode": "historical",
+      "path": "ROADMAP_V2.md",
+      "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+      "revision": "32169d1282effa083a431b17b11c436fdd862771",
+      "sha256": "ec15c9ee2df4fd99f25ac43d9ccb53120e89341823d1927b4eeb0651c754fbf1"
+    },
+    {
+      "claim": "current-retired-return-migration-guidance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.1.json",
+      "revision": "cf4dceccd24bc6642fc9c7d8d10b329e136849b6",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "current-retired-return-migration-guidance",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.1.json",
+      "revision": "cf4dceccd24bc6642fc9c7d8d10b329e136849b6",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "authority-population-and-value-model",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json",
+      "revision": "c053c9dcf24a78cc8b551187f47cdb7aefb03eb3",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "authority-population-and-value-model",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.0.json",
+      "revision": "c053c9dcf24a78cc8b551187f47cdb7aefb03eb3",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    },
+    {
+      "claim": "perl-evaluated-list-values",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.3.json",
+      "revision": "2fca7d8489038c226fe0454a105f12a2af696a1f",
+      "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+    },
+    {
+      "claim": "perl-evaluated-list-values",
+      "mode": "historical",
+      "path": "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+      "record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.3.json",
+      "revision": "2fca7d8489038c226fe0454a105f12a2af696a1f",
+      "sha256": "f6874379d8f3297b68da34fb6b3255037340f488296f758765b4e83c5ed31cbe"
+    }
+  ],
+  "claim_records": 213,
+  "live_intersections": [],
+  "prospective_paths": [
+    "docs/linkedspec-book/src/appendix/runtime-semantics.md",
+    "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md",
+    "docs/knowledge/lua-runtime-structured-diagnostics.md",
+    "docs/knowledge/lua-callable-pipeline-result-guards.md",
+    "docs/knowledge/lua-callable-array-transform-result-guards.md",
+    "docs/knowledge/lua-callable-key-count-preservation.md",
+    "docs/tasks/TYPE-REFERENCE-BOOK.overview.md",
+    "docs/tasks/TYPE-REFERENCE-BOOK.md",
+    "ROADMAP.md",
+    "ROADMAP_V2.md",
+    "CHANGES.md",
+    "DEVELOPMENT_NOTES.md",
+    "LIVE_ACHIEVEMENT_STATUS.md",
+    "MEMORY.md"
+  ],
+  "scope": "Exact accepted Git records only. The new raw-field record is not yet accepted; native custody and current pack falsification remain explicit gaps. Historical bindings keep their original hashes/revisions; no SDK or old claim is refreshed.",
+  "source_commit": "e0a1bb47571b75b800546c3d4522e0d2ca5f778c"
+}

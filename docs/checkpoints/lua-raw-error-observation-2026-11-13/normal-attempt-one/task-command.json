@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "show",
+    ":docs/tasks/TYPE-REFERENCE-BOOK.overview.md"
+  ],
+  "cwd": "."
+}

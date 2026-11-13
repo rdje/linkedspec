@@ -1343,7 +1343,7 @@ Installed Lua independently passes508 programs/four routes with20 supported targ
 four separately qualified legacy continuations and484 preserved records, including
 80 initial/eight invalid signatures. Callable SX/ordinary SA/scalar elements remain
 own terminal compatibility. Full published JSON/text/named flags and field absence
-survive, with raw-table4.28/declared5.4/full admission separate. Reload Lua applications.
+survive, with selected raw-field4.28 focused coverage and broader native4.2/declared5.4/full admission separate. Reload Lua applications.
 
 Perl source-isolation78.0 keeps Number literals out of the eight legacy named-Array
 shortcuts. The bounded native/emitted controls now ignore unrelated Perl host Arrays,
@@ -1566,7 +1566,7 @@ intact on these recorded routes. Lua also preserves the observer's named outer
 flags; this does not establish preservation of every raw native error-table field.
 Lua evaluates positional argument values before its invocation arity preparation,
 while rejecting keywords earlier; this repair keeps that order. Wider open-arity
-`concat_arrays` continuations now have focused family80 proof in Perl, Rust, Dart, Julia and installed Lua (PUC5.5.1/LuaJIT). Existing one-or-more Array forms retain guards; all initial and fixed/rest policies remain independently acquired. Lua preserves full published error JSON/text and named outer flags, with raw-table4.28/declared5.4/full admission separate. Reload Lua applications.
+`concat_arrays` continuations now have focused family80 proof in Perl, Rust, Dart, Julia and installed Lua (PUC5.5.1/LuaJIT). Existing one-or-more Array forms retain guards; all initial and fixed/rest policies remain independently acquired. Lua preserves full published error JSON/text and named outer flags, with selected raw-field4.28 focused coverage and broader native4.2/declared5.4/full admission separate. Reload Lua applications.
 
 Initial wrong-input policy remains separate from produced-result guards. The
 established constructor contrast uses `array(...)`; a direct literal Array with

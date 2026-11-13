@@ -1,0 +1,172 @@
+{
+  "CHANGES.md": {
+    "bytes": 47481,
+    "mode": 420,
+    "sha256": "85245ffd149735b712b8b21cec7ed3fffc3bf3637fcc53910dd012498e89484d"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 37714,
+    "mode": 420,
+    "sha256": "168cd11c9d30c4f368098d3623f4a2fcfa8fad11d25d688a7fccc86e258b7143"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 5356,
+    "mode": 420,
+    "sha256": "23c6cf1b9a5f0f79294170e49416c993202da11a788dd8c80b08ef199d04bbc2"
+  },
+  "MEMORY.md": {
+    "bytes": 3862,
+    "mode": 420,
+    "sha256": "3d519fdbc6f0d62f4226aed09f044fb7479d284e04c0a74921856585bfb76f96"
+  },
+  "ROADMAP.md": {
+    "bytes": 472178,
+    "mode": 420,
+    "sha256": "98b5f49dcda4ee6e01779dcb89c0c229d3c9ee3bbc4690cdf2d6a990a111ccb9"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273513,
+    "mode": 420,
+    "sha256": "14d1b9bdeec2bc79f78baa5791ccc7f2905a1e9ff4ef6034cd8d31ce76efe938"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 348028,
+    "mode": 420,
+    "sha256": "5ed3f6476b63afe703c33279ba802f67b911d4b4d043e718451fd8371dd2ce0e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/CUSTODY.md": {
+    "bytes": 1821,
+    "mode": 420,
+    "sha256": "3e2b488fc13badb9cb8236058ffb8d8f058c7a06984857a933bc2afaac29640d"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/REVIEW.md": {
+    "bytes": 4139,
+    "mode": 420,
+    "sha256": "25488bb8ec51c57a5b03432b0253277e267423b62b94e7d570daab90548c4851"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/analysis/result.json": {
+    "bytes": 3350,
+    "mode": 420,
+    "sha256": "29c0eee4c5b462df754fc4b072af708e8c60fb8b09391fe7d5641353165a4f4a"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/book-section.md": {
+    "bytes": 3243,
+    "mode": 420,
+    "sha256": "401ff552e0681fb7a495eb219d99f772dc613fd98a315b71a031efec04ad9c4e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/fact-card.md": {
+    "bytes": 3850,
+    "mode": 420,
+    "sha256": "f1f6e3f9b29633199d6ad74a05b9f90be2881e7fc730aa1789c9037f70587f31"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/index-publication-inputs/input-identities.json": {
+    "bytes": 40370,
+    "mode": 420,
+    "sha256": "1bd3b69d8209d56c16e7acea5c8a00f7f81ba958a9e3b0d80804095fc4680235"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/index-publication-inputs/inputs-before-query.tar.gz": {
+    "bytes": 2778642,
+    "mode": 420,
+    "sha256": "bde2c826fdd31e5c92e194c2d175f1f868412944efe5d42f16f3195c4d861b8e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/index-publication-inputs/result.json": {
+    "bytes": 3699,
+    "mode": 420,
+    "sha256": "d51c40637e6a60a36661c2f273674289b47720d2dfae68b8ac86eee250f1f314"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/intake/input-identities.json": {
+    "bytes": 58766,
+    "mode": 420,
+    "sha256": "6c5f553176a12baaf099d3b29c14ad88ea6a481319b58308f026d116956df567"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/intake/inputs-before-use.tar.gz": {
+    "bytes": 5600794,
+    "mode": 420,
+    "sha256": "625b84533dbe7bc2d44d536676244227949b56b462159416757cbc38a0ce0b3b"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/normal/result.json": {
+    "bytes": 308,
+    "mode": 420,
+    "sha256": "c19b6abdd2dd64efcf81951201c2ad737c74042198a8b2dd56063ca128640506"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/proofs/historical-review/exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/proofs/historical-review/stderr.gz": {
+    "bytes": 20,
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/proofs/historical-review/stdout.gz": {
+    "bytes": 329,
+    "mode": 420,
+    "sha256": "98728ab9e9a0e555508917be84a3cb48ef42132a8f344ba1825b373f86018ac7"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publication-inputs/input-identities.json": {
+    "bytes": 40376,
+    "mode": 420,
+    "sha256": "31619a70e2c4c72578ebea1e0097f61841454e35f07e2d1f207b000fed6992d0"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publication-inputs/inputs-before-query.tar.gz": {
+    "bytes": 2778815,
+    "mode": 420,
+    "sha256": "b85745a0b6ea2ff0754fe619ca29afbbf2d5acc0b7632dab786614e3343dcf7a"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publication-inputs/result.json": {
+    "bytes": 112630,
+    "mode": 420,
+    "sha256": "cd76691a334690522f91b216ceafdf9445c7730d42d4953d4706bd01edba135e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publish.py": {
+    "bytes": 22156,
+    "mode": 420,
+    "sha256": "6a0545731635a74c686c767c57ac5976b3839a984f121d6ccc5e17e7830a3856"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/sealed-identities.json": {
+    "bytes": 41562,
+    "mode": 420,
+    "sha256": "f5fb96eb3be7d30c48595810139b852e197465bbb4dc53cbd9bc0c760baf3d72"
+  },
+  "docs/knowledge/lua-callable-array-transform-result-guards.md": {
+    "bytes": 3927,
+    "mode": 420,
+    "sha256": "17746ee0b899285d6ca755d22156933485d3ef3e9129f00c65976df7ca68e280"
+  },
+  "docs/knowledge/lua-callable-key-count-preservation.md": {
+    "bytes": 2846,
+    "mode": 420,
+    "sha256": "d1228a65bc7e6724b60ecae00ca1b845792984fe013f6729f6351d124a8de706"
+  },
+  "docs/knowledge/lua-callable-pipeline-result-guards.md": {
+    "bytes": 4027,
+    "mode": 420,
+    "sha256": "6e42640b38eddb4d7fa06aaaca1e0ba79fca00d12e280826a492d0e0771a5fc4"
+  },
+  "docs/knowledge/lua-runtime-structured-diagnostics.md": {
+    "bytes": 4112,
+    "mode": 420,
+    "sha256": "cc2a98ab08e115858052602cd7ed33f4e99fcca09ac6e1120806aedae049f367"
+  },
+  "docs/linkedspec-book/src/appendix/runtime-semantics.md": {
+    "bytes": 41970,
+    "mode": 420,
+    "sha256": "71595441ac1664e9091c8fec03d2978521cdb30f03263f0e179fa35c38b3944c"
+  },
+  "docs/linkedspec-book/src/dsl/value-container-flow-helper-reference.md": {
+    "bytes": 170224,
+    "mode": 420,
+    "sha256": "57a4ce9dfef1c91fc9b31661cf04c71b6c1587d113cf11d1e0b401148ff2ddf4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20820,
+    "mode": 420,
+    "sha256": "8e53340e3eae92e0fba99d8b4a5c6d4cfbd13d6428a850f76602ec0d5f78b47f"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 551704,
+    "mode": 420,
+    "sha256": "6caf95b7b6daa6a3f18b0a7a0959304a090558d091d49a117a8abf989d70a217"
+  }
+}

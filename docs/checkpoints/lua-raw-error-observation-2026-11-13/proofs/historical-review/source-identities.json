@@ -1,0 +1,72 @@
+{
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/analyze.py": {
+    "bytes": 17412,
+    "mode": 420,
+    "sha256": "23e5816e675e3ccba532d7f562ce1022f2580e65df4c5cdef1a302eb11c2282e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/capture.py": {
+    "bytes": 9288,
+    "mode": 420,
+    "sha256": "2486e5bc2ab63bbfa51333625579d9817339beaf894a0e123c361a07ded53f82"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/check_publication_inputs.py": {
+    "bytes": 3620,
+    "mode": 420,
+    "sha256": "d6a1743abfb2e04f0943f96b0e29ecd8dd3475ccc434fce106585f986025b9ef"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/intake.py": {
+    "bytes": 5448,
+    "mode": 420,
+    "sha256": "e377a1c650aa8207a283e8bbccf585298fd16e632ec6032e1e1c9c236fea308c"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare.py": {
+    "bytes": 2231,
+    "mode": 420,
+    "sha256": "b9f04e3d9303e1fb5c643750f9738ee9092cfecdd6fd6d3d10cc8a45fdfb9ffb"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare_normal.py": {
+    "bytes": 1146,
+    "mode": 420,
+    "sha256": "59c13f659ba4db8334449b504e544753ba59a69f200bcb44162225353bd0597d"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare_query.py": {
+    "bytes": 2473,
+    "mode": 420,
+    "sha256": "34d10749d364ff4bb5081dd1e34c93bfd524022727799ffa901a0a1d5a15702e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/review.py": {
+    "bytes": 10829,
+    "mode": 420,
+    "sha256": "2b6e3e1bb03be9144818ecf8a89ea93c5ca20f38a3c848b222276d51c9bf2080"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/review_publication_inputs.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/run_normal.py": {
+    "bytes": 7101,
+    "mode": 420,
+    "sha256": "3b71ddf3d39e86e40cd183a4bbaa1b97070c16fa29db05d9ed7f230404cfc888"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/run_stage.py": {
+    "bytes": 2009,
+    "mode": 420,
+    "sha256": "05821b48404cfc8c6e95a0381b2dd1c43d21c2fb5c2e11c701a826feb4bb38e6"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/seal.py": {
+    "bytes": 737,
+    "mode": 420,
+    "sha256": "b8d1149aae94813f587bdd68ac25d0346233d0e3594ea09891fc2fb1e9fabcd9"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

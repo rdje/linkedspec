@@ -1,0 +1,18 @@
+{
+  "luajit": {
+    "cases": 8,
+    "legacy_oracle_exit": 1,
+    "normal_checks": 128,
+    "normal_exit": 0,
+    "raw_oracle_exit": 0,
+    "routes": 4
+  },
+  "puc": {
+    "cases": 8,
+    "legacy_oracle_exit": 1,
+    "normal_checks": 128,
+    "normal_exit": 0,
+    "raw_oracle_exit": 0,
+    "routes": 4
+  }
+}

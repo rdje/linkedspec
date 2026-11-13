@@ -38,3 +38,6 @@ modules share runtime/process. Bounded callable peer children now have focused
 outcomes; remaining-family selection23.1.36 is next after clean landing. Historical
 recovery is not latest-code proof. See [[lua-spec-defined-function-parser]] and
 [[lua-key-count-result-guards]].
+
+
+November13 selected-field qualification: [[lua-raw-error-observation-scope]] records the eight-case/four-route old-current companion and the original scopes of eight function-grammar result-guard normals. Earlier counts/observations remain dated; no all-native-field, retrospective custody or fresh-process credit is added. Selected normal128 per installed host and specific legacyRED1/rawGREEN0 pass; broader native4.2/SESSION5 and current discovery4.1 remain separate.

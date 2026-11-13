@@ -1,0 +1,19 @@
+{
+  "original": "docs/checkpoints/array-transform-callable-lua-2026-11-12/cases.json",
+  "original_sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090",
+  "selected": [
+    "own_needed_source_take_free",
+    "own_needed_source_take_receiver",
+    "own_signature_fixed_missing_terminal",
+    "own_signature_fixed_missing_composed",
+    "own_signature_fixed_extra_composed",
+    "own_signature_variadic_missing_composed"
+  ],
+  "added": [
+    "nested_binding",
+    "nested_fixed_arity"
+  ],
+  "source_only": true,
+  "producer_sha256": "b9f04e3d9303e1fb5c643750f9738ee9092cfecdd6fd6d3d10cc8a45fdfb9ffb",
+  "scope": "Two selected error families; acyclic string/number-keyed finite values. Lua table identity, metatable implementation and all-error completeness are excluded."
+}

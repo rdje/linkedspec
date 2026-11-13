@@ -1,0 +1,12 @@
+{
+  "check_index_inputs.py": {
+    "original": "check_publication_inputs.py",
+    "original_sha256": "d6a1743abfb2e04f0943f96b0e29ecd8dd3475ccc434fce106585f986025b9ef",
+    "resulting_sha256": "b4219c1d52eb63ae590d732bb063255c3dd671cd95f7c536de9448c0537b0248"
+  },
+  "review_index_inputs.py": {
+    "original": "review_publication_inputs.py",
+    "original_sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0",
+    "resulting_sha256": "0c424c81a96088564033130e29b0d98209e068746204b9368c53b5ca5023b62e"
+  }
+}

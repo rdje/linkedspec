@@ -1,0 +1,97 @@
+{
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/analyze.py": {
+    "bytes": 17412,
+    "mode": 420,
+    "sha256": "23e5816e675e3ccba532d7f562ce1022f2580e65df4c5cdef1a302eb11c2282e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/capture.py": {
+    "bytes": 9288,
+    "mode": 420,
+    "sha256": "2486e5bc2ab63bbfa51333625579d9817339beaf894a0e123c361a07ded53f82"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/check_index_inputs.py": {
+    "bytes": 3087,
+    "mode": 420,
+    "sha256": "b4219c1d52eb63ae590d732bb063255c3dd671cd95f7c536de9448c0537b0248"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/check_publication_inputs.py": {
+    "bytes": 3620,
+    "mode": 420,
+    "sha256": "d6a1743abfb2e04f0943f96b0e29ecd8dd3475ccc434fce106585f986025b9ef"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/intake.py": {
+    "bytes": 5448,
+    "mode": 420,
+    "sha256": "e377a1c650aa8207a283e8bbccf585298fd16e632ec6032e1e1c9c236fea308c"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare.py": {
+    "bytes": 2231,
+    "mode": 420,
+    "sha256": "b9f04e3d9303e1fb5c643750f9738ee9092cfecdd6fd6d3d10cc8a45fdfb9ffb"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare_index_query.py": {
+    "bytes": 1205,
+    "mode": 420,
+    "sha256": "6c44f9cb6744dff5e7361a49bbe8628f7fac6783bdede589753849c76d21a6bd"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare_normal.py": {
+    "bytes": 1146,
+    "mode": 420,
+    "sha256": "59c13f659ba4db8334449b504e544753ba59a69f200bcb44162225353bd0597d"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/prepare_query.py": {
+    "bytes": 2473,
+    "mode": 420,
+    "sha256": "34d10749d364ff4bb5081dd1e34c93bfd524022727799ffa901a0a1d5a15702e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publish.py": {
+    "bytes": 22156,
+    "mode": 420,
+    "sha256": "6a0545731635a74c686c767c57ac5976b3839a984f121d6ccc5e17e7830a3856"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/publish_qualified.py": {
+    "bytes": 1757,
+    "mode": 420,
+    "sha256": "7f5df7b2245a6691fb3422967d91a8cee22e837524b8b10a56a182d422450f2d"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/review.py": {
+    "bytes": 10829,
+    "mode": 420,
+    "sha256": "2b6e3e1bb03be9144818ecf8a89ea93c5ca20f38a3c848b222276d51c9bf2080"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/review_index_inputs.py": {
+    "bytes": 3018,
+    "mode": 420,
+    "sha256": "0c424c81a96088564033130e29b0d98209e068746204b9368c53b5ca5023b62e"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/review_publication_inputs.py": {
+    "bytes": 3012,
+    "mode": 420,
+    "sha256": "60893864c2d7362c3e868b4b870da862e5e18468aab2d34c369c62b85f4256c0"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/run_normal.py": {
+    "bytes": 7101,
+    "mode": 420,
+    "sha256": "3b71ddf3d39e86e40cd183a4bbaa1b97070c16fa29db05d9ed7f230404cfc888"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/run_stage.py": {
+    "bytes": 2009,
+    "mode": 420,
+    "sha256": "05821b48404cfc8c6e95a0381b2dd1c43d21c2fb5c2e11c701a826feb4bb38e6"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/seal.py": {
+    "bytes": 737,
+    "mode": 420,
+    "sha256": "b8d1149aae94813f587bdd68ac25d0346233d0e3594ea09891fc2fb1e9fabcd9"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  }
+}

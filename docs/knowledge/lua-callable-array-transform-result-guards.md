@@ -53,3 +53,6 @@ declared5.4/formatter/full23.4 remain separate. Concat selection23.1.42 is next.
 
 Related: [[lua-array-transform-result-guards]], [[lua-callable-pipeline-result-guards]],
 [[array-transform-callable-result-selection]].
+
+
+November13 selected-field qualification: [[lua-raw-error-observation-scope]] records the eight-case/four-route old-current companion and the original scopes of eight function-grammar result-guard normals. Earlier counts/observations remain dated; no all-native-field, retrospective custody or fresh-process credit is added. Selected normal128 per installed host and specific legacyRED1/rawGREEN0 pass; broader native4.2/SESSION5 and current discovery4.1 remain separate.

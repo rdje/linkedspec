@@ -15,7 +15,7 @@ date: 2026-11-12
 status: current
 tags: [lua, runtime, diagnostics, embedding, LUA-BACKEND-PARITY]
 evidence: "LUA-BACKEND-PARITY.4.4.1 adds RuntimeDiagnostic, diagnostic-carrying RuntimeInterpreterException tables, optional engine spec_name/spec_path, rule/input/top-stage attribution, and focused dual-ABI proof at 126/126."
-reverify: "bash tools/run_lua_local.sh && rg -n 'RuntimeDiagnostic|runtime_diagnostic|runtime-structured-diagnostics' lua/src lua/test/run.lua"
+reverify: "bash tools/run_lua_project_data.sh puc lua/test/raw_error_observation_test.lua; bash tools/run_lua_project_data.sh luajit lua/test/raw_error_observation_test.lua; bash tools/run_python_project_data.sh docs/checkpoints/lua-raw-error-observation-2026-11-13/review.py"
 ---
 
 `LUA-BACKEND-PARITY.4.4.1` adds the backend-neutral failure payload to Lua's native runtime path.
@@ -60,3 +60,8 @@ published JSON/text and selected outer flags. Historical raw-field-claim/coverag
 audit TYPE-REFERENCE-BOOK.1.2.23.4.28 remains owned before admission. Source and
 first-use inputs/results: docs/checkpoints/array-transform-callable-lua-2026-11-12/
 REVIEW.md; readonly recovery uses review_qualified2.py in that packet.
+
+
+November13 selected-field qualification: [[lua-raw-error-observation-scope]] records the eight-case/four-route old-current companion and the original scopes of eight function-grammar result-guard normals. Earlier counts/observations remain dated; no all-native-field, retrospective custody or fresh-process credit is added. Selected normal128 per installed host and specific legacyRED1/rawGREEN0 pass; broader native4.2/SESSION5 and current discovery4.1 remain separate.
+
+The original126-suite result above remains dated history. The current focused recipe avoids the known unsafe full Lua formatter path, still owned by LUA-STARTUP-READING.2.3; declared5.4 remains separately owned.

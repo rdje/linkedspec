@@ -31,6 +31,7 @@
 {"bytes":2165,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-pure-split-bridge.md","sha256":"67b43679cd2858dbecb52f25b8b639985fea6cf0dfb8d1ae6738dd2261582de0","type":"member"}
 {"bytes":2281,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-push-snapshot-result-guards.md","sha256":"5b0300638a70d141f61a5b54f54d0f0f789231d81f43a0f91bc3596bc995b04a","type":"member"}
 {"bytes":15980,"lines":205,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-query-generated-observation-consumer-reading.md","sha256":"02622582dada29256fc5cdb37d025269eb3255c7dda3892fd9a74986acfdc362","type":"member"}
+{"bytes":3850,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.28","path":"docs/knowledge/lua-raw-error-observation-scope.md","sha256":"f1f6e3f9b29633199d6ad74a05b9f90be2881e7fc730aa1789c9037f70587f31","type":"member"}
 {"bytes":22449,"lines":329,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-commit-closeout-audit.md","sha256":"4633a10b9ecec33c6d3e2e456d0fb9db7759ecfa5abe8ac6f88f162b9fb0b9fc","type":"member"}
 {"bytes":22719,"lines":327,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-admission.md","sha256":"8b8dc415fc24706b140128b851752676a68dbf169840649871d78701692b4b9c","type":"member"}
 {"bytes":21407,"lines":321,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-reading-evidence-capacity-proposal.md","sha256":"8d353b371b219816af3aa64432c7d5233bd369dd76661febeead7b26ab5686d9","type":"member"}
@@ -83,7 +84,7 @@
 {"bytes":3449,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-matching-state.md","sha256":"0085c2b423b80a7d9a629b9aabdb52f2cc08c8b9ac1453815b09d451b8c90940","type":"member"}
 {"bytes":2230,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-named-harray-mutation.md","sha256":"03cc2480fcb7903b4643e0f107b9c31d6a8c43bb63bd7cef6c6b379d319c7faf","type":"member"}
 {"bytes":2912,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-rule-interpreter.md","sha256":"623f3b167873b8737301e55e6b823acf2c6878e321ff1692127ffcf186766020","type":"member"}
-{"bytes":4112,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5","path":"docs/knowledge/lua-runtime-structured-diagnostics.md","sha256":"cc2a98ab08e115858052602cd7ed33f4e99fcca09ac6e1120806aedae049f367","type":"member"}
+{"bytes":4931,"lines":67,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.28","path":"docs/knowledge/lua-runtime-structured-diagnostics.md","sha256":"84819948d79a4a153149160eaf93152de18128d3b81191242abd6637e0e7768e","type":"member"}
 {"bytes":2386,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-switch-statement-controls.md","sha256":"dcaf87a3d090a8a8fea13c8191f00fe82e86c71fd4974da0056fb7723fd43a9e","type":"member"}
 {"bytes":3358,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-tagged-record-construction.md","sha256":"16635bdb5391402cb9b270bfb8f74ebbe4021cf0e64a54d00763aa5378038ab2","type":"member"}
 {"bytes":2428,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-runtime-trace-events.md","sha256":"b23a25a2cce0a2b1c0ad338a008b19b1e07ed21047b77e2fb3959191581bd4f4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3542,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-function-runtime-closeout.md","sha256":"6634262f8eac9d50d5b99a06cd7aa2ef125ef4369e51a1c70baabe257b5dd524","type":"member"}
 {"bytes":17366,"lines":209,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md","sha256":"b9457323ba4751bb3c2f0b674fa358bc41f518b5b4dc14000c7526371ad568de","type":"member"}
 {"bytes":11456,"lines":194,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-startup-reading-coverage.md","sha256":"54622403ad39a1c5855ad22d5ee8cb0cc14f1843ee144a0c0b68ca213a6e273c","type":"member"}
-{"bytes":2049,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-statement-regex-mutation.md","sha256":"dc492212e862e16377fa83f3ee56538655debc990ce1a90ba1a8126e563c8dc4","type":"member"}

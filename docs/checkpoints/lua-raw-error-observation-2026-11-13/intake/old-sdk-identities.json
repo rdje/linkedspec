@@ -1,0 +1,278 @@
+{
+  "lua/src/linkedspec/action_ast.lua": {
+    "bytes": 12084,
+    "git_oid": "14bba9598c7d7ef3f7a942606d41c8b37ba911a8",
+    "mode": 420,
+    "sha256": "5900fa7f3bb883a7bb3d5c987e840945edea97155e257257e8103f3a832668d5"
+  },
+  "lua/src/linkedspec/action_call_names.lua": {
+    "bytes": 7925,
+    "git_oid": "f6118b3ab6e2450990edefd17b095cb2ee859105",
+    "mode": 420,
+    "sha256": "864c4d5d338167d8d0c9d610955ff1145dd2bf64b475940612fa2bd9956a8bc0"
+  },
+  "lua/src/linkedspec/action_contracts.lua": {
+    "bytes": 25197,
+    "git_oid": "b1046116fb8fee24febbdac7cd8616cf38e0ed3d",
+    "mode": 420,
+    "sha256": "b4187bb6d1381a25789afc6e4b6642137cd1e5d05d3838d7882e28cc4d0b9c66"
+  },
+  "lua/src/linkedspec/action_parser.lua": {
+    "bytes": 61463,
+    "git_oid": "cd623b8c2be32d17f5e14ea9c442267ac9e885b6",
+    "mode": 420,
+    "sha256": "055835b9c7eefb1ba2773e4c7b3870c2130221358ba856b280184238882819fc"
+  },
+  "lua/src/linkedspec/bounded_child_parse_authority.lua": {
+    "bytes": 42136,
+    "git_oid": "f66125c6896ab71aa357559e86e87f5f94091c33",
+    "mode": 420,
+    "sha256": "5d697173e34e677540cd2898a5a2cd118e265aa3d2f45220ecb16db03963a5fc"
+  },
+  "lua/src/linkedspec/compiled_spec.lua": {
+    "bytes": 59337,
+    "git_oid": "20fc5f7f9c5abb1364a401681d658689aff1d5f4",
+    "mode": 420,
+    "sha256": "9615ba900b620694926d24cccd8f4f2c08853fb498968dd5458bd14e33079ff8"
+  },
+  "lua/src/linkedspec/corpus.lua": {
+    "bytes": 17441,
+    "git_oid": "dfad4a1bd75f1e8b975bd838df75c41447da66f9",
+    "mode": 420,
+    "sha256": "a834b19c101d711c8a8203aace9b79f476d17477c249673a83f8adb6b5cb778d"
+  },
+  "lua/src/linkedspec/corpus_runner.lua": {
+    "bytes": 3011,
+    "git_oid": "f051f2096909f5215252dcb88c3f67b86c114d40",
+    "mode": 420,
+    "sha256": "2a6d5672cb3ac6beea1cba9535a7e3355267d60c8eaf2b0625c7128bbb5106d5"
+  },
+  "lua/src/linkedspec/init.lua": {
+    "bytes": 17052,
+    "git_oid": "309752c72731156ba4a614b6fbcd8fc82fee23f1",
+    "mode": 420,
+    "sha256": "72f939c282505e09a632a51b7c5cf5b1d7e57508b9772ef8a7e9dd9910d22822"
+  },
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 281336,
+    "git_oid": "27a8066ade362fed0dfeb7394b3fb891b5c237ec",
+    "mode": 420,
+    "sha256": "c81b14183a79294ff019b0142cbf0bd90ecb97b5afe9f14577816f0cca6c40f4"
+  },
+  "lua/src/linkedspec/json.lua": {
+    "bytes": 13478,
+    "git_oid": "fcdd203069de81df611e696ed3ffe4807cad80a0",
+    "mode": 420,
+    "sha256": "c51bf9a4861f2cde5b96b748a3eff5797109cb6290dbdc04abe0bc836cdb046a"
+  },
+  "lua/src/linkedspec/matching.lua": {
+    "bytes": 16453,
+    "git_oid": "0d5c29fa74fa208ea485c868d82ca19229506bf2",
+    "mode": 420,
+    "sha256": "b95884c4bb18f55d1b747ccf3c5f2d297f7d8dd58cbfcb8e97313f1ca5559e74"
+  },
+  "lua/src/linkedspec/mcp_contract.lua": {
+    "bytes": 83166,
+    "git_oid": "fb726fdf4157985b973d39381bb45836c6c7939b",
+    "mode": 420,
+    "sha256": "e1990d57f9442e55662a804866749e0502c51da669e389737ab6d4c8ea9ae0ad"
+  },
+  "lua/src/linkedspec/mcp_contract_runtime.lua": {
+    "bytes": 13699,
+    "git_oid": "80fb7a459dac91f877f1de63572f2370bb178413",
+    "mode": 420,
+    "sha256": "8b8b271ec30763c8505e201f9b377ff8c1557dda43f7b65d6855894c76987bfc"
+  },
+  "lua/src/linkedspec/mcp_server.lua": {
+    "bytes": 32192,
+    "git_oid": "f85474f91f768db5aec4f5ac30970f92b2e81738",
+    "mode": 420,
+    "sha256": "eeaef4aa61b7dfda007a5a5d0fdce5b02d2c2edf3768635dcfa7012d1f21671a"
+  },
+  "lua/src/linkedspec/mcp_wire.lua": {
+    "bytes": 17002,
+    "git_oid": "574c758b95b191b6785e2902adaa3edcd8db299b",
+    "mode": 420,
+    "sha256": "593c30d5616abbd78f5baca73cac695628cd657541cd520fa42cd69749883ce9"
+  },
+  "lua/src/linkedspec/primary_cli.lua": {
+    "bytes": 14146,
+    "git_oid": "77bcd877b976d43c2adca0f6b332d18c480e07f6",
+    "mode": 420,
+    "sha256": "b1be8d1003d5697c121d959df438d8dab640ba99a0fbaf6446310f8b67b93fae"
+  },
+  "lua/src/linkedspec/recognition_transaction.lua": {
+    "bytes": 23835,
+    "git_oid": "b67bcdd6f32cbc9e03d896c9e77142787e1df1bf",
+    "mode": 420,
+    "sha256": "92746429a6de872fdf38f8f42bcb2b25950ace950da5e2787986b68f496b0e45"
+  },
+  "lua/src/linkedspec/recognition_transaction_runtime.lua": {
+    "bytes": 17992,
+    "git_oid": "abd5f607e4183a824ea35c8c150e45266fe800d5",
+    "mode": 420,
+    "sha256": "c41c8cffb0ad829abafcaee851ee5840b469a21f1b64439ae67c1fd4b9273683"
+  },
+  "lua/src/linkedspec/runtime_scoped_binding.lua": {
+    "bytes": 3246,
+    "git_oid": "6413c06cea5170bd519a348ccbeb9ca130e7f651",
+    "mode": 420,
+    "sha256": "464db7ba11424a763d2f41935c00d379f1dcfd5efeded8a0a0607b914139e628"
+  },
+  "lua/src/linkedspec/scalar_numeric.lua": {
+    "bytes": 5629,
+    "git_oid": "751809d5bb1027ce041e04bf48027091370ba87b",
+    "mode": 420,
+    "sha256": "963052346fe869a674d7814ad691db90a4bb51e7c1e10716278ac8b1aefc1b2e"
+  },
+  "lua/src/linkedspec/semantic_compilation_outcome.lua": {
+    "bytes": 7583,
+    "git_oid": "ead59d972e5724ee89c94234c73a2bc199f26889",
+    "mode": 420,
+    "sha256": "98198703dd35b97e213aea2341fa7929afdc1a2deaa7df0ad2f7de2e56c9f5b4"
+  },
+  "lua/src/linkedspec/semantic_index.lua": {
+    "bytes": 23891,
+    "git_oid": "c2db23580e550daf9b4cc7e839184ae4f6cb7cf2",
+    "mode": 420,
+    "sha256": "cad0d318af69e7a7e26675b3171c45522191abc2d5999f1c46fb0ba3b13320f4"
+  },
+  "lua/src/linkedspec/semantic_observation.lua": {
+    "bytes": 3702,
+    "git_oid": "a905e3756523c3a084bd305bf66416f2fafcc0f2",
+    "mode": 420,
+    "sha256": "d91e9a216fa3385f1b937052083c11c53e7096008f1a556d4f55bc112b0771d0"
+  },
+  "lua/src/linkedspec/semantic_query.lua": {
+    "bytes": 41182,
+    "git_oid": "74abd5eb2e6d8f14cf75a9da11fa2b16f3bb5395",
+    "mode": 420,
+    "sha256": "2385f5130a9cdbc8cf9386337181d587d85bb1207297667d5dfabb06dc4be610"
+  },
+  "lua/src/linkedspec/semantic_runtime_projection.lua": {
+    "bytes": 10485,
+    "git_oid": "64b39782dc66fa3c1bfd5f69378ccd85a30794ea",
+    "mode": 420,
+    "sha256": "3992aedcba5f8754f80dc3ec8815a10e548a63ad85ef077f193fb07fd82b7d0c"
+  },
+  "lua/src/linkedspec/semantic_static_projection.lua": {
+    "bytes": 83091,
+    "git_oid": "b08b63f635cee9f89b8e8c77b538f4e4a885d0d6",
+    "mode": 420,
+    "sha256": "1449653f433befe5da00ad7164c12ed59d45ad08884d5d55503e17a733de8925"
+  },
+  "lua/src/linkedspec/sha256.lua": {
+    "bytes": 6017,
+    "git_oid": "39f85b32ef633252e79abcde6528e402efe41a0b",
+    "mode": 420,
+    "sha256": "9e102cb81ce541d6765ef9f41a102e22797f2bc23a246f19efa0124ee1e7db8e"
+  },
+  "lua/src/linkedspec/source_emitter.lua": {
+    "bytes": 30565,
+    "git_oid": "d51d512afd31e8a56a306c316a095cc2aa693f0d",
+    "mode": 420,
+    "sha256": "b20dde552b13c5cb3ae3b118dc11df72849628aa61a92db986da4d7cefd0c79a"
+  },
+  "lua/src/linkedspec/source_location.lua": {
+    "bytes": 14426,
+    "git_oid": "fbac05b6dd03b8e9513be461189508f22ec1383c",
+    "mode": 420,
+    "sha256": "80d360ed9c04ee1de45fdc757c630376de3d0b88d641a97577e512aa8fc25fe9"
+  },
+  "lua/src/linkedspec/source_location_runtime.lua": {
+    "bytes": 12432,
+    "git_oid": "fa2aff46c9f8c89aaf093e1302deb1dfd9ffd556",
+    "mode": 420,
+    "sha256": "089bc1d873a4b8ec1c70f3b76a3e66b0f4d249a38cb969547d7e96a365e247f8"
+  },
+  "lua/src/linkedspec/spec_ast.lua": {
+    "bytes": 42855,
+    "git_oid": "9e1b4a672280ba2e6d02d6e9a496a56682ddb866",
+    "mode": 420,
+    "sha256": "ed539030a9c40dee770d69a466e0c33cdeb8845f56cb7eaca63d7777f385876c"
+  },
+  "lua/src/linkedspec/spec_loader.lua": {
+    "bytes": 18236,
+    "git_oid": "bd44260a91a7930eef433b79023000e8a5dbe776",
+    "mode": 420,
+    "sha256": "380177db6255d0de0464ff3526c6090a91afd7a1e7a515462905530ad5a94e84"
+  },
+  "lua/src/linkedspec/spec_parser.lua": {
+    "bytes": 36541,
+    "git_oid": "aaffedb0fffde5c9fe337f0e1c595817defd90aa",
+    "mode": 420,
+    "sha256": "a4c2f2112256fe150a2e1e6ee2f814518214ad28dd22b585390f7b3bb436e60b"
+  },
+  "lua/src/linkedspec/spec_validator.lua": {
+    "bytes": 29085,
+    "git_oid": "56424e25f5acca20087024c1d8150096a12ad871",
+    "mode": 420,
+    "sha256": "d566e897a8b11adb706aaf14f6d9fbc129b3f3509a613f25cbcc8ab61f10e3dc"
+  },
+  "lua/src/linkedspec/staged_ast_enrichment.lua": {
+    "bytes": 82642,
+    "git_oid": "ebb7e0d3755490384901363cb6e849ffa0fda805",
+    "mode": 420,
+    "sha256": "28d2eea9da801a4d84054e718110e53611df6bdcea8d62217103d85e711b76ed"
+  },
+  "lua/src/linkedspec/staged_capture_provenance.lua": {
+    "bytes": 1431,
+    "git_oid": "c89c92261ce46ed8f70f24e30542f7b6b09b9ed0",
+    "mode": 420,
+    "sha256": "6242562c7f0031280944ec3b1caa5bb6df62972fb149a6538291fb2ab233ee97"
+  },
+  "lua/src/linkedspec/staged_parse_job.lua": {
+    "bytes": 9094,
+    "git_oid": "7f6babb5f9ba1862c3774ad5b2f60f7f58786df5",
+    "mode": 420,
+    "sha256": "6e6b9517f7328e6aaeec855a9c0fb89e39c7afe3438c0e66624a4cd6f260dc9d"
+  },
+  "lua/src/linkedspec/staged_parser_registry.lua": {
+    "bytes": 19670,
+    "git_oid": "cd36ce296c9d1484ac2420c476cf71a5d6daef11",
+    "mode": 420,
+    "sha256": "505372f922a8429a26ef0d52f46286d72a7f1c6c833f4773ac0526ce9aa60d6c"
+  },
+  "lua/src/linkedspec/trace.lua": {
+    "bytes": 18848,
+    "git_oid": "1d401817513079ee48918227f8954167736719f7",
+    "mode": 420,
+    "sha256": "b8eca0546b66b0312e70d77f083135556365e88a2b138bc66b36b543ae84a183"
+  },
+  "lua/src/linkedspec/trace_support.lua": {
+    "bytes": 1723,
+    "git_oid": "a4abe80ce472690de1ea3404a085765181e0f42a",
+    "mode": 420,
+    "sha256": "a984de248c22dfe4a9127c0e43ca1316df65192c80d0ad1e0f8c99bda0d46cc7"
+  },
+  "lua/src/linkedspec/unicode_case_mapping.lua": {
+    "bytes": 90371,
+    "git_oid": "a66d143fcce90d230961b3e51fa66a33e1b55238",
+    "mode": 420,
+    "sha256": "2562ffd6df40b4665e953d4101353ba592429c2dba5ac51d7e3ac847f8a39642"
+  },
+  "lua/src/linkedspec/unicode_rule_label.lua": {
+    "bytes": 22197,
+    "git_oid": "410394837c6b0c2cc8ed34d6f85c172cee337554",
+    "mode": 420,
+    "sha256": "afb881e5461db7714ee5909ad0955b36e634f5297af1ca656251ecd41a8e8e41"
+  },
+  "lua/src/linkedspec/user_function_definition_parser.lua": {
+    "bytes": 8305,
+    "git_oid": "10b9eb4e6330d8a7eacda71ef8d83889a55c015c",
+    "mode": 420,
+    "sha256": "6aa39ca90e4a135c574ff77a47409713906784c66cac4911c7c3e7c58924ca96"
+  },
+  "lua/src/linkedspec/user_function_definition_shell.lua": {
+    "bytes": 27075,
+    "git_oid": "86c41a73dd574fe949f8ae09d00dcf3904d468be",
+    "mode": 420,
+    "sha256": "2769aa36130b6a4d8d541b81e49917e09c181822d9d0f3e27534f62699b0179c"
+  },
+  "lua/src/linkedspec/user_function_registry.lua": {
+    "bytes": 18109,
+    "git_oid": "a74bf715f8a997096d3df2e47d7919c0ff4a1aa5",
+    "mode": 420,
+    "sha256": "ab05cc3b062b05bb4251309e2c562040bc058be576c1e26bbb6ec5c27cb3fedf"
+  }
+}

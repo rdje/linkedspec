@@ -764,6 +764,70 @@ balanced rule scopes, regex match/no-match, action/blind dispatch, recursion
 cutoff, lifecycle, cursor, source-boundary, and governed mark/capture events
 while preserving exact parse-result JSON.
 
+### 10.2.1 Lua native fields and generated error envelopes
+
+Choose the observation channel you need. Native and restored execution can expose
+fields on a `RuntimeInterpreterException` table that its published JSON omits.
+Plan and emitted execution use their own `GeneratedSourceError` envelope.
+Equal JSON therefore establishes equality of that projection, not every native
+field or the identity of the Lua table.
+
+For example, execute this source with input `x`:
+
+```spec
+Top::
+ -> Child
+
+Child:
+ /x/
+ E {items="bad";items+=1;return(items)}
+```
+
+The selected native binding error exposes `code = "binding_kind_mismatch"`,
+`identifier = "items"`, `expected_kind = "array"`, and `actual_kind = "scalar"`,
+alongside `message` and `diagnostic`. With an engine compiled from that source:
+
+```lua
+local ok, failure = pcall(linkedspec.runtime_execute, engine, "x")
+assert(not ok and linkedspec.is_runtime_interpreter_error(failure))
+assert(failure.identifier == "items" and failure.expected_kind == "array")
+local public = linkedspec.interpreter.to_json(failure)
+assert(public.identifier == nil and public.expected_kind == nil)
+assert(public.diagnostic.rule_label == "Child")
+```
+
+Reading the native fields helps an embedding caller inspect that binding failure.
+Changing `failure.expected_kind` while leaving its message/diagnostic alone does
+not change published JSON. It does change the native field observation.
+
+A fixed user function such as `fn pair(left,right) {return([left,right])}` called
+with one argument instead exposes outer `code`, `stage`, `helper_name`,
+`rule_label`, and `handler_source_label`, plus `message` and `diagnostic`.
+The selected arity errors do not have numeric `expected_arity`, `actual_arity`,
+`expected`, or `got` fields. Their text describes the expected and supplied arity;
+do not invent absent numeric fields from that text.
+
+| Selected route | Observed error object | Published projection |
+| --- | --- | --- |
+| Native/restored binding failure | Six outer fields, including binding kind metadata | `message` and neutral `diagnostic` |
+| Native/restored function-arity failure | Seven outer fields, including function attribution | `message` and neutral `diagnostic` |
+| Plan/fresh emitted failure | Eight-field generated envelope | `type`, `stage`, `code`, `summary`, `detail`, `source_identity`, `rule_label`, `handler_family` |
+
+The generated envelope's `detail` contains the runtime error's display text. It
+does not promise the inner binding fields or a nested native error table.
+Handle each route's public error type before choosing a serializer.
+
+Focused regression covers eight authored cases on the recorded PUC5.5.1 and
+LuaJIT hosts, with old/current SDKs and all four routes. It checks observed field
+names, finite values, nested diagnostics and absence, including distinguishing
+mutations invisible to the older observer. Fresh emitted modules share their
+runtime process; this is not process isolation, every-error coverage, metatable
+identity or full native provenance. Earlier result-guard records retain their
+original named-flag or published-JSON scope. The exact retained proof and remaining
+admission owners are recorded in
+`docs/checkpoints/lua-raw-error-observation-2026-11-13/REVIEW.md`.
+
+
 ### 10.3 Input Validation
 
 Spec compilation validates authored rule structure; parser input is a separate boundary. The Perl public

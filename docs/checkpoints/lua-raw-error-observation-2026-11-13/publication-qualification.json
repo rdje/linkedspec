@@ -1,0 +1,15 @@
+{
+  "original_sha256": "6a0545731635a74c686c767c57ac5976b3839a984f121d6ccc5e17e7830a3856",
+  "execution_sha256": "3bf02530e4a7c3425446a05a0ef4c2a7afecaa997a9f63ce8e8378c290688908",
+  "exact_changes": [
+    [
+      "OUT = BASE / 'publication'",
+      "OUT = BASE / 'publication-qualified'"
+    ],
+    [
+      "assert buffers[REFERENCE].count(old_phrase) == 1",
+      "assert buffers[REFERENCE].count(old_phrase) == 2"
+    ]
+  ],
+  "reason": "The helper reference has the same known phrase in its pipeline and concat sections. Preserve both historical scopes and update both prospective coverage pointers. The original failed before shared writes."
+}

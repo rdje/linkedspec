@@ -1,0 +1,10 @@
+{
+  "source": "docs/checkpoints/lua-raw-error-observation-2026-11-13/book-section.md",
+  "archived": "docs/checkpoints/lua-raw-error-observation-2026-11-13/book-section.md.gz",
+  "identity": {
+    "bytes": 3243,
+    "mode": 420,
+    "sha256": "401ff552e0681fb7a495eb219d99f772dc613fd98a315b71a031efec04ad9c4e"
+  },
+  "scope": "Only the exact own duplicate is retired after independent original-archive/body/full-mode comparison and gzip readback. Original used bytes remain recoverable; publishers are one-shot and historical readers use frozen archive inputs."
+}

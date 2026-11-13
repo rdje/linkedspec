@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "luajit",
+    "-v"
+  ],
+  "cwd": ".",
+  "environment": {
+    "LUA_PATH": ".linkedspec-data/raw-error-audit/old/lua/src/?.lua;.linkedspec-data/raw-error-audit/old/lua/src/?/init.lua;;",
+    "LUA_CPATH": ".linkedspec-data/raw-error-audit/native/luajit/?.so;;",
+    "LINKEDSPEC_LUA_TEST_RUNTIME": "luajit"
+  }
+}
