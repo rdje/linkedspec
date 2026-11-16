@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0",
+  "claims": [
+    {
+      "name": "bounded-native-source-routes",
+      "statement": "Named native source routes are focused-checked: Rust22/Dart25 convention paths, Julia20 includes and Lua16 named dofile routes; eleven Lua local routes remain unqualified. All113 retained inputs match current bodies/modes; six inert optional-branch cases and three observed selection REDs pass, alongside seven ledger controls. No SDK executed.",
+      "scope": "Static named candidate source roles and bounded local routes only. Convention eligibility and conditional branch selection are not SDK discovery/execution. Test bodies, conditional/ignored cases, transitive includes/loaders, environment/config/package/source-origin resolution and complete population remain unqualified. Registration4.1.2 and native/per-read/physical4.2/SESSION5 remain open.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/native-consumer-routes-2026-11-16/review.py --current",
+        "granularity": "Each of94 named candidate paths, source marker lines, prior selector and local route expressions;113 archived/current source bodies/modes.",
+        "result": "{\"backends\": {\"dart\": 25, \"julia\": 20, \"lua\": 27, \"rust\": 22}, \"branch_selection\": {\"healthy\": 6, \"observed_red\": [\"missing\", \"duplicate\", \"disabled\"], \"sdk_executed\": false}, \"candidates\": 94, \"controls\": {\"Julia-include-duplicated\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"conditional-default\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"duplicate\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"missing\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"owner-removed\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"route-invented\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}, \"support-promoted\": {\"reason\": \"role/route ledger differs from source\", \"result\": \"RED\"}}, \"current_inputs\": 113, \"limits\": \"Static named candidate source roles and bounded local routes only. Convention eligibility and conditional branch selection are not SDK discovery/execution. Test bodies, conditional/ignored cases, transitive includes/loaders, environment/config/package/source-origin resolution and complete population remain unqualified. Registration4.1.2 and native/per-read/physical4.2/SESSION5 remain open.\", \"result\": \"PASS\", \"routes\": {\"Cargo package test convention; documented, not executed\": 22, \"Dart package test convention; documented, not executed\": 25, \"Pkg.test entrypoint with named include; not executed\": 20, \"named dofile inside selected local run.lua; not executed\": 16, \"no direct local-driver or named run.lua route; transitive route unqualified\": 11}, \"source_inputs\": 113}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1",
+        "reason": "Seven ledger mutations reject source inconsistency and activation Git binds the sources, but fully independent semantic classification/transitive discovery of all candidate roles is not yet available. Sibling1 must resolve the remaining population before registration; convention eligibility supplies no SDK discovery result."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Archived logical source bodies/modes, activation Git listing, instruments and actual command channels are retained. Complete native Python/Bash/Git/toolchain/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remains4.2/SESSION5. No SDK or canonical admission is inferred."
+      }
+    },
+    {
+      "name": "optional-backend-branch-selection",
+      "statement": "Six inert actual Bash branch cases agree with a separate flag/path oracle. Missing, duplicate and disabled-command scripts all exit0 but produce observed RED path populations. No SDK executes.",
+      "scope": "Only the retained optional backend branch, using inert function recorders. Unconditional canonical commands, SDK discovery and actual gate/test execution are outside this proof.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/native-consumer-routes-2026-11-16/review.py --current",
+        "granularity": "All actual script inputs, flag environments, ordered recorder stdout, empty stderr and exit status for six healthy and three altered scripts.",
+        "result": "{\"healthy\": 6, \"observed_red\": [\"missing\", \"duplicate\", \"disabled\"], \"sdk_executed\": false}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Shell exit0 could hide a missing, duplicated or disabled local-gate command.",
+        "oracle": "Separately constructed expected flag-to-local-script path lists, compared with actual inert Bash argument-recording channels from unchanged branch text and three source inverses.",
+        "red_control": "Missing, duplicate and disabled scripts each exit0 and differ from the independently expected ordered path list. Six healthy scripts agree."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Archived logical source bodies/modes, activation Git listing, instruments and actual command channels are retained. Complete native Python/Bash/Git/toolchain/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remains4.2/SESSION5. No SDK or canonical admission is inferred."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,474,669,798 non-thin serialized bytes against cached4683555e;25,330,202 bytes below the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "The actual committed activation/cached-origin range; original monitor producer/input/command channels and metadata copied without replay.",
+        "result": "{\"ahead\": 115, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.474669798, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1474669798, \"evidence\": \".linkedspec-data/push-monitor/20261116T191307.663356Z\", \"gib\": 1.3733932729810476, \"head\": \"cb8978713452f427823f56e456ddc71ad75f0574\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 48196, \"pack_footer\": \"5ef71a49750520b03accf1e2d4db062af95e5f24\", \"pack_sha256\": \"a6c5a9747121e9c3db3791a79ccec12e5405cdcd15f657329f9265a09a22a7ae\", \"packed_objects\": 48196, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 25330202, \"trigger_reached\": false, \"unique_object_ids\": 48196}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Original pack byte count, file stat and footer agree inside the producer. Independent actual-file size falsification remains publication30; this slice does not infer it from copied metadata."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Archived logical source bodies/modes, activation Git listing, instruments and actual command channels are retained. Complete native Python/Bash/Git/toolchain/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remains4.2/SESSION5. No SDK or canonical admission is inferred."
+      }
+    }
+  ]
+}

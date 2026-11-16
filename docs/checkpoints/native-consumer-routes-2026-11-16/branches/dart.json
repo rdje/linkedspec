@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "-s"
+  ],
+  "cwd": ".",
+  "flags": {
+    "LINKEDSPEC_RUN_RUST": "0",
+    "LINKEDSPEC_RUN_DART": "1",
+    "LINKEDSPEC_RUN_JULIA": "0",
+    "LINKEDSPEC_RUN_LUA": "0"
+  }
+}

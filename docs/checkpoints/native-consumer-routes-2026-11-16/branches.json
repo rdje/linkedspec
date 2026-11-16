@@ -1,0 +1,111 @@
+[
+  {
+    "name": "default",
+    "expected": [],
+    "actual": [],
+    "result": "PASS"
+  },
+  {
+    "name": "all",
+    "expected": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "actual": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "result": "PASS"
+  },
+  {
+    "name": "rust",
+    "expected": [
+      "./tools/run_rust_local.sh"
+    ],
+    "actual": [
+      "./tools/run_rust_local.sh"
+    ],
+    "result": "PASS"
+  },
+  {
+    "name": "dart",
+    "expected": [
+      "./tools/run_dart_local.sh"
+    ],
+    "actual": [
+      "./tools/run_dart_local.sh"
+    ],
+    "result": "PASS"
+  },
+  {
+    "name": "julia",
+    "expected": [
+      "./tools/run_julia_local.sh"
+    ],
+    "actual": [
+      "./tools/run_julia_local.sh"
+    ],
+    "result": "PASS"
+  },
+  {
+    "name": "lua",
+    "expected": [
+      "./tools/run_lua_local.sh"
+    ],
+    "actual": [
+      "./tools/run_lua_local.sh"
+    ],
+    "result": "PASS"
+  },
+  {
+    "name": "missing",
+    "expected": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "actual": [
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "result": "RED"
+  },
+  {
+    "name": "duplicate",
+    "expected": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "actual": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "result": "RED"
+  },
+  {
+    "name": "disabled",
+    "expected": [
+      "./tools/run_rust_local.sh",
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "actual": [
+      "./tools/run_dart_local.sh",
+      "./tools/run_julia_local.sh",
+      "./tools/run_lua_local.sh"
+    ],
+    "result": "RED"
+  }
+]

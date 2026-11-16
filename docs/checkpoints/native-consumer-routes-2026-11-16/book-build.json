@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_mdbook_local.sh"
+  ],
+  "cwd": ".",
+  "exit": 0,
+  "recording": "after-use command metadata; combined actual output retained",
+  "output": "book-build.log.gz"
+}

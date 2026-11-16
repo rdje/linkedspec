@@ -59,6 +59,7 @@
 {"bytes":4943,"lines":73,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-method-source-gap.md","sha256":"acdec7ca6ddf1a063df3adbe6a69625ec06ccd566902be8af43b51f0b4d8bb9c","type":"member"}
 {"bytes":3123,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-mark-number-rust-ordinary-compatibility.md","sha256":"4cba6710af7a8a0d472255f54b3a01b43a2e4ca484b213b47fc6df7935e6af47","type":"member"}
 {"bytes":7339,"lines":110,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/named-writer-endpoint-presence-authority.md","sha256":"f801517a2bdc7f4b454d4aa94488d0edcb236a2170189a53484270e6657ffbf1","type":"member"}
+{"bytes":1910,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0","path":"docs/knowledge/native-consumer-source-routes.md","sha256":"da631fa0cf560a2ff378155894377219744137e87739d7727c27a9832d921f67","type":"member"}
 {"bytes":5806,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-in-memory-backend-contract.md","sha256":"5ce7f918ceb294a04c6769de63627555f14a8cce92805f859f41d3dfcbe6dd31","type":"member"}
 {"bytes":4758,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-spec-resolution-contract.md","sha256":"53f370104a9a9426b5109a6f91407ffcc650c68ebf9c225b1178dec63fd5ab36","type":"member"}
 {"bytes":4394,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/native-spec-resolution-policy-drift.md","sha256":"ca3022a5a297d460d1b9dc231c1a8512a97822979b14ccbfe44174432d005de1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3970,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"c162c6ce8161aa830d7de9e4f26bb77408cff03ee8b934f0ad91c78cf427253b","type":"member"}
 {"bytes":3968,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2","path":"docs/knowledge/perl-callable-array-transform-result-guards.md","sha256":"d5e65d965dd2060d2916763b5c1d29af5dab3a21ff9632ac32c244bc342fe223","type":"member"}
 {"bytes":5094,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-attached-conditional-execution.md","sha256":"ce6f3564205d977e41a77343ac55b5fa1f15b3ddeb9eac2aae66b8479b936b10","type":"member"}
-{"bytes":3691,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-dynamic-invocation.md","sha256":"52635d7769d7347dbd5032b8889bdef10b2e4e7401ea47c427dd20b5a246f056","type":"member"}

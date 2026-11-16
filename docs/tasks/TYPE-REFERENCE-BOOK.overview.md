@@ -1903,9 +1903,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Evidence: docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1` (ID suffixes).
   Goal: Complete parent qualification.
   Acceptance: Parent contract.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify the named native suite roles and bounded local discovery routes.
+  Acceptance: Preserve activation sources/modes; distinguish harness markers, local direct/include/convention routes and conditional canonical entry. Retain unresolved routes for sibling1; no SDK execution, full population or admission claim.
+  Verification tier: `focused`
+  Focused checks: Archived/current source reconstruction, independent Git/source oracle and effective role/route/conditional controls; book, histories, memory, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared runner, test, runtime or policy changes.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/native-consumer-routes-2026-11-16/REVIEW.md.
+
+  Outcome: Named native source routes are focused-checked: Rust22/Dart25 convention paths, Julia20 includes and Lua16 named dofile routes; eleven Lua local routes remain unqualified. All113 retained inputs match current bodies/modes; six inert optional-branch cases and three observed selection REDs pass, alongside seven ledger controls. No SDK executed.
+  Remaining: Sibling1 owns all eleven unresolved Lua routes, remaining direct loaders/support roles and independent semantic adjudication; registration/full native custody remain separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Resolve remaining direct loaders, support/dormant candidates and transitive discovery; freeze registration input.
+  Acceptance: Entire inherited parent contract, including unqualified native routes from sibling0 and earlier Perl/Dart evidence; preserve independent before-push owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.34`
   Status: `completed`

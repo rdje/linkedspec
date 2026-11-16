@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: bounded task headroom renewed; native roles/direct-loader qualification resumes before registration.
+PNT: bounded native source routes complete; remaining loaders/support/transitive qualification precedes registration.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.34 — The existing NONCURRENT-HELPER-CODE-PURGE epoch preserves 10 ordered IDs/all CORE fields, 2 complete unselected bodies and the complete frontier/trailing section of 9605 bytes. 8 closed narratives renew 16841 current-text bytes; all 11 public source/node queries and ten corruption controls pass. Dated pressure reconstruction preserves the original result and four controls without comparing today's TYPE task. No SDK or fresh helper-admission credit.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — Named native source routes are focused-checked: Rust22/Dart25 convention paths, Julia20 includes and Lua16 named dofile routes; eleven Lua local routes remain unqualified. All113 retained inputs match current bodies/modes; six inert optional-branch cases and three observed selection REDs pass, alongside seven ledger controls. No SDK executed.
 
 ## Next Action
 
-Remeasure committed outgoing size, then complete remaining native roles/direct loaders/discovery under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1 before freezing registration4.1.2 input; all separate before-push owners remain.
+Remeasure committed outgoing size; resolve remaining loaders/support/dormancy/transitive routes under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1 before freezing registration4.1.2 input; all separate before-push owners remain.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — native94/source113; conditional6/RED3; ledger7; eleven local Lua routes unresolved, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.34 — helper-purge10 IDs/eight closed/two unchanged/full9605-byte tail/16841 renewed; eleven queries/ten controls; historical pressure/four controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size, then complete remaining native roles/direct l
 - TYPE-REFERENCE-BOOK.1.2.23.4.30.1 —HEAD102ec3446/cached base4683555e:1,257,281,519 bytes/102 commits/45,549 objects; qualified verify/12 REDs/historical recovery/three controls; native durability gap explicit, remeasure then Julia.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.3 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct1155/readonly9/current521; publication-budget30 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.2 —504/four routes/16 supported/two separate compatibility/486 preserved/80 initial/eight invalid signatures; old18-current504/combined direct1205/qualified2 readonly25/current871; Dart80.3 next.
-- TYPE-REFERENCE-BOOK.1.2.23.4.29 —25 IDs/22 closed/three unchanged/full22339-byte tail/48937 renewed bytes;26 exact public queries/first readonly10/current identity0; Rust80.2 next.
 
 
 ## History

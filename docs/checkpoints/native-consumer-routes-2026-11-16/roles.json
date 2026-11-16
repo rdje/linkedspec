@@ -1,0 +1,4363 @@
+{
+  "candidates": [
+    {
+      "activation_sha256": "f34fc120d03030dd8e341b979c2318e71a7cd384bce1e1b4e9aed0049f6a5494",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 79,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "44f15b214e499d2b70952ddf4031b33abd79da3f750faaf36dcdad4b2b284c33",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 74,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "e57bfb932c4456f70dd7e4ca587327c65ae479a75ab4d406b70661000a7c0246",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 46,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/array_pipeline_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "2d98da40f737d67efded2113d896e30f7347cc8688913dab54fb2076701c51b3",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 74,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "6ab14c5773af42c63bee144e0e3b5cbe3be02d1a4abba468ff0f4278923e890b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 46,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/array_transform_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "0b1110b71daed0d0e698b74717f623438b07a70b578b3b68874a9add61542044",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/blind_parent_push_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "be1c3f6a611604ced0d582ecc657ef46b304574b48fe2579d2424fa9ce5b0684",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 38,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/capture_collection_selection_test.dart",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "627586d672402007d42bcbd28c2caabaef5b03a8b270f1904a3347871b2c682c",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/capture_endpoint_absence_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "a37d4eb65e60ef74644b5e746daa5f8376f1f6c8e1a0ddd2b4f28c2498e55f3b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 37,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/computed_selection_test.dart",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "35b4810e4159928ac78a38c6d27026baac1042b76832172912f80065a2e46906",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 58,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/copied_null_index_composition_test.dart",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "1ce7868953cb046389c8a986cc9d41ebd1110ed66177f939b744770b7a92bd3b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 28,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/count_length_receivers_test.dart",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "eed9b8ca7800101b54e3ffbcc4ed928b255b885c7aa625cd32cf481fb8f39d90",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 58,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/count_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "10d6c43429f09cd804a0d7d663e599c3127dea7b5e4cdbd683e435ea9f6cd76b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 58,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/count_source_fallback_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "9a2d36ec9df7a2170100ad716d54b2d7e30cbd9f713b05cae86263514ffb564b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 46,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.20",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/hash_value_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "8038bef922e382be3c75eaaec8600a0ca8f4caa49b47ec91b995547a36ff8c8a",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 46,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/hash_view_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "7e627113798bd816eeb078fc17527ee9290f61ee5204cee4baac1ff2fe72e75e",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 46,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "36c8fe42b717db28b55d3bf147d428da2b014a4b4cc954bf3e70f93215d102e9",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 58,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/key_count_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "231dda92c223bae9b1c60ccdee6138cb108bb9c1981c6bb7fbf5aa83829a95ee",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 58,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "dart/test/length_result_guard_composition_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "7d172b21b86514eed9c43de2927b11055f11159973237a20a33dee62f4277993",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/named_capture_endpoint_absence_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "5fd3be185f056bbdda0d87824decd5e2c6cc8fdd277d636003702cd270ffd838",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/named_writer_endpoint_absence_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "761b50f993a02287714ec79ef637ffed74f6bcef9733f8caa2dc0a4f20c87509",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/pure_blind_targets_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "390b32b8746e52585767d70aa5414209a66da19ef1ea7426eace033328c35802",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 13,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/referenced_blind_intermediate_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "6070518e4f35ad36925d4f3bceba96e1b7497ab731f499eddb3ae12ae0c4ceed",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "dart/test/rule_invocation_accumulators_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "719e73c20242486c0b5b949d2fc702b5596bcd80d4f6c868b39318ff346f60bb",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 9,
+          "source": "void main() {"
+        },
+        {
+          "line": 217,
+          "source": "void main() {"
+        },
+        {
+          "line": 395,
+          "source": "void main() {"
+        },
+        {
+          "line": 523,
+          "source": "void main() {"
+        },
+        {
+          "line": 904,
+          "source": "        'void main() {\\nfinal observed = <String, Object?>{};\\n',"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.18.1",
+          "status": "completed"
+        },
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.3",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/source_emitter_test.dart",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "30255046675ce0b6fb19a22d8009162b464df2c99224f00c0308752c5d11814d",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "dart",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 36,
+          "source": "void main() {"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.20",
+          "status": "completed"
+        }
+      ],
+      "path": "dart/test/with_hash_results_test.dart",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Dart package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 32,
+          "source": "\"${DART_RUN[@]}\" test"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "c16698c552e558e6715372dfd4c8bf412d0f8b23202005f6a6427defee1db6ed",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 62,
+          "source": "@testset \"Julia existing concat arity result guards\" begin"
+        },
+        {
+          "line": 67,
+          "source": "        @testset \"$identifier\" begin"
+        },
+        {
+          "line": 69,
+          "source": "                @test strict_equal(actual[route], expected[identifier][route])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 99,
+          "source": "include(\"array_concat_open_arity_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "a246d7b0e13b73bdff9b109ffa1e74f6d5e7efcc06d65cf6ad8ee4c3b136df82",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 59,
+          "source": "@testset \"Julia callable Array-pipeline result guards\" begin"
+        },
+        {
+          "line": 64,
+          "source": "        @testset \"$identifier\" begin"
+        },
+        {
+          "line": 66,
+          "source": "                @test strict_equal(actual[route], expected[identifier][route])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 101,
+          "source": "include(\"array_pipeline_callable_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "20d498919c1444c0963e050061766ba6fa57ba22e05b617ba9be723d0597acb7",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia ordinary Array-pipeline result guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "            @test profile[\"source\"] == row[\"source\"]"
+        },
+        {
+          "line": 88,
+          "source": "                @test strict_equal(actual[route], profile[route])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], row[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 100,
+          "source": "include(\"array_pipeline_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "30a6e49cfd57d9c23753d060cb97e1ac9cfb22017cc9f07cce369adee0cc5d70",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 59,
+          "source": "@testset \"Julia callable Array-transform result guards\" begin"
+        },
+        {
+          "line": 64,
+          "source": "        @testset \"$identifier\" begin"
+        },
+        {
+          "line": 66,
+          "source": "                @test strict_equal(actual[route], expected[identifier][route])"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 98,
+          "source": "include(\"array_transform_callable_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "0970a73c878ca96f119eb7f9298c20c07f8d918752f6b2db9d6f94e4a923b5a9",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia ordinary Array-transform result guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "            @test profile[\"source\"] == row[\"source\"]"
+        },
+        {
+          "line": 88,
+          "source": "                @test strict_equal(actual[route], profile[route])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], row[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/array_transform_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 97,
+          "source": "include(\"array_transform_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "d5f0915b550da46543e7932e9bcd7402b746b47c20a03bfda75ea395bbbc8e62",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 16,
+          "source": "@testset \"Julia blind enclosing-parent push\" begin"
+        },
+        {
+          "line": 22,
+          "source": "            @testset \"$name / $(fixture[\"name\"])\" begin"
+        },
+        {
+          "line": 32,
+          "source": "                    @test !(result isa Exception)"
+        },
+        {
+          "line": 34,
+          "source": "                    @test strict_equal(result.value, fixture[\"expected\"])"
+        },
+        {
+          "line": 35,
+          "source": "                    @test result.cursor_char_offset == length(fixture[\"input\"])"
+        },
+        {
+          "line": 43,
+          "source": "                @test !(result isa Exception)"
+        },
+        {
+          "line": 45,
+          "source": "                @test strict_equal(result, fixture[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/blind_parent_push_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 43,
+          "source": "include(\"blind_parent_push_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "d04ef78496c0afc18fe5ca8d8249e953c8bee86a3c07a1111bd7eddf313f569b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 41,
+          "source": "        @testset \"$route\" begin"
+        },
+        {
+          "line": 42,
+          "source": "            @test strict_capture_selection_equal(actual, expected)"
+        },
+        {
+          "line": 47,
+          "source": "@testset \"Julia capture collection selection\" begin"
+        },
+        {
+          "line": 48,
+          "source": "    @testset \"Unchanged frozen target\" begin"
+        },
+        {
+          "line": 54,
+          "source": "    @testset \"Aliases and with reject incompatible operands\" begin"
+        },
+        {
+          "line": 71,
+          "source": "    @testset \"String kinds compaction and static helpers\" begin"
+        },
+        {
+          "line": 86,
+          "source": "    @testset \"Missing captures versus legacy source counts\" begin"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.4",
+          "status": "completed"
+        }
+      ],
+      "path": "julia/test/capture_collection_selection_test.jl",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 63,
+          "source": "include(\"capture_collection_selection_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "abda7d11ffe400de5b04fb847cec0ef65384c4893456f01e261db259db7848e0",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 24,
+          "source": "@testset \"Julia anonymous capture endpoint presence\" begin"
+        },
+        {
+          "line": 32,
+          "source": "        @testset \"$name\" begin"
+        },
+        {
+          "line": 39,
+          "source": "                @test result.matched"
+        },
+        {
+          "line": 40,
+          "source": "                @test strict_equal(result.value, fixture[\"expected\"])"
+        },
+        {
+          "line": 41,
+          "source": "                @test result.cursor_char_offset == fixture[\"expected_cursor\"]"
+        },
+        {
+          "line": 43,
+          "source": "            @test strict_equal("
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/capture_endpoint_absence_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 108,
+          "source": "include(\"capture_endpoint_absence_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "8cf83dbafe934a78463b0dba0421a0335d76eec979acbfe578887a9e5a7389ca",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 41,
+          "source": "        @testset \"$route\" begin"
+        },
+        {
+          "line": 42,
+          "source": "            @test strict_selection_equal(actual, expected)"
+        },
+        {
+          "line": 47,
+          "source": "@testset \"Julia computed selection\" begin"
+        },
+        {
+          "line": 48,
+          "source": "    @testset \"Parser boundaries and scalar spans\" begin"
+        },
+        {
+          "line": 49,
+          "source": "        @test parse_action_expression(\"\\\"x\\\".?\") isa ActionRawExpr"
+        },
+        {
+          "line": 51,
+          "source": "        @test raw_receiver.receiver isa ActionRawExpr"
+        },
+        {
+          "line": 52,
+          "source": "        @test parse_action_expression(\"items[0]\") isa ActionIndexedVarExpr"
+        },
+        {
+          "line": 53,
+          "source": "        @test parse_action_expression(\"(array(\\\"a\\\"))[0]\") isa ActionRawExpr"
+        },
+        {
+          "line": 56,
+          "source": "        @test selected.source == \"[\\\"\ud83d\ude42\\\",\\\"b\\\"][-1]\""
+        },
+        {
+          "line": 57,
+          "source": "        @test selected.source_span.start == 0"
+        },
+        {
+          "line": 58,
+          "source": "        @test selected.source_span.stop == length(selected.source)"
+        },
+        {
+          "line": 60,
+          "source": "    @testset \"Unchanged complete target\" begin"
+        },
+        {
+          "line": 66,
+          "source": "    @testset \"Existing data-call kind guards\" begin"
+        },
+        {
+          "line": 75,
+          "source": "    @testset \"Function scopes snapshots and repeated bridges\" begin"
+        },
+        {
+          "line": 85,
+          "source": "    @testset \"Scoped with kind guards\" begin"
+        },
+        {
+          "line": 93,
+          "source": "    @testset \"Existing bound-call result policy\" begin"
+        },
+        {
+          "line": 99,
+          "source": "    @testset \"Regex split index and Unicode String methods\" begin"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.4",
+          "status": "completed"
+        }
+      ],
+      "path": "julia/test/computed_selection_test.jl",
+      "prior_required": false,
+      "prior_review_candidate": true,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 62,
+          "source": "include(\"computed_selection_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "0f52f68310db90c640dac7fe8cbce4f02c50b72d2096117a72b0c45d04e9ad57",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 79,
+          "source": "    @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 81,
+          "source": "        @test haskey(actual[route], \"ok\") && strict_equal(actual[route][\"ok\"], expected)"
+        },
+        {
+          "line": 85,
+          "source": "@testset \"Julia Count source and prefix guards\" begin"
+        },
+        {
+          "line": 96,
+          "source": "            @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 98,
+          "source": "                @test occursin(row[\"expected_error\"], get(value, \"error\", \"\"))"
+        },
+        {
+          "line": 100,
+          "source": "            @test strict_equal(actual, error_fences[row[\"id\"]])"
+        },
+        {
+          "line": 123,
+          "source": "    @test strict_equal(shapes, frozen)"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/count_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 91,
+          "source": "include(\"count_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "4f6586470d9fa89548f63f6267f5eb592d9f96a50c52a20860460d2040973c63",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 59,
+          "source": "@testset \"Julia initial Count source fallback\" begin"
+        },
+        {
+          "line": 63,
+          "source": "        @testset \"$(row[\"id\"])\" begin"
+        },
+        {
+          "line": 66,
+          "source": "            @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 69,
+          "source": "                    @test occursin(row[\"expected_error\"], get(actual[route], \"error\", \"\"))"
+        },
+        {
+          "line": 72,
+          "source": "                    @test haskey(actual[route], \"ok\") && strict_equal(actual[route][\"ok\"], expected)"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/count_source_fallback_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 102,
+          "source": "include(\"count_source_fallback_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "b17c46427291f61f52474de149328b02d828290b6c238b3151e0b7751bc6dcd5",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia pure Hash-helper result guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "            @test profile[\"source\"] == row[\"source\"]"
+        },
+        {
+          "line": 88,
+          "source": "                @test strict_equal(actual[route], profile[route])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], row[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/hash_value_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 96,
+          "source": "include(\"hash_value_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "0721e428ba989ebdeeb057aa34c86662562970569dd80af70b54df0e9878e358",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia Hash-view result guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "            @test profile[\"source\"] == row[\"source\"]"
+        },
+        {
+          "line": 88,
+          "source": "                @test strict_equal(actual[route], profile[route])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], row[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/hash_view_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 95,
+          "source": "include(\"hash_view_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "9528f767eb9e917f6f89c7e5bdb0b42a7009d57563420ab21fea8e5c5b07cdc5",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia callable CountKeys preservation\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "            @test profile[\"source\"] == row[\"source\"]"
+        },
+        {
+          "line": 88,
+          "source": "                @test strict_equal(actual[route], profile[route])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], row[\"expected\"])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 94,
+          "source": "include(\"key_count_callable_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "9ac93c7a4ae5095b7b71c20cf2901ec9438bec32e1e549a37df07667397de7ed",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia CountKeys source and continuation guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "                @test occursin(row[\"expected_error\"], get(value, \"error\", \"\"))"
+        },
+        {
+          "line": 88,
+          "source": "            @test strict_equal(actual, errors[row[\"id\"]])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], expected)"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/key_count_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 93,
+          "source": "include(\"key_count_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "3d4ea6ff8c936722638f5da045ce42ee68af9361d80baa08f4a75c6565286456",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 72,
+          "source": "@testset \"Julia Length source and continuation guards\" begin"
+        },
+        {
+          "line": 83,
+          "source": "        @test Set(keys(actual)) == Set([\"native\", \"restored\", \"plan\", \"fresh\"])"
+        },
+        {
+          "line": 86,
+          "source": "                @test occursin(row[\"expected_error\"], get(value, \"error\", \"\"))"
+        },
+        {
+          "line": 88,
+          "source": "            @test strict_equal(actual, errors[row[\"id\"]])"
+        },
+        {
+          "line": 92,
+          "source": "                @test haskey(value, \"value\") && strict_equal(value[\"value\"], expected)"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "julia/test/length_result_guard_composition_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 92,
+          "source": "include(\"length_result_guard_composition_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "b4f9ad753a15ef5979a56ecae9d5a8ddf78ba79d962053a0c77d63ad3353d57b",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 24,
+          "source": "@testset \"Julia named capture endpoint presence\" begin"
+        },
+        {
+          "line": 32,
+          "source": "        @testset \"$name\" begin"
+        },
+        {
+          "line": 39,
+          "source": "                @test result.matched"
+        },
+        {
+          "line": 40,
+          "source": "                @test strict_equal(result.value, fixture[\"expected\"])"
+        },
+        {
+          "line": 41,
+          "source": "                @test result.cursor_char_offset == fixture[\"expected_cursor\"]"
+        },
+        {
+          "line": 43,
+          "source": "            @test strict_equal("
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/named_capture_endpoint_absence_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 109,
+          "source": "include(\"named_capture_endpoint_absence_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "8f3698efdf5bdc8e351a819a024fd4a8c851d5b704deee5138220390f1a3cd3c",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 24,
+          "source": "@testset \"Julia local-match writer endpoint presence\" begin"
+        },
+        {
+          "line": 32,
+          "source": "        @testset \"$name\" begin"
+        },
+        {
+          "line": 39,
+          "source": "                @test result.matched"
+        },
+        {
+          "line": 40,
+          "source": "                @test strict_equal(result.value, fixture[\"expected\"])"
+        },
+        {
+          "line": 41,
+          "source": "                @test result.cursor_char_offset == fixture[\"expected_cursor\"]"
+        },
+        {
+          "line": 43,
+          "source": "            @test strict_equal("
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/named_writer_endpoint_absence_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 110,
+          "source": "include(\"named_writer_endpoint_absence_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "f09eeb63254ad03efbaa21ae1be142593421870ab0659dce63cd3330b45c45c2",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 16,
+          "source": "@testset \"Julia blind compiler strict bypass controls\" begin"
+        },
+        {
+          "line": 26,
+          "source": "    @test compiled.rules_by_label[\"Child\"].regex_patterns == [\"\"]"
+        },
+        {
+          "line": 27,
+          "source": "    @test compiled.dependency_regex_state.dependency_regex_map[\"Top\"].patterns == [\"\"]"
+        },
+        {
+          "line": 28,
+          "source": "    @test runtime_parse(LinkedSpecRuntimeEngine(compiled), \"x\").value == \"E\""
+        },
+        {
+          "line": 31,
+          "source": "@testset \"Julia referenced and pure-code blind target compilation\" begin"
+        },
+        {
+          "line": 40,
+          "source": "            @testset \"$file / $(fixture[\"name\"])\" begin"
+        },
+        {
+          "line": 51,
+          "source": "                @test !(compiled isa Exception)"
+        },
+        {
+          "line": 54,
+          "source": "                @test to_json(compile_spec(restored)) == to_json(compiled)"
+        },
+        {
+          "line": 55,
+          "source": "                @test !isempty(build_generated_rule_plan(compiled))"
+        },
+        {
+          "line": 58,
+          "source": "                    @test isempty(child.regex_patterns)"
+        },
+        {
+          "line": 59,
+          "source": "                    @test isempty(child.regex_slots)"
+        },
+        {
+          "line": 63,
+          "source": "                        @test entry === nothing"
+        },
+        {
+          "line": 65,
+          "source": "                        @test [ref.label for ref in entry.dependency_refs] == refs"
+        },
+        {
+          "line": 66,
+          "source": "                        @test entry.patterns == [\"x\"]"
+        },
+        {
+          "line": 69,
+          "source": "                        @test [ref.label for ref in compiled.rules_by_label[\"Top\"].dependency_refs] =="
+        },
+        {
+          "line": 84,
+          "source": "                        @test strict_equal(result.value, case[\"expected\"])"
+        },
+        {
+          "line": 85,
+          "source": "                        @test result.matched"
+        },
+        {
+          "line": 86,
+          "source": "                        @test result.cursor_char_offset == case[\"expected_cursor\"]"
+        },
+        {
+          "line": 88,
+          "source": "                    @test strict_equal(execute_generated_parser_v2(compiled,"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/referenced_blind_targets_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 42,
+          "source": "include(\"referenced_blind_targets_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "afaa8cf49caddf022c37089f38c4ddbff6f263b27ae0ed54d71252f9509d86c7",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "julia",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 16,
+          "source": "@testset \"Julia conventional rule-array invocations\" begin"
+        },
+        {
+          "line": 22,
+          "source": "            @testset \"$name / $(fixture[\"name\"])\" begin"
+        },
+        {
+          "line": 41,
+          "source": "                    @test !(result isa Exception)"
+        },
+        {
+          "line": 43,
+          "source": "                    @test strict_equal(result.value, expected)"
+        },
+        {
+          "line": 44,
+          "source": "                    @test result.cursor_char_offset == expected_cursor"
+        },
+        {
+          "line": 52,
+          "source": "                @test !(result isa Exception)"
+        },
+        {
+          "line": 54,
+          "source": "                @test strict_equal(result, expected)"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "julia/test/rule_invocation_accumulators_test.jl",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Pkg.test entrypoint with named include; not executed",
+      "route_expressions": [
+        {
+          "line": 44,
+          "source": "include(\"rule_invocation_accumulators_test.jl\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "a8a63aa68aceda1076bedef20969a21761d3e75c0f88bf1a02d992eea2c0e6aa",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 12,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 23,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 31,
+          "source": "  local file = assert(io.open(path, \"wb\"))"
+        },
+        {
+          "line": 33,
+          "source": "  file = assert(io.open(path, \"rb\"))"
+        },
+        {
+          "line": 35,
+          "source": "  assert(retained == body, \"normal artifact readback drift\")"
+        },
+        {
+          "line": 41,
+          "source": "    assert(output:match(\"^docs/checkpoints/array%-concat%-open%-arity%-lua%-2026%-11%-12/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 53,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 68,
+          "source": "local profiles = assert(fixture(\"array_concat_open_arity_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9637,
+          "source": "  dofile(\"lua/test/array_concat_open_arity_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 70,
+          "source": "  local actual = observe(row, os.getenv(\"LINKEDSPEC_ARRAY_CONCAT_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "ecfe76f33b7472cb97cebbda923e7c4372e06953dc605f631287fcbd19132b6d",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 12,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 23,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 31,
+          "source": "  local file = assert(io.open(path, \"wb\"))"
+        },
+        {
+          "line": 33,
+          "source": "  file = assert(io.open(path, \"rb\"))"
+        },
+        {
+          "line": 35,
+          "source": "  assert(retained == body, \"normal artifact readback drift\")"
+        },
+        {
+          "line": 41,
+          "source": "    assert(output:match(\"^docs/checkpoints/array%-pipeline%-callable%-lua%-2026%-11%-11/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 51,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 66,
+          "source": "local profiles = assert(fixture(\"array_pipeline_callable_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9643,
+          "source": "  dofile(\"lua/test/array_pipeline_callable_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 68,
+          "source": "  local actual = observe(row, os.getenv(\"LINKEDSPEC_CALLABLE_PIPELINE_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "adabf0a1c373b6bc36681b1749e9e9995f96df803c923446c9bf04a7af184f33",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 11,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 21,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 27,
+          "source": "    assert(output:match(\"^docs/checkpoints/array%-pipeline%-result%-guard%-lua%-2026%-11%-11/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 36,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 43,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 60,
+          "source": "local profiles = assert(fixture(\"array_pipeline_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9640,
+          "source": "  dofile(\"lua/test/array_pipeline_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 63,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_ARRAY_PIPELINE_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "a3c75268b098ccb451ee11336abe6a558b217c15d50825584a4c00cf855fe928",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 12,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 23,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 31,
+          "source": "  local file = assert(io.open(path, \"wb\"))"
+        },
+        {
+          "line": 33,
+          "source": "  file = assert(io.open(path, \"rb\"))"
+        },
+        {
+          "line": 35,
+          "source": "  assert(retained == body, \"normal artifact readback drift\")"
+        },
+        {
+          "line": 41,
+          "source": "    assert(output:match(\"^docs/checkpoints/array%-transform%-callable%-lua%-2026%-11%-12/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 51,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 66,
+          "source": "local profiles = assert(fixture(\"array_transform_callable_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9634,
+          "source": "  dofile(\"lua/test/array_transform_callable_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 68,
+          "source": "  local actual = observe(row, os.getenv(\"LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "b684edb6358015a7b288ec1f45d7f6f7986bc6ac5fddb2d76f194195618b0e0a",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 11,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 21,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 27,
+          "source": "    assert(output:match(\"^docs/checkpoints/array%-transform%-result%-guard%-lua%-2026%-11%-10/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 36,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 43,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 60,
+          "source": "local profiles = assert(fixture(\"array_transform_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/array_transform_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9631,
+          "source": "  dofile(\"lua/test/array_transform_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 63,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "10d535e614b888cc1a839b720ef448977e7ba3f190ceeee6665139fa730ba6e2",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/blind_postcall_results_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 44,
+          "source": "        check(actual.error ~= nil and tostring(actual.error):find(record.code, 1, true) ~= nil,"
+        },
+        {
+          "line": 47,
+          "source": "          check(ls.is_runtime_interpreter_error(actual.error), fixture.name .. ' typed runtime failure')"
+        },
+        {
+          "line": 49,
+          "source": "          check(diagnostic.code == record.code, fixture.name .. ' diagnostic code')"
+        },
+        {
+          "line": 50,
+          "source": "          check(diagnostic.rule_label == record.rule, fixture.name .. ' failing rule')"
+        },
+        {
+          "line": 51,
+          "source": "          check(diagnostic.stage == 'runtime_execution', fixture.name .. ' runtime phase')"
+        },
+        {
+          "line": 54,
+          "source": "        check(actual.error == nil, fixture.name .. ' ' .. route .. ' completes')"
+        },
+        {
+          "line": 55,
+          "source": "        check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 57,
+          "source": "          check(actual.result.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 58,
+          "source": "          check(actual.result.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        },
+        {
+          "line": 71,
+          "source": "      check(#observed == 1 and observed[1] == expected, fixture.name .. ' actual progress trace')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/blind_postcall_results_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "b6f6d8ddea95fad4db1c337cf77b3c916f0ad26d9caeefd9529ce97f6acc7055",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/blind_repetition_collection_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 31,
+          "source": "      check(ok, fixture.name .. ' ' .. route .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 33,
+          "source": "        check(json.encode(actual) == json.encode(row.expected), fixture.name .. ' generated value')"
+        },
+        {
+          "line": 35,
+          "source": "        check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 36,
+          "source": "        check(actual.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 37,
+          "source": "        check(actual.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/blind_repetition_collection_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "ae936c7a4e99c89047782a22e5ba39378dcff9b956b4b3ef26962bc3e4350738",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile('lua/src/linkedspec/interpreter.lua'))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile('lua/test/run.lua'))"
+        },
+        {
+          "line": 6,
+          "source": "local file = assert(io.open('tests/fixtures/capture_endpoint_absence.json', 'rb'))"
+        },
+        {
+          "line": 7,
+          "source": "local fixtures = json.decode(file:read('*a')); assert(file:close())"
+        },
+        {
+          "line": 9,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 19,
+          "source": "    check(result.matched == true, fixture.name .. ' matched')"
+        },
+        {
+          "line": 20,
+          "source": "    check(json.encode(result.value) == json.encode(fixture.expected), fixture.name .. ' value')"
+        },
+        {
+          "line": 21,
+          "source": "    check(result.cursor_char_offset == fixture.expected_cursor, fixture.name .. ' Unicode cursor')"
+        },
+        {
+          "line": 26,
+          "source": "  check(json.encode(value) == json.encode(fixture.expected), fixture.name .. ' plan value')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/capture_endpoint_absence_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9661,
+          "source": "  dofile(\"lua/test/capture_endpoint_absence_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 31,
+          "source": "  os.exit(1)"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "5f5fb67d8c2d8f2712e027291115938464bcd8099593d0181e276bbccd2d5722",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 22,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 51,
+          "source": "    local file=assert(io.open(\"tests/fixtures/\" .. name,\"r\"))"
+        },
+        {
+          "line": 60,
+          "source": "      local file=assert(io.open(\"tests/fixtures/count_result_guard_lua_errors.json\",\"r\"))"
+        },
+        {
+          "line": 75,
+          "source": "  local file=assert(io.open(\"tests/fixtures/count_result_guard_excluded_ast.json\",\"r\"))"
+        },
+        {
+          "line": 83,
+          "source": "  local file=assert(io.open(\"tests/fixtures/count_result_guard_lua_ast.json\",\"r\"))"
+        },
+        {
+          "line": 89,
+          "source": "  local file=assert(io.open(\"tests/fixtures/count_result_guard_lua_domain.json\",\"r\"))"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/count_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9613,
+          "source": "  dofile(\"lua/test/count_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 19,
+          "source": "    if os.getenv(\"LINKEDSPEC_COUNT_GUARD_CAPTURE\") == \"1\" then"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "1147877ef1e3c74112ec7f2b019d2ac992c7ae2a08217cbaa04c345911a1b2b6",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 24,
+          "source": "    local file = assert(io.open(capture .. \"/\" .. row.id .. \".lua\", \"w\"))"
+        },
+        {
+          "line": 26,
+          "source": "    file = assert(io.open(capture .. \"/\" .. row.id .. \".ast.json\", \"w\"))"
+        },
+        {
+          "line": 29,
+          "source": "  local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 47,
+          "source": "local file = assert(io.open(\"tests/fixtures/count_boolean_source_cases.json\", \"r\"))"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/count_source_fallback_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9646,
+          "source": "  dofile(\"lua/test/count_source_fallback_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 21,
+          "source": "  local capture = os.getenv(\"LINKEDSPEC_COUNT_SOURCE_CAPTURE\")"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "a3dc3c2e829d1d43f333eb303b12e0ab7368855a7dae156e18b614cef0359c70",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/default_blind_generated_family_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 9,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 11,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 23,
+          "source": "      check(key == 'label' or key == 'family', fixture.name .. ' minimal plan key')"
+        },
+        {
+          "line": 26,
+          "source": "    check(count == 2, fixture.name .. ' two plan fields')"
+        },
+        {
+          "line": 29,
+          "source": "      check(row.family == fixture.expected_family, fixture.name .. ' root family')"
+        },
+        {
+          "line": 34,
+          "source": "  local generated = assert((loadstring or load)(source, '@lua-default-family.lua'))()"
+        },
+        {
+          "line": 36,
+          "source": "  check(metadata.contract_id == 'linkedspec-generated-source-v2', fixture.name .. ' contract id')"
+        },
+        {
+          "line": 37,
+          "source": "  check(metadata.format_version == 2, fixture.name .. ' format version')"
+        },
+        {
+          "line": 47,
+          "source": "      check(ok, fixture.name .. ' ' .. route .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 49,
+          "source": "        check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 50,
+          "source": "        check(actual.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 51,
+          "source": "        check(actual.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        },
+        {
+          "line": 53,
+          "source": "        check(json.encode(actual) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 59,
+          "source": "    check(not ok, fixture.name .. ' stale family rejected')"
+        },
+        {
+          "line": 60,
+          "source": "    check(ls.is_generated_source_error(failure), fixture.name .. ' typed stale failure')"
+        },
+        {
+          "line": 62,
+          "source": "    check(diagnostic.code == 'generated_plan_family_mismatch', fixture.name .. ' stale code')"
+        },
+        {
+          "line": 63,
+          "source": "    check(diagnostic.stage == 'validate_generated_plan', fixture.name .. ' validation before execution')"
+        },
+        {
+          "line": 64,
+          "source": "    check(diagnostic.rule_label == 'Top', fixture.name .. ' stale rule')"
+        },
+        {
+          "line": 65,
+          "source": "    check(diagnostic.handler_family == 'and_bcode', fixture.name .. ' stale family attribution')"
+        },
+        {
+          "line": 69,
+          "source": "check(ls.classify_generated_rule_family(ordinary:rule('Top')) == 'default', 'ordinary Default regex family unchanged')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/default_blind_generated_family_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "7e03553d66eba29878cf629a61442f254510b0295cd26d7fa53cb45c106da7d7",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 5,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 7,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 13,
+          "source": "  local file = assert(io.open(path, 'rb'))"
+        },
+        {
+          "line": 15,
+          "source": "  assert(file:close())"
+        },
+        {
+          "line": 39,
+          "source": "          check(not ok, label .. ' fails closed')"
+        },
+        {
+          "line": 40,
+          "source": "          check(tostring(actual):find(expected.error_contains, 1, true) ~= nil, label .. ' source error')"
+        },
+        {
+          "line": 42,
+          "source": "            check(ls.is_runtime_interpreter_error(actual), label .. ' typed runtime failure')"
+        },
+        {
+          "line": 43,
+          "source": "            check(actual.diagnostic.code == expected.error_code, label .. ' code')"
+        },
+        {
+          "line": 44,
+          "source": "            check(actual.diagnostic.rule_label == expected.error_rule, label .. ' rule')"
+        },
+        {
+          "line": 45,
+          "source": "            check(actual.diagnostic.stage == 'advance_gap_context', label .. ' commit stage')"
+        },
+        {
+          "line": 48,
+          "source": "          check(ok, label .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 50,
+          "source": "            check(json.encode(actual) == json.encode(expected), label .. ' generated value')"
+        },
+        {
+          "line": 52,
+          "source": "            check(json.encode(actual.value) == json.encode(expected), label .. ' value')"
+        },
+        {
+          "line": 56,
+          "source": "            check(actual.matched == matched, label .. ' matched')"
+        },
+        {
+          "line": 57,
+          "source": "            check(ls.interpreter.to_json(actual).cursor_char_offset == cursor, label .. ' character cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/gap_ls_selected_cursor_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "52c5813babf5ce06fb910af65a6a86d83c7e65332ecd52a2d30697c26590c11e",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 3,
+          "source": "assert(loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 4,
+          "source": "assert(loadfile(input_root .. \"lua/test/run.lua\"))"
+        },
+        {
+          "line": 11,
+          "source": "local grammar_file = assert(io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 21,
+          "source": "  local file = assert(io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 27,
+          "source": "    assert(output:match(\"^docs/checkpoints/hash%-value%-result%-guard%-lua%-2026%-11%-07/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 36,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 43,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 60,
+          "source": "local profiles = assert(fixture(\"hash_value_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/hash_value_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9628,
+          "source": "  dofile(\"lua/test/hash_value_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 1,
+          "source": "local input_root = os.getenv(\"LINKEDSPEC_HASH_VALUE_INPUT_ROOT\") or \"\""
+        },
+        {
+          "line": 63,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_HASH_VALUE_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "6abea7c88e1cb6a5fc39ba494d84c42e20e8925708c2fee313afe5240114f730",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 9,
+          "source": "local grammar_file = assert(io.open(\"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 19,
+          "source": "  local file = assert(io.open(\"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 25,
+          "source": "    assert(output:match(\"^docs/checkpoints/hash%-view%-result%-guard%-lua%-2026%-11%-07/[a-z]+/[a-z]+$\"), \"owned capture path required\")"
+        },
+        {
+          "line": 34,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 41,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 58,
+          "source": "local profiles = assert(fixture(\"hash_view_result_guard_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/hash_view_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9625,
+          "source": "  dofile(\"lua/test/hash_view_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 61,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_HASH_VIEW_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "6dded6e22f77f9e4b2fd1e901d0226ec6fd516c0e3db3c1416db578e0ff3f00d",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 9,
+          "source": "local grammar_file = assert(io.open(\"specs/user_function_definition.spec\", \"rb\"))"
+        },
+        {
+          "line": 19,
+          "source": "  local file = assert(io.open(\"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 31,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 38,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 55,
+          "source": "local profiles = assert(fixture(\"key_count_callable_lua_profiles.json\")[host])"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9622,
+          "source": "  dofile(\"lua/test/key_count_callable_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 58,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "1ac8534831e5128567a814c06c1812b0991606d1f0e1272d566de4dbd1f181e6",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 14,
+          "source": "  local file = assert(io.open(\"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 26,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 33,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 69,
+          "source": "      assert(row.id == domain.id and row.source == domain.source, \"missing authored CountKeys expectation\")"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/key_count_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9619,
+          "source": "  dofile(\"lua/test/key_count_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 56,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_KEY_COUNT_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "1d68227caaff3e053e2c00c2899766eb99998e90f3d47edf634989524ccbb2ca",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile(\"lua/src/linkedspec/interpreter.lua\"))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile(\"lua/test/run.lua\"))"
+        },
+        {
+          "line": 14,
+          "source": "  local file = assert(io.open(\"tests/fixtures/\" .. name, \"rb\"))"
+        },
+        {
+          "line": 26,
+          "source": "        local file = assert(io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\"))"
+        },
+        {
+          "line": 33,
+          "source": "    local parser = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 69,
+          "source": "      assert(row.id == domain.id and row.source == domain.source, \"missing authored Length expectation\")"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/length_result_guard_composition_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9616,
+          "source": "  dofile(\"lua/test/length_result_guard_composition_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 56,
+          "source": "  local actual = observe(row.id, row.source, row.input, os.getenv(\"LINKEDSPEC_LENGTH_CAPTURE\"))"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "300d4aff82d65c1c4d5467e11df2242fbdf3dface71a07798969cdd3e810b27c",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/minimum_miss_routes_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 32,
+          "source": "        check(not ok and tostring(actual):find(expected_error, 1, true) ~= nil,"
+        },
+        {
+          "line": 35,
+          "source": "          check(actual.diagnostic ~= nil, fixture.name .. ' original diagnostic')"
+        },
+        {
+          "line": 37,
+          "source": "          check(diagnostic.rule_label == row.expected.error_rule, fixture.name .. ' failing rule')"
+        },
+        {
+          "line": 38,
+          "source": "          check(diagnostic.stage == 'runtime_execution', fixture.name .. ' runtime phase')"
+        },
+        {
+          "line": 41,
+          "source": "        check(ok, fixture.name .. ' ' .. route .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 43,
+          "source": "          check(json.encode(actual) == json.encode(row.expected), fixture.name .. ' generated value')"
+        },
+        {
+          "line": 45,
+          "source": "          check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 46,
+          "source": "          check(actual.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 47,
+          "source": "          check(actual.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/minimum_miss_routes_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "5752b9b2737b534033f9a82c4a77b1281057731f360daabf173aafe1f8092d31",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile('lua/src/linkedspec/interpreter.lua'))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile('lua/test/run.lua'))"
+        },
+        {
+          "line": 6,
+          "source": "local file = assert(io.open('tests/fixtures/named_capture_endpoint_absence.json', 'rb'))"
+        },
+        {
+          "line": 7,
+          "source": "local fixtures = json.decode(file:read('*a')); assert(file:close())"
+        },
+        {
+          "line": 9,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 19,
+          "source": "    check(result.matched == true, fixture.name .. ' matched')"
+        },
+        {
+          "line": 20,
+          "source": "    check(json.encode(result.value) == json.encode(fixture.expected), fixture.name .. ' value')"
+        },
+        {
+          "line": 21,
+          "source": "    check(result.cursor_char_offset == fixture.expected_cursor, fixture.name .. ' Unicode cursor')"
+        },
+        {
+          "line": 26,
+          "source": "  check(json.encode(value) == json.encode(fixture.expected), fixture.name .. ' plan value')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/named_capture_endpoint_absence_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9664,
+          "source": "  dofile(\"lua/test/named_capture_endpoint_absence_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 31,
+          "source": "  os.exit(1)"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "5e425c98a0e73817684eb3cce302b83b4ca394a2e5dbeb746e92c9a1eea80cb3",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 2,
+          "source": "assert(loadfile('lua/src/linkedspec/interpreter.lua'))"
+        },
+        {
+          "line": 3,
+          "source": "assert(loadfile('lua/test/run.lua'))"
+        },
+        {
+          "line": 6,
+          "source": "local file = assert(io.open('tests/fixtures/named_writer_endpoint_absence.json', 'rb'))"
+        },
+        {
+          "line": 7,
+          "source": "local fixtures = json.decode(file:read('*a')); assert(file:close())"
+        },
+        {
+          "line": 9,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 19,
+          "source": "    check(result.matched == true, fixture.name .. ' matched')"
+        },
+        {
+          "line": 20,
+          "source": "    check(json.encode(result.value) == json.encode(fixture.expected), fixture.name .. ' value')"
+        },
+        {
+          "line": 21,
+          "source": "    check(result.cursor_char_offset == fixture.expected_cursor, fixture.name .. ' Unicode cursor')"
+        },
+        {
+          "line": 26,
+          "source": "  check(json.encode(value) == json.encode(fixture.expected), fixture.name .. ' plan value')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/named_writer_endpoint_absence_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9667,
+          "source": "  dofile(\"lua/test/named_writer_endpoint_absence_test.lua\")"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 31,
+          "source": "  os.exit(1)"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "2b6c6fd4ecd84a0b0a444e2cd19b53f03dc7799e608670011b54117a30be49e5",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/null_return_and_observation_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 37,
+          "source": "          check(not ok and tostring(actual):find(expected_error, 1, true) ~= nil,"
+        },
+        {
+          "line": 40,
+          "source": "          check(ok, fixture.name .. ' ' .. route .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 42,
+          "source": "            check(json.encode(actual) == json.encode(row.expected), fixture.name .. ' generated value/record')"
+        },
+        {
+          "line": 44,
+          "source": "            check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value/record')"
+        },
+        {
+          "line": 45,
+          "source": "            check(actual.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 46,
+          "source": "            check(actual.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/null_return_and_observation_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "89da3323e4bd7c0965a0e688c720539ff998308d89379a0b6590edc59b82ac62",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 8,
+          "source": "  assert(output:match(\"^docs/checkpoints/lua%-raw%-error%-observation%-2026%-11%-13/normal/[a-z]+$\"))"
+        },
+        {
+          "line": 11,
+          "source": "  local file = assert(io.open(path, \"rb\"))"
+        },
+        {
+          "line": 18,
+          "source": "  local file = assert(io.open(path, \"wb\"))"
+        },
+        {
+          "line": 20,
+          "source": "  assert(read(path) == body, \"actual normal input readback\")"
+        },
+        {
+          "line": 27,
+          "source": "local profiles = assert(json.decode(read(\"tests/fixtures/lua_raw_error_observation_profiles.json\"))[host])"
+        },
+        {
+          "line": 40,
+          "source": "  local fresh = assert((loadstring or load)(emitted))()"
+        },
+        {
+          "line": 50,
+          "source": "    assert(not ok, row.id .. \"/\" .. route[1] .. \" must retain its failure\")"
+        },
+        {
+          "line": 53,
+          "source": "    assert(baseline == json.encode(profiles[row.id][route[1]]), row.id .. \"/\" .. route[1] .. \" complete observed fields\")"
+        },
+        {
+          "line": 58,
+          "source": "      local original = assert(failure[field])"
+        },
+        {
+          "line": 64,
+          "source": "        assert(json.encode(observation.snapshot(l, failure)) ~= raw_before, \"raw field \" .. operation .. \" must be detected\")"
+        },
+        {
+          "line": 65,
+          "source": "        assert(old_projection(failure) == old_before, \"prior projection's known blind field remains explicit\")"
+        },
+        {
+          "line": 67,
+          "source": "        assert(json.encode(observation.observe_failure(l, failure)) == baseline, \"control restores exact fields\")"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "lua/test/raw_error_observation_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": [
+        {
+          "line": 6,
+          "source": "local output = os.getenv(\"LINKEDSPEC_RAW_ERROR_CAPTURE\")"
+        }
+      ]
+    },
+    {
+      "activation_sha256": "009df53b471ab4decf7ea5c35467102b98c2879b339f6a6bf62d78c2891de9e9",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/recognition_repetition_progress_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 44,
+          "source": "        check(actual.error ~= nil and tostring(actual.error):find(record.code, 1, true) ~= nil,"
+        },
+        {
+          "line": 47,
+          "source": "          check(ls.is_runtime_interpreter_error(actual.error), fixture.name .. ' typed runtime failure')"
+        },
+        {
+          "line": 49,
+          "source": "          check(diagnostic.code == record.code, fixture.name .. ' diagnostic code')"
+        },
+        {
+          "line": 50,
+          "source": "          check(diagnostic.rule_label == record.rule, fixture.name .. ' failing rule')"
+        },
+        {
+          "line": 51,
+          "source": "          check(diagnostic.stage == 'runtime_execution', fixture.name .. ' runtime phase')"
+        },
+        {
+          "line": 54,
+          "source": "        check(actual.error == nil, fixture.name .. ' ' .. route .. ' completes')"
+        },
+        {
+          "line": 55,
+          "source": "        check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 67,
+          "source": "      check(#observed == 1 and observed[1] == expected, fixture.name .. ' actual progress trace')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/recognition_repetition_progress_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "0abe99f79fff39e5acd074091cc7d893a668f3ac3275d8ce0b87fe3f977debbd",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 5,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  local file=assert(io.open(path,'rb'));local data=file:read('*a');assert(file:close());return data"
+        },
+        {
+          "line": 18,
+          "source": "    check(ok==fixture.expected_builds,label..' compilation')"
+        },
+        {
+          "line": 20,
+          "source": "      check(not ok and ls.is_spec_validation_error(compiled),label..' strict validation error')"
+        },
+        {
+          "line": 23,
+          "source": "      check(json.encode(ls.compiled_spec_to_json(ls.compile_spec(restored)))=="
+        },
+        {
+          "line": 25,
+          "source": "      check(#ls.build_generated_rule_plan(compiled)>0,label..' generated plan')"
+        },
+        {
+          "line": 27,
+          "source": "        check(#compiled.rules_by_label.Child.regex_patterns==0,label..' no regex')"
+        },
+        {
+          "line": 28,
+          "source": "        check(#compiled.rules_by_label.Child.regex_slots==0,label..' no slot')"
+        },
+        {
+          "line": 31,
+          "source": "          check(entry and #entry.dependency_refs==1 and entry.dependency_refs[1].label=='Token' and"
+        },
+        {
+          "line": 33,
+          "source": "          check(#compiled.rules_by_label.Top.dependency_refs==2,label..' complete call refs')"
+        },
+        {
+          "line": 35,
+          "source": "          check(entry==nil,label..' no manufactured regex map')"
+        },
+        {
+          "line": 47,
+          "source": "            check(json.encode(result.value)==json.encode(case.expected),label..' runtime value')"
+        },
+        {
+          "line": 48,
+          "source": "            check(result.matched,label..' matched')"
+        },
+        {
+          "line": 49,
+          "source": "            check(result.cursor_char_offset==case.expected_cursor,label..' cursor')"
+        },
+        {
+          "line": 53,
+          "source": "          check(json.encode(result)==json.encode(case.expected),label..' plan value')"
+        },
+        {
+          "line": 65,
+          "source": "  check(not ok and ls.is_compiled_spec_error(value),'strict validation bypass')"
+        },
+        {
+          "line": 68,
+          "source": "check(#empty.rules_by_label.Child.regex_patterns==1 and empty.rules_by_label.Child.regex_patterns[1]=='',"
+        },
+        {
+          "line": 70,
+          "source": "check(empty.dependency_regex_state.dependency_regex_map.Top.patterns[1]=='','real empty regex dependency')"
+        },
+        {
+          "line": 71,
+          "source": "check(ls.runtime_parse(ls.runtime_engine(empty),'x').value=='E','real empty regex runtime')"
+        },
+        {
+          "line": 74,
+          "source": "assert(#failures==0,'blind target compilation failures')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/referenced_blind_targets_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "named dofile inside selected local run.lua; not executed",
+      "route_expressions": [
+        {
+          "line": 9670,
+          "source": "  dofile(\"lua/test/referenced_blind_targets_test.lua\")"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "c9523082611b8a47cde76fb902ae2ebda9ec56ec4a37e7b59c6d0375d76fbc6f",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/repeated_and_group_results_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 30,
+          "source": "      check(ok, fixture.name .. ' ' .. route .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 32,
+          "source": "        check(json.encode(actual) == json.encode(row.expected), fixture.name .. ' generated value')"
+        },
+        {
+          "line": 34,
+          "source": "        check(json.encode(actual.value) == json.encode(row.expected), fixture.name .. ' ' .. route .. ' value')"
+        },
+        {
+          "line": 35,
+          "source": "        check(actual.matched == row.expected_match, fixture.name .. ' ' .. route .. ' matched')"
+        },
+        {
+          "line": 36,
+          "source": "        check(actual.cursor_code_unit == row.expected_cursor, fixture.name .. ' ' .. route .. ' cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/repeated_and_group_results_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "b9a20adfb7f04a92d78e8e7071a8ec148cc9783899a56ff62ce72058452facfb",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 4,
+          "source": "local file = assert(io.open('lua/test/runtime_unknown_helper_diagnostic_cases.json', 'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "assert(file:close())"
+        },
+        {
+          "line": 8,
+          "source": "local function check(condition, label)"
+        },
+        {
+          "line": 10,
+          "source": "  assert(condition, label)"
+        },
+        {
+          "line": 30,
+          "source": "        check(not ok, label .. ' fails closed')"
+        },
+        {
+          "line": 31,
+          "source": "        check(tostring(actual):find(row.error_contains, 1, true) ~= nil, label .. ' error text')"
+        },
+        {
+          "line": 34,
+          "source": "          check(actual.code == 'generated_execution_failed', label .. ' generated envelope')"
+        },
+        {
+          "line": 35,
+          "source": "          check(actual.stage == 'execute_generated', label .. ' generated stage')"
+        },
+        {
+          "line": 36,
+          "source": "          check(actual.rule_label == row.error_rule, label .. ' generated failing rule')"
+        },
+        {
+          "line": 38,
+          "source": "          check(ls.is_runtime_interpreter_error(actual), label .. ' typed runtime error')"
+        },
+        {
+          "line": 40,
+          "source": "          check(diagnostic.code == row.error_code, label .. ' machine-readable code')"
+        },
+        {
+          "line": 41,
+          "source": "          check(diagnostic.stage == row.error_stage, label .. ' owning stage')"
+        },
+        {
+          "line": 42,
+          "source": "          check(diagnostic.rule_label == row.error_rule, label .. ' failing rule')"
+        },
+        {
+          "line": 45,
+          "source": "        check(ok, label .. ' completes: ' .. tostring(actual))"
+        },
+        {
+          "line": 47,
+          "source": "          check(json.encode(actual) == json.encode(row.expected), label .. ' generated value')"
+        },
+        {
+          "line": 49,
+          "source": "          check(json.encode(actual.value) == json.encode(row.expected), label .. ' value')"
+        },
+        {
+          "line": 50,
+          "source": "          check(actual.matched == row.expected_match, label .. ' match flag')"
+        },
+        {
+          "line": 51,
+          "source": "          check(actual.cursor_code_unit == row.expected_cursor, label .. ' cursor')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/runtime_unknown_helper_diagnostic_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "63fa8fa42ece83c11364333817ad2c372aabe3cfbb1c965e699d430c326611c3",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "lua",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "driver_expressions": [],
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 5,
+          "source": "  local file=assert(io.open(path,'rb'))"
+        },
+        {
+          "line": 6,
+          "source": "  local value=file:read('*a');assert(file:close());return value"
+        },
+        {
+          "line": 10,
+          "source": "local function check(condition,message)"
+        },
+        {
+          "line": 12,
+          "source": "  assert(condition,message)"
+        },
+        {
+          "line": 29,
+          "source": "          check(not ok and tostring(failure):find(error_contains,1,true)~=nil,row.name..' expected error')"
+        },
+        {
+          "line": 47,
+          "source": "        check(json.encode(native.value)==json.encode(item.expected),row.name..' native value')"
+        },
+        {
+          "line": 48,
+          "source": "        check(json.encode(reconstructed.value)==json.encode(item.expected),row.name..' reconstructed value')"
+        },
+        {
+          "line": 49,
+          "source": "        check(json.encode(plan)==json.encode(item.expected),row.name..' generated value')"
+        },
+        {
+          "line": 50,
+          "source": "        check(json.encode(ls.interpreter.to_json(native))==json.encode(ls.interpreter.to_json(reconstructed)),row.name..' reconstructed result')"
+        },
+        {
+          "line": 52,
+          "source": "          check(native.matched==true,'selected null remains matched')"
+        },
+        {
+          "line": 53,
+          "source": "          check(native.cursor_code_unit==4,'selected null consumes full structure')"
+        },
+        {
+          "line": 61,
+          "source": "          check(#selected==2 and selected[1]==identity and selected[2]==identity,row.name..' two selected occurrences')"
+        },
+        {
+          "line": 62,
+          "source": "          check(table.concat(semantic_slots,',')=='Value#0@1,Value#0@2',row.name..' semantic occurrences and positions')"
+        },
+        {
+          "line": 68,
+          "source": "          check(#selected==1 and selected[1]=='rule_label=Value selection_role=ordered_required target_rule=Part regex_index=1',row.name..' logical dependency identity')"
+        },
+        {
+          "line": 69,
+          "source": "          check(table.concat(semantic_slots,',')=='Part#1@3',row.name..' semantic logical identity and position')"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "lua/test/sparse_and_structural_sequence_test.lua",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "no direct local-driver or named run.lua route; transitive route unqualified",
+      "route_expressions": [],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "f9b74f55c7cd028cc278270fb0d6ef98998e6d16b99570a8e69374ae3c090588",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 130,
+          "source": "    ($($name:ident,)*) => { $(#[test] fn $name() { check_case(stringify!($name)); })* };"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "60ce5a77b73f6eac28785ac7c3d0d50e79622057f5dd7bdfa35ec25b2bbbcdbc",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 106,
+          "source": "    ($($name:ident,)*) => { $(#[test] fn $name() { check_case(stringify!($name)); })* };"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "50be43de8cd0f8d64dc6ccdc468fb208e769065233698fe4be03c534fab1159a",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 109,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "d41bacb7b8e5027b11d3932030364590a0c4639e4180473e2861be79e64b06c6",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 125,
+          "source": "    ($($name:ident,)*) => { $(#[test] fn $name() { check_case(stringify!($name)); })* };"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "a1754834039bd30a7a48266f1f006319347f970311f4eb8127e120fd90f3e6b4",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 115,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "be27a315c57374d1c6148e879d7b007fc4be11a6704a8c91929fb3ae35e4f6a4",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "c8492e8d35d0b7792f410fe1845bf0625d147a1d2720b8a45c30ac9422d101e0",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        },
+        {
+          "line": 85,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "88d2533a8ceab15a77a8d541c334cf551ab43e222bb953464382e140bb24a7ed",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "077a15226e606403a26948d4719154d4b6ae5752d95a53aafe32cbff1379c9e9",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "43b601ca80a2a458b5f9f4b8385eeec0d1768b4e1f8a5f37ee23b044cc2cfa32",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 86,
+          "source": "        #[test]"
+        },
+        {
+          "line": 113,
+          "source": "#[test]"
+        },
+        {
+          "line": 131,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "26769d225818c66f2abd871c9cbb33c66a68db1dcd3fdb02191d291031745b51",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 79,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/count_source_fallback.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "ab98322c264929f828512a5cbd43200c78eb6564f9856c9750055ad751e09e74",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 125,
+          "source": "    #[test]"
+        },
+        {
+          "line": 281,
+          "source": "#[test]"
+        },
+        {
+          "line": 362,
+          "source": "#[test]"
+        },
+        {
+          "line": 400,
+          "source": "            \"{generated}\\n#[cfg(test)] mod count_guard {{\\n#[test] fn expected_result() {{\\nlet actual = super::execute({input});\\nprintln!(\\\"COUNT_GUARD_FRESH {name} {{:?}}\\\", actual);\\n{assertion}\\n}}\\n}}\\n\""
+        },
+        {
+          "line": 418,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": [
+        {
+          "line": 123,
+          "source": "#[cfg(test)]"
+        },
+        {
+          "line": 400,
+          "source": "            \"{generated}\\n#[cfg(test)] mod count_guard {{\\n#[test] fn expected_result() {{\\nlet actual = super::execute({input});\\nprintln!(\\\"COUNT_GUARD_FRESH {name} {{:?}}\\\", actual);\\n{assertion}\\n}}\\n}}\\n\""
+        }
+      ]
+    },
+    {
+      "activation_sha256": "5f2c9b6546142591957277327966ed76db8fa3cb0fd402dd8286473007771ade",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 109,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "96e130c1a3d3ef006e7bb2599e4c8c4e801673b3e55fca0852230b9b306856dd",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 109,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "d2bbbd8c617f0916f3b70aaa5b8ccb330d53d7190a72904b5127e818254533a8",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 102,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "c0f9085197d4bc6ce564155d98da777a0a595b26b1d388f4e1327cd2071f8822",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 95,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "4a6f79ca51f5c1db23cf76acedd5bb740750597c1f31437104e62206d47f937f",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 95,
+          "source": "        #[test]"
+        }
+      ],
+      "historical_task_references": [],
+      "path": "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "489f7717c50bd318d023351051c66e508367deb771e12c60ff37bd5b344d2ae6",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "883131c21d0d6125400849ea1069aa96c7aff64e68f03bebbab93ee0c2a8cdc7",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "f4f642ef77b1ca156e80d83c14451beac3415e30cdbe49158e0fa44a67e04948",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 7,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "98d809ac0fb947c23d87c7585ad0fac839f5c541baf0fba942e4cdb66f81cd8c",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    },
+    {
+      "activation_sha256": "6431e37e9b0cb61b0bbe006b6cc850b77fca9b1ea8ee09115bceff6caa375278",
+      "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.2",
+      "backend": "rust",
+      "direct_loaders": "unqualified; sibling1 owns source interpretation",
+      "execution": "not run",
+      "harness_markers": [
+        {
+          "line": 11,
+          "source": "#[test]"
+        }
+      ],
+      "historical_task_references": [
+        {
+          "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+          "status": "active"
+        }
+      ],
+      "path": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "prior_required": true,
+      "prior_review_candidate": false,
+      "role": "native-regression-suite-source",
+      "route": "Cargo package test convention; documented, not executed",
+      "route_expressions": [
+        {
+          "line": 33,
+          "source": "\"$CARGO_CMD\" test --manifest-path rust/Cargo.toml -p linkedspec-runtime"
+        }
+      ],
+      "selection_caveats": []
+    }
+  ],
+  "limits": "Static named candidate source roles and bounded local routes only. Convention eligibility and conditional branch selection are not SDK discovery/execution. Test bodies, conditional/ignored cases, transitive includes/loaders, environment/config/package/source-origin resolution and complete population remain unqualified. Registration4.1.2 and native/per-read/physical4.2/SESSION5 remain open.",
+  "optional_gates": [
+    {
+      "backend": "rust",
+      "command": "bash \"$REPO_ROOT/tools/run_rust_local.sh\"",
+      "default": "0",
+      "enabled": "1",
+      "flag": "LINKEDSPEC_RUN_RUST"
+    },
+    {
+      "backend": "dart",
+      "command": "bash \"$REPO_ROOT/tools/run_dart_local.sh\"",
+      "default": "0",
+      "enabled": "1",
+      "flag": "LINKEDSPEC_RUN_DART"
+    },
+    {
+      "backend": "julia",
+      "command": "bash \"$REPO_ROOT/tools/run_julia_local.sh\"",
+      "default": "0",
+      "enabled": "1",
+      "flag": "LINKEDSPEC_RUN_JULIA"
+    },
+    {
+      "backend": "lua",
+      "command": "bash \"$REPO_ROOT/tools/run_lua_local.sh\"",
+      "default": "0",
+      "enabled": "1",
+      "flag": "LINKEDSPEC_RUN_LUA"
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0"
+}
