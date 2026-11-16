@@ -49,6 +49,7 @@
 {"bytes":2962,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.21","path":"docs/knowledge/dart-closed-task-narrative-headroom.md","sha256":"4fde3cb8c756d3f77b017ecace606b54f4c4d7c3fa5f15357273e955e9742f6e","type":"member"}
 {"bytes":5817,"lines":78,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-compiled-spec-state.md","sha256":"d477bbfa2197f5fa4ba8b529922c42169b44d9ed550d356b63d499fd9a90df52","type":"member"}
 {"bytes":7984,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-component-gate-sdk-compatibility.md","sha256":"5c0aae96195d4e6296d019f5ec773a57b99ffb5f9811e94fc115e2007d1c500b","type":"member"}
+{"bytes":2264,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0","path":"docs/knowledge/dart-constructed-loader-roles.md","sha256":"378c9901bdf45d11bc817e1734648320b7076d4586ae80b678305c6115a5a56a","type":"member"}
 {"bytes":2033,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-constructor-result-guards.md","sha256":"0590af4d3cf21dea6ade146b8c4df2b8b0ae3224454dae8d2e8882bf16cd2ba4","type":"member"}
 {"bytes":3163,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-contains-source-guards.md","sha256":"e430eca911c41241a24e1484284a6e203dea75bcef7108213465a8c1a35776c8","type":"member"}
 {"bytes":7280,"lines":99,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-controlled-corpus-execution.md","sha256":"7c4ed77b24bb1c976893b7a5b4011ee87a847db23d3b632f56ae23b533eef52f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2905,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-repetition-minimum-misses.md","sha256":"f568a085419623d42bfe51ce2fa21d85058f6b7a761fb95ec6ed569af38910b1","type":"member"}
 {"bytes":4071,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-perl-blind-postcall-return-gap.md","sha256":"3016f57f71fd8af5327ffb365b82be0610e3092e8959e7042a0ae4c9c57025a9","type":"member"}
 {"bytes":3043,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-presence-result-source-guards.md","sha256":"bd6adabb25b607163c57008f2590dbaff2005fcc8dedcd65b23d5de2127a97f7","type":"member"}
-{"bytes":3377,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-boundary.md","sha256":"c01814905f47cabbe2a33b1361d227db371b5dc19d58ec4d2c0317ac25241023","type":"member"}

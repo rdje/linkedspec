@@ -1,0 +1,22 @@
+{
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0",
+  "activation": "c9de2f335a2be2d518bcdb79773d16964d7f8109",
+  "cwd": "dart",
+  "grammar": "specs/user_function_definition.spec",
+  "loader": "dart/lib/src/parser/user_function_definition_parser.dart",
+  "prior_ledger": "docs/checkpoints/dart-direct-input-qualification-2026-11-10/inputs.json",
+  "consumers": [
+    {"path": "dart/test/array_transform_result_guard_composition_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.3", "grammar_route": "explicit"},
+    {"path": "dart/test/array_transform_callable_result_guard_composition_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3", "grammar_route": "explicit"},
+    {"path": "dart/test/hash_value_result_guard_composition_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.77.3", "grammar_route": "explicit"},
+    {"path": "dart/test/hash_view_result_guard_composition_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.76.3", "grammar_route": "explicit"},
+    {"path": "dart/test/with_hash_results_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.31.3", "grammar_route": "default-cached-upward-lookup"},
+    {"path": "dart/test/constructor_result_composition_test.dart", "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.61.3", "grammar_route": "default-cached-upward-lookup"}
+  ],
+  "callable_inputs": [
+    "docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json",
+    "tests/fixtures/array_transform_callable_result_guard_dart_profiles.json"
+  ],
+  "callable_support": "dart/tool/callable_array_transform_observation.dart",
+  "limits": "Static interpretation of six named consumers at the activation only. No SDK execution, default lookup observation, package resolution, full transitive/per-read closure, test population completeness or canonical selection. Optional capture output paths depend on runtime phase/id/cwd. Native/source-origin/OS custody and shadowing remain TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION-STARTUP-READING.5."
+}

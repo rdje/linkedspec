@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3865,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-with-callback-name-collision.md","sha256":"a6a5e45d4595ebfaff10b9f7e28fa48629fc48d134bd39a045293ce1e2085742","type":"member"}
 {"bytes":2229,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-with-final-callback-snapshot.md","sha256":"902a2d6900487a29a7bab4d61c4b13356803a98d5202c522c78df281b5cc9663","type":"member"}
 {"bytes":8170,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-working-vars-auto-vivify.md","sha256":"14ae7eb0001a50f4cbff4473572426f51c6dd02c57b7122e00605b1d9ec1c27a","type":"member"}
 {"bytes":2061,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-numeric-unicode-digit-oracle-drift.md","sha256":"ff21d319a9a3d3b51a56a5795f14a0c5b40b0f86443103cffdc050e4cb316ac4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4366,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-assignment-expression-values.md","sha256":"f30623b5d674bd6dcec715c67be4e3e626a8ff82b6c06a9c091efa060c530aef","type":"member"}
 {"bytes":4313,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-slot-bare-reads.md","sha256":"2059f0f21f2aebbe981f50a66695c85c05e9ed03d3d25e82a02cb031ad627c86","type":"member"}
 {"bytes":8065,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-surface-ground-truth.md","sha256":"428f3d74c6b964185841cb507902d2f1dbfe18130b78e0ac9cbe917e524e417c","type":"member"}
-{"bytes":7201,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-nested-value-path-assignment.md","sha256":"3e0ad60ce6d62ef064e04821261038c6e32b6dee2802dc05250a2f2075423d45","type":"member"}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — qualify constructed Dart loader inputs
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0: Six named Dart consumers have ten fixture-input edges, six explicit/default grammar edges, one support import and one optional output readback; the older five-consumer ledger agrees and eight distinguishing controls reject. All26 retained current inputs match bytes/modes. This is static source interpretation, with no SDK execution, observed default resolution or canonical admission. Evidence: `docs/checkpoints/dart-loader-qualification-2026-11-16/REVIEW.md`. Remaining population, canonical registration and native/source-origin closure retain their existing owners.
+
 ## 2026-11-16 — prepare canonical source selection and portable recovery
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0: 952 filename-universe candidates, 221 captured-classifier proposals and 131 proposed Perl paths without direct unconditional selection; five actual Bash selector controls and five evidence controls pass. All226 planning-archive member bodies/modes recover independently through native tar after correcting one noncanonical self-source name. Original archive/producer stay exact; legacy namespace RED and five archive controls pass. Evidence: `docs/checkpoints/canonical-discovery-inventory-2026-11-16/REVIEW.md`. Focused preparation only; full canonical and all before-push owners remain open.

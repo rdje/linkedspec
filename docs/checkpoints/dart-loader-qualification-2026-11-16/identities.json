@@ -1,0 +1,106 @@
+{
+  "dart/lib/src/parser/user_function_definition_parser.dart": {
+    "mode": 420,
+    "sha256": "67f01bc6d8285c67db55d569e758192bc44fbf609c505dc99ca1f94f4f37c8ce"
+  },
+  "dart/test/array_transform_callable_result_guard_composition_test.dart": {
+    "mode": 420,
+    "sha256": "2d98da40f737d67efded2113d896e30f7347cc8688913dab54fb2076701c51b3"
+  },
+  "dart/test/array_transform_result_guard_composition_test.dart": {
+    "mode": 420,
+    "sha256": "6ab14c5773af42c63bee144e0e3b5cbe3be02d1a4abba468ff0f4278923e890b"
+  },
+  "dart/test/constructor_result_composition_test.dart": {
+    "mode": 420,
+    "sha256": "88fe64897cb96d5ec32a512acc287764fbec520778fc09818b485d86356cd693"
+  },
+  "dart/test/hash_value_result_guard_composition_test.dart": {
+    "mode": 420,
+    "sha256": "9a2d36ec9df7a2170100ad716d54b2d7e30cbd9f713b05cae86263514ffb564b"
+  },
+  "dart/test/hash_view_result_guard_composition_test.dart": {
+    "mode": 420,
+    "sha256": "8038bef922e382be3c75eaaec8600a0ca8f4caa49b47ec91b995547a36ff8c8a"
+  },
+  "dart/test/with_hash_results_test.dart": {
+    "mode": 420,
+    "sha256": "30255046675ce0b6fb19a22d8009162b464df2c99224f00c0308752c5d11814d"
+  },
+  "dart/tool/callable_array_transform_observation.dart": {
+    "mode": 420,
+    "sha256": "12ae4a5dff3b05a355f30fda45008abf89c635aa0ff3f64a85aa332db107f1b7"
+  },
+  "docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json": {
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/cases.json": {
+    "mode": 420,
+    "sha256": "0d730f41a3dd4f47abe325cc0fca0bacde40830194288c8b263d367b307d717a"
+  },
+  "docs/checkpoints/dart-direct-input-qualification-2026-11-10/inputs.json": {
+    "mode": 420,
+    "sha256": "443441c5a5c77b9561885e610711c894e3a0ad3664a821e362df2f56bf9cd487"
+  },
+  "docs/checkpoints/dart-loader-qualification-2026-11-16/capture.py": {
+    "mode": 420,
+    "sha256": "48796d946876ff88470acd7a848ffed18d37fc54d00f897e235812a61c9daeeb"
+  },
+  "docs/checkpoints/dart-loader-qualification-2026-11-16/qualification.json": {
+    "mode": 420,
+    "sha256": "902415641a51da3897113ecfc5d00967c8c479c3f4ffdb571099e7968709b513"
+  },
+  "docs/checkpoints/dart-loader-qualification-2026-11-16/review.py": {
+    "mode": 420,
+    "sha256": "0f2a53ed2d3b710e051fdea27ab8496f4349a7defd8f1683ed86fd85c19e7a33"
+  },
+  "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json": {
+    "mode": 420,
+    "sha256": "77c79b8b17e345695ca314a84ac56fd0c2a79007853e83e5c038ac1ff25f31fd"
+  },
+  "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json": {
+    "mode": 420,
+    "sha256": "1d2d2eecef5a714a6f0140a9afc9a8f1beaacbea51704752e28ef6aaabc7a9b1"
+  },
+  "specs/user_function_definition.spec": {
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_dart_profiles.json": {
+    "mode": 420,
+    "sha256": "7acda29e6781e4938ff6f666ac4249e132655785002b4aa782ca96ae58b89dd1"
+  },
+  "tests/fixtures/array_transform_result_guard_dart_profiles.json": {
+    "mode": 420,
+    "sha256": "3915eb4df0a06f7280e74cca9880e985e16fac4205c56cd0f977e8b1d281bd36"
+  },
+  "tests/fixtures/hash_value_result_guard_dart_profiles.json": {
+    "mode": 420,
+    "sha256": "dbcd105794049f7baed4534e7cec48138a2fe908eeccb42ea77fd06579c25186"
+  },
+  "tests/fixtures/hash_view_result_guard_dart_profiles.json": {
+    "mode": 420,
+    "sha256": "6a74480ee21c4774cd7048a4a9bc8ef2c49098b2b77668ff0825e86a0a9384b7"
+  },
+  "tests/fixtures/with_hash_result_values.json": {
+    "mode": 420,
+    "sha256": "08fa100171b6136807acbca04bce880c8bc618f7136115f4ee1487028390745d"
+  },
+  "tests/fixtures/with_hash_result_values.spec": {
+    "mode": 420,
+    "sha256": "a66a4ac58c211532d013315918c0748fbf96b7484d95a74430337c296a07d9a2"
+  },
+  "tools/project_data_env.sh": {
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

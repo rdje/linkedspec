@@ -1,0 +1,15 @@
+{
+  "original_component_argv": [
+    "bash",
+    "tools/run_python_project_data.sh",
+    "docs/checkpoints/dart-loader-qualification-2026-11-16/review.py",
+    "--current"
+  ],
+  "cwd": ".",
+  "actual_result": "docs/checkpoints/dart-loader-qualification-2026-11-16/review-stdout.json",
+  "metadata_correction": "Claim command now includes the actual --current option; no result/source recapture or producer replay.",
+  "second_commit_exit": 143,
+  "second_attempt_credit": "Interrupted before landing for metadata correction; no complete-hook credit.",
+  "partial_hook_sha256": "c6a1eca00cabd1a95f52f86c5ecb532813fd49b6a6119b90168cd990487401c5",
+  "old_staged_diff_sha256": "7a6b84fe3934d264c40edd56ff5f0b0e86aefb5f072db36da93b28b509078f9d"
+}

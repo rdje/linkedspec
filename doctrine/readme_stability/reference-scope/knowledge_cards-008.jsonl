@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2171,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-control-parent-reconciliation.md","sha256":"ec396207e59608bee0d6e4db4b9b55dbc4fe98c77f97218bd9006f06c88aabe5","type":"member"}
 {"bytes":5630,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-grouped-pattern-membership.md","sha256":"549e21957b85b385ef5a7c33a4d64a3061589f45d88b65fb391bf90a4054ed24","type":"member"}
 {"bytes":4265,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"ecc968d38c4632366a01c2c6bca2e52b21f903edbdeaa19d812aaafdad96ecb9","type":"member"}
 {"bytes":3520,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-marker-conditional-execution.md","sha256":"6cb5c77bd8e8d01e918609bfd0562050ebe23635497bfaa4fa253cbbc0131c9b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3834,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-regex-undef-required-capture.md","sha256":"d9d837aa77323796ffd28995e4760083da5e67b070ba28024297091504e71224","type":"member"}
 {"bytes":5229,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-set-key-required-capture.md","sha256":"1c3eab53f2a70c77a0dd40700f6d90d5f4ef84de72de755cdf37b5d702753f8d","type":"member"}
 {"bytes":10395,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-slot-required-capture.md","sha256":"2935b00845cd1e0dfadee80f53c49db52407b1c85d137f92390772cf65122c38","type":"member"}
-{"bytes":33972,"lines":402,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-trim-capture.md","sha256":"a9c6455169cf69c6fb61d31dc012f5f2e12c2c8e43268a9e0af9bfd2151e4015","type":"member"}

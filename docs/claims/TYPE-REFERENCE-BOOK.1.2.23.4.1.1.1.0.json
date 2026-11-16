@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0",
+  "claims": [
+    {
+      "name": "six-consumer-static-loader-roles",
+      "statement": "Six named Dart consumers have ten fixture-input edges, six explicit/default grammar edges, one support import and one optional output readback; the older five-consumer ledger agrees and eight distinguishing controls reject. All26 retained current inputs match bytes/modes. This is static source interpretation, with no SDK execution, observed default resolution or canonical admission.",
+      "scope": "Static interpretation of six named consumers at the activation only. No SDK execution, default lookup observation, package resolution, full transitive/per-read closure, test population completeness or canonical selection. Optional capture output paths depend on runtime phase/id/cwd. Native/source-origin/OS custody and shadowing remain TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION-STARTUP-READING.5.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/dart-loader-qualification-2026-11-16/review.py --current",
+        "granularity": "Each named consumer, constructed direct read target and source expression; prior five-consumer input ledger; explicit/default grammar/support/output roles, archived bytes/modes and actual Git listing.",
+        "result": "{\"consumers\": 6, \"controls\": {\"duplicate-read\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}, \"missing-default-grammar\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}, \"missing-fixture\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}, \"missing-support\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}, \"omitted-consumer\": {\"reason\": \"six named consumers\", \"result\": \"RED\"}, \"output-promoted-to-fixture\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}, \"reversed-default-anchor-precedence\": {\"reason\": \"default grammar source contract\", \"result\": \"RED\"}, \"wrong-constructed-path\": {\"reason\": \"loader ledger differs from source interpretation\", \"result\": \"RED\"}}, \"current_inputs\": 26, \"fixture_edges\": 10, \"grammar_edges\": 6, \"limits\": \"Static interpretation of six named consumers at the activation only. No SDK execution, default lookup observation, package resolution, full transitive/per-read closure, test population completeness or canonical selection. Optional capture output paths depend on runtime phase/id/cwd. Native/source-origin/OS custody and shadowing remain TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION-STARTUP-READING.5.\", \"optional_output_readbacks\": 1, \"result\": \"PASS\", \"support_imports\": 1}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A missing fixture/default grammar/support, wrong path, output misclassification, duplicate read, reversed default anchor precedence or omitted consumer could pass.",
+        "oracle": "Retained activation source/read expressions and an independent earlier five-consumer input ledger. Callable literals and default source contract are statically interpreted, not a runtime oracle.",
+        "red_control": "All eight named controls in actual review-stdout.json reject; healthy reconstruction and prior-ledger comparison pass."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "All26 named project source/fixture/instrument bodies and modes, Git listing channels, actual capture/review stdout/stderr and reconstructing instruments are retained and source-gated. Complete native Python/Git/library/OS, outer-launcher first-use and runtime per-read/source-origin/physical closure remain4.2/SESSION5. No SDK invocation or retrospective custody claim."
+      }
+    },
+    {
+      "name": "raw-book-log-retention",
+      "statement": "The compressed mdBook output preserves the exact body and mode recovered independently from the first rejected staged diff; four corruption controls reject.",
+      "scope": "One raw build log and the partial failed normal hook. No new build, SDK run, complete first-hook pass or native custody credit.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/dart-loader-qualification-2026-11-16/review_log.py",
+        "granularity": "Complete original body, original file mode, rejected full-index diff and partial hook bytes.",
+        "result": "PASS: original_body_and_mode_preserved; mode, digest, index-digest and body controls reject."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Changed log bytes, mode or source digest could be accepted as the original build output.",
+        "oracle": "The independently retained rejected staged diff supplies the complete original added-file body and mode; the first actual path-hook refusal identifies the raw output.",
+        "red_control": "Actual first path hook rejects the plaintext file. All four named preservation controls reject and exact compressed recovery passes."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Original log, failed index diff, partial hook, preservation and review producers, metadata and review channels remain tracked. Complete native/OS and outer-launcher first-use/source-origin closure remains4.2/SESSION5. The interrupted first hook has no all-doctrine credit."
+      }
+    }
+  ]
+}

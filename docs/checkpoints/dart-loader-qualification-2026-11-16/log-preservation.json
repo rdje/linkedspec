@@ -1,0 +1,11 @@
+{
+  "source": "book-build.log",
+  "retained": "book-build.log.gz",
+  "sha256": "8123ceaf2dc7f6111d46f378fdfcf901e325442604b21e531a413a298186c535",
+  "mode": 420,
+  "representation": "Exact original output bytes, compressed; no rewritten log or repeated build.",
+  "first_commit_exit": 143,
+  "first_hook": "Interrupted after observed path failure; no all-doctrine pass credit.",
+  "staged_diff_sha256": "2d3380ddebad48bb046fcf11f82b1524622d413c1d8f9528fdc68526613d4728",
+  "partial_hook_sha256": "10cccd297dd85228c098061989fea3bbec483f621dc0f767bc8832acddf6f9b5"
+}

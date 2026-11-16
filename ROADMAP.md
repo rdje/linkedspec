@@ -1,4 +1,4 @@
-November16 current PNT frontier: Source preparation TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 is focused-checked; actual consumer/loader qualification4.1.1.1 is next. Registration/source admission/canonical4.1.2 and all separate before-push owners precede publication30.2. No SDK execution or runtime/admission change is claimed.
+November16 current PNT frontier: Bounded Dart loader qualification TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 is focused-checked. Remaining consumer/loader qualification4.1.1.1.1 precedes exact registration/source admission/canonical4.1.2 and publication30.2 after all independent prerequisites. No SDK execution or full inventory/admission is claimed.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

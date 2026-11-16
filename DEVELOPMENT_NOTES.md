@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — distinguish Dart input and capture roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0: Literal paths alone miss the with fixture extension substitution and the default grammar dependency. Four selected normals pass grammar explicitly; constructor/with use the cached cwd-then-script upward lookup. Callable-transform imports its observer and optionally reads back its own just-written capture. These are distinct roles; no current lookup/cache/SDK result is inferred. The prior five-consumer fixture ledger is an independent dated comparison; callable inputs are additionally source-bound. Three supplied portable-policy digests match the previous review; known guide changes remain policy20. Evidence: `docs/checkpoints/dart-loader-qualification-2026-11-16/REVIEW.md`. Remaining population, canonical registration and native/source-origin closure retain their existing owners.
+
 ## 2026-11-16 — preserve preparation limits and source-image namespace
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0: The inventory freezes an activation filename universe and actual stubbed Bash arguments. Captured classifier proposals, literal references and potential keyword lines are unqualified source evidence; they do not establish ownership, actual input reads, SDK results or canonical admission. Qualification4.1.1.1 precedes registration4.1.2. The earlier archive defect comes from passing absolute Path(__file__) as arcname. A separate root-relative image preserves original member bodies/modes and actual producer bytes; native recovery and source/data controls verify it without rewriting the original epoch. Evidence: `docs/checkpoints/canonical-discovery-inventory-2026-11-16/REVIEW.md`. Focused preparation only; full canonical and all before-push owners remain open.

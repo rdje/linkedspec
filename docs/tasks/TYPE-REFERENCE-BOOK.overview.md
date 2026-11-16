@@ -1856,13 +1856,39 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Handoff: Source preparation is the safe completed slice; actual loader/role qualification grew into its separately owned child. Session focus degraded after earlier workflow mistakes, so recover fresh from the committed pointer before starting that larger audit; no next-unit execution or SDK job is in flight.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0`, `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1`.
   Goal: Qualify the proposed feature/support population and actual direct loaders before freezing registration input for4.1.2.
   Dependencies: Completed preparation4.1.1.0; source references and potential loader lines supply evidence, not execution or resolved dependency assertions.
   Acceptance: Resolve required-versus-support/dormant/fixture roles with exact existing owners and source context; interpret actual read/include/producer calls separately from comments, strings and writes. Include the known external Dart cases/profiles and default function grammar. Record constructed paths, helper dependencies and unresolved dynamic/alias/per-read edges with4.2/SESSION5; preserve all original data and exclusions. Freeze complete qualified registration input and its honest closure limits before completing parent4.1.1. Actual optional backend execution and exact canonical admission remain4.1.2.
   Planned verification tier: focused unless shared mechanical owners change.
   Planned focused checks: Source-directed role/loader qualification, independent required-population and constructed-path checks, input omission controls, current source identity and normal documentation/commit hooks.
   Planned claim verification: Declare actual qualification granularity and every unavailable leg at activation; no keyword-only graph or static filename population supplies runtime proof.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify constructed fixture, explicit/default grammar, support import and optional read-after-write roles in six named Dart consumers.
+  Dependencies: Clean c9de2f335a2be2d518bcdb79773d16964d7f8109; preparation0 and Dart direct-input qualification4.20; preserve all historical sources and observations.
+  Acceptance: Retain exact six consumer sources, loader/support/fixture bytes and relevant prior input ledger; bind actual read expressions to root-relative fixture paths and existing feature owners. Distinguish explicit grammar from cached upward default lookup and optional capture outputs. Use the prior independently captured input ledger and effective omission/role/path/source controls. No Dart execution, full role population, current resolved routing or parent closeout.
+  Verification tier: `focused`
+  Focused checks: Readonly static loader reconstruction, prior five-consumer ledger comparison, source/fixture identity and distinguishing controls; current-source check, task/index, Knowledge, book, memory, histories, whitespace and normal doctrine hooks.
+  Canonical trigger: Registration4.1.2 and final publication30.2; this bounded checkpoint changes no runtime, test, shared runner, gate or policy.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0.json`
+  Activation: Parent loader/role qualification is too large for one reviewable slice. This child handles the known constructed-path boundary first; remaining population/discovery stays1.1.1.1. Other repositories remain read-only; three supplied policy digests match the recorded review and the guide's known updates remain scheduled under policy20.
+
+  Landing defect (owned/fixed): The first normal path hook rejects book-build.log because mdBook prints the current checkout identity. Exact raw bytes/mode survive in a compressed evidence file, independently recovered from the rejected staged diff; body/mode/digest/index controls reject. The partial hook log survives. The already-failed first hook process and its seven observed descendants were stopped, with no all-doctrine credit. Focused path retry0 passes; a complete normal retry governs landing.
+  Pre-landing review correction: The claim command now includes the actual --current option matching the retained result. Original source/results/publisher remain unchanged; completed publisher is not replayable. The second pending commit was interrupted to correct this metadata before landing, with no complete-hook credit. Finish the final normal workflow and recover fresh before another large qualification slice; avoidable workflow errors make this the safe session boundary.
+  Outcome: Six named Dart consumers have ten fixture-input edges, six explicit/default grammar edges, one support import and one optional output readback; the older five-consumer ledger agrees and eight distinguishing controls reject. All26 retained current inputs match bytes/modes. This is static source interpretation, with no SDK execution, observed default resolution or canonical admission.
+  Evidence: docs/checkpoints/dart-loader-qualification-2026-11-16/REVIEW.md; readonly review.py reconstructs all named read expressions and compares the older input ledger. Current identity is pre-landing only; cache/search shadowing, actual per-read/native/source-origin closure remain4.2/SESSION5.
+  Next: Complete remaining role/loader/discovery qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1, then freeze registration input for4.1.2; all independent before-push owners remain.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1`
+  Status: `pending`
+  Goal: Complete remaining consumer/support/dormant/fixture roles and loader/discovery qualification, then freeze registration input.
+  Dependencies: Completed constructed Dart boundary0; all original qualification1/parent4.1 obligations remain binding.
+  Acceptance: Reconcile every proposal and relevant excluded candidate against exact owners/source context; interpret remaining reads/includes/producer calls and automatic/conditional discovery without SDK execution claims. Integrate child0's bounded loader ledger; retain source/current identities and effective missing/duplicate/disabled/input controls. Keep unresolved runtime/alias/native/source-origin edges under4.2/SESSION5 and actual canonical execution4.1.2.
+  Planned verification tier: focused unless shared mechanical owners change.
+  Planned claim verification: Declare the actual source-directed population and unresolved legs before activation.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`
   Status: `pending`

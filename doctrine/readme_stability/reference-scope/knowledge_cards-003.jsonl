@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7082,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-registry-dispatch.md","sha256":"261c4f1b345c96452bc1ff7381fda25e8f3b6573e3404497abb2deb7c80da824","type":"member"}
 {"bytes":5575,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-definition-staged-ast-audit.md","sha256":"b22f6d0b529c353ee920f9f3c1565af6674b6f971090348514ba37cd64fd0c32","type":"member"}
 {"bytes":4364,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/future-parity-task-partition-capacity.md","sha256":"694ca8cd8fa0928be8668f2c2a85026bd48646481ddb79895c4b1e9e7ee20124","type":"member"}
 {"bytes":4527,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/future-parity-task-partition-contract.md","sha256":"0ebf7cf9ce1591e6341825457a546764fa47b6bd38a9f577ba70d1d8514c1b12","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":8626,"lines":144,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-large-number-and-slice-boundaries.md","sha256":"697e0725e55b21d1927e7de10c7ec2f6d25cae98edc953ea946dbf158aa1516c","type":"member"}
 {"bytes":3033,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.4","path":"docs/knowledge/julia-length-result-guards.md","sha256":"d8e484ca8e070643606e7c151b37ede2b1675b3913dad33dd664d9ff6ef5cd84","type":"member"}
 {"bytes":2763,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lexical-result-source-guards.md","sha256":"54c3835cb1a0a01c8bacc1d7d3bc36f88640a212053d921dc9bfbab4de85a5d9","type":"member"}
-{"bytes":3391,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-live-recognition-progress.md","sha256":"99e88650093684cd11362049dfc7730086f555624c19dc29247b88637826b0ad","type":"member"}

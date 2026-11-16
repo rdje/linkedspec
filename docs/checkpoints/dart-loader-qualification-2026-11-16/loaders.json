@@ -1,0 +1,160 @@
+[
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.3",
+    "role": "grammar-input",
+    "source_expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+    "source_line": 48,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n                  root.resolve(\n                    'docs/checkpoints/array-transform-result-guard-dart-2026-11-10/cases.json',\n                  ),\n                ).readAsStringSync()",
+    "source_line": 56,
+    "target": "docs/checkpoints/array-transform-result-guard-dart-2026-11-10/cases.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/array_transform_result_guard_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+    "source_line": 66,
+    "target": "tests/fixtures/array_transform_result_guard_dart_profiles.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3",
+    "role": "grammar-input",
+    "source_expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+    "source_line": 76,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n                  root.resolve(\n                    'docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json',\n                  ),\n                ).readAsStringSync()",
+    "source_line": 84,
+    "target": "docs/checkpoints/array-transform-callable-dart-2026-11-12/cases.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/array_transform_callable_result_guard_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+    "source_line": 94,
+    "target": "tests/fixtures/array_transform_callable_result_guard_dart_profiles.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_value_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.77.3",
+    "role": "grammar-input",
+    "source_expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+    "source_line": 48,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_value_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.77.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n                  root.resolve(\n                    'docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json',\n                  ),\n                ).readAsStringSync()",
+    "source_line": 56,
+    "target": "docs/checkpoints/hash-value-result-guard-dart-2026-11-07/cases.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_value_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.77.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/hash_value_result_guard_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+    "source_line": 66,
+    "target": "tests/fixtures/hash_value_result_guard_dart_profiles.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_view_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.76.3",
+    "role": "grammar-input",
+    "source_expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+    "source_line": 48,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_view_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.76.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n                  root.resolve(\n                    'docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json',\n                  ),\n                ).readAsStringSync()",
+    "source_line": 56,
+    "target": "docs/checkpoints/hash-view-result-guard-dart-2026-11-07/cases.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/hash_view_result_guard_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.76.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/hash_view_result_guard_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+    "source_line": 66,
+    "target": "tests/fixtures/hash_view_result_guard_dart_profiles.json"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/with_hash_results_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.31.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/with_hash_result_values.$extension',\n      ),\n    ).readAsStringSync()",
+    "source_line": 56,
+    "target": "tests/fixtures/with_hash_result_values.spec"
+  },
+  {
+    "condition": "ordinary main/test path; static, not executed",
+    "consumer": "dart/test/with_hash_results_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.31.3",
+    "role": "fixture-input",
+    "source_expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/with_hash_result_values.$extension',\n      ),\n    ).readAsStringSync()",
+    "source_line": 56,
+    "target": "tests/fixtures/with_hash_result_values.json"
+  },
+  {
+    "condition": "default parser cache miss; first existing upward cwd candidate, then script anchor; current resolution not observed",
+    "consumer": "dart/test/with_hash_results_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.31.3",
+    "role": "grammar-input",
+    "source_expression": "parseSpecWithStagedUserFunctionDefinitions(source)",
+    "source_line": 8,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "default parser cache miss; first existing upward cwd candidate, then script anchor; current resolution not observed",
+    "consumer": "dart/test/constructor_result_composition_test.dart",
+    "feature_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.61.3",
+    "role": "grammar-input",
+    "source_expression": "parseSpecWithStagedUserFunctionDefinitions(source)",
+    "source_line": 7,
+    "target": "specs/user_function_definition.spec"
+  },
+  {
+    "condition": "source-relative import, package dependencies not resolved",
+    "consumer": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+    "role": "support-import",
+    "source_expression": "import '../tool/callable_array_transform_observation.dart' as observation;",
+    "target": "dart/tool/callable_array_transform_observation.dart"
+  },
+  {
+    "condition": "capture environment variable set; same invocation writes serialized first; dynamic phase/id/cwd",
+    "consumer": "dart/test/array_transform_callable_result_guard_composition_test.dart",
+    "role": "optional-capture-output-readback",
+    "source_expression": "target.readAsStringSync()",
+    "target": ".linkedspec-data/scratch/callable-transform-dart-normal/$phase/$id.json"
+  }
+]

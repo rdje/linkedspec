@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7646,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/post-parity-structured-text-program.md","sha256":"f96baefd9a112c23a15c6b4bc90c74a4b24f604f489b94c69fc2fe1197686587","type":"member"}
 {"bytes":2976,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-descriptor-ready-legacy-runtime-boundary.md","sha256":"cdaa04e9f1555d1f357817a0b40ec8c048851901642c27d1de0b73ec6be42d8b","type":"member"}
 {"bytes":6731,"lines":98,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-pluginbridge-transition-machinery.md","sha256":"12c408f5d68c9c4c6c30571d902c7aaae4e2fedc2215e088dc4f005719e3c24b","type":"member"}
 {"bytes":6081,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/presence-result-source-guards.md","sha256":"78af1e3e6ab12099cae98d4916b05a833a6f6ff38fb819a90243a30eaebaf4cd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-emptiness-result-source-guards.md","sha256":"17ca9172c5fd175cb12b7260f4e194080b6aaf4e6fefe2cc8202ea958993f489","type":"member"}
 {"bytes":4433,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-entry-match-separation.md","sha256":"40d74b482b10958a44b786dd139f82bb48d2dd1ed3cffeda738f422c02c18a6f","type":"member"}
 {"bytes":9559,"lines":158,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-final-value-assignment-receiver-guard-gap.md","sha256":"867df8d032f80df7146f1da8aa9a83514e328983cc82c9856d904961aedbe6c0","type":"member"}
-{"bytes":1628,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-format-owned-packages.md","sha256":"55e942b0b0d18e93f78c5b5d6a3bcdc38d52fbf8b5a209e38523fdabb7c897bd","type":"member"}
