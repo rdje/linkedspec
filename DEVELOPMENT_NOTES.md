@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — separate Lua syntax loads, package requests and capture readbacks
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0: Remaining native Lua27 minus the earlier11 gives16 consumers. Source interpretation separates syntax compilation from chunk invocation, input-root-prefixed file reads from opaque require requests, three equal-byte write/readback families from eight write-only captures and a stdout-only flag. A representative retained header compiles two actual repository chunks with an inert package and never calls them; a toy-only inverse calls exactly one. The earlier root ledger corroborates29 source/input identities and lacks30 current selected targets; neither membership nor absence establishes old test/read execution. Native/source-origin and complete semantic/transitive qualification remain open; all original SDK bytes/claims remain unchanged. Evidence: `docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — account for constructed Dart reads without erasing exclusions
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0: Remaining population comes from the native ledger minus earlier Dart manifests and generated-source owner. Every explicit readAsStringSync site maps to a fixed/list/stem/suffix expansion; consumer-level grammar remains explicit or cached/default without runtime-resolution credit. Three referenced runtime exclusions, an accumulator override, compile-only negatives and inline copied-null policy observations retain their scopes. The older root packet matches all file identities but captured more than its selected tests; no execution follows from membership. No original claim hash/result or consumer code changes. Evidence: `docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/REVIEW.md`.

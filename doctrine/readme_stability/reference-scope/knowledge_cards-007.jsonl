@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7407,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md","sha256":"f5a6632d29de4bb617f17599e86a3b97271f5487b74f00dc7ce7614b2a6a0d9c","type":"member"}
 {"bytes":35990,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md","sha256":"1c52958b65e31dfeb13d4eaf58fed317d44d8fbc50dc54e07d05ccfd60e49efc","type":"member"}
 {"bytes":14509,"lines":187,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md","sha256":"5f08d614dae0c6c2cfa3af3cdeeb6ecc9f415d5781816f02c8469f59eb9270de","type":"member"}
 {"bytes":3728,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-function-body-registry.md","sha256":"d215c73d88248d3cc250cb1b73dc3962eca4155b5b01bf98c7027557c597bb55","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}
 {"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
 {"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
-{"bytes":1962,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-quoted-marker-current-oracle.md","sha256":"52fbcc0405087b93f5c593c3f3c05555dd7c50c8fde97b37a25cdd6bff039406","type":"member"}

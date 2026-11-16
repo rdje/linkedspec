@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: ordinary Dart loader graphs complete; remaining Perl/native qualification precedes registration.
+PNT: ordinary Lua loader graphs complete; remaining Perl/native qualification precedes registration.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Ordinary Dart16 sources account for all23 explicit string-read sites, 46 fixture/grammar bindings to30 targets and matching historical identities. Four source qualifications/two inline policy rows remain explicit; twelve controls/current152 pass. No Dart/SDK or admission credit.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Sixteen ordinary Lua sources account for all43 io.open sites,87 file/grammar/syntax/support bindings to43 targets,30 syntax-only loads,three support loads and16 opaque package requests. Twelve optional capture conditions, named runtime exclusions,29 historical identities,14 controls/current165 and the inert-header/toy inverse pass. No package/regression body execution or admission.
 
 ## Next Action
 
-Remeasure committed outgoing size; continue remaining Perl/Rust/Julia/Lua loaders/support/dormancy/transitive qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1; generated Dart package/corpus2 and frozen-input3 remain separate before registration4.1.2, alongside every other push prerequisite.
+Remeasure committed outgoing size; continue remaining Perl/Rust/Julia loaders/support/dormancy/transitive qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1; generated Dart package/corpus2 and frozen-input3 remain separate before registration4.1.2, alongside every other push prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Lua16/io-sites43/bindings87/targets43/syntax30/support3/current165/fourteen controls and header inverse; no SDK body.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Dart16/read-sites23/bindings46/targets30/qualifications4/inline2/current152/twelve controls; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0 — Dart3/fixture-grammar9/support2/optional2/historical11-to9/current130/nine controls; original reader refusal retained, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Lua11/direct24/targets14/support2/optional2/historical6/current134/ten controls; no SDK.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; continue remaining Perl/Rust/Julia/Lua loader
 - TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.5 — each host508/four routes/20 targets/four separate compatibility/484 preserved/80 initial/eight signatures; old24-current508/direct6987 checks/readonly11/current266/3048 pairs; fresh size then coverage/discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.31 —1316 rows/eight scopes retained; three exact own completed logs/133480 combined bytes/modes independently used before plain retirement; readonly16/three public queries/parent30-31 exact; fresh size then Lua80.5.
-- TYPE-REFERENCE-BOOK.1.2.23.3.80.4 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct4959 assertions/readonly10/current516/3048 pairs; fresh size/cleanup then Lua80.5.
 
 
 ## History

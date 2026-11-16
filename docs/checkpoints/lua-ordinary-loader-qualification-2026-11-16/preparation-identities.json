@@ -1,0 +1,62 @@
+{
+  "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/direct/input-identities.json": {
+    "bytes": 47815,
+    "mode": 420,
+    "sha256": "37d1123feb58bdb8d8e1bfbe99ea614be296906abdda872abaffb29a3f8a95fd"
+  },
+  "docs/checkpoints/lua-loader-qualification-2026-11-16/loaders.json": {
+    "bytes": 11444,
+    "mode": 420,
+    "sha256": "faa91dbda93c7812023d6ea4edd2a7fde3920015c3a9cafe15f0e32d5f66b238"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/capture.py": {
+    "bytes": 3259,
+    "mode": 420,
+    "sha256": "25c2b0b41cf04d796a51805782ab4f827fd956ff81b599f9fcb31d2148360eb8"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/plan.json": {
+    "bytes": 1582,
+    "mode": 420,
+    "sha256": "c0e9fda5dfb0a74ef7ebec73a488b36676c83a42ce7fb9ca8114fa03c32911a9"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/probe.py": {
+    "bytes": 5353,
+    "mode": 420,
+    "sha256": "f850f786306a274f3830a0674d48c1e02a88e4bfc5971eb2644689a115cc2458"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/review.py": {
+    "bytes": 17938,
+    "mode": 420,
+    "sha256": "4e71c6644577f79a45f6fde7375cadb4d2fe5607dc518f0c2ceaa32d0ce7e0f4"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/run_step.py": {
+    "bytes": 1014,
+    "mode": 420,
+    "sha256": "1780a14195992407a6f03692fffc4f61c6968194152d877d43542f596f07a31c"
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/toy_chunk.lua": {
+    "bytes": 61,
+    "mode": 420,
+    "sha256": "697a2e557dc4044573502c4dc18a64c7fa5e9d2e05ab0385e01bfc0d6984505f"
+  },
+  "docs/knowledge/lua-spec-defined-function-parser.md": {
+    "bytes": 3521,
+    "mode": 420,
+    "sha256": "ce698d12ea38537fd3b1e59c4f61b58684575db15047a7d0f3ff5c637b71023c"
+  },
+  "lua/src/linkedspec/interpreter.lua": {
+    "bytes": 281483,
+    "mode": 420,
+    "sha256": "ecd3ef1ee80120d06aab980ef8cbca44bb6d57972f945b3263ab09392dc51098"
+  },
+  "lua/src/linkedspec/user_function_definition_parser.lua": {
+    "bytes": 8305,
+    "mode": 420,
+    "sha256": "6aa39ca90e4a135c574ff77a47409713906784c66cac4911c7c3e7c58924ca96"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  }
+}

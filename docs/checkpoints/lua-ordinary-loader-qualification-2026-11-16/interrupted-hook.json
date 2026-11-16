@@ -1,0 +1,6 @@
+{
+  "source": ".linkedspec-data/lua-ordinary-loader-commit.log",
+  "recording": "after-use copy; commit/hook deliberately stopped before landing to repair known whitespace",
+  "sha256": "7524b8fa9ed618d08fcc8d3b69af6f87a2078aa5a4a19bd3a9124364c2113920",
+  "mode": 420
+}

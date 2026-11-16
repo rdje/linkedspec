@@ -1,0 +1,14 @@
+{
+  "path": "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/review.py",
+  "operation": "rstrip only LF bytes at EOF, then append one LF",
+  "original": {
+    "bytes": 17938,
+    "sha256": "4e71c6644577f79a45f6fde7375cadb4d2fe5607dc518f0c2ceaa32d0ce7e0f4"
+  },
+  "normalized": {
+    "bytes": 17936,
+    "sha256": "f46a967d2dfce6c91e063ce89ccd1a0ca57eb42425f7e5411426d180b9e42b16"
+  },
+  "mode": 420,
+  "limits": "Original reader body/mode remains exact in preparation archive with original successful command channels. Only the landing form loses an extra final LF; qualified current verification treats this one explicit normalization separately."
+}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6640,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-diagnostic-output-events.md","sha256":"495baa4dbd2d949fa0841c8f7d7ddb4657f1829ef806405c48a4c3c9cab12e71","type":"member"}
 {"bytes":4491,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-duplicate-regex-slot-identity-admission.md","sha256":"79bb2658aa85e4a415b122ba67a11778a5cfc24969c1ba9cdfc1f879c2913114","type":"member"}
 {"bytes":2860,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-edge-semantics-bug.md","sha256":"6bb99643ef483b91defa0393391a7e88ef38949bc51c77d90db5d560782b6aa6","type":"member"}
 {"bytes":8005,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-emitted-cargo-manifest-path-portability-gap.md","sha256":"33c2db3450586b0301770f2e11ae6271c0f5c6551b5c10829f695dfef0c831b5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2789,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-parity-design-inventory.md","sha256":"fd1db56c208b464c91649068c027f65c3419b85c086cc7d7c96c5299e60dd78d","type":"member"}
 {"bytes":3783,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-runtime-branch-events.md","sha256":"483da84915ccee85e21e5076ca70dad97fe536d8601c2577c7c690208ff08277","type":"member"}
 {"bytes":4132,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-authority-materialization.md","sha256":"b277477547d3f62b26280b2cf516ec37058eace3ec62f97ed0fcb68e0851bea8","type":"member"}
-{"bytes":5801,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-compatibility-alias-gap.md","sha256":"4310a0105e77ec153b46f53c7ef2d2c17245d534eb1c4636c9d80b69de4a4a4b","type":"member"}

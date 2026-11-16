@@ -1,0 +1,1538 @@
+{
+  "consumers": [
+    "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_result_guard_composition_test.lua",
+    "lua/test/array_transform_callable_result_guard_composition_test.lua",
+    "lua/test/array_transform_result_guard_composition_test.lua",
+    "lua/test/capture_endpoint_absence_test.lua",
+    "lua/test/count_result_guard_composition_test.lua",
+    "lua/test/count_source_fallback_test.lua",
+    "lua/test/hash_value_result_guard_composition_test.lua",
+    "lua/test/hash_view_result_guard_composition_test.lua",
+    "lua/test/key_count_callable_result_guard_composition_test.lua",
+    "lua/test/key_count_result_guard_composition_test.lua",
+    "lua/test/length_result_guard_composition_test.lua",
+    "lua/test/named_capture_endpoint_absence_test.lua",
+    "lua/test/named_writer_endpoint_absence_test.lua",
+    "lua/test/referenced_blind_targets_test.lua"
+  ],
+  "execution_qualifications": [
+    {
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "excluded_names": [
+        "blind_no_regex",
+        "marked_blind_target",
+        "markerless_blind"
+      ],
+      "excluded_parent": "referenced_blind_intermediate",
+      "owners": [
+        "TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2.1",
+        "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1"
+      ],
+      "role": "invalid-build compile-only branch; parent runtime exclusion and three coordinator runtime exclusions"
+    }
+  ],
+  "input_edges": [
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "dofile(input_root .. \"lua/test/callable_array_transform_observation.lua\")",
+      "line": 7,
+      "role": "executed returned observation support",
+      "target": "lua/test/callable_array_transform_observation.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_concat_open_arity_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_concat_open_arity_lua_cases.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "dofile(input_root .. \"lua/test/callable_array_pipeline_observation.lua\")",
+      "line": 7,
+      "role": "executed returned observation support",
+      "target": "lua/test/callable_array_pipeline_observation.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_pipeline_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_pipeline_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "dofile(input_root .. \"lua/test/callable_array_transform_observation.lua\")",
+      "line": 7,
+      "role": "executed returned observation support",
+      "target": "lua/test/callable_array_transform_observation.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_transform_callable_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_transform_callable_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_transform_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/array_transform_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/src/linkedspec/interpreter.lua')",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/test/run.lua')",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/capture_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/capture_endpoint_absence.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 14,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name,\"r\")",
+      "line": 51,
+      "mode": "r",
+      "role": "JSON fixture",
+      "route": "literal name loop",
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name,\"r\")",
+      "line": 51,
+      "mode": "r",
+      "role": "JSON fixture",
+      "route": "literal name loop",
+      "target": "tests/fixtures/count_result_guard_source_owner_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_errors.json\",\"r\")",
+      "line": 60,
+      "mode": "r",
+      "role": "JSON fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/count_result_guard_lua_errors.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_excluded_ast.json\",\"r\")",
+      "line": 75,
+      "mode": "r",
+      "role": "AST-source fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/count_result_guard_excluded_ast.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_ast.json\",\"r\")",
+      "line": 83,
+      "mode": "r",
+      "role": "AST-expected fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/count_result_guard_lua_ast.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_domain.json\",\"r\")",
+      "line": 89,
+      "mode": "r",
+      "role": "host domain/profile fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/count_result_guard_lua_domain.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 15,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_boolean_source_cases.json\", \"r\")",
+      "line": 47,
+      "mode": "r",
+      "role": "JSON fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/count_boolean_source_cases.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 16,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/src/linkedspec/interpreter.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "loadfile(input_root .. \"lua/test/run.lua\")",
+      "line": 4,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "input-root prefix + fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/hash_value_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/hash_value_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(\"specs/user_function_definition.spec\", \"rb\")",
+      "line": 9,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/hash_view_result_guard_lua_profiles.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/hash_view_result_guard_lua_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(\"specs/user_function_definition.spec\", \"rb\")",
+      "line": 9,
+      "mode": "rb",
+      "role": "explicit grammar read",
+      "route": "fixed literal",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_callable_lua_profiles.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_callable_result_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_result_guard_lua_domain.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_result_guard_lua_errors.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_result_guard_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/key_count_count_source_ownership_cases.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 20,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/src/linkedspec/interpreter.lua\")",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "loadfile(\"lua/test/run.lua\")",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "host domain/profile fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/length_result_guard_lua_domain.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/length_result_guard_lua_errors.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/length_result_guard_cases.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixture(name) literal calls/list",
+      "target": "tests/fixtures/length_count_source_ownership_cases.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 20,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/src/linkedspec/interpreter.lua')",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/test/run.lua')",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/named_capture_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/named_capture_endpoint_absence.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 14,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/src/linkedspec/interpreter.lua')",
+      "line": 2,
+      "role": "syntax compilation only",
+      "target": "lua/src/linkedspec/interpreter.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "loadfile('lua/test/run.lua')",
+      "line": 3,
+      "role": "syntax compilation only",
+      "target": "lua/test/run.lua"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/named_writer_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "fixed literal",
+      "target": "tests/fixtures/named_writer_endpoint_absence.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 14,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "io.open(path,'rb')",
+      "line": 10,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "literal name loop -> read(path)",
+      "target": "tests/fixtures/referenced_blind_intermediate.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "io.open(path,'rb')",
+      "line": 10,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "literal name loop -> read(path)",
+      "target": "tests/fixtures/referenced_blind_intermediate_qualified.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "io.open(path,'rb')",
+      "line": 10,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "literal name loop -> read(path)",
+      "target": "tests/fixtures/pure_blind_targets.json"
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "io.open(path,'rb')",
+      "line": 10,
+      "mode": "rb",
+      "role": "JSON fixture",
+      "route": "literal name loop -> read(path)",
+      "target": "tests/fixtures/referenced_blind_intermediate_negatives.json"
+    },
+    {
+      "condition": "module-relative exact request and cache; actual resolution unobserved",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "parse_spec_with_staged_user_function_definitions(",
+      "line": 15,
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "io_sites": [
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/array_concat_open_arity_lua_profiles.json",
+        "tests/fixtures/array_concat_open_arity_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"wb\")",
+      "line": 31,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_CONCAT_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"rb\")",
+      "line": 33,
+      "mode": "rb",
+      "role": "optional generated output readback",
+      "route": "same locally written path",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/array_pipeline_callable_result_guard_lua_profiles.json",
+        "tests/fixtures/array_pipeline_callable_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"wb\")",
+      "line": 31,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"rb\")",
+      "line": 33,
+      "mode": "rb",
+      "role": "optional generated output readback",
+      "route": "same locally written path",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/array_pipeline_result_guard_lua_profiles.json",
+        "tests/fixtures/array_pipeline_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_PIPELINE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 36,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 12,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 23,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/array_transform_callable_result_guard_lua_profiles.json",
+        "tests/fixtures/array_transform_callable_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"wb\")",
+      "line": 31,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_CALLABLE_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "io.open(path, \"rb\")",
+      "line": 33,
+      "mode": "rb",
+      "role": "optional generated output readback",
+      "route": "same locally written path",
+      "targets": []
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/array_transform_result_guard_lua_profiles.json",
+        "tests/fixtures/array_transform_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_ARRAY_TRANSFORM_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 36,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/capture_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/capture_endpoint_absence.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name,\"r\")",
+      "line": 51,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "literal name loop",
+      "targets": [
+        "tests/fixtures/count_result_guard_cases.json",
+        "tests/fixtures/count_result_guard_source_owner_cases.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_errors.json\",\"r\")",
+      "line": 60,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/count_result_guard_lua_errors.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_excluded_ast.json\",\"r\")",
+      "line": 75,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/count_result_guard_excluded_ast.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_ast.json\",\"r\")",
+      "line": 83,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/count_result_guard_lua_ast.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_result_guard_lua_domain.json\",\"r\")",
+      "line": 89,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/count_result_guard_lua_domain.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "io.open(capture .. \"/\" .. row.id .. \".lua\", \"w\")",
+      "line": 24,
+      "mode": "w",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "io.open(capture .. \"/\" .. row.id .. \".ast.json\", \"w\")",
+      "line": 26,
+      "mode": "w",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "io.open(\"tests/fixtures/count_boolean_source_cases.json\", \"r\")",
+      "line": 47,
+      "mode": "r",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/count_boolean_source_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"specs/user_function_definition.spec\", \"rb\")",
+      "line": 11,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "input-root prefix + fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(input_root .. \"tests/fixtures/\" .. name, \"rb\")",
+      "line": 21,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/hash_value_result_guard_lua_profiles.json",
+        "tests/fixtures/hash_value_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "${LINKEDSPEC_HASH_VALUE_INPUT_ROOT} or cwd; prefix must include its separator",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 36,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(\"specs/user_function_definition.spec\", \"rb\")",
+      "line": 9,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/hash_view_result_guard_lua_profiles.json",
+        "tests/fixtures/hash_view_result_guard_lua_cases.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 34,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(\"specs/user_function_definition.spec\", \"rb\")",
+      "line": 9,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 19,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/key_count_callable_lua_profiles.json",
+        "tests/fixtures/key_count_callable_result_cases.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 31,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/key_count_result_guard_lua_domain.json",
+        "tests/fixtures/key_count_result_guard_lua_errors.json",
+        "tests/fixtures/key_count_result_guard_cases.json",
+        "tests/fixtures/key_count_count_source_ownership_cases.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 26,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(\"tests/fixtures/\" .. name, \"rb\")",
+      "line": 14,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixture(name) literal calls/list",
+      "targets": [
+        "tests/fixtures/length_result_guard_lua_domain.json",
+        "tests/fixtures/length_result_guard_lua_errors.json",
+        "tests/fixtures/length_result_guard_cases.json",
+        "tests/fixtures/length_count_source_ownership_cases.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "io.open(output .. \"/\" .. directory .. \"/\" .. identifier .. extension, \"wb\")",
+      "line": 26,
+      "mode": "wb",
+      "role": "optional generated output write",
+      "route": "capture helper/path expression",
+      "targets": []
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/named_capture_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/named_capture_endpoint_absence.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "io.open('tests/fixtures/named_writer_endpoint_absence.json', 'rb')",
+      "line": 6,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "fixed literal",
+      "targets": [
+        "tests/fixtures/named_writer_endpoint_absence.json"
+      ]
+    },
+    {
+      "condition": "repository cwd",
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "io.open(path,'rb')",
+      "line": 10,
+      "mode": "rb",
+      "role": "fixture read",
+      "route": "literal name loop -> read(path)",
+      "targets": [
+        "tests/fixtures/referenced_blind_intermediate.json",
+        "tests/fixtures/referenced_blind_intermediate_qualified.json",
+        "tests/fixtures/pure_blind_targets.json",
+        "tests/fixtures/referenced_blind_intermediate_negatives.json"
+      ]
+    }
+  ],
+  "limits": "Sixteen remaining named Lua sources and finite direct expressions only. Syntax compilation never selects or runs run.lua. Input-root prefix does not bind require resolution. No package/regression body execution, SDK outcome, transitive/native/origin/per-read or canonical admission. Historical root overlap is identity only; older output timing and all excluded/selection owners remain open.",
+  "module_requests": [
+    {
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/capture_endpoint_absence_test.lua",
+      "expression": "require('linkedspec')",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 5,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "expression": "require(\"linkedspec\")",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/named_capture_endpoint_absence_test.lua",
+      "expression": "require('linkedspec')",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/named_writer_endpoint_absence_test.lua",
+      "expression": "require('linkedspec')",
+      "line": 4,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    },
+    {
+      "consumer": "lua/test/referenced_blind_targets_test.lua",
+      "expression": "require('linkedspec')",
+      "line": 2,
+      "module": "linkedspec",
+      "prefix_changes_request": false,
+      "role": "package request; actual environment/cache resolution unobserved"
+    }
+  ],
+  "optional_captures": [
+    {
+      "condition": "nonempty env plus owned capture path pattern",
+      "consumer": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_CAPTURE",
+      "role": "write then one equal-byte readback; parsed before restore/compile and emitted before chunk load; parsing already happened"
+    },
+    {
+      "condition": "nonempty env plus owned capture path pattern",
+      "consumer": "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_CALLABLE_PIPELINE_CAPTURE",
+      "role": "write then one equal-byte readback; parsed before restore/compile and emitted before chunk load; parsing already happened"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/array_pipeline_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "nonempty env plus owned capture path pattern",
+      "consumer": "lua/test/array_transform_callable_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_CAPTURE",
+      "role": "write then one equal-byte readback; parsed before restore/compile and emitted before chunk load; parsing already happened"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/array_transform_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env exactly 1",
+      "consumer": "lua/test/count_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_COUNT_GUARD_CAPTURE",
+      "role": "stdout observation only; no capture file"
+    },
+    {
+      "condition": "env present; empty Lua string is truthy",
+      "consumer": "lua/test/count_source_fallback_test.lua",
+      "env": "LINKEDSPEC_COUNT_SOURCE_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/hash_value_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_HASH_VALUE_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/hash_view_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_HASH_VIEW_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/key_count_callable_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/key_count_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_KEY_COUNT_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "lua/test/length_result_guard_composition_test.lua",
+      "env": "LINKEDSPEC_LENGTH_CAPTURE",
+      "role": "two write-only outputs after compile/restore and before emitted chunk load"
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0"
+}

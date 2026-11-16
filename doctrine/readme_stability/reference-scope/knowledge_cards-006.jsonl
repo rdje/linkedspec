@@ -15,6 +15,7 @@
 {"bytes":2778,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-comparison-source-guards.md","sha256":"04bebee808e9d2d6154765fd541807186fb4fb64bfe384c91cc9308266af2f04","type":"member"}
 {"bytes":1977,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-numeric-helper-preflight.md","sha256":"ae447ede5fd912d48ef63f968d73c62d918e456d1440ace2758a0e275fd69197","type":"member"}
 {"bytes":3667,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.5","path":"docs/knowledge/lua-open-arity-concat-result-guards.md","sha256":"accd62244749e2720cf9dc9b3988f08056cbc036d2514007bf10ca65b613aecc","type":"member"}
+{"bytes":2148,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0","path":"docs/knowledge/lua-ordinary-loader-roles.md","sha256":"f9e91e0987390400b23da469d18519b7d012a64a7d4b585da44804afffb328f2","type":"member"}
 {"bytes":2990,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-ordinary-repetition-minimum-misses.md","sha256":"9d9ac439cdc15f81dc1caa548638658a3c910343565b959eb912ee31a220175e","type":"member"}
 {"bytes":3322,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-outward-function-descriptor-union.md","sha256":"c565f7510e8b74ecd9276e31e8f1db52e818dd428fdb42efe7f09f291e08de47","type":"member"}
 {"bytes":22824,"lines":219,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-package-completion-semantic-foundation-reading.md","sha256":"e31cd1b61d81881c32ca53c0afcaabdfa04879a21d908d665a361210faec2c9f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7027,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-dormant-red.md","sha256":"3d4745af27863d9d7e2908cd266ba17c14fc3b94ffce27ea5cd2635391314942","type":"member"}
 {"bytes":6804,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md","sha256":"229e368ec6b6c93dc4b2ed2eb52f208ddcdf23bde6b63b974b3f6d8fb460a768","type":"member"}
 {"bytes":4994,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recomposition.md","sha256":"6f2f9d0ebc2c5da672196fbdf060d315908265b2c208c6c74c1c093da1184f07","type":"member"}
-{"bytes":7407,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md","sha256":"f5a6632d29de4bb617f17599e86a3b97271f5487b74f00dc7ce7614b2a6a0d9c","type":"member"}

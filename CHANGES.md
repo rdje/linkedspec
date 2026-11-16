@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — qualify ordinary Lua loader roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0: Sixteen ordinary Lua sources account for all43 io.open sites,87 file/grammar/syntax/support bindings to43 targets,30 syntax-only loads,three support loads and16 opaque package requests. Twelve optional capture conditions, named runtime exclusions,29 historical identities,14 controls/current165 and the inert-header/toy inverse pass. No package/regression body execution or admission. Evidence: `docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — qualify ordinary Dart fixture loaders
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0: Ordinary Dart16 sources account for all23 explicit string-read sites, 46 fixture/grammar bindings to30 targets and matching historical identities. Four source qualifications/two inline policy rows remain explicit; twelve controls/current152 pass. No Dart/SDK or admission credit. Evidence: `docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/REVIEW.md`.

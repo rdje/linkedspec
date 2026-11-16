@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "lua",
+    "-E",
+    "-"
+  ],
+  "cwd": ".",
+  "controlled_header_input": {
+    "prefix": "inert-prefix/",
+    "toy_mapping": "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/toy_chunk.lua",
+    "require": "inert replacement returning only json={}",
+    "header_source": "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "header_sha256": "221e001dc87860db2b083812d41e46a985300665494b99914f43388fb03ce2bb",
+    "inverse": true
+  },
+  "stdin": "stdin.lua.gz",
+  "inherited_environment": "project_data_run routing; -E ignores Lua environment; header getenv and require replaced"
+}

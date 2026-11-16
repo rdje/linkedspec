@@ -1980,9 +1980,30 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Remaining: Sibling1 owns remaining backends/Perl and population/selection; generated Dart source2/frozen-input3/native4.2 and all other prerequisites stay open.39.8.1 exclusions are unchanged.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1` (ID suffixes).
   Goal: Complete remaining Perl/Rust/Julia/Lua loaders, support/dormant classification, transitive selection and relevant excluded candidates.
   Acceptance: Full inherited qualification contract and all completed bounded ledgers; generated Dart source remains separately owned2 before frozen-input3.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify remaining sixteen Lua source loaders and distinguish syntax/module/fixture/output/readback roles.
+  Acceptance: Retain input-root conditions, fixed/constructed fixtures, explicit/default grammar, support modules and named exclusions. Use a bounded inert-package host probe for compile-versus-call semantics with a toy-only inverse; never execute LinkedSpec package or regression bodies. Compare historical inputs and effective role/path/condition controls; full native/origin/admission stays separate.
+  Verification tier: `focused`
+  Focused checks: Source graph/body/mode reconstruction, isolated Lua-host header/toy probe, historical identities and controls; book, memory, histories, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no SDK/runtime/test/shared runner or policy changes.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/REVIEW.md.
+
+  Outcome: Sixteen ordinary Lua sources account for all43 io.open sites,87 file/grammar/syntax/support bindings to43 targets,30 syntax-only loads,three support loads and16 opaque package requests. Twelve optional capture conditions, named runtime exclusions,29 historical identities,14 controls/current165 and the inert-header/toy inverse pass. No package/regression body execution or admission.
+  Remaining: Sibling1 owns remaining Perl/Rust/Julia and population/selection; generated Dart source2/frozen-input3/native4.2 and all other prerequisites stay open.39.8.1 exclusions are unchanged.
+  Landing checks: Readonly current165 and14 controls PASS; header/base/prefix compile-only PASS and toy invocation inverse RED; historical29/absent30 explicit. Scope1969/17, mdBook0/rendered paragraph, memory architecture0, history pressure0 and whitespace0. Normal hooks govern landing; no broad/canonical CI or push.
+  Reader landing defect (owned/fixed): Staged diff check rejects one extra EOF LF at original reader line252. The actual refusal and interrupted own hook remain retained. Original capture archive/reader/result are unchanged; only the live landing form loses that LF. Separate review_qualified.py validates exact original-to-normalized bytes and all other inputs; focused proof passes. No original hash/result refresh or SDK replay.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Complete remaining Perl/Rust/Julia loaders, support/dormant roles, transitive selection and relevant excluded candidates.
+  Acceptance: Full inherited qualification contract; retain every earlier ledger and unresolved origin/native/selection owner before frozen-input3.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.2`
   Status: `pending`

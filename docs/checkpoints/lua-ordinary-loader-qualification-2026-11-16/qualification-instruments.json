@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/normalize_reader.py": {
+    "bytes": 2281,
+    "sha256": "b251bbf31cc26df8fed2c84a943ec332412fb4f461e30cb84830b40cd4cd8918",
+    "mode": 420
+  },
+  "docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/review_qualified.py": {
+    "bytes": 2348,
+    "sha256": "a8af5607634daacd14d8ee98783257cfcb0b94da8ac90c1d54149919a3b3c7f6",
+    "mode": 420
+  }
+}

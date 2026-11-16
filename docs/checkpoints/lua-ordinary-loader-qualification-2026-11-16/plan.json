@@ -1,0 +1,29 @@
+{
+  "activation": "fb6f74f9842891394cba80e7ea05ab7016e41be3",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0",
+  "cwd": ".",
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_owner": "lua/src/linkedspec/user_function_definition_parser.lua",
+  "interpreter": "lua/src/linkedspec/interpreter.lua",
+  "earlier_lua": "docs/checkpoints/lua-loader-qualification-2026-11-16/loaders.json",
+  "historical": "docs/checkpoints/array-concat-open-arity-lua-2026-11-12/direct/input-identities.json",
+  "grammar_fact": "docs/knowledge/lua-spec-defined-function-parser.md",
+  "consumers": [
+    "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_result_guard_composition_test.lua",
+    "lua/test/array_transform_callable_result_guard_composition_test.lua",
+    "lua/test/array_transform_result_guard_composition_test.lua",
+    "lua/test/capture_endpoint_absence_test.lua",
+    "lua/test/count_result_guard_composition_test.lua",
+    "lua/test/count_source_fallback_test.lua",
+    "lua/test/hash_value_result_guard_composition_test.lua",
+    "lua/test/hash_view_result_guard_composition_test.lua",
+    "lua/test/key_count_callable_result_guard_composition_test.lua",
+    "lua/test/key_count_result_guard_composition_test.lua",
+    "lua/test/length_result_guard_composition_test.lua",
+    "lua/test/named_capture_endpoint_absence_test.lua",
+    "lua/test/named_writer_endpoint_absence_test.lua",
+    "lua/test/referenced_blind_targets_test.lua"
+  ]
+}
