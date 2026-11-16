@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — distinguish Perl suite roles and named includes
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0: Harness/completion source and the retained actual selector distinguish maintenance from feature/compatibility candidates. The callable suite includes the pipeline regression inside a subtest; its unless-caller completion supports that route. The lazy default-literal regression has no direct or named-callable route. Existing ActionIR parser/copy direct repetitions remain explicit for registration reconciliation. Initial reader log-string refusal is retained; command-boundary qualification fixes only the reader. No test or runner changed. Evidence: `docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md`. Full population/direct-input/native/source-origin closure remains separately owned.
+
+Landing: the first normal hook exposed task-evidence pressure. Only new own commentary routes to the checkpoint; original parent/other bytes remain exact with four readonly controls. Full rejected text/log/mode survive; partial hooks and interrupted standalone prechecks have no PASS credit. Renew task headroom after clean landing; normal hooks are the single mandatory global boundary.
+
 ## 2026-11-16 — distinguish Dart input and capture roles
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0: Literal paths alone miss the with fixture extension substitution and the default grammar dependency. Four selected normals pass grammar explicitly; constructor/with use the cached cwd-then-script upward lookup. Callable-transform imports its observer and optionally reads back its own just-written capture. These are distinct roles; no current lookup/cache/SDK result is inferred. The prior five-consumer fixture ledger is an independent dated comparison; callable inputs are additionally source-bound. Three supplied portable-policy digests match the previous review; known guide changes remain policy20. Evidence: `docs/checkpoints/dart-loader-qualification-2026-11-16/REVIEW.md`. Remaining population, canonical registration and native/source-origin closure retain their existing owners.

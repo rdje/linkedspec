@@ -12,6 +12,12 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — qualify bounded Perl consumer roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0: The bounded Perl ledger classifies145 named candidates as134 proposed feature suites, nine compatibility suites and two maintenance suites. Twelve have direct selection, one has a named include route and132 have neither route in this bounded review. Seven ledger corruptions reject;164 retained inputs match current bytes/modes. This is static qualification, with no Perl execution or canonical admission. Evidence: `docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md`. Full population/direct-input/native/source-origin closure remains separately owned.
+
+Landing: the first normal hook exposed task-evidence pressure. Only new own commentary routes to the checkpoint; original parent/other bytes remain exact with four readonly controls. Full rejected text/log/mode survive; partial hooks and interrupted standalone prechecks have no PASS credit. Renew task headroom after clean landing; normal hooks are the single mandatory global boundary.
+
 ## 2026-11-16 — qualify constructed Dart loader inputs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0: Six named Dart consumers have ten fixture-input edges, six explicit/default grammar edges, one support import and one optional output readback; the older five-consumer ledger agrees and eight distinguishing controls reject. All26 retained current inputs match bytes/modes. This is static source interpretation, with no SDK execution, observed default resolution or canonical admission. Evidence: `docs/checkpoints/dart-loader-qualification-2026-11-16/REVIEW.md`. Remaining population, canonical registration and native/source-origin closure retain their existing owners.

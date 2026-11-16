@@ -1,0 +1,10 @@
+{
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/qualify.py": {
+    "mode": 420,
+    "sha256": "2499161722142613c404d3121c4abb526df6f3f9a7440ec5a5fa12a1bff9acbc"
+  },
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/review_qualified.py": {
+    "mode": 420,
+    "sha256": "b4b9d735d25a378366d351d8f1e6198749a4a8aecd7c9406dbc53a11841ecf4b"
+  }
+}

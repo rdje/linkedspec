@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0",
+  "claims": [
+    {
+      "name": "bounded-perl-consumer-roles",
+      "statement": "The bounded Perl ledger classifies145 named candidates as134 proposed feature suites, nine compatibility suites and two maintenance suites. Twelve have direct selection, one has a named include route and132 have neither route in this bounded review. Seven ledger corruptions reject;164 retained inputs match current bytes/modes. This is static qualification, with no Perl execution or canonical admission.",
+      "scope": "Static named Perl candidate roles and direct/named callable selection only. No Perl test execution, complete dynamic include/input graph, native discovery, default resolution, canonical inclusion or full population claim. Complete native/source-origin/physical custody remains4.2/SESSION5.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-consumer-roles-2026-11-16/review_qualified.py --current",
+        "granularity": "Each named candidate role/harness/completion/owner and ordered direct selection versus the original Bash wire; eleven named callable include expressions; archived/current bodies and modes.",
+        "result": "{\"candidates\": 145, \"controls\": {\"duplicate\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"duplicate-selection-hidden\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"include-promoted-to-missing\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"maintenance-promoted\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"missing\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"owner-removed\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}, \"unselected-default-promoted\": {\"reason\": \"role ledger differs from source\", \"result\": \"RED\"}}, \"current_inputs\": 164, \"default_literal_registration_owner\": \"TYPE-REFERENCE-BOOK.1.2.23.4.1.2\", \"direct_repetitions\": {\"t/actionir_ast_parser.t\": 2, \"t/actionir_receiver_scalar_copy.t\": 2}, \"limits\": \"Static named Perl candidate roles and direct/named callable selection only. No Perl test execution, complete dynamic include/input graph, native discovery, default resolution, canonical inclusion or full population claim. Complete native/source-origin/physical custody remains4.2/SESSION5.\", \"named_callable_includes\": 11, \"result\": \"PASS\", \"roles\": {\"compatibility-suite\": 9, \"feature-suite\": 134, \"maintenance-suite\": 2}, \"routes\": {\"direct-unconditional-selection\": 12, \"named-include-from-selected-suite\": 1, \"no-direct-or-named-callable-selection\": 132}}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A missing/duplicated candidate, promoted maintenance role, lost include, invented default selection, hidden repetition or removed owner could pass.",
+        "oracle": "Activation Git source and the independently retained older actual Bash selector wire; named executable do expression and source caller-plan boundary distinguish the pipeline route from default omission.",
+        "red_control": "Seven named ledger corruptions reject in retained actual review output; healthy source reconstruction and actual selector comparison pass."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Source bodies/modes, activation Git listing, original inventory/Bash channels, actual original refusal, qualified instrument/source images and successful review channels are tracked. Complete native Python/Git/library/OS, outer-launcher first-use and per-read/source-origin/physical custody remain4.2/SESSION5. No retroactive first-use, Perl execution or complete input graph claim."
+      }
+    },
+    {
+      "name": "own-task-commentary-routing",
+      "statement": "The condensed task part adds589 bytes to its activation while preserving the complete original parent contract and all other original bytes. Four coherent body/contract/node/mode controls reject; the original pressure refusal and rejected own text remain retained.",
+      "scope": "Only this slice's unlanded task commentary and new child records. No older task contract, limit, checker or previous claim/result/hash changes; no complete normal-hook PASS or canonical credit.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-consumer-roles-2026-11-16/review_pressure.py",
+        "granularity": "Complete activation Git source, rejected/current task bodies and original mode; parent state/child suffixes versus otherwise exact bytes; actual normal pressure refusal.",
+        "result": "{\"added_task_bytes\": 589, \"controls\": {\"mode\": {\"reason\": \"task mode\", \"result\": \"RED\"}, \"new-node\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}, \"older-prefix\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}, \"parent-contract\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}}, \"original_contract_and_other_bytes\": \"preserved\", \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Coherently rehashed older-prefix, parent-contract or new-node mutations, or changed mode, could pass as preservation.",
+        "oracle": "Immutable actual3f619e9c2 activation Git source and complete separately retained rejected/current task bodies; the actual hook refusal distinguishes the pressure boundary.",
+        "red_control": "Four named controls reject in actual pressure-review-stdout.json. Healthy reconstruction passes; the first normal hook pressure refusal is retained without complete-pass credit."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Full rejected/activation/current task bodies, original mode/digests, partial failed normal log, actual compact/review producers and review channels are tracked. Native Git/Python/OS, complete origin/outer-launcher first-use and physical closure remain4.2/SESSION5. The pressure command record is explicitly after-use, not retroactive custody."
+      }
+    }
+  ]
+}

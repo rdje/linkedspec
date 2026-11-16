@@ -1,0 +1,3613 @@
+[
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 1544
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/actionir_ast_parser.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.17",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 2
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 385
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/actionir_method_value_capture.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.18.2",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 142
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/actionir_receiver_scalar_copy.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 2
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 118
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 10
+    },
+    "path": "t/array_concat_open_arity_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 103
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 9
+    },
+    "path": "t/array_pipeline_callable_arity.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 107
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 9
+    },
+    "path": "t/array_pipeline_callable_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 9
+    },
+    "path": "t/array_pipeline_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 103
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 9
+    },
+    "path": "t/array_pipeline_source_isolation.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 94
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/array_pipeline_value_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.1",
+        "status": "completed"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.6",
+        "status": "completed"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.79.0",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "edge": {
+        "expression": "    do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;",
+        "line": 1402,
+        "parent": "t/callable_codeblock_literal_contract.t",
+        "target": "t/array_pipeline_value_contract.t"
+      },
+      "kind": "named-include-from-selected-suite"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 110
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 9
+    },
+    "path": "t/array_transform_callable_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 151
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/array_transform_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 150
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/array_transform_source_isolation.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 36
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/blind_child_retv.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 142
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/boundary_capture_fluent_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 1429
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/callable_codeblock_literal_contract.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 88
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/callback_identity.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.31.6.4.2",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 144
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/capture_advance_number_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 145
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/capture_advance_text_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 128
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/capture_boundary_number_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 136
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/capture_boundary_text_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 100
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/capture_collection_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.1",
+        "status": "completed"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.3",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 56
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/capture_endpoint_absence.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 131
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/capture_reset_value_block.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 69
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/closed_named_selector_assignments.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 530
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/codeblock_push_composition_perl.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.15",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 41
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/computed_selection_callable_compat.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 113
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/computed_selection_contextual_boundary.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.25.0",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 80
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/computed_selection_deferred_boundary.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 139
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/computed_selection_functions.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 101
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/computed_selection_helper_calls.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 93
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/computed_selection_noncall_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 112
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/conditional_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.26.1",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 136
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/constructor_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 124
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/contains_block_operand_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 127
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/contains_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/contains_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/copied_null_contains_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 126
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/copied_null_index_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 126
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/copied_null_presence_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 112
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/copy_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/count_block_source_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 134
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/count_copy_source_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.1",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 134
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/count_logical_source_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.73.6.6",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/count_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 144
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/cursor_rewind_result.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 138
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/cursor_statement_scope.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 34
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/default_literal_operand_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.7",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 68
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/defined_default_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.3",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 103
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/definedness_native_numeric_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/definedness_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/definedness_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": null,
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 139
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/document_history_catalog.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.10",
+        "status": "completed"
+      }
+    ],
+    "rationale": "bounded document-history catalog",
+    "role": "maintenance-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 59
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/emitted_boundary_catalog.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 204
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/emitted_rule_progress_guard.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/emptiness_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/emptiness_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 20
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/emptiness_result_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 66
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/entry_match_number_result_continuations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 146
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_default_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 113
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_numeric_comparison_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_numeric_comparison_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 113
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_numeric_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_numeric_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 135
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_string_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/free_string_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 163
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/gap_slot_record_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 179
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/gap_string_result.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/has_key_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/has_key_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 20
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/has_key_result_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 153
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/hash_helper_source_isolation.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 143
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/hash_value_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 146
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/hash_view_receiver_source_policy.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 114
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/hash_view_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 124
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/index_block_operand_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 127
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/index_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/index_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 71
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/inline_condition_value_blocks.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.26.0",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 73
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/input_cursor_result_continuations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 124
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/input_mark_value_block_statements.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 132
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/key_count_block_source_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 101
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/key_count_callable_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 168
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/key_count_result_guard_composition.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 151
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/key_count_source_domain.t",
+    "prior_task_references": [],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": null,
+    "completion": [
+      {
+        "expression": "Test::More::done_testing();",
+        "line": 179
+      }
+    ],
+    "harness": {
+      "expression": "require Test::More;",
+      "line": 133
+    },
+    "path": "t/knowledge_map_header_lists.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.1",
+        "status": "completed"
+      }
+    ],
+    "rationale": "Knowledge Map front-matter list projection",
+    "role": "maintenance-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 147
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/length_count_source_ownership.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 164
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/length_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.74.1",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/lexical_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/lexical_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 68
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/logical_receiver_method_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/logical_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/logical_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 190
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/mark_name_advance_arguments.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 164
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/mark_name_number_arguments.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 160
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/mark_name_text_arguments.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 160
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/mark_name_write_arguments.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 51
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/named_capture_endpoint_absence.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 70
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/named_capture_literal_names.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 142
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/named_mark_number_results.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 119
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/named_take_reversed_span.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 51
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/named_writer_endpoint_absence.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 50
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/nested_handler_error.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 60
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/perl_blind_scalar_declarations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 44
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/perl_match_local_declarations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 44
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/perl_or_match_local_declarations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 118
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/perl_sort_scope.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 49090
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 33
+    },
+    "path": "t/phase0_regression.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45",
+        "status": "in_progress"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 33
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/pick_keys_operand_isolation.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 206
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 8
+    },
+    "path": "t/punctuation_light_zero_arg_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.12",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 144
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/push_payload_values.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 148
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/push_result_fluent.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 154
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/push_result_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 116
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/receiver_string_bridge_guards.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/receiver_string_bridge_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 41
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/reduction_result_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.1.4.1",
+        "status": "pending"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 60
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/referenced_blind_intermediate.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 67
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/repeated_and_falsey_group.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 42
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/repeated_and_falsey_recognition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 40
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/repeated_blind_falsey_group.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 40
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/repeated_blind_parent_acceptance.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 147
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/rule_call_result_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/scalar_numeric_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.16",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 45
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/scalar_string_result_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      },
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.8",
+        "status": "completed"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 42
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/scalar_text_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.3.45.9",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 80
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/set_key_block_operands.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 173
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/set_result_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 153
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/shared_rule_progress_guard.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 285
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 11
+    },
+    "path": "t/signed_array_selector_perl_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.20.1.14",
+        "status": "completed"
+      }
+    ],
+    "rationale": "existing feature regression retained alongside the proposed population",
+    "role": "compatibility-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 1
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 59
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/sorted_values_scalar_isolation.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 136
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/sparse_and_single_action.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 125
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/string_predicate_result_guard_composition.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 48
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/string_predicate_result_guard_source_fences.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 20
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/string_predicate_result_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 47
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/tagged_record_producer_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing() unless caller;",
+        "line": 39
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/tagged_record_receiver_contract.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 92
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/unicode_recognition_operands.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 120
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/unicode_rule_recognition_runtime.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 57
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/user_function_parser_context_boundary.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 70
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/user_function_parser_state_boundary.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 108
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/value_copy_function.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 87
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/value_copy_interpreted.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing();",
+        "line": 89
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/value_copy_receiver.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 84
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/with_callback_snapshot.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 88
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 3
+    },
+    "path": "t/with_hash_result_continuations.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  },
+  {
+    "admission_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+    "completion": [
+      {
+        "expression": "done_testing;",
+        "line": 133
+      }
+    ],
+    "harness": {
+      "expression": "use Test::More;",
+      "line": 4
+    },
+    "path": "t/with_result_selection.t",
+    "prior_task_references": [
+      {
+        "id": "TYPE-REFERENCE-BOOK.1.2.23.4.1",
+        "status": "active"
+      }
+    ],
+    "rationale": "parent feature obligation or changed maintained feature consumer",
+    "role": "feature-suite",
+    "route": {
+      "kind": "no-direct-or-named-callable-selection"
+    }
+  }
+]

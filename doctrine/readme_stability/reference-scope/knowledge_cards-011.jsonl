@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":9559,"lines":158,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-final-value-assignment-receiver-guard-gap.md","sha256":"867df8d032f80df7146f1da8aa9a83514e328983cc82c9856d904961aedbe6c0","type":"member"}
 {"bytes":1628,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-format-owned-packages.md","sha256":"55e942b0b0d18e93f78c5b5d6a3bcdc38d52fbf8b5a209e38523fdabb7c897bd","type":"member"}
 {"bytes":2104,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-free-default-result-guards.md","sha256":"285add86a44420c68ce5993f3881f255ce60a7b4ebe0a3818ba64c6107ff9ac9","type":"member"}
 {"bytes":2325,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-free-string-result-guards.md","sha256":"ca99b27a80d4f845051425815bdc33fb92b73c9079ba89d1946f11cdb91fccec","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4668,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-helper-reservation-gap.md","sha256":"57ee583b4eb4644f546783ab960df5ea2de40f2984f959c3a26bd7dfbaf0159f","type":"member"}
 {"bytes":4167,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-registry-parity.md","sha256":"d84698d20c7fbc543720508b7435fa462aa0ae7b3e2a1f8e7f727d7af01e5fa5","type":"member"}
 {"bytes":4797,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-runtime-parity.md","sha256":"0475234eab1c2ba1e547133f2cadb19ccd508a8654ae258d0808b03790d92053","type":"member"}
-{"bytes":4321,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-variadic-user-functions.md","sha256":"caa0c129a8660c9c6260b7c78c2d2080f6f51646f51eedb5b6fad6f3594df367","type":"member"}

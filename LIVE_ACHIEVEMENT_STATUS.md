@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: bounded Dart constructed-input qualification is complete; remaining roles/loaders precede exact canonical registration.
+PNT: bounded Perl role qualification complete; remaining native roles/direct loaders/discovery precede registration.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — Six named Dart consumers have ten fixture-input edges, six explicit/default grammar edges, one support import and one optional output readback; the older five-consumer ledger agrees and eight distinguishing controls reject. All26 retained current inputs match bytes/modes. This is static source interpretation, with no SDK execution, observed default resolution or canonical admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — The bounded Perl ledger classifies145 named candidates as134 proposed feature suites, nine compatibility suites and two maintenance suites. Twelve have direct selection, one has a named include route and132 have neither route in this bounded review. Seven ledger corruptions reject;164 retained inputs match current bytes/modes. This is static qualification, with no Perl execution or canonical admission.
 
 ## Next Action
 
-Complete remaining role/loader/discovery qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1, then freeze registration input for4.1.2; all independent before-push owners remain.
+Remeasure outgoing size, renew task-evidence headroom, then finish remaining qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1 before freezing registration4.1.2 input.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
@@ -29,7 +30,6 @@ Complete remaining role/loader/discovery qualification under TYPE-REFERENCE-BOOK
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.2 —504/four routes/16 supported/two separate compatibility/486 preserved/80 initial/eight invalid signatures; old18-current504/combined direct1205/qualified2 readonly25/current871; Dart80.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.29 —25 IDs/22 closed/three unchanged/full22339-byte tail/48937 renewed bytes;26 exact public queries/first readonly10/current identity0; Rust80.2 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.1 —504/26 supported/four separate compatibility/474 preserved/80 initial policies; old30-current504/direct1028/first strict readonly25/current186; original failures qualified, headroom29 then Rust80.2.
-- TYPE-REFERENCE-BOOK.1.2.23.1.42 —84 valid-Array concat programs/66 contract passes/18 supported composition failures/84 pairs/first readonly14/current126; frozen80 and independent Perl80.1 next.
 
 
 ## History

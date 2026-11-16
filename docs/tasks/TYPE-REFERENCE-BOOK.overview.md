@@ -1883,12 +1883,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Next: Complete remaining role/loader/discovery qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1, then freeze registration input for4.1.2; all independent before-push owners remain.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1` (ID suffixes).
   Goal: Complete remaining consumer/support/dormant/fixture roles and loader/discovery qualification, then freeze registration input.
   Dependencies: Completed constructed Dart boundary0; all original qualification1/parent4.1 obligations remain binding.
   Acceptance: Reconcile every proposal and relevant excluded candidate against exact owners/source context; interpret remaining reads/includes/producer calls and automatic/conditional discovery without SDK execution claims. Integrate child0's bounded loader ledger; retain source/current identities and effective missing/duplicate/disabled/input controls. Keep unresolved runtime/alias/native/source-origin edges under4.2/SESSION5 and actual canonical execution4.1.2.
   Planned verification tier: focused unless shared mechanical owners change.
   Planned claim verification: Declare the actual source-directed population and unresolved legs before activation.
+
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify Perl roles.
+  Acceptance: Per Evidence.
+  Verification tier: `focused`
+  Focused checks: Qualified review; book; normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1`
+  Status: `pending`
+  Goal: Complete parent qualification.
+  Acceptance: Parent contract.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`
   Status: `pending`

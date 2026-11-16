@@ -1,0 +1,68 @@
+[
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'deferred_last_contract.t') or die $@ || $!;",
+    "line": 1386,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/deferred_last_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'deferred_with_contract.t') or die $@ || $!;",
+    "line": 1390,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/deferred_with_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'grouped_assignment_value_contract.t') or die $@ || $!;",
+    "line": 1394,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/grouped_assignment_value_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'filter_match_value_contract.t') or die $@ || $!;",
+    "line": 1398,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/filter_match_value_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;",
+    "line": 1402,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/array_pipeline_value_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'selected_scalar_receiver_contract.t') or die $@ || $!;",
+    "line": 1406,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/selected_scalar_receiver_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'selected_container_receiver_contract.t') or die $@ || $!;",
+    "line": 1410,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/selected_container_receiver_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'coalesce_nonempty_exhaustion.t') or die $@ || $!;",
+    "line": 1414,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/coalesce_nonempty_exhaustion.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'count_length_receiver_contract.t') or die $@ || $!;",
+    "line": 1418,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/count_length_receiver_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'aggregate_numeric_receiver_contract.t') or die $@ || $!;",
+    "line": 1422,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/aggregate_numeric_receiver_contract.t"
+  },
+  {
+    "expression": "    do File::Spec->catfile($repo_root, 't', 'joined_string_receiver_contract.t') or die $@ || $!;",
+    "line": 1426,
+    "parent": "t/callable_codeblock_literal_contract.t",
+    "target": "t/joined_string_receiver_contract.t"
+  }
+]

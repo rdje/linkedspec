@@ -1,0 +1,1 @@
+{"added_task_bytes": 589, "controls": {"mode": {"reason": "task mode", "result": "RED"}, "new-node": {"reason": "older bytes preserved", "result": "RED"}, "older-prefix": {"reason": "older bytes preserved", "result": "RED"}, "parent-contract": {"reason": "older bytes preserved", "result": "RED"}}, "original_contract_and_other_bytes": "preserved", "result": "PASS"}
