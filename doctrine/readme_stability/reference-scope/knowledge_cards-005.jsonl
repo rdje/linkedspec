@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":19021,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-configuration-source-contracts.md","sha256":"1c0f0b7598896e951688f2750c022b1143b868322130692882cd0131fa826daf","type":"member"}
 {"bytes":3894,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/legacy-helper-retirement-split-inventory.md","sha256":"9aa9894fa1f4dd749d9ee052743f773ee4ad7fd5fe0309bf03a146bf5b36e90b","type":"member"}
 {"bytes":6325,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0","path":"docs/knowledge/length-result-source-guard-gap.md","sha256":"d666797a6bad6ec1aca8b072dc166db61d91e17503c4c23564993aee043003a4","type":"member"}
 {"bytes":5024,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lexical-result-source-guards.md","sha256":"62a0640ccc503da74ac67a0d316cfd15e755ec23f182f8e4c9206dd84b9a46dd","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3569,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-full-pipeline-trace.md","sha256":"c3994e5715c787dab49c068894cef75e99cec5894115556f332a8f95cada8ab1","type":"member"}
 {"bytes":6785,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-mcp-server-plan.md","sha256":"f3947ee202714d536d63464bb370bbab8822dc9af8c4d9c0256df9b6f3904352","type":"member"}
 {"bytes":16508,"lines":255,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-readme-and-action-ast-reading.md","sha256":"213a7ff709fcaf9824da07063c54d18ef811adfd86bb3a4a9532a2cc3c53c2a3","type":"member"}
-{"bytes":3152,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-loading-closeout.md","sha256":"234a1aa95bc5bd7bdfa85cf61efb95cdfe0ea72145844eb1836e60ee55cecf28","type":"member"}

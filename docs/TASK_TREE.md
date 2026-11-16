@@ -1,12 +1,12 @@
 # Repo-Local Task Tree Workflow
 
-Current frontier: Independent Rust callable Array-transform78.6.2 is focused-checked312/20 supported targets/three compatibility movements/289 preserved, with original failures and exact launcher notice retained. Independent Dart78.6.3 is next; broader verification/full23.4 follows agreed coverage.
+Current frontier: November16 PNT resumed; daily retention33 is focused-checked. Canonical discovery TYPE-REFERENCE-BOOK.1.2.23.4.1, then size-driven publication30.2 after all prerequisites.
 
 November5 frontier: Count P1/compiler73.7/Dart formatting73.8 are committed with focused proof. Growth assessment23.4.8 and the outgoing-scope correction are focused-checked; the fixed pre-landing range has15 commits and the director reports about11.5MB outgoing. The whole local store includes published history and the warned blob already exists at the origin base. Director authorizes RAM-window retry; normal hooks govern landing before selection23.1.35. Prospective input reuse4.12 remains separate. Canonical4683555e is the last published checkpoint.
 
 October 3 nested raw-readiness diagnosis: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.0 retains16 sources/48 native-fresh pairs,16 actual traces and42 top-level TAP tests; twelve evidence corruptions reject. Seven sources/21 pairs conceal unsupported raw descendants behind ready1/raw0/fallback0. Shared condition aliases and distinct repeated spans establish source-occurrence policy.138 claim inputs bind15 producers and four rendered exact examples. Compiler/runtime remain activation-exact. Repair .7.1, quoted false blockers .7.2 and source-comment classification .7.3 precede dispatcher/full execution.
 
-Latest PNT slice: TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 — four-route312, private23-current312/direct701/first full readonly23/current825;96 initial policies exact and5/4 classifier delta. Independent Dart78.6.3 next.
+Latest PNT slice: TYPE-REFERENCE-BOOK.1.2.23.4.33 — dated eight-scope retention review; current discovery4.1 is next.
 
 September27 report closeout: all seven ARCHOGEN reports are accounted for: LS-001–005 have published remedies at fd3e328d5; LS-006 is withdrawn and LS-007 needs no behavior change. SEMULITH independently closed its three reports. Correction8b5b5ffd8 records the unauthorized ARCHOGEN write and makes every other repository read-only. RGX-CONSUMER-BUILD-REPORTS.1.3.2 closes LinkedSpec’s bounded report work through canonical acceptance; ARCHOGEN owns its adoption, verification and any reversal. Artifact census .93 is complete with zero deletions; startup .92/.94/.95/.51 resumes; unrelated defects and global book reconciliation remain open.
 

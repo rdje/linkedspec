@@ -1,0 +1,8 @@
+{
+  "scope_update_exit": 1,
+  "scope_update_error": "update reference scope before staging the candidate",
+  "second_commit_outer_exit": 1,
+  "second_attempt_interrupted": true,
+  "reason": "Agent began the retry after a failed scope regeneration. The candidate was canceled before any all-doctrine result. All own files were unstaged without changing worktree data, then reference scope regenerated before restaging.",
+  "provenance": "Transcribed tool results; staging-attempt.log.gz retains the actual partial combined hook channel. No successful verification credit."
+}

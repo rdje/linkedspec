@@ -1,15 +1,12 @@
 # MEMORY
 
-- activation_commit: `e0a1bb47571b75b800546c3d4522e0d2ca5f778c` — clean raw-error4.28 activation; derive current HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.4.28` — selected Lua error-field companion and historical observer scope.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.4.28` (completed); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md.
-- run_state: Stopped at the director-requested handoff-ready checkpoint; do not resume PNT without an explicit request.
-- session_health: Long session; recover from this committed pointer and bounded current-discovery leaf before larger work.
-- next_action: Await explicit resume, remeasure current HEAD with docs/checkpoints/publication-size-monitor-2026-11-12/measure.py, then current discovery4.1 including the new standalone raw-error normal and early publication30.2. Preparation due; no new feature lane and no before-push owner waived.
-- in_flight_uncommitted: none; selected field evidence/tests/docs committed; no required background job.
-- evidence: docs/checkpoints/lua-raw-error-observation-2026-11-13/REVIEW.md; default review.py is readonly historical recovery. Old/current eight cases/four routes/two hosts yield128 matching records;2896 field controls include384 named native misses in the old observer. Each new normal128PASS, specific legacyRED1/rawGREEN0; first historical0/ten corruptions and source/field analysis0/eight+four controls.
-- source_scope: Complete204 activation Lua-file inventory identifies eight explicit-function-grammar guard normals: three full published JSON plus named flags, five older partial named flags. Native/restored and generated envelopes differ. No all-error/table-identity/metatable/native closure or SDK/serializer change; old observations/hashes stay exact.
-- custody: Direct inputs/actual parsed-emitted artifacts/opaque native products/modes precede selected SDK use. docs/checkpoints/lua-raw-error-observation-2026-11-13/CUSTODY.md preserves preparation channel/late-image limits. Full physical/native/cache/toolchain/OS/source-resolution/origin gaps remain4.2/SESSION5; source-shadowing/isolation owners stay separate.
-- canonical_boundary: Resource14 at e0a1bb475 has exact canonical0/all10/post-pointer/brief0/clean proof. Raw28 is focused; current discovery4.1 must register the new normal and produce a fresh exact receipt before push. Declared5.4/formatter/full23.4/source/context/historical/launcher/SESSION7/literal/excluded/shadowing owners are not closed.
-- publication: Director1,500,000,000-byte trigger overrides cadence; advisory1,400,000,000. Actual e0/cached origin4683555e pack0 is1,415,327,104 bytes/108 ahead/47,344 objects/84,672,896 trigger margin, excluding28; preparation due. Metadata/source/channels retained in intake; raw pack ignored/protected. Current-independent30/native4.2 gaps remain. Remeasure after clean landing; no remote freshness/wire/future-size promise.
-- locality: Same-volume serial jobs/shared24GiB/current90-percent rising-trend policy; only this repo writable, submodules black boxes. Cleanup2026-11-12T15:32:21.895461+00:00 remains current. No native PID/PGID inference from denied pgrep.
+- activation_commit: `b3ab04a22019bd8e95fcba47d278b95bb401d709` — clean daily33 activation; derive current HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.4.33` — dated artifact retention review.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.4.33` (completed); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md.
+- run_state: PNT resumed by the director on November16; continue after each clean leaf.
+- next_action: Current canonical discovery TYPE-REFERENCE-BOOK.1.2.23.4.1 including the Lua raw-error normal; then publication30.2 after all before-push prerequisites. Remeasure committed outgoing bytes before growth.
+- in_flight_uncommitted: none; no required background job.
+- evidence: docs/checkpoints/artifact-review-2026-11-16/REVIEW.md; readonly review.py retains the dated observation and five effective corruption controls. 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
+- publication: Current startup monitor at b3ab04a22/cached origin4683555e is1,430,901,703 bytes/109 ahead/69,098,297 trigger margin; raw pack remains ignored in .linkedspec-data/push-monitor/20261116T105751.125946Z. Preparation is due; no fresh remote/wire/future-size guarantee. This maintenance is excluded. Current independent/native gaps remain30/4.2.
+- boundaries: Full admission23.4, native/input custody4.2/SESSION5, historical4.24, raw-error coverage outside selected28, declared5.4/formatter, source/context/shadowing, launcher/SESSION7/literal/excluded owners remain open.
+- locality: Only this repository writable; dependencies are black boxes. Same-volume serial jobs/shared24GiB/current90-percent rising-trend policy. Latest cleanup: docs/ARTIFACT_CLEANUP.md.

@@ -67,6 +67,19 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Task Tree
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.33`
+  Status: `completed`
+  Goal: Complete the due November16 retention-only artifact review before canonical publication preparation.
+  Dependencies: Clean b3ab04a22019bd8e95fcba47d278b95bb401d709; last cleanup November12; published named-scope scanner and independent metadata review.
+  Acceptance: Reuse retained scanner contracts, compare every dated path/suffix/byte row in the eight existing scopes with independent scandir/lstat, retain all artifacts/caches/proof, preserve actual source/commands/channels and effective corruption controls, overwrite the latest-only cleanup record and commit. No liveness, disposal or physical-reclamation claim.
+  Verification tier: `focused`
+  Focused checks: One bounded metadata capture and separate readonly recovery with corruption controls; claim/source identity, task/index, memory, history pressure, book and normal doctrine hooks.
+  Canonical trigger: Current discovery4.1 and final clean publication30.2; this checkpoint-only maintenance changes no shared runner, policy, storage default or runtime.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.33.json`
+  Landing correction: Initial CHANGES heading lacked the required ISO date; scripts/check_document_history.pl387-390 reports the exact defect. Preserve the partial failed normal log and before/after source in landing-repair/. Remaining first hooks and the redundant standalone claim check were canceled; no all-doctrine credit. Only the heading changes; normal retry must complete every required hook.
+  Outcome: 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed. Actual observation/source images/modes/index/commands/channels: docs/checkpoints/artifact-review-2026-11-16/. Reverify: bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-16/review.py. Normal hooks govern landing. Native/physical custody remains4.2/SESSION5.
+  Next: Current canonical discovery4.1, then early publication30.2 after all prerequisites.
+
 - ID: `TYPE-REFERENCE-BOOK`
   Status: `active`
   Goal: Canonical per-type reference with complete current operation coverage and verified examples.
@@ -1429,7 +1442,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`, `TYPE-REFERENCE-BOOK.1.2.23.4.29`, `TYPE-REFERENCE-BOOK.1.2.23.4.30`, `TYPE-REFERENCE-BOOK.1.2.23.4.31`, `TYPE-REFERENCE-BOOK.1.2.23.4.32`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`, `TYPE-REFERENCE-BOOK.1.2.23.4.29`, `TYPE-REFERENCE-BOOK.1.2.23.4.30`, `TYPE-REFERENCE-BOOK.1.2.23.4.31`, `TYPE-REFERENCE-BOOK.1.2.23.4.32`, `TYPE-REFERENCE-BOOK.1.2.23.4.33`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.

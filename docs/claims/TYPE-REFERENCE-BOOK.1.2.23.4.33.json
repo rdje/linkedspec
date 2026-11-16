@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.33",
+  "claims": [
+    {
+      "name": "dated-bounded-artifact-retention-review",
+      "statement": "1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.",
+      "scope": "Dated eight named root/Rust/log scopes only. No whole-project inventory, content ownership, disposability, liveness, reclamation or concurrent-adversarial claim. All artifacts and reusable caches retained.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-16/review.py",
+        "granularity": "Every retained primary path/suffix/byte row against separately acquired scandir/lstat rows; independent process readonly recovery of the dated observation.",
+        "result": "{\"date\": \"2026-11-16T10:59:48.421834+00:00\", \"rejected_controls\": [\"missing-row\", \"wrong-size\", \"duplicate-row\", \"outside-path\", \"producer-byte\"], \"removed\": 0, \"result\": \"PASS\", \"scoped_rows\": 1316}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Missing, altered, duplicated or outside-path rows or corrupted retained producer bytes could pass.",
+        "oracle": "Independent scandir/lstat against the primary os.walk scanner; immutable observation is the readonly recovery oracle.",
+        "red_control": "Actual capture and separate recovery reject missing-row, wrong-size, duplicate-row, outside-path and producer-byte controls; both exit0 with empty stderr."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project source bodies/modes, composition templates, raw Git-index observation and full command channels are retained in the checkpoint before helper import/scanning. Complete native Python/Git/library/filesystem/kernel/transitive input custody is unavailable;4.2/SESSION5 owns it. Earlier template or wrapper execution gains no retroactive first-use credit."
+      }
+    },
+    {
+      "name": "startup-committed-outgoing-pack-telemetry",
+      "statement": "Actual committed HEAD versus cached origin/main estimate: 1430901703 bytes, 109 outgoing commits, 69098297 bytes below the director1.5GB trigger.",
+      "scope": "Exact b3ab04a22019bd8e95fcba47d278b95bb401d709 against cached4683555ec51f04b8977812ce4e984c5cc6e6f42c; this maintenance is excluded. No remote freshness, wire/server size, complete independent validation or future-size promise. Raw pack stays ignored on the repository volume.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/project_data_run.sh env PYTHONPATH= python3 -P docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "One actual serial non-thin/no-sparse pack, streamed/stat/header/footer/empty-range/ref/config checks; actual project-source input archive and full command channels retained in push-monitor-current.",
+        "result": "{\"ahead\": 109, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.430901703, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1430901703, \"evidence\": \".linkedspec-data/push-monitor/20261116T105751.125946Z\", \"gib\": 1.3326310580596328, \"head\": \"b3ab04a22019bd8e95fcba47d278b95bb401d709\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 47622, \"pack_footer\": \"61d2ece82d84ec5c70dc8c7db94435551d9d8dca\", \"pack_sha256\": \"81d453728f12cdd566fbad97b0b5bc41415e7a8628813fffc16cb55d85f34c53\", \"packed_objects\": 47622, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 69098297, \"trigger_reached\": false, \"unique_object_ids\": 47622}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Current estimate has producer consistency controls but no independent current pack validator/falsification. Parent30 owns qualification before publication; older qualified measurements do not supply this leg."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Exact project-source input archive, metadata/config/refs/commands/channels are retained; ignored raw pack and complete native Git/cache/compressor/toolchain/OS input custody remain4.2/SESSION5. Native logical/physical completeness is not claimed."
+      }
+    }
+  ]
+}

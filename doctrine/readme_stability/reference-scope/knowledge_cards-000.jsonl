@@ -27,6 +27,7 @@
 {"bytes":6290,"lines":86,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.5","path":"docs/knowledge/array-transform-result-guard-selection.md","sha256":"913a29cd0babbbb72ac081df046763bc32ae0a3dc84342e1a48aee3546fa858b","type":"member"}
 {"bytes":9652,"lines":147,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/array-tree-traversal-contract.md","sha256":"647203a478e2690c6461128eefd45774d07d0c590fe17d5dcc2f740ff8c1869e","type":"member"}
 {"bytes":2338,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.15","path":"docs/knowledge/artifact-claim-composition-inputs.md","sha256":"7789ed7fb69a76e617c60f136c8990d76b353e09d202a4a41db18d1452b69c1f","type":"member"}
+{"bytes":1746,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.33","path":"docs/knowledge/artifact-review-november16-retention.md","sha256":"f2abd5d9b9285ac72d2429a254c09562c683aa7575d790323b139eb1e9578d51","type":"member"}
 {"bytes":12263,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/backend-capability-census.md","sha256":"2f9b465ff17a21dfc946a71edf77dfc0b947105d24119d418ce5a978c8abb7d7","type":"member"}
 {"bytes":2261,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/backend-companion-book-architecture.md","sha256":"8c5a092bb80300b785666280ce172a6610f06d1d08e1705cd89ba3efbce3c22d","type":"member"}
 {"bytes":35689,"lines":509,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/backend-integration-inventory.md","sha256":"3d07bc267e766f9a749a4316dfea3d3deca3ed1e87709bcb88fb3a30af72fd52","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5223,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-index-composition.md","sha256":"53a385b003e46017fec974c36d784453f9009cc048584defdcab0c6faa442cb3","type":"member"}
 {"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}
 {"bytes":4841,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"a28524918e7f1994d6fa51d7aa65594260712e6d706375cac309b6023292d8db","type":"member"}
-{"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-Director-requested stop at the next handoff-ready checkpoint. Raw28 focused implementation/evidence/docs complete; normal clean landing and final size check govern the stop. Full current discovery/publication remains pending.
+PNT resumed. Daily maintenance33 is complete with focused checks; current canonical discovery4.1 and early publication30.2 are next. No feature-admission or full-CI credit is implied.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.28. Lua selected raw-error coverage is focused-checked: eight source questions/two installed hosts/four routes/old-current128 records;2896 field controls with384 named native misses in the older projection. Each new standalone normal128PASS, specific legacyRED1/rawGREEN0 and first historical recovery0/ten controls pass. Complete source census204 identifies eight function-grammar guard normals: three full public-JSON helpers and five older partial named-field observers. Native/restored and generated envelopes keep distinct contracts. No SDK/serializer or old observation/hash changes; native/source/preparation-origin4.2/SESSION5 and declared5.4/full admission remain separate.
+TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 
 ## Next Action
 
-Await explicit resume; remeasure current committed outgoing bytes, then current discovery4.1 including the new raw-error normal and early publication30.2 after all before-push owners. Prepare near1.4GB and publish around1.5GB regardless cadence, with fresh remote/exact-HEAD canonical proof/normal hooks/clean tree.
+Inventory and register current canonical feature tests under4.1, including the Lua raw-error normal. Complete exact candidate canonical proof and all before-push owners, then normal publication30.2 around the1.5GB trigger.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
@@ -29,7 +30,6 @@ Await explicit resume; remeasure current committed outgoing bytes, then current 
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Each host312/four routes/1872 checks/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct3939/qualified2 readonly26/current531; raw-field4.28 explicit, concat42 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct2927 assertions/first readonly24/current519/1872 pairs/nine traces; installed Lua next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.2 —312/four routes/20 targets+three compatibility/289 preserved/96 initial policies exact; private23-current312/direct701/readonly23/current825; original failures/launcher notice retained, Dart next.
 
 
 ## History

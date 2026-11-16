@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3152,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-loading-closeout.md","sha256":"234a1aa95bc5bd7bdfa85cf61efb95cdfe0ea72145844eb1836e60ee55cecf28","type":"member"}
 {"bytes":3281,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-loading-split.md","sha256":"edb1f82f788aa44056908076613fe41d1facf775a298803db5bd6debc4b0c9e2","type":"member"}
 {"bytes":3589,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-pipeline.md","sha256":"58c8f7a156ab1072d2cb7a33aac4496d4d16183b04b765eca092eb4f7f187410","type":"member"}
 {"bytes":3508,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-spec-resolution.md","sha256":"ddb471f8d44c61b7d16ba6a02d0e90022b4d371a891081e1c08c4e7fecc3f2dc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3438,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-function-execution-split.md","sha256":"d49d2f2c9f1ea72b0a91a51f54efd7b552acee62cada7ab2638bd25517088e7a","type":"member"}
 {"bytes":3542,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-function-runtime-closeout.md","sha256":"6634262f8eac9d50d5b99a06cd7aa2ef125ef4369e51a1c70baabe257b5dd524","type":"member"}
 {"bytes":17366,"lines":209,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-lifecycle-typed-unicode-consumer-reading.md","sha256":"b9457323ba4751bb3c2f0b674fa358bc41f518b5b4dc14000c7526371ad568de","type":"member"}
-{"bytes":11456,"lines":194,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-startup-reading-coverage.md","sha256":"54622403ad39a1c5855ad22d5ee8cb0cc14f1843ee144a0c0b68ca213a6e273c","type":"member"}

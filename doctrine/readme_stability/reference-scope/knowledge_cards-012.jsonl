@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8170,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-working-vars-auto-vivify.md","sha256":"14ae7eb0001a50f4cbff4473572426f51c6dd02c57b7122e00605b1d9ec1c27a","type":"member"}
 {"bytes":2061,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-numeric-unicode-digit-oracle-drift.md","sha256":"ff21d319a9a3d3b51a56a5795f14a0c5b40b0f86443103cffdc050e4cb316ac4","type":"member"}
 {"bytes":1772,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-text-contract-home.md","sha256":"a922b674db3ffa61848cdb00f7968f378c46e12e6b320f7940664958983a7944","type":"member"}
 {"bytes":2856,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-to-text-coercion-cross-backend-gap.md","sha256":"bdb7e5fba0d469977543435241e08c7dd18a5479c15a85fa1ac0527cfd07cf58","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7201,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-nested-value-path-assignment.md","sha256":"3e0ad60ce6d62ef064e04821261038c6e32b6dee2802dc05250a2f2075423d45","type":"member"}
 {"bytes":5301,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-number-receiver-value-chains.md","sha256":"6baf6d262897101011135bb499ed05b6b7c5e15da3686c6dda74d6967ab693fd","type":"member"}
 {"bytes":3167,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-symbol-callees.md","sha256":"6148ec0fdff975d1a15576dc88c1c7dc9662b01e49a1a29a5519f04c23b0a0da","type":"member"}
-{"bytes":2013,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-word-aliases.md","sha256":"7f5957d8864f38d054c8b216a88753c7acd0681572f53e8f87a4532307ebc7e7","type":"member"}

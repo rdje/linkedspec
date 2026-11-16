@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":11456,"lines":194,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-startup-reading-coverage.md","sha256":"54622403ad39a1c5855ad22d5ee8cb0cc14f1843ee144a0c0b68ca213a6e273c","type":"member"}
 {"bytes":2049,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-statement-regex-mutation.md","sha256":"dc492212e862e16377fa83f3ee56538655debc990ce1a90ba1a8126e563c8dc4","type":"member"}
 {"bytes":18297,"lines":189,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-static-completion-sha-emitter-reading-and-conditional-gaps.md","sha256":"b457a3d98fda911114f2090be8b48250fe2e8cf7b9d482994a1e8edd2b6bf2cf","type":"member"}
 {"bytes":16997,"lines":192,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-stdio-progressive-recognition-consumer-reading.md","sha256":"7ecbb1a4e7c8885e07e7dc8b56305f18d29474143beb1c218fb7fa915bf798b5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4625,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-literal-record.md","sha256":"cbe04af46db9d6a4ebf92ba87e28f59f54b4176ad8b68a307a078b0cddbdf11a","type":"member"}
 {"bytes":2171,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-control-parent-reconciliation.md","sha256":"ec396207e59608bee0d6e4db4b9b55dbc4fe98c77f97218bd9006f06c88aabe5","type":"member"}
 {"bytes":5630,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-grouped-pattern-membership.md","sha256":"549e21957b85b385ef5a7c33a4d64a3061589f45d88b65fb391bf90a4054ed24","type":"member"}
-{"bytes":4265,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"ecc968d38c4632366a01c2c6bca2e52b21f903edbdeaa19d812aaafdad96ecb9","type":"member"}

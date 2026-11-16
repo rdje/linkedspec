@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — bounded artifact retention review
+
+TYPE-REFERENCE-BOOK.1.2.23.4.33: 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed. Evidence and readonly command: `docs/checkpoints/artifact-review-2026-11-16/REVIEW.md`. Focused maintenance only; current canonical discovery4.1/publication30.2 remain pending.
+
 ## 2026-11-13 — TYPE-REFERENCE-BOOK.1.2.23.4.28: selected Lua raw error fields
 
 Lua selected raw-error coverage is focused-checked: eight source questions/two installed hosts/four routes/old-current128 records;2896 field controls with384 named native misses in the older projection. Each new standalone normal128PASS, specific legacyRED1/rawGREEN0 and first historical recovery0/ten controls pass. Complete source census204 identifies eight function-grammar guard normals: three full public-JSON helpers and five older partial named-field observers. Native/restored and generated envelopes keep distinct contracts. No SDK/serializer or old observation/hash changes; native/source/preparation-origin4.2/SESSION5 and declared5.4/full admission remain separate. Book examples and canonical field scopes now distinguish native tables from generated envelopes. The stale global task-index row is repaired after a separate213-record/nine-historical/zero-live query and injected-live RED. Source-only preparation-origin limits remain explicit; successful producers are not replayed. Stop after this focused clean handoff; discovery4.1 and all publication prerequisites remain. Evidence: docs/checkpoints/lua-raw-error-observation-2026-11-13/REVIEW.md.

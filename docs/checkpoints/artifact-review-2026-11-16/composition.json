@@ -1,0 +1,13 @@
+{
+  "templates": {
+    "docs/checkpoints/artifact-review-2026-11-07/review.py": {
+      "sha256": "8203877040facefbc5183b3cb105331e4a78ee7a8bea83033cd3e5a8064bf78a",
+      "mode": 420
+    },
+    "docs/checkpoints/artifact-review-2026-11-07/run.py": {
+      "sha256": "edec6cec85d0f2d1a70d952b9ddb50c61de065cb91107c782bfe54a84cf38f70",
+      "mode": 420
+    }
+  },
+  "activation": "b3ab04a22019bd8e95fcba47d278b95bb401d709"
+}

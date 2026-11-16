@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — retain artifacts before publication preparation
+
+TYPE-REFERENCE-BOOK.1.2.23.4.33: Reused the accepted non-following scanner and composed a separate dated reader from retained November7 templates. Actual source bodies/modes precede helper import and scanning, and command channels and raw Git-index input survive. Historical recovery reads the observation; it does not rescan runtime state. Native/OS/transitive custody remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. The three supplied portable-policy hashes still match their recorded canonical comparison; no donor update is required. Evidence and readonly command: `docs/checkpoints/artifact-review-2026-11-16/REVIEW.md`. Focused maintenance only; current canonical discovery4.1/publication30.2 remain pending.
+
 ## 2026-11-13 — TYPE-REFERENCE-BOOK.1.2.23.4.28: JSON equality is projection-specific
 
 Lua fail stores native fields and with_runtime_diagnostic copies them, but to_json publishes message/diagnostic. Generated execution deliberately wraps display text in its own envelope. The shared observer therefore misses identifier/kind or duplicated function attribution changes while public JSON stays equal. The new test-only field observer and old per-host baseline add exact selected-field regression without changing those public formats. Eight-case old/current proof, actual legacyRED/rawGREEN and independent source/mutation/historical controls pass. Five older inline normals remain explicitly partial; three later helpers add published JSON. The global task-index next-slice cell was stale and is corrected under the same handoff. Preparation-source/channel limits are preserved under4.2, not retroactively repaired. Full CI belongs to current discovery/publication; this leaf is focused. Evidence: docs/checkpoints/lua-raw-error-observation-2026-11-13/REVIEW.md.

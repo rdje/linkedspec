@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}
 {"bytes":10751,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.0.1","path":"docs/knowledge/count-result-source-guards.md","sha256":"2c29bb92618be0eb4e8bbdb5193a78a626c9760f3f73aeee5893989c1b7d455a","type":"member"}
 {"bytes":2648,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-attached-while-boundary-drift.md","sha256":"360f0b3b7a20c3ba1d1a1709c053444734ccb49312e31dfb81854e662d3cb861","type":"member"}
 {"bytes":4850,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/cross-backend-cli-contract-gap.md","sha256":"5ad46f6cb251ff1fa3f529a64522f05cda3d20e8008ed259ab4f6f43b19a4bf4","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3043,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-presence-result-source-guards.md","sha256":"bd6adabb25b607163c57008f2590dbaff2005fcc8dedcd65b23d5de2127a97f7","type":"member"}
 {"bytes":3377,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-boundary.md","sha256":"c01814905f47cabbe2a33b1361d227db371b5dc19d58ec4d2c0317ac25241023","type":"member"}
 {"bytes":2408,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-closeout.md","sha256":"c82d50cbe6d72693f3f2216c34d593c7fa81e4666925fefb84ae6eaede27dc2d","type":"member"}
-{"bytes":3095,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-mechanism-audit.md","sha256":"6be6d8f2012d1abfb232a6191113f76b67c6da69f2e610940c22aba7c1064b4b","type":"member"}
