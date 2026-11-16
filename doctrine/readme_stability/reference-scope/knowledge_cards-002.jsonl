@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3043,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-presence-result-source-guards.md","sha256":"bd6adabb25b607163c57008f2590dbaff2005fcc8dedcd65b23d5de2127a97f7","type":"member"}
 {"bytes":3377,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-boundary.md","sha256":"c01814905f47cabbe2a33b1361d227db371b5dc19d58ec4d2c0317ac25241023","type":"member"}
 {"bytes":2408,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-closeout.md","sha256":"c82d50cbe6d72693f3f2216c34d593c7fa81e4666925fefb84ae6eaede27dc2d","type":"member"}
 {"bytes":3095,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-mechanism-audit.md","sha256":"6be6d8f2012d1abfb232a6191113f76b67c6da69f2e610940c22aba7c1064b4b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4923,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/free-numeric-result-source-guards.md","sha256":"8e149c7bffc4b205df40565ead6203c30bb6fc7760677b0ec99ba25455983118","type":"member"}
 {"bytes":3717,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/free-string-result-source-guards.md","sha256":"a51d248e1610e41ec1f3ade8efeca0ab8aad693728ed27bf7efb921a573f7c30","type":"member"}
 {"bytes":2579,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-parse-job-sidecar.md","sha256":"01b4d4a8c2ebe8d5e9ac548a12eb179c9fbc6e53da77d4788d54ce6954811094","type":"member"}
-{"bytes":2633,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-prototype-proof.md","sha256":"182c95ed0b4e54035c214b2ed14bbaf1d60450d30a2b009149ca3d8a2a595e76","type":"member"}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — qualify recent Dart Array loaders
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0: Three Dart Array normals have nine fixture/grammar edges, two support imports and two optional one-shot readbacks. Eleven older bindings to nine distinct targets agree; nine controls/current130 pass. The original export-reader refusal is retained; one qualified regex correction completes the ledger without capture or Dart replay. Evidence: `docs/checkpoints/dart-array-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — qualify eleven Lua candidates direct loaders
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0: Eleven Lua direct-loader sources have24 fixture/grammar edges to14 distinct targets, two returned support modules and two optional write/readback families. The older raw-error ledger agrees on six inputs; ten controls reject. All134 retained source bodies/modes match current inputs, reusing113 and adding21. No SDK execution or transitive selection claim. Evidence: `docs/checkpoints/lua-loader-qualification-2026-11-16/REVIEW.md`.

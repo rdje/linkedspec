@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/native-consumer-routes-2026-11-16/activation-tree.json": {
+    "mode": 420,
+    "sha256": "67ec9e6148567bbf3265030d2f3e627589bd776bb3972b933eb06f837b0635ec"
+  },
+  "docs/checkpoints/native-consumer-routes-2026-11-16/identities.json": {
+    "mode": 420,
+    "sha256": "ec5d325ed10036cf906bbbddbe8b2ed641f58888ed719d7f52af5b63ff90c5cc"
+  },
+  "docs/checkpoints/native-consumer-routes-2026-11-16/inputs.tar.gz": {
+    "mode": 420,
+    "sha256": "1e80ce56adeaa2a152448c3709dd993430d2adfa9e7d33128d04ae9073376902"
+  },
+  "docs/checkpoints/native-consumer-routes-2026-11-16/review.py": {
+    "mode": 420,
+    "sha256": "d7693cfd3a9910dc6c6a6889f16f73e68a8f648a6e41559c093c17887b57be93"
+  },
+  "docs/checkpoints/native-consumer-routes-2026-11-16/roles.json": {
+    "mode": 420,
+    "sha256": "ffed13602f5ee0bd40ec520727bcd873087166e9a845f4ffea3531cb1c3bb196"
+  }
+}

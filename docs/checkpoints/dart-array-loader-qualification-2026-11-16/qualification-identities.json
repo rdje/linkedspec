@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/dart-array-loader-qualification-2026-11-16/qualify.py": {
+    "bytes": 1824,
+    "mode": 420,
+    "sha256": "8548115e5eba4fbb2f568379bcaded095a4f9a8030aa9cd6860e3c691e399f2b"
+  },
+  "docs/checkpoints/dart-array-loader-qualification-2026-11-16/review.py": {
+    "bytes": 11458,
+    "mode": 420,
+    "sha256": "48c0ca37f5832424119650b8666e2e5dd18e22af82909438d6edf5cd80a28597"
+  },
+  "docs/checkpoints/dart-array-loader-qualification-2026-11-16/review_qualified.py": {
+    "bytes": 3453,
+    "mode": 420,
+    "sha256": "64e4c8aa6b3fa7be9dd141bb82f22fa80e3771e09aa67faa446ed0a13b5ad229"
+  },
+  "docs/checkpoints/dart-array-loader-qualification-2026-11-16/run_qualified.py": {
+    "bytes": 1127,
+    "mode": 420,
+    "sha256": "d28a9bb69ef2e7652d7d057edbae4a990ce9c66416d699eb88174decb615fbd1"
+  }
+}

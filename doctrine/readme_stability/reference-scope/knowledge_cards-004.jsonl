@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3033,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.4","path":"docs/knowledge/julia-length-result-guards.md","sha256":"d8e484ca8e070643606e7c151b37ede2b1675b3913dad33dd664d9ff6ef5cd84","type":"member"}
 {"bytes":2763,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lexical-result-source-guards.md","sha256":"54c3835cb1a0a01c8bacc1d7d3bc36f88640a212053d921dc9bfbab4de85a5d9","type":"member"}
 {"bytes":3391,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-live-recognition-progress.md","sha256":"99e88650093684cd11362049dfc7730086f555624c19dc29247b88637826b0ad","type":"member"}
 {"bytes":2264,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-match-writer-presence-compatibility.md","sha256":"92a699c6e1ec2c93104ea5296c27e08ee9303dc332c5a4ebb241d1655d15b8c5","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4216,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-variadic-user-functions.md","sha256":"60e5c3385f01f3bc05eeddcdb90dbbc0cf42c61795f23e77bd5fbd1f06023834","type":"member"}
 {"bytes":6960,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"b734fb87270a31d793b6050803a7f9aaaa0139a0cb01a4dbfacf9187fd61d1c2","type":"member"}
 {"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}
-{"bytes":1872,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-nonatomic-publication.md","sha256":"b13a018b828a88ace208e3bb446dd96b039558071315a0d83cf392297b5c87f1","type":"member"}

@@ -1941,9 +1941,39 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Remaining: All eleven local Lua selection routes and broader independent semantic/population review remain with sibling1; registration4.1.2 and native4.2 stay separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1`, `.2`, `.3` (ID suffixes).
   Goal: Complete remaining Perl/native loaders, support/dormant roles and transitive discovery before freezing registration input.
   Acceptance: Full inherited parent contract; retain all existing unresolved semantic, source-origin and admission owners.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify the three recent Dart Array guard loaders beyond the earlier six-consumer ledger.
+  Acceptance: Preserve source/mode identity; interpret pipeline/callable-pipeline/concat fixtures, explicit grammar, support imports and conditional one-shot readbacks. Retain independent historical input comparisons and effective omissions/role/path controls. No SDK, complete population or canonical claim.
+  Verification tier: `focused`
+  Focused checks: Readonly source/loader reconstruction, historical direct-input comparison, current identity and controls; book, memory, histories, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no test, runtime, shared runner or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/dart-array-loader-qualification-2026-11-16/REVIEW.md.
+  Reader defect (owned/fixed): The first captured reader exits1 at observation support export because its single-token return-type regex excludes Dart Map<String, Object?>. The complete source epoch/original reader/actual failure remain exact. A separately retained qualified reader corrects only that export interpretation and recovers from the existing archive without capture or SDK replay; nine controls and the original pure-reader refusal distinguish the result.
+
+  Outcome: Three Dart Array normals have nine fixture/grammar edges, two support imports and two optional one-shot readbacks. Eleven older bindings to nine distinct targets agree; nine controls/current130 pass. The original export-reader refusal is retained; one qualified regex correction completes the ledger without capture or Dart replay.
+  Remaining: Sibling1 owns remaining population/loaders/selection, sibling2 generated package/corpus interpretation, sibling3 registration-input freeze; native4.2 and all other prerequisites stay separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Qualify remaining Perl/native direct loaders, support/dormant roles and transitive selection, excluding separately owned Dart generated-source2.
+  Acceptance: Entire inherited qualification contract and earlier Perl/Dart/native/Lua evidence; resolve relevant excluded candidates and independent role adjudication.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.2`
+  Status: `pending`
+  Goal: Interpret Dart source_emitter_test generated-package, manifest/corpus, process, trace and readback dependencies.
+  Acceptance: Distinguish executable Dart imports from imports inside emitted strings, fixed fixtures from generated artifacts, and source selection from actual SDK/package/native resolution. Retain source authority and per-read/native4.2 limits; no SDK result inferred from filename or keyword matches.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.3`
+  Status: `pending`
+  Goal: Reconcile all qualification children and freeze the exact registration4.1.2 input.
+  Acceptance: Parent contract, source identities, explicit exclusions/repair owners and all inherited loader/selection findings; no canonical execution or full native custody credit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.34`
   Status: `completed`

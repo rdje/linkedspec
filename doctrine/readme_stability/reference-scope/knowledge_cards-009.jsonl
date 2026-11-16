@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5427,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-local-return-capture.md","sha256":"e351a8033ff342f293ac75e39fc7b8f51165f90538ea63123da8393144afc112","type":"member"}
 {"bytes":4577,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-push-required-capture.md","sha256":"3a1bb91890773955a6111506f24acb18208692d72e8c8682051b7246f6e77c23","type":"member"}
 {"bytes":3834,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-regex-undef-required-capture.md","sha256":"d9d837aa77323796ffd28995e4760083da5e67b070ba28024297091504e71224","type":"member"}
 {"bytes":5229,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-set-key-required-capture.md","sha256":"1c3eab53f2a70c77a0dd40700f6d90d5f4ef84de72de755cdf37b5d702753f8d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10518,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-cursor-source-observation-gap.md","sha256":"86adb2304745c1f9b0a3564a8c6abe6c439f4771a25756bca0c19f56f5feddca","type":"member"}
 {"bytes":4483,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-legacy-pathsearch-generated-tree-scan.md","sha256":"baa1a1629af272953cc4f5f6119ceaebd8cb7d1f1c47c09ea28c85285bed9d77","type":"member"}
 {"bytes":3509,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-num-min-lowering-fixture.md","sha256":"c494221c3ee0a3534ec290b7a239ce2278ae14b76828b68f3836342ad4569753","type":"member"}
-{"bytes":2423,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-private-owner-focused-selection.md","sha256":"bbf8a6ffd9267fdc95f933fe974a3a12aa3d8a3ea80dc86a433e0881e6538a99","type":"member"}

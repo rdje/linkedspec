@@ -1,0 +1,121 @@
+{
+  "input_edges": [
+    {
+      "consumer": "dart/test/array_pipeline_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                    'docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/cases.json',\n                  )",
+      "line": 57,
+      "role": "fixture-cases",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/cases.json"
+    },
+    {
+      "consumer": "dart/test/array_pipeline_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                'tests/fixtures/array_pipeline_result_guard_dart_profiles.json',\n              )",
+      "line": 67,
+      "role": "fixture-profiles",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "tests/fixtures/array_pipeline_result_guard_dart_profiles.json"
+    },
+    {
+      "consumer": "dart/test/array_pipeline_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+      "line": 48,
+      "role": "explicit-grammar-read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                    'docs/checkpoints/array-pipeline-callable-dart-2026-11-11/cases.json',\n                  )",
+      "line": 85,
+      "role": "fixture-cases",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/cases.json"
+    },
+    {
+      "consumer": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                'tests/fixtures/array_pipeline_callable_result_guard_dart_profiles.json',\n              )",
+      "line": 95,
+      "role": "fixture-profiles",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_dart_profiles.json"
+    },
+    {
+      "consumer": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+      "line": 76,
+      "role": "explicit-grammar-read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                    'tests/fixtures/array_concat_open_arity_dart_cases.json',\n                  )",
+      "line": 90,
+      "role": "fixture-cases",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "tests/fixtures/array_concat_open_arity_dart_cases.json"
+    },
+    {
+      "consumer": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "expression": "root.resolve(\n                'tests/fixtures/array_concat_open_arity_result_guard_dart_profiles.json',\n              )",
+      "line": 100,
+      "role": "fixture-profiles",
+      "route": "File.fromUri(root.resolve(literal)).readAsStringSync; declared cwd dart",
+      "target": "tests/fixtures/array_concat_open_arity_result_guard_dart_profiles.json"
+    },
+    {
+      "consumer": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+      "line": 81,
+      "role": "explicit-grammar-read",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "limits": "Three named Dart Array normal sources, fixed cases/profiles, explicit grammar constant, two support imports and two conditional one-shot readback expressions. Static declared-cwd interpretation only; no Dart/SDK run, observed package/path resolution, full transitive/native/source-origin graph, population completeness or canonical admission. Earlier ordinary parsed-dump timing/error-field qualifications remain unchanged.",
+  "optional_captures": [
+    {
+      "condition": "phase nonnull, allowed named phase, target absent",
+      "consumer": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "environment": "LINKEDSPEC_CALLABLE_PIPELINE_DART_CAPTURE",
+      "expression": "'${Directory.current.parent.path}/.linkedspec-data/scratch/callable-pipeline-dart-normal/$phase/$id.json'",
+      "limit": "source parse precedes serialization; no before-all-SDK custody is implied",
+      "line": 44,
+      "read_calls": 1,
+      "role": "conditional one-shot parsed output then readback",
+      "target": ".linkedspec-data/scratch/callable-pipeline-dart-normal/${phase}/${id}.json"
+    },
+    {
+      "condition": "phase nonnull, allowed named phase, target absent",
+      "consumer": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "environment": "LINKEDSPEC_ARRAY_CONCAT_DART_CAPTURE",
+      "expression": "'${Directory.current.parent.path}/.linkedspec-data/scratch/open-arity-concat-dart-normal/$phase/$id.json'",
+      "limit": "source parse precedes serialization; no before-all-SDK custody is implied",
+      "line": 44,
+      "read_calls": 1,
+      "role": "conditional one-shot parsed output then readback",
+      "target": ".linkedspec-data/scratch/open-arity-concat-dart-normal/${phase}/${id}.json"
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0",
+  "support_imports": [
+    {
+      "consumer": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "exports": [
+        "observeCallablePipeline"
+      ],
+      "expression": "import '../tool/callable_array_pipeline_observation.dart' as observation;",
+      "line": 7,
+      "role": "imported observation support",
+      "target": "dart/tool/callable_array_pipeline_observation.dart"
+    },
+    {
+      "consumer": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "exports": [
+        "observeCallableTransform"
+      ],
+      "expression": "import '../tool/callable_array_transform_observation.dart' as observation;",
+      "line": 7,
+      "role": "imported observation support",
+      "target": "dart/tool/callable_array_transform_observation.dart"
+    }
+  ]
+}

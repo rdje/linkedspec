@@ -27,6 +27,7 @@
 {"bytes":2912,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-and-required-dependency-steps.md","sha256":"e3cc04f4af97ad532e1470bad6125aedf60ce4f5e1c791b84fe0e2f8b47e5b77","type":"member"}
 {"bytes":3000,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-arithmetic-result-source-guards.md","sha256":"a479ff90047b785a54b0214bf47b717b2f045bc5e61ab503ec8b3e9c6c26628c","type":"member"}
 {"bytes":1918,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-array-flat-list-context-splice.md","sha256":"f868d869789367d8b3b21edc933ac503678e9841f12b6219d6155d7854436151","type":"member"}
+{"bytes":1991,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0","path":"docs/knowledge/dart-array-loader-roles.md","sha256":"71d1a1007dffdbeead4b9a24b7b113640bf8a5ad36292028ba7486015be9d707","type":"member"}
 {"bytes":5223,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.79.6.3","path":"docs/knowledge/dart-array-pipeline-result-guards.md","sha256":"e4eea101cdae197edcdc0c5afc7f0727babca639e29a26209406a19d5aae204a","type":"member"}
 {"bytes":5610,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.20","path":"docs/knowledge/dart-array-transform-result-guards.md","sha256":"604ad9b9da573168dc017fe9f399e7b921dace79d858f4cd1eece222b4b25f68","type":"member"}
 {"bytes":5840,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-attached-switch-body-omission.md","sha256":"b76e880b383867a58f7fd741064510c55263a70d4e1e8e2f560a8b45f4b6081b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2158,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-blind-progress-authority-boundary.md","sha256":"bbb5903b150bb5379f7a9f71b848390bd5556c0d698a1ecfeb4c774e1abbaa54","type":"member"}
 {"bytes":2905,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-repetition-minimum-misses.md","sha256":"f568a085419623d42bfe51ce2fa21d85058f6b7a761fb95ec6ed569af38910b1","type":"member"}
 {"bytes":4071,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-perl-blind-postcall-return-gap.md","sha256":"3016f57f71fd8af5327ffb365b82be0610e3092e8959e7042a0ae4c9c57025a9","type":"member"}
-{"bytes":3043,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-presence-result-source-guards.md","sha256":"bd6adabb25b607163c57008f2590dbaff2005fcc8dedcd65b23d5de2127a97f7","type":"member"}

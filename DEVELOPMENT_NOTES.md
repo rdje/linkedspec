@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — retain Dart loader reader refusal and source epochs
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0: The captured source epoch stays exact after the original single-token return-type regex rejects valid Map<String, Object?> observation entrypoints. A separate reader derives exactly one export-regex replacement, retains its full source, reproduces the original pure-reader refusal and completes the first ledger without capture/SDK replay. Explicit grammar/fixture inputs differ from conditional parsed-output readbacks. Independent direct-run root ledgers agree on eleven bindings; older ordinary parsed-dump/error-field qualifications remain unchanged. Generated-package/corpus dependencies have their own pending owner. Evidence: `docs/checkpoints/dart-array-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — reuse source epochs and separate Lua read roles
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0: The unchanged native archive supplies suite sources; only additional direct inputs are archived. Fixed/list reads, cached/default versus explicit grammar, returned support modules and optional output readbacks have separate source expressions. The raw-error persist helper writes before two readbacks; support exports are not standalone suites. The older independent six-input ledger agrees; nullable phase authority remains excluded. No prior claim or result is refreshed. Evidence: `docs/checkpoints/lua-loader-qualification-2026-11-16/REVIEW.md`.

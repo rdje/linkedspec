@@ -1,0 +1,36 @@
+{
+  "activation": "54f374727558365d616ce6a8539f9ddd02a8e88d",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0",
+  "cwd": "dart",
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_constant_owner": "dart/lib/src/parser/user_function_definition_parser.dart",
+  "consumers": [
+    {
+      "path": "dart/test/array_pipeline_result_guard_composition_test.dart",
+      "cases": "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/cases.json",
+      "profiles": "tests/fixtures/array_pipeline_result_guard_dart_profiles.json",
+      "historical": "docs/checkpoints/array-pipeline-result-guard-dart-2026-11-11/direct/custody.json",
+      "grammar_argument": "functionGrammarSource"
+    },
+    {
+      "path": "dart/test/array_pipeline_callable_result_guard_composition_test.dart",
+      "cases": "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/cases.json",
+      "profiles": "tests/fixtures/array_pipeline_callable_result_guard_dart_profiles.json",
+      "historical": "docs/checkpoints/array-pipeline-callable-dart-2026-11-11/direct/custody.json",
+      "grammar_argument": "grammar",
+      "support": "dart/tool/callable_array_pipeline_observation.dart",
+      "capture_environment": "LINKEDSPEC_CALLABLE_PIPELINE_DART_CAPTURE",
+      "capture_directory": ".linkedspec-data/scratch/callable-pipeline-dart-normal"
+    },
+    {
+      "path": "dart/test/array_concat_open_arity_result_guard_composition_test.dart",
+      "cases": "tests/fixtures/array_concat_open_arity_dart_cases.json",
+      "profiles": "tests/fixtures/array_concat_open_arity_result_guard_dart_profiles.json",
+      "historical": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/direct/custody.json",
+      "grammar_argument": "grammar",
+      "support": "dart/tool/callable_array_transform_observation.dart",
+      "capture_environment": "LINKEDSPEC_ARRAY_CONCAT_DART_CAPTURE",
+      "capture_directory": ".linkedspec-data/scratch/open-arity-concat-dart-normal"
+    }
+  ]
+}
