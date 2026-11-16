@@ -2022,9 +2022,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing checks: Qualified current169/13 controls PASS; independent original victim RED and corrected exact role selection PASS; historical69/absent0. Scope1970/17, mdBook0/rendered paragraph, memory architecture0, histories0 and whitespace0. Normal hooks govern landing; no broad/canonical CI or push.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `completed`
   Goal: Qualify the twenty-one ordinary Rust consumers outside generated_source_full_manifest_classifier.
   Acceptance: Preserve include_str/filesystem/env fixture and grammar routes, module/support roles and exact runtime exclusions; no Cargo execution or complete transitive/native claim.
+  Verification tier: `focused`
+  Focused checks: Source/body/mode/roles/history/victims; book/memory/scope/hooks/routing.
+  Canonical trigger: Registration4.1.2/push30.2.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1.json`
+  Evidence: docs/checkpoints/rust-loader-qualification-2026-11-16/REVIEW.md.
+  Outcome: PASS; counts, repairs and limits in Evidence.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2`
   Status: `pending`
@@ -2056,6 +2062,11 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.34.json`
   Evidence: docs/checkpoints/task-headroom-2026-11-16/REVIEW.md.
   Outcome: Eight closed commentary pointers; original contracts and trailing bytes exact. Full original activation and normal log retained; next is qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1. Native/source-origin closure remains4.2/SESSION5.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.35`
+  Status: `pending`
+  Goal: Renew task-evidence headroom.
+  Acceptance: Preserve CORE/unselected/frontier bytes via existing epoch; unchanged limits/tools.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`
   Status: `pending`

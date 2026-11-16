@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_readme_stability.sh"
+  ],
+  "cwd": "."
+}

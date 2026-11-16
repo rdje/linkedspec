@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: Julia loader graphs complete; remaining Perl/native qualification precedes registration.
+PNT: ordinary Rust loaders complete; immediate task headroom35 precedes generated Rust/Perl-transitive/generated Dart qualification.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0 — Julia20 sources account for all52 file-read sites,69 fixture/grammar/support bindings to49 targets,14 same-process generated Modules and12 optional capture conditions. Three execution qualifications,69 older identities,13 corrected controls and current169 pass; a separate victim oracle exposes the original positional-control defect. No Julia/SDK execution or admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21 sources retain38 literal fixtures plus21 embedded grammar dependencies,59 bindings to39 targets,21 filesystem sites, five readbacks/six write-only exports/twelve env sites/seven emitted-string roles/three row selectors/two execution qualifications. Historical61/eleven victim-sensitive controls/current159 and two original reader refusals pass. No Cargo/SDK or admission.
 
 ## Next Action
 
-Remeasure committed outgoing size; continue ordinary Rust21 under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1, then generated Rust2 and remaining Perl/transitive3. Separate generated Dart2/frozen-input3 precede registration4.1.2 alongside every other push prerequisite.
+Renew task-evidence headroom under TYPE-REFERENCE-BOOK.1.2.23.4.35 using the existing epoch before generated Rust2/remaining Perl-transitive3/generated Dart2/frozen-input3; retain every registration/publication prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21/bindings59/targets39/filesystem21/readbacks5/exports6/current159/historical61/eleven controls/two refusals; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0 — Julia20/read-sites52/bindings69/targets49/modules14/captures12/qualifications3/current169/thirteen corrected controls and victim oracle; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Lua16/io-sites43/bindings87/targets43/syntax30/support3/current165/fourteen controls and header inverse; no SDK body.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Dart16/read-sites23/bindings46/targets30/qualifications4/inline2/current152/twelve controls; no SDK.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; continue ordinary Rust21 under TYPE-REFERENCE
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
 - TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
-- TYPE-REFERENCE-BOOK.1.2.23.3.80.5 — each host508/four routes/20 targets/four separate compatibility/484 preserved/80 initial/eight signatures; old24-current508/direct6987 checks/readonly11/current266/3048 pairs; fresh size then coverage/discovery.
 
 
 ## History

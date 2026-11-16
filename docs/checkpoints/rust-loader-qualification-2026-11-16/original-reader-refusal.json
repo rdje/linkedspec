@@ -1,0 +1,9 @@
+{
+  "result": "RED",
+  "exception": "AssertionError",
+  "reader_line": 158,
+  "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+  "expected_argument": "serialized",
+  "actual_source_argument": "retained",
+  "limits": "Pure reconstruction of the retained first reader refusal; no capture or SDK replay."
+}

@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_mdbook_local.sh"
+  ],
+  "cwd": ".",
+  "exit": 0,
+  "stdout_stderr": "book.log.gz",
+  "bytes": 274,
+  "sha256": "76951f761dd8edf0de4b7eda55e5080caaf5106f9698cd1d9c7a2722d564c2f0",
+  "mode": 420,
+  "recording": "after-use copy; rendered paragraph checked"
+}

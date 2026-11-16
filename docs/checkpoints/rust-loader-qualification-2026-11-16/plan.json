@@ -1,0 +1,32 @@
+{
+  "activation": "beab9517fe9ee05d54709153922282cc3bbac535",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1",
+  "cwd": ".",
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_owner": "rust/linkedspec-runtime/src/spec_parser.rs",
+  "historical": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/custody.json",
+  "grammar_fact": "docs/knowledge/rust-user-function-registry-parity.md",
+  "consumers": [
+    "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+    "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+    "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+    "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/count_source_fallback.rs",
+    "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+    "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+    "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs"
+  ]
+}

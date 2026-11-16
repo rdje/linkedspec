@@ -1,0 +1,192 @@
+{
+  "tests/fixtures/array_concat_open_arity_result_guard_rust_profiles.json": {
+    "bytes": 534292,
+    "mode": 420,
+    "sha256": "d94b0988bc96109dedeae801f6a9db4148f09f6610944230d400c43b0c54b7ba"
+  },
+  "tests/fixtures/array_concat_open_arity_rust_cases.json": {
+    "bytes": 292158,
+    "mode": 420,
+    "sha256": "6a381d949db6a36743841bff053d872d985d5f8e063ea06a0e57e6529cb1725d"
+  },
+  "tests/fixtures/array_pipeline_callable_result_guard_rust_profiles.json": {
+    "bytes": 170537,
+    "mode": 420,
+    "sha256": "68a63f32d2a16894752ed6856f05994e0ba265819b456ddc7771de45a2b1b06a"
+  },
+  "tests/fixtures/array_pipeline_callable_rust_cases.json": {
+    "bytes": 88562,
+    "mode": 420,
+    "sha256": "1cc289fd5e0a3cbcf4748ede0c8cd610d250e7fe50c5a49f006a478f1b0df93e"
+  },
+  "tests/fixtures/array_pipeline_result_guard_cases.json": {
+    "bytes": 16001,
+    "mode": 420,
+    "sha256": "9868abea011925dec2229f5cbb806f319c5518492ae352b5b341c65ac4ecb591"
+  },
+  "tests/fixtures/array_pipeline_result_guard_rust_profiles.json": {
+    "bytes": 103184,
+    "mode": 420,
+    "sha256": "d99091d7999a966a5bca2426538c62b67e24f278021966e8ab71ed4ad4c10d97"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_rust_profiles.json": {
+    "bytes": 298664,
+    "mode": 420,
+    "sha256": "284b25fd0ddbb5a98de4cf358c931ca812b46f5d8f8f497ddb09a824aba35ae4"
+  },
+  "tests/fixtures/array_transform_callable_rust_cases.json": {
+    "bytes": 155300,
+    "mode": 420,
+    "sha256": "4c43ca9857f4a155ccd468bcdee3279f5f4df81900204418e9a186397100d090"
+  },
+  "tests/fixtures/array_transform_optional_result_guard_cases.json": {
+    "bytes": 5431,
+    "mode": 420,
+    "sha256": "c6f0016337ae1da6654be57f4d57a958279bfa0ee789efa34f409a9b28061366"
+  },
+  "tests/fixtures/array_transform_result_guard_cases.json": {
+    "bytes": 15994,
+    "mode": 420,
+    "sha256": "5be0d5ca5336aabe77b373ab59f5a1bd05310c569030a0a78fbd1690143d575e"
+  },
+  "tests/fixtures/array_transform_result_guard_rust_profiles.json": {
+    "bytes": 70438,
+    "mode": 420,
+    "sha256": "2bd7a1d3400dbd50751f3171f54d22fde9967d393c733c0b6f35b9ba956e0926"
+  },
+  "tests/fixtures/blind_fluent_return_values.json": {
+    "bytes": 3117,
+    "mode": 420,
+    "sha256": "a5c0f8a63c48852d7def8edc6c9f3c2496408bc3d33c6841d90b8cee710f11e5"
+  },
+  "tests/fixtures/blind_parent_push.json": {
+    "bytes": 1950,
+    "mode": 420,
+    "sha256": "58b574f66d2bbc24578720cd718aee9c5c9994bd15fa02d0d6181f3a23542e05"
+  },
+  "tests/fixtures/blind_parent_push_repeated.json": {
+    "bytes": 1252,
+    "mode": 420,
+    "sha256": "4dd84491e8e77097a642937c2f585552d827fdce59f642a498c13586f487034d"
+  },
+  "tests/fixtures/blind_postcall_results.json": {
+    "bytes": 7982,
+    "mode": 420,
+    "sha256": "99fe20f3f82b1141dfd5208405d0ddb668b509b27f2efddb233a15e2fa9d7586"
+  },
+  "tests/fixtures/capture_endpoint_absence.json": {
+    "bytes": 12684,
+    "mode": 420,
+    "sha256": "70c07aebb6182555ed9ca5123b8751d1ffe55799777115b39b87e6f5fba8e091"
+  },
+  "tests/fixtures/count_result_guard_cases.json": {
+    "bytes": 8973,
+    "mode": 420,
+    "sha256": "0a41b080e30cc990322d98c82bbfbcfb5db88ff61ba9d4a27bb0f07f27296b93"
+  },
+  "tests/fixtures/count_result_guard_excluded_ast.json": {
+    "bytes": 70318,
+    "mode": 420,
+    "sha256": "8cdcfa9d4ee092c95a7eade0a7b84c91b8a5c3f630ad784e2e20fd7ba17245b8"
+  },
+  "tests/fixtures/count_result_guard_rust_ast.json": {
+    "bytes": 25871,
+    "mode": 420,
+    "sha256": "6b82a6356d8ec992549ea6afb34d2d7ee91fadc1a6ae8779e9ead6ec8362239e"
+  },
+  "tests/fixtures/count_result_guard_source_owner_cases.json": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "63a085f734fb34738ace168c8d36c6a9b086def53b1c87b4214639725f0a93dc"
+  },
+  "tests/fixtures/count_source_fallback_cases.json": {
+    "bytes": 6374,
+    "mode": 420,
+    "sha256": "65bdee1e2592dff11a63aec90858d16f1b9bd938b3654b31c77925eb6e356659"
+  },
+  "tests/fixtures/hash_value_result_guard_cases.json": {
+    "bytes": 11916,
+    "mode": 420,
+    "sha256": "355777a30a33c1054274dbe7f27e0eeca9a7a8648f4bcc0890f2982d86646a7c"
+  },
+  "tests/fixtures/hash_value_result_guard_rust_profiles.json": {
+    "bytes": 30204,
+    "mode": 420,
+    "sha256": "cadbf7936a0d04e1834e2008e0ef2770a038d41c3599472ba2e520bc28227374"
+  },
+  "tests/fixtures/hash_view_result_guard_cases.json": {
+    "bytes": 6929,
+    "mode": 420,
+    "sha256": "ba26e8caef9ec0700192d6605ab5632042c17be5accdcd1cbf3a97c1159e0d8f"
+  },
+  "tests/fixtures/hash_view_result_guard_rust_profiles.json": {
+    "bytes": 4602,
+    "mode": 420,
+    "sha256": "6ce4f538e3b93a6d4ab24e0f0a79990adc7e7cffe878d6e92aba13c6df48fa93"
+  },
+  "tests/fixtures/key_count_callable_result_cases.json": {
+    "bytes": 5443,
+    "mode": 420,
+    "sha256": "245181e02ad12ced3f8eb44dfe3ce0e29edf2724248920471dc84641967b906e"
+  },
+  "tests/fixtures/key_count_callable_rust_profiles.json": {
+    "bytes": 1884,
+    "mode": 420,
+    "sha256": "0cd619afec313151fe0169fa810e74c43527ff7e9a75c2551fb7fcabe924199d"
+  },
+  "tests/fixtures/key_count_count_source_ownership_cases.json": {
+    "bytes": 748,
+    "mode": 420,
+    "sha256": "ba87550bba0d551ad152ac11cf79d967c134a0840da1f118addd7e331f578a11"
+  },
+  "tests/fixtures/key_count_result_guard_cases.json": {
+    "bytes": 6880,
+    "mode": 420,
+    "sha256": "a02dcfea784b87c50a948337597b330ace9d037d8088feb6b4c4bce88fcd3075"
+  },
+  "tests/fixtures/key_count_result_guard_rust_domain.json": {
+    "bytes": 452,
+    "mode": 420,
+    "sha256": "b865aadba9b9ae482ceab2b6f1e855c3c720d1ab542dcc0d4165737076a080ff"
+  },
+  "tests/fixtures/length_count_source_ownership_cases.json": {
+    "bytes": 2007,
+    "mode": 420,
+    "sha256": "a5c15c64cd3e27025e24a9fafa4ec52a0c21feeb7d41946550907d716f9a3e71"
+  },
+  "tests/fixtures/length_result_guard_cases.json": {
+    "bytes": 5098,
+    "mode": 420,
+    "sha256": "e16fd3efe2c2f0edaed3b5ef119a4c09414610d6ad0588e64f01ebe18a35768d"
+  },
+  "tests/fixtures/length_result_guard_rust_domain.json": {
+    "bytes": 390,
+    "mode": 420,
+    "sha256": "2e1510a420ef18a6f291d31cc3ce3c851ada9037a6632ddb2788a2ee4ffaed9b"
+  },
+  "tests/fixtures/named_capture_endpoint_absence.json": {
+    "bytes": 10543,
+    "mode": 420,
+    "sha256": "0f2da9455b16dd9501285ea8f6c3f1362128f29fb6755466b1c5aa1b85319c47"
+  },
+  "tests/fixtures/named_writer_endpoint_absence.json": {
+    "bytes": 7784,
+    "mode": 420,
+    "sha256": "f043f118976651b00928ef6bd570b3001d26a71380b7185ecbc0b1a550b21b09"
+  },
+  "tests/fixtures/referenced_blind_intermediate.json": {
+    "bytes": 4411,
+    "mode": 420,
+    "sha256": "2c1afd2b5ae129bbfea47d9b18f300cc0557da65e129c6532cfd3fd43f7cb305"
+  },
+  "tests/fixtures/referenced_blind_intermediate_qualified.json": {
+    "bytes": 4339,
+    "mode": 420,
+    "sha256": "b6085759ffdd009924387382431be7c80ae2790287feba12071d44a537753746"
+  },
+  "tests/fixtures/rule_invocation_accumulators.json": {
+    "bytes": 848,
+    "mode": 420,
+    "sha256": "6f5a66598dab032c2b741f00d55537953aeb53fc57b16108416978120a3ba27a"
+  }
+}

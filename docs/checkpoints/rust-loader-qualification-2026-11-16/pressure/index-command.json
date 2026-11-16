@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "perl",
+    "tools/update_task_tree_index.pl",
+    "--tree",
+    "TYPE-REFERENCE-BOOK"
+  ],
+  "cwd": "."
+}

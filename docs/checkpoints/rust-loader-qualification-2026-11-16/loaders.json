@@ -1,0 +1,848 @@
+{
+  "consumers": [
+    "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+    "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+    "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+    "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/count_source_fallback.rs",
+    "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+    "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs",
+    "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+    "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+    "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs"
+  ],
+  "emitted_source_roles": [
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"blind-fluent-return.spec\").unwrap();",
+      "line": 63,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"blind-parent-push.spec\").unwrap();",
+      "line": 63,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"blind-parent-push-repeated.spec\").unwrap();",
+      "line": 137,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"rust-blind-postcall.spec\").unwrap();",
+      "line": 41,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"referenced-intermediate.spec\")",
+      "line": 27,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"referenced-intermediate-qualified.spec\")",
+      "line": 55,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "expression": "emit_rust_source_v2(&compiled, \"rule-invocation-accumulators.spec\").unwrap();",
+      "line": 64,
+      "role": "emitted source string/validation or observation; no compiled-host execution observed here"
+    }
+  ],
+  "environment_sites": [
+    {
+      "api": "var",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE",
+      "expression": "std::env::var(\"LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE\")",
+      "line": 13,
+      "role": "optional serialized artifact capture"
+    },
+    {
+      "api": "var",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE",
+      "expression": "std::env::var(\"LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE\")",
+      "line": 35,
+      "role": "optional serialized artifact capture"
+    },
+    {
+      "api": "var",
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE",
+      "expression": "std::env::var(\"LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE\")",
+      "line": 16,
+      "role": "optional serialized artifact capture"
+    },
+    {
+      "api": "var",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE",
+      "expression": "std::env::var(\"LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE\")",
+      "line": 13,
+      "role": "optional serialized artifact capture"
+    },
+    {
+      "api": "var",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE",
+      "expression": "std::env::var(\"LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE\")",
+      "line": 35,
+      "role": "optional serialized artifact capture"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "env": "LINKEDSPEC_BLIND_FLUENT_RETURN_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_BLIND_FLUENT_RETURN_INTAKE\")",
+      "line": 76,
+      "role": "optional write-only observation output"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "env": "LINKEDSPEC_BLIND_PARENT_PUSH_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_BLIND_PARENT_PUSH_INTAKE\")",
+      "line": 76,
+      "role": "optional write-only observation output"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "env": "LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE\")",
+      "line": 150,
+      "role": "optional write-only observation output"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "env": "LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE\")",
+      "line": 87,
+      "role": "stdout trace for error_record cases when intake env is present"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "env": "LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE\")",
+      "line": 104,
+      "role": "optional write-only observation output"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "env": "LINKEDSPEC_REFERENCED_QUALIFIED_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_REFERENCED_QUALIFIED_INTAKE\")",
+      "line": 96,
+      "role": "optional write-only observation output"
+    },
+    {
+      "api": "var_os",
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "env": "LINKEDSPEC_COORDINATOR_SCOPE_INTAKE",
+      "expression": "std::env::var_os(\"LINKEDSPEC_COORDINATOR_SCOPE_INTAKE\")",
+      "line": 77,
+      "role": "optional write-only observation output"
+    }
+  ],
+  "execution_qualifications": [
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+      "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2.1",
+      "role": "original source tests compiler/emitter ownership without runtime execution"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "role": "failed-build branch records observation and skips runtime; unexpected build status still fails"
+    }
+  ],
+  "filesystem_sites": [
+    {
+      "api": "create_dir_all",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::create_dir_all(&inputs).unwrap();",
+      "line": 21
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::write(&target, &body).unwrap();",
+      "line": 25
+    },
+    {
+      "api": "read_to_string",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::read_to_string(target).unwrap(), body);",
+      "line": 26
+    },
+    {
+      "api": "create_dir_all",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::create_dir_all(&inputs).unwrap();",
+      "line": 43
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::write(&target, &serialized).unwrap();",
+      "line": 46
+    },
+    {
+      "api": "read_to_string",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "std::fs::read_to_string(target).unwrap();",
+      "line": 47
+    },
+    {
+      "api": "create_dir_all",
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": "std::fs::create_dir_all(&inputs).unwrap();",
+      "line": 24
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": "std::fs::write(&target, &serialized).unwrap();",
+      "line": 27
+    },
+    {
+      "api": "read_to_string",
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": "std::fs::read_to_string(target).unwrap();",
+      "line": 28
+    },
+    {
+      "api": "create_dir_all",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::create_dir_all(&inputs).unwrap();",
+      "line": 21
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::write(&target, &body).unwrap();",
+      "line": 25
+    },
+    {
+      "api": "read_to_string",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::read_to_string(target).unwrap(), body);",
+      "line": 26
+    },
+    {
+      "api": "create_dir_all",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::create_dir_all(&inputs).unwrap();",
+      "line": 43
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::write(&target, &serialized).unwrap();",
+      "line": 46
+    },
+    {
+      "api": "read_to_string",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "std::fs::read_to_string(target).unwrap();",
+      "line": 47
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 79
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 79
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 154
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 107
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 100
+    },
+    {
+      "api": "write",
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "expression": "std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();",
+      "line": 80
+    }
+  ],
+  "input_edges": [
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_concat_open_arity_rust_cases.json\"\n    )",
+      "line": 92,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_concat_open_arity_rust_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_concat_open_arity_result_guard_rust_profiles.json\"\n    )",
+      "line": 96,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/array_concat_open_arity_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_pipeline_callable_rust_cases.json\"\n    )",
+      "line": 69,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_pipeline_callable_rust_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_pipeline_callable_result_guard_rust_profiles.json\"\n    )",
+      "line": 73,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_pipeline_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_pipeline_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_pipeline_result_guard_rust_profiles.json\"\n    )",
+      "line": 51,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/array_pipeline_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_transform_callable_rust_cases.json\"\n    )",
+      "line": 88,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_transform_callable_rust_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_transform_callable_result_guard_rust_profiles.json\"\n    )",
+      "line": 92,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/array_transform_callable_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_transform_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_transform_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+      "expression": "include_str!(\n            \"../../../tests/fixtures/array_transform_optional_result_guard_cases.json\"\n        )",
+      "line": 52,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/array_transform_optional_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/array_transform_result_guard_rust_profiles.json\"\n    )",
+      "line": 57,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/array_transform_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/blind_fluent_return_values.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/blind_fluent_return_values.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/blind_parent_push.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/blind_parent_push.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/blind_parent_push_repeated.json\"\n    )",
+      "line": 87,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/blind_parent_push_repeated.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/blind_postcall_results.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/blind_postcall_results.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/capture_endpoint_absence.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/capture_endpoint_absence.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/capture_endpoint_absence.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/count_result_guard_cases.json\"\n    )",
+      "line": 49,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/count_result_guard_source_owner_cases.json\"\n    )",
+      "line": 53,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/count_result_guard_source_owner_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/count_result_guard_excluded_ast.json\"\n    )",
+      "line": 133,
+      "role": "compile-time AST-source fixture",
+      "target": "tests/fixtures/count_result_guard_excluded_ast.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/count_result_guard_rust_ast.json\"\n    )",
+      "line": 148,
+      "role": "compile-time AST-expected fixture",
+      "target": "tests/fixtures/count_result_guard_rust_ast.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_source_fallback.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/count_source_fallback_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/count_source_fallback_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/count_source_fallback.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/hash_value_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/hash_value_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/hash_value_result_guard_rust_profiles.json\"\n    )",
+      "line": 51,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/hash_value_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_value_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/hash_view_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/hash_view_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/hash_view_result_guard_rust_profiles.json\"\n    )",
+      "line": 51,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/hash_view_result_guard_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/hash_view_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/key_count_callable_result_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/key_count_callable_result_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/key_count_callable_rust_profiles.json\"\n    )",
+      "line": 51,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/key_count_callable_rust_profiles.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_callable_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/key_count_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/key_count_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/key_count_count_source_ownership_cases.json\"\n    )",
+      "line": 51,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/key_count_count_source_ownership_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+      "expression": "include_str!(\n                    \"../../../tests/fixtures/key_count_result_guard_rust_domain.json\"\n                )",
+      "line": 74,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/key_count_result_guard_rust_domain.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/key_count_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/length_result_guard_cases.json\"\n    )",
+      "line": 47,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/length_result_guard_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/length_count_source_ownership_cases.json\"\n    )",
+      "line": 51,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/length_count_source_ownership_cases.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+      "expression": "include_str!(\n                    \"../../../tests/fixtures/length_result_guard_rust_domain.json\"\n                )",
+      "line": 74,
+      "role": "compile-time host domain/profile fixture",
+      "target": "tests/fixtures/length_result_guard_rust_domain.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/length_result_guard_composition.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/named_capture_endpoint_absence.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/named_capture_endpoint_absence.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/named_capture_endpoint_absence.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/named_writer_endpoint_absence.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/named_writer_endpoint_absence.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/named_writer_endpoint_absence.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/referenced_blind_intermediate.json\"\n    )",
+      "line": 9,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/referenced_blind_intermediate.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/referenced_blind_intermediate_qualified.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/referenced_blind_intermediate_qualified.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "expression": "include_str!(\n        \"../../../tests/fixtures/rule_invocation_accumulators.json\"\n    )",
+      "line": 13,
+      "role": "compile-time JSON fixture",
+      "target": "tests/fixtures/rule_invocation_accumulators.json"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "role": "compile-time embedded grammar dependency",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs USER_FUNCTION_DEFINITION_SPEC; no runtime grammar file read or actual binary identity proof",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "limits": "Twenty-one ordinary Rust source consumers outside the separately owned generated-manifest classifier. Direct compile-time fixture/grammar references and conditional filesystem/trace/emitted-string roles only. No Cargo/SDK run, actual old binary embedded bytes/manifest anchor, full transitive/native/per-read/source-origin graph, all-row test execution or admission. Capture equality and actual downstream readback consumption retain separate scopes.",
+  "observation_outputs": [
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\"))\n            .join(\"../../.linkedspec-data/verification/rust-blind-fluent-return-observations.json\");\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/blind_fluent_return_values.rs",
+      "env": "LINKEDSPEC_BLIND_FLUENT_RETURN_INTAKE",
+      "line": 76,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-blind-fluent-return-observations.json"
+    },
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\"))\n            .join(\"../../.linkedspec-data/verification/rust-blind-parent-push-observations.json\");\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "env": "LINKEDSPEC_BLIND_PARENT_PUSH_INTAKE",
+      "line": 76,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-blind-parent-push-observations.json"
+    },
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\")).join(\n            \"../../.linkedspec-data/verification/rust-blind-postcall-parent-composition.json\",\n        );\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/blind_parent_push.rs",
+      "env": "LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE",
+      "line": 150,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-blind-postcall-parent-composition.json"
+    },
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\"))\n            .join(\"../../.linkedspec-data/verification/rust-blind-postcall-observations.json\");\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/blind_postcall_results.rs",
+      "env": "LINKEDSPEC_RUST_BLIND_POSTCALL_INTAKE",
+      "line": 104,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-blind-postcall-observations.json"
+    },
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\")).join(\n            \"../../.linkedspec-data/verification/rust-referenced-qualified-observations.json\",\n        );\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/referenced_blind_intermediate_qualified.rs",
+      "env": "LINKEDSPEC_REFERENCED_QUALIFIED_INTAKE",
+      "line": 96,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-referenced-qualified-observations.json"
+    },
+    {
+      "anchor": "compile-time CARGO_MANIFEST_DIR plus literal suffix; actual old binary anchor unobserved",
+      "branch": "\n        let path = std::path::Path::new(env!(\"CARGO_MANIFEST_DIR\"))\n            .join(\"../../.linkedspec-data/verification/rust-coordinator-scope-observations.json\");\n        std::fs::write(path, serde_json::to_vec_pretty(&observations).unwrap()).unwrap();\n    ",
+      "condition": "OS env value present, including empty/non-Unicode; failure assertion still applies",
+      "consumer": "rust/linkedspec-runtime/tests/rule_invocation_accumulators.rs",
+      "env": "LINKEDSPEC_COORDINATOR_SCOPE_INTAKE",
+      "line": 77,
+      "role": "write-only observation JSON after row loop; output is not a producer input",
+      "target": ".linkedspec-data/verification/rust-coordinator-scope-observations.json"
+    }
+  ],
+  "optional_readbacks": [
+    {
+      "branch": "\n        let path = std::path::Path::new(&folder);\n        assert!(folder.starts_with(\"docs/checkpoints/array-concat-open-arity-rust-2026-11-12/\"));\n        assert!(\n            path.components()\n                .all(|part| matches!(part, std::path::Component::Normal(_)))\n        );\n        let inputs = path.join(\"normal-parsed\");\n        std::fs::create_dir_all(&inputs).unwrap();\n        let target = inputs.join(format!(\"{label}.json\"));\n        assert!(!target.exists(), \"parsed snapshots are one-shot\");\n        let body = serde_json::to_string(&parsed).unwrap();\n        std::fs::write(&target, &body).unwrap();\n        assert_eq!(std::fs::read_to_string(target).unwrap(), body);\n        eprintln!(\n            \"ARRAY_CONCAT_RUST_NORMAL_PARSED_INPUT {label} {}\",\n            serde_json::json!({\"parsed\": body})\n        );\n    ",
+      "condition": "Unicode env lookup succeeds, lexical prefix/normal components pass and target absent; no physical/source-origin credit",
+      "consumed_by": "equality assertion only; no parsed-object restoration from this readback",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE",
+      "lexical_prefix": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/",
+      "line": 13,
+      "plan_argument": null,
+      "role": "write/equality readback of already-parsed AST serialization; parsed object remains validation/compile input",
+      "target": "${LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE}/normal-parsed/${label}.json",
+      "timing": "after parsing, before validation and target compilation"
+    },
+    {
+      "branch": "\n        let path = std::path::Path::new(&folder);\n        assert!(folder.starts_with(\"docs/checkpoints/array-concat-open-arity-rust-2026-11-12/\"));\n        assert!(\n            path.components()\n                .all(|part| matches!(part, std::path::Component::Normal(_)))\n        );\n        let inputs = path.join(\"normal-inputs\");\n        std::fs::create_dir_all(&inputs).unwrap();\n        let target = inputs.join(format!(\"{label}.json\"));\n        assert!(!target.exists(), \"capture inputs are one-shot\");\n        std::fs::write(&target, &serialized).unwrap();\n        let retained = std::fs::read_to_string(target).unwrap();\n        assert_eq!(retained.as_bytes(), serialized.as_bytes());\n        eprintln!(\n            \"ARRAY_CONCAT_RUST_NORMAL_INPUT {label} {}\",\n            serde_json::json!({\"compiled\": &retained})\n        );\n        retained\n    ",
+      "condition": "Unicode env lookup succeeds, lexical prefix/normal components pass and target absent; no physical/source-origin credit",
+      "consumed_by": "restored route and plan both name retained string",
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE",
+      "lexical_prefix": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/",
+      "line": 35,
+      "plan_argument": "retained",
+      "role": "equal compiled serialization write/readback feeds restored CompiledSpec deserialization",
+      "target": "${LINKEDSPEC_ARRAY_CONCAT_RUST_CAPTURE}/normal-inputs/${label}.json",
+      "timing": "after target compilation, before restored CompiledSpec deserialization"
+    },
+    {
+      "branch": "\n        let path = std::path::Path::new(&folder);\n        assert!(folder.starts_with(\"docs/checkpoints/array-pipeline-callable-rust-2026-11-11/\"));\n        assert!(\n            path.components()\n                .all(|part| matches!(part, std::path::Component::Normal(_)))\n        );\n        let inputs = path.join(\"normal-inputs\");\n        std::fs::create_dir_all(&inputs).unwrap();\n        let target = inputs.join(format!(\"{label}.json\"));\n        assert!(!target.exists(), \"capture inputs are one-shot\");\n        std::fs::write(&target, &serialized).unwrap();\n        let retained = std::fs::read_to_string(target).unwrap();\n        assert_eq!(retained.as_bytes(), serialized.as_bytes());\n        eprintln!(\n            \"CALLABLE_PIPELINE_RUST_NORMAL_INPUT {label} {}\",\n            serde_json::json!({\"compiled\": &retained})\n        );\n        retained\n    ",
+      "condition": "Unicode env lookup succeeds, lexical prefix/normal components pass and target absent; no physical/source-origin credit",
+      "consumed_by": "restored route; plan call still names original serialized string",
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE",
+      "lexical_prefix": "docs/checkpoints/array-pipeline-callable-rust-2026-11-11/",
+      "line": 16,
+      "plan_argument": "serialized",
+      "role": "equal compiled serialization write/readback feeds restored CompiledSpec deserialization",
+      "target": "${LINKEDSPEC_CALLABLE_PIPELINE_RUST_CAPTURE}/normal-inputs/${label}.json",
+      "timing": "after target compilation, before restored CompiledSpec deserialization"
+    },
+    {
+      "branch": "\n        let path = std::path::Path::new(&folder);\n        assert!(folder.starts_with(\"docs/checkpoints/array-transform-callable-rust-2026-11-11/\"));\n        assert!(\n            path.components()\n                .all(|part| matches!(part, std::path::Component::Normal(_)))\n        );\n        let inputs = path.join(\"normal-parsed\");\n        std::fs::create_dir_all(&inputs).unwrap();\n        let target = inputs.join(format!(\"{label}.json\"));\n        assert!(!target.exists(), \"parsed snapshots are one-shot\");\n        let body = serde_json::to_string(&parsed).unwrap();\n        std::fs::write(&target, &body).unwrap();\n        assert_eq!(std::fs::read_to_string(target).unwrap(), body);\n        eprintln!(\n            \"CALLABLE_TRANSFORM_RUST_NORMAL_PARSED_INPUT {label} {}\",\n            serde_json::json!({\"parsed\": body})\n        );\n    ",
+      "condition": "Unicode env lookup succeeds, lexical prefix/normal components pass and target absent; no physical/source-origin credit",
+      "consumed_by": "equality assertion only; no parsed-object restoration from this readback",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE",
+      "lexical_prefix": "docs/checkpoints/array-transform-callable-rust-2026-11-11/",
+      "line": 13,
+      "plan_argument": null,
+      "role": "write/equality readback of already-parsed AST serialization; parsed object remains validation/compile input",
+      "target": "${LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE}/normal-parsed/${label}.json",
+      "timing": "after parsing, before validation and target compilation"
+    },
+    {
+      "branch": "\n        let path = std::path::Path::new(&folder);\n        assert!(folder.starts_with(\"docs/checkpoints/array-transform-callable-rust-2026-11-11/\"));\n        assert!(\n            path.components()\n                .all(|part| matches!(part, std::path::Component::Normal(_)))\n        );\n        let inputs = path.join(\"normal-inputs\");\n        std::fs::create_dir_all(&inputs).unwrap();\n        let target = inputs.join(format!(\"{label}.json\"));\n        assert!(!target.exists(), \"capture inputs are one-shot\");\n        std::fs::write(&target, &serialized).unwrap();\n        let retained = std::fs::read_to_string(target).unwrap();\n        assert_eq!(retained.as_bytes(), serialized.as_bytes());\n        eprintln!(\n            \"CALLABLE_TRANSFORM_RUST_NORMAL_INPUT {label} {}\",\n            serde_json::json!({\"compiled\": &retained})\n        );\n        retained\n    ",
+      "condition": "Unicode env lookup succeeds, lexical prefix/normal components pass and target absent; no physical/source-origin credit",
+      "consumed_by": "restored route and plan both name retained string",
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE",
+      "lexical_prefix": "docs/checkpoints/array-transform-callable-rust-2026-11-11/",
+      "line": 35,
+      "plan_argument": "retained",
+      "role": "equal compiled serialization write/readback feeds restored CompiledSpec deserialization",
+      "target": "${LINKEDSPEC_CALLABLE_TRANSFORM_RUST_CAPTURE}/normal-inputs/${label}.json",
+      "timing": "after target compilation, before restored CompiledSpec deserialization"
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1",
+  "row_selectors": [
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_concat_open_arity_result_guard_composition.rs",
+      "expression": ".find(|case| case[\"id\"] == label)",
+      "role": "helper selects fixture row by caller label; no all-row execution inference"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_pipeline_callable_result_guard_composition.rs",
+      "expression": ".find(|case| case[\"id\"] == label)",
+      "role": "helper selects fixture row by caller label; no all-row execution inference"
+    },
+    {
+      "consumer": "rust/linkedspec-runtime/tests/array_transform_callable_result_guard_composition.rs",
+      "expression": ".find(|case| case[\"id\"] == label)",
+      "role": "helper selects fixture row by caller label; no all-row execution inference"
+    }
+  ]
+}

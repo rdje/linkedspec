@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/custody.json": {
+    "bytes": 188199,
+    "mode": 420,
+    "sha256": "0284d46c055cd42db6cef5f34ff838fc3b181f60ce727e4ec3fb3bfc8a37cd1b"
+  },
+  "docs/checkpoints/rust-loader-qualification-2026-11-16/capture.py": {
+    "bytes": 3216,
+    "mode": 420,
+    "sha256": "7188946af87eed1f83927354fa326c5548dd5fb4319c1efd308bec999ae6e01c"
+  },
+  "docs/checkpoints/rust-loader-qualification-2026-11-16/plan.json": {
+    "bytes": 2017,
+    "mode": 420,
+    "sha256": "acdec130c3265b0b16ced1e1578b39a96b0fe76d4183c39671a133ac4f73e741"
+  },
+  "docs/checkpoints/rust-loader-qualification-2026-11-16/review.py": {
+    "bytes": 19040,
+    "mode": 420,
+    "sha256": "186c72511d8836cabbdeb36756d5ee24f41f8d32d5aee4a8549aa6e52f785962"
+  },
+  "docs/checkpoints/rust-loader-qualification-2026-11-16/run_step.py": {
+    "bytes": 1014,
+    "mode": 420,
+    "sha256": "1780a14195992407a6f03692fffc4f61c6968194152d877d43542f596f07a31c"
+  },
+  "docs/knowledge/rust-user-function-registry-parity.md": {
+    "bytes": 4167,
+    "mode": 420,
+    "sha256": "d84698d20c7fbc543720508b7435fa462aa0ae7b3e2a1f8e7f727d7af01e5fa5"
+  },
+  "rust/linkedspec-runtime/src/spec_parser.rs": {
+    "bytes": 39214,
+    "mode": 420,
+    "sha256": "d25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  }
+}

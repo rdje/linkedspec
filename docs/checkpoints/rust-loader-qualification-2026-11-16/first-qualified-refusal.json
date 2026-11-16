@@ -1,0 +1,13 @@
+{
+  "result": "RED",
+  "exception": "KeyError",
+  "missing_key": "tag",
+  "packets": 4,
+  "packet_keys": [
+    "archive",
+    "files"
+  ],
+  "root_archive": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/root-inputs.tar.gz",
+  "root_file_count": 871,
+  "limits": "Pure first-qualified historical-reader reconstruction; original child exit1/channels remain exact."
+}
