@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT resumed. Daily maintenance33 is complete with focused checks; current canonical discovery4.1 and early publication30.2 are next. No feature-admission or full-CI credit is implied.
+PNT: inventory4.1.1 follows completed canonical-discovery decomposition4.1.0. Exact registration4.1.2 and separate before-push owners precede publication30.2.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded inventory/registration plan with every existing parent obligation preserved; no shared runner, auditor, runtime or fixture change.
 
 ## Next Action
 
-Inventory and register current canonical feature tests under4.1, including the Lua raw-error normal. Complete exact candidate canonical proof and all before-push owners, then normal publication30.2 around the1.5GB trigger.
+Freeze the current feature-test/helper/artifact-input inventory under4.1.1, then exact registration/source admission/full canonical4.1.2. Preserve all independent before-push owners.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
@@ -29,7 +30,6 @@ Inventory and register current canonical feature tests under4.1, including the L
 - TYPE-REFERENCE-BOOK.1.2.23.1.42 —84 valid-Array concat programs/66 contract passes/18 supported composition failures/84 pairs/first readonly14/current126; frozen80 and independent Perl80.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Each host312/four routes/1872 checks/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct3939/qualified2 readonly26/current531; raw-field4.28 explicit, concat42 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct2927 assertions/first readonly24/current519/1872 pairs/nine traces; installed Lua next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.3 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct647/qualified readonly24/current510; original reader1/launcher notice retained, Julia next.
 
 
 ## History

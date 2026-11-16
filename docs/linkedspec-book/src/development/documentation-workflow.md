@@ -160,6 +160,8 @@ historical auditor removes only the exact 150-line insertion before its older
 inverses and still requires every original runner byte. Its per-path mutations
 operate within that block, because six names also occur in older commands.
 
+Accumulated feature regressions enter canonical CI in two steps: first freeze the current consumer/helper/fixture inventory and distinguish direct, automatic and optional backend selection; then repair the proven omissions with an exact historical CI inverse and current-source admission. Source inventory supplies no runtime or canonical-execution credit. The registration slice requires an exact staged receipt and actual required backend routes; declared-host and native-custody gaps retain their separate owners.
+
 Keep future tests task-owned and explicitly registered. Exact staged canonical
 CI and normal hooks govern admission. Pipeline scope and broader private/mapped
 execution retain their separate owners.

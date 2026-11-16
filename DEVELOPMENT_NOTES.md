@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — separate discovery inventory from canonical source admission
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.0: A runner edit must preserve both current selected execution and the exact historical CI inverse/current-image contracts. The inventory step freezes consumers/helpers/actual artifact loaders, distinguishing literal, automatic and conditional backend discovery. The canonical step admits only that frozen population and retains the earlier source/observation epochs. Deferred native/declared-host/full-admission work remains separately owned. Planning-only focused slice; no measured population or runtime/admission result.
+
 ## 2026-11-16 — retain artifacts before publication preparation
 
 TYPE-REFERENCE-BOOK.1.2.23.4.33: Reused the accepted non-following scanner and composed a separate dated reader from retained November7 templates. Actual source bodies/modes precede helper import and scanning, and command channels and raw Git-index input survive. Historical recovery reads the observation; it does not rescan runtime state. Native/OS/transitive custody remains TYPE-REFERENCE-BOOK.1.2.23.4.2/SESSION5. The three supplied portable-policy hashes still match their recorded canonical comparison; no donor update is required. Evidence and readonly command: `docs/checkpoints/artifact-review-2026-11-16/REVIEW.md`. Focused maintenance only; current canonical discovery4.1/publication30.2 remain pending.

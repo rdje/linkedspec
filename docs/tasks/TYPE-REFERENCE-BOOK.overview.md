@@ -67,6 +67,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 ## Task Tree
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.0`
+  Status: `completed`
+  Goal: Split accumulated canonical discovery into bounded inventory and registration work before shared runner changes.
+  Dependencies: Clean53cb0297c4879cb1c1cad892ccb678c3de3302b2; current4.1 obligations and published selection/historical-inverse contracts reviewed.
+  Acceptance: Preserve every existing parent obligation; create inventory1 and canonical registration2 with explicit boundaries, order the frontier accordingly, synchronize the book and continuity docs, and commit without modifying a runtime, fixture, runner or auditor.
+  Verification tier: `focused`
+  Focused checks: Exact public parent/child task queries and unchanged parent obligation body; task/index, book, memory, bounded history, whitespace and normal doctrine hooks.
+  Canonical trigger: Registration4.1.2 changes CI infrastructure and requires exact staged canonical proof; final publication30.2 retains all prior prerequisites.
+  Claim verification: none: This slice publishes a work decomposition and no new measured test population, runtime result, canonical admission or pack-size claim.
+  Outcome: Inventory4.1.1 and canonical registration4.1.2 are ordered; the complete parent obligation body is preserved. Shared runner/auditor/runtime/fixture bytes are unchanged.
+  Next: Inventory4.1.1 after the clean plan commit; registration4.1.2 requires exact current-source admission and canonical proof.
+
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.33`
   Status: `completed`
   Goal: Complete the due November16 retention-only artifact review before canonical publication preparation.
@@ -1615,7 +1627,8 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Added ownership28: The selected Lua field proof retains its SDK/normal/oracle direct inputs, actual channels and opaque native bodies before the new loads. Its source-only initial case-preparation outer channels were not archived, and query-preparation-before-use.tar.gz is actually a late preparer source image. CUSTODY.md in docs/checkpoints/lua-raw-error-observation-2026-11-13/ owns those exact original-origin limits without retroactive first-use credit. Preserve the originals and include these named edges in this existing P2/SESSION5 origin audit before its admission/final-publication closeout; no broader native/source-resolution closure is inferred from the field observations.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
-  Status: `pending` / P1 canonical admission prerequisite
+  Status: `active` / P1 canonical admission prerequisite; bounded children below
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1.0`, `TYPE-REFERENCE-BOOK.1.2.23.4.1.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`.
   Goal: Register new bounded feature regressions in canonical CI before full admission/final push.
   Addition80.1: Check exact canonical discovery for t/array_concat_open_arity_result_guard_composition.t and tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json before23.4/push. The new504/direct1028 focused groups do not establish canonical selection. Preserve original-v1/qualified-v2 expectations,26 supported/four separate compatibility/474 preserved scope and native-dump timing qualification.
   Addition78.6.5: Check exact canonical discovery for lua/test/array_transform_callable_result_guard_composition_test.lua, callable_array_transform_observation.lua and array_transform_callable_result_guard_lua_cases.json/profiles.json on each installed ABI and separately declared5.4 before admission/push. One run.lua group and focused1872/direct3939 per host do not establish canonical selection. Preserve published-error/selected-outer scope and raw-field4.28 qualification.
@@ -1817,6 +1830,24 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Added72.6.1 ownership: t/copied_null_index_composition.t14 (shared12 plus two inline source-exact diagnostics) and tests/fixtures/copied_null_index_cases.json12 require explicit canonical registration before admission/push. Focused execution is not registration; original index18 fences remain unchanged.
 
   Added73.0 ownership: t/count_block_source_composition.t14, t/count_result_guard_source_fences.t18 and tests/fixtures/count_block_source_cases.json14 require explicit canonical registration before admission/push. Original count excluded18 is consumed by the new fence; focused execution is not registration.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1`
+  Status: `pending`
+  Goal: Freeze the current feature-test population and its direct producer/fixture graph against actual canonical and backend discovery routes.
+  Dependencies: Completed4.1.0; every existing parent4.1 addition remains binding.
+  Acceptance: Inventory the named parent obligations plus later maintained feature consumers/helpers and actual artifact loaders. Distinguish literal registration, backend automatic discovery, conditional optional-gate selection and actual execution. Classify omissions and exclusions explicitly, preserve exact activation source/commands/channels, use distinguishing missing/duplicate/disabled selection controls, and freeze the complete registration input for4.1.2. No SDK result, canonical inclusion, complete native custody or declared5.4 execution is inferred from source inventory. Keep source-shadowing/full4.2/SESSION5 owners separate.
+  Planned verification tier: focused; only checkpoint data/instruments and documentation change here.
+  Planned focused checks: Source-bound inventory and actual selector extraction through public interfaces, independent population/loader checks, effective omission controls, source custody and current-input identity; normal documentation/commit checks.
+  Planned claim verification: Declare the measured inventory granularity and actual three legs at activation, with native/physical or unavailable discovery legs disclosed under their existing owners.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`
+  Status: `pending`
+  Goal: Admit exactly the frozen current feature regressions through canonical CI while preserving all historical CI and source observations.
+  Dependencies: Completed4.1.1; published exact historical inverse/current-image contracts; current shared-host headroom and fully staged candidate.
+  Acceptance: Repair every proven omission exactly once, including the new standalone Lua raw-error normal; preserve automatic backend discovery rather than adding duplicate execution. Retain presence/syntax/execution selection and direct artifact-input coverage. Add an exact owner-bound CI inverse and source-image admission before historical recovery consumes the new runner/auditor bytes; unchanged historical hashes, original controls and unrelated-source refusals remain required. Run focused actual selector RED/GREEN and historical inverse/source corruptions, then the complete exact staged canonical gate with the required backend flags. Record the actual receipt and selected routes. Do not claim absent declared5.4, formatter, source/context/full23.4 or native-custody closure. Complete parent4.1 only after its entire frozen inventory has verified selection. Publication30.2 still requires every separate before-push owner.
+  Planned verification tier: canonical.
+  Planned focused checks: Actual ordered selection and missing/duplicate/disabled substitutions; historical inverse and complete source-image reconciliation with effective corruption denials; exact staged canonical receipt, normal hooks and clean post-commit pointer.
+  Planned claim verification: Declare actual selected populations/routes and retain or explicitly disclose every producer/artifact-input leg; no source-only inventory is runtime execution credit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.28`
   Status: `completed` / focused selected-field proof; full discovery/admission separate

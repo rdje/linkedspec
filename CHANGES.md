@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — bound canonical discovery before registration
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.0: Split accumulated discovery into inventory4.1.1 and exact canonical registration4.1.2. Preserve all prior parent obligations; no runtime, test, runner or auditor changes. Planning-only focused slice; no measured population or runtime/admission result.
+
 ## 2026-11-16 — bounded artifact retention review
 
 TYPE-REFERENCE-BOOK.1.2.23.4.33: 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed. Evidence and readonly command: `docs/checkpoints/artifact-review-2026-11-16/REVIEW.md`. Focused maintenance only; current canonical discovery4.1/publication30.2 remain pending.
