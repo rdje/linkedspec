@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-syntax.sh"
+  ],
+  "cwd": ".",
+  "representation": "Portable logical equivalent; original actual argv is archived without alteration.",
+  "original_actual_command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-syntax-command.actual.json.gz",
+  "original_actual_sha256": "600c86c3ada85ba4c0cb7b565abc4a80ce5403dc82cfb20b79e3a101a7b64031",
+  "script_sha256": "9594603c996dc50bc63cf8e1be09b63d2b4af97cb861bf851a0ee245e748eee8"
+}

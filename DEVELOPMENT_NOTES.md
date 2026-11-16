@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — preserve preparation limits and source-image namespace
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0: The inventory freezes an activation filename universe and actual stubbed Bash arguments. Captured classifier proposals, literal references and potential keyword lines are unqualified source evidence; they do not establish ownership, actual input reads, SDK results or canonical admission. Qualification4.1.1.1 precedes registration4.1.2. The earlier archive defect comes from passing absolute Path(__file__) as arcname. A separate root-relative image preserves original member bodies/modes and actual producer bytes; native recovery and source/data controls verify it without rewriting the original epoch. Evidence: `docs/checkpoints/canonical-discovery-inventory-2026-11-16/REVIEW.md`. Focused preparation only; full canonical and all before-push owners remain open.
+
 ## 2026-11-16 — separate discovery inventory from canonical source admission
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.0: A runner edit must preserve both current selected execution and the exact historical CI inverse/current-image contracts. The inventory step freezes consumers/helpers/actual artifact loaders, distinguishing literal, automatic and conditional backend discovery. The canonical step admits only that frozen population and retains the earlier source/observation epochs. Deferred native/declared-host/full-admission work remains separately owned. Planning-only focused slice; no measured population or runtime/admission result.

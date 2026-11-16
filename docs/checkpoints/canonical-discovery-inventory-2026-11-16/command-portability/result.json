@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "rows": [
+    {
+      "command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-prove-command.json",
+      "actual_archive": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-prove-command.actual.json.gz",
+      "actual_sha256": "95f6529958e11ba517929d85610b08bc213532b3ba7aaca6ea82e2cd76ed0b8f",
+      "actual_file_mode": 420,
+      "portable_sha256": "0a0b9673d1fb57003b500fa86056c7c14c671ea82ca19e41e1c9586f64200b08",
+      "script": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-prove.sh",
+      "script_sha256": "1943a469c18c124e9d51c671801f03eedacebd36e5f4759de28a7bd6700814b6"
+    },
+    {
+      "command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/duplicate-prove-command.json",
+      "actual_archive": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/duplicate-prove-command.actual.json.gz",
+      "actual_sha256": "bf41a84f336b7cff63f6d5ab887f81bb8ab0cf5dd0e7e2cb9886640c6ba236bf",
+      "actual_file_mode": 420,
+      "portable_sha256": "1679321c711cf870fedb9999e492d5fdbd7070f42832ced4b96e928f9ee4c8dc",
+      "script": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/duplicate-prove.sh",
+      "script_sha256": "8fb15388c13c120f2be13e8d17ba130950d97461264dccfa050eb21dbe26a2d2"
+    },
+    {
+      "command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-syntax-command.json",
+      "actual_archive": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-syntax-command.actual.json.gz",
+      "actual_sha256": "600c86c3ada85ba4c0cb7b565abc4a80ce5403dc82cfb20b79e3a101a7b64031",
+      "actual_file_mode": 420,
+      "portable_sha256": "403381f2808f715fe079fcdc1ca52fac8361e610bcf0cd62467364538cadb0d2",
+      "script": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-syntax.sh",
+      "script_sha256": "9594603c996dc50bc63cf8e1be09b63d2b4af97cb861bf851a0ee245e748eee8"
+    },
+    {
+      "command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-suite-command.json",
+      "actual_archive": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-suite-command.actual.json.gz",
+      "actual_sha256": "c7290f456cf621412fcbac6f07611fbe976fd2360ea047ec84e50ac711a3d0c2",
+      "actual_file_mode": 420,
+      "portable_sha256": "3020c0712dff14c9ed8837623745a0709550e7b79c6cdcc0d688dd544c2b2190",
+      "script": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-suite.sh",
+      "script_sha256": "0e88eeadd886847465726ab713877222b5fd2c451d07fa09a51264f91530fb60"
+    },
+    {
+      "command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-helper-command.json",
+      "actual_archive": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-helper-command.actual.json.gz",
+      "actual_sha256": "8604722853e4d7eb0757252e8f5c939d610acbb5a0be6f3138abf3d0fc495990",
+      "actual_file_mode": 420,
+      "portable_sha256": "5f02469b4fc32bf879937b3ad66f5d3a918b4cff10683b50e635a039380fee8e",
+      "script": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-helper.sh",
+      "script_sha256": "2e6067457fdd8cb2009e44f664a5dcc59643611532eb2abd6914e5e1146f0d3a"
+    }
+  ],
+  "selector_replayed": false,
+  "limits": "Original actual argv/observations remain unchanged in raw historical images. Maintained metadata is explicitly portable, not a new native invocation. No SDK, selector replay or original first-use credit. Interrupted normal hook supplied no all-doctrine report."
+}

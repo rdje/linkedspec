@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0",
+  "claims": [
+    {
+      "name": "source-universe-and-stubbed-selector-preparation",
+      "statement": "952 filename-universe candidates, 221 captured-classifier proposals and 131 proposed Perl paths without direct unconditional selection; five actual Bash selector controls and five evidence controls pass.",
+      "scope": "Activation-bound filename universe and captured-classifier proposals only, including selected external Perl fixtures. Proposed ownership/roles and actual loaders remain unqualified. Bash stubs emit arguments rather than perform presence/syntax/prove or SDK tests. No automatic backend discovery, runtime result or canonical admission is inferred.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/canonical-discovery-inventory-2026-11-16/review_portable.py",
+        "granularity": "Every candidate/source identity and actual ordered Bash selector argument; preserved original/changed scripts and separate readonly recovery.",
+        "result": "{\"archive\": {\"canonical_members\": 226, \"original_retained\": true, \"result\": \"PASS\"}, \"consumers\": 952, \"integrity_controls\": [\"missing-consumer\", \"duplicate-consumer\", \"source-byte\", \"route\", \"outside-candidate\"], \"producer_proposals\": 221, \"proposal_perl_omissions\": 131, \"result\": \"PASS\", \"scope\": \"Filename universe, captured classifier proposals and actual stubbed Bash arguments only. Ownership, actual loaders, automatic backend discovery and runtime/canonical execution remain unqualified.\", \"selector_controls\": [\"disabled-prove\", \"duplicate-prove\", \"disabled-syntax\", \"missing-private-suite\", \"missing-private-helper\"]}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Missing/duplicated consumers, changed source bytes, false route or candidate path, or missing/disabled/duplicated selector commands could pass.",
+        "oracle": "Independent Git path population, source Git blobs, shell-word interpretation and actual Bash argument channels; evidence routes checked against those observations.",
+        "red_control": "Five actual Bash selector mutations have native exit0 but independent population/order RED. Five consumer/source/route/path corruptions reject in verify_epoch.py. Original and first/final readonly channels remain exact."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project code, activation Git sources/blob mappings, before-child images and full command channels are retained. Complete native Python/Bash/Git/Tar/cache/library/filesystem/OS and outer-launcher first-use epochs remain4.2/SESSION5. Candidate paths/keyword lines provide no actual per-read closure; no retroactive original plan-source timing credit."
+      }
+    },
+    {
+      "name": "portable-plan-source-image-qualification",
+      "statement": "All226 planning-archive member bodies/modes recover independently through native tar after correcting one noncanonical self-source name. Original archive/producer stay exact; legacy namespace RED and five archive controls pass.",
+      "scope": "Exactly the original planning archive at activation and its226 retained member bodies/modes; one source-member logical name is corrected in a separate image. Original archive/producer stay unchanged. No original-first-use, whole-project archive census, native closure or filesystem-extraction claim.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/canonical-discovery-inventory-2026-11-16/review_portable.py",
+        "granularity": "Every original/qualified member path/body/mode, original Git blob and independent native tar name/mode/full-body recovery.",
+        "result": "Actual qualification0 and readonly recovery0: original namespace RED, qualified namespace/body/modes GREEN; all226 members and five controls. Full actual channels retained."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A checkout-prefixed source member or lost/duplicated/unsafe/changed body/mode could be accepted as portable recovery.",
+        "oracle": "Activation Git publisher bytes and original archive; independent native tar recovers every qualified body/mode.",
+        "red_control": "Actual original namespace rejects; qualified image passes. Missing, duplicate, unsafe-path, body and mode controls are effective; original archive hash/Git identity remains exact."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project code, activation Git sources/blob mappings, before-child images and full command channels are retained. Complete native Python/Bash/Git/Tar/cache/library/filesystem/OS and outer-launcher first-use epochs remain4.2/SESSION5. Candidate paths/keyword lines provide no actual per-read closure; no retroactive original plan-source timing credit."
+      }
+    },
+    {
+      "name": "portable-selector-command-metadata",
+      "statement": "Five maintained selector-command records use explicitly labeled repository-relative logical replay operands; every exact original actual command record is retained unchanged with its mode and script identity.",
+      "scope": "Only the five captured selector controls. Relative operands are logical equivalents, not new native invocations or replacements for original actual argv. Scripts do not inspect their invocation name. No SDK/selector replay, old observation refresh or source-origin/native closure credit.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/canonical-discovery-inventory-2026-11-16/review_portable.py",
+        "granularity": "Every original raw record, portable counterpart, unchanged script body/mode and cwd/other-operand mapping; actual portable-review0/empty stderr is retained.",
+        "result": "{\"original_actual_records_retained\": true, \"records\": 5, \"rejected\": [\"absolute-operand\", \"cwd\", \"actual-digest\", \"script-byte\", \"argv-mapping\"], \"representation\": \"Logical replay metadata only; actual original argv remains archived.\", \"selector_replayed\": false}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An absolute operand, changed cwd, false original digest, changed script or wrong original mapping could be accepted as equivalent replay metadata.",
+        "oracle": "Exact archived actual records and unchanged generated scripts plus the original path-hook rejection; independent readonly mapping validation.",
+        "red_control": "Actual first normal path hook rejects the five original records. Absolute-operand, cwd, actual-digest, script-byte and argv-mapping controls reject; healthy portable recovery returns0 without replaying selectors."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual old records/producers, unchanged scripts, before-child source images and full qualification/recovery channels are retained. Complete native/toolchain/cache/library/filesystem/OS and outer-launcher first-use epochs remain4.2/SESSION5; logical equivalence gives no retroactive original custody credit."
+      }
+    }
+  ]
+}

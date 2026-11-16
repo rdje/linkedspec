@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "tar",
+    "-tzf",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/plan-archive/before-qualified.tar.gz"
+  ],
+  "cwd": "."
+}

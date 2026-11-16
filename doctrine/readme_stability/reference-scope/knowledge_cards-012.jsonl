@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2229,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-with-final-callback-snapshot.md","sha256":"902a2d6900487a29a7bab4d61c4b13356803a98d5202c522c78df281b5cc9663","type":"member"}
 {"bytes":8170,"lines":108,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-working-vars-auto-vivify.md","sha256":"14ae7eb0001a50f4cbff4473572426f51c6dd02c57b7122e00605b1d9ec1c27a","type":"member"}
 {"bytes":2061,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-numeric-unicode-digit-oracle-drift.md","sha256":"ff21d319a9a3d3b51a56a5795f14a0c5b40b0f86443103cffdc050e4cb316ac4","type":"member"}
 {"bytes":1772,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/scalar-text-contract-home.md","sha256":"a922b674db3ffa61848cdb00f7968f378c46e12e6b320f7940664958983a7944","type":"member"}
@@ -80,6 +81,7 @@
 {"bytes":17406,"lines":256,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-reading-closeout-audit.md","sha256":"0e01c3c58a7f04ba640dca503b4c4bea73d6905d455b5dd6df8edada20c3c016","type":"member"}
 {"bytes":28330,"lines":490,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/supporting-source-reading-coverage.md","sha256":"57fbfd04494ac6bf694f72fd4ca7d441e78cd17e723700bf3272891706241252","type":"member"}
 {"bytes":16773,"lines":248,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/tagged-record-evaluation-and-split-drift.md","sha256":"ea09869c5ee30d8159918951ea3446ce6df39e240dcb772b998a2c0bcbb6f1bd","type":"member"}
+{"bytes":2234,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0","path":"docs/knowledge/tar-source-image-root-relative-paths.md","sha256":"b3493fa0d5adcb56ccc7fd4ae58865b0418839b6155862cf425270bb42fdaa99","type":"member"}
 {"bytes":3651,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/targeted-session-startup.md","sha256":"fdfcadf09c6d5ce25f14bc10f8d7f2202f8142eec1b43137ab11515164e1b388","type":"member"}
 {"bytes":6203,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.3","path":"docs/knowledge/task-acceptance-evidence-gate-boundary.md","sha256":"ca8601711769ac7fc7dd6ec9e339c13d8971bc7aa22ffc698442a9a05d0b98cc","type":"member"}
 {"bytes":6342,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/task-index-marker-anchor-hazard.md","sha256":"e6e135adc3c9d6d35b0308a7904794ae5b33521e2ed77193dc895779b9df39d8","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":4313,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-slot-bare-reads.md","sha256":"2059f0f21f2aebbe981f50a66695c85c05e9ed03d3d25e82a02cb031ad627c86","type":"member"}
 {"bytes":8065,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-surface-ground-truth.md","sha256":"428f3d74c6b964185841cb507902d2f1dbfe18130b78e0ac9cbe917e524e417c","type":"member"}
 {"bytes":7201,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-nested-value-path-assignment.md","sha256":"3e0ad60ce6d62ef064e04821261038c6e32b6dee2802dc05250a2f2075423d45","type":"member"}
-{"bytes":5301,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-number-receiver-value-chains.md","sha256":"6baf6d262897101011135bb499ed05b6b7c5e15da3686c6dda74d6967ab693fd","type":"member"}
-{"bytes":3167,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-symbol-callees.md","sha256":"6148ec0fdff975d1a15576dc88c1c7dc9662b01e49a1a29a5519f04c23b0a0da","type":"member"}

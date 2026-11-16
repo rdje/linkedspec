@@ -1,0 +1,7 @@
+{
+  "argv": ["bash", "scripts/check_repo_root_path_portability.sh"],
+  "cwd": ".",
+  "observed_tool_exit": 0,
+  "combined_channel": "focused-path.log",
+  "scope": "Focused path proof against the fully staged corrected candidate. Combined stdout/stderr; no separate-channel assertion or full-doctrine/canonical credit."
+}

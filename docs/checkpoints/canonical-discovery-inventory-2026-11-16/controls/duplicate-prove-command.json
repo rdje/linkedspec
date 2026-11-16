@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/duplicate-prove.sh"
+  ],
+  "cwd": ".",
+  "representation": "Portable logical equivalent; original actual argv is archived without alteration.",
+  "original_actual_command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/duplicate-prove-command.actual.json.gz",
+  "original_actual_sha256": "bf41a84f336b7cff63f6d5ab887f81bb8ab0cf5dd0e7e2cb9886640c6ba236bf",
+  "script_sha256": "8fb15388c13c120f2be13e8d17ba130950d97461264dccfa050eb21dbe26a2d2"
+}

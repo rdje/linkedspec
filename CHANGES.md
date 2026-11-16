@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — prepare canonical source selection and portable recovery
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0: 952 filename-universe candidates, 221 captured-classifier proposals and 131 proposed Perl paths without direct unconditional selection; five actual Bash selector controls and five evidence controls pass. All226 planning-archive member bodies/modes recover independently through native tar after correcting one noncanonical self-source name. Original archive/producer stay exact; legacy namespace RED and five archive controls pass. Evidence: `docs/checkpoints/canonical-discovery-inventory-2026-11-16/REVIEW.md`. Focused preparation only; full canonical and all before-push owners remain open.
+
 ## 2026-11-16 — bound canonical discovery before registration
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.0: Split accumulated discovery into inventory4.1.1 and exact canonical registration4.1.2. Preserve all prior parent obligations; no runtime, test, runner or auditor changes. Planning-only focused slice; no measured population or runtime/admission result.

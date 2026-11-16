@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2264,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-match-writer-presence-compatibility.md","sha256":"92a699c6e1ec2c93104ea5296c27e08ee9303dc332c5a4ebb241d1655d15b8c5","type":"member"}
 {"bytes":3603,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-local-verification-gate.md","sha256":"4a6e04e60e3f4725fba415e68012f193357aa30fd816a4117e0cef204383dcae","type":"member"}
 {"bytes":5360,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-helper-execution.md","sha256":"81ceb7eb925528d4270fea9f95f289bb955edc9fbb8eb3a994ec8dcc36788796","type":"member"}
 {"bytes":2900,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-logical-result-source-guards.md","sha256":"a30bf842f3a1b4dfa329cd8256a36e6111f5dc8066e6fe8e407c8b42a124f1db","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":1872,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-nonatomic-publication.md","sha256":"b13a018b828a88ace208e3bb446dd96b039558071315a0d83cf392297b5c87f1","type":"member"}
 {"bytes":6626,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-agnostic-backend-vision.md","sha256":"c3bf8200047285bc1e323e9baa04e03c6c21aeb7544aae2f3d6090cdfa49fd6c","type":"member"}
 {"bytes":4275,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-closure-definition-reconciliation.md","sha256":"79c87c01adaae108e0b5840e306ccdf8df0a68b4da56293ef5b1a1c9d27f9d6a","type":"member"}
-{"bytes":4819,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-closure-scoped-policy-freeze.md","sha256":"49a3e075e18c5e696bb762c6c35f22cbc30e25079c4d580bc92e660313de1fea","type":"member"}

@@ -11,3 +11,13 @@ native/source/context/declared-host/full-admission and before-push owners remain
 before.tar.gz retains the pre-publication documents and accepted claim records;
 bindings.json records the historical shared bindings without changing them.
 The one-shot publisher must not be replayed. Resume from the committed task leaf.
+
+## Portable source-image qualification
+
+The original archive retains one noncanonical self-source member created from an
+absolute `__file__` value. Keep the original archive/producer unchanged as historical
+evidence. Portable logical recovery now uses `docs/checkpoints/canonical-discovery-inventory-2026-11-16/plan-archive/before-qualified.tar.gz`
+and the readonly `docs/checkpoints/canonical-discovery-inventory-2026-11-16/review_portable.py`. All226 member bodies/modes are preserved;
+only the self-source member name is normalized. Native tar recovery, original
+namespace RED and five path/body/mode controls pass. This supplies no retroactive
+original producer-first-use or complete native/OS input-custody credit.

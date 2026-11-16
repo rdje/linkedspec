@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-suite.sh"
+  ],
+  "cwd": ".",
+  "representation": "Portable logical equivalent; original actual argv is archived without alteration.",
+  "original_actual_command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-suite-command.actual.json.gz",
+  "original_actual_sha256": "c7290f456cf621412fcbac6f07611fbe976fd2360ea047ec84e50ac711a3d0c2",
+  "script_sha256": "0e88eeadd886847465726ab713877222b5fd2c451d07fa09a51264f91530fb60"
+}

@@ -1,0 +1,645 @@
+#!/usr/bin/env bash
+set -euo pipefail
+require_tracked_file() { printf 'declared_presence\0%s\0' "$1"; }
+perl() { printf 'declared_syntax\0%s\0' "${@: -1}"; }
+prove() {
+ for selected in "$@"; do
+  case "$selected" in *.t) printf 'selected_test\0%s\0' "$selected" ;; esac
+ done
+}
+require_tracked_file tools/test_diagnosis_evidence.py
+require_tracked_file docs/checkpoints/task-acceptance-backend-scope/test_restoration_boundary.py
+require_tracked_file docs/checkpoints/task-acceptance-backend-scope/test_publish.py
+require_tracked_file tools/test_doctrine_path_streaming.py
+require_tracked_file t/knowledge_map_header_lists.t
+require_tracked_file tools/test_knowledge_map_atomic_output.py
+require_tracked_file tools/historical_objective_images.py
+require_tracked_file tests/language-readiness/current-source-images.json.gz
+require_tracked_file tests/language-readiness/current-source-successors-2026-11-12.json.gz
+require_tracked_file tests/language-readiness/ram-preflight-ci-evolution.json.gz
+require_tracked_file t/document_history_catalog.t
+PERL5LIB= prove t/document_history_catalog.t
+require_tracked_file .github/workflows/ci.yml
+require_tracked_file tools/run_ci_local.sh
+require_tracked_file tools/verification_receipt.sh
+require_tracked_file tools/run_rust_local.sh
+require_tracked_file tools/run_dart_local.sh
+require_tracked_file tools/run_dart_project_data.sh
+require_tracked_file tools/run_julia_local.sh
+require_tracked_file tools/run_julia_project_data.sh
+require_tracked_file tools/run_lua_local.sh
+require_tracked_file tools/run_lua_project_data.sh
+require_tracked_file tools/run_python_project_data.sh
+require_tracked_file tools/run_primary_cli_matrix.sh
+require_tracked_file tools/run_cargo_local.sh
+require_tracked_file tools/build_lua_native.sh
+require_tracked_file tools/test_perl_project_data_storage.sh
+require_tracked_file tools/test_rust_project_data_storage.sh
+require_tracked_file tools/test_dart_project_data_storage.sh
+require_tracked_file tools/test_julia_project_data_storage.sh
+require_tracked_file tools/test_lua_project_data_storage.sh
+require_tracked_file tools/test_tool_project_data_storage.sh
+require_tracked_file tools/test_project_data_process_locality.sh
+require_tracked_file tools/test_repo_root_process_portability.sh
+require_tracked_file rust/linkedspec-runtime/tests/repository_root_relocation.rs
+require_tracked_file lua/test/project_data_storage_test.lua
+require_tracked_file tools/check_julia_primary_cli.sh
+require_tracked_file tools/run_cli_conformance.pl
+require_tracked_file tools/check_callable_codeblock_contract.py
+require_tracked_file tools/check_callable_codeblock_five_backend.sh
+require_tracked_file tools/check_callable_signature_contract.py
+require_tracked_file tools/check_complete_named_mark_contract.py
+require_tracked_file tools/check_diagnostic_output_contract.py
+require_tracked_file tools/check_diagnostic_output_five_backend.sh
+require_tracked_file tools/check_duplicate_regex_slot_identity_contract.py
+require_tracked_file tools/check_duplicate_regex_slot_identity_five_backend.sh
+require_tracked_file tools/check_logical_helper_contract.py
+require_tracked_file tools/check_logical_helper_five_backend.sh
+require_tracked_file tools/materialize_mcp_semantic_transport_contract.py
+require_tracked_file tools/check_mcp_semantic_transport_contract.py
+require_tracked_file tools/check_progressive_span_dispatch_contract.py
+require_tracked_file tools/check_recognition_transaction_contract.py
+require_tracked_file tools/check_staged_ast_enrichment_contract.py
+require_tracked_file tools/mcp_contract_binding.py
+require_tracked_file tools/generate_perl_mcp_contract.py
+require_tracked_file tools/generate_rust_mcp_contract.py
+require_tracked_file tools/generate_dart_mcp_contract.py
+require_tracked_file tools/generate_julia_mcp_contract.py
+require_tracked_file tools/generate_lua_mcp_contract.py
+require_tracked_file tools/check_mcp_implementation_admission.py
+require_tracked_file tools/check_punctuation_light_zero_arg_contract.py
+require_tracked_file tools/check_punctuation_light_five_backend.sh
+require_tracked_file tools/check_repeated_action_result_contract.py
+require_tracked_file tools/check_repeated_action_result_five_backend.sh
+require_tracked_file tools/check_standalone_lifecycle_block_contract.py
+require_tracked_file tools/check_standalone_lifecycle_block_five_backend.sh
+require_tracked_file tools/check_sexpr_document_v1.sh
+require_tracked_file specs/SExprDocumentV1.spec
+require_tracked_file tests/sexpr-document-v1/contract.json
+require_tracked_file t/sexpr_document_v1.t
+require_tracked_file rust/linkedspec-runtime/tests/sexpr_document_v1.rs
+require_tracked_file dart/test/sexpr_document_v1_test.dart
+require_tracked_file julia/test/sexpr_document_v1_test.jl
+require_tracked_file lua/test/sexpr_document_v1_test.lua
+require_tracked_file tools/check_root_rule_selection_contract.py
+require_tracked_file tools/check_root_rule_selection_five_backend.sh
+require_tracked_file tools/check_rule_local_cursor_contract.py
+require_tracked_file tools/check_rule_local_cursor_five_backend.sh
+require_tracked_file tools/check_typed_source_location_contract.py
+require_tracked_file tools/check_language_closure_contract.py
+require_tracked_file capability_conformance/language_closure_contract.json
+require_tracked_file tools/check_composed_objective_contract.py
+require_tracked_file capability_conformance/composed_objective_contract.json
+require_tracked_file tests/language-readiness/composed/diagnostic.spec
+require_tracked_file tests/language-readiness/composed/normalization.spec
+require_tracked_file tests/language-readiness/composed/normalization-calls.spec
+require_tracked_file t/composed_normalization_perl.t
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-fresh.pl
+require_tracked_file tests/language-readiness/recover_objective_audit_inputs.py
+require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.zip
+require_tracked_file tests/language-readiness/artifacts/objective-audit-inputs.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-proof.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.1-archive.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-census.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.2.0-verification.json
+require_tracked_file tests/language-readiness/verify_objectives.py
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.4.1-verification.json
+require_tracked_file docs/language-readiness/objective-reconciliation.md
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.1.2.3-verification.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.2.7-verification.json
+require_tracked_file docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.1.3.3.5-verification.json
+require_tracked_file tests/language-readiness/composed/diagnostic-invalid-arity.spec
+require_tracked_file tools/check_typed_source_location_six_runtime.sh
+require_tracked_file tools/check_recursive_observation_six_runtime.sh
+require_tracked_file tools/check_progressive_span_dispatch_six_runtime.sh
+require_tracked_file tools/check_staged_ast_enrichment_six_runtime.sh
+require_tracked_file tools/check_typed_authoring_model_six_runtime.sh
+require_tracked_file tools/check_inter_match_gap_capture_contract.py
+require_tracked_file tools/check_inter_match_gap_capture_six_runtime.sh
+require_tracked_file tools/check_typed_gap_composition_six_runtime.sh
+require_tracked_file lua/test/inter_match_gap_capture_contract_test.lua
+require_tracked_file tools/check_recognition_transaction_six_runtime.sh
+require_tracked_file tools/check_semantic_introspection_contract.py
+require_tracked_file tools/check_semantic_introspection_six_runtime.sh
+require_tracked_file tools/check_mcp_six_runtime.sh
+require_tracked_file tools/check_mutation_public_surface.py
+require_tracked_file tools/check_mutation_six_runtime.sh
+require_tracked_file tools/check_uniform_binding_contract.py
+require_tracked_file tools/check_uniform_binding_mutation_result_surface.py
+require_tracked_file tools/check_capability_conformance.pl
+require_tracked_file tools/check_generated_source_contract.pl
+require_tracked_file tools/check_language_capability_coverage.pl
+require_tracked_file tools/check_native_spec_resolution_contract.pl
+require_tracked_file tools/check_scalar_numeric_contract.py
+require_tracked_file tools/check_unicode_case_contract.py
+require_tracked_file tools/check_unicode_rule_label_contract.py
+require_tracked_file capability_conformance/mcp_semantic_transport_contract.json
+require_tracked_file capability_conformance/progressive_span_dispatch_contract.json
+require_tracked_file capability_conformance/recognition_transaction_contract.json
+require_tracked_file capability_conformance/mcp_semantic_transport/schema.json
+require_tracked_file capability_conformance/mcp_semantic_transport/semantic_payloads.json
+require_tracked_file capability_conformance/mcp_semantic_transport/corpus.json
+require_tracked_file capability_conformance/mcp_semantic_transport/canonical_frames.jsonl
+require_tracked_file capability_conformance/mcp_semantic_transport/validator_cases.json
+require_tracked_file capability_conformance/mcp_implementation_admission.json
+require_tracked_file unicode_case/self_hosted_cli/manifest.json
+require_tracked_file t/semantic_introspection_perl_admission.t
+require_tracked_file rust/linkedspec-runtime/tests/semantic_introspection_rust_admission.rs
+require_tracked_file rust/linkedspec-runtime/src/mcp_contract.rs
+require_tracked_file rust/linkedspec-runtime/src/mcp_contract_runtime.rs
+require_tracked_file rust/linkedspec-runtime/src/mcp_server.rs
+require_tracked_file rust/linkedspec-runtime/src/mcp_wire.rs
+require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_dispatch.rs
+require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_stdio.rs
+require_tracked_file rust/linkedspec-runtime/tests/mcp_server_rust_admission.rs
+require_tracked_file dart/lib/src/mcp/mcp_contract.dart
+require_tracked_file dart/lib/src/mcp/mcp_contract_runtime.dart
+require_tracked_file dart/lib/src/mcp/mcp_server.dart
+require_tracked_file dart/lib/src/mcp/mcp_wire.dart
+require_tracked_file dart/test/mcp_contract_dart_binding_test.dart
+require_tracked_file dart/test/mcp_server_dart_dispatch_test.dart
+require_tracked_file dart/test/mcp_server_dart_stdio_test.dart
+require_tracked_file dart/test/mcp_server_dart_admission_test.dart
+require_tracked_file julia/src/mcp/McpContract.jl
+require_tracked_file julia/src/mcp/McpContractRuntime.jl
+require_tracked_file julia/src/mcp/McpServer.jl
+require_tracked_file julia/src/mcp/McpWire.jl
+require_tracked_file julia/test/mcp_contract_julia_binding_test.jl
+require_tracked_file julia/test/mcp_server_julia_dispatch_test.jl
+require_tracked_file julia/test/mcp_server_julia_stdio_test.jl
+require_tracked_file julia/test/mcp_server_julia_admission_test.jl
+require_tracked_file lua/native/mcp_system.c
+require_tracked_file lua/src/linkedspec/mcp_contract.lua
+require_tracked_file lua/src/linkedspec/mcp_contract_runtime.lua
+require_tracked_file lua/src/linkedspec/mcp_server.lua
+require_tracked_file lua/src/linkedspec/mcp_wire.lua
+require_tracked_file lua/test/mcp_contract_lua_binding_test.lua
+require_tracked_file lua/test/mcp_server_lua_dispatch_test.lua
+require_tracked_file lua/test/mcp_server_lua_stdio_test.lua
+require_tracked_file lua/test/mcp_server_lua_admission_test.lua
+require_tracked_file dart/test/semantic_introspection_dart_admission_test.dart
+require_tracked_file julia/test/semantic_introspection_julia_admission_test.jl
+require_tracked_file lua/test/semantic_introspection_lua_admission_test.lua
+require_tracked_file t/rule_local_cursor_perl_contract.t
+require_tracked_file t/duplicate_regex_slot_identity_perl_contract.t
+require_tracked_file t/sparse_and_action_slots_perl_regression.t
+require_tracked_file t/repeated_action_result_perl_contract.t
+require_tracked_file t/standalone_lifecycle_block_perl_contract.t
+require_tracked_file t/standalone_lifecycle_block_self_hosted_contract.t
+require_tracked_file rust/linkedspec-runtime/tests/duplicate_regex_slot_identity_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/repeated_action_result_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/standalone_lifecycle_block_contract.rs
+require_tracked_file rust/linkedspec-core/tests/unicode_rule_label_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/unicode_rule_label_routes.rs
+require_tracked_file dart/test/repeated_action_result_contract_test.dart
+require_tracked_file dart/test/standalone_lifecycle_block_contract_test.dart
+require_tracked_file dart/test/self_hosted_unicode_rule_label_test.dart
+require_tracked_file dart/lib/src/parser/unicode_rule_label.dart
+require_tracked_file dart/test/unicode_rule_label_classifier_test.dart
+require_tracked_file dart/test/unicode_rule_label_routes_test.dart
+require_tracked_file dart/test/unicode_rule_label_identity_routes_test.dart
+require_tracked_file dart/test/unicode_rule_label_negative_isolation_test.dart
+require_tracked_file julia/src/spec/UnicodeRuleLabel.jl
+require_tracked_file julia/test/unicode_rule_label_classifier_test.jl
+require_tracked_file julia/test/unicode_rule_label_routes_test.jl
+require_tracked_file julia/test/unicode_rule_label_identity_routes_test.jl
+require_tracked_file julia/test/unicode_rule_label_negative_isolation_test.jl
+require_tracked_file julia/test/repeated_action_result_contract_test.jl
+require_tracked_file julia/test/standalone_lifecycle_block_contract_test.jl
+require_tracked_file lua/src/linkedspec/unicode_rule_label.lua
+require_tracked_file lua/src/linkedspec/semantic_index.lua
+require_tracked_file lua/src/linkedspec/semantic_compilation_outcome.lua
+require_tracked_file lua/src/linkedspec/semantic_static_projection.lua
+require_tracked_file lua/src/linkedspec/semantic_query.lua
+require_tracked_file lua/test/semantic_index_source_foundation_test.lua
+require_tracked_file lua/test/semantic_index_compilation_foundation_test.lua
+require_tracked_file lua/test/semantic_index_static_graph_test.lua
+require_tracked_file lua/test/semantic_index_static_remaining_test.lua
+require_tracked_file lua/test/semantic_index_call_core_test.lua
+require_tracked_file lua/test/semantic_index_call_staged_generated_test.lua
+require_tracked_file lua/test/semantic_index_query_kernel_test.lua
+require_tracked_file lua/test/unicode_rule_label_classifier_test.lua
+require_tracked_file lua/test/unicode_rule_label_routes_test.lua
+require_tracked_file lua/test/unicode_rule_label_identity_routes_test.lua
+require_tracked_file lua/test/body_fluent_whole_token_test.lua
+require_tracked_file lua/test/unicode_rule_label_negative_isolation_test.lua
+require_tracked_file lua/test/repeated_action_result_contract_test.lua
+require_tracked_file lua/test/standalone_lifecycle_block_contract_test.lua
+require_tracked_file dart/test/duplicate_regex_slot_identity_contract_test.dart
+require_tracked_file julia/test/duplicate_regex_slot_identity_contract_test.jl
+require_tracked_file lua/test/duplicate_regex_slot_identity_contract_test.lua
+require_tracked_file t/root_rule_selection_perl_core.t
+require_tracked_file t/root_rule_selection_perl_routes.t
+require_tracked_file rust/linkedspec-runtime/tests/rule_local_cursor_contract.rs
+require_tracked_file dart/test/rule_local_cursor_contract_test.dart
+require_tracked_file julia/test/rule_local_cursor_contract_test.jl
+require_tracked_file lua/test/rule_local_cursor_contract_test.lua
+require_tracked_file rust/linkedspec-runtime/tests/root_rule_selection_admission.rs
+require_tracked_file dart/test/root_rule_selection_admission_test.dart
+require_tracked_file julia/test/root_rule_selection_admission_test.jl
+require_tracked_file lua/test/root_rule_selection_admission_test.lua
+require_tracked_file bin/linkedspec
+require_tracked_file capability_conformance/manifest.json
+require_tracked_file capability_conformance/callable_codeblock_contract.json
+require_tracked_file capability_conformance/callable_signature_contract.json
+require_tracked_file capability_conformance/complete_named_mark_contract.json
+require_tracked_file capability_conformance/diagnostic_output_contract.json
+require_tracked_file capability_conformance/duplicate_regex_slot_identity_contract.json
+require_tracked_file capability_conformance/logical_helper_contract.json
+require_tracked_file capability_conformance/punctuation_light_zero_arg_contract.json
+require_tracked_file capability_conformance/repeated_action_result_contract.json
+require_tracked_file capability_conformance/standalone_lifecycle_block_contract.json
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.spec
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.input
+require_tracked_file capability_conformance/repeated_action_result/explicit_or_distinct.expected.json
+require_tracked_file capability_conformance/root_rule_selection_contract.json
+require_tracked_file capability_conformance/rule_local_cursor_contract.json
+require_tracked_file capability_conformance/typed_source_location_contract.json
+require_tracked_file capability_conformance/inter_match_gap_capture_contract.json
+require_tracked_file capability_conformance/semantic_introspection_contract.json
+require_tracked_file capability_conformance/semantic_introspection_model.json
+require_tracked_file capability_conformance/uniform_binding_contract.json
+require_tracked_file capability_conformance/generated_source_contract.json
+require_tracked_file capability_conformance/native_spec_resolution_contract.json
+require_tracked_file capability_conformance/unicode_case_contract.json
+require_tracked_file capability_conformance/unicode_rule_label_contract.json
+require_tracked_file capability_conformance/scalar_text_contract.json
+require_tracked_file capability_conformance/scalar_numeric_contract.json
+require_tracked_file unicode_case/README.md
+require_tracked_file unicode_case/generate_unicode_case_contract.py
+require_tracked_file unicode_case/generate_unicode_rule_label_contract.py
+require_tracked_file unicode_case/unicode_rule_label_regex_class.txt
+require_tracked_file unicode_case/upstream/17.0.0/UnicodeData.txt.gz
+require_tracked_file unicode_case/upstream/17.0.0/SpecialCasing.txt.gz
+require_tracked_file unicode_case/upstream/17.0.0/DerivedCoreProperties.txt.gz
+require_tracked_file unicode_case/upstream/17.0.0/LICENSE.txt.gz
+require_tracked_file perl/LinkedSpec/UnicodeCaseMapping.pm
+require_tracked_file perl/LinkedSpec/UnicodeXIDContinue.pm
+require_tracked_file rust/linkedspec-runtime/src/unicode_case_mapping.rs
+require_tracked_file rust/linkedspec-core/src/unicode_rule_label.rs
+require_tracked_file rust/linkedspec-runtime/src/semantic_index.rs
+require_tracked_file rust/linkedspec-runtime/tests/unicode_case_mapping.rs
+require_tracked_file rust/linkedspec-runtime/tests/semantic_index_foundation.rs
+require_tracked_file dart/lib/src/runtime/unicode_case_mapping.dart
+require_tracked_file dart/test/unicode_case_mapping_test.dart
+require_tracked_file julia/src/runtime/UnicodeCaseMapping.jl
+require_tracked_file lua/src/linkedspec/unicode_case_mapping.lua
+require_tracked_file cli_conformance/manifest.json
+require_tracked_file t/cli_conformance_runner.t
+require_tracked_file t/trace_cli.t
+require_tracked_file t/native_spec_resolution.t
+require_tracked_file t/generated_source_contract.t
+require_tracked_file t/diagnostic_output_perl_contract.t
+require_tracked_file t/scalar_numeric_contract.t
+require_tracked_file t/punctuation_light_zero_arg_contract.t
+require_tracked_file t/complete_named_mark_contract.t
+require_tracked_file t/typed_source_location_values.t
+require_tracked_file t/typed_source_location_perl_contract.t
+require_tracked_file t/recursive_observation_perl_contract.t
+require_tracked_file t/recognition_transaction_perl_authority.t
+require_tracked_file t/recognition_transaction_perl_contract.t
+require_tracked_file t/progressive_span_dispatch_perl_contract.t
+require_tracked_file t/staged_ast_enrichment_perl_contract.t
+require_tracked_file rust/linkedspec-runtime/tests/staged_ast_enrichment_contract.rs
+require_tracked_file dart/test/staged_ast_enrichment_contract_test.dart
+require_tracked_file julia/test/staged_ast_enrichment_contract_test.jl
+require_tracked_file lua/test/staged_ast_enrichment_contract_test.lua
+require_tracked_file rust/linkedspec-runtime/tests/progressive_span_dispatch_contract.rs
+require_tracked_file dart/test/progressive_span_dispatch_contract_test.dart
+require_tracked_file julia/test/progressive_span_dispatch_contract_test.jl
+require_tracked_file lua/test/progressive_span_dispatch_contract_test.lua
+require_tracked_file rust/linkedspec-runtime/tests/recognition_transaction_contract.rs
+require_tracked_file dart/test/recognition_transaction_contract_test.dart
+require_tracked_file julia/test/recognition_transaction_contract_test.jl
+require_tracked_file lua/test/recognition_transaction_contract_test.lua
+require_tracked_file rust/linkedspec-runtime/tests/typed_source_location_contract.rs
+require_tracked_file rust/linkedspec-runtime/tests/recursive_observation_contract.rs
+require_tracked_file dart/test/typed_source_location_contract_test.dart
+require_tracked_file dart/test/recursive_observation_contract_test.dart
+require_tracked_file julia/test/typed_source_location_contract_test.jl
+require_tracked_file julia/test/recursive_observation_contract_test.jl
+require_tracked_file lua/test/typed_source_location_contract_test.lua
+require_tracked_file lua/test/recursive_observation_contract_test.lua
+require_tracked_file lua/test/source_boundary_compatibility_aliases_test.lua
+require_tracked_file t/variadic_user_function_contract.t
+require_tracked_file t/callable_codeblock_literal_contract.t
+require_tracked_file t/signed_array_selector_perl_contract.t
+require_tracked_file tests/numeric-codeblocks/signed-array-selectors.json
+require_tracked_file t/uniform_binding_contract.t
+require_tracked_file t/actionir_receiver_scalar_copy.t
+require_tracked_file t/actionir_receiver_scalar_copy_probe.pl
+require_tracked_file t/semantic_index_perl_foundation.t
+require_tracked_file t/semantic_index_perl_static_projection.t
+require_tracked_file t/semantic_index_perl_calls_projection.t
+require_tracked_file t/semantic_index_perl_query.t
+require_tracked_file t/semantic_index_perl_runtime_observation.t
+require_tracked_file t/mcp_contract_perl_binding.t
+require_tracked_file t/mcp_server_perl_dispatch.t
+require_tracked_file t/mcp_server_perl_stdio.t
+require_tracked_file t/mcp_server_perl_admission.t
+require_tracked_file perl/LinkedSpec/SemanticCallProjection.pm
+require_tracked_file perl/LinkedSpec/SemanticQuery.pm
+require_tracked_file perl/LinkedSpec/SemanticRuntimeProjection.pm
+require_tracked_file perl/LinkedSpec/SemanticStaticProjection.pm
+require_tracked_file perl/LinkedSpec/RuntimeSemanticObservation.pm
+require_tracked_file tools/check_aggregate_selector_retirement.py
+require_tracked_file tools/check_public_aggregate_selector_surface.py
+require_tracked_file tools/check_executable_aggregate_selector_sources.py
+require_tracked_file perl/LinkedSpec.pm
+require_tracked_file perl/LinkedSpec/BindingRuntime.pm
+require_tracked_file perl/LinkedSpec/SpecLoader.pm
+require_tracked_file perl/LinkedSpec/GeneratedSource.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransaction.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransactionPolicy.pm
+require_tracked_file perl/LinkedSpec/RecognitionTransactionRuntime.pm
+require_tracked_file perl/LinkedSpec/RecursiveObservationPolicy.pm
+require_tracked_file perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
+require_tracked_file perl/LinkedSpec/SemanticIndex.pm
+require_tracked_file perl/LinkedSpec/SemanticSourceMap.pm
+require_tracked_file perl/LinkedSpec/MCPContract.pm
+require_tracked_file perl/LinkedSpec/MCPContractRuntime.pm
+require_tracked_file perl/LinkedSpec/MCPServer.pm
+require_tracked_file perl/LinkedSpec/MCPWire.pm
+require_tracked_file perl/LinkedSpec/Numeric.pm
+require_tracked_file t/phase0_regression.t
+require_tracked_file perl/LinkedSpec/ActionIR/RawDependencies.pm
+require_tracked_file t/actionir_raw_dependency_metadata.t
+require_tracked_file t/actionir_raw_dependency_provenance.t
+require_tracked_file t/actionir_nested_block_source_spans.t
+require_tracked_file t/actionir_raw_dependency_compatibility.t
+require_tracked_file t/codeblock_push_composition_perl.t
+require_tracked_file scripts/check_memory_architecture.sh
+require_tracked_file scripts/check_memory_commit_pointer.sh
+require_tracked_file tools/test_memory_commit_pointer.sh
+require_tracked_file tools/check_memory_handoff_state.py
+require_tracked_file scripts/check_doctrines.sh
+require_tracked_file scripts/check_diagnosis_evidence.sh
+require_tracked_file scripts/check_readme_stability.sh
+require_tracked_file scripts/check_readme_routing_pressure.pl
+require_tracked_file doctrine/readme_stability/routes.jsonl
+require_tracked_file README_POLICY.md
+require_tracked_file DOCTRINE_ENFORCEMENT.md
+require_tracked_file TOOLBOX.md
+require_tracked_file MEMORY_ARCHITECTURE.md
+require_tracked_file KNOWLEDGE_MAP.md
+require_tracked_file knowledge-map/scripts/gen_knowledge_map.sh
+require_tracked_file knowledge-map/scripts/check_knowledge_map.sh
+perl -c perl/LinkedSpec.pm
+perl -c bin/linkedspec
+perl -c scripts/check_readme_routing_pressure.pl
+perl -c tools/run_cli_conformance.pl
+perl -c tools/check_capability_conformance.pl
+perl -c tools/check_generated_source_contract.pl
+perl -c tools/check_language_capability_coverage.pl
+perl -c tools/check_native_spec_resolution_contract.pl
+perl -c -Iperl t/actionir_ast_parser.t
+perl -c -Iperl t/actionir_receiver_scalar_copy.t
+perl -c -Iperl t/actionir_receiver_scalar_copy_probe.pl
+perl -c -Iperl perl/LinkedSpec/ActionIR/RawDependencies.pm
+perl -c -Iperl t/actionir_raw_dependency_metadata.t
+perl -c -Iperl t/actionir_raw_dependency_provenance.t
+perl -c -Iperl t/actionir_nested_block_source_spans.t
+perl -c -Iperl t/actionir_raw_dependency_compatibility.t
+perl -c -Iperl t/cli_conformance_runner.t
+perl -c -Iperl t/trace_cli.t
+perl -c -Iperl t/native_spec_resolution.t
+perl -c -Iperl t/generated_source_contract.t
+perl -c -Iperl t/diagnostic_output_perl_contract.t
+perl -c -Iperl t/scalar_text_contract.t
+perl -c -Iperl t/scalar_numeric_contract.t
+perl -c -Iperl t/punctuation_light_zero_arg_contract.t
+perl -c -Iperl t/complete_named_mark_contract.t
+perl -c -Iperl t/typed_source_location_values.t
+perl -c -Iperl t/typed_source_location_perl_contract.t
+perl -c -Iperl t/recursive_observation_perl_contract.t
+perl -c -Iperl t/recognition_transaction_perl_authority.t
+perl -c -Iperl t/recognition_transaction_perl_contract.t
+perl -c -Iperl t/progressive_span_dispatch_perl_contract.t
+perl -c -Iperl t/staged_ast_enrichment_perl_contract.t
+perl -c -Iperl t/rule_local_cursor_perl_contract.t
+perl -c -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+perl -c -Iperl t/sparse_and_action_slots_perl_regression.t
+perl -c -Iperl t/repeated_action_result_perl_contract.t
+perl -c -Iperl t/root_rule_selection_perl_core.t
+perl -c -Iperl t/root_rule_selection_perl_routes.t
+perl -c -Iperl t/variadic_user_function_contract.t
+perl -c -Iperl t/callable_codeblock_literal_contract.t
+perl -c -Iperl t/signed_array_selector_perl_contract.t
+perl -c -Iperl t/uniform_binding_contract.t
+perl -c -Iperl t/semantic_index_perl_foundation.t
+perl -c -Iperl t/semantic_index_perl_static_projection.t
+perl -c -Iperl t/semantic_index_perl_calls_projection.t
+perl -c -Iperl t/semantic_index_perl_query.t
+perl -c -Iperl t/semantic_index_perl_runtime_observation.t
+perl -c -Iperl t/semantic_introspection_perl_admission.t
+perl -c -Iperl t/mcp_contract_perl_binding.t
+perl -c -Iperl t/mcp_server_perl_dispatch.t
+perl -c -Iperl t/mcp_server_perl_stdio.t
+perl -c -Iperl t/mcp_server_perl_admission.t
+perl -c -Iperl perl/LinkedSpec/BindingRuntime.pm
+perl -c -Iperl perl/LinkedSpec/UnicodeXIDContinue.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransaction.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransactionPolicy.pm
+perl -c -Iperl perl/LinkedSpec/RecognitionTransactionRuntime.pm
+perl -c -Iperl perl/LinkedSpec/RecursiveObservationPolicy.pm
+perl -c -Iperl perl/LinkedSpec/ActionIR/Scanner/RecognitionTransactionRules.pm
+perl -c -Iperl perl/LinkedSpec/SemanticIndex.pm
+perl -c -Iperl perl/LinkedSpec/SemanticSourceMap.pm
+perl -c -Iperl perl/LinkedSpec/SemanticCallProjection.pm
+perl -c -Iperl perl/LinkedSpec/SemanticQuery.pm
+perl -c -Iperl perl/LinkedSpec/SemanticRuntimeProjection.pm
+perl -c -Iperl perl/LinkedSpec/SemanticStaticProjection.pm
+perl -c -Iperl perl/LinkedSpec/RuntimeSemanticObservation.pm
+perl -c -Iperl perl/LinkedSpec/MCPContract.pm
+perl -c -Iperl perl/LinkedSpec/MCPContractRuntime.pm
+perl -c -Iperl perl/LinkedSpec/MCPServer.pm
+perl -c -Iperl perl/LinkedSpec/MCPWire.pm
+perl -c -Iperl t/phase0_regression.t
+PERL5LIB= prove -Iperl t/staged_ast_enrichment_perl_contract.t
+PERL5LIB= prove -Iperl t/progressive_span_dispatch_perl_contract.t
+PERL5LIB= prove -Iperl t/inter_match_gap_capture_perl_contract.t
+PERL5LIB= prove -Iperl t/recognition_transaction_perl_authority.t
+PERL5LIB= prove -Iperl t/recognition_transaction_perl_contract.t
+PERL5LIB= prove -Iperl t/typed_source_location_values.t t/typed_source_location_perl_contract.t t/recursive_observation_perl_contract.t
+PERL5LIB= prove -Iperl t/mcp_contract_perl_binding.t t/mcp_server_perl_dispatch.t t/mcp_server_perl_stdio.t
+PERL5LIB= prove -Iperl t/mcp_server_perl_admission.t
+PERL5LIB= prove -Iperl t/semantic_index_perl_foundation.t
+PERL5LIB= prove -Iperl t/semantic_index_perl_static_projection.t
+PERL5LIB= prove -Iperl t/semantic_index_perl_calls_projection.t
+PERL5LIB= prove -Iperl t/semantic_index_perl_query.t
+PERL5LIB= prove -Iperl t/semantic_index_perl_runtime_observation.t
+PERL5LIB= prove -Iperl t/semantic_introspection_perl_admission.t
+PERL5LIB= prove -Iperl t/duplicate_regex_slot_identity_perl_contract.t
+PERL5LIB= prove -Iperl t/sparse_and_action_slots_perl_regression.t
+PERL5LIB= prove -Iperl t/repeated_action_result_perl_contract.t
+PERL5LIB= prove -Iperl t/standalone_lifecycle_block_self_hosted_contract.t
+PERL5LIB= prove -Iperl t/root_rule_selection_perl_core.t
+PERL5LIB= prove -Iperl t/root_rule_selection_perl_routes.t
+PERL5LIB= prove -Iperl t/rule_local_cursor_perl_contract.t
+PERL5LIB= prove -Iperl t/diagnostic_output_perl_contract.t
+PERL5LIB= prove -Iperl t/complete_named_mark_contract.t
+PERL5LIB= prove -Iperl t/punctuation_light_zero_arg_contract.t
+PERL5LIB= prove -Iperl t/uniform_binding_contract.t
+PERL5LIB= prove -Iperl t/callable_codeblock_literal_contract.t
+PERL5LIB= prove -Iperl t/signed_array_selector_perl_contract.t
+PERL5LIB= prove -Iperl t/codeblock_push_composition_perl.t
+PERL5LIB= prove -Iperl t/composed_normalization_perl.t
+PERL5LIB= prove -Iperl t/variadic_user_function_contract.t
+PERL5LIB= prove -Iperl t/generated_source_contract.t
+PERL5LIB= prove -Iperl t/scalar_text_contract.t
+PERL5LIB= prove -Iperl t/scalar_numeric_contract.t
+PERL5LIB= prove -Iperl t/native_spec_resolution.t
+prove -Iperl t/actionir_ast_parser.t
+prove -Iperl t/actionir_receiver_scalar_copy.t
+PERL5LIB= prove -Iperl t/actionir_raw_dependency_metadata.t t/actionir_raw_dependency_provenance.t t/actionir_nested_block_source_spans.t t/actionir_raw_dependency_compatibility.t
+private_factory_suites=(
+ t/actionir_method_input_captures.t
+ t/actionir_method_argument_source_frames.t
+ t/actionir_empty_expression_spans.t
+ t/actionir_ast_input_frames.t
+ t/actionir_ast_constructions.t
+ t/actionir_ast_parser.t
+ t/actionir_source_emissions.t
+ t/canonical_event_occurrence_order.t
+ t/actionir_nested_block_source_spans.t
+ t/actionir_compiler_source_membership.t
+ t/actionir_executable_source_membership.t
+ t/trace_actionir_method_lowering.t
+ t/trace_emit_context_bridge.t
+ docs/checkpoints/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0-origin-fixture.t
+ t/actionir_event_input_grants.t
+ t/actionir_input_composition_acceptance.t
+ t/actionir_factory_capture.t
+ t/actionir_emit_context_capture.t
+ t/actionir_emit_context_capture_cold.t
+ t/actionir_contract_dependency_capture.t
+ t/actionir_contract_dependency_capture_cold.t
+ t/actionir_contract_factory_capture.t
+ t/actionir_contract_factory_capture_cold.t
+ t/actionir_method_default_capture.t
+ t/actionir_method_default_capture_cold.t
+ t/actionir_method_trim_capture.t
+ t/actionir_method_trim_capture_cold.t
+ t/actionir_method_inference_capture.t
+ t/actionir_method_inference_capture_cold.t
+ t/actionir_method_inline_capture.t
+ t/actionir_method_inline_capture_cold.t
+ t/actionir_method_block_component_capture.t
+ t/actionir_method_block_component_capture_cold.t
+ t/actionir_method_local_return_capture.t
+ t/actionir_method_local_return_capture_cold.t
+ t/actionir_method_block_value_capture.t
+ t/actionir_method_block_value_capture_cold.t
+ t/actionir_method_ast_hash_key_capture.t
+ t/actionir_method_ast_hash_key_capture_cold.t
+ t/actionir_method_ast_call_capture.t
+ t/actionir_method_ast_call_capture_cold.t
+ t/actionir_method_ast_array_end_capture.t
+ t/actionir_method_ast_array_end_capture_cold.t
+ t/uniform_binding_contract.t
+ t/actionir_method_ast_assignment_capture.t
+ t/actionir_method_ast_assignment_capture_cold.t
+ t/actionir_method_value_capture.t
+ t/actionir_method_value_capture_cold.t
+ t/actionir_method_slot_capture.t
+ t/actionir_method_slot_capture_cold.t
+ t/actionir_method_general_return_capture.t
+ t/actionir_method_general_return_capture_cold.t
+ t/actionir_method_assignment_required_capture.t
+ t/actionir_method_assignment_required_capture_cold.t
+ t/actionir_method_set_key_required_capture.t
+ t/actionir_method_set_key_required_capture_cold.t
+ t/actionir_method_push_required_capture.t
+ t/actionir_method_push_required_capture_cold.t
+ t/actionir_method_regex_undef_required_capture.t
+ t/actionir_method_regex_undef_required_capture_cold.t
+ t/actionir_receiver_scalar_copy.t
+ t/actionir_array_receiver_required_capture.t
+ t/actionir_scalar_receiver_required_capture.t
+ t/actionir_hash_receiver_required_capture.t
+ t/actionir_array_end_required_capture.t
+ t/actionir_hash_index_required_capture.t
+ t/actionir_package_flow_capture.t
+ t/actionir_dropped_trim_capture.t
+ t/actionir_small_kind_capture.t
+ t/actionir_uniform_target.t
+ t/actionir_method_kind_capture.t
+ t/actionir_source_assignment_kind_capture.t
+ t/actionir_ast_optional_capture.t
+ t/actionir_tracking_predicate_capture.t
+ t/actionir_formal_trim_capture.t
+ t/actionir_named_dispatch_capture.t
+ t/actionir_flow_required_capture.t
+ t/actionir_flow_kind_capture.t
+ t/actionir_flow_default_capture.t
+ t/actionir_control_foundation_capture.t
+ t/actionir_control_expansion_capture.t
+ t/actionir_control_attached_capture.t
+ t/actionir_control_single_capture.t
+ t/actionir_control_ifwhile_capture.t
+ t/actionir_control_switch_capture.t
+ t/diagnostic_output_perl_contract.t
+ t/actionir_control_output_capture.t
+ t/actionir_control_kind_capture.t
+ t/actionir_control_calls_capture.t
+ t/actionir_control_default_capture.t
+ t/actionir_default_object_capture.t
+)
+private_factory_helpers=(
+ t/actionir_array_end_required_cold_probe.pl
+ t/actionir_array_end_required_probe.pl
+ t/actionir_array_receiver_required_cold_probe.pl
+ t/actionir_array_receiver_required_probe.pl
+ t/actionir_ast_optional_probe.pl
+ t/actionir_ast_optional_stable_probe.pl
+ t/actionir_control_attached_native_fixed.pl
+ t/actionir_control_calls_native_complete.pl
+ t/actionir_control_default_native.pl
+ t/actionir_control_expansion_native.pl
+ t/actionir_control_foundation_native.pl
+ t/actionir_control_ifwhile_native.pl
+ t/actionir_control_ifwhile_native_complete.pl
+ t/actionir_control_kind_native_complete.pl
+ t/actionir_control_output_native.pl
+ t/actionir_control_output_native_complete.pl
+ t/actionir_control_single_native.pl
+ t/actionir_control_switch_native.pl
+ t/actionir_default_object_native.pl
+ t/actionir_dropped_trim_cold_probe.pl
+ t/actionir_dropped_trim_probe.pl
+ t/actionir_flow_default_native.pl
+ t/actionir_flow_kind_native.pl
+ t/actionir_flow_required_native.pl
+ t/actionir_formal_trim_probe.pl
+ t/actionir_hash_index_required_cold_probe.pl
+ t/actionir_hash_index_required_probe.pl
+ t/actionir_hash_receiver_required_cold_probe.pl
+ t/actionir_hash_receiver_required_probe.pl
+ t/actionir_legacy_hash_kind_cold_probe.pl
+ t/actionir_legacy_hash_kind_probe.pl
+ t/actionir_method_kind_authority_probe.pl
+ t/actionir_method_kind_probe.pl
+ t/actionir_method_regex_undef_required_probe.pl
+ t/actionir_named_dispatch_probe.pl
+ t/actionir_package_flow_cold_probe.pl
+ t/actionir_package_flow_probe.pl
+ t/actionir_receiver_scalar_copy_probe.pl
+ t/actionir_scalar_receiver_required_cold_probe.pl
+ t/actionir_scalar_receiver_required_probe.pl
+ t/actionir_small_kind_probe.pl
+ t/actionir_small_kind_reference_probe.pl
+ t/actionir_small_kind_symbolic_probe.pl
+ t/actionir_source_assignment_kind_probe.pl
+ t/actionir_tracking_predicate_probe.pl
+ t/actionir_uniform_target_probe.pl
+)
+for private_factory_input in "${private_factory_suites[@]}" "${private_factory_helpers[@]}"; do
+ require_tracked_file "$private_factory_input"
+ perl -c -Iperl "$private_factory_input"
+done
+LINKEDSPEC_EVENT_ORDER_BASELINE=0 LINKEDSPEC_MEMBERSHIP_BASELINE=0 PERL5LIB= PERL5OPT= prove -Iperl "${private_factory_suites[@]}"
+PERL5LIB= prove -Iperl t/inspect_spec_codegen.t
+PERL5LIB= prove -Iperl t/cli_conformance_runner.t t/trace_cli.t
+require_tracked_file tools/host_ram_usage.sh
+require_tracked_file tools/test_ram_guard.py
+prove -v -Iperl t/phase0_regression.t

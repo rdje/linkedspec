@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/perl-selector.sh"
+  ],
+  "cwd": "."
+}

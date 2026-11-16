@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "rev-parse",
+    "e3940a675d6313b226c6492198cbdb60c18b78dd:docs/checkpoints/canonical-discovery-plan-2026-11-16/before.tar.gz"
+  ],
+  "cwd": "."
+}

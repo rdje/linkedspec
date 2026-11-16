@@ -1,4 +1,6 @@
-{"member_count":94,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":96,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5301,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-number-receiver-value-chains.md","sha256":"6baf6d262897101011135bb499ed05b6b7c5e15da3686c6dda74d6967ab693fd","type":"member"}
+{"bytes":3167,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-symbol-callees.md","sha256":"6148ec0fdff975d1a15576dc88c1c7dc9662b01e49a1a29a5519f04c23b0a0da","type":"member"}
 {"bytes":2013,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-numeric-comparison-word-aliases.md","sha256":"7f5957d8864f38d054c8b216a88753c7acd0681572f53e8f87a4532307ebc7e7","type":"member"}
 {"bytes":3016,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-attached-if-statement-split-seam.md","sha256":"35c0e6b293f0b79ada3356d367435f8a64b6416402449c00e3f87d9362592f17","type":"member"}
 {"bytes":2302,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-perl-colon-scalar-retired.md","sha256":"5e38e74e6985c2d1510878e8af126f34d7457781c931466daa8cb98d2bf3c6d8","type":"member"}

@@ -54,6 +54,7 @@
 {"bytes":7863,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/callable-codeblock-literal-contract.md","sha256":"e5eec715088364e7ff3e017dd38abec4b8f3fbfc6e22bccebe9e41788448adec","type":"member"}
 {"bytes":2688,"lines":24,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/callable-mdbook-public-count-drift.md","sha256":"c3fcc0c0c54e623aa74f7516d84213a1f36a55962031d704c285026065c26061","type":"member"}
 {"bytes":2784,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.14","path":"docs/knowledge/canonical-ci-ram-fallback-prerequisite.md","sha256":"f6f4480b51b7d2685fdfc8a4ad08a8af1812bd2dee275546f9362bac77368a33","type":"member"}
+{"bytes":1824,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0","path":"docs/knowledge/canonical-discovery-source-preparation.md","sha256":"3303ffedf05af7d3677cc2eb7b3fb463bc16e71c3cfb313d1542a189baf020f5","type":"member"}
 {"bytes":5230,"lines":83,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/canonical-primary-cli-trace-protocol.md","sha256":"a1269911b339d72c6876337c2d834389adc55858c737690d536a09ebc914dfb1","type":"member"}
 {"bytes":4899,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/capability-exclusion-freshness-gap.md","sha256":"b5a16ed3651e6f0a2fbf6900844f22099708c4a794025d9988b6e6dc6507eaaf","type":"member"}
 {"bytes":5780,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/capability-exclusion-freshness-model.md","sha256":"9202dabb62386d1b05814ea9f457458e588284a9de68a54cb6eec8c9446e278e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5227,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-contains-composition.md","sha256":"1531e58ffb4d443d011ffb06fde9cad3827d84423560077569da5ae69bfcf500","type":"member"}
 {"bytes":5223,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-index-composition.md","sha256":"53a385b003e46017fec974c36d784453f9009cc048584defdcab0c6faa442cb3","type":"member"}
 {"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}
-{"bytes":4841,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"a28524918e7f1994d6fa51d7aa65594260712e6d706375cac309b6023292d8db","type":"member"}

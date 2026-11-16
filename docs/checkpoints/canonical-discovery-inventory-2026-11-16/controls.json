@@ -1,0 +1,35 @@
+{
+  "rejected": [
+    {
+      "name": "disabled-prove",
+      "oracle": "RED",
+      "reason": "actual selector population/order differs",
+      "shell_exit": 0
+    },
+    {
+      "name": "duplicate-prove",
+      "oracle": "RED",
+      "reason": "actual selector population/order differs",
+      "shell_exit": 0
+    },
+    {
+      "name": "disabled-syntax",
+      "oracle": "RED",
+      "reason": "actual selector population/order differs",
+      "shell_exit": 0
+    },
+    {
+      "name": "missing-private-suite",
+      "oracle": "RED",
+      "reason": "actual selector population/order differs",
+      "shell_exit": 0
+    },
+    {
+      "name": "missing-private-helper",
+      "oracle": "RED",
+      "reason": "actual selector population/order differs",
+      "shell_exit": 0
+    }
+  ],
+  "scope": "Actual mutated selector Bash executions use stubs; independent healthy-source oracle rejects. No SDK or full canonical run."
+}

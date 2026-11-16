@@ -160,6 +160,10 @@ historical auditor removes only the exact 150-line insertion before its older
 inverses and still requires every original runner byte. Its per-path mutations
 operate within that block, because six names also occur in older commands.
 
+The current source preparation retains 952 candidate consumer files and 221 classifier proposals; 131 proposed Perl paths have no direct unconditional selector. Actual Bash argument extraction uses stubs, with five missing/duplicate/disabled-command controls and five independent evidence controls. These are preparation results. Target ownership, actual loaders, automatic backend discovery, SDK tests and canonical inclusion still need their own proof.
+
+Archive member names must be derived relative to the repository before adding source images. The planning capture used an absolute self-source name and retained the checkout prefix in that one archive member. A separate qualified archive restores the canonical namespace while retaining all226 member bodies/modes; native tar independently recovers every body/mode. The original capture stays historical, with no new original first-use or native-custody credit. Recovery: `bash tools/run_python_project_data.sh docs/checkpoints/canonical-discovery-inventory-2026-11-16/review_portable.py`.
+
 Accumulated feature regressions enter canonical CI in two steps: first freeze the current consumer/helper/fixture inventory and distinguish direct, automatic and optional backend selection; then repair the proven omissions with an exact historical CI inverse and current-source admission. Source inventory supplies no runtime or canonical-execution credit. The registration slice requires an exact staged receipt and actual required backend routes; declared-host and native-custody gaps retain their separate owners.
 
 Keep future tests task-owned and explicitly registered. Exact staged canonical

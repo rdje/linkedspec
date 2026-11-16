@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-helper.sh"
+  ],
+  "cwd": ".",
+  "representation": "Portable logical equivalent; original actual argv is archived without alteration.",
+  "original_actual_command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/missing-private-helper-command.actual.json.gz",
+  "original_actual_sha256": "8604722853e4d7eb0757252e8f5c939d610acbb5a0be6f3138abf3d0fc495990",
+  "script_sha256": "2e6067457fdd8cb2009e44f664a5dcc59643611532eb2abd6914e5e1146f0d3a"
+}

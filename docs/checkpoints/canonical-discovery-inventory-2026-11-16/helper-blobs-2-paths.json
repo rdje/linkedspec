@@ -1,0 +1,14 @@
+[
+  "dart/lib/src/action/callable_contract.dart",
+  "dart/lib/src/parser/unicode_rule_label.dart",
+  "dart/lib/src/runtime/bounded_child_parse_authority.dart",
+  "dart/lib/src/runtime/recognition_transaction.dart",
+  "dart/lib/src/runtime/source_location.dart",
+  "dart/lib/src/runtime/staged_ast_enrichment.dart",
+  "dart/lib/src/runtime/staged_parse_job.dart",
+  "dart/lib/src/runtime/unicode_case_mapping.dart",
+  "dart/lib/src/semantic/semantic_call_projection.dart",
+  "dart/lib/src/semantic/semantic_query.dart",
+  "dart/lib/src/semantic/semantic_runtime_projection.dart",
+  "dart/lib/src/semantic/semantic_static_projection.dart"
+]

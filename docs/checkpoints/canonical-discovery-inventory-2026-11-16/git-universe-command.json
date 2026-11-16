@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "git",
+    "ls-files",
+    "-z",
+    "--",
+    "t/*.t",
+    "t/**/*.t",
+    "rust/linkedspec-runtime/tests/*.rs",
+    "dart/test/*_test.dart",
+    "dart/test/**/*_test.dart",
+    "julia/test/*_test.jl",
+    "julia/test/**/*_test.jl",
+    "lua/test/*_test.lua",
+    "lua/test/**/*_test.lua"
+  ],
+  "cwd": "."
+}

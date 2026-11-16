@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-prove.sh"
+  ],
+  "cwd": ".",
+  "representation": "Portable logical equivalent; original actual argv is archived without alteration.",
+  "original_actual_command": "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls/disabled-prove-command.actual.json.gz",
+  "original_actual_sha256": "95f6529958e11ba517929d85610b08bc213532b3ba7aaca6ea82e2cd76ed0b8f",
+  "script_sha256": "1943a469c18c124e9d51c671801f03eedacebd36e5f4759de28a7bd6700814b6"
+}

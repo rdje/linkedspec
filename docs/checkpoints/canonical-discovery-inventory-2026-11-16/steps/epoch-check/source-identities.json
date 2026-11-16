@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/capture.py": {
+    "sha256": "8ced38f72f328fc4b52cba6dfa1f7481404f49ae4ed2db2b1d3ad3dc28ad065d",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/controls.py": {
+    "sha256": "30cbef385723bfbff59022bee59c2678a6393d70041433fd2b59a7810a7553d7",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/qualify_plan.py": {
+    "sha256": "f5964e64a3e22ff52f0c80225b41cefaf6e30c04a300e2ab2698060aa517dc38",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/review.py": {
+    "sha256": "1dbefe9d4dfe02f30946671ca64f827e760bca23a52d2e7a461607cc5140e609",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/run.py": {
+    "sha256": "3bca73db3f253c134d650fd257fe3a3655d0a5db8509d0b8ff66898157084eb9",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/run_step.py": {
+    "sha256": "1394effbfcb4f39b524e8055f22d6196b146aa181832030a811a5fa3d403c53c",
+    "mode": 420
+  },
+  "docs/checkpoints/canonical-discovery-inventory-2026-11-16/verify_epoch.py": {
+    "sha256": "db1a6296353d7283045c2e72eac140a7ea109a9c366af58d67473367240c707d",
+    "mode": 420
+  },
+  "tools/project_data_run.sh": {
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f",
+    "mode": 493
+  },
+  "tools/project_data_env.sh": {
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73",
+    "mode": 493
+  },
+  "tools/run_python_project_data.sh": {
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604",
+    "mode": 493
+  }
+}

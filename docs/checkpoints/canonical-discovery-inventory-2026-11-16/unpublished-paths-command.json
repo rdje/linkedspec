@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "diff",
+    "--name-only",
+    "-z",
+    "4683555ec51f04b8977812ce4e984c5cc6e6f42c",
+    "e3940a675d6313b226c6492198cbdb60c18b78dd"
+  ],
+  "cwd": "."
+}

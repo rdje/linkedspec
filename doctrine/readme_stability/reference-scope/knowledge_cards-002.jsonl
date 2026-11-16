@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2408,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-closeout.md","sha256":"c82d50cbe6d72693f3f2216c34d593c7fa81e4666925fefb84ae6eaede27dc2d","type":"member"}
 {"bytes":3095,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-mechanism-audit.md","sha256":"6be6d8f2012d1abfb232a6191113f76b67c6da69f2e610940c22aba7c1064b4b","type":"member"}
 {"bytes":2953,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-native-execution-canonical-json.md","sha256":"3a2c912d9dbf89734f4be0e6b43b434167acdc997499ddb48f5452583d6b713e","type":"member"}
 {"bytes":4991,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-primary-cli-trace-overflow.md","sha256":"19b5940201c37431bfc5f6db1cef4d7936e39d290eabb22ee2b8e0562b10ca2a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2579,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-parse-job-sidecar.md","sha256":"01b4d4a8c2ebe8d5e9ac548a12eb179c9fbc6e53da77d4788d54ce6954811094","type":"member"}
 {"bytes":2633,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-prototype-proof.md","sha256":"182c95ed0b4e54035c214b2ed14bbaf1d60450d30a2b009149ca3d8a2a595e76","type":"member"}
 {"bytes":7082,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-registry-dispatch.md","sha256":"261c4f1b345c96452bc1ff7381fda25e8f3b6573e3404497abb2deb7c80da824","type":"member"}
-{"bytes":5575,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-definition-staged-ast-audit.md","sha256":"b22f6d0b529c353ee920f9f3c1565af6674b6f971090348514ba37cd64fd0c32","type":"member"}

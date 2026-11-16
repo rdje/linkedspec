@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7667,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-helper-pattern-validation.md","sha256":"67889cacac1f2bc6ce15c6a391989ac4c442e565f78ba67e3f3c6d6044738a5e","type":"member"}
 {"bytes":12613,"lines":224,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-regex-scanner-boundaries.md","sha256":"00ea459ee6aee0312c5479453d6e31400010cf00db75da79a0a3ab2df4895c22","type":"member"}
 {"bytes":2451,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-named-capture-endpoint-presence-repair.md","sha256":"4158a9a78d2f42cee8116e1843072daf4feb3c228ec9374343b0916f826a9f81","type":"member"}
 {"bytes":6740,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-native-mcp-server-plan.md","sha256":"a14234db56f129ecac389743695efdd520ad5e5d979fc026d42799f0d66b0b7f","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10890,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-working-variable-observation-drift.md","sha256":"8c58010ff5286a68a9dd5c12576b05061391d037531e1d78bb77c84aa5c23079","type":"member"}
 {"bytes":5683,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/portable-parse-job-public-authoring.md","sha256":"7df178a3b1f49959f622ce5b387f9f5292afeaaf250971a62839ecaea5f8f5e2","type":"member"}
 {"bytes":7646,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/post-parity-structured-text-program.md","sha256":"f96baefd9a112c23a15c6b4bc90c74a4b24f604f489b94c69fc2fe1197686587","type":"member"}
-{"bytes":2976,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/pplugin-descriptor-ready-legacy-runtime-boundary.md","sha256":"cdaa04e9f1555d1f357817a0b40ec8c048851901642c27d1de0b73ec6be42d8b","type":"member"}

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: inventory4.1.1 follows completed canonical-discovery decomposition4.1.0. Exact registration4.1.2 and separate before-push owners precede publication30.2.
+PNT: actual consumer/loader qualification4.1.1.1 follows focused source preparation0. Exact registration/source admission4.1.2 and every independent before-push owner remain.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded inventory/registration plan with every existing parent obligation preserved; no shared runner, auditor, runtime or fixture change.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — 952 filename-universe candidates, 221 captured-classifier proposals and 131 proposed Perl paths without direct unconditional selection; five actual Bash selector controls and five evidence controls pass. All226 planning-archive member bodies/modes recover independently through native tar after correcting one noncanonical self-source name. Original archive/producer stay exact; legacy namespace RED and five archive controls pass.
 
 ## Next Action
 
-Freeze the current feature-test/helper/artifact-input inventory under4.1.1, then exact registration/source admission/full canonical4.1.2. Preserve all independent before-push owners.
+Qualify proposed consumer/support/dormant/fixture roles and actual loaders under4.1.1.1; preserve direct/native/source-origin gaps under4.2/SESSION5. Freeze registration input, then exact staged canonical4.1.2 and publication30.2 after all prerequisites.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
@@ -29,7 +30,6 @@ Freeze the current feature-test/helper/artifact-input inventory under4.1.1, then
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.1 —504/26 supported/four separate compatibility/474 preserved/80 initial policies; old30-current504/direct1028/first strict readonly25/current186; original failures qualified, headroom29 then Rust80.2.
 - TYPE-REFERENCE-BOOK.1.2.23.1.42 —84 valid-Array concat programs/66 contract passes/18 supported composition failures/84 pairs/first readonly14/current126; frozen80 and independent Perl80.1 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.78.6.5 — Each host312/four routes/1872 checks/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct3939/qualified2 readonly26/current531; raw-field4.28 explicit, concat42 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.78.6.4 —312/four routes/28 targets+three compatibility/281 preserved/104 initial policies; private31-current312/direct2927 assertions/first readonly24/current519/1872 pairs/nine traces; installed Lua next.
 
 
 ## History
