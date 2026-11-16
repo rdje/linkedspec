@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — bound task growth and separate historical pressure views
+
+TYPE-REFERENCE-BOOK.1.2.23.4.34: Preflight uses immutable source proposals rather than filename size as capacity credit. The unchanged writer and independent source/CORE/unselected/frontier oracle agree. The earlier pressure reader deliberately checks its dated current task view; its expected current-identity refusal is retained. A new historical route uses its unchanged retained pure validator and archived task bytes, preserving every old result and control without requiring later task edits to equal the old source. No old claim hash, source, result or shared tool changes. Evidence: `docs/checkpoints/task-headroom-2026-11-16/REVIEW.md`. Full source-origin/native/physical closure remains4.2/SESSION5.
+
 ## 2026-11-16 — distinguish Perl suite roles and named includes
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0: Harness/completion source and the retained actual selector distinguish maintenance from feature/compatibility candidates. The callable suite includes the pipeline regression inside a subtest; its unless-caller completion supports that route. The lazy default-literal regression has no direct or named-callable route. Existing ActionIR parser/copy direct repetitions remain explicit for registration reconciliation. Initial reader log-string refusal is retained; command-boundary qualification fixes only the reader. No test or runner changed. Evidence: `docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md`. Full population/direct-input/native/source-origin closure remains separately owned.

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: bounded Perl role qualification complete; remaining native roles/direct loaders/discovery precede registration.
+PNT: bounded task headroom renewed; native roles/direct-loader qualification resumes before registration.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — The bounded Perl ledger classifies145 named candidates as134 proposed feature suites, nine compatibility suites and two maintenance suites. Twelve have direct selection, one has a named include route and132 have neither route in this bounded review. Seven ledger corruptions reject;164 retained inputs match current bytes/modes. This is static qualification, with no Perl execution or canonical admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.34 — The existing NONCURRENT-HELPER-CODE-PURGE epoch preserves 10 ordered IDs/all CORE fields, 2 complete unselected bodies and the complete frontier/trailing section of 9605 bytes. 8 closed narratives renew 16841 current-text bytes; all 11 public source/node queries and ten corruption controls pass. Dated pressure reconstruction preserves the original result and four controls without comparing today's TYPE task. No SDK or fresh helper-admission credit.
 
 ## Next Action
 
-Remeasure outgoing size, renew task-evidence headroom, then finish remaining qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1 before freezing registration4.1.2 input.
+Remeasure committed outgoing size, then complete remaining native roles/direct loaders/discovery under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1 before freezing registration4.1.2 input; all separate before-push owners remain.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.34 — helper-purge10 IDs/eight closed/two unchanged/full9605-byte tail/16841 renewed; eleven queries/ten controls; historical pressure/four controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
@@ -29,7 +30,6 @@ Remeasure outgoing size, renew task-evidence headroom, then finish remaining qua
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.3 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct1155/readonly9/current521; publication-budget30 next.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.2 —504/four routes/16 supported/two separate compatibility/486 preserved/80 initial/eight invalid signatures; old18-current504/combined direct1205/qualified2 readonly25/current871; Dart80.3 next.
 - TYPE-REFERENCE-BOOK.1.2.23.4.29 —25 IDs/22 closed/three unchanged/full22339-byte tail/48937 renewed bytes;26 exact public queries/first readonly10/current identity0; Rust80.2 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.80.1 —504/26 supported/four separate compatibility/474 preserved/80 initial policies; old30-current504/direct1028/first strict readonly25/current186; original failures qualified, headroom29 then Rust80.2.
 
 
 ## History

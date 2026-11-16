@@ -1,0 +1,7 @@
+{
+  "source": ".linkedspec-data/perl-roles-normal-retry-20261116.log",
+  "sha256": "1df41180c20c532bbb265df45f3b0cf36149678bf2645ced077f47bc5149ea4b",
+  "mode": 420,
+  "channel": "original combined stdout/stderr",
+  "result": "complete normal and post-pointer PASS"
+}

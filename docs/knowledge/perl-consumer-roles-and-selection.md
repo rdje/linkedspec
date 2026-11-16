@@ -35,3 +35,5 @@ TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1; native/source-origin/physical closure st
 4.2/SESSION5.
 
 The first normal hook also found task-evidence pressure. Full rejected own text, mode and partial hook survive; only this new slice's commentary routes to its checkpoint. Immutable-Git recovery protects the original parent and all other older bytes with four effective controls. Renew task headroom before further activation. The normal hook is the mandatory global integrity boundary; interrupted redundant standalone prechecks supply no PASS credit.
+
+Headroom34 qualifies historical pressure recovery after later task edits. The original strict reader and its dated current-identity refusal remain exact; `docs/checkpoints/task-headroom-2026-11-16/historical_pressure.py` reads archived task bytes/mode through the retained pure validator and preserves the original result/four controls. It asserts no current TYPE task identity.

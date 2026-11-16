@@ -1,4 +1,5 @@
-{"member_count":98,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":99,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4313,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-slot-bare-reads.md","sha256":"2059f0f21f2aebbe981f50a66695c85c05e9ed03d3d25e82a02cb031ad627c86","type":"member"}
 {"bytes":8065,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-surface-ground-truth.md","sha256":"428f3d74c6b964185841cb507902d2f1dbfe18130b78e0ac9cbe917e524e417c","type":"member"}
 {"bytes":7201,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-nested-value-path-assignment.md","sha256":"3e0ad60ce6d62ef064e04821261038c6e32b6dee2802dc05250a2f2075423d45","type":"member"}
 {"bytes":5301,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-number-receiver-value-chains.md","sha256":"6baf6d262897101011135bb499ed05b6b7c5e15da3686c6dda74d6967ab693fd","type":"member"}

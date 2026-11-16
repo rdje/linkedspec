@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.34",
+  "claims": [
+    {
+      "name": "closed-helper-purge-task-epoch",
+      "statement": "The existing NONCURRENT-HELPER-CODE-PURGE epoch preserves 10 ordered IDs/all CORE fields, 2 complete unselected bodies and the complete frontier/trailing section of 9605 bytes. 8 closed narratives renew 16841 current-text bytes; all 11 public source/node queries and ten corruption controls pass. Dated pressure reconstruction preserves the original result and four controls without comparing today's TYPE task. No SDK or fresh helper-admission credit.",
+      "scope": "Finite named task preservation only; original measurements, runtime behavior and code are unchanged. No SDK, whole-project reading, physical reclamation or complete native/source-origin custody claim;4.2/SESSION5 remain.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-2026-11-16/review.py --current",
+        "granularity": "Every ordered ID/CORE field, selected pointer and full unselected body/prefix/frontier; actual public whole-source/every-ID outputs and point-in-time target/manifest modes.",
+        "result": "{\"after_bytes\": 18106, \"before_bytes\": 34947, \"controls\": {\"goal\": {\"reason\": \"CORE field:NONCURRENT-HELPER-CODE-PURGE/Goal\", \"result\": \"RED\"}, \"mode\": {\"reason\": \"target mode\", \"result\": \"RED\"}, \"omitted-node\": {\"reason\": \"ordered current IDs\", \"result\": \"RED\"}, \"pointer\": {\"reason\": \"exact selected contract and pointer\", \"result\": \"RED\"}, \"prefix\": {\"reason\": \"complete prefix\", \"result\": \"RED\"}, \"selection\": {\"reason\": \"complete unselected body\", \"result\": \"RED\"}, \"source\": {\"reason\": \"source Git address\", \"result\": \"RED\"}, \"status\": {\"reason\": \"CORE field:NONCURRENT-HELPER-CODE-PURGE/Status\", \"result\": \"RED\"}, \"tail\": {\"reason\": \"complete frontier and trailing bytes\", \"result\": \"RED\"}, \"unselected-body\": {\"reason\": \"complete unselected body\", \"result\": \"RED\"}}, \"current_target_and_manifest\": \"PASS\", \"ids\": 10, \"limits\": \"Finite named task preservation only; original measurements, runtime behavior and code are unchanged. No SDK, whole-project reading, physical reclamation or complete native/source-origin custody claim;4.2/SESSION5 remain.\", \"operational_estimate_bytes\": 1463675787, \"operational_limits\": \"Retained primary output only; independent actual-pack falsification30 and complete raw-artifact/native/physical closure4.2 remain. No remote freshness, actual wire or future-size promise.\", \"public_queries\": 11, \"result\": \"PASS\", \"saved_bytes\": 16841, \"selected\": 8, \"tail_bytes\": 9605, \"unselected\": 2}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Altered prefix/tail/status/goal, omitted node, changed unselected body/pointer/source/selection or mode could pass.",
+        "oracle": "Immutable activation Git source and independently parsed original/current bodies, contrasted with the unchanged production epoch/reader outputs and source proposals.",
+        "red_control": "All ten named corruptions reject in actual review output; exact source and every public query pass."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project source/data/producer images, full modes, native command channels and immutable Git ancestor are retained. Complete native Python/Git/library/OS, outer-launcher first-use, source-origin and physical closure remains4.2/SESSION5; no retroactive full custody claim."
+      }
+    },
+    {
+      "name": "dated-pressure-historical-view",
+      "statement": "Archived pressure reconstruction preserves the original589-byte result and four controls while the original strict reader rejects the changed current task view.",
+      "scope": "Archived accepted task bytes/mode only. No current TYPE task identity or original command freshness is asserted; original source/result/claim fields stay unchanged.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-2026-11-16/historical_pressure.py",
+        "granularity": "Complete original validator source/task bytes/modes/result/normal refusal; original four mutations in an archived view.",
+        "result": "{\"historical_pressure\": {\"added_task_bytes\": 589, \"controls\": {\"mode\": {\"reason\": \"task mode\", \"result\": \"RED\"}, \"new-node\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}, \"older-prefix\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}, \"parent-contract\": {\"reason\": \"older bytes preserved\", \"result\": \"RED\"}}, \"original_contract_and_other_bytes\": \"preserved\", \"result\": \"PASS\"}, \"limits\": \"Archived accepted task bytes/mode only. No current TYPE task identity or original command freshness is asserted; original source/result/claim fields stay unchanged.\", \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Historical preservation would require later current task bytes to equal the dated source, or changed archived contracts could pass.",
+        "oracle": "Actual original current-identity RED versus archived-view recovery and unchanged original pure-validator controls, with immutable Git source.",
+        "red_control": "Original reader exits1 with current task identity; the archived route passes and all four original controls reject."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project source/data/producer images, full modes, native command channels and immutable Git ancestor are retained. Complete native Python/Git/library/OS, outer-launcher first-use, source-origin and physical closure remains4.2/SESSION5; no retroactive full custody claim."
+      }
+    },
+    {
+      "name": "activation-operational-pack-estimate",
+      "statement": "At activation e476d208d versus cached origin4683555e, the retained primary monitor reports1,463,675,787 serialized non-thin bytes/114 commits and36,324,213 bytes below director1.5GB.",
+      "scope": "Retained primary output only; independent actual-pack falsification30 and complete raw-artifact/native/physical closure4.2 remain. No remote freshness, actual wire or future-size promise.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual activation refs, producer/config/policy/command metadata and primary serialized-byte result retained in telemetry; excludes this uncommitted slice.",
+        "result": "Retained telemetry/result.json agrees with actual completed monitor output; raw pack remains ignored on the repository volume."
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "This maintenance reuses the completed primary operation without an independent current actual-pack size falsification. Broader monitor qualification remains30; no copied metadata alone supplies that oracle."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual project source/data/producer images, full modes, native command channels and immutable Git ancestor are retained. Complete native Python/Git/library/OS, outer-launcher first-use, source-origin and physical closure remains4.2/SESSION5; no retroactive full custody claim."
+      }
+    }
+  ]
+}

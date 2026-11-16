@@ -1,0 +1,307 @@
+{
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/ahead-command.json": {
+    "mode": 420,
+    "sha256": "97af835e86aac49fe3176ba372419a49c9ae94dd5a7944147949497adda17d29",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/ahead-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/ahead-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/ahead-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/ahead-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/ahead-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/ahead-stdout.gz": {
+    "mode": 420,
+    "sha256": "d756d3e5ce011e0a7ffbc396f38274ae32e232f227765001e29c11d7f16554b8",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/ahead-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-after-command.json": {
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-after-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-command.json": {
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/base-stdout.gz": {
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/base-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/empty-range-command.json": {
+    "mode": 420,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/empty-range-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/empty-range-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/empty-range-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/empty-range-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/empty-range-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/empty-range-stdin.gz": {
+    "mode": 420,
+    "sha256": "e7cbb1a8e24fdabf5d68c81b488a447356481c1456e09dc1312a03adddc04b16",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/empty-range-stdin.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/empty-range-stdout.gz": {
+    "mode": 420,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/empty-range-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/git-version-command.json": {
+    "mode": 420,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/git-version-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/git-version-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/git-version-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/git-version-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/git-version-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/git-version-stdout.gz": {
+    "mode": 420,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/git-version-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-after-command.json": {
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-after-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "1335f33c9ebae04bb6b2931c8e151dd4e2d41f4dd9fe856e164bf5df62af1a5c",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-command.json": {
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/head-stdout.gz": {
+    "mode": 420,
+    "sha256": "1335f33c9ebae04bb6b2931c8e151dd4e2d41f4dd9fe856e164bf5df62af1a5c",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/head-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/memory-command.json": {
+    "mode": 420,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/memory-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/memory-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/memory-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/memory-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/memory-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/memory-stdout.gz": {
+    "mode": 420,
+    "sha256": "b839d953578dc3ea112755fce464655dda286eb84edb97ff801c769b34f40709",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/memory-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-format-command.json": {
+    "mode": 420,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-format-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-format-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-format-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-format-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-format-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-format-stdout.gz": {
+    "mode": 420,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-format-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-metadata-command.json": {
+    "mode": 420,
+    "sha256": "2a29b2687be4be512ddf67e33a171b3ebf1c4ba8e9fa3b14ddcb459cfb75af45",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-metadata-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-metadata-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-metadata-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-metadata-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-metadata-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-metadata-stdin.gz": {
+    "mode": 420,
+    "sha256": "cc06301a0859747933ccee77a5324c96d4f0b6708b1d616fafba1e5e48635d2f",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-metadata-stdin.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/object-metadata-stdout.gz": {
+    "mode": 420,
+    "sha256": "e266a00989928bf061f8de3a1def6e5b3cf1342039b61c6bd994ae01dc616ef5",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/object-metadata-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/objects-command.json": {
+    "mode": 420,
+    "sha256": "5c57b29a1344874e8d07bf8a5c5bf890210a6e30ce8d6c6b19d73fd909700ae5",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/objects-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/objects-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/objects-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/objects-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/objects-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/objects-stdout.gz": {
+    "mode": 420,
+    "sha256": "cc06301a0859747933ccee77a5324c96d4f0b6708b1d616fafba1e5e48635d2f",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/objects-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-command.json": {
+    "mode": 420,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-after-command.json": {
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-after-exit.txt": {
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-command.json": {
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-command.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-exit.txt": {
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-config-stdout.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-config-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/pack-stderr.gz": {
+    "mode": 420,
+    "sha256": "a542e6b54e0e83e6c12682cb5f4d2371ae7ba60210fd6af1a58d12000bd57758",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/pack-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/producer-input-identities.json": {
+    "mode": 420,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/producer-input-identities.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/producer-inputs.tar.gz": {
+    "mode": 420,
+    "sha256": "50a8ce9e10ecc0037921f18b7215281957c6e53cb64d5c49c323e3563bad3610",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/producer-inputs.tar.gz"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/result.json": {
+    "mode": 420,
+    "sha256": "10e8e858ef284d6c7374e005456de11492c5f2cbf7e185b6e4f79c6b863aeb23",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/result.json"
+  },
+  "docs/checkpoints/task-headroom-2026-11-16/telemetry/revisions.txt": {
+    "mode": 420,
+    "sha256": "b0ed9d525c3097bc36e579d59f65436e54e7fbaa1e33a2c6adb87973c0888391",
+    "source": ".linkedspec-data/push-monitor/20261116T171858.448209Z/revisions.txt"
+  }
+}

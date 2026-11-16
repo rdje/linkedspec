@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "show",
+    "e476d208dcee58f67ca4d0d7a950d5aa8bdcab00:docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md"
+  ],
+  "cwd": "."
+}

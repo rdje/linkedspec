@@ -1,0 +1,7 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_mdbook_local.sh"
+  ],
+  "cwd": "."
+}

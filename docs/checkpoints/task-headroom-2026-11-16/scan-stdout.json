@@ -1,0 +1,52 @@
+[
+  {
+    "tree": "NONCURRENT-HELPER-CODE-PURGE",
+    "selected": 8,
+    "saved": 16841
+  },
+  {
+    "tree": "PERL-ACTIONIR-AST-MIGRATION",
+    "selected": 23,
+    "saved": 13074
+  },
+  {
+    "tree": "STAGED-LINKED-PARSING",
+    "selected": 13,
+    "saved": 11972
+  },
+  {
+    "tree": "REPO-ROOT-PATH-PORTABILITY",
+    "selected": 6,
+    "saved": 8291
+  },
+  {
+    "tree": "MEDIUM-IMPACT",
+    "selected": 12,
+    "saved": 6962
+  },
+  {
+    "tree": "MDBOOK-VARIANT-AGNOSTIC",
+    "selected": 6,
+    "saved": 6521
+  },
+  {
+    "tree": "MDBOOK-DESTINATION-ROOT-ALIGNMENT",
+    "selected": 2,
+    "saved": 4639
+  },
+  {
+    "tree": "PHASE6-DOCUMENTATION",
+    "selected": 8,
+    "saved": 2955
+  },
+  {
+    "tree": "RUST-DEPENDENCY-WARNING-ZERO",
+    "selected": 2,
+    "saved": 2260
+  },
+  {
+    "tree": "METHOD-LIKE-DSL-MIGRATION",
+    "selected": 5,
+    "saved": 2130
+  }
+]

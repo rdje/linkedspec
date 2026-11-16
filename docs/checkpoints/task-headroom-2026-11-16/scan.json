@@ -1,0 +1,5182 @@
+{
+  "activation": "e476d208dcee58f67ca4d0d7a950d5aa8bdcab00",
+  "limits": "Immutable source proposals only; no task mutation, actual capacity renewal, SDK or native/source-origin/physical closure. Production epoch admission and independent preservation still required; full custody remains4.2/SESSION5.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.34",
+  "sources": [
+    {
+      "blob": "dbeb15a6fd84e722a3eda9828eba50e0eb9ea90b",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/ACCUMULATOR-CONVENTION-AUDIT.md",
+      "proposed_saved_bytes": 85,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 752,
+          "before": 837,
+          "id": "ACCUMULATOR-CONVENTION-AUDIT.1",
+          "saved": 85
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "8c7a8555b14a31ca2351e8746bbe4a4fd2efdddd684716eef14965161b3d88ae",
+      "tail_bytes": 20655,
+      "tree": "ACCUMULATOR-CONVENTION-AUDIT"
+    },
+    {
+      "blob": "bac98cfc5d9645aef1f65a70d1ddb50f834092cd",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/ALIAS-RETIREMENT-DOC-SYNC.md",
+      "proposed_saved_bytes": 684,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 760,
+          "before": 1444,
+          "id": "ALIAS-RETIREMENT-DOC-SYNC.1",
+          "saved": 684
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "7734f8aaa62ff9b24ce1a02d973a2d2052dc1fc52be174127f7ef6392a2c21bb",
+      "tail_bytes": 2444,
+      "tree": "ALIAS-RETIREMENT-DOC-SYNC"
+    },
+    {
+      "blob": "cb44ad442cf5417279a0210d9bee816a4b0e4d43",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/BACKBONE-ACTION-IR-LOWERING.md",
+      "proposed_saved_bytes": 350,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 825,
+          "before": 1175,
+          "id": "BACKBONE-ACTION-IR-LOWERING.1",
+          "saved": 350
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "455072dea2b0b450fa0f88eea48d6489d7bf184cb8a77d37dc8cf6409993fe73",
+      "tail_bytes": 5048,
+      "tree": "BACKBONE-ACTION-IR-LOWERING"
+    },
+    {
+      "blob": "1289ae202df7f81264cda690c8f0d9ac68c4b234",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 10,
+      "mode": "100644",
+      "path": "docs/tasks/BACKEND-COMPANION-BOOKS.md",
+      "proposed_saved_bytes": 387,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 773,
+          "before": 1160,
+          "id": "BACKEND-COMPANION-BOOKS.0",
+          "saved": 387
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "805fd825415677804694d812a29cdf1cb9b3158c2f2454d25edc49a871d1d4df",
+      "tail_bytes": 2301,
+      "tree": "BACKEND-COMPANION-BOOKS"
+    },
+    {
+      "blob": "b534f762f1155d4287b59b36f7c861795d0c680b",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 27,
+      "mode": "100644",
+      "path": "docs/tasks/BACKEND-INTEGRATION-GUIDES.md",
+      "proposed_saved_bytes": 43197,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 640,
+          "before": 929,
+          "id": "BACKEND-INTEGRATION-GUIDES",
+          "saved": 289
+        },
+        {
+          "after": 1594,
+          "before": 2895,
+          "id": "BACKEND-INTEGRATION-GUIDES.0",
+          "saved": 1301
+        },
+        {
+          "after": 1520,
+          "before": 3701,
+          "id": "BACKEND-INTEGRATION-GUIDES.1.1",
+          "saved": 2181
+        },
+        {
+          "after": 1406,
+          "before": 3224,
+          "id": "BACKEND-INTEGRATION-GUIDES.1.2",
+          "saved": 1818
+        },
+        {
+          "after": 771,
+          "before": 1393,
+          "id": "BACKEND-INTEGRATION-GUIDES.2",
+          "saved": 622
+        },
+        {
+          "after": 1552,
+          "before": 6234,
+          "id": "BACKEND-INTEGRATION-GUIDES.2.1",
+          "saved": 4682
+        },
+        {
+          "after": 1544,
+          "before": 5851,
+          "id": "BACKEND-INTEGRATION-GUIDES.2.2",
+          "saved": 4307
+        },
+        {
+          "after": 1476,
+          "before": 3747,
+          "id": "BACKEND-INTEGRATION-GUIDES.3.1",
+          "saved": 2271
+        },
+        {
+          "after": 1458,
+          "before": 3613,
+          "id": "BACKEND-INTEGRATION-GUIDES.3.2",
+          "saved": 2155
+        },
+        {
+          "after": 1427,
+          "before": 3228,
+          "id": "BACKEND-INTEGRATION-GUIDES.4.1",
+          "saved": 1801
+        },
+        {
+          "after": 1468,
+          "before": 2793,
+          "id": "BACKEND-INTEGRATION-GUIDES.4.2",
+          "saved": 1325
+        },
+        {
+          "after": 777,
+          "before": 845,
+          "id": "BACKEND-INTEGRATION-GUIDES.5",
+          "saved": 68
+        },
+        {
+          "after": 1478,
+          "before": 4263,
+          "id": "BACKEND-INTEGRATION-GUIDES.5.1",
+          "saved": 2785
+        },
+        {
+          "after": 1358,
+          "before": 3348,
+          "id": "BACKEND-INTEGRATION-GUIDES.5.2",
+          "saved": 1990
+        },
+        {
+          "after": 1718,
+          "before": 3422,
+          "id": "BACKEND-INTEGRATION-GUIDES.5.3",
+          "saved": 1704
+        },
+        {
+          "after": 1411,
+          "before": 3023,
+          "id": "BACKEND-INTEGRATION-GUIDES.6",
+          "saved": 1612
+        },
+        {
+          "after": 1484,
+          "before": 3509,
+          "id": "BACKEND-INTEGRATION-GUIDES.7",
+          "saved": 2025
+        },
+        {
+          "after": 908,
+          "before": 992,
+          "id": "BACKEND-INTEGRATION-GUIDES.8",
+          "saved": 84
+        },
+        {
+          "after": 1496,
+          "before": 3515,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.1",
+          "saved": 2019
+        },
+        {
+          "after": 1659,
+          "before": 3945,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.2",
+          "saved": 2286
+        },
+        {
+          "after": 1674,
+          "before": 3993,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.3",
+          "saved": 2319
+        },
+        {
+          "after": 1412,
+          "before": 2142,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.4",
+          "saved": 730
+        },
+        {
+          "after": 1803,
+          "before": 3596,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.5",
+          "saved": 1793
+        },
+        {
+          "after": 1556,
+          "before": 2586,
+          "id": "BACKEND-INTEGRATION-GUIDES.8.6",
+          "saved": 1030
+        }
+      ],
+      "selected_scope_loss": [
+        "BACKEND-INTEGRATION-GUIDES.0",
+        "BACKEND-INTEGRATION-GUIDES.1.1",
+        "BACKEND-INTEGRATION-GUIDES.1.2",
+        "BACKEND-INTEGRATION-GUIDES.2.2",
+        "BACKEND-INTEGRATION-GUIDES.3.1",
+        "BACKEND-INTEGRATION-GUIDES.3.2",
+        "BACKEND-INTEGRATION-GUIDES.4.1",
+        "BACKEND-INTEGRATION-GUIDES.4.2",
+        "BACKEND-INTEGRATION-GUIDES.5.1",
+        "BACKEND-INTEGRATION-GUIDES.5.2",
+        "BACKEND-INTEGRATION-GUIDES.5.3",
+        "BACKEND-INTEGRATION-GUIDES.6",
+        "BACKEND-INTEGRATION-GUIDES.8.1",
+        "BACKEND-INTEGRATION-GUIDES.8.2",
+        "BACKEND-INTEGRATION-GUIDES.8.3",
+        "BACKEND-INTEGRATION-GUIDES.8.4",
+        "BACKEND-INTEGRATION-GUIDES.8.5",
+        "BACKEND-INTEGRATION-GUIDES.8.6"
+      ],
+      "sha256": "95ffd026d04a59f0c2df66aea21b29cd00a86086a07c99c7b4716eb6bf8ccf4d",
+      "tail_bytes": 54787,
+      "tree": "BACKEND-INTEGRATION-GUIDES"
+    },
+    {
+      "blob": "f2cc4a36f444ffd0ba61d7d5714deac35c6bc883",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/BACKTRACK-SURFACE-RUST-ALIGNMENT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "5487d50b705f0eae396f7eb797a5169eb2e3218e59285a7324c3fb54741326bc",
+      "tail_bytes": 4492,
+      "tree": "BACKTRACK-SURFACE-RUST-ALIGNMENT"
+    },
+    {
+      "blob": "293b6e1213cf2411297c9a109edce1f5633918fe",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/BOOK-DOCUMENTATION-SYNC.md",
+      "proposed_saved_bytes": 313,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 661,
+          "before": 681,
+          "id": "BOOK-DOCUMENTATION-SYNC.1",
+          "saved": 20
+        },
+        {
+          "after": 653,
+          "before": 946,
+          "id": "BOOK-DOCUMENTATION-SYNC.3",
+          "saved": 293
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "c1d53f9e61de984adc604a9bb82a23d1f306066d9733dff137d5d68df719e03b",
+      "tail_bytes": 3339,
+      "tree": "BOOK-DOCUMENTATION-SYNC"
+    },
+    {
+      "blob": "bde0cb81d3aedbd05b0287bf62ee247a378a1481",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/BOOTSTRAP-RESUME-SYNC.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "be5d67cbe206925c30fc281252ea95a1bfd4bbe4180c266d6e5e34ee9d718704",
+      "tail_bytes": 1271,
+      "tree": "BOOTSTRAP-RESUME-SYNC"
+    },
+    {
+      "blob": "08ee641e5d85fdadc122912d2cd1bd3517b2e3bb",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/COMPAT-ALIAS-RETIREMENT-V2.md",
+      "proposed_saved_bytes": 902,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 955,
+          "before": 1127,
+          "id": "COMPAT-ALIAS-RETIREMENT-V2.1",
+          "saved": 172
+        },
+        {
+          "after": 938,
+          "before": 1337,
+          "id": "COMPAT-ALIAS-RETIREMENT-V2.2",
+          "saved": 399
+        },
+        {
+          "after": 755,
+          "before": 1086,
+          "id": "COMPAT-ALIAS-RETIREMENT-V2.3",
+          "saved": 331
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "8632e53dcb2a98bfa1743322cff5c407cd2cad81098331db89fb164ff4db802c",
+      "tail_bytes": 4452,
+      "tree": "COMPAT-ALIAS-RETIREMENT-V2"
+    },
+    {
+      "blob": "d06f6079619510480516799980be567c0603213b",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/COMPAT-ALIAS-RETIREMENT.md",
+      "proposed_saved_bytes": 327,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 1017,
+          "before": 1344,
+          "id": "COMPAT-ALIAS-RETIREMENT.1",
+          "saved": 327
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "52b0efee6f868c4c0355a02096cdf450439758a4d8acbc89745bbe51faa5bb05",
+      "tail_bytes": 3203,
+      "tree": "COMPAT-ALIAS-RETIREMENT"
+    },
+    {
+      "blob": "400a054bb973208584dca40ab40d758f65d0968c",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/COMPAT-ALIAS-TEST-CLEANUP.md",
+      "proposed_saved_bytes": 119,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 735,
+          "before": 801,
+          "id": "COMPAT-ALIAS-TEST-CLEANUP.1",
+          "saved": 66
+        },
+        {
+          "after": 762,
+          "before": 815,
+          "id": "COMPAT-ALIAS-TEST-CLEANUP.2",
+          "saved": 53
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "3a036a9191a7cbb59ae1b629f192f2b14b1e3000bbc237b03324efc1a87a6839",
+      "tail_bytes": 1862,
+      "tree": "COMPAT-ALIAS-TEST-CLEANUP"
+    },
+    {
+      "blob": "3e4bd896ef8433ecb3604c5f1ef17b3eab3bcf59",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 180,
+      "mode": "100644",
+      "path": "docs/tasks/CONFORMANCE-SOURCE-READING.md",
+      "proposed_saved_bytes": 278231,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 1316,
+          "before": 3273,
+          "id": "CONFORMANCE-SOURCE-READING.1.1",
+          "saved": 1957
+        },
+        {
+          "after": 1279,
+          "before": 3524,
+          "id": "CONFORMANCE-SOURCE-READING.1.2",
+          "saved": 2245
+        },
+        {
+          "after": 1284,
+          "before": 4782,
+          "id": "CONFORMANCE-SOURCE-READING.1.3",
+          "saved": 3498
+        },
+        {
+          "after": 1302,
+          "before": 4830,
+          "id": "CONFORMANCE-SOURCE-READING.1.4",
+          "saved": 3528
+        },
+        {
+          "after": 1265,
+          "before": 4575,
+          "id": "CONFORMANCE-SOURCE-READING.1.5",
+          "saved": 3310
+        },
+        {
+          "after": 1220,
+          "before": 3825,
+          "id": "CONFORMANCE-SOURCE-READING.1.6",
+          "saved": 2605
+        },
+        {
+          "after": 1196,
+          "before": 3788,
+          "id": "CONFORMANCE-SOURCE-READING.1.7",
+          "saved": 2592
+        },
+        {
+          "after": 1210,
+          "before": 4207,
+          "id": "CONFORMANCE-SOURCE-READING.1.8",
+          "saved": 2997
+        },
+        {
+          "after": 1192,
+          "before": 3685,
+          "id": "CONFORMANCE-SOURCE-READING.1.9",
+          "saved": 2493
+        },
+        {
+          "after": 1182,
+          "before": 4583,
+          "id": "CONFORMANCE-SOURCE-READING.1.10",
+          "saved": 3401
+        },
+        {
+          "after": 1168,
+          "before": 4531,
+          "id": "CONFORMANCE-SOURCE-READING.1.11",
+          "saved": 3363
+        },
+        {
+          "after": 1186,
+          "before": 4121,
+          "id": "CONFORMANCE-SOURCE-READING.1.12",
+          "saved": 2935
+        },
+        {
+          "after": 1187,
+          "before": 4806,
+          "id": "CONFORMANCE-SOURCE-READING.1.13",
+          "saved": 3619
+        },
+        {
+          "after": 1174,
+          "before": 3918,
+          "id": "CONFORMANCE-SOURCE-READING.1.14",
+          "saved": 2744
+        },
+        {
+          "after": 1187,
+          "before": 3351,
+          "id": "CONFORMANCE-SOURCE-READING.1.15",
+          "saved": 2164
+        },
+        {
+          "after": 1185,
+          "before": 3660,
+          "id": "CONFORMANCE-SOURCE-READING.1.16",
+          "saved": 2475
+        },
+        {
+          "after": 1179,
+          "before": 3103,
+          "id": "CONFORMANCE-SOURCE-READING.1.17",
+          "saved": 1924
+        },
+        {
+          "after": 1183,
+          "before": 3194,
+          "id": "CONFORMANCE-SOURCE-READING.1.18",
+          "saved": 2011
+        },
+        {
+          "after": 1182,
+          "before": 3284,
+          "id": "CONFORMANCE-SOURCE-READING.1.19",
+          "saved": 2102
+        },
+        {
+          "after": 1181,
+          "before": 4419,
+          "id": "CONFORMANCE-SOURCE-READING.1.20",
+          "saved": 3238
+        },
+        {
+          "after": 1179,
+          "before": 3406,
+          "id": "CONFORMANCE-SOURCE-READING.1.21",
+          "saved": 2227
+        },
+        {
+          "after": 1185,
+          "before": 3423,
+          "id": "CONFORMANCE-SOURCE-READING.1.22",
+          "saved": 2238
+        },
+        {
+          "after": 1177,
+          "before": 3445,
+          "id": "CONFORMANCE-SOURCE-READING.1.23",
+          "saved": 2268
+        },
+        {
+          "after": 1183,
+          "before": 3362,
+          "id": "CONFORMANCE-SOURCE-READING.1.24",
+          "saved": 2179
+        },
+        {
+          "after": 1190,
+          "before": 3448,
+          "id": "CONFORMANCE-SOURCE-READING.1.25",
+          "saved": 2258
+        },
+        {
+          "after": 1185,
+          "before": 5144,
+          "id": "CONFORMANCE-SOURCE-READING.1.26",
+          "saved": 3959
+        },
+        {
+          "after": 1183,
+          "before": 4284,
+          "id": "CONFORMANCE-SOURCE-READING.1.27",
+          "saved": 3101
+        },
+        {
+          "after": 1182,
+          "before": 3838,
+          "id": "CONFORMANCE-SOURCE-READING.1.28",
+          "saved": 2656
+        },
+        {
+          "after": 1183,
+          "before": 3642,
+          "id": "CONFORMANCE-SOURCE-READING.1.29",
+          "saved": 2459
+        },
+        {
+          "after": 1189,
+          "before": 5548,
+          "id": "CONFORMANCE-SOURCE-READING.1.30",
+          "saved": 4359
+        },
+        {
+          "after": 1179,
+          "before": 5826,
+          "id": "CONFORMANCE-SOURCE-READING.1.31",
+          "saved": 4647
+        },
+        {
+          "after": 1183,
+          "before": 4017,
+          "id": "CONFORMANCE-SOURCE-READING.1.32",
+          "saved": 2834
+        },
+        {
+          "after": 1193,
+          "before": 4259,
+          "id": "CONFORMANCE-SOURCE-READING.1.33",
+          "saved": 3066
+        },
+        {
+          "after": 1194,
+          "before": 5563,
+          "id": "CONFORMANCE-SOURCE-READING.1.34",
+          "saved": 4369
+        },
+        {
+          "after": 1351,
+          "before": 4236,
+          "id": "CONFORMANCE-SOURCE-READING.1.35",
+          "saved": 2885
+        },
+        {
+          "after": 1252,
+          "before": 4285,
+          "id": "CONFORMANCE-SOURCE-READING.1.36",
+          "saved": 3033
+        },
+        {
+          "after": 1257,
+          "before": 3834,
+          "id": "CONFORMANCE-SOURCE-READING.1.37",
+          "saved": 2577
+        },
+        {
+          "after": 1251,
+          "before": 3324,
+          "id": "CONFORMANCE-SOURCE-READING.1.38",
+          "saved": 2073
+        },
+        {
+          "after": 1251,
+          "before": 3459,
+          "id": "CONFORMANCE-SOURCE-READING.1.39",
+          "saved": 2208
+        },
+        {
+          "after": 1252,
+          "before": 3334,
+          "id": "CONFORMANCE-SOURCE-READING.1.40",
+          "saved": 2082
+        },
+        {
+          "after": 1258,
+          "before": 3585,
+          "id": "CONFORMANCE-SOURCE-READING.1.41",
+          "saved": 2327
+        },
+        {
+          "after": 1259,
+          "before": 3600,
+          "id": "CONFORMANCE-SOURCE-READING.1.42",
+          "saved": 2341
+        },
+        {
+          "after": 1243,
+          "before": 3658,
+          "id": "CONFORMANCE-SOURCE-READING.1.43",
+          "saved": 2415
+        },
+        {
+          "after": 1246,
+          "before": 3839,
+          "id": "CONFORMANCE-SOURCE-READING.1.44",
+          "saved": 2593
+        },
+        {
+          "after": 1249,
+          "before": 3667,
+          "id": "CONFORMANCE-SOURCE-READING.1.45",
+          "saved": 2418
+        },
+        {
+          "after": 1258,
+          "before": 3823,
+          "id": "CONFORMANCE-SOURCE-READING.1.46",
+          "saved": 2565
+        },
+        {
+          "after": 1255,
+          "before": 3827,
+          "id": "CONFORMANCE-SOURCE-READING.1.47",
+          "saved": 2572
+        },
+        {
+          "after": 1258,
+          "before": 3913,
+          "id": "CONFORMANCE-SOURCE-READING.1.48",
+          "saved": 2655
+        },
+        {
+          "after": 1256,
+          "before": 4553,
+          "id": "CONFORMANCE-SOURCE-READING.1.49",
+          "saved": 3297
+        },
+        {
+          "after": 1273,
+          "before": 4390,
+          "id": "CONFORMANCE-SOURCE-READING.1.50",
+          "saved": 3117
+        },
+        {
+          "after": 1272,
+          "before": 4066,
+          "id": "CONFORMANCE-SOURCE-READING.1.51",
+          "saved": 2794
+        },
+        {
+          "after": 1257,
+          "before": 4259,
+          "id": "CONFORMANCE-SOURCE-READING.1.52",
+          "saved": 3002
+        },
+        {
+          "after": 1219,
+          "before": 4329,
+          "id": "CONFORMANCE-SOURCE-READING.1.53",
+          "saved": 3110
+        },
+        {
+          "after": 1214,
+          "before": 4109,
+          "id": "CONFORMANCE-SOURCE-READING.1.54",
+          "saved": 2895
+        },
+        {
+          "after": 1206,
+          "before": 3979,
+          "id": "CONFORMANCE-SOURCE-READING.1.55",
+          "saved": 2773
+        },
+        {
+          "after": 1256,
+          "before": 4392,
+          "id": "CONFORMANCE-SOURCE-READING.1.56",
+          "saved": 3136
+        },
+        {
+          "after": 1226,
+          "before": 4063,
+          "id": "CONFORMANCE-SOURCE-READING.1.57",
+          "saved": 2837
+        },
+        {
+          "after": 1221,
+          "before": 4126,
+          "id": "CONFORMANCE-SOURCE-READING.1.58",
+          "saved": 2905
+        },
+        {
+          "after": 1227,
+          "before": 4090,
+          "id": "CONFORMANCE-SOURCE-READING.1.59",
+          "saved": 2863
+        },
+        {
+          "after": 1233,
+          "before": 3652,
+          "id": "CONFORMANCE-SOURCE-READING.1.60",
+          "saved": 2419
+        },
+        {
+          "after": 1250,
+          "before": 3756,
+          "id": "CONFORMANCE-SOURCE-READING.1.61",
+          "saved": 2506
+        },
+        {
+          "after": 1239,
+          "before": 3858,
+          "id": "CONFORMANCE-SOURCE-READING.1.62",
+          "saved": 2619
+        },
+        {
+          "after": 1237,
+          "before": 3916,
+          "id": "CONFORMANCE-SOURCE-READING.1.63",
+          "saved": 2679
+        },
+        {
+          "after": 1231,
+          "before": 3886,
+          "id": "CONFORMANCE-SOURCE-READING.1.64",
+          "saved": 2655
+        },
+        {
+          "after": 1240,
+          "before": 3494,
+          "id": "CONFORMANCE-SOURCE-READING.1.65",
+          "saved": 2254
+        },
+        {
+          "after": 1223,
+          "before": 3412,
+          "id": "CONFORMANCE-SOURCE-READING.1.66",
+          "saved": 2189
+        },
+        {
+          "after": 1239,
+          "before": 3478,
+          "id": "CONFORMANCE-SOURCE-READING.1.67",
+          "saved": 2239
+        },
+        {
+          "after": 1226,
+          "before": 3615,
+          "id": "CONFORMANCE-SOURCE-READING.1.68",
+          "saved": 2389
+        },
+        {
+          "after": 1227,
+          "before": 3656,
+          "id": "CONFORMANCE-SOURCE-READING.1.69",
+          "saved": 2429
+        },
+        {
+          "after": 1231,
+          "before": 3568,
+          "id": "CONFORMANCE-SOURCE-READING.1.70",
+          "saved": 2337
+        },
+        {
+          "after": 1251,
+          "before": 3741,
+          "id": "CONFORMANCE-SOURCE-READING.1.71",
+          "saved": 2490
+        },
+        {
+          "after": 1238,
+          "before": 3916,
+          "id": "CONFORMANCE-SOURCE-READING.1.72",
+          "saved": 2678
+        },
+        {
+          "after": 1235,
+          "before": 3899,
+          "id": "CONFORMANCE-SOURCE-READING.1.73",
+          "saved": 2664
+        },
+        {
+          "after": 1256,
+          "before": 4401,
+          "id": "CONFORMANCE-SOURCE-READING.1.74",
+          "saved": 3145
+        },
+        {
+          "after": 1242,
+          "before": 3803,
+          "id": "CONFORMANCE-SOURCE-READING.1.75",
+          "saved": 2561
+        },
+        {
+          "after": 1215,
+          "before": 3728,
+          "id": "CONFORMANCE-SOURCE-READING.1.76",
+          "saved": 2513
+        },
+        {
+          "after": 1219,
+          "before": 4119,
+          "id": "CONFORMANCE-SOURCE-READING.1.77",
+          "saved": 2900
+        },
+        {
+          "after": 1221,
+          "before": 4272,
+          "id": "CONFORMANCE-SOURCE-READING.1.78",
+          "saved": 3051
+        },
+        {
+          "after": 1218,
+          "before": 3324,
+          "id": "CONFORMANCE-SOURCE-READING.1.79",
+          "saved": 2106
+        },
+        {
+          "after": 1220,
+          "before": 3874,
+          "id": "CONFORMANCE-SOURCE-READING.1.80",
+          "saved": 2654
+        },
+        {
+          "after": 1219,
+          "before": 3829,
+          "id": "CONFORMANCE-SOURCE-READING.1.81",
+          "saved": 2610
+        },
+        {
+          "after": 1247,
+          "before": 4219,
+          "id": "CONFORMANCE-SOURCE-READING.1.82",
+          "saved": 2972
+        },
+        {
+          "after": 1252,
+          "before": 5135,
+          "id": "CONFORMANCE-SOURCE-READING.1.83",
+          "saved": 3883
+        },
+        {
+          "after": 1283,
+          "before": 4320,
+          "id": "CONFORMANCE-SOURCE-READING.1.84",
+          "saved": 3037
+        },
+        {
+          "after": 1280,
+          "before": 4436,
+          "id": "CONFORMANCE-SOURCE-READING.1.85",
+          "saved": 3156
+        },
+        {
+          "after": 1272,
+          "before": 4028,
+          "id": "CONFORMANCE-SOURCE-READING.1.86",
+          "saved": 2756
+        },
+        {
+          "after": 1320,
+          "before": 4632,
+          "id": "CONFORMANCE-SOURCE-READING.1.87",
+          "saved": 3312
+        },
+        {
+          "after": 1305,
+          "before": 4513,
+          "id": "CONFORMANCE-SOURCE-READING.1.88",
+          "saved": 3208
+        },
+        {
+          "after": 1294,
+          "before": 4702,
+          "id": "CONFORMANCE-SOURCE-READING.1.89",
+          "saved": 3408
+        },
+        {
+          "after": 865,
+          "before": 979,
+          "id": "CONFORMANCE-SOURCE-READING.4",
+          "saved": 114
+        },
+        {
+          "after": 1285,
+          "before": 2730,
+          "id": "CONFORMANCE-SOURCE-READING.4.1",
+          "saved": 1445
+        },
+        {
+          "after": 1039,
+          "before": 30598,
+          "id": "CONFORMANCE-SOURCE-READING.4.2",
+          "saved": 29559
+        }
+      ],
+      "selected_scope_loss": [
+        "CONFORMANCE-SOURCE-READING.1.1",
+        "CONFORMANCE-SOURCE-READING.1.2",
+        "CONFORMANCE-SOURCE-READING.1.3",
+        "CONFORMANCE-SOURCE-READING.1.4",
+        "CONFORMANCE-SOURCE-READING.1.5",
+        "CONFORMANCE-SOURCE-READING.1.6",
+        "CONFORMANCE-SOURCE-READING.1.7",
+        "CONFORMANCE-SOURCE-READING.1.8",
+        "CONFORMANCE-SOURCE-READING.1.9",
+        "CONFORMANCE-SOURCE-READING.1.10",
+        "CONFORMANCE-SOURCE-READING.1.11",
+        "CONFORMANCE-SOURCE-READING.1.12",
+        "CONFORMANCE-SOURCE-READING.1.13",
+        "CONFORMANCE-SOURCE-READING.1.14",
+        "CONFORMANCE-SOURCE-READING.1.15",
+        "CONFORMANCE-SOURCE-READING.1.16",
+        "CONFORMANCE-SOURCE-READING.1.17",
+        "CONFORMANCE-SOURCE-READING.1.18",
+        "CONFORMANCE-SOURCE-READING.1.19",
+        "CONFORMANCE-SOURCE-READING.1.20",
+        "CONFORMANCE-SOURCE-READING.1.21",
+        "CONFORMANCE-SOURCE-READING.1.22",
+        "CONFORMANCE-SOURCE-READING.1.23",
+        "CONFORMANCE-SOURCE-READING.1.24",
+        "CONFORMANCE-SOURCE-READING.1.25",
+        "CONFORMANCE-SOURCE-READING.1.26",
+        "CONFORMANCE-SOURCE-READING.1.27",
+        "CONFORMANCE-SOURCE-READING.1.28",
+        "CONFORMANCE-SOURCE-READING.1.29",
+        "CONFORMANCE-SOURCE-READING.1.30",
+        "CONFORMANCE-SOURCE-READING.1.31",
+        "CONFORMANCE-SOURCE-READING.1.32",
+        "CONFORMANCE-SOURCE-READING.1.33",
+        "CONFORMANCE-SOURCE-READING.1.34",
+        "CONFORMANCE-SOURCE-READING.1.35",
+        "CONFORMANCE-SOURCE-READING.1.36",
+        "CONFORMANCE-SOURCE-READING.1.37",
+        "CONFORMANCE-SOURCE-READING.1.38",
+        "CONFORMANCE-SOURCE-READING.1.39",
+        "CONFORMANCE-SOURCE-READING.1.40",
+        "CONFORMANCE-SOURCE-READING.1.41",
+        "CONFORMANCE-SOURCE-READING.1.42",
+        "CONFORMANCE-SOURCE-READING.1.43",
+        "CONFORMANCE-SOURCE-READING.1.44",
+        "CONFORMANCE-SOURCE-READING.1.45",
+        "CONFORMANCE-SOURCE-READING.1.46",
+        "CONFORMANCE-SOURCE-READING.1.47",
+        "CONFORMANCE-SOURCE-READING.1.48",
+        "CONFORMANCE-SOURCE-READING.1.49",
+        "CONFORMANCE-SOURCE-READING.1.50",
+        "CONFORMANCE-SOURCE-READING.1.51",
+        "CONFORMANCE-SOURCE-READING.1.52",
+        "CONFORMANCE-SOURCE-READING.1.53",
+        "CONFORMANCE-SOURCE-READING.1.54",
+        "CONFORMANCE-SOURCE-READING.1.55",
+        "CONFORMANCE-SOURCE-READING.1.56",
+        "CONFORMANCE-SOURCE-READING.1.57",
+        "CONFORMANCE-SOURCE-READING.1.58",
+        "CONFORMANCE-SOURCE-READING.1.59",
+        "CONFORMANCE-SOURCE-READING.1.60",
+        "CONFORMANCE-SOURCE-READING.1.61",
+        "CONFORMANCE-SOURCE-READING.1.62",
+        "CONFORMANCE-SOURCE-READING.1.63",
+        "CONFORMANCE-SOURCE-READING.1.64",
+        "CONFORMANCE-SOURCE-READING.1.65",
+        "CONFORMANCE-SOURCE-READING.1.66",
+        "CONFORMANCE-SOURCE-READING.1.67",
+        "CONFORMANCE-SOURCE-READING.1.68",
+        "CONFORMANCE-SOURCE-READING.1.69",
+        "CONFORMANCE-SOURCE-READING.1.70",
+        "CONFORMANCE-SOURCE-READING.1.71",
+        "CONFORMANCE-SOURCE-READING.1.72",
+        "CONFORMANCE-SOURCE-READING.1.73",
+        "CONFORMANCE-SOURCE-READING.1.74",
+        "CONFORMANCE-SOURCE-READING.1.75",
+        "CONFORMANCE-SOURCE-READING.1.76",
+        "CONFORMANCE-SOURCE-READING.1.77",
+        "CONFORMANCE-SOURCE-READING.1.78",
+        "CONFORMANCE-SOURCE-READING.1.79",
+        "CONFORMANCE-SOURCE-READING.1.80",
+        "CONFORMANCE-SOURCE-READING.1.81",
+        "CONFORMANCE-SOURCE-READING.1.82",
+        "CONFORMANCE-SOURCE-READING.1.83",
+        "CONFORMANCE-SOURCE-READING.1.84",
+        "CONFORMANCE-SOURCE-READING.1.85",
+        "CONFORMANCE-SOURCE-READING.1.86",
+        "CONFORMANCE-SOURCE-READING.1.87",
+        "CONFORMANCE-SOURCE-READING.1.88",
+        "CONFORMANCE-SOURCE-READING.1.89",
+        "CONFORMANCE-SOURCE-READING.4.1"
+      ],
+      "sha256": "2dc355ed4d889f754261a71b906e588b141bbee244a670485a5056b85ea11be9",
+      "tail_bytes": 125283,
+      "tree": "CONFORMANCE-SOURCE-READING"
+    },
+    {
+      "blob": "c08f81037b10eba35a692a229772eb7a9701bd8c",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 7,
+      "mode": "100644",
+      "path": "docs/tasks/CONSUMER-REPORT-DELIVERY.md",
+      "proposed_saved_bytes": 1997,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 1471,
+          "before": 2007,
+          "id": "CONSUMER-REPORT-DELIVERY.1",
+          "saved": 536
+        },
+        {
+          "after": 1330,
+          "before": 1712,
+          "id": "CONSUMER-REPORT-DELIVERY.2",
+          "saved": 382
+        },
+        {
+          "after": 1166,
+          "before": 1441,
+          "id": "CONSUMER-REPORT-DELIVERY.3",
+          "saved": 275
+        },
+        {
+          "after": 1499,
+          "before": 1710,
+          "id": "CONSUMER-REPORT-DELIVERY.4",
+          "saved": 211
+        },
+        {
+          "after": 1638,
+          "before": 1885,
+          "id": "CONSUMER-REPORT-DELIVERY.5",
+          "saved": 247
+        },
+        {
+          "after": 1598,
+          "before": 1944,
+          "id": "CONSUMER-REPORT-DELIVERY.6",
+          "saved": 346
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "4a3c907b7aee12f3415890d4e027e1cb112636c884b6474cce6fe95baa4f8a4b",
+      "tail_bytes": 2915,
+      "tree": "CONSUMER-REPORT-DELIVERY"
+    },
+    {
+      "blob": "a198d1ea04d61e8cf2a2a829f45c46d5b7316ab3",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 68,
+      "mode": "100644",
+      "path": "docs/tasks/DART-BACKEND-PARITY.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "b1487e85e679e4caa6e30eb2ca87d9ba6522ab1c06541465d05ed7d223e2d349",
+      "tail_bytes": 54738,
+      "tree": "DART-BACKEND-PARITY"
+    },
+    {
+      "blob": "e229eff2b7a81d1abcb6ce9f14b4735827b2a3da",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 135,
+      "mode": "100644",
+      "path": "docs/tasks/DART-STARTUP-READING.md",
+      "proposed_saved_bytes": 125200,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 1198,
+          "before": 1369,
+          "id": "DART-STARTUP-READING.0",
+          "saved": 171
+        },
+        {
+          "after": 919,
+          "before": 969,
+          "id": "DART-STARTUP-READING.1",
+          "saved": 50
+        },
+        {
+          "after": 1118,
+          "before": 2185,
+          "id": "DART-STARTUP-READING.1.1",
+          "saved": 1067
+        },
+        {
+          "after": 1151,
+          "before": 2379,
+          "id": "DART-STARTUP-READING.1.2",
+          "saved": 1228
+        },
+        {
+          "after": 1329,
+          "before": 2661,
+          "id": "DART-STARTUP-READING.1.3",
+          "saved": 1332
+        },
+        {
+          "after": 1192,
+          "before": 2246,
+          "id": "DART-STARTUP-READING.1.4",
+          "saved": 1054
+        },
+        {
+          "after": 1271,
+          "before": 2820,
+          "id": "DART-STARTUP-READING.1.5",
+          "saved": 1549
+        },
+        {
+          "after": 1258,
+          "before": 2835,
+          "id": "DART-STARTUP-READING.1.6",
+          "saved": 1577
+        },
+        {
+          "after": 1292,
+          "before": 2980,
+          "id": "DART-STARTUP-READING.1.7",
+          "saved": 1688
+        },
+        {
+          "after": 1133,
+          "before": 2476,
+          "id": "DART-STARTUP-READING.1.8",
+          "saved": 1343
+        },
+        {
+          "after": 1199,
+          "before": 2689,
+          "id": "DART-STARTUP-READING.1.9",
+          "saved": 1490
+        },
+        {
+          "after": 1316,
+          "before": 3050,
+          "id": "DART-STARTUP-READING.1.10",
+          "saved": 1734
+        },
+        {
+          "after": 1181,
+          "before": 2846,
+          "id": "DART-STARTUP-READING.1.11",
+          "saved": 1665
+        },
+        {
+          "after": 1163,
+          "before": 2900,
+          "id": "DART-STARTUP-READING.1.12",
+          "saved": 1737
+        },
+        {
+          "after": 1263,
+          "before": 3217,
+          "id": "DART-STARTUP-READING.1.13",
+          "saved": 1954
+        },
+        {
+          "after": 1189,
+          "before": 2836,
+          "id": "DART-STARTUP-READING.1.14",
+          "saved": 1647
+        },
+        {
+          "after": 1226,
+          "before": 3057,
+          "id": "DART-STARTUP-READING.1.15",
+          "saved": 1831
+        },
+        {
+          "after": 1222,
+          "before": 3007,
+          "id": "DART-STARTUP-READING.1.16",
+          "saved": 1785
+        },
+        {
+          "after": 1189,
+          "before": 2921,
+          "id": "DART-STARTUP-READING.1.17",
+          "saved": 1732
+        },
+        {
+          "after": 1205,
+          "before": 2996,
+          "id": "DART-STARTUP-READING.1.18",
+          "saved": 1791
+        },
+        {
+          "after": 1225,
+          "before": 3196,
+          "id": "DART-STARTUP-READING.1.19",
+          "saved": 1971
+        },
+        {
+          "after": 1303,
+          "before": 3150,
+          "id": "DART-STARTUP-READING.1.20",
+          "saved": 1847
+        },
+        {
+          "after": 1218,
+          "before": 2993,
+          "id": "DART-STARTUP-READING.1.21",
+          "saved": 1775
+        },
+        {
+          "after": 1162,
+          "before": 3026,
+          "id": "DART-STARTUP-READING.1.22",
+          "saved": 1864
+        },
+        {
+          "after": 1194,
+          "before": 3147,
+          "id": "DART-STARTUP-READING.1.23",
+          "saved": 1953
+        },
+        {
+          "after": 1260,
+          "before": 3905,
+          "id": "DART-STARTUP-READING.1.24",
+          "saved": 2645
+        },
+        {
+          "after": 1145,
+          "before": 3025,
+          "id": "DART-STARTUP-READING.1.25",
+          "saved": 1880
+        },
+        {
+          "after": 1147,
+          "before": 3249,
+          "id": "DART-STARTUP-READING.1.26",
+          "saved": 2102
+        },
+        {
+          "after": 1227,
+          "before": 3559,
+          "id": "DART-STARTUP-READING.1.27",
+          "saved": 2332
+        },
+        {
+          "after": 1201,
+          "before": 2941,
+          "id": "DART-STARTUP-READING.1.28",
+          "saved": 1740
+        },
+        {
+          "after": 1239,
+          "before": 3642,
+          "id": "DART-STARTUP-READING.1.29",
+          "saved": 2403
+        },
+        {
+          "after": 1240,
+          "before": 3674,
+          "id": "DART-STARTUP-READING.1.30",
+          "saved": 2434
+        },
+        {
+          "after": 1201,
+          "before": 3674,
+          "id": "DART-STARTUP-READING.1.31",
+          "saved": 2473
+        },
+        {
+          "after": 1214,
+          "before": 4150,
+          "id": "DART-STARTUP-READING.1.32",
+          "saved": 2936
+        },
+        {
+          "after": 1228,
+          "before": 4084,
+          "id": "DART-STARTUP-READING.1.33",
+          "saved": 2856
+        },
+        {
+          "after": 1236,
+          "before": 4152,
+          "id": "DART-STARTUP-READING.1.34",
+          "saved": 2916
+        },
+        {
+          "after": 1284,
+          "before": 4126,
+          "id": "DART-STARTUP-READING.1.35",
+          "saved": 2842
+        },
+        {
+          "after": 1293,
+          "before": 4629,
+          "id": "DART-STARTUP-READING.1.36",
+          "saved": 3336
+        },
+        {
+          "after": 1167,
+          "before": 4030,
+          "id": "DART-STARTUP-READING.1.37",
+          "saved": 2863
+        },
+        {
+          "after": 1141,
+          "before": 4209,
+          "id": "DART-STARTUP-READING.1.38",
+          "saved": 3068
+        },
+        {
+          "after": 1112,
+          "before": 3944,
+          "id": "DART-STARTUP-READING.1.39",
+          "saved": 2832
+        },
+        {
+          "after": 1174,
+          "before": 3617,
+          "id": "DART-STARTUP-READING.1.40",
+          "saved": 2443
+        },
+        {
+          "after": 1140,
+          "before": 3413,
+          "id": "DART-STARTUP-READING.1.41",
+          "saved": 2273
+        },
+        {
+          "after": 1174,
+          "before": 4028,
+          "id": "DART-STARTUP-READING.1.42",
+          "saved": 2854
+        },
+        {
+          "after": 1171,
+          "before": 3801,
+          "id": "DART-STARTUP-READING.1.43",
+          "saved": 2630
+        },
+        {
+          "after": 1170,
+          "before": 3989,
+          "id": "DART-STARTUP-READING.1.44",
+          "saved": 2819
+        },
+        {
+          "after": 1143,
+          "before": 3937,
+          "id": "DART-STARTUP-READING.1.45",
+          "saved": 2794
+        },
+        {
+          "after": 1149,
+          "before": 4349,
+          "id": "DART-STARTUP-READING.1.46",
+          "saved": 3200
+        },
+        {
+          "after": 1162,
+          "before": 3200,
+          "id": "DART-STARTUP-READING.1.47",
+          "saved": 2038
+        },
+        {
+          "after": 1157,
+          "before": 3230,
+          "id": "DART-STARTUP-READING.1.48",
+          "saved": 2073
+        },
+        {
+          "after": 1187,
+          "before": 3155,
+          "id": "DART-STARTUP-READING.1.49",
+          "saved": 1968
+        },
+        {
+          "after": 1155,
+          "before": 3235,
+          "id": "DART-STARTUP-READING.1.50",
+          "saved": 2080
+        },
+        {
+          "after": 1134,
+          "before": 2839,
+          "id": "DART-STARTUP-READING.1.51",
+          "saved": 1705
+        },
+        {
+          "after": 1171,
+          "before": 3128,
+          "id": "DART-STARTUP-READING.1.52",
+          "saved": 1957
+        },
+        {
+          "after": 1114,
+          "before": 3591,
+          "id": "DART-STARTUP-READING.1.53",
+          "saved": 2477
+        },
+        {
+          "after": 1156,
+          "before": 3373,
+          "id": "DART-STARTUP-READING.1.54",
+          "saved": 2217
+        },
+        {
+          "after": 1174,
+          "before": 3278,
+          "id": "DART-STARTUP-READING.1.55",
+          "saved": 2104
+        },
+        {
+          "after": 1010,
+          "before": 1215,
+          "id": "DART-STARTUP-READING.3",
+          "saved": 205
+        },
+        {
+          "after": 1500,
+          "before": 2604,
+          "id": "DART-STARTUP-READING.3.1",
+          "saved": 1104
+        },
+        {
+          "after": 1746,
+          "before": 3461,
+          "id": "DART-STARTUP-READING.3.2",
+          "saved": 1715
+        },
+        {
+          "after": 1232,
+          "before": 2399,
+          "id": "DART-STARTUP-READING.4",
+          "saved": 1167
+        },
+        {
+          "after": 1150,
+          "before": 2269,
+          "id": "DART-STARTUP-READING.5",
+          "saved": 1119
+        },
+        {
+          "after": 1138,
+          "before": 2275,
+          "id": "DART-STARTUP-READING.6",
+          "saved": 1137
+        },
+        {
+          "after": 1081,
+          "before": 2709,
+          "id": "DART-STARTUP-READING.7",
+          "saved": 1628
+        }
+      ],
+      "selected_scope_loss": [
+        "DART-STARTUP-READING.1.1",
+        "DART-STARTUP-READING.1.2",
+        "DART-STARTUP-READING.1.3",
+        "DART-STARTUP-READING.1.4",
+        "DART-STARTUP-READING.1.5",
+        "DART-STARTUP-READING.1.6",
+        "DART-STARTUP-READING.1.7",
+        "DART-STARTUP-READING.1.8",
+        "DART-STARTUP-READING.1.9",
+        "DART-STARTUP-READING.1.10",
+        "DART-STARTUP-READING.1.11",
+        "DART-STARTUP-READING.1.12",
+        "DART-STARTUP-READING.1.13",
+        "DART-STARTUP-READING.1.14",
+        "DART-STARTUP-READING.1.15",
+        "DART-STARTUP-READING.1.16",
+        "DART-STARTUP-READING.1.17",
+        "DART-STARTUP-READING.1.18",
+        "DART-STARTUP-READING.1.19",
+        "DART-STARTUP-READING.1.20",
+        "DART-STARTUP-READING.1.21",
+        "DART-STARTUP-READING.1.22",
+        "DART-STARTUP-READING.1.23",
+        "DART-STARTUP-READING.1.24",
+        "DART-STARTUP-READING.1.25",
+        "DART-STARTUP-READING.1.26",
+        "DART-STARTUP-READING.1.27",
+        "DART-STARTUP-READING.1.28",
+        "DART-STARTUP-READING.1.29",
+        "DART-STARTUP-READING.1.30",
+        "DART-STARTUP-READING.1.31",
+        "DART-STARTUP-READING.1.32",
+        "DART-STARTUP-READING.1.33",
+        "DART-STARTUP-READING.1.34",
+        "DART-STARTUP-READING.1.35",
+        "DART-STARTUP-READING.1.36",
+        "DART-STARTUP-READING.1.37",
+        "DART-STARTUP-READING.1.38",
+        "DART-STARTUP-READING.1.39",
+        "DART-STARTUP-READING.1.40",
+        "DART-STARTUP-READING.1.41",
+        "DART-STARTUP-READING.1.42",
+        "DART-STARTUP-READING.1.43",
+        "DART-STARTUP-READING.1.44",
+        "DART-STARTUP-READING.1.45",
+        "DART-STARTUP-READING.1.46",
+        "DART-STARTUP-READING.1.47",
+        "DART-STARTUP-READING.1.48",
+        "DART-STARTUP-READING.1.49",
+        "DART-STARTUP-READING.1.50",
+        "DART-STARTUP-READING.1.51",
+        "DART-STARTUP-READING.1.52",
+        "DART-STARTUP-READING.1.53",
+        "DART-STARTUP-READING.1.54",
+        "DART-STARTUP-READING.1.55",
+        "DART-STARTUP-READING.3.1",
+        "DART-STARTUP-READING.4",
+        "DART-STARTUP-READING.5",
+        "DART-STARTUP-READING.6",
+        "DART-STARTUP-READING.7"
+      ],
+      "sha256": "6adb019205c984eb0a9fc84fc7bf6c67fe9cd63c2862418432e77b50d52b1208",
+      "tail_bytes": 42264,
+      "tree": "DART-STARTUP-READING"
+    },
+    {
+      "blob": "03e8836827e4a607735a9e119bcb6a877f64dcd4",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/DOC-BOOK-SYNC.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "9716355bbf1bf55822b68708b53cc6db63fbeeaa28f8d4b7e8b5459997140e4e",
+      "tail_bytes": 5750,
+      "tree": "DOC-BOOK-SYNC"
+    },
+    {
+      "blob": "521a92ac2dce218083fece00ad59b7699f761649",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/DOC-CODEBASE-ALIGNMENT.md",
+      "proposed_saved_bytes": 1412,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 880,
+          "before": 1303,
+          "id": "DOC-CODEBASE-ALIGNMENT.1",
+          "saved": 423
+        },
+        {
+          "after": 773,
+          "before": 1075,
+          "id": "DOC-CODEBASE-ALIGNMENT.2",
+          "saved": 302
+        },
+        {
+          "after": 756,
+          "before": 1443,
+          "id": "DOC-CODEBASE-ALIGNMENT.3",
+          "saved": 687
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "cf7f4e9b3c49bdc29886ae0ddbf29e093efdef4f825691b679fd161bfb129ccf",
+      "tail_bytes": 6527,
+      "tree": "DOC-CODEBASE-ALIGNMENT"
+    },
+    {
+      "blob": "adbf9a9fe9091c175eca6002fa9798e1ba9034bf",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/DOC-DRIFT-SYNC.md",
+      "proposed_saved_bytes": 1088,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 490,
+          "before": 1578,
+          "id": "DOC-DRIFT-SYNC.1",
+          "saved": 1088
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "0338dd1597fbf58bc3882149c7eb690f466ef6313c9194e627da11c799b6f2b1",
+      "tail_bytes": 4401,
+      "tree": "DOC-DRIFT-SYNC"
+    },
+    {
+      "blob": "a9ad3dd2ca725800a9981ed1e2ffd5e678f43945",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 0,
+      "mode": "100644",
+      "path": "docs/tasks/DOCTRINE-ENFORCEMENT-ADOPT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "c5ee38bd1b6f76d86b695788cc78bb7806295edaca13bf4d408e7f2c3a78ee03",
+      "tail_bytes": 6580,
+      "tree": "DOCTRINE-ENFORCEMENT-ADOPT"
+    },
+    {
+      "blob": "6fe95284dcf000fab0adfabdef3bd1ceb312c78a",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/FLUENT-BLOCK-EQUIVALENCE.md",
+      "proposed_saved_bytes": 153,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 934,
+          "before": 1087,
+          "id": "FLUENT-BLOCK-EQUIVALENCE.2",
+          "saved": 153
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "a804a2669047f2d4dc9d8b56b8ef9f3af204c297d4ea276af3b1ecbf657b2481",
+      "tail_bytes": 8585,
+      "tree": "FLUENT-BLOCK-EQUIVALENCE"
+    },
+    {
+      "blob": "d956fc6bcd368be53da29376845a5568697ac3a9",
+      "compatible": false,
+      "frontier_count": 0,
+      "mode": "100644",
+      "path": "docs/tasks/FUTURE-PARITY-PARTITION-CAPACITY.md",
+      "reason": "requires one exact uppercase frontier",
+      "sha256": "2d70bea92779d9b76b1819a566d4c9930352c3a6d4f6df1f9593120e97ff9969",
+      "tree": "FUTURE-PARITY-PARTITION-CAPACITY"
+    },
+    {
+      "blob": "9ce55d828dbe85136ace39d8d7543ae9c5476b50",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 46,
+      "mode": "100644",
+      "path": "docs/tasks/INTER-MATCH-GAP-CAPTURE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "8b6dfe1a33f1b4b500fa9dbf1da38306933319ab57cda0d9ec91464f1df637b3",
+      "tail_bytes": 117254,
+      "tree": "INTER-MATCH-GAP-CAPTURE"
+    },
+    {
+      "blob": "8ea4fbf7f28179b0466f21969f02b45b8fbe4729",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 75,
+      "mode": "100644",
+      "path": "docs/tasks/JULIA-BACKEND-PARITY.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "f82409a93ff2dd3b7aef1caebc731aea00f72c81120859bfe8046a10a1609b43",
+      "tail_bytes": 232593,
+      "tree": "JULIA-BACKEND-PARITY"
+    },
+    {
+      "blob": "3869b0ff8749b8122a7d23eaa508b1aa89faee37",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 142,
+      "mode": "100644",
+      "path": "docs/tasks/JULIA-STARTUP-READING.md",
+      "proposed_saved_bytes": 125180,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 843,
+          "before": 1212,
+          "id": "JULIA-STARTUP-READING.1",
+          "saved": 369
+        },
+        {
+          "after": 1226,
+          "before": 2780,
+          "id": "JULIA-STARTUP-READING.1.1",
+          "saved": 1554
+        },
+        {
+          "after": 1164,
+          "before": 3317,
+          "id": "JULIA-STARTUP-READING.1.2",
+          "saved": 2153
+        },
+        {
+          "after": 1172,
+          "before": 3214,
+          "id": "JULIA-STARTUP-READING.1.3",
+          "saved": 2042
+        },
+        {
+          "after": 1174,
+          "before": 3375,
+          "id": "JULIA-STARTUP-READING.1.4",
+          "saved": 2201
+        },
+        {
+          "after": 1173,
+          "before": 3357,
+          "id": "JULIA-STARTUP-READING.1.5",
+          "saved": 2184
+        },
+        {
+          "after": 1219,
+          "before": 3318,
+          "id": "JULIA-STARTUP-READING.1.6",
+          "saved": 2099
+        },
+        {
+          "after": 1213,
+          "before": 3101,
+          "id": "JULIA-STARTUP-READING.1.7",
+          "saved": 1888
+        },
+        {
+          "after": 1220,
+          "before": 3022,
+          "id": "JULIA-STARTUP-READING.1.8",
+          "saved": 1802
+        },
+        {
+          "after": 1200,
+          "before": 2686,
+          "id": "JULIA-STARTUP-READING.1.9",
+          "saved": 1486
+        },
+        {
+          "after": 1278,
+          "before": 3355,
+          "id": "JULIA-STARTUP-READING.1.10",
+          "saved": 2077
+        },
+        {
+          "after": 1248,
+          "before": 3235,
+          "id": "JULIA-STARTUP-READING.1.11",
+          "saved": 1987
+        },
+        {
+          "after": 1267,
+          "before": 3357,
+          "id": "JULIA-STARTUP-READING.1.12",
+          "saved": 2090
+        },
+        {
+          "after": 1290,
+          "before": 3533,
+          "id": "JULIA-STARTUP-READING.1.13",
+          "saved": 2243
+        },
+        {
+          "after": 1265,
+          "before": 3603,
+          "id": "JULIA-STARTUP-READING.1.14",
+          "saved": 2338
+        },
+        {
+          "after": 1287,
+          "before": 4051,
+          "id": "JULIA-STARTUP-READING.1.15",
+          "saved": 2764
+        },
+        {
+          "after": 1317,
+          "before": 3947,
+          "id": "JULIA-STARTUP-READING.1.16",
+          "saved": 2630
+        },
+        {
+          "after": 1289,
+          "before": 3613,
+          "id": "JULIA-STARTUP-READING.1.17",
+          "saved": 2324
+        },
+        {
+          "after": 1288,
+          "before": 3823,
+          "id": "JULIA-STARTUP-READING.1.18",
+          "saved": 2535
+        },
+        {
+          "after": 1256,
+          "before": 3576,
+          "id": "JULIA-STARTUP-READING.1.19",
+          "saved": 2320
+        },
+        {
+          "after": 1292,
+          "before": 3871,
+          "id": "JULIA-STARTUP-READING.1.20",
+          "saved": 2579
+        },
+        {
+          "after": 1235,
+          "before": 3215,
+          "id": "JULIA-STARTUP-READING.1.21",
+          "saved": 1980
+        },
+        {
+          "after": 1255,
+          "before": 3567,
+          "id": "JULIA-STARTUP-READING.1.22",
+          "saved": 2312
+        },
+        {
+          "after": 1220,
+          "before": 2848,
+          "id": "JULIA-STARTUP-READING.1.23",
+          "saved": 1628
+        },
+        {
+          "after": 1218,
+          "before": 2720,
+          "id": "JULIA-STARTUP-READING.1.24",
+          "saved": 1502
+        },
+        {
+          "after": 1231,
+          "before": 3399,
+          "id": "JULIA-STARTUP-READING.1.25",
+          "saved": 2168
+        },
+        {
+          "after": 1283,
+          "before": 3781,
+          "id": "JULIA-STARTUP-READING.1.26",
+          "saved": 2498
+        },
+        {
+          "after": 1248,
+          "before": 3555,
+          "id": "JULIA-STARTUP-READING.1.27",
+          "saved": 2307
+        },
+        {
+          "after": 1286,
+          "before": 3722,
+          "id": "JULIA-STARTUP-READING.1.28",
+          "saved": 2436
+        },
+        {
+          "after": 1284,
+          "before": 3650,
+          "id": "JULIA-STARTUP-READING.1.29",
+          "saved": 2366
+        },
+        {
+          "after": 1275,
+          "before": 3444,
+          "id": "JULIA-STARTUP-READING.1.30",
+          "saved": 2169
+        },
+        {
+          "after": 1259,
+          "before": 3455,
+          "id": "JULIA-STARTUP-READING.1.31",
+          "saved": 2196
+        },
+        {
+          "after": 1245,
+          "before": 3342,
+          "id": "JULIA-STARTUP-READING.1.32",
+          "saved": 2097
+        },
+        {
+          "after": 1244,
+          "before": 3518,
+          "id": "JULIA-STARTUP-READING.1.33",
+          "saved": 2274
+        },
+        {
+          "after": 1305,
+          "before": 3752,
+          "id": "JULIA-STARTUP-READING.1.34",
+          "saved": 2447
+        },
+        {
+          "after": 1142,
+          "before": 2714,
+          "id": "JULIA-STARTUP-READING.1.35",
+          "saved": 1572
+        },
+        {
+          "after": 1136,
+          "before": 3003,
+          "id": "JULIA-STARTUP-READING.1.36",
+          "saved": 1867
+        },
+        {
+          "after": 1154,
+          "before": 3350,
+          "id": "JULIA-STARTUP-READING.1.37",
+          "saved": 2196
+        },
+        {
+          "after": 1209,
+          "before": 3519,
+          "id": "JULIA-STARTUP-READING.1.38",
+          "saved": 2310
+        },
+        {
+          "after": 1210,
+          "before": 3496,
+          "id": "JULIA-STARTUP-READING.1.39",
+          "saved": 2286
+        },
+        {
+          "after": 1162,
+          "before": 3696,
+          "id": "JULIA-STARTUP-READING.1.40",
+          "saved": 2534
+        },
+        {
+          "after": 1297,
+          "before": 3951,
+          "id": "JULIA-STARTUP-READING.1.41",
+          "saved": 2654
+        },
+        {
+          "after": 1193,
+          "before": 3526,
+          "id": "JULIA-STARTUP-READING.1.42",
+          "saved": 2333
+        },
+        {
+          "after": 1194,
+          "before": 3747,
+          "id": "JULIA-STARTUP-READING.1.43",
+          "saved": 2553
+        },
+        {
+          "after": 1200,
+          "before": 3821,
+          "id": "JULIA-STARTUP-READING.1.44",
+          "saved": 2621
+        },
+        {
+          "after": 1198,
+          "before": 4232,
+          "id": "JULIA-STARTUP-READING.1.45",
+          "saved": 3034
+        },
+        {
+          "after": 1204,
+          "before": 4444,
+          "id": "JULIA-STARTUP-READING.1.46",
+          "saved": 3240
+        },
+        {
+          "after": 1225,
+          "before": 4386,
+          "id": "JULIA-STARTUP-READING.1.47",
+          "saved": 3161
+        },
+        {
+          "after": 1212,
+          "before": 4121,
+          "id": "JULIA-STARTUP-READING.1.48",
+          "saved": 2909
+        },
+        {
+          "after": 1193,
+          "before": 3767,
+          "id": "JULIA-STARTUP-READING.1.49",
+          "saved": 2574
+        },
+        {
+          "after": 1211,
+          "before": 3569,
+          "id": "JULIA-STARTUP-READING.1.50",
+          "saved": 2358
+        },
+        {
+          "after": 1208,
+          "before": 3452,
+          "id": "JULIA-STARTUP-READING.1.51",
+          "saved": 2244
+        },
+        {
+          "after": 1276,
+          "before": 3583,
+          "id": "JULIA-STARTUP-READING.1.52",
+          "saved": 2307
+        },
+        {
+          "after": 934,
+          "before": 1303,
+          "id": "JULIA-STARTUP-READING.3",
+          "saved": 369
+        },
+        {
+          "after": 1425,
+          "before": 3474,
+          "id": "JULIA-STARTUP-READING.3.1",
+          "saved": 2049
+        },
+        {
+          "after": 1507,
+          "before": 3306,
+          "id": "JULIA-STARTUP-READING.3.2",
+          "saved": 1799
+        },
+        {
+          "after": 1136,
+          "before": 1244,
+          "id": "JULIA-STARTUP-READING.4",
+          "saved": 108
+        },
+        {
+          "after": 1229,
+          "before": 2249,
+          "id": "JULIA-STARTUP-READING.4.1",
+          "saved": 1020
+        },
+        {
+          "after": 1345,
+          "before": 1709,
+          "id": "JULIA-STARTUP-READING.5",
+          "saved": 364
+        },
+        {
+          "after": 1270,
+          "before": 1943,
+          "id": "JULIA-STARTUP-READING.5.1",
+          "saved": 673
+        }
+      ],
+      "selected_scope_loss": [
+        "JULIA-STARTUP-READING.1.1",
+        "JULIA-STARTUP-READING.1.2",
+        "JULIA-STARTUP-READING.1.3",
+        "JULIA-STARTUP-READING.1.4",
+        "JULIA-STARTUP-READING.1.5",
+        "JULIA-STARTUP-READING.1.6",
+        "JULIA-STARTUP-READING.1.7",
+        "JULIA-STARTUP-READING.1.8",
+        "JULIA-STARTUP-READING.1.9",
+        "JULIA-STARTUP-READING.1.10",
+        "JULIA-STARTUP-READING.1.11",
+        "JULIA-STARTUP-READING.1.12",
+        "JULIA-STARTUP-READING.1.13",
+        "JULIA-STARTUP-READING.1.14",
+        "JULIA-STARTUP-READING.1.15",
+        "JULIA-STARTUP-READING.1.16",
+        "JULIA-STARTUP-READING.1.17",
+        "JULIA-STARTUP-READING.1.18",
+        "JULIA-STARTUP-READING.1.19",
+        "JULIA-STARTUP-READING.1.20",
+        "JULIA-STARTUP-READING.1.21",
+        "JULIA-STARTUP-READING.1.22",
+        "JULIA-STARTUP-READING.1.23",
+        "JULIA-STARTUP-READING.1.24",
+        "JULIA-STARTUP-READING.1.25",
+        "JULIA-STARTUP-READING.1.26",
+        "JULIA-STARTUP-READING.1.27",
+        "JULIA-STARTUP-READING.1.28",
+        "JULIA-STARTUP-READING.1.29",
+        "JULIA-STARTUP-READING.1.30",
+        "JULIA-STARTUP-READING.1.31",
+        "JULIA-STARTUP-READING.1.32",
+        "JULIA-STARTUP-READING.1.33",
+        "JULIA-STARTUP-READING.1.34",
+        "JULIA-STARTUP-READING.1.35",
+        "JULIA-STARTUP-READING.1.36",
+        "JULIA-STARTUP-READING.1.37",
+        "JULIA-STARTUP-READING.1.38",
+        "JULIA-STARTUP-READING.1.39",
+        "JULIA-STARTUP-READING.1.40",
+        "JULIA-STARTUP-READING.1.41",
+        "JULIA-STARTUP-READING.1.42",
+        "JULIA-STARTUP-READING.1.43",
+        "JULIA-STARTUP-READING.1.44",
+        "JULIA-STARTUP-READING.1.45",
+        "JULIA-STARTUP-READING.1.46",
+        "JULIA-STARTUP-READING.1.47",
+        "JULIA-STARTUP-READING.1.48",
+        "JULIA-STARTUP-READING.1.49",
+        "JULIA-STARTUP-READING.1.50",
+        "JULIA-STARTUP-READING.1.51",
+        "JULIA-STARTUP-READING.1.52",
+        "JULIA-STARTUP-READING.3.1",
+        "JULIA-STARTUP-READING.4.1"
+      ],
+      "sha256": "e7e7f72bebad2d73f06a54001a0fccd93af75bfd43b917a68f97c6d06b435af2",
+      "tail_bytes": 70479,
+      "tree": "JULIA-STARTUP-READING"
+    },
+    {
+      "blob": "638e2790706873d2fc09bbb49cbc487a1b19d5b0",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/KNOWLEDGE-MAP-DOC.md",
+      "proposed_saved_bytes": 414,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 905,
+          "before": 1319,
+          "id": "KNOWLEDGE-MAP-DOC.1",
+          "saved": 414
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "7f066b36724466ef2075b46bd12c22e38a8a5566963ace8713949e5bf7c4731d",
+      "tail_bytes": 5159,
+      "tree": "KNOWLEDGE-MAP-DOC"
+    },
+    {
+      "blob": "c80a3bee6ebeefce8b0e3786ee0cc7eb6395cf52",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/LEGACY-VHDL-RETIRE.md",
+      "proposed_saved_bytes": 722,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 750,
+          "before": 866,
+          "id": "LEGACY-VHDL-RETIRE.1",
+          "saved": 116
+        },
+        {
+          "after": 756,
+          "before": 889,
+          "id": "LEGACY-VHDL-RETIRE.2",
+          "saved": 133
+        },
+        {
+          "after": 625,
+          "before": 733,
+          "id": "LEGACY-VHDL-RETIRE.3",
+          "saved": 108
+        },
+        {
+          "after": 1052,
+          "before": 1417,
+          "id": "LEGACY-VHDL-RETIRE.5",
+          "saved": 365
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "9a9554c0b733877d7d5b31cffefb7b2424e06ea8e6e10882457380ea183bd1a7",
+      "tail_bytes": 13665,
+      "tree": "LEGACY-VHDL-RETIRE"
+    },
+    {
+      "blob": "5d2868ccd0c9e15ac8b576aac3e8b9d757d7b6df",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/LIFECYCLE-FAMILY-AUDIT.md",
+      "proposed_saved_bytes": 572,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 625,
+          "before": 881,
+          "id": "LIFECYCLE-FAMILY-AUDIT.1",
+          "saved": 256
+        },
+        {
+          "after": 532,
+          "before": 848,
+          "id": "LIFECYCLE-FAMILY-AUDIT.2",
+          "saved": 316
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "571a2c90f2e1efa45368a61682b15df87aafa96e2561c22e0267a816fa3f782e",
+      "tail_bytes": 1902,
+      "tree": "LIFECYCLE-FAMILY-AUDIT"
+    },
+    {
+      "blob": "2cf0adecc7edb6748b11d7c0ddd849682a088691",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/LINKEDSPEC-ENHANCEMENTS.md",
+      "proposed_saved_bytes": 79,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 502,
+          "before": 581,
+          "id": "LINKEDSPEC-ENHANCEMENTS.1",
+          "saved": 79
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "1327f9fbfeba0bb2ed179c23c89b228c20ee8e51aa023c36dd6136fa04da032b",
+      "tail_bytes": 1676,
+      "tree": "LINKEDSPEC-ENHANCEMENTS"
+    },
+    {
+      "blob": "e7db459b2af6f7754fad847dc04032d6539a9651",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/LINKEDSPEC-LOW-EFFORT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "4c6f506cbcc9815a3d823198d5491a712e3ee021f06fab174170fbc4a2c57225",
+      "tail_bytes": 2269,
+      "tree": "LINKEDSPEC-LOW-EFFORT"
+    },
+    {
+      "blob": "762dfc1b5c8a172c47ca5f2214184f51d121348f",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 26,
+      "mode": "100644",
+      "path": "docs/tasks/LIVE-DOCUMENT-PRESSURE-CONTAINMENT.md",
+      "proposed_saved_bytes": 29436,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 1213,
+          "before": 3499,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.0",
+          "saved": 2286
+        },
+        {
+          "after": 1242,
+          "before": 4848,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.1",
+          "saved": 3606
+        },
+        {
+          "after": 1160,
+          "before": 3033,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.2",
+          "saved": 1873
+        },
+        {
+          "after": 1164,
+          "before": 4072,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.3",
+          "saved": 2908
+        },
+        {
+          "after": 1299,
+          "before": 3650,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.4",
+          "saved": 2351
+        },
+        {
+          "after": 1334,
+          "before": 1468,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.5",
+          "saved": 134
+        },
+        {
+          "after": 1350,
+          "before": 1533,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.6",
+          "saved": 183
+        },
+        {
+          "after": 1048,
+          "before": 1421,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7",
+          "saved": 373
+        },
+        {
+          "after": 1298,
+          "before": 1570,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.0",
+          "saved": 272
+        },
+        {
+          "after": 1333,
+          "before": 1515,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.1",
+          "saved": 182
+        },
+        {
+          "after": 1363,
+          "before": 2685,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.2",
+          "saved": 1322
+        },
+        {
+          "after": 1211,
+          "before": 1492,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.3",
+          "saved": 281
+        },
+        {
+          "after": 1211,
+          "before": 1415,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.7.4",
+          "saved": 204
+        },
+        {
+          "after": 1492,
+          "before": 2200,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8",
+          "saved": 708
+        },
+        {
+          "after": 1612,
+          "before": 2265,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9",
+          "saved": 653
+        },
+        {
+          "after": 1567,
+          "before": 2287,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10",
+          "saved": 720
+        },
+        {
+          "after": 1900,
+          "before": 3211,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11",
+          "saved": 1311
+        },
+        {
+          "after": 2017,
+          "before": 2983,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12",
+          "saved": 966
+        },
+        {
+          "after": 1782,
+          "before": 2661,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13",
+          "saved": 879
+        },
+        {
+          "after": 2023,
+          "before": 3131,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14",
+          "saved": 1108
+        },
+        {
+          "after": 1602,
+          "before": 3108,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15",
+          "saved": 1506
+        },
+        {
+          "after": 1042,
+          "before": 2616,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15.1",
+          "saved": 1574
+        },
+        {
+          "after": 1179,
+          "before": 2136,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16",
+          "saved": 957
+        },
+        {
+          "after": 1410,
+          "before": 2116,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.1",
+          "saved": 706
+        },
+        {
+          "after": 1546,
+          "before": 3919,
+          "id": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.16.2",
+          "saved": 2373
+        }
+      ],
+      "selected_scope_loss": [
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.8",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.9",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.10",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.11",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.12",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.13",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.14",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15",
+        "LIVE-DOCUMENT-PRESSURE-CONTAINMENT.15.1"
+      ],
+      "sha256": "3712e049cc29fc0b7ff81ec8c591b3a3bbb9b57354345e4b45abfc276cfd719a",
+      "tail_bytes": 38165,
+      "tree": "LIVE-DOCUMENT-PRESSURE-CONTAINMENT"
+    },
+    {
+      "blob": "406d85d5876e92cfb156ad06c9ac278b0f7d8a76",
+      "compatible": false,
+      "frontier_count": 0,
+      "mode": "100644",
+      "path": "docs/tasks/LUA-BACKEND-PARITY.md",
+      "reason": "requires one exact uppercase frontier",
+      "sha256": "76c2e43f73c275f8471ff7dd8ad748c30a06d26cb850bd1825e3c5d6a3f863f6",
+      "tree": "LUA-BACKEND-PARITY"
+    },
+    {
+      "blob": "5996d49aec00587430f95617fb0991ebdec9492c",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 206,
+      "mode": "100644",
+      "path": "docs/tasks/LUA-STARTUP-READING.md",
+      "proposed_saved_bytes": 86851,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 763,
+          "before": 1332,
+          "id": "LUA-STARTUP-READING.1",
+          "saved": 569
+        },
+        {
+          "after": 1089,
+          "before": 3088,
+          "id": "LUA-STARTUP-READING.1.1",
+          "saved": 1999
+        },
+        {
+          "after": 1056,
+          "before": 3539,
+          "id": "LUA-STARTUP-READING.1.2",
+          "saved": 2483
+        },
+        {
+          "after": 1099,
+          "before": 3043,
+          "id": "LUA-STARTUP-READING.1.3",
+          "saved": 1944
+        },
+        {
+          "after": 1086,
+          "before": 3040,
+          "id": "LUA-STARTUP-READING.1.4",
+          "saved": 1954
+        },
+        {
+          "after": 1159,
+          "before": 3201,
+          "id": "LUA-STARTUP-READING.1.5",
+          "saved": 2042
+        },
+        {
+          "after": 1063,
+          "before": 2742,
+          "id": "LUA-STARTUP-READING.1.6",
+          "saved": 1679
+        },
+        {
+          "after": 1062,
+          "before": 2782,
+          "id": "LUA-STARTUP-READING.1.7",
+          "saved": 1720
+        },
+        {
+          "after": 1055,
+          "before": 2759,
+          "id": "LUA-STARTUP-READING.1.8",
+          "saved": 1704
+        },
+        {
+          "after": 1047,
+          "before": 2855,
+          "id": "LUA-STARTUP-READING.1.9",
+          "saved": 1808
+        },
+        {
+          "after": 1061,
+          "before": 2975,
+          "id": "LUA-STARTUP-READING.1.10",
+          "saved": 1914
+        },
+        {
+          "after": 1059,
+          "before": 3060,
+          "id": "LUA-STARTUP-READING.1.11",
+          "saved": 2001
+        },
+        {
+          "after": 1052,
+          "before": 2914,
+          "id": "LUA-STARTUP-READING.1.12",
+          "saved": 1862
+        },
+        {
+          "after": 1047,
+          "before": 2626,
+          "id": "LUA-STARTUP-READING.1.13",
+          "saved": 1579
+        },
+        {
+          "after": 1152,
+          "before": 3374,
+          "id": "LUA-STARTUP-READING.1.14",
+          "saved": 2222
+        },
+        {
+          "after": 1119,
+          "before": 3161,
+          "id": "LUA-STARTUP-READING.1.15",
+          "saved": 2042
+        },
+        {
+          "after": 1118,
+          "before": 2912,
+          "id": "LUA-STARTUP-READING.1.16",
+          "saved": 1794
+        },
+        {
+          "after": 1121,
+          "before": 2954,
+          "id": "LUA-STARTUP-READING.1.17",
+          "saved": 1833
+        },
+        {
+          "after": 1111,
+          "before": 2668,
+          "id": "LUA-STARTUP-READING.1.18",
+          "saved": 1557
+        },
+        {
+          "after": 1112,
+          "before": 2681,
+          "id": "LUA-STARTUP-READING.1.19",
+          "saved": 1569
+        },
+        {
+          "after": 1083,
+          "before": 3274,
+          "id": "LUA-STARTUP-READING.1.20",
+          "saved": 2191
+        },
+        {
+          "after": 1086,
+          "before": 3127,
+          "id": "LUA-STARTUP-READING.1.21",
+          "saved": 2041
+        },
+        {
+          "after": 1088,
+          "before": 3331,
+          "id": "LUA-STARTUP-READING.1.22",
+          "saved": 2243
+        },
+        {
+          "after": 1118,
+          "before": 3074,
+          "id": "LUA-STARTUP-READING.1.23",
+          "saved": 1956
+        },
+        {
+          "after": 1134,
+          "before": 3201,
+          "id": "LUA-STARTUP-READING.1.24",
+          "saved": 2067
+        },
+        {
+          "after": 1168,
+          "before": 2484,
+          "id": "LUA-STARTUP-READING.1.25",
+          "saved": 1316
+        },
+        {
+          "after": 1149,
+          "before": 2029,
+          "id": "LUA-STARTUP-READING.1.26",
+          "saved": 880
+        },
+        {
+          "after": 1171,
+          "before": 2055,
+          "id": "LUA-STARTUP-READING.1.27",
+          "saved": 884
+        },
+        {
+          "after": 1175,
+          "before": 2222,
+          "id": "LUA-STARTUP-READING.1.28",
+          "saved": 1047
+        },
+        {
+          "after": 1179,
+          "before": 2417,
+          "id": "LUA-STARTUP-READING.1.29",
+          "saved": 1238
+        },
+        {
+          "after": 1261,
+          "before": 2366,
+          "id": "LUA-STARTUP-READING.1.30",
+          "saved": 1105
+        },
+        {
+          "after": 1247,
+          "before": 2339,
+          "id": "LUA-STARTUP-READING.1.31",
+          "saved": 1092
+        },
+        {
+          "after": 1239,
+          "before": 2376,
+          "id": "LUA-STARTUP-READING.1.32",
+          "saved": 1137
+        },
+        {
+          "after": 1244,
+          "before": 2479,
+          "id": "LUA-STARTUP-READING.1.33",
+          "saved": 1235
+        },
+        {
+          "after": 1283,
+          "before": 2572,
+          "id": "LUA-STARTUP-READING.1.34",
+          "saved": 1289
+        },
+        {
+          "after": 1254,
+          "before": 2452,
+          "id": "LUA-STARTUP-READING.1.35",
+          "saved": 1198
+        },
+        {
+          "after": 1238,
+          "before": 2930,
+          "id": "LUA-STARTUP-READING.1.36",
+          "saved": 1692
+        },
+        {
+          "after": 1251,
+          "before": 2455,
+          "id": "LUA-STARTUP-READING.1.37",
+          "saved": 1204
+        },
+        {
+          "after": 1158,
+          "before": 1977,
+          "id": "LUA-STARTUP-READING.1.38",
+          "saved": 819
+        },
+        {
+          "after": 1135,
+          "before": 1994,
+          "id": "LUA-STARTUP-READING.1.39",
+          "saved": 859
+        },
+        {
+          "after": 1129,
+          "before": 2030,
+          "id": "LUA-STARTUP-READING.1.40",
+          "saved": 901
+        },
+        {
+          "after": 1174,
+          "before": 2079,
+          "id": "LUA-STARTUP-READING.1.41",
+          "saved": 905
+        },
+        {
+          "after": 1161,
+          "before": 2047,
+          "id": "LUA-STARTUP-READING.1.42",
+          "saved": 886
+        },
+        {
+          "after": 1158,
+          "before": 2061,
+          "id": "LUA-STARTUP-READING.1.43",
+          "saved": 903
+        },
+        {
+          "after": 1223,
+          "before": 2481,
+          "id": "LUA-STARTUP-READING.1.44",
+          "saved": 1258
+        },
+        {
+          "after": 1377,
+          "before": 2496,
+          "id": "LUA-STARTUP-READING.1.45",
+          "saved": 1119
+        },
+        {
+          "after": 1412,
+          "before": 3007,
+          "id": "LUA-STARTUP-READING.1.46",
+          "saved": 1595
+        },
+        {
+          "after": 1334,
+          "before": 2490,
+          "id": "LUA-STARTUP-READING.1.47",
+          "saved": 1156
+        },
+        {
+          "after": 1291,
+          "before": 2333,
+          "id": "LUA-STARTUP-READING.1.48",
+          "saved": 1042
+        },
+        {
+          "after": 1352,
+          "before": 2731,
+          "id": "LUA-STARTUP-READING.1.49",
+          "saved": 1379
+        },
+        {
+          "after": 1393,
+          "before": 2740,
+          "id": "LUA-STARTUP-READING.1.50",
+          "saved": 1347
+        },
+        {
+          "after": 1366,
+          "before": 2758,
+          "id": "LUA-STARTUP-READING.1.51",
+          "saved": 1392
+        },
+        {
+          "after": 1621,
+          "before": 4796,
+          "id": "LUA-STARTUP-READING.2.9.1.1",
+          "saved": 3175
+        },
+        {
+          "after": 846,
+          "before": 1415,
+          "id": "LUA-STARTUP-READING.3",
+          "saved": 569
+        },
+        {
+          "after": 1498,
+          "before": 3181,
+          "id": "LUA-STARTUP-READING.3.1",
+          "saved": 1683
+        },
+        {
+          "after": 1632,
+          "before": 3439,
+          "id": "LUA-STARTUP-READING.3.2",
+          "saved": 1807
+        },
+        {
+          "after": 764,
+          "before": 1095,
+          "id": "LUA-STARTUP-READING.4",
+          "saved": 331
+        },
+        {
+          "after": 1529,
+          "before": 2561,
+          "id": "LUA-STARTUP-READING.4.1",
+          "saved": 1032
+        },
+        {
+          "after": 1155,
+          "before": 1758,
+          "id": "LUA-STARTUP-READING.4.2",
+          "saved": 603
+        }
+      ],
+      "selected_scope_loss": [
+        "LUA-STARTUP-READING.1.1",
+        "LUA-STARTUP-READING.1.2",
+        "LUA-STARTUP-READING.1.3",
+        "LUA-STARTUP-READING.1.4",
+        "LUA-STARTUP-READING.1.5",
+        "LUA-STARTUP-READING.1.6",
+        "LUA-STARTUP-READING.1.7",
+        "LUA-STARTUP-READING.1.8",
+        "LUA-STARTUP-READING.1.9",
+        "LUA-STARTUP-READING.1.10",
+        "LUA-STARTUP-READING.1.11",
+        "LUA-STARTUP-READING.1.12",
+        "LUA-STARTUP-READING.1.13",
+        "LUA-STARTUP-READING.1.14",
+        "LUA-STARTUP-READING.1.15",
+        "LUA-STARTUP-READING.1.16",
+        "LUA-STARTUP-READING.1.17",
+        "LUA-STARTUP-READING.1.18",
+        "LUA-STARTUP-READING.1.19",
+        "LUA-STARTUP-READING.1.20",
+        "LUA-STARTUP-READING.1.21",
+        "LUA-STARTUP-READING.1.22",
+        "LUA-STARTUP-READING.1.23",
+        "LUA-STARTUP-READING.1.24",
+        "LUA-STARTUP-READING.1.25",
+        "LUA-STARTUP-READING.1.26",
+        "LUA-STARTUP-READING.1.27",
+        "LUA-STARTUP-READING.1.28",
+        "LUA-STARTUP-READING.1.29",
+        "LUA-STARTUP-READING.1.30",
+        "LUA-STARTUP-READING.1.31",
+        "LUA-STARTUP-READING.1.32",
+        "LUA-STARTUP-READING.1.33",
+        "LUA-STARTUP-READING.1.34",
+        "LUA-STARTUP-READING.1.35",
+        "LUA-STARTUP-READING.1.36",
+        "LUA-STARTUP-READING.1.37",
+        "LUA-STARTUP-READING.1.38",
+        "LUA-STARTUP-READING.1.39",
+        "LUA-STARTUP-READING.1.40",
+        "LUA-STARTUP-READING.1.41",
+        "LUA-STARTUP-READING.1.42",
+        "LUA-STARTUP-READING.1.43",
+        "LUA-STARTUP-READING.1.44",
+        "LUA-STARTUP-READING.1.45",
+        "LUA-STARTUP-READING.1.46",
+        "LUA-STARTUP-READING.1.47",
+        "LUA-STARTUP-READING.1.48",
+        "LUA-STARTUP-READING.1.49",
+        "LUA-STARTUP-READING.1.50",
+        "LUA-STARTUP-READING.1.51",
+        "LUA-STARTUP-READING.3.1",
+        "LUA-STARTUP-READING.3.2"
+      ],
+      "sha256": "40c9a36f7b23142f6b7872061d33a991a3006f1134cabe4fa0124a008d7cb36b",
+      "tail_bytes": 69516,
+      "tree": "LUA-STARTUP-READING"
+    },
+    {
+      "blob": "6a6a6575c5d3cb91fc1fab1d9cd2221ba8dbf64e",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/MDBOOK-DESTINATION-ROOT-ALIGNMENT.md",
+      "proposed_saved_bytes": 4639,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 977,
+          "before": 3912,
+          "id": "MDBOOK-DESTINATION-ROOT-ALIGNMENT.0",
+          "saved": 2935
+        },
+        {
+          "after": 1101,
+          "before": 2805,
+          "id": "MDBOOK-DESTINATION-ROOT-ALIGNMENT.1",
+          "saved": 1704
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "565ddfdbf1ed498850e0b922bc3b3d4401c554613c65c22b01f40de79da32757",
+      "tail_bytes": 3278,
+      "tree": "MDBOOK-DESTINATION-ROOT-ALIGNMENT"
+    },
+    {
+      "blob": "191f29bd8454c510d638d5aab2237735dc366ff9",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/MDBOOK-FORMAT-CORRECTNESS.md",
+      "proposed_saved_bytes": 1384,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 710,
+          "before": 931,
+          "id": "MDBOOK-FORMAT-CORRECTNESS.1",
+          "saved": 221
+        },
+        {
+          "after": 692,
+          "before": 1548,
+          "id": "MDBOOK-FORMAT-CORRECTNESS.2",
+          "saved": 856
+        },
+        {
+          "after": 551,
+          "before": 858,
+          "id": "MDBOOK-FORMAT-CORRECTNESS.3",
+          "saved": 307
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "1ec9555e735cb856b239a2cea987333439768d0c84ea17ac9314dc5edbcf853c",
+      "tail_bytes": 4620,
+      "tree": "MDBOOK-FORMAT-CORRECTNESS"
+    },
+    {
+      "blob": "9efb5192b494eb79b99301e337d526f257bb8531",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/MDBOOK-RENDERED-READABILITY.md",
+      "proposed_saved_bytes": 1003,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 740,
+          "before": 1743,
+          "id": "MDBOOK-RENDERED-READABILITY.0",
+          "saved": 1003
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "800011d60554769b4354fa06c9fab16bb489e48b7106f0bac86ce831c7c92315",
+      "tail_bytes": 1246,
+      "tree": "MDBOOK-RENDERED-READABILITY"
+    },
+    {
+      "blob": "da31ef7b65310424ce4cb6f33e85a2fb44feff03",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 8,
+      "mode": "100644",
+      "path": "docs/tasks/MDBOOK-VARIANT-AGNOSTIC.md",
+      "proposed_saved_bytes": 6521,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 690,
+          "before": 1278,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.2",
+          "saved": 588
+        },
+        {
+          "after": 747,
+          "before": 2047,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.3",
+          "saved": 1300
+        },
+        {
+          "after": 707,
+          "before": 1606,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.4",
+          "saved": 899
+        },
+        {
+          "after": 695,
+          "before": 2492,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.5",
+          "saved": 1797
+        },
+        {
+          "after": 671,
+          "before": 2038,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.6",
+          "saved": 1367
+        },
+        {
+          "after": 607,
+          "before": 1177,
+          "id": "MDBOOK-VARIANT-AGNOSTIC.7",
+          "saved": 570
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "f3e6ecec82ce319397e08b62f4f8bd92c54fd031c0e1fc82bf8c16c38f50bb8f",
+      "tail_bytes": 18599,
+      "tree": "MDBOOK-VARIANT-AGNOSTIC"
+    },
+    {
+      "blob": "4f8f29aabdfb58c17b6920ae99e6d5323411070e",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 20,
+      "mode": "100644",
+      "path": "docs/tasks/MEDIUM-IMPACT.md",
+      "proposed_saved_bytes": 6962,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 772,
+          "before": 1081,
+          "id": "MEDIUM-IMPACT.1.1",
+          "saved": 309
+        },
+        {
+          "after": 786,
+          "before": 1079,
+          "id": "MEDIUM-IMPACT.1.2",
+          "saved": 293
+        },
+        {
+          "after": 916,
+          "before": 1410,
+          "id": "MEDIUM-IMPACT.1.3",
+          "saved": 494
+        },
+        {
+          "after": 762,
+          "before": 962,
+          "id": "MEDIUM-IMPACT.1.4",
+          "saved": 200
+        },
+        {
+          "after": 806,
+          "before": 1071,
+          "id": "MEDIUM-IMPACT.1.5",
+          "saved": 265
+        },
+        {
+          "after": 775,
+          "before": 1191,
+          "id": "MEDIUM-IMPACT.2.1",
+          "saved": 416
+        },
+        {
+          "after": 856,
+          "before": 956,
+          "id": "MEDIUM-IMPACT.2.2",
+          "saved": 100
+        },
+        {
+          "after": 886,
+          "before": 971,
+          "id": "MEDIUM-IMPACT.2.3",
+          "saved": 85
+        },
+        {
+          "after": 984,
+          "before": 1069,
+          "id": "MEDIUM-IMPACT.2.4",
+          "saved": 85
+        },
+        {
+          "after": 1126,
+          "before": 1888,
+          "id": "MEDIUM-IMPACT.3.3",
+          "saved": 762
+        },
+        {
+          "after": 617,
+          "before": 4553,
+          "id": "MEDIUM-IMPACT.3.4",
+          "saved": 3936
+        },
+        {
+          "after": 847,
+          "before": 864,
+          "id": "MEDIUM-IMPACT.3.6",
+          "saved": 17
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "755d016bd757e36496918e3e477fc847ad40d68c4c8fe1858f2d7cbce0f9369d",
+      "tail_bytes": 12667,
+      "tree": "MEDIUM-IMPACT"
+    },
+    {
+      "blob": "cdfd01edf8b6b5add3952ac06936b89ca7dbf1c1",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/MEMORY-ARCHITECTURE-DOC.md",
+      "proposed_saved_bytes": 1466,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 777,
+          "before": 1282,
+          "id": "MEMORY-ARCHITECTURE-DOC.1",
+          "saved": 505
+        },
+        {
+          "after": 976,
+          "before": 1392,
+          "id": "MEMORY-ARCHITECTURE-DOC.2",
+          "saved": 416
+        },
+        {
+          "after": 910,
+          "before": 1455,
+          "id": "MEMORY-ARCHITECTURE-DOC.3",
+          "saved": 545
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "b6190a05e59556c51cb990651a6d3b4888332a87f2d54eb828cd352a72435847",
+      "tail_bytes": 6691,
+      "tree": "MEMORY-ARCHITECTURE-DOC"
+    },
+    {
+      "blob": "ac7dc4480daec45685500d31b39b5d97363c8537",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/MEMORY-COMMIT-POINTER-ENFORCEMENT.md",
+      "proposed_saved_bytes": 56,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 651,
+          "before": 686,
+          "id": "MEMORY-COMMIT-POINTER-ENFORCEMENT.0",
+          "saved": 35
+        },
+        {
+          "after": 673,
+          "before": 694,
+          "id": "MEMORY-COMMIT-POINTER-ENFORCEMENT.2",
+          "saved": 21
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "08c9ce8a7d386e1c16ef55b8cddca7fe19c315be7d336ecaa68a3b820297fbdc",
+      "tail_bytes": 8742,
+      "tree": "MEMORY-COMMIT-POINTER-ENFORCEMENT"
+    },
+    {
+      "blob": "660923e58dd52c0826b057731dd493eb948023ba",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/MEMORY-PUSH-POINTER-SYNC.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "63bcab0b32be984ba4e01f9087510086012be5b2e66aaab7f7475b76feaaa9cf",
+      "tail_bytes": 1593,
+      "tree": "MEMORY-PUSH-POINTER-SYNC"
+    },
+    {
+      "blob": "f92f0fe3b68d9bcfc4640441c04e8fb15e7418e8",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/METHOD-LIKE-DSL-MIGRATION.md",
+      "proposed_saved_bytes": 2130,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 991,
+          "before": 1653,
+          "id": "METHOD-LIKE-DSL-MIGRATION.1",
+          "saved": 662
+        },
+        {
+          "after": 820,
+          "before": 1152,
+          "id": "METHOD-LIKE-DSL-MIGRATION.2",
+          "saved": 332
+        },
+        {
+          "after": 766,
+          "before": 1089,
+          "id": "METHOD-LIKE-DSL-MIGRATION.3",
+          "saved": 323
+        },
+        {
+          "after": 790,
+          "before": 1152,
+          "id": "METHOD-LIKE-DSL-MIGRATION.4",
+          "saved": 362
+        },
+        {
+          "after": 761,
+          "before": 1212,
+          "id": "METHOD-LIKE-DSL-MIGRATION.5",
+          "saved": 451
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "d75b008b5ed1e195a42833af9bed2cbb89ffb039115c1b8cdd0942fa6b2b400c",
+      "tail_bytes": 7762,
+      "tree": "METHOD-LIKE-DSL-MIGRATION"
+    },
+    {
+      "blob": "091f51c2a054cdf38bbe47f1f629e440af0f17f1",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 7,
+      "mode": "100644",
+      "path": "docs/tasks/NATIVE-PARSER-ACCELERATOR.md",
+      "proposed_saved_bytes": 482,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 770,
+          "before": 1252,
+          "id": "NATIVE-PARSER-ACCELERATOR.0",
+          "saved": 482
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "81274d52d73df7c7c417a5c424b28f88fd1d1e09ffe0d5165f361d784f17b8ec",
+      "tail_bytes": 1248,
+      "tree": "NATIVE-PARSER-ACCELERATOR"
+    },
+    {
+      "blob": "d0050b7b8ed76ad0c63351e85cbdbbe59f2c6250",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 0,
+      "mode": "100644",
+      "path": "docs/tasks/NONCORE-QUARANTINE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "7e13852a543b3f9282ae8f02a34734a506cc3708c4194ed999113a582db1c815",
+      "tail_bytes": 6443,
+      "tree": "NONCORE-QUARANTINE"
+    },
+    {
+      "blob": "0beb2aeac71d3d74df69684494307ee88857f36f",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 10,
+      "mode": "100644",
+      "path": "docs/tasks/NONCURRENT-HELPER-CODE-PURGE.md",
+      "proposed_saved_bytes": 16841,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 620,
+          "before": 872,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.1",
+          "saved": 252
+        },
+        {
+          "after": 824,
+          "before": 4348,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.2.1",
+          "saved": 3524
+        },
+        {
+          "after": 854,
+          "before": 3334,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.2.2",
+          "saved": 2480
+        },
+        {
+          "after": 641,
+          "before": 2428,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.2.3",
+          "saved": 1787
+        },
+        {
+          "after": 664,
+          "before": 2593,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.2.4",
+          "saved": 1929
+        },
+        {
+          "after": 689,
+          "before": 3570,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.3",
+          "saved": 2881
+        },
+        {
+          "after": 766,
+          "before": 2860,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.4",
+          "saved": 2094
+        },
+        {
+          "after": 672,
+          "before": 2566,
+          "id": "NONCURRENT-HELPER-CODE-PURGE.5",
+          "saved": 1894
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "0ba388f8556edd9c6c5ac4f697b917bb89a0e8af1d47f308ebc04f2276c0b250",
+      "tail_bytes": 9605,
+      "tree": "NONCURRENT-HELPER-CODE-PURGE"
+    },
+    {
+      "blob": "9e0ea56a5cc27e252f34ad4c4ee4e8c56cd03074",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 30,
+      "mode": "100644",
+      "path": "docs/tasks/OPENAI-TOOL-API.md",
+      "proposed_saved_bytes": 664,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 1403,
+          "before": 2067,
+          "id": "OPENAI-TOOL-API.1",
+          "saved": 664
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "e96b876fd9675460b2b0fe729db248c3c30659ff4a37448d31a09f3f2676b4c6",
+      "tail_bytes": 3378,
+      "tree": "OPENAI-TOOL-API"
+    },
+    {
+      "blob": "7cf5aef7726e622bd0b2900a9e83ba0f46ba64f5",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 9,
+      "mode": "100644",
+      "path": "docs/tasks/PARSER-AUTHORING-APIS.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "982e9ea7cef5194761139727735635b31586dec7c2bb430b830bc65d48f32f8a",
+      "tail_bytes": 1905,
+      "tree": "PARSER-AUTHORING-APIS"
+    },
+    {
+      "blob": "ef8f86fcefa93dae0e338399c447c3ac7311d6fa",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 28,
+      "mode": "100644",
+      "path": "docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md",
+      "proposed_saved_bytes": 13074,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 641,
+          "before": 920,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.0",
+          "saved": 279
+        },
+        {
+          "after": 754,
+          "before": 1140,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.1",
+          "saved": 386
+        },
+        {
+          "after": 726,
+          "before": 1353,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.2",
+          "saved": 627
+        },
+        {
+          "after": 814,
+          "before": 892,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3",
+          "saved": 78
+        },
+        {
+          "after": 923,
+          "before": 1460,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.1",
+          "saved": 537
+        },
+        {
+          "after": 828,
+          "before": 1295,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.1",
+          "saved": 467
+        },
+        {
+          "after": 1000,
+          "before": 1603,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.2",
+          "saved": 603
+        },
+        {
+          "after": 724,
+          "before": 1217,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.3",
+          "saved": 493
+        },
+        {
+          "after": 776,
+          "before": 1299,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.3",
+          "saved": 523
+        },
+        {
+          "after": 740,
+          "before": 1486,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.4",
+          "saved": 746
+        },
+        {
+          "after": 808,
+          "before": 1364,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.1",
+          "saved": 556
+        },
+        {
+          "after": 834,
+          "before": 1338,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.2",
+          "saved": 504
+        },
+        {
+          "after": 788,
+          "before": 1131,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.3",
+          "saved": 343
+        },
+        {
+          "after": 718,
+          "before": 1570,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.1",
+          "saved": 852
+        },
+        {
+          "after": 701,
+          "before": 1404,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.2",
+          "saved": 703
+        },
+        {
+          "after": 698,
+          "before": 1564,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.3",
+          "saved": 866
+        },
+        {
+          "after": 636,
+          "before": 1453,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.4",
+          "saved": 817
+        },
+        {
+          "after": 1017,
+          "before": 1201,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5",
+          "saved": 184
+        },
+        {
+          "after": 779,
+          "before": 1240,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.1",
+          "saved": 461
+        },
+        {
+          "after": 821,
+          "before": 1492,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.2",
+          "saved": 671
+        },
+        {
+          "after": 951,
+          "before": 1806,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.3.1",
+          "saved": 855
+        },
+        {
+          "after": 824,
+          "before": 1737,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.3.2",
+          "saved": 913
+        },
+        {
+          "after": 813,
+          "before": 1423,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.4",
+          "saved": 610
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "99277d2bdf68371abf3f5b59d08923456480873474d30f94d4b174ada7488f36",
+      "tail_bytes": 52263,
+      "tree": "PERL-ACTIONIR-AST-MIGRATION"
+    },
+    {
+      "blob": "a6ff7fdf5e10f52b9be9d9e1d11a470cdd9cac37",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 83,
+      "mode": "100644",
+      "path": "docs/tasks/PERL-PRIVATE-FACTORY-CAPTURE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "99088bb8f4d2b9d4b2a31133a0559a79543cb33632b176c7fa6503215a3b35c8",
+      "tail_bytes": 203617,
+      "tree": "PERL-PRIVATE-FACTORY-CAPTURE"
+    },
+    {
+      "blob": "eda48ebc93311066309e778afb31aa975406a280",
+      "compatible": false,
+      "frontier_count": 0,
+      "mode": "100644",
+      "path": "docs/tasks/PERL-TRACE-UNICODE-SINK.md",
+      "reason": "requires one exact uppercase frontier",
+      "sha256": "bb403eed7b9d90ce14f26b4c52a6dbbef3176bfd21adea1cbd304cc2d59efe26",
+      "tree": "PERL-TRACE-UNICODE-SINK"
+    },
+    {
+      "blob": "267c335a86276da45c33f83c3cf0818d0b3c32f5",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 0,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE0-BACKHALF-TRIAGE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "9752fd9b2add06baf3825cc5ff124bb96567986610f3a940ad5eff9f5f49a4ce",
+      "tail_bytes": 43417,
+      "tree": "PHASE0-BACKHALF-TRIAGE"
+    },
+    {
+      "blob": "53a6fcdb8475d0d1361b21cbdfa9c16c3f767419",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE1-PARSER-CORE-ISOLATION.md",
+      "proposed_saved_bytes": 1420,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 942,
+          "before": 2034,
+          "id": "PHASE1-PARSER-CORE-ISOLATION.1",
+          "saved": 1092
+        },
+        {
+          "after": 730,
+          "before": 845,
+          "id": "PHASE1-PARSER-CORE-ISOLATION.2",
+          "saved": 115
+        },
+        {
+          "after": 665,
+          "before": 878,
+          "id": "PHASE1-PARSER-CORE-ISOLATION.3",
+          "saved": 213
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "8767012cc929f08bc7876cc930de119e87d977a51f065a62af81ecb686720653",
+      "tail_bytes": 6212,
+      "tree": "PHASE1-PARSER-CORE-ISOLATION"
+    },
+    {
+      "blob": "6d812ec7574eac303be4d3723f3c238effba8dfd",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE1A-CLOSE-OUT.md",
+      "proposed_saved_bytes": 109,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 758,
+          "before": 867,
+          "id": "PHASE1A-CLOSE-OUT.1",
+          "saved": 109
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "1088c822f86d616cd685aa8cf1b954c0f7f8c4674f1b6db6840b810f2805df88",
+      "tail_bytes": 5925,
+      "tree": "PHASE1A-CLOSE-OUT"
+    },
+    {
+      "blob": "5281dd368bd07e6d0a6a3a7eebfbfb765dd59ac0",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 7,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE2-DSL-FRONTEND.md",
+      "proposed_saved_bytes": 613,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 779,
+          "before": 1069,
+          "id": "PHASE2-DSL-FRONTEND.3",
+          "saved": 290
+        },
+        {
+          "after": 770,
+          "before": 926,
+          "id": "PHASE2-DSL-FRONTEND.4",
+          "saved": 156
+        },
+        {
+          "after": 643,
+          "before": 784,
+          "id": "PHASE2-DSL-FRONTEND.5",
+          "saved": 141
+        },
+        {
+          "after": 840,
+          "before": 866,
+          "id": "PHASE2-DSL-FRONTEND.6",
+          "saved": 26
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "9b973b446c4a604a78170ca16f2c9b7f0984bde71988a42ccf39ba0bae389335",
+      "tail_bytes": 20313,
+      "tree": "PHASE2-DSL-FRONTEND"
+    },
+    {
+      "blob": "8fa7e1a628d11357fcecab080112acc62bf039be",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE3-EXECUTION-SEMANTICS.md",
+      "proposed_saved_bytes": 1093,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 654,
+          "before": 1157,
+          "id": "PHASE3-EXECUTION-SEMANTICS.1",
+          "saved": 503
+        },
+        {
+          "after": 843,
+          "before": 1061,
+          "id": "PHASE3-EXECUTION-SEMANTICS.2",
+          "saved": 218
+        },
+        {
+          "after": 880,
+          "before": 1179,
+          "id": "PHASE3-EXECUTION-SEMANTICS.3",
+          "saved": 299
+        },
+        {
+          "after": 723,
+          "before": 796,
+          "id": "PHASE3-EXECUTION-SEMANTICS.4",
+          "saved": 73
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "00ee0be99f484bb5d7cfe35f3a1a81b1171ef349c83485bb07c2da555fd676f0",
+      "tail_bytes": 12620,
+      "tree": "PHASE3-EXECUTION-SEMANTICS"
+    },
+    {
+      "blob": "613c74af8d754754cd5273a0b43dbdddff6ed151",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE4-CAPTURE-MARK-API.md",
+      "proposed_saved_bytes": 723,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 736,
+          "before": 995,
+          "id": "PHASE4-CAPTURE-MARK-API.1",
+          "saved": 259
+        },
+        {
+          "after": 834,
+          "before": 1087,
+          "id": "PHASE4-CAPTURE-MARK-API.2",
+          "saved": 253
+        },
+        {
+          "after": 787,
+          "before": 998,
+          "id": "PHASE4-CAPTURE-MARK-API.3",
+          "saved": 211
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "c97f3d1769b721d3ea53266f81214d8de25b4afc2a8675c344b50b6d57d730a4",
+      "tail_bytes": 9989,
+      "tree": "PHASE4-CAPTURE-MARK-API"
+    },
+    {
+      "blob": "19c25098ab57246051fa7fd50d0900e21485f29f",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE5-RUNTIME-DIAGNOSTICS.md",
+      "proposed_saved_bytes": 123,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 733,
+          "before": 856,
+          "id": "PHASE5-RUNTIME-DIAGNOSTICS.1",
+          "saved": 123
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "c8c0d82e63d9a412718d3309b22936cffea10d20983a923f02dd730461349e85",
+      "tail_bytes": 7688,
+      "tree": "PHASE5-RUNTIME-DIAGNOSTICS"
+    },
+    {
+      "blob": "957605c57ce7fea5b4e54db00124fe27ea554d57",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 9,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE6-DOCUMENTATION.md",
+      "proposed_saved_bytes": 2955,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 645,
+          "before": 865,
+          "id": "PHASE6-DOCUMENTATION.1",
+          "saved": 220
+        },
+        {
+          "after": 739,
+          "before": 996,
+          "id": "PHASE6-DOCUMENTATION.2",
+          "saved": 257
+        },
+        {
+          "after": 950,
+          "before": 1390,
+          "id": "PHASE6-DOCUMENTATION.3",
+          "saved": 440
+        },
+        {
+          "after": 926,
+          "before": 1247,
+          "id": "PHASE6-DOCUMENTATION.4",
+          "saved": 321
+        },
+        {
+          "after": 726,
+          "before": 1126,
+          "id": "PHASE6-DOCUMENTATION.5",
+          "saved": 400
+        },
+        {
+          "after": 904,
+          "before": 1403,
+          "id": "PHASE6-DOCUMENTATION.6",
+          "saved": 499
+        },
+        {
+          "after": 872,
+          "before": 1237,
+          "id": "PHASE6-DOCUMENTATION.7",
+          "saved": 365
+        },
+        {
+          "after": 850,
+          "before": 1303,
+          "id": "PHASE6-DOCUMENTATION.8",
+          "saved": 453
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "fa4a316739b09a2c4f93bdfd3f42f5452773322f4cef77244e8bdc8254ad429f",
+      "tail_bytes": 15683,
+      "tree": "PHASE6-DOCUMENTATION"
+    },
+    {
+      "blob": "d55145dd654d61e80905063ed9286b9bfb7fc717",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE7-SELF-HOSTED-SPEC.md",
+      "proposed_saved_bytes": 1059,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 662,
+          "before": 822,
+          "id": "PHASE7-SELF-HOSTED-SPEC.1",
+          "saved": 160
+        },
+        {
+          "after": 808,
+          "before": 879,
+          "id": "PHASE7-SELF-HOSTED-SPEC.2",
+          "saved": 71
+        },
+        {
+          "after": 785,
+          "before": 867,
+          "id": "PHASE7-SELF-HOSTED-SPEC.3",
+          "saved": 82
+        },
+        {
+          "after": 685,
+          "before": 1126,
+          "id": "PHASE7-SELF-HOSTED-SPEC.4",
+          "saved": 441
+        },
+        {
+          "after": 706,
+          "before": 1011,
+          "id": "PHASE7-SELF-HOSTED-SPEC.5",
+          "saved": 305
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "f97aa37de3f20397ca0ca01ae7a8fe6b6cfa9704bae3785d7ba526f1b2021a6c",
+      "tail_bytes": 11779,
+      "tree": "PHASE7-SELF-HOSTED-SPEC"
+    },
+    {
+      "blob": "edcbc8cbb9c3fab64f75f5641d0806d412bf2e76",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 9,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE8-MULTI-BACKEND-HANDOFF.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "c2a14d630df564a2ade9fee8986233267a08e37fc89501801b16c75f3830c664",
+      "tail_bytes": 4278,
+      "tree": "PHASE8-MULTI-BACKEND-HANDOFF"
+    },
+    {
+      "blob": "d258a4883cc9452b079688bd4816e62cc2451e41",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 30,
+      "mode": "100644",
+      "path": "docs/tasks/PHASE9-RUST-VARIANT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "c4e214dc2b6c2c3d623a895bba248084fd6cd806e9908cd7ae6da2026de754aa",
+      "tail_bytes": 2238,
+      "tree": "PHASE9-RUST-VARIANT"
+    },
+    {
+      "blob": "0933376f855b908c407ee7f70e8792bb1e70fc09",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/PLUGIN-ACTION-MIGRATION-STALE-REFERENCES.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "b2f0dc09e599d503ffb5fe0d6b695d74824a55c3a6880b1d2d357ea28b7bcacb",
+      "tail_bytes": 1056,
+      "tree": "PLUGIN-ACTION-MIGRATION-STALE-REFERENCES"
+    },
+    {
+      "blob": "4901dad0110ba1491851ab282243dec77d46e2a5",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/PLUGIN-ACTION-MIGRATION.md",
+      "proposed_saved_bytes": 1352,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 736,
+          "before": 996,
+          "id": "PLUGIN-ACTION-MIGRATION.1",
+          "saved": 260
+        },
+        {
+          "after": 770,
+          "before": 942,
+          "id": "PLUGIN-ACTION-MIGRATION.2",
+          "saved": 172
+        },
+        {
+          "after": 749,
+          "before": 1144,
+          "id": "PLUGIN-ACTION-MIGRATION.3",
+          "saved": 395
+        },
+        {
+          "after": 655,
+          "before": 1084,
+          "id": "PLUGIN-ACTION-MIGRATION.4",
+          "saved": 429
+        },
+        {
+          "after": 642,
+          "before": 738,
+          "id": "PLUGIN-ACTION-MIGRATION.5",
+          "saved": 96
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "94fe5a575ab7f636485083f0d081438fc17853164979faac09a300d29f47d5f9",
+      "tail_bytes": 12929,
+      "tree": "PLUGIN-ACTION-MIGRATION"
+    },
+    {
+      "blob": "d274b4864fefb4f06b91508f447912547f219c11",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/PLUGIN-MODERNIZATION.md",
+      "proposed_saved_bytes": 1086,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 667,
+          "before": 1040,
+          "id": "PLUGIN-MODERNIZATION.1",
+          "saved": 373
+        },
+        {
+          "after": 994,
+          "before": 1056,
+          "id": "PLUGIN-MODERNIZATION.2",
+          "saved": 62
+        },
+        {
+          "after": 754,
+          "before": 977,
+          "id": "PLUGIN-MODERNIZATION.3",
+          "saved": 223
+        },
+        {
+          "after": 833,
+          "before": 1040,
+          "id": "PLUGIN-MODERNIZATION.4",
+          "saved": 207
+        },
+        {
+          "after": 828,
+          "before": 1049,
+          "id": "PLUGIN-MODERNIZATION.5",
+          "saved": 221
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "fa8da47f9f74ebe3807e944180037f13285c5d8178f2095b9f3fa916663ee83e",
+      "tail_bytes": 13094,
+      "tree": "PLUGIN-MODERNIZATION"
+    },
+    {
+      "blob": "657b4b1e0c0b848f30dcc0152d148b9b021eed54",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/PPLUGIN-WALKTHROUGH-DRIFT.md",
+      "proposed_saved_bytes": 94,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 884,
+          "before": 978,
+          "id": "PPLUGIN-WALKTHROUGH-DRIFT.1",
+          "saved": 94
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "08742c892d19206524a9b178d58bee91eadedaa5935e6276509fc19eb11e41fd",
+      "tail_bytes": 2461,
+      "tree": "PPLUGIN-WALKTHROUGH-DRIFT"
+    },
+    {
+      "blob": "308772758f7ab910d40400105b59e7c89c4f18c3",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 22,
+      "mode": "100644",
+      "path": "docs/tasks/PROJECT-DATA-SSD-ROOTING.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "80d718e47ec7c6f21aaa93cd3860543de91dffb0a5cab44f6b4a10db0305518a",
+      "tail_bytes": 35245,
+      "tree": "PROJECT-DATA-SSD-ROOTING"
+    },
+    {
+      "blob": "b7375f846cd64b122de9766d4b8112f5a03eecbf",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/PUBLIC-STATUS-DRIFT-SYNC.md",
+      "proposed_saved_bytes": 102,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 802,
+          "before": 867,
+          "id": "PUBLIC-STATUS-DRIFT-SYNC.1",
+          "saved": 65
+        },
+        {
+          "after": 874,
+          "before": 911,
+          "id": "PUBLIC-STATUS-DRIFT-SYNC.2",
+          "saved": 37
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "9fff9ba2e093181da2ca2dac5f3af5cd59e83d327d4f510904f5aa8ea14cfa37",
+      "tail_bytes": 3433,
+      "tree": "PUBLIC-STATUS-DRIFT-SYNC"
+    },
+    {
+      "blob": "3feed241d914cce07b28bb7df015e9e1ec0de5f5",
+      "compatible": false,
+      "frontier_count": 0,
+      "mode": "100644",
+      "path": "docs/tasks/README-STABILITY-POLICY.md",
+      "reason": "requires one exact uppercase frontier",
+      "sha256": "faaf093fd21110d2ca2e1f83fcdfe93a0cef6dfa08a43ba6a414d9345bc3107e",
+      "tree": "README-STABILITY-POLICY"
+    },
+    {
+      "blob": "76932050ef2587912766c9cb29ee3bf85fad4ca0",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 25,
+      "mode": "100644",
+      "path": "docs/tasks/REPO-HYGIENE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "7f0a16512ae970d6eefb9680dae92cd1c62fe7128d02b578c4057d019a1c1ea3",
+      "tail_bytes": 22359,
+      "tree": "REPO-HYGIENE"
+    },
+    {
+      "blob": "da18e10607b3665f19dde0c1e26cd83907af6be8",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 9,
+      "mode": "100644",
+      "path": "docs/tasks/REPO-ROOT-PATH-PORTABILITY.md",
+      "proposed_saved_bytes": 8291,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 1317,
+          "before": 2172,
+          "id": "REPO-ROOT-PATH-PORTABILITY.0",
+          "saved": 855
+        },
+        {
+          "after": 1095,
+          "before": 2349,
+          "id": "REPO-ROOT-PATH-PORTABILITY.1.1",
+          "saved": 1254
+        },
+        {
+          "after": 1183,
+          "before": 2473,
+          "id": "REPO-ROOT-PATH-PORTABILITY.1.2",
+          "saved": 1290
+        },
+        {
+          "after": 1037,
+          "before": 2305,
+          "id": "REPO-ROOT-PATH-PORTABILITY.1.3",
+          "saved": 1268
+        },
+        {
+          "after": 1516,
+          "before": 3051,
+          "id": "REPO-ROOT-PATH-PORTABILITY.2.1",
+          "saved": 1535
+        },
+        {
+          "after": 1178,
+          "before": 3267,
+          "id": "REPO-ROOT-PATH-PORTABILITY.2.2",
+          "saved": 2089
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "e7ad65f63d5cd8ec515a915ad969dbee0584333ba32bf701a7007fca3243d043",
+      "tail_bytes": 14217,
+      "tree": "REPO-ROOT-PATH-PORTABILITY"
+    },
+    {
+      "blob": "a3364c02df06fa3b1b00a9c4eedadac1767cddb8",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/RGX-ADOPTION.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "ddf32db8a906d76e25aa0ffea2bb88c5653e6a102ae2aed4308ad4d6d24a9648",
+      "tail_bytes": 1411,
+      "tree": "RGX-ADOPTION"
+    },
+    {
+      "blob": "cc67df360222b467f6418f87f32b42f3bda13f4b",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/RGX-BRANCH-TRACKING.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "718080edacaa312ba0d24cc4579edea990174b3c7cd7b048b12c54493d77c7e1",
+      "tail_bytes": 1532,
+      "tree": "RGX-BRANCH-TRACKING"
+    },
+    {
+      "blob": "d76b1ab4280419bcd098832c5120303c52bf63c1",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/RGX-BUILD-REPRO.md",
+      "proposed_saved_bytes": 89,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 594,
+          "before": 683,
+          "id": "RGX-BUILD-REPRO.1",
+          "saved": 89
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "4b7b229937c99414eda2c94646fee444124af55e2e8c946b58b950781689b6c3",
+      "tail_bytes": 1720,
+      "tree": "RGX-BUILD-REPRO"
+    },
+    {
+      "blob": "37e2a892d25204e083b18db36ca311864954c66c",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 7,
+      "mode": "100644",
+      "path": "docs/tasks/RGX-CONSUMER-BUILD-REPORTS.md",
+      "proposed_saved_bytes": 17491,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 397,
+          "before": 443,
+          "id": "RGX-CONSUMER-BUILD-REPORTS",
+          "saved": 46
+        },
+        {
+          "after": 1582,
+          "before": 2736,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1",
+          "saved": 1154
+        },
+        {
+          "after": 1116,
+          "before": 4183,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1.1",
+          "saved": 3067
+        },
+        {
+          "after": 1787,
+          "before": 12205,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1.2",
+          "saved": 10418
+        },
+        {
+          "after": 882,
+          "before": 1618,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1.3",
+          "saved": 736
+        },
+        {
+          "after": 1404,
+          "before": 2505,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1.3.1",
+          "saved": 1101
+        },
+        {
+          "after": 1272,
+          "before": 2241,
+          "id": "RGX-CONSUMER-BUILD-REPORTS.1.3.2",
+          "saved": 969
+        }
+      ],
+      "selected_scope_loss": [
+        "RGX-CONSUMER-BUILD-REPORTS.1"
+      ],
+      "sha256": "83774f63fc42e336356e4390d5fc9adc0f8c63b328c6c9a0cae1526af401fbae",
+      "tail_bytes": 3202,
+      "tree": "RGX-CONSUMER-BUILD-REPORTS"
+    },
+    {
+      "blob": "5201124084a0e3ce7d7f69fafb44272d24014b93",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/ROADMAP-DRIFT-RECONCILE.md",
+      "proposed_saved_bytes": 679,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 819,
+          "before": 960,
+          "id": "ROADMAP-DRIFT-RECONCILE.0",
+          "saved": 141
+        },
+        {
+          "after": 1469,
+          "before": 1673,
+          "id": "ROADMAP-DRIFT-RECONCILE.1",
+          "saved": 204
+        },
+        {
+          "after": 1030,
+          "before": 1364,
+          "id": "ROADMAP-DRIFT-RECONCILE.2",
+          "saved": 334
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "d73cb15e86b83dae4a0e66b5ffaf21513dfac1787c62e6eef86fefaec100ddc8",
+      "tail_bytes": 4391,
+      "tree": "ROADMAP-DRIFT-RECONCILE"
+    },
+    {
+      "blob": "baec5c59317149637ddd9196e7aa1a3bd060764a",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/ROADMAP-POST-12-DRIFT-SYNC.md",
+      "proposed_saved_bytes": 35,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 711,
+          "before": 746,
+          "id": "ROADMAP-POST-12-DRIFT-SYNC.1",
+          "saved": 35
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "a5ca7b6e59c3cb788a00052cbf1c1d7787caaa2f8217676e826cd7318c9a6af1",
+      "tail_bytes": 1715,
+      "tree": "ROADMAP-POST-12-DRIFT-SYNC"
+    },
+    {
+      "blob": "9def72250c86ce6b1720c46cb9a578baf11bb0a3",
+      "compatible": false,
+      "duplicate_core": [
+        {
+          "id": "ROADMAP-V2-TRACKER-SYNC.5",
+          "labels": [
+            "Acceptance",
+            "Commit"
+          ]
+        }
+      ],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/ROADMAP-V2-TRACKER-SYNC.md",
+      "proposed_saved_bytes": 2093,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 648,
+          "before": 2594,
+          "id": "ROADMAP-V2-TRACKER-SYNC.1",
+          "saved": 1946
+        },
+        {
+          "after": 628,
+          "before": 775,
+          "id": "ROADMAP-V2-TRACKER-SYNC.4",
+          "saved": 147
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "b2941b6bc073c03a2d54ba8ef5327d839092b89a19a736e90219330723b9f804",
+      "tail_bytes": 2032,
+      "tree": "ROADMAP-V2-TRACKER-SYNC"
+    },
+    {
+      "blob": "5c40460b8760129c34c91ca607cbf83d57a875f3",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 10,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-DEPENDENCY-WARNING-ZERO.md",
+      "proposed_saved_bytes": 2260,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 1659,
+          "before": 2627,
+          "id": "RUST-DEPENDENCY-WARNING-ZERO.0",
+          "saved": 968
+        },
+        {
+          "after": 1589,
+          "before": 2881,
+          "id": "RUST-DEPENDENCY-WARNING-ZERO.8",
+          "saved": 1292
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "2a64b2f6c3e560e867c9ae51f7237e136816855d6a000e34ebec5a094aaf9e3a",
+      "tail_bytes": 2953,
+      "tree": "RUST-DEPENDENCY-WARNING-ZERO"
+    },
+    {
+      "blob": "c91c3a81f420502e0366fb2b5ad936acb0a447ae",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 4,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-DIAGNOSTICS.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "1ba2d0b73f30faedd7a47f111775d99217b28d3c862db270d08bf03591b87d3a",
+      "tail_bytes": 1148,
+      "tree": "RUST-DIAGNOSTICS"
+    },
+    {
+      "blob": "ebfc914ed3b244ef5083f7dd0b929812af5d0a94",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-EDGE-SEMANTICS.md",
+      "proposed_saved_bytes": 479,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 836,
+          "before": 904,
+          "id": "RUST-EDGE-SEMANTICS.1",
+          "saved": 68
+        },
+        {
+          "after": 746,
+          "before": 847,
+          "id": "RUST-EDGE-SEMANTICS.2",
+          "saved": 101
+        },
+        {
+          "after": 659,
+          "before": 969,
+          "id": "RUST-EDGE-SEMANTICS.3",
+          "saved": 310
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "9a75e1936ad20888fa6aaa9e918a277db00bd3f8e0a69859cf0e0ea8108380c6",
+      "tail_bytes": 12046,
+      "tree": "RUST-EDGE-SEMANTICS"
+    },
+    {
+      "blob": "f6495b3d3ca2762e15fd6a8fa0f69470581525fb",
+      "compatible": false,
+      "frontier_count": 0,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-FUNCTIONAL-PARITY.md",
+      "reason": "requires one exact uppercase frontier",
+      "sha256": "8b4531033347d84fdc74f03c65f06fc4bace481587d5035aa23ba0d3ac7fbf98",
+      "tree": "RUST-FUNCTIONAL-PARITY"
+    },
+    {
+      "blob": "3ba96c8521c252bb31c9f0a20f0ca6fc0f8bd98b",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-MUTATION-TESTING.md",
+      "proposed_saved_bytes": 382,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 772,
+          "before": 1154,
+          "id": "RUST-MUTATION-TESTING.0",
+          "saved": 382
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "693117b2e8f1609707c6b88192f34044a6b222ffed7e0baf7ebd1203f31073db",
+      "tail_bytes": 1509,
+      "tree": "RUST-MUTATION-TESTING"
+    },
+    {
+      "blob": "d413cd715919136650faba0e81f78300bd9d50c9",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 52,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-PARITY.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "92d8b4ae6f7f8ec0ec571933a87b75927e659b2d4a453ed731edf5cc42db2a5b",
+      "tail_bytes": 112824,
+      "tree": "RUST-PARITY"
+    },
+    {
+      "blob": "d517b242c214a8f402df9ec21eb6c6cbc5bed827",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-README-DRIFT-SYNC.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "f10656904252bc9343489cbb39dcb1dd06d6d4c2f599695f097493eb9bfdfcef",
+      "tail_bytes": 1945,
+      "tree": "RUST-README-DRIFT-SYNC"
+    },
+    {
+      "blob": "65ce04dd8ac1c851b0f71450466705200a5b1b8d",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/RUST-STATUS-DRIFT-SYNC.md",
+      "proposed_saved_bytes": 60,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 666,
+          "before": 726,
+          "id": "RUST-STATUS-DRIFT-SYNC.1",
+          "saved": 60
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "0403c7acc90ba4c3bdd7a072adc4830e7fc3ac3563d49e3cead9cf09f94cf4e0",
+      "tail_bytes": 1774,
+      "tree": "RUST-STATUS-DRIFT-SYNC"
+    },
+    {
+      "blob": "28f1de12c9b68e7d3c1548ee07221b1bcfffb0a4",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 6,
+      "mode": "100644",
+      "path": "docs/tasks/SCALAREF-RETIREMENT.md",
+      "proposed_saved_bytes": 113,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 692,
+          "before": 696,
+          "id": "SCALAREF-RETIREMENT.1",
+          "saved": 4
+        },
+        {
+          "after": 857,
+          "before": 899,
+          "id": "SCALAREF-RETIREMENT.2",
+          "saved": 42
+        },
+        {
+          "after": 733,
+          "before": 737,
+          "id": "SCALAREF-RETIREMENT.3",
+          "saved": 4
+        },
+        {
+          "after": 733,
+          "before": 765,
+          "id": "SCALAREF-RETIREMENT.4",
+          "saved": 32
+        },
+        {
+          "after": 668,
+          "before": 699,
+          "id": "SCALAREF-RETIREMENT.5",
+          "saved": 31
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "51aaaa5cc4ee19b71d02abed995f533c69f8f92e8947378e8cfa2ed3aee7fd81",
+      "tail_bytes": 9740,
+      "tree": "SCALAREF-RETIREMENT"
+    },
+    {
+      "blob": "25413133fe266d906f83f7c87b40fd3c4d5905e6",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 3,
+      "mode": "100644",
+      "path": "docs/tasks/SEXPR-DOCUMENT-INTEGRATION.md",
+      "proposed_saved_bytes": 5022,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 1688,
+          "before": 4229,
+          "id": "SEXPR-DOCUMENT-INTEGRATION.1",
+          "saved": 2541
+        },
+        {
+          "after": 1509,
+          "before": 3990,
+          "id": "SEXPR-DOCUMENT-INTEGRATION.2",
+          "saved": 2481
+        }
+      ],
+      "selected_scope_loss": [
+        "SEXPR-DOCUMENT-INTEGRATION.1",
+        "SEXPR-DOCUMENT-INTEGRATION.2"
+      ],
+      "sha256": "fe07d3f02fbbfe1e2470201806db5decd697fe394895e491a24e961754abbf7c",
+      "tail_bytes": 2578,
+      "tree": "SEXPR-DOCUMENT-INTEGRATION"
+    },
+    {
+      "blob": "7c35e2674399784391a8d77f27509bd600e3b681",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 189,
+      "mode": "100644",
+      "path": "docs/tasks/SPEC-FORMAT-TERSE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "dfb0421de17e164a23380c33b0a513bb595310fbae96bbcd8337fe835bd28946",
+      "tail_bytes": 111457,
+      "tree": "SPEC-FORMAT-TERSE"
+    },
+    {
+      "blob": "0800f6c405a143190096ea26a048c95054667a46",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 45,
+      "mode": "100644",
+      "path": "docs/tasks/SPEC-LANG-REFERENCE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "7e083b81a51e0f96d6c0409eff2324f0c7a23607e52d487b4f6baac7a9541e44",
+      "tail_bytes": 71701,
+      "tree": "SPEC-LANG-REFERENCE"
+    },
+    {
+      "blob": "3ccea871184b69d78fde217127394dde4edc4672",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 224,
+      "mode": "100644",
+      "path": "docs/tasks/SPEC-LANGUAGE-SELF-CONTAINMENT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "66d815fe01de38337688b1464fb7591a4ec6cd759d749098c163f752fb4be822",
+      "tail_bytes": 28184,
+      "tree": "SPEC-LANGUAGE-SELF-CONTAINMENT"
+    },
+    {
+      "blob": "d2cdffe2f9451285fb1eb17d4ac50ebc8d142fc0",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/SPEC-SOURCE-TERSE-CLOSEOUT.md",
+      "proposed_saved_bytes": 504,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 636,
+          "before": 1140,
+          "id": "SPEC-SOURCE-TERSE-CLOSEOUT.1",
+          "saved": 504
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "a0be6b06abb2468c2bbac2129e06bed8743be4a4f19f1f4d0511542a7f6842e0",
+      "tail_bytes": 4535,
+      "tree": "SPEC-SOURCE-TERSE-CLOSEOUT"
+    },
+    {
+      "blob": "b62ad23822d830a9a0069311bab7745ab872a434",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 5,
+      "mode": "100644",
+      "path": "docs/tasks/SPEC-SPEC-SELFHOST.md",
+      "proposed_saved_bytes": 1121,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 577,
+          "before": 597,
+          "id": "SPEC-SPEC-SELFHOST.1",
+          "saved": 20
+        },
+        {
+          "after": 587,
+          "before": 706,
+          "id": "SPEC-SPEC-SELFHOST.2",
+          "saved": 119
+        },
+        {
+          "after": 581,
+          "before": 912,
+          "id": "SPEC-SPEC-SELFHOST.3",
+          "saved": 331
+        },
+        {
+          "after": 589,
+          "before": 1240,
+          "id": "SPEC-SPEC-SELFHOST.4",
+          "saved": 651
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "c8cd564d0769516084c76c984e8560559676e6b455ac26f4d3c6a225f79974f5",
+      "tail_bytes": 4543,
+      "tree": "SPEC-SPEC-SELFHOST"
+    },
+    {
+      "blob": "7ba1c115b5cd5aa61f95cf234e5cbe6622a47154",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 15,
+      "mode": "100644",
+      "path": "docs/tasks/STAGED-LINKED-PARSING.md",
+      "proposed_saved_bytes": 11972,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 591,
+          "before": 852,
+          "id": "STAGED-LINKED-PARSING.1",
+          "saved": 261
+        },
+        {
+          "after": 555,
+          "before": 1060,
+          "id": "STAGED-LINKED-PARSING.2",
+          "saved": 505
+        },
+        {
+          "after": 607,
+          "before": 1246,
+          "id": "STAGED-LINKED-PARSING.3",
+          "saved": 639
+        },
+        {
+          "after": 619,
+          "before": 1494,
+          "id": "STAGED-LINKED-PARSING.4",
+          "saved": 875
+        },
+        {
+          "after": 734,
+          "before": 1073,
+          "id": "STAGED-LINKED-PARSING.5",
+          "saved": 339
+        },
+        {
+          "after": 780,
+          "before": 1219,
+          "id": "STAGED-LINKED-PARSING.5.1",
+          "saved": 439
+        },
+        {
+          "after": 999,
+          "before": 2375,
+          "id": "STAGED-LINKED-PARSING.5.2",
+          "saved": 1376
+        },
+        {
+          "after": 1176,
+          "before": 2915,
+          "id": "STAGED-LINKED-PARSING.5.3.1",
+          "saved": 1739
+        },
+        {
+          "after": 1215,
+          "before": 3168,
+          "id": "STAGED-LINKED-PARSING.5.3.2",
+          "saved": 1953
+        },
+        {
+          "after": 717,
+          "before": 2033,
+          "id": "STAGED-LINKED-PARSING.5.4",
+          "saved": 1316
+        },
+        {
+          "after": 679,
+          "before": 2243,
+          "id": "STAGED-LINKED-PARSING.5.5",
+          "saved": 1564
+        },
+        {
+          "after": 921,
+          "before": 1879,
+          "id": "STAGED-LINKED-PARSING.5.6",
+          "saved": 958
+        },
+        {
+          "after": 699,
+          "before": 707,
+          "id": "STAGED-LINKED-PARSING.6",
+          "saved": 8
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "8b831287bc84d1fca9640902d9b224263c8da9026c0572e5b725ac1a8261f1e8",
+      "tail_bytes": 19108,
+      "tree": "STAGED-LINKED-PARSING"
+    },
+    {
+      "blob": "416496af5e4cdcf28f742cd72d898ac834d00b36",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "fae548e50bdd89cace1f571b387d5dc5fd6575e5412407018d984faf53f0f98a",
+      "tail_bytes": 1339,
+      "tree": "STATEMENT-SEPARATOR-EXAMPLE-ALIGNMENT"
+    },
+    {
+      "blob": "cdbb69b10b38b3d7c0cab8bc4d43b40223c985ca",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 20,
+      "mode": "100644",
+      "path": "docs/tasks/STRUCTURED-TEXT-FORMAT-PROGRAM.md",
+      "proposed_saved_bytes": 536,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 845,
+          "before": 1318,
+          "id": "STRUCTURED-TEXT-FORMAT-PROGRAM.0",
+          "saved": 473
+        },
+        {
+          "after": 1306,
+          "before": 1369,
+          "id": "STRUCTURED-TEXT-FORMAT-PROGRAM.0.1",
+          "saved": 63
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "3d6795cfe1b590fb0695748b6b08474fcedea5a86e928a41a7165eca315d86a6",
+      "tail_bytes": 5386,
+      "tree": "STRUCTURED-TEXT-FORMAT-PROGRAM"
+    },
+    {
+      "blob": "0bbb5826a85cc46e08841e95a013fb987fc91184",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 37,
+      "mode": "100644",
+      "path": "docs/tasks/SUPPORTING-SOURCE-READING.md",
+      "proposed_saved_bytes": 28569,
+      "reason": "no safe eligible reduction",
+      "selected": [
+        {
+          "after": 1431,
+          "before": 3748,
+          "id": "SUPPORTING-SOURCE-READING.0",
+          "saved": 2317
+        },
+        {
+          "after": 1502,
+          "before": 2477,
+          "id": "SUPPORTING-SOURCE-READING.1",
+          "saved": 975
+        },
+        {
+          "after": 1286,
+          "before": 3591,
+          "id": "SUPPORTING-SOURCE-READING.1.1",
+          "saved": 2305
+        },
+        {
+          "after": 784,
+          "before": 1551,
+          "id": "SUPPORTING-SOURCE-READING.1.2",
+          "saved": 767
+        },
+        {
+          "after": 754,
+          "before": 1139,
+          "id": "SUPPORTING-SOURCE-READING.1.3",
+          "saved": 385
+        },
+        {
+          "after": 754,
+          "before": 1109,
+          "id": "SUPPORTING-SOURCE-READING.1.4",
+          "saved": 355
+        },
+        {
+          "after": 754,
+          "before": 905,
+          "id": "SUPPORTING-SOURCE-READING.1.5",
+          "saved": 151
+        },
+        {
+          "after": 761,
+          "before": 1659,
+          "id": "SUPPORTING-SOURCE-READING.1.6",
+          "saved": 898
+        },
+        {
+          "after": 761,
+          "before": 997,
+          "id": "SUPPORTING-SOURCE-READING.1.7",
+          "saved": 236
+        },
+        {
+          "after": 862,
+          "before": 1255,
+          "id": "SUPPORTING-SOURCE-READING.1.8",
+          "saved": 393
+        },
+        {
+          "after": 757,
+          "before": 1271,
+          "id": "SUPPORTING-SOURCE-READING.1.9",
+          "saved": 514
+        },
+        {
+          "after": 760,
+          "before": 1232,
+          "id": "SUPPORTING-SOURCE-READING.1.10",
+          "saved": 472
+        },
+        {
+          "after": 761,
+          "before": 1218,
+          "id": "SUPPORTING-SOURCE-READING.1.11",
+          "saved": 457
+        },
+        {
+          "after": 761,
+          "before": 1334,
+          "id": "SUPPORTING-SOURCE-READING.1.12",
+          "saved": 573
+        },
+        {
+          "after": 761,
+          "before": 1296,
+          "id": "SUPPORTING-SOURCE-READING.1.13",
+          "saved": 535
+        },
+        {
+          "after": 761,
+          "before": 973,
+          "id": "SUPPORTING-SOURCE-READING.1.14",
+          "saved": 212
+        },
+        {
+          "after": 761,
+          "before": 935,
+          "id": "SUPPORTING-SOURCE-READING.1.15",
+          "saved": 174
+        },
+        {
+          "after": 761,
+          "before": 935,
+          "id": "SUPPORTING-SOURCE-READING.1.16",
+          "saved": 174
+        },
+        {
+          "after": 1308,
+          "before": 4626,
+          "id": "SUPPORTING-SOURCE-READING.1.17",
+          "saved": 3318
+        },
+        {
+          "after": 1240,
+          "before": 5412,
+          "id": "SUPPORTING-SOURCE-READING.1.18",
+          "saved": 4172
+        },
+        {
+          "after": 1271,
+          "before": 4342,
+          "id": "SUPPORTING-SOURCE-READING.1.19",
+          "saved": 3071
+        },
+        {
+          "after": 758,
+          "before": 1179,
+          "id": "SUPPORTING-SOURCE-READING.1.20",
+          "saved": 421
+        },
+        {
+          "after": 758,
+          "before": 944,
+          "id": "SUPPORTING-SOURCE-READING.1.21",
+          "saved": 186
+        },
+        {
+          "after": 1853,
+          "before": 4352,
+          "id": "SUPPORTING-SOURCE-READING.2.6",
+          "saved": 2499
+        },
+        {
+          "after": 1570,
+          "before": 2554,
+          "id": "SUPPORTING-SOURCE-READING.3",
+          "saved": 984
+        },
+        {
+          "after": 1573,
+          "before": 3598,
+          "id": "SUPPORTING-SOURCE-READING.4",
+          "saved": 2025
+        }
+      ],
+      "selected_scope_loss": [
+        "SUPPORTING-SOURCE-READING.0",
+        "SUPPORTING-SOURCE-READING.1.1",
+        "SUPPORTING-SOURCE-READING.1.2",
+        "SUPPORTING-SOURCE-READING.1.3",
+        "SUPPORTING-SOURCE-READING.1.4",
+        "SUPPORTING-SOURCE-READING.1.5",
+        "SUPPORTING-SOURCE-READING.1.6",
+        "SUPPORTING-SOURCE-READING.1.7",
+        "SUPPORTING-SOURCE-READING.1.8",
+        "SUPPORTING-SOURCE-READING.1.9",
+        "SUPPORTING-SOURCE-READING.1.10",
+        "SUPPORTING-SOURCE-READING.1.11",
+        "SUPPORTING-SOURCE-READING.1.12",
+        "SUPPORTING-SOURCE-READING.1.13",
+        "SUPPORTING-SOURCE-READING.1.14",
+        "SUPPORTING-SOURCE-READING.1.15",
+        "SUPPORTING-SOURCE-READING.1.16",
+        "SUPPORTING-SOURCE-READING.1.17",
+        "SUPPORTING-SOURCE-READING.1.18",
+        "SUPPORTING-SOURCE-READING.1.19",
+        "SUPPORTING-SOURCE-READING.1.20",
+        "SUPPORTING-SOURCE-READING.1.21",
+        "SUPPORTING-SOURCE-READING.4"
+      ],
+      "sha256": "61c4aef0c8fdf020966f0cb6b7fc2fceeecd8e35a9827f22b182379b59eb8d8b",
+      "tail_bytes": 13854,
+      "tree": "SUPPORTING-SOURCE-READING"
+    },
+    {
+      "blob": "4aa63b046e0330d8f3b957764aae715651e2c894",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/TASK-TREE-INDEX-SYNC.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "e8a41455491d33e48000676f78142fb80ababbc071186a777dc3262a87149526",
+      "tail_bytes": 1431,
+      "tree": "TASK-TREE-INDEX-SYNC"
+    },
+    {
+      "blob": "d413b4ed560232dc93bb92450753c4f8109c205c",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 7,
+      "mode": "100644",
+      "path": "docs/tasks/TASK-TREE-METADATA-HYGIENE.md",
+      "proposed_saved_bytes": 731,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 754,
+          "before": 790,
+          "id": "TASK-TREE-METADATA-HYGIENE.0",
+          "saved": 36
+        },
+        {
+          "after": 782,
+          "before": 973,
+          "id": "TASK-TREE-METADATA-HYGIENE.1",
+          "saved": 191
+        },
+        {
+          "after": 891,
+          "before": 1157,
+          "id": "TASK-TREE-METADATA-HYGIENE.2",
+          "saved": 266
+        },
+        {
+          "after": 648,
+          "before": 874,
+          "id": "TASK-TREE-METADATA-HYGIENE.3",
+          "saved": 226
+        },
+        {
+          "after": 730,
+          "before": 742,
+          "id": "TASK-TREE-METADATA-HYGIENE.4",
+          "saved": 12
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "09a33d7ccf5161606f0a254c17659e3de189c369309cac8e82ab06d8626f44ed",
+      "tail_bytes": 9046,
+      "tree": "TASK-TREE-METADATA-HYGIENE"
+    },
+    {
+      "blob": "7c3ba3094efb9c0d316c56e9c8bb4b19224f8e4c",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/TEMPLATE.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "aed71696b27bfdc0709ba8146a614920a8da6b05cffad4ebd0889713d57872b1",
+      "tail_bytes": 615,
+      "tree": "TEMPLATE"
+    },
+    {
+      "blob": "84be7a5947344808e6d680f0ebb3f680be550057",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 0,
+      "mode": "100644",
+      "path": "docs/tasks/TOP-RULE-AS-NORMAL.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "1bfb25a938165a5ea8dc67a62312599626182eb957e166d20fd5dfe265097119",
+      "tail_bytes": 20915,
+      "tree": "TOP-RULE-AS-NORMAL"
+    },
+    {
+      "blob": "5a537d715c7e4c5af494ca247d45f6a40673cf99",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 0,
+      "mode": "100644",
+      "path": "docs/tasks/TRACE-OBSERVABILITY.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "cfb3b768ae91d765e9abbfef521f8cc4d18f917480b7e9b900ee497232e3e801",
+      "tail_bytes": 32970,
+      "tree": "TRACE-OBSERVABILITY"
+    },
+    {
+      "blob": "e4e9625f0a4568ced8e19e026617c6a303a96243",
+      "compatible": false,
+      "duplicate_core": [],
+      "ids": 2,
+      "mode": "100644",
+      "path": "docs/tasks/VERIFICATION-CADENCE-POLICY.md",
+      "proposed_saved_bytes": 0,
+      "reason": "no safe eligible reduction",
+      "selected": [],
+      "selected_scope_loss": [],
+      "sha256": "2303907075571d4f922c1617efe3f92c1703ef9a03b5c3b5a4b5b0d4c8719941",
+      "tail_bytes": 4804,
+      "tree": "VERIFICATION-CADENCE-POLICY"
+    }
+  ]
+}

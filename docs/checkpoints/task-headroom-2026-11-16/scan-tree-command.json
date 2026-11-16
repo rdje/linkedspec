@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "git",
+    "ls-tree",
+    "-rz",
+    "e476d208dcee58f67ca4d0d7a950d5aa8bdcab00",
+    "--",
+    "docs/tasks"
+  ],
+  "cwd": "."
+}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — retain closed helper-purge task narratives
+
+TYPE-REFERENCE-BOOK.1.2.23.4.34: The existing NONCURRENT-HELPER-CODE-PURGE epoch preserves 10 ordered IDs/all CORE fields, 2 complete unselected bodies and the complete frontier/trailing section of 9605 bytes. 8 closed narratives renew 16841 current-text bytes; all 11 public source/node queries and ten corruption controls pass. Dated pressure reconstruction preserves the original result and four controls without comparing today's TYPE task. No SDK or fresh helper-admission credit. Evidence: `docs/checkpoints/task-headroom-2026-11-16/REVIEW.md`. Full source-origin/native/physical closure remains4.2/SESSION5.
+
 ## 2026-11-16 — qualify bounded Perl consumer roles
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0: The bounded Perl ledger classifies145 named candidates as134 proposed feature suites, nine compatibility suites and two maintenance suites. Twelve have direct selection, one has a named include route and132 have neither route in this bounded review. Seven ledger corruptions reject;164 retained inputs match current bytes/modes. This is static qualification, with no Perl execution or canonical admission. Evidence: `docs/checkpoints/perl-consumer-roles-2026-11-16/REVIEW.md`. Full population/direct-input/native/source-origin closure remains separately owned.

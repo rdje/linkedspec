@@ -99,3 +99,7 @@ bash tools/run_python_project_data.sh docs/checkpoints/perl-consumer-roles-2026-
 The earlier role measurement and164 input identities are unchanged. A complete
 normal hook retry still governs landing. Native/source-origin/outer-launcher
 custody remains4.2/SESSION5; this repair supplies no canonical admission.
+
+## Historical recovery after later task edits
+
+The original `review_pressure.py` is a dated strict current-task check and requires its accepted e476 task view. Headroom34 retains its expected current-identity refusal after later task activation, without changing that source, result or claim. For historical byte/contract recovery use `bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-2026-11-16/historical_pressure.py`. This reads the archived task bytes/mode through the unchanged retained pure validator and preserves all four original controls; it makes no current task-identity claim.

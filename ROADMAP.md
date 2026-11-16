@@ -1,4 +1,4 @@
-November16 current PNT frontier: Bounded Perl roles TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 are focused-checked. Remaining native roles/direct loaders/discovery precede frozen registration4.1.2 and publication30.2. Default literal omission and redundant direct routes are owned by4.1.2; no SDK execution or full admission is claimed.
+November16 current PNT frontier: Headroom34 preserves the closed helper-purge task source through an existing data epoch; bounded Perl roles are focused-checked. Remaining native roles/direct loaders/discovery precede frozen registration4.1.2 and publication30.2 after every separate prerequisite. No fresh SDK or full admission claim.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

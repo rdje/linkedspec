@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4625,"lines":82,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-literal-record.md","sha256":"cbe04af46db9d6a4ebf92ba87e28f59f54b4176ad8b68a307a078b0cddbdf11a","type":"member"}
 {"bytes":2171,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-control-parent-reconciliation.md","sha256":"ec396207e59608bee0d6e4db4b9b55dbc4fe98c77f97218bd9006f06c88aabe5","type":"member"}
 {"bytes":5630,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-grouped-pattern-membership.md","sha256":"549e21957b85b385ef5a7c33a4d64a3061589f45d88b65fb391bf90a4054ed24","type":"member"}
 {"bytes":4265,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.5","path":"docs/knowledge/perl-callable-key-count-result-guards.md","sha256":"ecc968d38c4632366a01c2c6bca2e52b21f903edbdeaa19d812aaafdad96ecb9","type":"member"}
@@ -22,7 +23,7 @@
 {"bytes":5242,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-compiler-pipeline-stage-and-mode-boundaries.md","sha256":"668df8eedad08352d1ccf451013ce1046051805408ad6f7afb934eac5fe72f34","type":"member"}
 {"bytes":7711,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-compiler-source-membership.md","sha256":"3ff20c983bc7b8a7532c37d3a54d0c4225ca7ce8504aa5cb1fd2e68cd6e9232e","type":"member"}
 {"bytes":2466,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-constructor-result-guards.md","sha256":"c08f126eeda92992f268a0f6280ab1156f78c3a201b727dfdba52540ed1cf1ed","type":"member"}
-{"bytes":2665,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0","path":"docs/knowledge/perl-consumer-roles-and-selection.md","sha256":"175036fabb1f32037445f8806c8070f9e1b059f43fc034971985ebe57d9948c1","type":"member"}
+{"bytes":3045,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.34","path":"docs/knowledge/perl-consumer-roles-and-selection.md","sha256":"21e71b02caf9908e1532a86a866a177fb3ea27d106df07aec8d27215a8234f9a","type":"member"}
 {"bytes":5010,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-constructor-capture.md","sha256":"d4495eb02813656375014266fbd989d7a7df352db469c9bde6798cccb0169596","type":"member"}
 {"bytes":5302,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-dependency-capture.md","sha256":"b6e96532c1a1193512f107d8df9d29373527eed7fb8c63ebbab114e09aaa659f","type":"member"}
 {"bytes":3891,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-contract-factory-historical-inverse.md","sha256":"e7717e0acd22bcca7795f8bc780126b6409d76ec59fd6aa05aad92c5b3e8e41c","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5427,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-local-return-capture.md","sha256":"e351a8033ff342f293ac75e39fc7b8f51165f90538ea63123da8393144afc112","type":"member"}
 {"bytes":4577,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-push-required-capture.md","sha256":"3a1bb91890773955a6111506f24acb18208692d72e8c8682051b7246f6e77c23","type":"member"}
 {"bytes":3834,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-regex-undef-required-capture.md","sha256":"d9d837aa77323796ffd28995e4760083da5e67b070ba28024297091504e71224","type":"member"}
-{"bytes":5229,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-set-key-required-capture.md","sha256":"1c3eab53f2a70c77a0dd40700f6d90d5f4ef84de72de755cdf37b5d702753f8d","type":"member"}

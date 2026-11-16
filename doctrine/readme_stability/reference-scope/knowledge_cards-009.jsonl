@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5229,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-set-key-required-capture.md","sha256":"1c3eab53f2a70c77a0dd40700f6d90d5f4ef84de72de755cdf37b5d702753f8d","type":"member"}
 {"bytes":10395,"lines":126,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-slot-required-capture.md","sha256":"2935b00845cd1e0dfadee80f53c49db52407b1c85d137f92390772cf65122c38","type":"member"}
 {"bytes":33972,"lines":402,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-trim-capture.md","sha256":"a9c6455169cf69c6fb61d31dc012f5f2e12c2c8e43268a9e0af9bfd2151e4015","type":"member"}
 {"bytes":7667,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-multiline-helper-pattern-validation.md","sha256":"67889cacac1f2bc6ce15c6a391989ac4c442e565f78ba67e3f3c6d6044738a5e","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2423,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-private-owner-focused-selection.md","sha256":"bbf8a6ffd9267fdc95f933fe974a3a12aa3d8a3ea80dc86a433e0881e6538a99","type":"member"}
 {"bytes":2970,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-regression-structure.md","sha256":"01cad8920a91aa1937f05f13b2956fdc1624bf3d83b63e941f1e0f823e11d8c1","type":"member"}
 {"bytes":21267,"lines":375,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md","sha256":"bc74f4eb674e45c518ab2de46ef7eae113c2ad3e3bfb03e7b108fe0da82fa011","type":"member"}
-{"bytes":10890,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-working-variable-observation-drift.md","sha256":"8c58010ff5286a68a9dd5c12576b05061391d037531e1d78bb77c84aa5c23079","type":"member"}
