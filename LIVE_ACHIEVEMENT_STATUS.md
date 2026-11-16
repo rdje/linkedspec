@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: bounded native source routes complete; remaining loaders/support/transitive qualification precedes registration.
+PNT: bounded Lua direct loaders complete; remaining loader/support/transitive qualification precedes registration.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — Named native source routes are focused-checked: Rust22/Dart25 convention paths, Julia20 includes and Lua16 named dofile routes; eleven Lua local routes remain unqualified. All113 retained inputs match current bodies/modes; six inert optional-branch cases and three observed selection REDs pass, alongside seven ledger controls. No SDK executed.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Eleven Lua direct-loader sources have24 fixture/grammar edges to14 distinct targets, two returned support modules and two optional write/readback families. The older raw-error ledger agrees on six inputs; ten controls reject. All134 retained source bodies/modes match current inputs, reusing113 and adding21. No SDK execution or transitive selection claim.
 
 ## Next Action
 
-Remeasure committed outgoing size; resolve remaining loaders/support/dormancy/transitive routes under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1 before freezing registration4.1.2 input; all separate before-push owners remain.
+Remeasure committed outgoing size; complete remaining Perl/native loaders, support/dormancy and transitive discovery under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1 before freezing registration4.1.2 input; all separate before-push owners remain.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Lua11/direct24/targets14/support2/optional2/historical6/current134/ten controls; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — native94/source113; conditional6/RED3; ledger7; eleven local Lua routes unresolved, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.34 — helper-purge10 IDs/eight closed/two unchanged/full9605-byte tail/16841 renewed; eleven queries/ten controls; historical pressure/four controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; resolve remaining loaders/support/dormancy/tr
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.4 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct4959 assertions/readonly10/current516/3048 pairs; fresh size/cleanup then Lua80.5.
 - TYPE-REFERENCE-BOOK.1.2.23.4.30.1 —HEAD102ec3446/cached base4683555e:1,257,281,519 bytes/102 commits/45,549 objects; qualified verify/12 REDs/historical recovery/three controls; native durability gap explicit, remeasure then Julia.
 - TYPE-REFERENCE-BOOK.1.2.23.3.80.3 —508/four routes/20 supported/four separate compatibility/484 preserved/80 initial/eight invalid signatures; old24-current508/direct1155/readonly9/current521; publication-budget30 next.
-- TYPE-REFERENCE-BOOK.1.2.23.3.80.2 —504/four routes/16 supported/two separate compatibility/486 preserved/80 initial/eight invalid signatures; old18-current504/combined direct1205/qualified2 readonly25/current871; Dart80.3 next.
 
 
 ## History

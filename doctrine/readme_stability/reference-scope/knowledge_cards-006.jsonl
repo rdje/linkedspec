@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4946,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-backend-scaffold.md","sha256":"b74da2384e79abd4527ccfca4751aea9ac5b3fdd36b364cb6a56f5ad748565f7","type":"member"}
 {"bytes":3569,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-full-pipeline-trace.md","sha256":"c3994e5715c787dab49c068894cef75e99cec5894115556f332a8f95cada8ab1","type":"member"}
 {"bytes":6785,"lines":75,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-mcp-server-plan.md","sha256":"f3947ee202714d536d63464bb370bbab8822dc9af8c4d9c0256df9b6f3904352","type":"member"}
 {"bytes":16508,"lines":255,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-readme-and-action-ast-reading.md","sha256":"213a7ff709fcaf9824da07063c54d18ef811adfd86bb3a4a9532a2cc3c53c2a3","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7407,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md","sha256":"f5a6632d29de4bb617f17599e86a3b97271f5487b74f00dc7ce7614b2a6a0d9c","type":"member"}
 {"bytes":35990,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md","sha256":"1c52958b65e31dfeb13d4eaf58fed317d44d8fbc50dc54e07d05ccfd60e49efc","type":"member"}
 {"bytes":14509,"lines":187,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-declaration-depth-recursion-consumer-reading.md","sha256":"5f08d614dae0c6c2cfa3af3cdeeb6ecc9f415d5781816f02c8469f59eb9270de","type":"member"}
-{"bytes":3728,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-function-body-registry.md","sha256":"d215c73d88248d3cc250cb1b73dc3962eca4155b5b01bf98c7027557c597bb55","type":"member"}

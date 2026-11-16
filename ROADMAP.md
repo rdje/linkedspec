@@ -1,4 +1,4 @@
-November16 current PNT frontier: Bounded native source routes TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 are focused-checked without SDK execution. Remaining loaders/support/dormancy/transitive routes precede registration4.1.2 and publication30.2; independent semantic/native custody remains open.
+November16 current PNT frontier: Eleven Lua direct loaders TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 are focused-checked using the retained native epoch. Remaining loaders/support/dormancy/transitive routes precede registration4.1.2 and publication30.2; no SDK execution/full population/admission claim.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

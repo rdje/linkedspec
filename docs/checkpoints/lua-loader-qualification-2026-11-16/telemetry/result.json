@@ -1,0 +1,23 @@
+{
+  "ahead": 116,
+  "cached_origin_main": "4683555ec51f04b8977812ce4e984c5cc6e6f42c",
+  "decimal_gb": 1.477999832,
+  "early_push_trigger_bytes": 1500000000,
+  "estimated_non_thin_pack_bytes": 1477999832,
+  "evidence": ".linkedspec-data/push-monitor/20261116T194006.431077Z",
+  "gib": 1.3764946088194847,
+  "head": "341f488d36b15cb39069db32a74e3dc5d82a70d8",
+  "largest_outgoing_blob_bytes": 31374498,
+  "largest_outgoing_blob_oid": "0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1",
+  "limits": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+  "object_format": "sha1",
+  "object_rows": 48284,
+  "pack_footer": "aae8a449bafffffbfe9e160f802f782e0234f08c",
+  "pack_sha256": "1fa444de11a609f9c0c468a71e9c2116e5b0df311f5a0e0410d1ef8732a8532d",
+  "packed_objects": 48284,
+  "preparation_due": true,
+  "preparation_threshold_bytes": 1400000000,
+  "remaining_to_trigger_bytes": 22000168,
+  "trigger_reached": false,
+  "unique_object_ids": 48284
+}

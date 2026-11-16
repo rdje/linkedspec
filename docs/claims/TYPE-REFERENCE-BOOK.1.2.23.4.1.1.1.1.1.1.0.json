@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0",
+  "claims": [
+    {
+      "name": "bounded-lua-direct-loaders",
+      "statement": "Eleven Lua direct-loader sources have24 fixture/grammar edges to14 distinct targets, two returned support modules and two optional write/readback families. The older raw-error ledger agrees on six inputs; ten controls reject. All134 retained source bodies/modes match current inputs, reusing113 and adding21. No SDK execution or transitive selection claim.",
+      "scope": "Eleven named Lua suite sources and their interpreted direct fixture/grammar/support/output-readback expressions only. No SDK execution, actual grammar cache/path selection, transitive package/native resolution, complete input graph, canonical selection, full population or admission. Remaining discovery/independent semantic adjudication stays with parent1; native/source-origin/physical custody remains4.2/SESSION5.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-loader-qualification-2026-11-16/review.py --current",
+        "granularity": "Each named suite/input expression, returned support export, optional write/readback condition; all134 reused/additional bodies and modes.",
+        "result": "{\"additional_source_inputs\": 21, \"consumers\": 11, \"controls\": {\"default-grammar-missing\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"duplicate\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"fixture-missing\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"historical-body\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"historical-missing\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"historical-mode\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"list-member-missing\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"output-as-fixture\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"profile-target\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}, \"support-as-suite\": {\"reason\": \"loader ledger differs from source\", \"result\": \"RED\"}}, \"current_inputs\": 134, \"historical_inputs\": 6, \"input_edges\": 24, \"limits\": \"Eleven named Lua suite sources and their interpreted direct fixture/grammar/support/output-readback expressions only. No SDK execution, actual grammar cache/path selection, transitive package/native resolution, complete input graph, canonical selection, full population or admission. Remaining discovery/independent semantic adjudication stays with parent1; native/source-origin/physical custody remains4.2/SESSION5.\", \"optional_capture_families\": 2, \"result\": \"PASS\", \"reused_source_inputs\": 113, \"support_modules\": 2, \"unique_direct_targets\": 14}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1",
+        "reason": "Seven source-ledger corruptions reject and the independent historical six-input subset agrees, but full independent semantic/transitive adjudication of every edge remains parent1. Static expression agreement establishes no SDK lookup or execution."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused and additional logical source bodies/modes, activation Git binding, instruments and command channels are retained. Complete native Python/Git/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remain4.2/SESSION5. No SDK or canonical credit."
+      }
+    },
+    {
+      "name": "historical-raw-error-direct-input-comparison",
+      "statement": "All six named raw-error suite/helper/fixture/grammar byte and mode identities agree with its older independent normal input ledger. Three body/mode/missing-record controls reject.",
+      "scope": "Exactly the six named historical direct inputs. No new normal/SDK run, earlier first-use repair, complete native input graph or broader history verdict.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-loader-qualification-2026-11-16/review.py --current",
+        "granularity": "Six actual archived bodies and modes versus the independently retained older normal input-identities.json.",
+        "result": "historical_inputs=6; body/mode/missing-record controls RED; healthy comparison PASS"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A substituted grammar body/mode or absent historical grammar record could still pass.",
+        "oracle": "The prior raw-error normal input ledger is an independently captured historical list of exact bytes/modes, separate from the new loader reconstruction.",
+        "red_control": "Changed grammar body, changed grammar mode and removed historical grammar record each reject; all six healthy identities agree."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused and additional logical source bodies/modes, activation Git binding, instruments and command channels are retained. Complete native Python/Git/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remain4.2/SESSION5. No SDK or canonical credit."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,477,999,832 non-thin serialized bytes against cached4683555e;22,000,168 bytes below the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin range; selected original producer/ref/config/command channels copied without replay.",
+        "result": "{\"ahead\": 116, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.477999832, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1477999832, \"evidence\": \".linkedspec-data/push-monitor/20261116T194006.431077Z\", \"gib\": 1.3764946088194847, \"head\": \"341f488d36b15cb39069db32a74e3dc5d82a70d8\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 48284, \"pack_footer\": \"aae8a449bafffffbfe9e160f802f782e0234f08c\", \"pack_sha256\": \"1fa444de11a609f9c0c468a71e9c2116e5b0df311f5a0e0410d1ef8732a8532d\", \"packed_objects\": 48284, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 22000168, \"trigger_reached\": false, \"unique_object_ids\": 48284}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "The producer stream/stat/footer agree; independent actual-file size falsification remains30. This companion does not infer it from metadata."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected actual producer/ref/config/command channels are tracked. Raw pack and complete logical object tables remain ignored; full native/physical/input custody stays4.2/SESSION5. No remote freshness or wire-size claim."
+      }
+    }
+  ]
+}

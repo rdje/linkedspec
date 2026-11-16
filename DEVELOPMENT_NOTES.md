@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — reuse source epochs and separate Lua read roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0: The unchanged native archive supplies suite sources; only additional direct inputs are archived. Fixed/list reads, cached/default versus explicit grammar, returned support modules and optional output readbacks have separate source expressions. The raw-error persist helper writes before two readbacks; support exports are not standalone suites. The older independent six-input ledger agrees; nullable phase authority remains excluded. No prior claim or result is refreshed. Evidence: `docs/checkpoints/lua-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — distinguish native route source from execution
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0: The finite native ledger binds the prior required-or-review selector to source harness markers and exact local route expressions. Convention paths differ from named includes; eleven Lua local routes remain unqualified. Actual optional branch text runs with inert shell recorders and an independent flag/path oracle: missing, duplicate and disabled commands all exit0 yet distinguish RED. Ledger consistency is separate from independent semantic role adjudication, which stays with the next loader owner. Existing historical claim values remain unchanged. Evidence: `docs/checkpoints/native-consumer-routes-2026-11-16/REVIEW.md`.

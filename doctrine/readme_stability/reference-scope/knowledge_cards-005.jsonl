@@ -69,6 +69,7 @@
 {"bytes":3734,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-diagnostic-output-events.md","sha256":"28c75e3aa5e3b077f5ae8fcdbcf28b063abf4104ad9105abf11df0e290eb030c","type":"member"}
 {"bytes":13868,"lines":169,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-diagnostic-slot-gap-consumer-reading.md","sha256":"aed40a483ea9bc8be7bd0e5b007ad62fb8be0379889eab9f103cbc34c05c9462","type":"member"}
 {"bytes":2717,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-diagnostics-trace-boundary.md","sha256":"c571601e2462194fa097e53baca6530bb27029d31d6a3cbfcb5d60fe9e51ff01","type":"member"}
+{"bytes":1713,"lines":25,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0","path":"docs/knowledge/lua-direct-loader-roles.md","sha256":"d591c8294c1b73e542a274ba1988f6f328fd566893db21018757f75536eac723","type":"member"}
 {"bytes":4936,"lines":63,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-duplicate-regex-slot-identity-admission.md","sha256":"b71e1dfea89a88a663fe244c594d030c3459e6736327d1e9f0289c2d78005b71","type":"member"}
 {"bytes":20015,"lines":189,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-emitter-source-location-reading-and-boundary-gaps.md","sha256":"cf0abe4c59d7e696ba966375a09ec42fa85f973aa825bd1bf064a02ef4ffebf2","type":"member"}
 {"bytes":2895,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-emptiness-result-source-guards.md","sha256":"1e677f6bc02fc60e7bde9be6e6afad367af4ee24a77c58714eb1f5e373c09f83","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3785,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-implementation-admission.md","sha256":"12c454320e480698d7b899478e4930a0faf92ca0cf34529c32124b8d22448581","type":"member"}
 {"bytes":15233,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md","sha256":"498e50ba353331fba880de52cd5737c489776cd37f96c7e0fc037f268a83449f","type":"member"}
 {"bytes":2523,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-named-capture-endpoint-origin-compatibility.md","sha256":"2cc8898fa500f90af1f0604c5a88a126638683d8556d150cffb4c0b236575275","type":"member"}
-{"bytes":4946,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-backend-scaffold.md","sha256":"b74da2384e79abd4527ccfca4751aea9ac5b3fdd36b364cb6a56f5ad748565f7","type":"member"}

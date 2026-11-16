@@ -1,0 +1,107 @@
+{
+  "dart/test/fixtures/gap_ls_broad_carrier.json": {
+    "bytes": 644,
+    "mode": 420,
+    "sha256": "24f700c2c947b0b278e5e990cd8f9a315ecdd74de0a73de2489ca406a99571f8"
+  },
+  "dart/test/fixtures/gap_ls_cursor.json": {
+    "bytes": 4745,
+    "mode": 420,
+    "sha256": "f654abb0b7e11d80557d31614f299174522026014145a3d66868acc19148181f"
+  },
+  "docs/checkpoints/lua-loader-qualification-2026-11-16/capture.py": {
+    "bytes": 3635,
+    "mode": 420,
+    "sha256": "55bbb88a89c88e01e87dacb0490e52493d2af0ce5b392decd8b9047d25ee5163"
+  },
+  "docs/checkpoints/lua-loader-qualification-2026-11-16/review.py": {
+    "bytes": 12960,
+    "mode": 420,
+    "sha256": "92754ab93e84b3e2bf48519ffc0ca5907351b2320969c4d004c5b60158ced1e2"
+  },
+  "docs/checkpoints/lua-loader-qualification-2026-11-16/run_step.py": {
+    "bytes": 1029,
+    "mode": 420,
+    "sha256": "57624cd101f75985751152cd1bb3b5e6f62d2a05a2c4b97d5dd0563972c7f600"
+  },
+  "docs/checkpoints/lua-raw-error-observation-2026-11-13/normal/input-identities.json": {
+    "bytes": 40399,
+    "mode": 420,
+    "sha256": "759504d8f3db57f0466fa97050d7ef593fe409162acd38ef016cf61b22faf375"
+  },
+  "lua/src/linkedspec/user_function_definition_parser.lua": {
+    "bytes": 8305,
+    "mode": 420,
+    "sha256": "6aa39ca90e4a135c574ff77a47409713906784c66cac4911c7c3e7c58924ca96"
+  },
+  "lua/test/blind_postcall_results_cases.json": {
+    "bytes": 8522,
+    "mode": 420,
+    "sha256": "3597b94b3c186f67fadce4a65d0b00e0a6bd6aca7ade24bde35b8f4472e99f6d"
+  },
+  "lua/test/blind_repetition_collection_cases.json": {
+    "bytes": 7231,
+    "mode": 420,
+    "sha256": "67cc0b7e334d58423ba4455775680bcae7d70cebb52af5774fe967da094dc559"
+  },
+  "lua/test/callable_array_transform_observation.lua": {
+    "bytes": 990,
+    "mode": 420,
+    "sha256": "16eede1f1b2464093ee2c9f38feb12bd3f2fa8cd094524b56cb70d494bd537ed"
+  },
+  "lua/test/default_blind_generated_family_cases.json": {
+    "bytes": 4302,
+    "mode": 420,
+    "sha256": "3de85fbacc88e9b8abab79ae6ddd940325b444adcfe8d3c7ed9896a0a0004f1b"
+  },
+  "lua/test/minimum_miss_routes_cases.json": {
+    "bytes": 6563,
+    "mode": 420,
+    "sha256": "5a1eabe6158f0dbbfb89bafa60371c5297811d4ed9b9c7a98b3c35cde718347b"
+  },
+  "lua/test/null_return_and_observation_cases.json": {
+    "bytes": 22599,
+    "mode": 420,
+    "sha256": "e2bf909d2f50a2450c1041c1ce9cd35221981495a3598f632f49030874c67c45"
+  },
+  "lua/test/raw_error_observation.lua": {
+    "bytes": 1903,
+    "mode": 420,
+    "sha256": "704c1e3731e09790f98a63840e66a52ee4dc2289ae4dc6092d6aa339b65dacbd"
+  },
+  "lua/test/recognition_repetition_progress_cases.json": {
+    "bytes": 12375,
+    "mode": 420,
+    "sha256": "29e295f806e4cd03bc37f8a11498c291a5910b562a53eb793519a3db65316865"
+  },
+  "lua/test/repeated_and_group_results_cases.json": {
+    "bytes": 9100,
+    "mode": 420,
+    "sha256": "250d9709f430bccbde11ff9a91290539022a7f6887d2c9bd1778cfb4369ba2f3"
+  },
+  "lua/test/runtime_unknown_helper_diagnostic_cases.json": {
+    "bytes": 2232,
+    "mode": 420,
+    "sha256": "013272feeaade3c34730998fbd940e72f14bb4c1dd061f2c6678a979be261701"
+  },
+  "lua/test/sparse_and_structural_sequence_cases.json": {
+    "bytes": 9101,
+    "mode": 420,
+    "sha256": "93ade96fe8983ed18b04c7675e3e39bbdbc4da37e76210d198deb670fa6210c4"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  },
+  "tests/fixtures/lua_raw_error_observation_cases.json": {
+    "bytes": 2216,
+    "mode": 420,
+    "sha256": "f9f02b669f49b4321427cd5e1175ebcea023ea90b1efbd9ccde89d773dded75f"
+  },
+  "tests/fixtures/lua_raw_error_observation_profiles.json": {
+    "bytes": 256550,
+    "mode": 420,
+    "sha256": "f355ddcd0c2b49c9a87226afbb112510dd5a1caeda4f10a60d307aa065f4bde3"
+  }
+}

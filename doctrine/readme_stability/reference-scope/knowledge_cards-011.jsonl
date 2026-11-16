@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8005,"lines":121,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-emitted-cargo-manifest-path-portability-gap.md","sha256":"33c2db3450586b0301770f2e11ae6271c0f5c6551b5c10829f695dfef0c831b5","type":"member"}
 {"bytes":2696,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-emptiness-result-source-guards.md","sha256":"17ca9172c5fd175cb12b7260f4e194080b6aaf4e6fefe2cc8202ea958993f489","type":"member"}
 {"bytes":4433,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-entry-match-separation.md","sha256":"40d74b482b10958a44b786dd139f82bb48d2dd1ed3cffeda738f422c02c18a6f","type":"member"}
 {"bytes":9559,"lines":158,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-final-value-assignment-receiver-guard-gap.md","sha256":"867df8d032f80df7146f1da8aa9a83514e328983cc82c9856d904961aedbe6c0","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5801,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-compatibility-alias-gap.md","sha256":"4310a0105e77ec153b46f53c7ef2d2c17245d534eb1c4636c9d80b69de4a4a4b","type":"member"}
 {"bytes":7808,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-uniform-binding-runtime.md","sha256":"9255d8ac3da08d7f2a83ddde83932dad6ccdb9b60b83c86b7f37a729152f9415","type":"member"}
 {"bytes":6113,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-untargeted-regex-body-dispatch.md","sha256":"feedbeff57b9659bb71f19d79d714674174667aa737c6c1d6808b7213080ed26","type":"member"}
-{"bytes":4668,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-helper-reservation-gap.md","sha256":"57ee583b4eb4644f546783ab960df5ea2de40f2984f959c3a26bd7dfbaf0159f","type":"member"}

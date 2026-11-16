@@ -1922,9 +1922,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Remaining: Sibling1 owns all eleven unresolved Lua routes, remaining direct loaders/support roles and independent semantic adjudication; registration/full native custody remain separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1` (ID suffixes).
   Goal: Resolve remaining direct loaders, support/dormant candidates and transitive discovery; freeze registration input.
   Acceptance: Entire inherited parent contract, including unqualified native routes from sibling0 and earlier Perl/Dart evidence; preserve independent before-push owners.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify direct inputs and support roles for the eleven unresolved local Lua candidates.
+  Acceptance: Reuse the retained native source epoch; preserve additional fixture/grammar/helper sources and modes. Distinguish fixed/list reads, default/explicit grammar, support modules and optional write/readback paths; compare the older raw-error input ledger and reject effective omissions/role/path controls. No SDK, transitive selection or admission claim.
+  Verification tier: `focused`
+  Focused checks: Readonly loader reconstruction, independent historical input comparison, current source/mode identity and controls; book, history, memory, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no runtime, test, shared runner or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/lua-loader-qualification-2026-11-16/REVIEW.md.
+
+  Outcome: Eleven Lua direct-loader sources have24 fixture/grammar edges to14 distinct targets, two returned support modules and two optional write/readback families. The older raw-error ledger agrees on six inputs; ten controls reject. All134 retained source bodies/modes match current inputs, reusing113 and adding21. No SDK execution or transitive selection claim.
+  Remaining: All eleven local Lua selection routes and broader independent semantic/population review remain with sibling1; registration4.1.2 and native4.2 stay separate.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Complete remaining Perl/native loaders, support/dormant roles and transitive discovery before freezing registration input.
+  Acceptance: Full inherited parent contract; retain all existing unresolved semantic, source-origin and admission owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.34`
   Status: `completed`

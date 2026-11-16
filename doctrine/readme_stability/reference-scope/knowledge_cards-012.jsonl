@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4668,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-helper-reservation-gap.md","sha256":"57ee583b4eb4644f546783ab960df5ea2de40f2984f959c3a26bd7dfbaf0159f","type":"member"}
 {"bytes":4167,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-registry-parity.md","sha256":"d84698d20c7fbc543720508b7435fa462aa0ae7b3e2a1f8e7f727d7af01e5fa5","type":"member"}
 {"bytes":4797,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-user-function-runtime-parity.md","sha256":"0475234eab1c2ba1e547133f2cadb19ccd508a8654ae258d0808b03790d92053","type":"member"}
 {"bytes":4321,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-variadic-user-functions.md","sha256":"caa0c129a8660c9c6260b7c78c2d2080f6f51646f51eedb5b6fad6f3594df367","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3971,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-helper-retirement-no-drift-closeout.md","sha256":"f77df51114af34747db362746a51bb579716d8275f6d7483a21867e5b066dfb0","type":"member"}
 {"bytes":3458,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-lifecycle-value-drop-return-channel.md","sha256":"ec1f590b0dba5e84022e25278000defc29d60f93710c425a92c1dcad0c7e39b5","type":"member"}
 {"bytes":4653,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-literals-calls-separators-access-ground-truth.md","sha256":"e62ed121e560072571288118a606d9224913fc930b5857186a613610e911b304","type":"member"}
-{"bytes":2848,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-merge-hash-bare-overlay-boundary.md","sha256":"8860afd8c4dec1e5fa6c74666c3b2001bbbcd9620aa8a5090029037ff6f3c5c8","type":"member"}

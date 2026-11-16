@@ -1,0 +1,8 @@
+{
+  "source": ".linkedspec-data/native-consumer-routes-commit.log",
+  "commit": "341f488d36b15cb39069db32a74e3dc5d82a70d8",
+  "sha256": "30aa6d95b4c02dcec6f5856306273e137bc24b3f77fb45b80dbb418209a04e79",
+  "bytes": 14810,
+  "mode": 420,
+  "recording": "after-use copy; this log belongs to the preceding completed commit"
+}
