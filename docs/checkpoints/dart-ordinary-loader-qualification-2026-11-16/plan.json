@@ -1,0 +1,29 @@
+{
+  "activation": "ea23e100a021c7561b133de0d98b2d27919350d2",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0",
+  "cwd": "dart",
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_owner": "dart/lib/src/parser/user_function_definition_parser.dart",
+  "earlier_dart": "docs/checkpoints/dart-loader-qualification-2026-11-16/qualification.json",
+  "recent_dart": "docs/checkpoints/dart-array-loader-qualification-2026-11-16/plan.json",
+  "historical": "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/direct/custody.json",
+  "policy_fact": "docs/knowledge/dart-ordinary-blind-progress-authority-boundary.md",
+  "consumers": [
+    "dart/test/blind_parent_push_test.dart",
+    "dart/test/capture_collection_selection_test.dart",
+    "dart/test/capture_endpoint_absence_test.dart",
+    "dart/test/computed_selection_test.dart",
+    "dart/test/copied_null_index_composition_test.dart",
+    "dart/test/count_length_receivers_test.dart",
+    "dart/test/count_result_guard_composition_test.dart",
+    "dart/test/count_source_fallback_test.dart",
+    "dart/test/key_count_callable_result_guard_composition_test.dart",
+    "dart/test/key_count_result_guard_composition_test.dart",
+    "dart/test/length_result_guard_composition_test.dart",
+    "dart/test/named_capture_endpoint_absence_test.dart",
+    "dart/test/named_writer_endpoint_absence_test.dart",
+    "dart/test/pure_blind_targets_test.dart",
+    "dart/test/referenced_blind_intermediate_test.dart",
+    "dart/test/rule_invocation_accumulators_test.dart"
+  ]
+}

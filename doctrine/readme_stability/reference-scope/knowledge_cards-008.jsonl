@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3970,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"c162c6ce8161aa830d7de9e4f26bb77408cff03ee8b934f0ad91c78cf427253b","type":"member"}
 {"bytes":3968,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2","path":"docs/knowledge/perl-callable-array-transform-result-guards.md","sha256":"d5e65d965dd2060d2916763b5c1d29af5dab3a21ff9632ac32c244bc342fe223","type":"member"}
 {"bytes":5094,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-attached-conditional-execution.md","sha256":"ce6f3564205d977e41a77343ac55b5fa1f15b3ddeb9eac2aae66b8479b936b10","type":"member"}
 {"bytes":3691,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-callable-codeblock-dynamic-invocation.md","sha256":"52635d7769d7347dbd5032b8889bdef10b2e4e7401ea47c427dd20b5a246f056","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4680,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-default-capture.md","sha256":"10e6c6fa67d9c2e2ea1daf67b4407bff57f229793ad9e57c7571fa4ef9317f65","type":"member"}
 {"bytes":7258,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-general-return-required-capture.md","sha256":"f33c986df9426c4a6b0ae56ecf82f62b0092c2897adc215fe977afa49e860754","type":"member"}
 {"bytes":5990,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-inference-capture.md","sha256":"addbc3ee699f61eb7a3c1308fe3fdb55422f9ddb7b23c910a23efadd66b348e7","type":"member"}
-{"bytes":5646,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-inline-capture.md","sha256":"85646ca4df3af36bb5dee1b28773e53cdedef4b32fa0f8d10cbe0583d8d7ad03","type":"member"}

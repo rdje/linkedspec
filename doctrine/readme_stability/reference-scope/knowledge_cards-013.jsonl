@@ -1,4 +1,5 @@
-{"member_count":102,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":103,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3458,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-lifecycle-value-drop-return-channel.md","sha256":"ec1f590b0dba5e84022e25278000defc29d60f93710c425a92c1dcad0c7e39b5","type":"member"}
 {"bytes":4653,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-literals-calls-separators-access-ground-truth.md","sha256":"e62ed121e560072571288118a606d9224913fc930b5857186a613610e911b304","type":"member"}
 {"bytes":2848,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-merge-hash-bare-overlay-boundary.md","sha256":"8860afd8c4dec1e5fa6c74666c3b2001bbbcd9620aa8a5090029037ff6f3c5c8","type":"member"}
 {"bytes":4366,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-mutation-assignment-expression-values.md","sha256":"f30623b5d674bd6dcec715c67be4e3e626a8ff82b6c06a9c091efa060c530aef","type":"member"}

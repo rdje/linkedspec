@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0",
+  "claims": [
+    {
+      "name": "ordinary-dart-loader-source-graphs",
+      "statement": "Ordinary Dart16 sources account for all23 explicit string-read sites, 46 fixture/grammar bindings to30 targets and matching historical identities. Four source qualifications/two inline policy rows remain explicit; twelve controls/current152 pass. No Dart/SDK or admission credit.",
+      "scope": "Sixteen remaining named ordinary Dart source consumers, their explicit read sites/finite literal expansions and consumer-level explicit/default grammar dependencies. Source-only declared cwd dart; no SDK execution, observed cache/path/module/native resolution or complete transitive/per-read graph. Existing39.8.1 runtime exclusions, preserved expected-value override, compile-only branches and AST/inline policy roles remain qualified. Generated-package/corpus source_emitter_test stays separately owned2; full population/admission remains open.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/review.py --current",
+        "granularity": "Each of16 source consumers, all23 explicit string-read sites, finite path expansions/grammar edges, source qualifications/inline rows and152 retained bodies/modes.",
+        "result": "{\"consumers\": 16, \"controls\": {\"consumer-missing\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"default-grammar-missing\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"duplicate\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"expanded-spec-missing\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"fixture-missing\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"historical-body\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"historical-missing\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"historical-mode\": {\"reason\": \"independent historical input disagreement\", \"result\": \"RED\"}, \"inline-as-file\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"override-portable\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"read-site-missing\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}, \"runtime-exclusion-erased\": {\"reason\": \"loader graph differs from source\", \"result\": \"RED\"}}, \"current_inputs\": 152, \"execution_qualifications\": 4, \"historical_bindings\": 46, \"inline_observation_rows\": 2, \"input_edges\": 46, \"limits\": \"Sixteen remaining named ordinary Dart source consumers, their explicit read sites/finite literal expansions and consumer-level explicit/default grammar dependencies. Source-only declared cwd dart; no SDK execution, observed cache/path/module/native resolution or complete transitive/per-read graph. Existing39.8.1 runtime exclusions, preserved expected-value override, compile-only branches and AST/inline policy roles remain qualified. Generated-package/corpus source_emitter_test stays separately owned2; full population/admission remains open.\", \"read_sites\": 23, \"result\": \"PASS\", \"retained_inputs\": 152, \"reused_inputs\": 113, \"unique_targets\": 30}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1",
+        "reason": "Nine graph corruptions reject and all46 older metadata bindings agree. Full independent semantic/transitive classification remains with remaining qualification; source consistency and read-site accounting supply no actual SDK/cache/module resolution."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused/additional logical source bodies/modes, actual Git binding, instruments and command channels are retained. Complete Python/Git/toolchain/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remains4.2/SESSION5. No SDK or canonical admission."
+      }
+    },
+    {
+      "name": "historical-ordinary-dart-file-identity-comparison",
+      "statement": "All46 graph bindings to30 distinct targets match an independently captured older root-packet file ledger; three body/mode/missing-record controls reject.",
+      "scope": "Only selected historical metadata versus retained file bodies/modes. The broad root image captured more than its command selected; no claim that these16 consumers ran or read each file in that older SDK execution.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/review.py --current",
+        "granularity": "Every expanded fixture/grammar binding versus the older direct/custody.json root packet file identity.",
+        "result": "historical_bindings=46; unique_targets=30; healthy PASS; historical body/mode/missing-record RED"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A changed grammar body/mode or absent older identity could pass.",
+        "oracle": "Independently retained older root-packet identity metadata, separate from the new source read-site graph and archived target bodies.",
+        "red_control": "Changed grammar body, changed grammar mode and removed root-packet grammar record each reject; healthy46 bindings agree."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused/additional logical source bodies/modes, actual Git binding, instruments and command channels are retained. Complete Python/Git/toolchain/library/OS, outer-launcher first-use, per-read/source-origin and physical custody remains4.2/SESSION5. No SDK or canonical admission."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,478,295,277 non-thin serialized bytes against cached4683555e;21,704,723 bytes below the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin range; selected original producer/ref/config/command channels copied without replay.",
+        "result": "{\"ahead\": 118, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.478295277, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1478295277, \"evidence\": \".linkedspec-data/push-monitor/20261116T204051.758633Z\", \"gib\": 1.376769763417542, \"head\": \"ea23e100a021c7561b133de0d98b2d27919350d2\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 48431, \"pack_footer\": \"21e80c68cca89fc850f8f8fbd61573113e5cd344\", \"pack_sha256\": \"bd189bdf824da8722d0e07e1cdc2ccbe61e4f450f45435780d5ebc8d65f9e3d7\", \"packed_objects\": 48431, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 21704723, \"trigger_reached\": false, \"unique_object_ids\": 48431}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Producer stream/stat/footer agree; independent actual-file size falsification remains30, not inferred from metadata."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected producer/ref/config/command channels retained; raw pack/full logical tables remain ignored. Full native/physical/input custody remains4.2/SESSION5. No remote freshness/wire claim."
+      }
+    }
+  ]
+}

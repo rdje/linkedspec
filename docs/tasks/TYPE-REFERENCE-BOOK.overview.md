@@ -1961,9 +1961,28 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Remaining: Sibling1 owns remaining population/loaders/selection, sibling2 generated package/corpus interpretation, sibling3 registration-input freeze; native4.2 and all other prerequisites stay separate.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1` (ID suffixes).
   Goal: Qualify remaining Perl/native direct loaders, support/dormant roles and transitive selection, excluding separately owned Dart generated-source2.
   Acceptance: Entire inherited qualification contract and earlier Perl/Dart/native/Lua evidence; resolve relevant excluded candidates and independent role adjudication.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify the remaining sixteen ordinary Dart candidate loaders and preserve their existing runtime exclusions.
+  Acceptance: Reuse retained source epochs; resolve fixed, suffix-expanded, stem-list and helper-call fixture paths plus default/explicit grammar. Compare named historical input identities and reject missing/path/role/exclusion controls. Preserve39.8.1 and inline/AST-only scope; no SDK execution, full graph or admission credit.
+  Verification tier: `focused`
+  Focused checks: Readonly source-directed loader/exclusion reconstruction, historical input/body/mode comparison and controls; book, memory, histories, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no test/runtime/shared runner or policy changes.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/REVIEW.md.
+
+  Outcome: Ordinary Dart16 sources account for all23 explicit string-read sites, 46 fixture/grammar bindings to30 targets and matching historical identities. Four source qualifications/two inline policy rows remain explicit; twelve controls/current152 pass. No Dart/SDK or admission credit.
+  Remaining: Sibling1 owns remaining backends/Perl and population/selection; generated Dart source2/frozen-input3/native4.2 and all other prerequisites stay open.39.8.1 exclusions are unchanged.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Complete remaining Perl/Rust/Julia/Lua loaders, support/dormant classification, transitive selection and relevant excluded candidates.
+  Acceptance: Full inherited qualification contract and all completed bounded ledgers; generated Dart source remains separately owned2 before frozen-input3.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.2`
   Status: `pending`

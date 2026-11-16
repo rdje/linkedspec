@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}
 {"bytes":1872,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-nonatomic-publication.md","sha256":"b13a018b828a88ace208e3bb446dd96b039558071315a0d83cf392297b5c87f1","type":"member"}
 {"bytes":6626,"lines":95,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-agnostic-backend-vision.md","sha256":"c3bf8200047285bc1e323e9baa04e03c6c21aeb7544aae2f3d6090cdfa49fd6c","type":"member"}
 {"bytes":4275,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/language-closure-definition-reconciliation.md","sha256":"79c87c01adaae108e0b5840e306ccdf8df0a68b4da56293ef5b1a1c9d27f9d6a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":14146,"lines":171,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-consumer-reading.md","sha256":"602809e15cd121b991238d9e90dd3d5b727a450655317b9ef72d36850816a6fe","type":"member"}
 {"bytes":4593,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-decoded-server.md","sha256":"64a44a70717184c80b6b2398e9250620d84cc18c01df3dc3239919f9128a9216","type":"member"}
 {"bytes":3785,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-implementation-admission.md","sha256":"12c454320e480698d7b899478e4930a0faf92ca0cf34529c32124b8d22448581","type":"member"}
-{"bytes":15233,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md","sha256":"498e50ba353331fba880de52cd5737c489776cd37f96c7e0fc037f268a83449f","type":"member"}

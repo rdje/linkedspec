@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":8626,"lines":144,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-large-number-and-slice-boundaries.md","sha256":"697e0725e55b21d1927e7de10c7ec2f6d25cae98edc953ea946dbf158aa1516c","type":"member"}
 {"bytes":3033,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.4","path":"docs/knowledge/julia-length-result-guards.md","sha256":"d8e484ca8e070643606e7c151b37ede2b1675b3913dad33dd664d9ff6ef5cd84","type":"member"}
 {"bytes":2763,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-lexical-result-source-guards.md","sha256":"54c3835cb1a0a01c8bacc1d7d3bc36f88640a212053d921dc9bfbab4de85a5d9","type":"member"}
 {"bytes":3391,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-live-recognition-progress.md","sha256":"99e88650093684cd11362049dfc7730086f555624c19dc29247b88637826b0ad","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3843,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-runtime-execution.md","sha256":"effa3c61986406f90b2c2aed0059f8193063dc3ec3a2a395353b53c29b7be51e","type":"member"}
 {"bytes":4216,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-variadic-user-functions.md","sha256":"60e5c3385f01f3bc05eeddcdb90dbbc0cf42c61795f23e77bd5fbd1f06023834","type":"member"}
 {"bytes":6960,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"b734fb87270a31d793b6050803a7f9aaaa0139a0cb01a4dbfacf9187fd61d1c2","type":"member"}
-{"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}

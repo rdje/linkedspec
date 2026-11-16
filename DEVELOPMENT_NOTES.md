@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-16 — account for constructed Dart reads without erasing exclusions
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0: Remaining population comes from the native ledger minus earlier Dart manifests and generated-source owner. Every explicit readAsStringSync site maps to a fixed/list/stem/suffix expansion; consumer-level grammar remains explicit or cached/default without runtime-resolution credit. Three referenced runtime exclusions, an accumulator override, compile-only negatives and inline copied-null policy observations retain their scopes. The older root packet matches all file identities but captured more than its selected tests; no execution follows from membership. No original claim hash/result or consumer code changes. Evidence: `docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — retain Dart loader reader refusal and source epochs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0: The captured source epoch stays exact after the original single-token return-type regex rejects valid Map<String, Object?> observation entrypoints. A separate reader derives exactly one export-regex replacement, retains its full source, reproduces the original pure-reader refusal and completes the first ledger without capture/SDK replay. Explicit grammar/fixture inputs differ from conditional parsed-output readbacks. Independent direct-run root ledgers agree on eleven bindings; older ordinary parsed-dump/error-field qualifications remain unchanged. Generated-package/corpus dependencies have their own pending owner. Evidence: `docs/checkpoints/dart-array-loader-qualification-2026-11-16/REVIEW.md`.

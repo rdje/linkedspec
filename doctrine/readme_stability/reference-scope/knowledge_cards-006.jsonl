@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":15233,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-runtime-server-reading-and-validation-gaps.md","sha256":"498e50ba353331fba880de52cd5737c489776cd37f96c7e0fc037f268a83449f","type":"member"}
 {"bytes":2523,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-named-capture-endpoint-origin-compatibility.md","sha256":"2cc8898fa500f90af1f0604c5a88a126638683d8556d150cffb4c0b236575275","type":"member"}
 {"bytes":4946,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-backend-scaffold.md","sha256":"b74da2384e79abd4527ccfca4751aea9ac5b3fdd36b364cb6a56f5ad748565f7","type":"member"}
 {"bytes":3569,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-native-full-pipeline-trace.md","sha256":"c3994e5715c787dab49c068894cef75e99cec5894115556f332a8f95cada8ab1","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":6804,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md","sha256":"229e368ec6b6c93dc4b2ed2eb52f208ddcdf23bde6b63b974b3f6d8fb460a768","type":"member"}
 {"bytes":4994,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recomposition.md","sha256":"6f2f9d0ebc2c5da672196fbdf060d315908265b2c208c6c74c1c093da1184f07","type":"member"}
 {"bytes":7407,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md","sha256":"f5a6632d29de4bb617f17599e86a3b97271f5487b74f00dc7ce7614b2a6a0d9c","type":"member"}
-{"bytes":35990,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md","sha256":"1c52958b65e31dfeb13d4eaf58fed317d44d8fbc50dc54e07d05ccfd60e49efc","type":"member"}

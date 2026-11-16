@@ -1,0 +1,690 @@
+{
+  "consumers": [
+    "dart/test/blind_parent_push_test.dart",
+    "dart/test/capture_collection_selection_test.dart",
+    "dart/test/capture_endpoint_absence_test.dart",
+    "dart/test/computed_selection_test.dart",
+    "dart/test/copied_null_index_composition_test.dart",
+    "dart/test/count_length_receivers_test.dart",
+    "dart/test/count_result_guard_composition_test.dart",
+    "dart/test/count_source_fallback_test.dart",
+    "dart/test/key_count_callable_result_guard_composition_test.dart",
+    "dart/test/key_count_result_guard_composition_test.dart",
+    "dart/test/length_result_guard_composition_test.dart",
+    "dart/test/named_capture_endpoint_absence_test.dart",
+    "dart/test/named_writer_endpoint_absence_test.dart",
+    "dart/test/pure_blind_targets_test.dart",
+    "dart/test/referenced_blind_intermediate_test.dart",
+    "dart/test/rule_invocation_accumulators_test.dart"
+  ],
+  "execution_qualifications": [
+    {
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "expression": "if (row['expected_builds'] != true)",
+      "owner": "existing fixture/build authority",
+      "role": "invalid-build branch is compile-only; no runtime coverage inferred"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expression": "if ({\n        'blind_no_regex',\n        'marked_blind_target',\n        'markerless_blind',\n      }.contains(name)) {\n        return;\n      }",
+      "line": 50,
+      "names": [
+        "blind_no_regex",
+        "marked_blind_target",
+        "markerless_blind"
+      ],
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1",
+      "role": "three named runtime exclusions"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expression": "if (row['expected_builds'] != true)",
+      "owner": "existing fixture/build authority",
+      "role": "invalid-build branch is compile-only; no runtime coverage inferred"
+    },
+    {
+      "consumer": "dart/test/rule_invocation_accumulators_test.dart",
+      "expression": "final expected = row['name'] == 'implicit_parent_no_tail'\n            ? [\n                ['x'],\n                <Object?>[],\n              ]\n            : row['expected'];",
+      "line": 26,
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1",
+      "role": "preserved ordinary blind expected-value override"
+    }
+  ],
+  "inline_observations": [
+    {
+      "consumer": "dart/test/copied_null_index_composition_test.dart",
+      "expression": "jsonDecode(\n              r'''[{\"id\":\"copied_null_needle_policy\",\"body\":\"order=\\\"\\\";out=[{undef}.copy().index_of({order=cat(order,\\\"A\\\");\\\"a\\\"}),copy({undef}).index_of({order=cat(order,\\\"B\\\");\\\"a\\\"}),index_of(copy({undef}),{order=cat(order,\\\"C\\\");\\\"a\\\"})];return([out,order])\",\"source\":\"Value:: I {order=\\\"\\\";out=[{undef}.copy().index_of({order=cat(order,\\\"A\\\");\\\"a\\\"}),copy({undef}).index_of({order=cat(order,\\\"B\\\");\\\"a\\\"}),index_of(copy({undef}),{order=cat(order,\\\"C\\\");\\\"a\\\"})];return([out,order])}\",\"rule\":\"Value\",\"input\":\"x\",\"input_characters\":1,\"leading_codepoint\":120,\"component\":\"null_diagnostic\",\"observation_only\":true,\"expected\":[[null,null,null],\"ABC\"]},{\"id\":\"null_source_needle_policy\",\"body\":\"order=\\\"\\\";out=[index_of(undef,{order=cat(order,\\\"F\\\");\\\"a\\\"}),{undef}.index_of({order=cat(order,\\\"R\\\");\\\"a\\\"}),[].first().index_of({order=cat(order,\\\"S\\\");\\\"a\\\"})];return([out,order])\",\"source\":\"Value:: I {order=\\\"\\\";out=[index_of(undef,{order=cat(order,\\\"F\\\");\\\"a\\\"}),{undef}.index_of({order=cat(order,\\\"R\\\");\\\"a\\\"}),[].first().index_of({order=cat(order,\\\"S\\\");\\\"a\\\"})];return([out,order])}\",\"rule\":\"Value\",\"input\":\"x\",\"input_characters\":1,\"leading_codepoint\":120,\"component\":\"null_diagnostic\",\"observation_only\":true,\"expected\":[[null,null,null],\"FRS\"]}]'''",
+      "ids": [
+        "copied_null_needle_policy",
+        "null_source_needle_policy"
+      ],
+      "line": 70,
+      "role": "inline policy observations; not file inputs"
+    }
+  ],
+  "input_edges": [
+    {
+      "consumer": "dart/test/blind_parent_push_test.dart",
+      "expression": "File('../tests/fixtures/$target.json').readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "literal stem loop -> File template",
+      "target": "tests/fixtures/blind_parent_push.json"
+    },
+    {
+      "consumer": "dart/test/blind_parent_push_test.dart",
+      "expression": "File('../tests/fixtures/$target.json').readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "literal stem loop -> File template",
+      "target": "tests/fixtures/blind_parent_push_repeated.json"
+    },
+    {
+      "call_lines": [
+        14
+      ],
+      "consumer": "dart/test/blind_parent_push_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/capture_collection_selection_test.dart",
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/capture_collection_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 40,
+      "role": "authored spec fixture",
+      "route": "fixture(spec/json) suffix expansion",
+      "target": "tests/fixtures/capture_collection_selection_values.spec"
+    },
+    {
+      "consumer": "dart/test/capture_collection_selection_test.dart",
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/capture_collection_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 40,
+      "role": "JSON fixture",
+      "route": "fixture(spec/json) suffix expansion",
+      "target": "tests/fixtures/capture_collection_selection_values.json"
+    },
+    {
+      "call_lines": [
+        9
+      ],
+      "consumer": "dart/test/capture_collection_selection_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/capture_endpoint_absence_test.dart",
+      "expression": "File(\n              '../tests/fixtures/capture_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "fixed cwd-relative File",
+      "target": "tests/fixtures/capture_endpoint_absence.json"
+    },
+    {
+      "call_lines": [
+        20
+      ],
+      "consumer": "dart/test/capture_endpoint_absence_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/computed_selection_test.dart",
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/computed_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 56,
+      "role": "authored spec fixture",
+      "route": "fixture(spec/json) suffix expansion",
+      "target": "tests/fixtures/computed_selection_values.spec"
+    },
+    {
+      "consumer": "dart/test/computed_selection_test.dart",
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/computed_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 56,
+      "role": "JSON fixture",
+      "route": "fixture(spec/json) suffix expansion",
+      "target": "tests/fixtures/computed_selection_values.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/computed_selection_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/copied_null_index_composition_test.dart",
+      "expression": "File.fromUri(\n                  Directory.current.parent.uri.resolve(\n                    'tests/fixtures/copied_null_index_cases.json',\n                  ),\n                ).readAsStringSync()",
+      "line": 61,
+      "role": "JSON fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/copied_null_index_cases.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/copied_null_index_composition_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "call_lines": [
+        7
+      ],
+      "consumer": "dart/test/count_length_receivers_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/count_result_guard_source_owner_cases.json"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n        root.resolve('tests/fixtures/count_result_guard_dart_domain.json'),\n      ).readAsStringSync()",
+      "line": 103,
+      "role": "Dart domain/profile fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/count_result_guard_dart_domain.json"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n                root.resolve(\n                  'tests/fixtures/count_result_guard_excluded_ast.json',\n                ),\n              ).readAsStringSync()",
+      "line": 117,
+      "role": "AST-source fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/count_result_guard_excluded_ast.json"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n        root.resolve('tests/fixtures/count_result_guard_dart_ast.json'),\n      ).readAsStringSync()",
+      "line": 142,
+      "role": "AST-expected fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/count_result_guard_dart_ast.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/count_source_fallback_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 65,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/count_boolean_source_cases.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/count_source_fallback_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n                  root.resolve(\n                    'tests/fixtures/key_count_callable_result_cases.json',\n                  ),\n                ).readAsStringSync()",
+      "line": 56,
+      "role": "JSON fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/key_count_callable_result_cases.json"
+    },
+    {
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/key_count_callable_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+      "line": 66,
+      "role": "Dart domain/profile fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/key_count_callable_dart_profiles.json"
+    },
+    {
+      "call_lines": [
+        12
+      ],
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "role": "explicit grammar dependency",
+      "route": "explicit File read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/key_count_result_guard_cases.json"
+    },
+    {
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/key_count_count_source_ownership_cases.json"
+    },
+    {
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/key_count_result_guard_dart_domain.json',\n              ),\n            ).readAsStringSync()",
+      "line": 73,
+      "role": "Dart domain/profile fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/key_count_result_guard_dart_domain.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/length_result_guard_cases.json"
+    },
+    {
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "JSON fixture",
+      "route": "literal loop -> root.resolve(fixture)",
+      "target": "tests/fixtures/length_count_source_ownership_cases.json"
+    },
+    {
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/length_result_guard_dart_domain.json',\n              ),\n            ).readAsStringSync()",
+      "line": 73,
+      "role": "Dart domain/profile fixture",
+      "route": "fixed root-relative URI",
+      "target": "tests/fixtures/length_result_guard_dart_domain.json"
+    },
+    {
+      "call_lines": [
+        8
+      ],
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/named_capture_endpoint_absence_test.dart",
+      "expression": "File(\n              '../tests/fixtures/named_capture_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "fixed cwd-relative File",
+      "target": "tests/fixtures/named_capture_endpoint_absence.json"
+    },
+    {
+      "call_lines": [
+        20
+      ],
+      "consumer": "dart/test/named_capture_endpoint_absence_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/named_writer_endpoint_absence_test.dart",
+      "expression": "File(\n              '../tests/fixtures/named_writer_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "fixed cwd-relative File",
+      "target": "tests/fixtures/named_writer_endpoint_absence.json"
+    },
+    {
+      "call_lines": [
+        20
+      ],
+      "consumer": "dart/test/named_writer_endpoint_absence_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "expression": "File('../tests/fixtures/pure_blind_targets.json').readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "fixed cwd-relative File",
+      "target": "tests/fixtures/pure_blind_targets.json"
+    },
+    {
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "expression": "File(\n            '../tests/fixtures/referenced_blind_intermediate_negatives.json',\n          ).readAsStringSync()",
+      "line": 14,
+      "role": "JSON fixture",
+      "route": "fixed cwd-relative File",
+      "target": "tests/fixtures/referenced_blind_intermediate_negatives.json"
+    },
+    {
+      "call_lines": [
+        22
+      ],
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expression": "File('../tests/fixtures/$name.json').readAsStringSync()",
+      "line": 8,
+      "role": "JSON fixture",
+      "route": "literal fixtures(name) calls -> File template",
+      "target": "tests/fixtures/referenced_blind_intermediate.json"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expression": "File('../tests/fixtures/$name.json').readAsStringSync()",
+      "line": 8,
+      "role": "JSON fixture",
+      "route": "literal fixtures(name) calls -> File template",
+      "target": "tests/fixtures/referenced_blind_intermediate_qualified.json"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expression": "File('../tests/fixtures/$name.json').readAsStringSync()",
+      "line": 8,
+      "role": "JSON fixture",
+      "route": "literal fixtures(name) calls -> File template",
+      "target": "tests/fixtures/referenced_blind_intermediate_negatives.json"
+    },
+    {
+      "call_lines": [
+        25,
+        39
+      ],
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "dart/test/rule_invocation_accumulators_test.dart",
+      "expression": "File('../tests/fixtures/$target.json').readAsStringSync()",
+      "line": 10,
+      "role": "JSON fixture",
+      "route": "literal stem loop -> File template",
+      "target": "tests/fixtures/rule_invocation_accumulators.json"
+    },
+    {
+      "call_lines": [
+        14
+      ],
+      "consumer": "dart/test/rule_invocation_accumulators_test.dart",
+      "role": "cached-default grammar dependency",
+      "route": "documented cached upward lookup; runtime selection unobserved",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "limits": "Sixteen remaining named ordinary Dart source consumers, their explicit read sites/finite literal expansions and consumer-level explicit/default grammar dependencies. Source-only declared cwd dart; no SDK execution, observed cache/path/module/native resolution or complete transitive/per-read graph. Existing39.8.1 runtime exclusions, preserved expected-value override, compile-only branches and AST/inline policy roles remain qualified. Generated-package/corpus source_emitter_test stays separately owned2; full population/admission remains open.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0",
+  "read_sites": [
+    {
+      "consumer": "dart/test/blind_parent_push_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/blind_parent_push.json",
+        "tests/fixtures/blind_parent_push_repeated.json"
+      ],
+      "expression": "File('../tests/fixtures/$target.json').readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "literal stem loop -> File template"
+    },
+    {
+      "consumer": "dart/test/capture_collection_selection_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/capture_collection_selection_values.spec",
+        "tests/fixtures/capture_collection_selection_values.json"
+      ],
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/capture_collection_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 40,
+      "role": "fixture read site",
+      "route": "fixture(spec/json) suffix expansion"
+    },
+    {
+      "consumer": "dart/test/capture_endpoint_absence_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/capture_endpoint_absence.json"
+      ],
+      "expression": "File(\n              '../tests/fixtures/capture_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "fixed cwd-relative File"
+    },
+    {
+      "consumer": "dart/test/computed_selection_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/computed_selection_values.spec",
+        "tests/fixtures/computed_selection_values.json"
+      ],
+      "expression": "File.fromUri(\n      Directory.current.parent.uri.resolve(\n        'tests/fixtures/computed_selection_values.$extension',\n      ),\n    ).readAsStringSync()",
+      "line": 56,
+      "role": "fixture read site",
+      "route": "fixture(spec/json) suffix expansion"
+    },
+    {
+      "consumer": "dart/test/copied_null_index_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/copied_null_index_cases.json"
+      ],
+      "expression": "File.fromUri(\n                  Directory.current.parent.uri.resolve(\n                    'tests/fixtures/copied_null_index_cases.json',\n                  ),\n                ).readAsStringSync()",
+      "line": 61,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/count_result_guard_cases.json",
+        "tests/fixtures/count_result_guard_source_owner_cases.json"
+      ],
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "fixture read site",
+      "route": "literal loop -> root.resolve(fixture)"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/count_result_guard_dart_domain.json"
+      ],
+      "expression": "File.fromUri(\n        root.resolve('tests/fixtures/count_result_guard_dart_domain.json'),\n      ).readAsStringSync()",
+      "line": 103,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/count_result_guard_excluded_ast.json"
+      ],
+      "expression": "File.fromUri(\n                root.resolve(\n                  'tests/fixtures/count_result_guard_excluded_ast.json',\n                ),\n              ).readAsStringSync()",
+      "line": 117,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/count_result_guard_dart_ast.json"
+      ],
+      "expression": "File.fromUri(\n        root.resolve('tests/fixtures/count_result_guard_dart_ast.json'),\n      ).readAsStringSync()",
+      "line": 142,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/count_source_fallback_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/count_boolean_source_cases.json"
+      ],
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 65,
+      "role": "fixture read site",
+      "route": "literal loop -> root.resolve(fixture)"
+    },
+    {
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "expression": "File.fromUri(\n    root.resolve(userFunctionDefinitionSpecRelativePath),\n  ).readAsStringSync()",
+      "line": 48,
+      "role": "explicit grammar read site"
+    },
+    {
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/key_count_callable_result_cases.json"
+      ],
+      "expression": "File.fromUri(\n                  root.resolve(\n                    'tests/fixtures/key_count_callable_result_cases.json',\n                  ),\n                ).readAsStringSync()",
+      "line": 56,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/key_count_callable_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/key_count_callable_dart_profiles.json"
+      ],
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/key_count_callable_dart_profiles.json',\n              ),\n            ).readAsStringSync()",
+      "line": 66,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/key_count_result_guard_cases.json",
+        "tests/fixtures/key_count_count_source_ownership_cases.json"
+      ],
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "fixture read site",
+      "route": "literal loop -> root.resolve(fixture)"
+    },
+    {
+      "consumer": "dart/test/key_count_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/key_count_result_guard_dart_domain.json"
+      ],
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/key_count_result_guard_dart_domain.json',\n              ),\n            ).readAsStringSync()",
+      "line": 73,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/length_result_guard_cases.json",
+        "tests/fixtures/length_count_source_ownership_cases.json"
+      ],
+      "expression": "File.fromUri(root.resolve(fixture)).readAsStringSync()",
+      "line": 66,
+      "role": "fixture read site",
+      "route": "literal loop -> root.resolve(fixture)"
+    },
+    {
+      "consumer": "dart/test/length_result_guard_composition_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/length_result_guard_dart_domain.json"
+      ],
+      "expression": "File.fromUri(\n              root.resolve(\n                'tests/fixtures/length_result_guard_dart_domain.json',\n              ),\n            ).readAsStringSync()",
+      "line": 73,
+      "role": "fixture read site",
+      "route": "fixed root-relative URI"
+    },
+    {
+      "consumer": "dart/test/named_capture_endpoint_absence_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/named_capture_endpoint_absence.json"
+      ],
+      "expression": "File(\n              '../tests/fixtures/named_capture_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "fixed cwd-relative File"
+    },
+    {
+      "consumer": "dart/test/named_writer_endpoint_absence_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/named_writer_endpoint_absence.json"
+      ],
+      "expression": "File(\n              '../tests/fixtures/named_writer_endpoint_absence.json',\n            ).readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "fixed cwd-relative File"
+    },
+    {
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/pure_blind_targets.json"
+      ],
+      "expression": "File('../tests/fixtures/pure_blind_targets.json').readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "fixed cwd-relative File"
+    },
+    {
+      "consumer": "dart/test/pure_blind_targets_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/referenced_blind_intermediate_negatives.json"
+      ],
+      "expression": "File(\n            '../tests/fixtures/referenced_blind_intermediate_negatives.json',\n          ).readAsStringSync()",
+      "line": 14,
+      "role": "fixture read site",
+      "route": "fixed cwd-relative File"
+    },
+    {
+      "consumer": "dart/test/referenced_blind_intermediate_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/referenced_blind_intermediate.json",
+        "tests/fixtures/referenced_blind_intermediate_qualified.json",
+        "tests/fixtures/referenced_blind_intermediate_negatives.json"
+      ],
+      "expression": "File('../tests/fixtures/$name.json').readAsStringSync()",
+      "line": 8,
+      "role": "fixture read site",
+      "route": "literal fixtures(name) calls -> File template"
+    },
+    {
+      "consumer": "dart/test/rule_invocation_accumulators_test.dart",
+      "expanded_targets": [
+        "tests/fixtures/rule_invocation_accumulators.json"
+      ],
+      "expression": "File('../tests/fixtures/$target.json').readAsStringSync()",
+      "line": 10,
+      "role": "fixture read site",
+      "route": "literal stem loop -> File template"
+    }
+  ]
+}

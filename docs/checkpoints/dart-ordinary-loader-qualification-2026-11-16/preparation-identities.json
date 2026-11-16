@@ -1,0 +1,52 @@
+{
+  "dart/lib/src/parser/user_function_definition_parser.dart": {
+    "bytes": 7863,
+    "mode": 420,
+    "sha256": "67f01bc6d8285c67db55d569e758192bc44fbf609c505dc99ca1f94f4f37c8ce"
+  },
+  "docs/checkpoints/array-concat-open-arity-dart-2026-11-12/direct/custody.json": {
+    "bytes": 242312,
+    "mode": 420,
+    "sha256": "27bee1c01cb0dc6c7b2a20f235e581bd1e45b8ad431ed0a9619f674b94bc241f"
+  },
+  "docs/checkpoints/dart-array-loader-qualification-2026-11-16/plan.json": {
+    "bytes": 1986,
+    "mode": 420,
+    "sha256": "57916e452ea072d8a4855673e626bd5433ca30ab694f14293389dd4ce38731ea"
+  },
+  "docs/checkpoints/dart-loader-qualification-2026-11-16/qualification.json": {
+    "bytes": 2011,
+    "mode": 420,
+    "sha256": "902415641a51da3897113ecfc5d00967c8c479c3f4ffdb571099e7968709b513"
+  },
+  "docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/capture.py": {
+    "bytes": 3227,
+    "mode": 420,
+    "sha256": "1793f86653effbc60f2599c347370d99433951d794092e9326b77e6432d951f5"
+  },
+  "docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/plan.json": {
+    "bytes": 1538,
+    "mode": 420,
+    "sha256": "f52b9999faee10b457b87a1d82ef06d92f1558425c250bac02377f1a18f7b6f5"
+  },
+  "docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/review.py": {
+    "bytes": 16681,
+    "mode": 420,
+    "sha256": "9a1896cb245a1658b3f2726edb978ba26b10d0c313bff740ff203219223563da"
+  },
+  "docs/checkpoints/dart-ordinary-loader-qualification-2026-11-16/run_step.py": {
+    "bytes": 1014,
+    "mode": 420,
+    "sha256": "1780a14195992407a6f03692fffc4f61c6968194152d877d43542f596f07a31c"
+  },
+  "docs/knowledge/dart-ordinary-blind-progress-authority-boundary.md": {
+    "bytes": 2158,
+    "mode": 420,
+    "sha256": "bbb5903b150bb5379f7a9f71b848390bd5556c0d698a1ecfeb4c774e1abbaa54"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  }
+}

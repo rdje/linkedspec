@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3509,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-num-min-lowering-fixture.md","sha256":"c494221c3ee0a3534ec290b7a239ce2278ae14b76828b68f3836342ad4569753","type":"member"}
 {"bytes":2423,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-private-owner-focused-selection.md","sha256":"bbf8a6ffd9267fdc95f933fe974a3a12aa3d8a3ea80dc86a433e0881e6538a99","type":"member"}
 {"bytes":2970,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-regression-structure.md","sha256":"01cad8920a91aa1937f05f13b2956fdc1624bf3d83b63e941f1e0f823e11d8c1","type":"member"}
 {"bytes":21267,"lines":375,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-subprocess-capture-status-and-pipe-gap.md","sha256":"bc74f4eb674e45c518ab2de46ef7eae113c2ad3e3bfb03e7b108fe0da82fa011","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3626,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-definedness-result-source-guards.md","sha256":"c6e59a5d93ca05f4bfac6d1d0ec9105204c47f2706c559f9e952e4d2e80a1ebb","type":"member"}
 {"bytes":2898,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-dependency-warning-baseline.md","sha256":"09c24cab8b9c19450bac8589375d643c4a4496da98d87439d1ce43993e6c2b8e","type":"member"}
 {"bytes":6640,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-diagnostic-output-events.md","sha256":"495baa4dbd2d949fa0841c8f7d7ddb4657f1829ef806405c48a4c3c9cab12e71","type":"member"}
-{"bytes":4491,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-duplicate-regex-slot-identity-admission.md","sha256":"79bb2658aa85e4a415b122ba67a11778a5cfc24969c1ba9cdfc1f879c2913114","type":"member"}
