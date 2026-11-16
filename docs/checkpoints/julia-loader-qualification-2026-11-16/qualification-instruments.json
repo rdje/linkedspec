@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/review_qualified.py": {
+    "bytes": 3056,
+    "sha256": "5103230cf7192e450c9365ccfd764d35e35c1346970371b6dcca2423788c9b84",
+    "mode": 420
+  },
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/qualify.py": {
+    "bytes": 1980,
+    "sha256": "dbb1ceb9b114118a9b6e117406edc422349b66464f6bcc75316ce2f73b9510f8",
+    "mode": 420
+  }
+}

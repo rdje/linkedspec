@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":7258,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-general-return-required-capture.md","sha256":"f33c986df9426c4a6b0ae56ecf82f62b0092c2897adc215fe977afa49e860754","type":"member"}
 {"bytes":5990,"lines":68,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-inference-capture.md","sha256":"addbc3ee699f61eb7a3c1308fe3fdb55422f9ddb7b23c910a23efadd66b348e7","type":"member"}
 {"bytes":5646,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-inline-capture.md","sha256":"85646ca4df3af36bb5dee1b28773e53cdedef4b32fa0f8d10cbe0583d8d7ad03","type":"member"}
 {"bytes":5427,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-local-return-capture.md","sha256":"e351a8033ff342f293ac75e39fc7b8f51165f90538ea63123da8393144afc112","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3611,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-behavior-calibration-source-stages.md","sha256":"161415a4dcb2380139b6296023732f9b403244ffd959c3cc70242f41503b5363","type":"member"}
 {"bytes":8882,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-code-slot-equivalence-observation-gap.md","sha256":"6f963697ab59324fe35104a942f7ecf7480aa1b8412464cf1726693ad0c04cbe","type":"member"}
 {"bytes":4064,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-compiler-scanner-mock-historical-inverse.md","sha256":"a2579462df2206037c781299d79811facf02762ebd25df0016d0318fcb53e89a","type":"member"}
-{"bytes":10518,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-cursor-source-observation-gap.md","sha256":"86adb2304745c1f9b0a3564a8c6abe6c439f4771a25756bca0c19f56f5feddca","type":"member"}

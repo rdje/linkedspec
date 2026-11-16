@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-16 — qualify Julia direct loader roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0: Julia20 sources account for all52 file-read sites,69 fixture/grammar/support bindings to49 targets,14 same-process generated Modules and12 optional capture conditions. Three execution qualifications,69 older identities,13 corrected controls and current169 pass; a separate victim oracle exposes the original positional-control defect. No Julia/SDK execution or admission. Evidence: `docs/checkpoints/julia-loader-qualification-2026-11-16/REVIEW.md`.
+
 ## 2026-11-16 — qualify ordinary Lua loader roles
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0: Sixteen ordinary Lua sources account for all43 io.open sites,87 file/grammar/syntax/support bindings to43 targets,30 syntax-only loads,three support loads and16 opaque package requests. Twelve optional capture conditions, named runtime exclusions,29 historical identities,14 controls/current165 and the inert-header/toy inverse pass. No package/regression body execution or admission. Evidence: `docs/checkpoints/lua-ordinary-loader-qualification-2026-11-16/REVIEW.md`.

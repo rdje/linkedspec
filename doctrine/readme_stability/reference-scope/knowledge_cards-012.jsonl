@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4132,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-authority-materialization.md","sha256":"b277477547d3f62b26280b2cf516ec37058eace3ec62f97ed0fcb68e0851bea8","type":"member"}
 {"bytes":5801,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-compatibility-alias-gap.md","sha256":"4310a0105e77ec153b46f53c7ef2d2c17245d534eb1c4636c9d80b69de4a4a4b","type":"member"}
 {"bytes":7808,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-uniform-binding-runtime.md","sha256":"9255d8ac3da08d7f2a83ddde83932dad6ccdb9b60b83c86b7f37a729152f9415","type":"member"}
 {"bytes":6113,"lines":90,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-untargeted-regex-body-dispatch.md","sha256":"feedbeff57b9659bb71f19d79d714674174667aa737c6c1d6808b7213080ed26","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3632,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-blocks-ground-truth.md","sha256":"2cd546aec1695eb347295a02e2fadecdb52a03a9af611b4e9162b0133bbc7907","type":"member"}
 {"bytes":3739,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-fluent-lifecycle-composability-split.md","sha256":"a64433eae9e26d0605884c595fd3927589248606dd687e1d13fd628b0552b2d4","type":"member"}
 {"bytes":5890,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-hash-receiver-value-chains.md","sha256":"22b1cb64e80bdd81c93e8b4f2ba823b60b02f7aebb759500b0213f7bb76674f5","type":"member"}
-{"bytes":11819,"lines":133,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-helper-rename-lowering-sites.md","sha256":"2d2a692e726d80d0a23acf97e89c111114897245c52273c6d6bd5971dc9da8c7","type":"member"}

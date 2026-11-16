@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2898,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-dependency-warning-baseline.md","sha256":"09c24cab8b9c19450bac8589375d643c4a4496da98d87439d1ce43993e6c2b8e","type":"member"}
 {"bytes":6640,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-diagnostic-output-events.md","sha256":"495baa4dbd2d949fa0841c8f7d7ddb4657f1829ef806405c48a4c3c9cab12e71","type":"member"}
 {"bytes":4491,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-duplicate-regex-slot-identity-admission.md","sha256":"79bb2658aa85e4a415b122ba67a11778a5cfc24969c1ba9cdfc1f879c2913114","type":"member"}
 {"bytes":2860,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-edge-semantics-bug.md","sha256":"6bb99643ef483b91defa0393391a7e88ef38949bc51c77d90db5d560782b6aa6","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4039,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-controls-sinks.md","sha256":"20673df73e92908238cc1aefb62bf5cb627d613ea29a63017fcb223a1be75e80","type":"member"}
 {"bytes":2789,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-parity-design-inventory.md","sha256":"fd1db56c208b464c91649068c027f65c3419b85c086cc7d7c96c5299e60dd78d","type":"member"}
 {"bytes":3783,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-runtime-branch-events.md","sha256":"483da84915ccee85e21e5076ca70dad97fe536d8601c2577c7c690208ff08277","type":"member"}
-{"bytes":4132,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-authority-materialization.md","sha256":"b277477547d3f62b26280b2cf516ec37058eace3ec62f97ed0fcb68e0851bea8","type":"member"}

@@ -2001,9 +2001,40 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Reader landing defect (owned/fixed): Staged diff check rejects one extra EOF LF at original reader line252. The actual refusal and interrupted own hook remain retained. Original capture archive/reader/result are unchanged; only the live landing form loses that LF. Separate review_qualified.py validates exact original-to-normalized bytes and all other inputs; focused proof passes. No original hash/result refresh or SDK replay.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1`
-  Status: `pending`
+  Status: `active`
+  Children: `.0`, `.1`, `.2`, `.3` (ID suffixes).
   Goal: Complete remaining Perl/Rust/Julia loaders, support/dormant roles, transitive selection and relevant excluded candidates.
   Acceptance: Full inherited qualification contract; retain every earlier ledger and unresolved origin/native/selection owner before frozen-input3.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify the twenty named Julia direct fixture/grammar/support loaders and preserve source execution qualifications.
+  Acceptance: Source-bound finite path expansions, root aliases, explicit/default grammar, support includes, generated in-memory module roles and optional write/readback timing/conditions. Retain independent historical overlap/missing records and effective path/role/exclusion controls; no Julia/SDK execution, full graph or admission credit.
+  Verification tier: `focused`
+  Focused checks: Readonly graph/body/mode reconstruction, historical identities and altered-evidence controls; book, memory, histories, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no runtime, regression, shared runner or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0.json`
+  Evidence: docs/checkpoints/julia-loader-qualification-2026-11-16/REVIEW.md.
+  Control defect (owned/fixed): Original runtime-exclusion-erased pops the first qualification, which is Count-source fallback, leaving runtime exclusions present. Preserve original source/result; qualify only this control by selecting the runtime-exclusion role, with an independent victim-role RED check before accepting its label.
+
+  Outcome: Julia20 sources account for all52 file-read sites,69 fixture/grammar/support bindings to49 targets,14 same-process generated Modules and12 optional capture conditions. Three execution qualifications,69 older identities,13 corrected controls and current169 pass; a separate victim oracle exposes the original positional-control defect. No Julia/SDK execution or admission.
+  Remaining: Ordinary Rust1/generated Rust2/remaining Perl-transitive3, including eleven unresolved Lua local routes, remain open; generated Dart2/frozen-input3/native4.2 and every other prerequisite stay separate. Source exclusions and host expectation fallbacks are unchanged.
+  Landing checks: Qualified current169/13 controls PASS; independent original victim RED and corrected exact role selection PASS; historical69/absent0. Scope1970/17, mdBook0/rendered paragraph, memory architecture0, histories0 and whitespace0. Normal hooks govern landing; no broad/canonical CI or push.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1`
+  Status: `pending`
+  Goal: Qualify the twenty-one ordinary Rust consumers outside generated_source_full_manifest_classifier.
+  Acceptance: Preserve include_str/filesystem/env fixture and grammar routes, module/support roles and exact runtime exclusions; no Cargo execution or complete transitive/native claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2`
+  Status: `pending`
+  Goal: Interpret Rust generated_source_full_manifest_classifier manifest/corpus/generated-host/process dependencies.
+  Acceptance: Separate compile-time literals from runtime filesystem/corpus selection, generated artifacts and actual host/native execution. Retain source identities and origin/per-read limits.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3`
+  Status: `pending`
+  Goal: Complete remaining Perl loaders, support/dormant roles, transitive selection and relevant excluded candidates.
+  Acceptance: Full inherited population contract, including all eleven unresolved Lua local routes; preserve existing default-literal/repeated ActionIR registration findings and every source-origin/native/semantic owner before frozen-input3.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.2`
   Status: `pending`

@@ -98,6 +98,7 @@
 {"bytes":3696,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-depot-layering-after-cache-cleanup.md","sha256":"33492da80a7648e4c00660422b1190de4c95807d0355684448cdca1a49435310","type":"member"}
 {"bytes":5946,"lines":89,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-diagnostic-output-helpers.md","sha256":"90c57dbf788ee3ea6628ddde48e13c850134955cd8c17db592ce79f5c1ec905b","type":"member"}
 {"bytes":3032,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-diagnostics-trace-boundary.md","sha256":"7c001d76164ca62472689b3ec06a14254ac9ec9c4d2da548febc81da4952868c","type":"member"}
+{"bytes":2292,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0","path":"docs/knowledge/julia-direct-loader-roles.md","sha256":"d2f92146d81c474d82238397985231461b414659bb665043c61c16a8b210864f","type":"member"}
 {"bytes":5644,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-duplicate-regex-slot-identity-admission.md","sha256":"37139984b9752d41e712279f3e9e6a6dd942070ebe2831ae3bccc6450a65fa4d","type":"member"}
 {"bytes":2877,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-emptiness-result-source-guards.md","sha256":"a201ae4d1d4ffa96d01f91bb13c58a70e352516564d6be600eaef651f74350da","type":"member"}
 {"bytes":11844,"lines":182,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-evidence-capacity-admission.md","sha256":"21228d39884bb19823499153f634c0ebaacad0b274c3de4cbd2860609efb7a15","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2985,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-implicit-blind-iteration-collections.md","sha256":"4ff297e4de92da322cee5b67bfd3644ba25935c1bd5c8e4343aac6ff7cea470f","type":"member"}
 {"bytes":3790,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-index-source-guards.md","sha256":"b66a5c6c15684f94597e26a14024a17df686b33a0c7c454fe31fda76c5175d9a","type":"member"}
 {"bytes":8553,"lines":123,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-input-slice-arity-and-count-boundaries.md","sha256":"3e8e8d7a96737b0f7a89f87484f339b4ff941df5155c90eb80dc09657b317ef0","type":"member"}
-{"bytes":4164,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.4","path":"docs/knowledge/julia-key-count-result-guards.md","sha256":"02863e45a7a14621769d9819e0f385b4b37daad18080806e9b6e57b3a24e7561","type":"member"}

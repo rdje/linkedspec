@@ -1,0 +1,366 @@
+[
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/ahead-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/ahead-command.json",
+    "bytes": 268,
+    "sha256": "6c420e544b4fdba100d754908ebd999026b41ea9ff5fed455860fe79b45c18ee",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/ahead-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/ahead-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/ahead-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/ahead-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/ahead-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/ahead-stdout.gz",
+    "bytes": 24,
+    "sha256": "01bffea3703fb6783278eaa8cdb121e2da752985aecb6c62be116ba537a36317",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-after-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-after-command.json",
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-after-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-after-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-after-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-after-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-after-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-after-stdout.gz",
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-command.json",
+    "bytes": 196,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/base-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/base-stdout.gz",
+    "bytes": 59,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/empty-range-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/empty-range-command.json",
+    "bytes": 324,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/empty-range-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/empty-range-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/empty-range-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/empty-range-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/empty-range-stdin.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/empty-range-stdin.gz",
+    "bytes": 64,
+    "sha256": "88f0d4b82b0792d8fd92e79551686d9ea287e161a17bb7bcefa214376050d439",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/empty-range-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/empty-range-stdout.gz",
+    "bytes": 50,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/git-version-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/git-version-command.json",
+    "bytes": 164,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/git-version-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/git-version-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/git-version-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/git-version-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/git-version-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/git-version-stdout.gz",
+    "bytes": 55,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-after-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-after-command.json",
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-after-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-after-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-after-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-after-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-after-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-after-stdout.gz",
+    "bytes": 59,
+    "sha256": "3cf80c7ca6ac661df386354b759f4c3f738a0438b4e5de6ef166e85552a1d31d",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-command.json",
+    "bytes": 176,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/head-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/head-stdout.gz",
+    "bytes": 59,
+    "sha256": "3cf80c7ca6ac661df386354b759f4c3f738a0438b4e5de6ef166e85552a1d31d",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/memory-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/memory-command.json",
+    "bytes": 204,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/memory-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/memory-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/memory-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/memory-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/memory-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/memory-stdout.gz",
+    "bytes": 327,
+    "sha256": "5b4e3dfcceb7949c8a5f84aa633ece311c1110875e0653f63d6e6ae8ea517662",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/object-format-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/object-format-command.json",
+    "bytes": 192,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/object-format-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/object-format-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/object-format-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/object-format-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/object-format-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/object-format-stdout.gz",
+    "bytes": 25,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-command.json",
+    "bytes": 464,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-after-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-after-command.json",
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-after-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-after-exit.txt",
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-after-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-after-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-after-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-after-stdout.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-command.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-command.json",
+    "bytes": 301,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-exit.txt",
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-stderr.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-config-stdout.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-config-stdout.gz",
+    "bytes": 20,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-exit.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-exit.txt",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/pack-stderr.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/pack-stderr.gz",
+    "bytes": 1423,
+    "sha256": "effa565b3a2401f5559f1b46b2e92cdcea6ea425296478081a9cd35c45c28ca2",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/producer-input-identities.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/producer-input-identities.json",
+    "bytes": 862,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/producer-inputs.tar.gz",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/producer-inputs.tar.gz",
+    "bytes": 9165,
+    "sha256": "6eb96c8d5810e5a2c060e9cc833abdfeef20ac47838d3d392898d1c335b60fae",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/result.json",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/result.json",
+    "bytes": 1339,
+    "sha256": "fa48aa30e000b1ffce0919400cc51587eba94e7736b9825a3b17915595e841dc",
+    "mode": 420
+  },
+  {
+    "source": ".linkedspec-data/push-monitor/20261116T222311.531391Z/revisions.txt",
+    "target": "docs/checkpoints/julia-loader-qualification-2026-11-16/telemetry/revisions.txt",
+    "bytes": 83,
+    "sha256": "57ac46d9514e9d550d23465af88af0ca23a619b1c9fb031abb8d483285f17148",
+    "mode": 420
+  }
+]

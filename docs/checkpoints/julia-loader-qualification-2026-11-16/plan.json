@@ -1,0 +1,31 @@
+{
+  "activation": "53a7df83a8019a800ff80dc64dce66746059b7e8",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0",
+  "cwd": ".",
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_owner": "julia/src/parser/UserFunctionDefinitionParser.jl",
+  "historical": "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/direct/custody.json",
+  "grammar_fact": "docs/knowledge/julia-spec-driven-function-shell-parser.md",
+  "consumers": [
+    "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+    "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+    "julia/test/array_pipeline_result_guard_composition_test.jl",
+    "julia/test/array_transform_callable_result_guard_composition_test.jl",
+    "julia/test/array_transform_result_guard_composition_test.jl",
+    "julia/test/blind_parent_push_test.jl",
+    "julia/test/capture_collection_selection_test.jl",
+    "julia/test/capture_endpoint_absence_test.jl",
+    "julia/test/computed_selection_test.jl",
+    "julia/test/count_result_guard_composition_test.jl",
+    "julia/test/count_source_fallback_test.jl",
+    "julia/test/hash_value_result_guard_composition_test.jl",
+    "julia/test/hash_view_result_guard_composition_test.jl",
+    "julia/test/key_count_callable_result_guard_composition_test.jl",
+    "julia/test/key_count_result_guard_composition_test.jl",
+    "julia/test/length_result_guard_composition_test.jl",
+    "julia/test/named_capture_endpoint_absence_test.jl",
+    "julia/test/named_writer_endpoint_absence_test.jl",
+    "julia/test/referenced_blind_targets_test.jl",
+    "julia/test/rule_invocation_accumulators_test.jl"
+  ]
+}

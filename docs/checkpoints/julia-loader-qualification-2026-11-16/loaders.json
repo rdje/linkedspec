@@ -1,0 +1,1448 @@
+{
+  "consumers": [
+    "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+    "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+    "julia/test/array_pipeline_result_guard_composition_test.jl",
+    "julia/test/array_transform_callable_result_guard_composition_test.jl",
+    "julia/test/array_transform_result_guard_composition_test.jl",
+    "julia/test/blind_parent_push_test.jl",
+    "julia/test/capture_collection_selection_test.jl",
+    "julia/test/capture_endpoint_absence_test.jl",
+    "julia/test/computed_selection_test.jl",
+    "julia/test/count_result_guard_composition_test.jl",
+    "julia/test/count_source_fallback_test.jl",
+    "julia/test/hash_value_result_guard_composition_test.jl",
+    "julia/test/hash_view_result_guard_composition_test.jl",
+    "julia/test/key_count_callable_result_guard_composition_test.jl",
+    "julia/test/key_count_result_guard_composition_test.jl",
+    "julia/test/length_result_guard_composition_test.jl",
+    "julia/test/named_capture_endpoint_absence_test.jl",
+    "julia/test/named_writer_endpoint_absence_test.jl",
+    "julia/test/referenced_blind_targets_test.jl",
+    "julia/test/rule_invocation_accumulators_test.jl"
+  ],
+  "execution_qualifications": [
+    {
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "role": "existing non-Perl expected-value fallback; no portable-policy admission"
+    },
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "names": [
+        "blind_no_regex",
+        "marked_blind_target",
+        "markerless_blind"
+      ],
+      "owners": [
+        "TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2.1",
+        "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1"
+      ],
+      "parent": "referenced_blind_intermediate.json",
+      "role": "invalid-build compile-only branch and named runtime exclusions"
+    },
+    {
+      "consumer": "julia/test/rule_invocation_accumulators_test.jl",
+      "owner": "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1 plus existing fixture binding authority",
+      "role": "preserved empty-iteration override and fixture Julia compatibility fallback"
+    }
+  ],
+  "generated_modules": [
+    {
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "expression": "Base.include_string(host, emit_julia_source_v2(compiled, \"capture-collection-selection.spec\"))",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/computed_selection_test.jl",
+      "expression": "Base.include_string(host, emit_julia_source_v2(compiled, \"computed-selection.spec\"))",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    },
+    {
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "Base.include_string(host, emitted)",
+      "role": "emitted bytes included into fresh Module in the same process; no fresh OS process or file input"
+    }
+  ],
+  "input_edges": [
+    {
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_julia_cases.json\"), String)",
+      "line": 47,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/array_concat_open_arity_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_result_guard_julia_profiles.json\"), String)",
+      "line": 48,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/array_concat_open_arity_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 52,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "include(joinpath(@__DIR__, \"callable_array_transform_observation.jl\"))",
+      "line": 3,
+      "role": "included observation support module",
+      "target": "julia/test/callable_array_transform_observation.jl"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_cases.json\"), String)",
+      "line": 44,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_profiles.json\"), String)",
+      "line": 45,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/array_pipeline_callable_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 49,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "include(joinpath(@__DIR__, \"callable_array_pipeline_observation.jl\"))",
+      "line": 3,
+      "role": "included observation support module",
+      "target": "julia/test/callable_array_pipeline_observation.jl"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_pipeline_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/array_pipeline_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_pipeline_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/array_pipeline_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_cases.json\"), String)",
+      "line": 44,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/array_transform_callable_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_profiles.json\"), String)",
+      "line": 45,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/array_transform_callable_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 49,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "include(joinpath(@__DIR__, \"callable_array_transform_observation.jl\"))",
+      "line": 3,
+      "role": "included observation support module",
+      "target": "julia/test/callable_array_transform_observation.jl"
+    },
+    {
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_transform_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/array_transform_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_transform_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/array_transform_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/blind_parent_push_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/blind_parent_push.json"
+    },
+    {
+      "consumer": "julia/test/blind_parent_push_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/blind_parent_push_repeated.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/blind_parent_push_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.spec\"),String)",
+      "line": 50,
+      "role": "authored spec fixture",
+      "target": "tests/fixtures/capture_collection_selection_values.spec"
+    },
+    {
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.json\"),String)",
+      "line": 51,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/capture_collection_selection_values.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/capture_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"capture_endpoint_absence.json\"), String)",
+      "line": 27,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/capture_endpoint_absence.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/capture_endpoint_absence_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/computed_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.spec\"),String)",
+      "line": 62,
+      "role": "authored spec fixture",
+      "target": "tests/fixtures/computed_selection_values.spec"
+    },
+    {
+      "consumer": "julia/test/computed_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.json\"),String)",
+      "line": 63,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/computed_selection_values.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/computed_selection_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_errors.json\"), String)",
+      "line": 87,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/count_result_guard_julia_errors.json"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", name), String)",
+      "line": 90,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", name), String)",
+      "line": 90,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/count_result_guard_source_owner_cases.json"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_domain.json\"), String)",
+      "line": 105,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/count_result_guard_julia_domain.json"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_excluded_ast.json\"), String)",
+      "line": 111,
+      "role": "AST-source fixture",
+      "target": "tests/fixtures/count_result_guard_excluded_ast.json"
+    },
+    {
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_ast.json\"), String)",
+      "line": 122,
+      "role": "AST-expected fixture",
+      "target": "tests/fixtures/count_result_guard_julia_ast.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"count_boolean_source_cases.json\"), String)",
+      "line": 61,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/count_boolean_source_cases.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_value_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/hash_value_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_value_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/hash_value_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_view_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/hash_view_result_guard_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_view_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/hash_view_result_guard_julia_cases.json"
+    },
+    {
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "role": "explicit grammar read",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_callable_julia_profiles.json\"), String)",
+      "line": 78,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/key_count_callable_julia_profiles.json"
+    },
+    {
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_callable_result_cases.json\"), String)",
+      "line": 79,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/key_count_callable_result_cases.json"
+    },
+    {
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_result_guard_julia_domain.json\"), String)",
+      "line": 74,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/key_count_result_guard_julia_domain.json"
+    },
+    {
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_result_guard_julia_errors.json\"), String)",
+      "line": 75,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/key_count_result_guard_julia_errors.json"
+    },
+    {
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/key_count_result_guard_cases.json"
+    },
+    {
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/key_count_count_source_ownership_julia_cases.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"length_result_guard_julia_domain.json\"), String)",
+      "line": 74,
+      "role": "host domain/profile fixture",
+      "target": "tests/fixtures/length_result_guard_julia_domain.json"
+    },
+    {
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"length_result_guard_julia_errors.json\"), String)",
+      "line": 75,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/length_result_guard_julia_errors.json"
+    },
+    {
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/length_result_guard_cases.json"
+    },
+    {
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/length_count_source_ownership_cases.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/named_capture_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"named_capture_endpoint_absence.json\"), String)",
+      "line": 27,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/named_capture_endpoint_absence.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/named_capture_endpoint_absence_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/named_writer_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"named_writer_endpoint_absence.json\"), String)",
+      "line": 27,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/named_writer_endpoint_absence.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/named_writer_endpoint_absence_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", file), String)",
+      "line": 37,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/referenced_blind_intermediate.json"
+    },
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", file), String)",
+      "line": 37,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/referenced_blind_intermediate_qualified.json"
+    },
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", file), String)",
+      "line": 37,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/pure_blind_targets.json"
+    },
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", file), String)",
+      "line": 37,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/referenced_blind_intermediate_negatives.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    },
+    {
+      "consumer": "julia/test/rule_invocation_accumulators_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/rule_invocation_accumulators.json"
+    },
+    {
+      "consumer": "julia/test/rule_invocation_accumulators_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "role": "JSON fixture",
+      "target": "tests/fixtures/rule_invocation_binding_scope.json"
+    },
+    {
+      "condition": "package source ancestors before pwd ancestors; locked cache; runtime resolution unobserved",
+      "consumer": "julia/test/rule_invocation_accumulators_test.jl",
+      "role": "cached-default grammar dependency",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "limits": "Twenty named Julia source consumers and finite direct read/include/grammar/generated-Module roles. No Julia/SDK execution, actual package/cache/path selection, full transitive/native/per-read graph, fresh OS process or canonical admission. Existing runtime exclusions/host expectation fallbacks and older capture timing remain explicit.",
+  "optional_captures": [
+    {
+      "condition": "nonempty capture plus relative owned-path and symlink checks",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_ARRAY_CONCAT_JULIA_CAPTURE",
+      "role": "two write/equal-byte readbacks; parsed before restore/target compile, emitted before include_string; parsing already happened"
+    },
+    {
+      "condition": "nonempty capture plus relative owned-path and symlink checks",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_CALLABLE_PIPELINE_JULIA_CAPTURE",
+      "role": "two write/equal-byte readbacks; parsed before restore/target compile, emitted before include_string; parsing already happened"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_ARRAY_PIPELINE_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "nonempty capture plus relative owned-path and symlink checks",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_CALLABLE_TRANSFORM_JULIA_CAPTURE",
+      "role": "two write/equal-byte readbacks; parsed before restore/target compile, emitted before include_string; parsing already happened"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_ARRAY_TRANSFORM_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env exactly 1",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_COUNT_GUARD_CAPTURE",
+      "role": "stdout observation/trace only; no capture files"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "env": "LINKEDSPEC_COUNT_SOURCE_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_HASH_VALUE_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_HASH_VIEW_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_CALLABLE_KEY_COUNT_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_KEY_COUNT_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    },
+    {
+      "condition": "env nonempty",
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "env": "LINKEDSPEC_LENGTH_CAPTURE",
+      "role": "two write-only outputs after compile and AST restoration, before same-process include_string"
+    }
+  ],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0",
+  "read_sites": [
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 13,
+      "position": 549,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 26,
+      "position": 1195,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_julia_cases.json\"), String)",
+      "line": 47,
+      "position": 2215,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_concat_open_arity_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_concat_open_arity_result_guard_julia_profiles.json\"), String)",
+      "line": 48,
+      "position": 2337,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_concat_open_arity_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, grammar_path)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_concat_open_arity_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 52,
+      "position": 2644,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 13,
+      "position": 548,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 24,
+      "position": 1026,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_cases.json\"), String)",
+      "line": 44,
+      "position": 1953,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_pipeline_callable_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_pipeline_callable_result_guard_julia_profiles.json\"), String)",
+      "line": 45,
+      "position": 2088,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_pipeline_callable_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, grammar_path)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 49,
+      "position": 2395,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "grammar_path",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "position": 3400,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"array_pipeline_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_pipeline_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "position": 3603,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_pipeline_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"array_pipeline_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_pipeline_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_pipeline_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "position": 3720,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_pipeline_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 13,
+      "position": 551,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "path",
+        "String"
+      ],
+      "condition": "capture nonempty",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(path, String)",
+      "line": 24,
+      "position": 1030,
+      "role": "optional generated artifact readback",
+      "targets": []
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_cases.json\"), String)",
+      "line": 44,
+      "position": 1958,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_transform_callable_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"array_transform_callable_result_guard_julia_profiles.json\"), String)",
+      "line": 45,
+      "position": 2094,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_transform_callable_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, grammar_path)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(root, grammar_path), String)",
+      "line": 49,
+      "position": 2402,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "grammar_path",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "position": 3407,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"array_transform_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_transform_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "position": 3611,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_transform_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"array_transform_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/array_transform_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"array_transform_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "position": 3729,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/array_transform_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests/fixtures\", name * \".json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/blind_parent_push_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "position": 801,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/blind_parent_push.json",
+        "tests/fixtures/blind_parent_push_repeated.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.spec\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.spec\"),String)",
+      "line": 50,
+      "position": 2354,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/capture_collection_selection_values.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/capture_collection_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"capture_collection_selection_values.json\"),String)",
+      "line": 51,
+      "position": 2474,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/capture_collection_selection_values.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"capture_endpoint_absence.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/capture_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"capture_endpoint_absence.json\"), String)",
+      "line": 27,
+      "position": 1132,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/capture_endpoint_absence.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.spec\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/computed_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.spec\"),String)",
+      "line": 62,
+      "position": 2949,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/computed_selection_values.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/computed_selection_test.jl",
+      "expression": "read(joinpath(root,\"tests\",\"fixtures\",\"computed_selection_values.json\"),String)",
+      "line": 63,
+      "position": 3059,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/computed_selection_values.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_errors.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_errors.json\"), String)",
+      "line": 87,
+      "position": 3869,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_result_guard_julia_errors.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"tests\", \"fixtures\", name)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", name), String)",
+      "line": 90,
+      "position": 4121,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_result_guard_cases.json",
+        "tests/fixtures/count_result_guard_source_owner_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_domain.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_domain.json\"), String)",
+      "line": 105,
+      "position": 4861,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_result_guard_julia_domain.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_excluded_ast.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_excluded_ast.json\"), String)",
+      "line": 111,
+      "position": 5205,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_result_guard_excluded_ast.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_ast.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"tests\", \"fixtures\", \"count_result_guard_julia_ast.json\"), String)",
+      "line": 122,
+      "position": 5745,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_result_guard_julia_ast.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"count_boolean_source_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/count_source_fallback_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"count_boolean_source_cases.json\"), String)",
+      "line": 61,
+      "position": 2674,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/count_boolean_source_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "grammar_path",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "position": 3366,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"hash_value_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_value_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "position": 3565,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/hash_value_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"hash_value_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_value_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_value_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "position": 3678,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/hash_value_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "grammar_path",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "position": 3347,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"hash_view_result_guard_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_view_result_guard_julia_profiles.json\"), String)",
+      "line": 78,
+      "position": 3545,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/hash_view_result_guard_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"hash_view_result_guard_julia_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/hash_view_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"hash_view_result_guard_julia_cases.json\"), String)",
+      "line": 79,
+      "position": 3657,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/hash_view_result_guard_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "grammar_path",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(grammar_path, String)",
+      "line": 75,
+      "position": 3369,
+      "role": "direct file read",
+      "targets": [
+        "specs/user_function_definition.spec"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"key_count_callable_julia_profiles.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_callable_julia_profiles.json\"), String)",
+      "line": 78,
+      "position": 3576,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/key_count_callable_julia_profiles.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"key_count_callable_result_cases.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_callable_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_callable_result_cases.json\"), String)",
+      "line": 79,
+      "position": 3684,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/key_count_callable_result_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"key_count_result_guard_julia_domain.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_result_guard_julia_domain.json\"), String)",
+      "line": 74,
+      "position": 3235,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/key_count_result_guard_julia_domain.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"key_count_result_guard_julia_errors.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"key_count_result_guard_julia_errors.json\"), String)",
+      "line": 75,
+      "position": 3346,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/key_count_result_guard_julia_errors.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, name)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/key_count_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "position": 3592,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/key_count_result_guard_cases.json",
+        "tests/fixtures/key_count_count_source_ownership_julia_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"length_result_guard_julia_domain.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"length_result_guard_julia_domain.json\"), String)",
+      "line": 74,
+      "position": 3216,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/length_result_guard_julia_domain.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, \"length_result_guard_julia_errors.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, \"length_result_guard_julia_errors.json\"), String)",
+      "line": 75,
+      "position": 3324,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/length_result_guard_julia_errors.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(fixture_root, name)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/length_result_guard_composition_test.jl",
+      "expression": "read(joinpath(fixture_root, name), String)",
+      "line": 78,
+      "position": 3555,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/length_result_guard_cases.json",
+        "tests/fixtures/length_count_source_ownership_cases.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"named_capture_endpoint_absence.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/named_capture_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"named_capture_endpoint_absence.json\"), String)",
+      "line": 27,
+      "position": 1129,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/named_capture_endpoint_absence.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests\", \"fixtures\", \"named_writer_endpoint_absence.json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/named_writer_endpoint_absence_test.jl",
+      "expression": "read(joinpath(root, \"tests\", \"fixtures\", \"named_writer_endpoint_absence.json\"), String)",
+      "line": 27,
+      "position": 1133,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/named_writer_endpoint_absence.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests/fixtures\", file)",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", file), String)",
+      "line": 37,
+      "position": 1747,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/referenced_blind_intermediate.json",
+        "tests/fixtures/referenced_blind_intermediate_qualified.json",
+        "tests/fixtures/pure_blind_targets.json",
+        "tests/fixtures/referenced_blind_intermediate_negatives.json"
+      ]
+    },
+    {
+      "arguments": [
+        "joinpath(root, \"tests/fixtures\", name * \".json\")",
+        "String"
+      ],
+      "condition": "source-derived root aliases; no observed resolution",
+      "consumer": "julia/test/rule_invocation_accumulators_test.jl",
+      "expression": "read(joinpath(root, \"tests/fixtures\", name * \".json\"), String)",
+      "line": 19,
+      "position": 840,
+      "role": "direct file read",
+      "targets": [
+        "tests/fixtures/rule_invocation_accumulators.json",
+        "tests/fixtures/rule_invocation_binding_scope.json"
+      ]
+    }
+  ]
+}

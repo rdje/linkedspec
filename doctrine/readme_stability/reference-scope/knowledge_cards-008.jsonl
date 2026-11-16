@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
 {"bytes":1962,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-quoted-marker-current-oracle.md","sha256":"52fbcc0405087b93f5c593c3f3c05555dd7c50c8fde97b37a25cdd6bff039406","type":"member"}
 {"bytes":3970,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"c162c6ce8161aa830d7de9e4f26bb77408cff03ee8b934f0ad91c78cf427253b","type":"member"}
 {"bytes":3968,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.6.1.2","path":"docs/knowledge/perl-callable-array-transform-result-guards.md","sha256":"d5e65d965dd2060d2916763b5c1d29af5dab3a21ff9632ac32c244bc342fe223","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":20671,"lines":252,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-component-capture.md","sha256":"9cf7b153cf75173cdc6b0e94251ac24a32343d5106ede2e2374e4517366c6a65","type":"member"}
 {"bytes":5004,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-value-capture.md","sha256":"8d83d08a5ae74981cb08e9a4a8ba3dfa2c37b73deb0bc0e59bfc278d95fd0b5a","type":"member"}
 {"bytes":4680,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-default-capture.md","sha256":"10e6c6fa67d9c2e2ea1daf67b4407bff57f229793ad9e57c7571fa4ef9317f65","type":"member"}
-{"bytes":7258,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-general-return-required-capture.md","sha256":"f33c986df9426c4a6b0ae56ecf82f62b0092c2897adc215fe977afa49e860754","type":"member"}

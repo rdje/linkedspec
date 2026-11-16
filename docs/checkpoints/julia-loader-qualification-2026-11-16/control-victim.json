@@ -1,0 +1,25 @@
+{
+  "original_label": "runtime-exclusion-erased",
+  "original_result": "RED: victim is Count fallback and runtime exclusions remain",
+  "original_victim": {
+    "consumer": "julia/test/count_source_fallback_test.jl",
+    "role": "existing non-Perl expected-value fallback; no portable-policy admission"
+  },
+  "qualified_result": "PASS: exactly the runtime-exclusion role removed; both expectation qualifications remain",
+  "qualified_victim": [
+    {
+      "consumer": "julia/test/referenced_blind_targets_test.jl",
+      "names": [
+        "blind_no_regex",
+        "marked_blind_target",
+        "markerless_blind"
+      ],
+      "owners": [
+        "TYPE-REFERENCE-BOOK.1.2.23.3.48.2.2.1",
+        "TYPE-REFERENCE-BOOK.1.2.23.3.39.8.1"
+      ],
+      "parent": "referenced_blind_intermediate.json",
+      "role": "invalid-build compile-only branch and named runtime exclusions"
+    }
+  ]
+}

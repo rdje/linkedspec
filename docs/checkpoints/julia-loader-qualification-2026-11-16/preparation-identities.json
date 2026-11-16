@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/array-concat-open-arity-julia-2026-11-12/direct/custody.json": {
+    "bytes": 368761,
+    "mode": 420,
+    "sha256": "817be1b481c9f89666664277cf740941a8e459015692bf7986b4a9f8e9eb7787"
+  },
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/capture.py": {
+    "bytes": 3204,
+    "mode": 420,
+    "sha256": "5af189b83bb8a40acce7fd352d14d5f12bf370c5140eebbfa3567b97c2ec3ec6"
+  },
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/plan.json": {
+    "bytes": 1652,
+    "mode": 420,
+    "sha256": "9069a34f53068a041fd07dcf0a92bc1a1d0543589e93e257e0a363975b3389b2"
+  },
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/review.py": {
+    "bytes": 18357,
+    "mode": 420,
+    "sha256": "a8ea930663a78b877d6dd3a2081d906fc3567ed48cdfd86c4e9600cf3dfa688c"
+  },
+  "docs/checkpoints/julia-loader-qualification-2026-11-16/run_step.py": {
+    "bytes": 1014,
+    "mode": 420,
+    "sha256": "1780a14195992407a6f03692fffc4f61c6968194152d877d43542f596f07a31c"
+  },
+  "docs/knowledge/julia-spec-driven-function-shell-parser.md": {
+    "bytes": 5544,
+    "mode": 420,
+    "sha256": "d118d7dd7833f4329ad1e46b4a5472a6598876721b1a1904c431138938277ba4"
+  },
+  "julia/src/parser/UserFunctionDefinitionParser.jl": {
+    "bytes": 8201,
+    "mode": 420,
+    "sha256": "c6266a06de921fc42af5876b195cb6d054855076aca5f4cb15f8ef238371b838"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  }
+}
