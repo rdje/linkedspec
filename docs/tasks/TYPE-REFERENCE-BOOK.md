@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2` | `pending` | Literal/non-open source forms reconciled; resolve nonadjacent/constructed/helper/library paths, then generated and all admission prerequisites. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1` | `pending` | Helper/path plan committed; qualify nonadjacent literal bindings, then helper/caller, library/process/non-open and reconciliation leaves. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.1.42` | `completed` | Own84/66 contract passes/18 terminal-supported concat composition failures;84 module-dump pairs/first readonly14/current126; frozen bounded80, no production change. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.4.28` | `completed` | Selected route-specific raw fields/normal128 per host/legacyRED1/rawGREEN0; historical scope qualified, full admission separate. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |

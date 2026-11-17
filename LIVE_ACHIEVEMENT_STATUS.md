@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: Perl other-IO source forms qualified; helper/library path resolution continues.
+PNT: helper/path obligation split; nonadjacent literal bindings next.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2 — 159 retained sources/322 IO sites round-trip under PPI1.270; all320 original sites and34 earlier literal sites reconcile. Open forms:32 literal reads/two literal writes/35 scalar-output declarations/one process pipe/96 unresolved read operands/26 unresolved write operands. Non-open:121 readline syntax sites and nine Word candidates. Four independent specimens, actual scalar-reference removal RED and six evidence controls pass; current177 inputs agree. No application execution.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0 — Split the helper/path obligation into nonadjacent literal bindings, helper/caller targets, library/process/non-open origins and final reconciliation. Parent Goal/Acceptance/Continuation and the full inherited159-source cohort remain binding; generated/inline, independent semantics and native/publication prerequisites stay separate.
 
 ## Next Action
 
-Remeasure committed size; resolve nonadjacent/constructed/helper/library direct paths under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2, then generated/inline, independent semantics, Dart/frozen inputs and canonical registration/publication prerequisites.
+Qualify nonadjacent fixed literal open bindings under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1; remeasure after each leaf and preserve every unresolved helper/library/generated and admission owner.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0 — helper/path work split with full parent/source scope preserved; no new runtime verdict.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2 — IO322/original320/literal34/scalar-output35/process1/unresolved-file122/non-open130/current177; four specimens/source RED/six controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1 — adjacent variable input:159 sources/192 open/one baseline/191 unmatched/current190; six specimens/changed-source RED/seven controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.36 — staged epoch15/13 pointers/two bodies/16 queries/ten controls/11972 text bytes; parent links35/36 repaired.
@@ -29,7 +30,6 @@ Remeasure committed size; resolve nonadjacent/constructed/helper/library direct 
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Dart16/read-sites23/bindings46/targets30/qualifications4/inline2/current152/twelve controls; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0 — Dart3/fixture-grammar9/support2/optional2/historical11-to9/current130/nine controls; original reader refusal retained, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Lua11/direct24/targets14/support2/optional2/historical6/current134/ten controls; no SDK.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — native94/source113; conditional6/RED3; ledger7; eleven local Lua routes unresolved, no SDK.
 
 
 ## History

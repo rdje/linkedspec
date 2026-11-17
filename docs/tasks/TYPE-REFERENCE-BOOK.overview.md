@@ -2148,11 +2148,42 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing correction: First normal attempt rejects the omitted maintained-reference refresh. Preserve complete failed-normal.log.gz and landing-before.tar.gz; its remaining claim check was stopped after the known rejection, so it earns no complete hook credit. Existing update_reference_scope.py refreshes this leaf's store before a full normal retry; no checker, limit or authority changes.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2`
-  Status: `pending`
+  Status: `active`
   Goal: Resolve constructed/helper-based direct paths and reconcile this edge-expansion lane.
   Acceptance: Parent contract across all145, including custom library/helper loaders beyond the bounded initial vocabulary. Preserve unresolved semantic/native origins and coordinate generated/inline roles with sibling2.
 
   Continuation: Include all122 unresolved file operands, nonadjacent literal declarations, the process pipe and130 non-open sites from other-io2. Retain all159 sources; library/custom-helper/generated/alias/phase semantics remain explicit rather than treating this bounded lexical reconciliation as closure.
+  Children: `.0` plan; `.1` nonadjacent literals; `.2` helper/caller paths; `.3` library/process/non-open origins; `.4` reconciliation (ID suffixes).
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0`
+  Status: `completed`
+  Goal: Split the inherited helper/path obligation into bounded source qualification leaves before implementation.
+  Acceptance: Preserve the parent Goal/Acceptance and full159-source/unresolved populations; order concrete children with explicit semantic/native/generated limits. Retain actual plan inputs and current outgoing telemetry without duplicating immutable source bodies.
+  Verification tier: `focused`
+  Focused checks: Parent contract/source/child/frontier recovery; current inherited source qualification, scope, book, memory, histories and normal hooks.
+  Canonical trigger: Registration4.1.2/publication30.2; no shared runner, checker, runtime, storage default or authority change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0.json`
+  Outcome: Parent contract and full inherited cohort preserved; nonadjacent1, helper/caller2, library/process/non-open3 and reconciliation4 are ordered. No source classification, runtime or admission promoted. Evidence: docs/checkpoints/perl-helper-path-plan-2026-11-17/.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1`
+  Status: `pending`
+  Goal: Qualify nonadjacent fixed literal variable declarations at open operands.
+  Acceptance: Full159 sources; exact declaration/use/scope/conditions and intervening-write exclusions, retained target bodies and independent source controls. Preserve adjacent1 and unresolved sites; no evaluated values or reached IO.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.2`
+  Status: `pending`
+  Goal: Resolve declared file-read helper bodies and finite literal/constructed caller path sets.
+  Acceptance: Bind each owned helper formal/operand/caller to exact source and target bodies, including root/File::Spec construction and source selections. Preserve dynamic/alias/conditional limits and full159 coverage; split further when required.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.3`
+  Status: `pending`
+  Goal: Qualify remaining library/custom-helper, process and non-open origins.
+  Acceptance: Full159 sources; explicit public library/namespace vocabulary, pipe child/argv and handle/directory/glob roles, target bodies and unresolved transitive origins. Never inspect dependency internals or infer runtime/native custody.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.4`
+  Status: `pending`
+  Goal: Reconcile the complete helper/path cohort before generated/inline qualification.
+  Acceptance: Every inherited source/site and target remains accounted for, including unresolved/excluded/dormant edges. Coordinate sibling3.1.2 and broader3.2/native4.2 rather than transferring their admission credit or silently dropping a route.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.2`
   Status: `pending`

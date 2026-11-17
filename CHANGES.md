@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — bound the remaining Perl helper and path work
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0: Split the helper/path obligation into nonadjacent literal bindings, helper/caller targets, library/process/non-open origins and final reconciliation. Parent Goal/Acceptance/Continuation and the full inherited159-source cohort remain binding; generated/inline, independent semantics and native/publication prerequisites stay separate. Evidence: `docs/checkpoints/perl-helper-path-plan-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — reconcile remaining Perl IO source forms
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2: 159 retained sources/322 IO sites round-trip under PPI1.270; all320 original sites and34 earlier literal sites reconcile. Open forms:32 literal reads/two literal writes/35 scalar-output declarations/one process pipe/96 unresolved read operands/26 unresolved write operands. Non-open:121 readline syntax sites and nine Word candidates. Four independent specimens, actual scalar-reference removal RED and six evidence controls pass; current177 inputs agree. No application execution. Evidence: `docs/checkpoints/perl-other-io-2026-11-17/REVIEW.md`.

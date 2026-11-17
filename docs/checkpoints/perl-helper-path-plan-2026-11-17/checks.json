@@ -1,0 +1,26 @@
+[
+  {
+    "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-helper-path-plan-2026-11-17/review.py",
+    "source": ".linkedspec-data/perl-helper-path-plan-review.log",
+    "target": "docs/checkpoints/perl-helper-path-plan-2026-11-17/review.log.gz",
+    "bytes": 309,
+    "sha256": "aa06d91cc21c45730864c687a6823d4677e0361f3936a5419be64043e3033af1",
+    "recording": "After-use actual combined stdout/stderr; successful sequential command chain observed exit0. No original separate-channel/outer-first-use credit."
+  },
+  {
+    "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-other-io-2026-11-17/review.py --current",
+    "source": ".linkedspec-data/perl-helper-path-plan-source-review.log",
+    "target": "docs/checkpoints/perl-helper-path-plan-2026-11-17/inherited-source-review.log.gz",
+    "bytes": 763,
+    "sha256": "c3fbb08d375ad6c535bb4c3ed97fde3bc084c47c88997cc42887f82032602e58",
+    "recording": "After-use actual combined stdout/stderr; successful sequential command chain observed exit0. No original separate-channel/outer-first-use credit."
+  },
+  {
+    "command": "bash tools/run_mdbook_local.sh",
+    "source": ".linkedspec-data/perl-helper-path-plan-book.log",
+    "target": "docs/checkpoints/perl-helper-path-plan-2026-11-17/book.log.gz",
+    "bytes": 274,
+    "sha256": "4de52648b8e9e8e3fb6e0f43d747abd25cb62f17147348d915aaf46b3675f5c1",
+    "recording": "After-use actual combined stdout/stderr; successful sequential command chain observed exit0. No original separate-channel/outer-first-use credit."
+  }
+]

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — preserve the full helper-path obligation while splitting work
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0: The parent remains active and its Goal/Acceptance/Continuation are preserved byte-for-byte as field values. Child source grammars must retain every unqualified site, source condition and target identity; they do not establish evaluated Perl values or callee/alias/phase semantics. Committed inputs are reused through Git revision/blob/SHA256 identities rather than duplicate source archives. Only the newly activated task image and producer need new before-images. Evidence: `docs/checkpoints/perl-helper-path-plan-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — separate scalar captures and non-open IO from file inputs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2: Lexical source shape separates35 scalar-backed output declarations from file paths, and a named support process pipe from file reads. The nine non-open Words are two glob, two opendir, two readdir, two pipe and one sysread sites;121 readline syntax sites use source handle names. These are declaration/candidate roles, not proof of resolved builtins, handle origin, reachability or execution. The earlier34 literal sites remain exact. All122 unresolved file operands and130 non-open sites continue with the helper/library lane; generated/inline and independent semantic/native owners remain open. The first incorrect artifact lookup failed before lexical observations; its sources and original channels survive. Corrected capture and separate current review pass. Startup shared policy digests match the recorded October23 values; due cleanup remains November16 10:59UTC, still under24h. Evidence: `docs/checkpoints/perl-other-io-2026-11-17/REVIEW.md`.

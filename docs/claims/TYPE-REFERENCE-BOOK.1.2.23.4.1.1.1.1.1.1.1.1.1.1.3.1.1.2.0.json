@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0",
+  "claims": [
+    {
+      "name": "helper-plan-activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,498,460,705 non-thin bytes against cached4683555e, leaving1,539,295 before the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Committed activation/cached-origin serialized range; actual retained selected source/ref/config/command/channels copied after use.",
+        "result": "{\"ahead\": 131, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.498460705, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1498460705, \"evidence\": \".linkedspec-data/push-monitor/20261117T095703.973397Z\", \"gib\": 1.395550281740725, \"head\": \"7354d156f40c492e84c7992578a699e2e77ad7ba\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 49770, \"pack_footer\": \"4818d2e631341d8643bc513bd092fc6f88b1eed6\", \"pack_sha256\": \"7f4a19a3fc07a1bbb222fe6d0a0c2dafb0d94a36dfefc68cd94db0f0f417c05f\", \"packed_objects\": 49770, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 1539295, \"trigger_reached\": false, \"unique_object_ids\": 49770}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Stream/stat/footer agreement is retained; complete independent actual-file falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "New plan producer/active task before-images and Git-addressed committed inputs retained, with selected actual telemetry. Raw diagnostic pack/full object tables remain ignored on this volume. Full native/physical/outer-first-use/per-read/source-origin/toolchain/OS closure remains4.2/SESSION5. No fresh remote, wire-size or future-growth guarantee."
+      }
+    }
+  ]
+}

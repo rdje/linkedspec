@@ -1,4 +1,4 @@
-November17 current PNT frontier: Perl other-IO2 is focused-checked:159 sources/322 sites/literal34/scalar-output35/process1/unresolved-file122/non-open130/current177. Constructed/nonadjacent/helper/library paths then generated/semantic/native, Dart/frozen-input and registration4.1.2/publication30.2 remain. No runtime admission.
+November17 current PNT frontier: Helper/path plan committed; nonadjacent literals precede helper/caller targets, library/process/non-open origins and source reconciliation. All prior159-source qualifications and semantic/native/generated/registration/publication limits remain. No runtime admission.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

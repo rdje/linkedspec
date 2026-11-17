@@ -1,0 +1,114 @@
+{
+  "CHANGES.md": {
+    "blob": "b2bd133ae8fb500f15b23c91872208769971c812",
+    "bytes": 35423,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "e09f79f52e02eb18ba6dd53825419d2e732f9ae1b4096c0d67d94336ec33bb80"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "blob": "d83193b0dc404a07ad237ea8b53545e051be791e",
+    "bytes": 31955,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "99939382de959cd5a3525506022aeae18c01a43bbc6e41fb5777e29073a26d89"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "blob": "8dab6eb4eda992fdc3d11d35be9d467d30e6742b",
+    "bytes": 4434,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "ac08cfe66cbc909f17f06eedaeb3c6783b4b3d241a463cc4cf4b83fa63d9bdfb"
+  },
+  "MEMORY.md": {
+    "blob": "d0f19f2f3835be4cf6d635208fa7c3b5db430a52",
+    "bytes": 2027,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "cb1c867a98c12f407b749cd345d90c5c2e01665261505483f5c8153a69fb5de9"
+  },
+  "ROADMAP.md": {
+    "blob": "77bdc2beefdb5c721257dee94ab7df3288f2ea28",
+    "bytes": 472692,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "b67b803d0dfa600948550cc8aab975e76b7a351b5db4877adec3d08fb4f0e8a9"
+  },
+  "ROADMAP_V2.md": {
+    "blob": "64ccc689751ad8174b918b28704e225867b7ad0f",
+    "bytes": 274027,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "40ba362aa4469d574ee83e716790fefc1755cc4d864323f5073f6f27d8f3de3f"
+  },
+  "docs/TASK_TREE.md": {
+    "blob": "bb7f278a13adc342f683a25e2bc63081212c223d",
+    "bytes": 347871,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "5b585416520cc518c2d5e65bc5c55be1397edf6c47ba2397e0ff4572816fec91"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "blob": "f612fade4b989a1caec745d535ed361785a30152",
+    "bytes": 80498,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "f8338421c8ab446fcf342c255879893de2155acad4b8dd9f386bcd6169913add"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "blob": "da9e30d5e0375cd22aaa69cd6ccd58b8445f7f6f",
+    "bytes": 20930,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "a76504e14454c58dba054034cef4ada56c447833efb0197764314e3bf326e558"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "blob": "79c35f96cbb34cdd5df18f395b82df1813c03ba5",
+    "bytes": 609952,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "050f8889718a1b2578dbc4249e4c205085aa74dbad84166b41abade8c634d5a2"
+  },
+  "tools/project_data_env.sh": {
+    "blob": "a805db245e12350fcf44f46541d452b468888905",
+    "bytes": 9311,
+    "mode": "100755",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "blob": "ce07a49d326a5cd78c4000e0936b8991a35f39fb",
+    "bytes": 11043,
+    "mode": "100755",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/reference_scope.py": {
+    "blob": "d141c45ff175d0a2b3f8f11eb947bdb0a54c0fb5",
+    "bytes": 18534,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "43f98dab9de01d70437ca4baa2a597caf3de9b7b20442d1a4391663a2ea8255a"
+  },
+  "tools/run_python_project_data.sh": {
+    "blob": "ea064936ca070ebc51ad3013cc4c2bcf281df248",
+    "bytes": 1486,
+    "mode": "100755",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "tools/update_reference_scope.py": {
+    "blob": "c6972d41a1a98141640d1bcdc558fde710e03a44",
+    "bytes": 2325,
+    "mode": "100644",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "f3d35bf43ec43d283759f57a962f98b1ed830df31a4c7c86d75a550e04b5b412"
+  },
+  "tools/update_task_tree_index.pl": {
+    "blob": "9f16bc973c5ccdcd45c7dd2ae34376ce1b8cd4b1",
+    "bytes": 3790,
+    "mode": "100755",
+    "revision": "7354d156f40c492e84c7992578a699e2e77ad7ba",
+    "sha256": "70a296bf960be17bcafbe0b31d423b8acd85f53539e73b0ac099d044f630e78a"
+  }
+}
