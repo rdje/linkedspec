@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":10197,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.0","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"bc902492c194b635e35d009400470c29a657d13377c7fd48a123b5953baf1b7c","type":"member"}
+{"bytes":1469,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-all-target-actionir-ready-invariant.md","sha256":"6369b1eb3f16a226c925727f769ede8e36c2a2296593ba5b1384d7b967f4718a","type":"member"}
 {"bytes":6252,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-array-assignment-description-drift.md","sha256":"051ce38c046a2053b7b71fba410bd4b38bd0dbc9f16ffae9b07a2d5fc54808d4","type":"member"}
 {"bytes":3611,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-behavior-calibration-source-stages.md","sha256":"161415a4dcb2380139b6296023732f9b403244ffd959c3cc70242f41503b5363","type":"member"}
 {"bytes":8882,"lines":152,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-code-slot-equivalence-observation-gap.md","sha256":"6f963697ab59324fe35104a942f7ecf7480aa1b8412464cf1726693ad0c04cbe","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3387,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-contains-source-guards.md","sha256":"28c9d278ab46688e6215af2495e41248d51210394b02ba8cf8790a4e15d67e1b","type":"member"}
 {"bytes":3197,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-contains.md","sha256":"9fe7e117f7ce6c393ea987b2c2176a2227c4d5b58e9b9d43df7e0edc7fdadb78","type":"member"}
 {"bytes":3138,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-index.md","sha256":"5b879a32fe7c5217f240b3a26889b2125143667a4cfac56dc9a067fd868fb761","type":"member"}
-{"bytes":2634,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-presence.md","sha256":"33a696e32b7f5a8e8f01834d8d30c8e93878ffc042e2bb6cfebc240cd47d843d","type":"member"}
-{"bytes":7160,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-core-compilation-boundaries.md","sha256":"d99270bb4a408ffce1197d76be3b1347d057f90844d0c733fdbb242b40416ff4","type":"member"}

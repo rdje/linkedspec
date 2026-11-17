@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2634,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-presence.md","sha256":"33a696e32b7f5a8e8f01834d8d30c8e93878ffc042e2bb6cfebc240cd47d843d","type":"member"}
+{"bytes":7160,"lines":100,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-core-compilation-boundaries.md","sha256":"d99270bb4a408ffce1197d76be3b1347d057f90844d0c733fdbb242b40416ff4","type":"member"}
 {"bytes":4845,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2","path":"docs/knowledge/rust-count-result-source-guards.md","sha256":"9cfff01d007b8b3f67026d133f60a1eef28f33734083d3c7f04f64408d077740","type":"member"}
 {"bytes":4403,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-cursor-rewind-number-results.md","sha256":"3de30a20d870138f10d2c57cf2ad33f0e1ca698a538abe44182ba1000e594561","type":"member"}
 {"bytes":5825,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-declare-type-token-rule-scope.md","sha256":"2bc1d9e902563c149be9374d049cd5d2520780ca345a09f09cf80a0be3ce8377","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":2839,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-call-counter-saturation.md","sha256":"fba75ce2e09988816ab94dadc9480d3bf7b58252dc58c0a91378c71022886831","type":"member"}
 {"bytes":4554,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-returned-marker-validation-gaps.md","sha256":"ed35c6133e7cd040c060bd0b2306776642430a6b1607ed00f009bbd56a38f373","type":"member"}
 {"bytes":2704,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-statement-mutation-helpers.md","sha256":"662b05464a125ef96634e5d9c7cc7bb03bd926f7f3262aa30ced501242c16f73","type":"member"}
-{"bytes":5174,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-strict-syntax-validation.md","sha256":"a247476090b9d21bd228a38bdf1fd5a08affe7497f9d1586063a57c3df7dff1e","type":"member"}
-{"bytes":3348,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-string-predicate-source-guards.md","sha256":"d829e20ada2f5648fd269fa61298f109f909523f5972c8fcb2e1c1fedb6e9b38","type":"member"}

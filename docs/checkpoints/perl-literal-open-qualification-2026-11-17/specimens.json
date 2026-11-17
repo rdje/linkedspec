@@ -1,0 +1,37 @@
+[
+  {
+    "id": "read-write",
+    "source": "use strict; open my $input, '<:raw', 'tests/fixtures/example.json' or die $!; open(my $output, '>', '.linkedspec-data/example.json') or die $!;\n",
+    "expected": [
+      {"path": "tests/fixtures/example.json", "mode": "<:raw", "role": "literal-input-read"},
+      {"path": ".linkedspec-data/example.json", "mode": ">", "role": "declared-output-write"}
+    ],
+    "open_words": 2
+  },
+  {
+    "id": "quoted-only",
+    "source": "my $expected = q{open my $input, '<', 'tests/fixtures/example.json' or die $!;};\n",
+    "expected": [],
+    "open_words": 0
+  },
+  {
+    "id": "nonliteral",
+    "source": "open my $a, '<', $path or die $!; open STDOUT, '>', \\$buffer or die $!; open my $b, '<', 'tests/'.$name.'.json' or die $!;\n",
+    "expected": [],
+    "open_words": 3
+  },
+  {
+    "id": "method-heredoc",
+    "source": "$object->open('tests/example.json'); my $text=<<'PAYLOAD';\nopen my $a, '<', 'tests/fixtures/example.json' or die $!;\nPAYLOAD\n",
+    "expected": [],
+    "open_words": 1
+  },
+  {
+    "id": "qualified-and-excluded-paths",
+    "source": "CORE::open(my $a, '<:encoding(UTF-8)', 'tests/example.json') or die $!; open my $b, '<', '../escape.json' or die $!; open my $c, '<', '/absolute.json' or die $!;\n",
+    "expected": [
+      {"path": "tests/example.json", "mode": "<:encoding(UTF-8)", "role": "literal-input-read"}
+    ],
+    "open_words": 3
+  }
+]

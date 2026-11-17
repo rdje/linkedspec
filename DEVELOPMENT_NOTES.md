@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — keep literal inputs and output declarations distinct
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0: A source Word is first qualified by token context, then by an explicit literal-mode/path grammar. The retained191 open sites partition into34 accepted and157 unmatched; all145 source bodies remain. Thirty-two read targets are captured, while two fixed .linkedspec-data output declarations supply no artifact input or production credit. Variable paths, scalar-backed handles, concatenations and other IO remain follow-ups. Five manual source oracles cover quoting, methods/heredocs, qualified words, scalar references and excluded paths. Actual mode promotion changes classification to two outputs and rejects the old read/write oracle. Complete independent Perl semantics and external/native closure remain3.2/4.2/SESSION5. Evidence: `docs/checkpoints/perl-literal-open-qualification-2026-11-17/REVIEW.md`.
+
+Book verification also retains a refused correction caused by reading JSON display escaping as source bytes. Native od confirms one ASCII92 in source/render and rejects an actual two92 control; the original published paragraph remains unchanged.
+
 ## 2026-11-17 — retain named suite and library roles
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0: Named do paths cover three source forms: parent-directory __FILE__, repository-root File::Spec and root-cwd literals. Twelve imported Test::More suites suppress only their final plan when caller is present; their source assertions remain. Two package probe libraries suppress standalone observe output under caller. Legacy observations declares cold(), which opens a Perl child pipe; its source is context, never another selected suite. AST/scalar-copy direct selections remain2 each versus callable1 in the earlier source ledger. Three primary targets absent from the older callable-only identities are captured prospectively; historical custody stays4.2. No source/runtime change or retrospective execution claim. Evidence: `docs/checkpoints/perl-named-includes-2026-11-17/REVIEW.md`.

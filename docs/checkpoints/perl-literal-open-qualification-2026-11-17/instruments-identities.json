@@ -1,0 +1,62 @@
+{
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/identities.json": {
+    "bytes": 23895,
+    "mode": 420,
+    "sha256": "bfd2fb11df495e5e777a96a987e24ed7d68b158336f6371f10e9d8fb0a30c30b"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/capture.py": {
+    "bytes": 4551,
+    "mode": 420,
+    "sha256": "f2faf75a9fb494fa10e68ccc5cd1f33421f246d1cf8a5f6849a190818e9a9724"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/classify.py": {
+    "bytes": 1872,
+    "mode": 420,
+    "sha256": "6dd7ea3059ee63e947fda8434a75a3699b1b22f6d7a9bd3d635d46362b1431cc"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/plan.json": {
+    "bytes": 661,
+    "mode": 420,
+    "sha256": "75fd073db11b67b3b13f72002ad73f862f5f9bc3004a51ca5e97e93174a5cd57"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/record_review.py": {
+    "bytes": 568,
+    "mode": 420,
+    "sha256": "5927675e3d4d64868e9bdb4bcc5e2d0953bca8166485497fb59d31f8164ff036"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/review.py": {
+    "bytes": 11926,
+    "mode": 420,
+    "sha256": "189a95be7682a6b96c226aa6373bc6b55b25193e343eef98df0a5a1d71c42bdf"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/specimens.json": {
+    "bytes": 1418,
+    "mode": 420,
+    "sha256": "064d8ebb6f828b510969ad2b3ca28859dcb487582b110d123255e0724c5ea03e"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/commands/consumers-stdin.gz": {
+    "bytes": 436081,
+    "mode": 420,
+    "sha256": "f1883fb5c1ebcd798a271cc36076de840000547f11f0108109fd054d239cbfe6"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/commands/consumers-stdout.gz": {
+    "bytes": 250966,
+    "mode": 420,
+    "sha256": "020a084fcdb5a5da491eb9618ed1f63514a5c5514819362d86ddcd9e1e2733f7"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/lexer.pl": {
+    "bytes": 7113,
+    "mode": 420,
+    "sha256": "0a2db51a195bf466534076351206ea0db4b10595766c85aef04f2d0ccbe9e361"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

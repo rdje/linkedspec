@@ -1,0 +1,82 @@
+{
+  "CHANGES.md": {
+    "bytes": 32924,
+    "mode": 420,
+    "sha256": "7ebc07d672ba20895f572cafda88ad22b7dab0a5ff6d468e18f54700216aba53"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 55254,
+    "mode": 420,
+    "sha256": "56a74ea5f1899e5f67b574ecf4ecfef4b3e337ab52691718ce82084b7702fb5b"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4460,
+    "mode": 420,
+    "sha256": "1ab2b52f75676fea8fce82572e1a41e013689ee3e9546c7ca519ebb289b6b378"
+  },
+  "MEMORY.md": {
+    "bytes": 2025,
+    "mode": 420,
+    "sha256": "6d170812ec5429d1600dcab97e64dff04634e11c23d24a2163cb4d26ae265bfc"
+  },
+  "ROADMAP.md": {
+    "bytes": 472710,
+    "mode": 420,
+    "sha256": "85ca73a5616ab74a616609b61a600d9cedd9988e8b9df887e5e47ea100e86a54"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 274045,
+    "mode": 420,
+    "sha256": "60783eda83a9b96c767cde183466c6ffbf1af1fd00649f783c5c7124fab85d8b"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347797,
+    "mode": 420,
+    "sha256": "2da0570282a5bdd1eb8a2133d450750f364392e6cdc95c0a0ba4d26ffd9bbbd5"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/commands/review-stdout.gz": {
+    "bytes": 522,
+    "mode": 420,
+    "sha256": "2167bbf074e7cc743f3fe1582edf7d336ce743f118a0a4971d9c663f95f1d754"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/inventory.json": {
+    "bytes": 108005,
+    "mode": 420,
+    "sha256": "d2f538b7f50376ab311c85fe7df36d244e1a0049994f93bcd5fdb094f3f3bf89"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/plan.json": {
+    "bytes": 661,
+    "mode": 420,
+    "sha256": "75fd073db11b67b3b13f72002ad73f862f5f9bc3004a51ca5e97e93174a5cd57"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/prepare_publication.py": {
+    "bytes": 14376,
+    "mode": 420,
+    "sha256": "203fcdfea806b6146eb993fcbd748b168290f8926d020083f5c95c923e7c5a68"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/publish.py": {
+    "bytes": 15893,
+    "mode": 420,
+    "sha256": "871a5229bd04b1071d67ac1f9bfbd252aa94a523003e99bf6bb712a50f947048"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/review_publication.py": {
+    "bytes": 2994,
+    "mode": 420,
+    "sha256": "bbd80a58d955fd99c48d7a49405843dc59074b1222eb31db1ab44a11578f8149"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 77879,
+    "mode": 420,
+    "sha256": "57057031f4da26a178429841701a3fcf495bb0fb243e50d89e75aa8cd8b292a7"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20882,
+    "mode": 420,
+    "sha256": "2ffed37f837ee3f343c5155a9370e4f4da7a52a9e67f01c6cb481401901843ff"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 606121,
+    "mode": 420,
+    "sha256": "eb0990cf44d5189d87cca9b2fdef7f613c3324af7fc310661ab4f7e14601ca06"
+  }
+}

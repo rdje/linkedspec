@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5389,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-hash-key-capture.md","sha256":"bde93e826ec8762d6d0ac54d9206a75eb851ba4fd9fb484c91181d773e3c1586","type":"member"}
+{"bytes":20671,"lines":252,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-component-capture.md","sha256":"9cf7b153cf75173cdc6b0e94251ac24a32343d5106ede2e2374e4517366c6a65","type":"member"}
 {"bytes":5004,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-value-capture.md","sha256":"8d83d08a5ae74981cb08e9a4a8ba3dfa2c37b73deb0bc0e59bfc278d95fd0b5a","type":"member"}
 {"bytes":4680,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-default-capture.md","sha256":"10e6c6fa67d9c2e2ea1daf67b4407bff57f229793ad9e57c7571fa4ef9317f65","type":"member"}
 {"bytes":7258,"lines":94,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-general-return-required-capture.md","sha256":"f33c986df9426c4a6b0ae56ecf82f62b0092c2897adc215fe977afa49e860754","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3366,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-validation-diagnostic-source-drift.md","sha256":"2312b25002947fb7448e15664297ec92b37d272b44f1cbf1d67f60262fa6de18","type":"member"}
 {"bytes":2763,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-variadic-user-functions.md","sha256":"0fc45642937bb9596b2d9a54cec7a3dd4ef41a005dfda486096a411726e38341","type":"member"}
 {"bytes":6058,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-with-callback-identity-and-snapshot.md","sha256":"ee7e410e3317a6f037aa177640375fd60ffcb877cdfa8561a003f4d35eb6a19f","type":"member"}
-{"bytes":10197,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.0","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"bc902492c194b635e35d009400470c29a657d13377c7fd48a123b5953baf1b7c","type":"member"}
-{"bytes":1469,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-all-target-actionir-ready-invariant.md","sha256":"6369b1eb3f16a226c925727f769ede8e36c2a2296593ba5b1384d7b967f4718a","type":"member"}

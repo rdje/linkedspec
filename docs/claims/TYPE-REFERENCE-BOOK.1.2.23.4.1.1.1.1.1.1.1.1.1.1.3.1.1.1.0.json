@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0",
+  "claims": [
+    {
+      "name": "perl-literal-open-source-inventory",
+      "statement": "The bounded literal-open grammar classifies34 of191 open Word sites across145 Perl sources:32 input reads/32 targets and two declared output writes. All157 unmatched open sites remain explicit. Current189 bodies/modes, five independent source specimens and eight evidence controls pass. Actual changed read-to-write source makes the old oracle RED at lexer exit0. No application test, runtime IO or output production is observed.",
+      "scope": "Only the declared bounded literal mode/path three-argument open grammar over the original145 source documents. All unmatched open and non-open/library/support/generated/interpolated IO remains follow-up; no actual test/IO reachability, resolved file origin, output production, complete Perl semantics or native/canonical custody.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-open-qualification-2026-11-17/review.py --current",
+        "granularity": "All145 source identities and191 retained Word sites, accepted34 path/mode/role bindings,157 explicit unmatched sites,32 input body/mode identities and two output declarations.",
+        "result": "{\"actual_mode_control\": \"RED at lexer exit0: changed <:raw to >:raw makes two outputs versus expected read/write\", \"consumers\": 145, \"controlled_specimens\": 5, \"controls\": {\"input body\": \"RED\", \"input mode\": \"RED\", \"input population\": \"RED\", \"literal input output role\": \"RED\", \"literal mode\": \"RED\", \"literal site population\": \"RED\", \"literal source site\": \"RED\", \"literal target path\": \"RED\"}, \"current_inputs\": 189, \"declared_output_sites\": 2, \"input_targets\": 32, \"limits\": \"Only the declared bounded literal mode/path three-argument open grammar over the original145 source documents. All unmatched open and non-open/library/support/generated/interpolated IO remains follow-up; no actual test/IO reachability, resolved file origin, output production, complete Perl semantics or native/canonical custody.\", \"literal_input_sites\": 32, \"literal_sites\": 34, \"open_word_sites\": 191, \"output_paths\": 2, \"result\": \"PASS\", \"retained_inputs\": 189, \"unmatched_open_sites\": 157}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2",
+        "reason": "Five independent manual source oracles, actual changed-mode source RED and eight consistency mutations qualify the declared grammar and bindings. Complete independent Perl/callee/phase/alias/helper/interpolation semantics remains broader3.2; unmatched/non-open/support/library routes remain explicit."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "All189 project source/instrument/target bodies and modes recover through before-use archives and original145 source requests; committed inputs bind to activation Git identities. Actual controlled PPI requests/channels and current-input review retained. External PPI/Perl/core/library/native/OS/outer-first-use/per-read/source-origin/physical and historical intake closure remain4.2/SESSION5. Publication/outer log copies are after use. No application IO or canonical admission."
+      }
+    },
+    {
+      "name": "literal-open-controls",
+      "statement": "Five controlled source specimens pass. An actual read-to-write mode substitution makes the old oracle RED at lexer exit0; eight evidence corruptions reject.",
+      "scope": "Only the retained declared grammar, controlled sources and exact evidence validators; no complete semantic classifier proof.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-open-qualification-2026-11-17/review.py --current",
+        "granularity": "Each independent literal/path/mode/token-context oracle, actual changed source request/PPI output and exact altered-evidence assertion.",
+        "result": "{\"actual\": \"RED at lexer exit0: changed <:raw to >:raw makes two outputs versus expected read/write\", \"controls\": {\"input body\": \"RED\", \"input mode\": \"RED\", \"input population\": \"RED\", \"literal input output role\": \"RED\", \"literal mode\": \"RED\", \"literal site population\": \"RED\", \"literal source site\": \"RED\", \"literal target path\": \"RED\"}, \"specimens\": 5}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Quoted/method/heredoc text or scalar/constructed paths could enter the literal population, or changing a read to a write could preserve the old role oracle.",
+        "oracle": "Independent manual specimen expectations and actual PPI lexical observations through the unchanged lexer; exact target/custody validators.",
+        "red_control": "Changing <:raw to >:raw in the controlled source produces two output declarations versus expected input/output and rejects the old oracle at actual lexer exit0. Eight actual missing/site/path/mode/output-role/body/mode mutations reject their exact expected assertion."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "All189 project source/instrument/target bodies and modes recover through before-use archives and original145 source requests; committed inputs bind to activation Git identities. Actual controlled PPI requests/channels and current-input review retained. External PPI/Perl/core/library/native/OS/outer-first-use/per-read/source-origin/physical and historical intake closure remain4.2/SESSION5. Publication/outer log copies are after use. No application IO or canonical admission."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Activation estimates1,490,288,908 non-thin bytes against cached4683555e;9,711,092 below director1.5GB.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin estimate and selected original metadata copied after use.",
+        "result": "{\"ahead\": 127, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.490288908, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1490288908, \"evidence\": \".linkedspec-data/push-monitor/20261117T044555.567744Z\", \"gib\": 1.38793970271945, \"head\": \"093e62098a94d0fd4c08a60ed49b8c35d0c1c9f8\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 49313, \"pack_footer\": \"1eacbb51d140a64065fccf8576415a11c9cfdefc\", \"pack_sha256\": \"e6c7abe8654c7a5c506fb7a753f454b6335dae2b23f69ed858f89e726d00b1a4\", \"packed_objects\": 49313, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 9711092, \"trigger_reached\": false, \"unique_object_ids\": 49313}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Stream/stat/footer agree; independent actual-file falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected telemetry retained; ignored raw pack/full tables and full native/physical/producer closure remain4.2/SESSION5. No fresh-remote/wire/future guarantee."
+      }
+    },
+    {
+      "name": "book-scalar-reference-bytes",
+      "statement": "The new source and rendered example each contain one ASCII92 backslash. The correction attempt refused at its first guard before writing; no book correction occurred.",
+      "scope": "Only retained source/render paragraph and command bytes. Full native od/renderer/toolchain/OS/first-use/source-origin/physical closure remains4.2/SESSION5.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-open-qualification-2026-11-17/review_book_bytes.py",
+        "granularity": "Actual retained source/render paragraph, publisher literal, failed corrector source/traceback and native od stdin/stdout/stderr/exit bytes.",
+        "result": "{\"actual_book_edit\": false, \"independent_od\": \"PASS: ASCII92 once; actual two-backslash command is RED against the single-byte oracle at exit0.\", \"limits\": \"Only retained source/render paragraph and command bytes. Full native od/renderer/toolchain/OS/first-use/source-origin/physical closure remains4.2/SESSION5.\", \"refused_attempt\": \"Actual guard fails at line15 before writes; source and failure retained after use.\", \"rendered_backslashes\": 1, \"result\": \"PASS\", \"source_backslashes\": 1}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The escaped display might represent two actual book backslashes, or a two-backslash specimen might satisfy the single-byte oracle.",
+        "oracle": "Independent native od unsigned-byte output against literal ASCII sequence; source/render raw byte counts and original publisher paragraph.",
+        "red_control": "Actual two-backslash stdin produces two92 bytes at od exit0 and fails the one92-byte oracle. Healthy source has one92; the original correction guard refuses before its write."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual source/render paragraph, new audit instruments, old refused corrector and after-use failure/build logs retained. Native od/renderer/toolchain/OS, original refused-producer first-use/outer launch and full source-origin/per-read/physical closure remain4.2/SESSION5. No missing first-use channel is reconstructed."
+      }
+    },
+    {
+      "name": "task-representation-pressure-repair",
+      "statement": "The preserved before/after task representations have identical task ID populations, status/tier/claim bindings and existing parent Goal/Acceptance. Full original new detail remains recoverable; only new summaries and a redundant child list are condensed.",
+      "scope": "Only the retained affected task part/frontier and identity/ownership fields. No complete semantic-equivalence, resulting-budget admission, runtime, tool or limit-change claim. A fresh complete normal-hook pass is still required.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-literal-open-qualification-2026-11-17/review_pressure.py",
+        "granularity": "Each retained before/after stable ID and status/tier/claim field, original parent contract, source archive body/mode identities and actual partial failed-normal log.",
+        "result": "Readonly current review PASS; original detail retained; missing ID and changed status both RED. The failed own hook tree was stopped at observed commit exit143 after the conclusive task-text pressure failure; no complete PASS is claimed from it."
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An omitted task or changed task status could preserve the identity/ownership comparison.",
+        "oracle": "Complete retained pre-repair task source and explicit field comparison; original parent Goal/Acceptance remain exact.",
+        "red_control": "Removing the actual owner ID fails task ID population; changing its status to pending fails task status/tier/claim binding."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Complete local before/after affected source images, actual repair/reviewer sources, original detailed new task bodies and actual failed-hook output retained. Partial original hook/instrument/native/Git/OS/outer-first-use/per-read/source-origin/physical closure remains4.2/SESSION5. Actual retry supplies admission; no previous failed result is overwritten."
+      }
+    }
+  ]
+}

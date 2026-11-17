@@ -1,0 +1,162 @@
+{
+  "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json": {
+    "bytes": 48046,
+    "mode": 420,
+    "sha256": "cee9c7ae0f04fe8d106197fc89bace7ab12cf2ebda24db1730904d0425017375"
+  },
+  "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json": {
+    "bytes": 732869,
+    "mode": 420,
+    "sha256": "68d186a1e901127270a8e1493736108c1392987817995ddd30f21e2099dd3f8b"
+  },
+  "tests/fixtures/array_pipeline_callable_arity_perl_cases.json": {
+    "bytes": 66022,
+    "mode": 420,
+    "sha256": "97275a5cfeb308b5a54bd1bdc6e41485ba5b9542868b389570c2c4f9c2815c38"
+  },
+  "tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json": {
+    "bytes": 249387,
+    "mode": 420,
+    "sha256": "fc2ea54db6ee091b09a879e49d9a6325fe803e3536e0910629a0cba881952e80"
+  },
+  "tests/fixtures/array_pipeline_result_guard_perl_cases.json": {
+    "bytes": 353311,
+    "mode": 420,
+    "sha256": "8d5f242ee3b4d84a9f2f76f5c05441e1bafbca25ea2ede0ab22d0b8906d4cce9"
+  },
+  "tests/fixtures/array_pipeline_source_isolation_perl_cases.json": {
+    "bytes": 226225,
+    "mode": 420,
+    "sha256": "fdc3e717df5f51e961a4e8a7b22329ba9f3c503bc54230d83e94c5624a263e65"
+  },
+  "tests/fixtures/array_transform_callable_result_guard_perl_cases.json": {
+    "bytes": 440098,
+    "mode": 420,
+    "sha256": "f3b26b4f28fcf7b6256137f87d9d41f581502a0b1e007dbb4cc1780e97aa1c07"
+  },
+  "tests/fixtures/capture_endpoint_absence.json": {
+    "bytes": 12684,
+    "mode": 420,
+    "sha256": "70c07aebb6182555ed9ca5123b8751d1ffe55799777115b39b87e6f5fba8e091"
+  },
+  "tests/fixtures/contains_result_guard_excluded_ast.json": {
+    "bytes": 72860,
+    "mode": 420,
+    "sha256": "cfe270bbed0b12a777578fc37284dc136733feab7fe11f6b379bbb1769d68e73"
+  },
+  "tests/fixtures/count_result_guard_excluded_ast.json": {
+    "bytes": 70318,
+    "mode": 420,
+    "sha256": "8cdcfa9d4ee092c95a7eade0a7b84c91b8a5c3f630ad784e2e20fd7ba17245b8"
+  },
+  "tests/fixtures/definedness_result_guard_excluded_ast.json": {
+    "bytes": 77921,
+    "mode": 420,
+    "sha256": "33eb99e69b34638f9efd7fba065248eca6523a1850af4033dbf1fb48ea4b409a"
+  },
+  "tests/fixtures/emitted_boundary_catalog.json": {
+    "bytes": 4518,
+    "mode": 420,
+    "sha256": "6745b07a53d3ba980bda1240f8614fcc0bff9d00468ac6650db60fe17b0108dd"
+  },
+  "tests/fixtures/emptiness_result_guard_excluded_ast.json": {
+    "bytes": 78831,
+    "mode": 420,
+    "sha256": "36affdbaf76db41cd0e07962ab97ff95278fd67109ec319cf2ec972c056a4846"
+  },
+  "tests/fixtures/free_numeric_comparison_excluded_source_ast.json": {
+    "bytes": 58243,
+    "mode": 420,
+    "sha256": "e42e44ca0464d477883aa269f9c4388ea0e7cfaba8348fb7a3a7118b638940b7"
+  },
+  "tests/fixtures/free_numeric_excluded_source_ast.json": {
+    "bytes": 58120,
+    "mode": 420,
+    "sha256": "bb1f63e6c5da4a9734536e00a065ea948879da064076f4f0d1dcf725fef6a5c4"
+  },
+  "tests/fixtures/free_string_excluded_source_ast.json": {
+    "bytes": 26326,
+    "mode": 420,
+    "sha256": "37449befe01863dc4808e29f1640ee7bbbff5e0bb345cce95d0f57d7a1aa6fe7"
+  },
+  "tests/fixtures/has_key_result_guard_excluded_ast.json": {
+    "bytes": 82265,
+    "mode": 420,
+    "sha256": "51ab3e1f8bce4e38e023436167ecc933ad0e6dd5f30ea1db2246f9170bc3ff87"
+  },
+  "tests/fixtures/index_result_guard_excluded_ast.json": {
+    "bytes": 73444,
+    "mode": 420,
+    "sha256": "4e0e2781757b29bd45266e2c3e438ee0e4a1478fde13b046bb29d0d3712fbd9e"
+  },
+  "tests/fixtures/lexical_result_guard_excluded_ast.json": {
+    "bytes": 82738,
+    "mode": 420,
+    "sha256": "4e21f242b9f1f91c231c039db56e367ab0b8fb24243c8b226da078267496954a"
+  },
+  "tests/fixtures/logical_result_guard_excluded_ast.json": {
+    "bytes": 68401,
+    "mode": 420,
+    "sha256": "bf06fd382231fbabe75aa08d959879d1cc5d79785bd02672df51322c34fab7bc"
+  },
+  "tests/fixtures/named_capture_endpoint_absence.json": {
+    "bytes": 10543,
+    "mode": 420,
+    "sha256": "0f2da9455b16dd9501285ea8f6c3f1362128f29fb6755466b1c5aa1b85319c47"
+  },
+  "tests/fixtures/named_writer_endpoint_absence.json": {
+    "bytes": 7784,
+    "mode": 420,
+    "sha256": "f043f118976651b00928ef6bd570b3001d26a71380b7185ecbc0b1a550b21b09"
+  },
+  "tests/fixtures/nested_handler_error.json": {
+    "bytes": 4247,
+    "mode": 420,
+    "sha256": "c553ef8bfbe2be84d6ad99cf3614405fc42bacc8e7466f460c811b87fc29fb50"
+  },
+  "tests/fixtures/perl_blind_scalar_declarations.json": {
+    "bytes": 19682,
+    "mode": 420,
+    "sha256": "a5b917c0509cb70cbaf39dabd8fd07cf2116342bb4208df8f1423d5bb0963feb"
+  },
+  "tests/fixtures/perl_match_local_declarations.json": {
+    "bytes": 6771,
+    "mode": 420,
+    "sha256": "b0ff3e5aff8c1e6536407e44877783af4b56673daf80b40ec49293cc678f973f"
+  },
+  "tests/fixtures/perl_or_match_local_declarations.json": {
+    "bytes": 6734,
+    "mode": 420,
+    "sha256": "e8c5df32da63cd09d5b94b210359fb20587d30ee307b3aeba0b57920e9620a57"
+  },
+  "tests/fixtures/pick_keys_operand_isolation.json": {
+    "bytes": 2722,
+    "mode": 420,
+    "sha256": "290473495d948f020aad69dfc8c6d78dd8de504fbc4458fe28fd14027b302619"
+  },
+  "tests/fixtures/receiver_string_bridge_excluded_ast.json": {
+    "bytes": 45246,
+    "mode": 420,
+    "sha256": "d619e2d6fda338ed626a315d5b13c60f188469a85ac616dd62b50116849491b3"
+  },
+  "tests/fixtures/referenced_blind_intermediate.json": {
+    "bytes": 4411,
+    "mode": 420,
+    "sha256": "2c1afd2b5ae129bbfea47d9b18f300cc0557da65e129c6532cfd3fd43f7cb305"
+  },
+  "tests/fixtures/sorted_values_scalar_isolation.json": {
+    "bytes": 2528,
+    "mode": 420,
+    "sha256": "4f350af9d7d1da293b0eb7de302c1b52cead11cdf8f9b0ecc8e24f0fab1e4bfe"
+  },
+  "tests/fixtures/string_predicate_result_guard_excluded_ast.json": {
+    "bytes": 63289,
+    "mode": 420,
+    "sha256": "c9e4b37a08547cdf16b9b7437956964616c421fde4ec58b9f0d3359396b8ce1c"
+  },
+  "tests/numeric-codeblocks/signed-array-selectors.json": {
+    "bytes": 56244,
+    "mode": 420,
+    "sha256": "352efd5e27feca27770cabe8eea39d42b8c099128ea06db1d6ca046cc88b4705"
+  }
+}

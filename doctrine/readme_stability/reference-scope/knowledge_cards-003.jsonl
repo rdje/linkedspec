@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3717,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/free-string-result-source-guards.md","sha256":"a51d248e1610e41ec1f3ade8efeca0ab8aad693728ed27bf7efb921a573f7c30","type":"member"}
 {"bytes":2579,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-parse-job-sidecar.md","sha256":"01b4d4a8c2ebe8d5e9ac548a12eb179c9fbc6e53da77d4788d54ce6954811094","type":"member"}
 {"bytes":2633,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-prototype-proof.md","sha256":"182c95ed0b4e54035c214b2ed14bbaf1d60450d30a2b009149ca3d8a2a595e76","type":"member"}
 {"bytes":7082,"lines":92,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/function-body-staged-registry-dispatch.md","sha256":"261c4f1b345c96452bc1ff7381fda25e8f3b6573e3404497abb2deb7c80da824","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2563,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-helper-regex-flag-normalization.md","sha256":"4ba709483edd4336fe864451cdac365b35d5e86770ed4baf6295a902ee9fc4ce","type":"member"}
 {"bytes":2985,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-implicit-blind-iteration-collections.md","sha256":"4ff297e4de92da322cee5b67bfd3644ba25935c1bd5c8e4343aac6ff7cea470f","type":"member"}
 {"bytes":3790,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-index-source-guards.md","sha256":"b66a5c6c15684f94597e26a14024a17df686b33a0c7c454fe31fda76c5175d9a","type":"member"}
-{"bytes":8553,"lines":123,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-input-slice-arity-and-count-boundaries.md","sha256":"3e8e8d7a96737b0f7a89f87484f339b4ff941df5155c90eb80dc09657b317ef0","type":"member"}

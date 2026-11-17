@@ -35,6 +35,7 @@
 {"bytes":1709,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/blind-call-rule-label-contract.md","sha256":"22dfe331920d8fd7b8ca6103f29bec8efdf3711c02e81fd49991fb5bf0e5e36f","type":"member"}
 {"bytes":3739,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/blind-le-public-phase-authority-gap.md","sha256":"f23a35b3028fc5063c862a511fd6997f08fdaabc0f311f7aabab605ae7afd59d","type":"member"}
 {"bytes":2520,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/blind-lx-public-phase-authority-gap.md","sha256":"6a36c062d9d6ae670c426d091644d504038b7420aa77a71fa4a3870e4506449c","type":"member"}
+{"bytes":2033,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0","path":"docs/knowledge/book-code-bytes-versus-json-display.md","sha256":"9f1b8f1a6be94423813586791b2b58e0575ca044259f9698eca87c7f6058ddaa","type":"member"}
 {"bytes":2921,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.16","path":"docs/knowledge/book-edit-pressure-and-claim-boundaries.md","sha256":"985e11ec0a894c821add806fa1657504d90c42d8ecda181910dd4c101aae0b7a","type":"member"}
 {"bytes":2754,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/book-per-type-reference-gap.md","sha256":"2a85b95a9ad5c298304c1a2679bf5c1744399d22aed2766318ba19b25f3c77f5","type":"member"}
 {"bytes":3140,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/bootstrap-comparison-stale-result.md","sha256":"addf772ba4316627b7293558416d63d67e319c79c6b61539dbb0f3b425176886","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2764,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/context-names-rust-carrier-readiness.md","sha256":"0b46397cd574d81f16764d2bb7eb58c10044d6f9d6488128fa23a09325daf908","type":"member"}
 {"bytes":5227,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-contains-composition.md","sha256":"1531e58ffb4d443d011ffb06fde9cad3827d84423560077569da5ae69bfcf500","type":"member"}
 {"bytes":5223,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-index-composition.md","sha256":"53a385b003e46017fec974c36d784453f9009cc048584defdcab0c6faa442cb3","type":"member"}
-{"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}

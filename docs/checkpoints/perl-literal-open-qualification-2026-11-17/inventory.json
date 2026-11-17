@@ -1,0 +1,2704 @@
+{
+  "declared_outputs": [
+    ".linkedspec-data/verification/perl-unicode-guard-observations.json",
+    ".linkedspec-data/verification/perl-unicode-operand-observations.json"
+  ],
+  "input_targets": [
+    "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json",
+    "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json",
+    "tests/fixtures/array_pipeline_callable_arity_perl_cases.json",
+    "tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json",
+    "tests/fixtures/array_pipeline_result_guard_perl_cases.json",
+    "tests/fixtures/array_pipeline_source_isolation_perl_cases.json",
+    "tests/fixtures/array_transform_callable_result_guard_perl_cases.json",
+    "tests/fixtures/capture_endpoint_absence.json",
+    "tests/fixtures/contains_result_guard_excluded_ast.json",
+    "tests/fixtures/count_result_guard_excluded_ast.json",
+    "tests/fixtures/definedness_result_guard_excluded_ast.json",
+    "tests/fixtures/emitted_boundary_catalog.json",
+    "tests/fixtures/emptiness_result_guard_excluded_ast.json",
+    "tests/fixtures/free_numeric_comparison_excluded_source_ast.json",
+    "tests/fixtures/free_numeric_excluded_source_ast.json",
+    "tests/fixtures/free_string_excluded_source_ast.json",
+    "tests/fixtures/has_key_result_guard_excluded_ast.json",
+    "tests/fixtures/index_result_guard_excluded_ast.json",
+    "tests/fixtures/lexical_result_guard_excluded_ast.json",
+    "tests/fixtures/logical_result_guard_excluded_ast.json",
+    "tests/fixtures/named_capture_endpoint_absence.json",
+    "tests/fixtures/named_writer_endpoint_absence.json",
+    "tests/fixtures/nested_handler_error.json",
+    "tests/fixtures/perl_blind_scalar_declarations.json",
+    "tests/fixtures/perl_match_local_declarations.json",
+    "tests/fixtures/perl_or_match_local_declarations.json",
+    "tests/fixtures/pick_keys_operand_isolation.json",
+    "tests/fixtures/receiver_string_bridge_excluded_ast.json",
+    "tests/fixtures/referenced_blind_intermediate.json",
+    "tests/fixtures/sorted_values_scalar_isolation.json",
+    "tests/fixtures/string_predicate_result_guard_excluded_ast.json",
+    "tests/numeric-codeblocks/signed-array-selectors.json"
+  ],
+  "literal": [
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1381,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "path": "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json",
+      "source_sha256": "31095da0334f6104275d72fee00478126cccc5ef3a5ffe34facc65c49e5c6319"
+    },
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_pipeline_callable_arity_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        78,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1174,
+      "parent": "t/array_pipeline_callable_arity.t",
+      "path": "tests/fixtures/array_pipeline_callable_arity_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_pipeline_callable_arity_perl_cases.json",
+      "source_sha256": "7219f6cb704e07e4811e8257975e0e35a927509e5b59ddf4bd4486449eb14ad2"
+    },
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        84,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1206,
+      "parent": "t/array_pipeline_callable_result_guard_composition.t",
+      "path": "tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json",
+      "source_sha256": "47e550ed281c3f91dfbf02aa6f9ca58be59ce3906d8c719f71f22e479494c6f7"
+    },
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_pipeline_result_guard_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1379,
+      "parent": "t/array_pipeline_result_guard_composition.t",
+      "path": "tests/fixtures/array_pipeline_result_guard_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_pipeline_result_guard_perl_cases.json",
+      "source_sha256": "650db36105c837488fbb809478a3dae91e6a551878afb28323f0d5fad177b8f0"
+    },
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_pipeline_source_isolation_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1379,
+      "parent": "t/array_pipeline_source_isolation.t",
+      "path": "tests/fixtures/array_pipeline_source_isolation_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_pipeline_source_isolation_perl_cases.json",
+      "source_sha256": "9b78f1c77409173715d94714806d09b8ee1bddd7c857ede95fdb2b8a43a76f17"
+    },
+    {
+      "expression": "open my $file,'<:raw','tests/fixtures/array_transform_callable_result_guard_perl_cases.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        84,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 1206,
+      "parent": "t/array_transform_callable_result_guard_composition.t",
+      "path": "tests/fixtures/array_transform_callable_result_guard_perl_cases.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/array_transform_callable_result_guard_perl_cases.json",
+      "source_sha256": "43f1308935e082c3d192fde8795541a868ed54fada71c4d748d0881263ffcada"
+    },
+    {
+      "expression": "open my $fh, '<:raw', 'tests/fixtures/capture_endpoint_absence.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 51,
+      "parent": "t/capture_endpoint_absence.t",
+      "path": "tests/fixtures/capture_endpoint_absence.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/capture_endpoint_absence.json",
+      "source_sha256": "f9cac8ea38c0117c704ce55aa5b78d178bdd97a8a8eef4b8fdacfd97ccf8eaaa"
+    },
+    {
+      "expression": "open my $file, '<', 'tests/numeric-codeblocks/signed-array-selectors.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 33,
+      "parent": "t/computed_selection_callable_compat.t",
+      "path": "tests/numeric-codeblocks/signed-array-selectors.json",
+      "role": "literal-input-read",
+      "source_path": "tests/numeric-codeblocks/signed-array-selectors.json",
+      "source_sha256": "687e81d500da360a0db03cb9d2ad7fbba178adc3a79255818d522dfb12170a46"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/contains_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/contains_result_guard_source_fences.t",
+      "path": "tests/fixtures/contains_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/contains_result_guard_excluded_ast.json",
+      "source_sha256": "6c83ff78ad88a127c8e9ca733108c94ca1b01080bcd064a47dde3b380770cd1d"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/count_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/count_result_guard_source_fences.t",
+      "path": "tests/fixtures/count_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/count_result_guard_excluded_ast.json",
+      "source_sha256": "63630df59b1f4f9d426eb264ab220817f0ccfaf7f946b6b1a0f75a06ae718618"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/definedness_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/definedness_result_guard_source_fences.t",
+      "path": "tests/fixtures/definedness_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/definedness_result_guard_excluded_ast.json",
+      "source_sha256": "fe7d269c6d137e5702a73785d42b494f765094bc3731c72d415b5ed4ef938169"
+    },
+    {
+      "expression": "open my $file, '<:raw', 'tests/fixtures/emitted_boundary_catalog.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 51,
+      "parent": "t/emitted_boundary_catalog.t",
+      "path": "tests/fixtures/emitted_boundary_catalog.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/emitted_boundary_catalog.json",
+      "source_sha256": "9eae96896029900b91b3633da76a4caaa58f8e4c8ae9f77f70bcdce62d381866"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/emptiness_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/emptiness_result_guard_source_fences.t",
+      "path": "tests/fixtures/emptiness_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/emptiness_result_guard_excluded_ast.json",
+      "source_sha256": "08959b3fde29305cc5a628797671c972659c2049cc2f924970688338416bef67"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/free_numeric_comparison_excluded_source_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/free_numeric_comparison_source_fences.t",
+      "path": "tests/fixtures/free_numeric_comparison_excluded_source_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/free_numeric_comparison_excluded_source_ast.json",
+      "source_sha256": "a0deb783d2787bf4c67d9c846387e5431cc9e51cba737fe756ea842b10f081a5"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/free_numeric_excluded_source_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/free_numeric_source_fences.t",
+      "path": "tests/fixtures/free_numeric_excluded_source_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/free_numeric_excluded_source_ast.json",
+      "source_sha256": "caab6f06c8d32e7c7c0098a383d7e323beb95f0f849d63c95a391aba4386ba9e"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/free_string_excluded_source_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/free_string_source_fences.t",
+      "path": "tests/fixtures/free_string_excluded_source_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/free_string_excluded_source_ast.json",
+      "source_sha256": "34305b69737b0d48b9d7fb3b35a423f6211ae1b6b0dd34934826b0b6722b957a"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/has_key_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/has_key_result_guard_source_fences.t",
+      "path": "tests/fixtures/has_key_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/has_key_result_guard_excluded_ast.json",
+      "source_sha256": "abd7eca2949c8e624bb9c62d5095b7307d475c0989e0ece96bbbafaafcec8200"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/index_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/index_result_guard_source_fences.t",
+      "path": "tests/fixtures/index_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/index_result_guard_excluded_ast.json",
+      "source_sha256": "9e17ed1417d732de8d808503c8b5878b5239c51dbbaa36c580794bf8803c98c1"
+    },
+    {
+      "expression": "open my $old, '<:raw', 'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json' or die $!;",
+      "handle": "$old",
+      "location": [
+        70,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 864,
+      "parent": "t/knowledge_map_header_lists.t",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json",
+      "role": "literal-input-read",
+      "source_path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json",
+      "source_sha256": "2836c3eb5427ff18bf5782c95ea1dfbea634d12f4953fd5327fc55a3ed4f9076"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/lexical_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/lexical_result_guard_source_fences.t",
+      "path": "tests/fixtures/lexical_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/lexical_result_guard_excluded_ast.json",
+      "source_sha256": "9234f6b4722a5b3dbbe9111b45cce8bd2bb72cc93341da48e678db9e4b629ff9"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/logical_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/logical_result_guard_source_fences.t",
+      "path": "tests/fixtures/logical_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/logical_result_guard_excluded_ast.json",
+      "source_sha256": "1b7086773ea8f4b798c67af49f3093d58c68a5295c981dc66ef86e4fa92eb69c"
+    },
+    {
+      "expression": "open my $file,'<:encoding(UTF-8)','tests/fixtures/named_capture_endpoint_absence.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "mode": "<:encoding(UTF-8)",
+      "ordinal": 51,
+      "parent": "t/named_capture_endpoint_absence.t",
+      "path": "tests/fixtures/named_capture_endpoint_absence.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/named_capture_endpoint_absence.json",
+      "source_sha256": "63cb5b35d682173c9b39d08479f2844f3272796a3f28622630188b57ff2adfa0"
+    },
+    {
+      "expression": "open my $file,'<:encoding(UTF-8)','tests/fixtures/named_writer_endpoint_absence.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "mode": "<:encoding(UTF-8)",
+      "ordinal": 51,
+      "parent": "t/named_writer_endpoint_absence.t",
+      "path": "tests/fixtures/named_writer_endpoint_absence.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/named_writer_endpoint_absence.json",
+      "source_sha256": "bb1ab937e54d8f0154403a9164e609dec451ff8335291771c5fc55d6bb904067"
+    },
+    {
+      "expression": "open my $file,'<:encoding(UTF-8)','tests/fixtures/nested_handler_error.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        11,
+        1,
+        1
+      ],
+      "mode": "<:encoding(UTF-8)",
+      "ordinal": 58,
+      "parent": "t/nested_handler_error.t",
+      "path": "tests/fixtures/nested_handler_error.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/nested_handler_error.json",
+      "source_sha256": "2244a4d054186269983799c10c6f2066851dee9f729f0ac5f3e8abcb13e4327f"
+    },
+    {
+      "expression": "open my $fh,'<:raw','tests/fixtures/perl_blind_scalar_declarations.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 48,
+      "parent": "t/perl_blind_scalar_declarations.t",
+      "path": "tests/fixtures/perl_blind_scalar_declarations.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/perl_blind_scalar_declarations.json",
+      "source_sha256": "247c1c08c5fb3b1bf09814b018c10d87f46b8247e70dc250a44b17ec094011dd"
+    },
+    {
+      "expression": "open my $fh,'<:raw','tests/fixtures/perl_match_local_declarations.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 48,
+      "parent": "t/perl_match_local_declarations.t",
+      "path": "tests/fixtures/perl_match_local_declarations.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/perl_match_local_declarations.json",
+      "source_sha256": "e3ee7c5ddac236f9e4d6bdf2c0656a5124f8d9016a17b3889ef46e487c09411f"
+    },
+    {
+      "expression": "open my $fh,'<:raw','tests/fixtures/perl_or_match_local_declarations.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "mode": "<:raw",
+      "ordinal": 48,
+      "parent": "t/perl_or_match_local_declarations.t",
+      "path": "tests/fixtures/perl_or_match_local_declarations.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/perl_or_match_local_declarations.json",
+      "source_sha256": "024cb1fcd55f3abf639942d58de2d08eea7987f14d8cad6e14049353cd638e3d"
+    },
+    {
+      "expression": "open my $file,'<','tests/fixtures/pick_keys_operand_isolation.json' or die $!;",
+      "handle": "$file",
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 43,
+      "parent": "t/pick_keys_operand_isolation.t",
+      "path": "tests/fixtures/pick_keys_operand_isolation.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/pick_keys_operand_isolation.json",
+      "source_sha256": "72ed0e72f31e464faf3087f3b032ebd3710472d20f6170792f9bb4910329b031"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/receiver_string_bridge_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/receiver_string_bridge_source_fences.t",
+      "path": "tests/fixtures/receiver_string_bridge_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/receiver_string_bridge_excluded_ast.json",
+      "source_sha256": "f847aad8f2c4c6b15d2ca9be38de2459ac379c16516a77d983911a5827bd54af"
+    },
+    {
+      "expression": "open my $f,'<:encoding(UTF-8)','tests/fixtures/referenced_blind_intermediate.json' or die $!;",
+      "handle": "$f",
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "mode": "<:encoding(UTF-8)",
+      "ordinal": 51,
+      "parent": "t/referenced_blind_intermediate.t",
+      "path": "tests/fixtures/referenced_blind_intermediate.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/referenced_blind_intermediate.json",
+      "source_sha256": "ddf184bc1f325418912d5621d143b351b481ffd956e4ae59c165f88e43790eb6"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/sorted_values_scalar_isolation.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 45,
+      "parent": "t/sorted_values_scalar_isolation.t",
+      "path": "tests/fixtures/sorted_values_scalar_isolation.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/sorted_values_scalar_isolation.json",
+      "source_sha256": "2c47896222b743c59b818b516d422c7350276c3d6c708e3d82cf9d214fee838c"
+    },
+    {
+      "expression": "open my $fh, '<', 'tests/fixtures/string_predicate_result_guard_excluded_ast.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 248,
+      "parent": "t/string_predicate_result_guard_source_fences.t",
+      "path": "tests/fixtures/string_predicate_result_guard_excluded_ast.json",
+      "role": "literal-input-read",
+      "source_path": "tests/fixtures/string_predicate_result_guard_excluded_ast.json",
+      "source_sha256": "1960fed599a8bf78080cc2687c11c2ab5f750fcfb85d759f11ca0041e99801bd"
+    },
+    {
+      "expression": "open my $fh,'>','.linkedspec-data/verification/perl-unicode-operand-observations.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        89,
+        2,
+        2
+      ],
+      "mode": ">",
+      "ordinal": 1255,
+      "parent": "t/unicode_recognition_operands.t",
+      "path": ".linkedspec-data/verification/perl-unicode-operand-observations.json",
+      "role": "declared-output-write",
+      "source_path": ".linkedspec-data/verification/perl-unicode-operand-observations.json",
+      "source_sha256": "7d07834626da681e5edb3d5484e7e207674d6633fe6379f1d023486352e58225"
+    },
+    {
+      "expression": "open my $fh,'>:encoding(UTF-8)','.linkedspec-data/verification/perl-unicode-guard-observations.json' or die $!;",
+      "handle": "$fh",
+      "location": [
+        117,
+        2,
+        2
+      ],
+      "mode": ">:encoding(UTF-8)",
+      "ordinal": 1509,
+      "parent": "t/unicode_rule_recognition_runtime.t",
+      "path": ".linkedspec-data/verification/perl-unicode-guard-observations.json",
+      "role": "declared-output-write",
+      "source_path": ".linkedspec-data/verification/perl-unicode-guard-observations.json",
+      "source_sha256": "8811821d5ec34b0f8c98ba9d675dd347057b1aabe8ceefdc7fe80558ecea97e0"
+    }
+  ],
+  "other_io": "Full145 retained; non-open IO vocabulary, variable/scalar/constructed/helper/library/support/generated/interpolated routes remain named follow-ups. No complete direct input graph.",
+  "specimens": [
+    {
+      "id": "read-write",
+      "literal": [
+        {
+          "mode": "<:raw",
+          "path": "tests/fixtures/example.json",
+          "role": "literal-input-read"
+        },
+        {
+          "mode": ">",
+          "path": ".linkedspec-data/example.json",
+          "role": "declared-output-write"
+        }
+      ],
+      "result": "PASS",
+      "unmatched": 0
+    },
+    {
+      "id": "quoted-only",
+      "literal": [],
+      "result": "PASS",
+      "unmatched": 0
+    },
+    {
+      "id": "nonliteral",
+      "literal": [],
+      "result": "PASS",
+      "unmatched": 3
+    },
+    {
+      "id": "method-heredoc",
+      "literal": [],
+      "result": "PASS",
+      "unmatched": 1
+    },
+    {
+      "id": "qualified-and-excluded-paths",
+      "literal": [
+        {
+          "mode": "<:encoding(UTF-8)",
+          "path": "tests/example.json",
+          "role": "literal-input-read"
+        }
+      ],
+      "result": "PASS",
+      "unmatched": 2
+    }
+  ],
+  "summary": {
+    "actual_mode_control": "RED at lexer exit0: changed <:raw to >:raw makes two outputs versus expected read/write",
+    "consumers": 145,
+    "controlled_specimens": 5,
+    "controls": {
+      "input body": "RED",
+      "input mode": "RED",
+      "input population": "RED",
+      "literal input output role": "RED",
+      "literal mode": "RED",
+      "literal site population": "RED",
+      "literal source site": "RED",
+      "literal target path": "RED"
+    },
+    "declared_output_sites": 2,
+    "input_targets": 32,
+    "limits": "Only the declared bounded literal mode/path three-argument open grammar over the original145 source documents. All unmatched open and non-open/library/support/generated/interpolated IO remains follow-up; no actual test/IO reachability, resolved file origin, output production, complete Perl semantics or native/canonical custody.",
+    "literal_input_sites": 32,
+    "literal_sites": 34,
+    "open_word_sites": 191,
+    "output_paths": 2,
+    "result": "PASS",
+    "retained_inputs": 189,
+    "unmatched_open_sites": 157
+  },
+  "unmatched_open": [
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $legacy_fh,'<',$legacy_native_path or die \"$legacy_native_path: $!\";",
+      "location": [
+        75,
+        1,
+        1
+      ],
+      "ordinal": 1068,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $owner_file,'<:raw',$owner or die $!;",
+      "location": [
+        16,
+        1,
+        1
+      ],
+      "ordinal": 139,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "31095da0334f6104275d72fee00478126cccc5ef3a5ffe34facc65c49e5c6319"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/array_transform_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9c2fc84ee72a8b083ee03279b6d100871537f98943bb101f595577a0a2e6fc49"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/array_transform_source_isolation.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0ebe4f4d309f6ff48a694988ec48e70a66eb2c4f5590b74416ca677c019af48a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/boundary_capture_fluent_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "dcff3fcadf3839b618ea6648c974d3baa32541682a2f36876cbe003c3dbf9e6c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n    or die \"Could not read $contract_path: $!\";",
+      "location": [
+        20,
+        1,
+        1
+      ],
+      "ordinal": 126,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $descriptor_contract_fh, '<:encoding(UTF-8)', $descriptor_contract_path\n    or die \"Could not read $descriptor_contract_path: $!\";",
+      "location": [
+        34,
+        1,
+        1
+      ],
+      "ordinal": 223,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fixture_fh, '<:raw', $fixture_path\n        or die \"Could not read $fixture_path: $!\";",
+      "location": [
+        705,
+        5,
+        5
+      ],
+      "ordinal": 6392,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";",
+      "location": [
+        750,
+        5,
+        5
+      ],
+      "ordinal": 6903,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";",
+      "location": [
+        761,
+        17,
+        17
+      ],
+      "ordinal": 7091,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";",
+      "location": [
+        825,
+        13,
+        13
+      ],
+      "ordinal": 7853,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";",
+      "location": [
+        906,
+        5,
+        5
+      ],
+      "ordinal": 8985,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";",
+      "location": [
+        916,
+        17,
+        17
+      ],
+      "ordinal": 9160,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";",
+      "location": [
+        962,
+        5,
+        5
+      ],
+      "ordinal": 9742,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$output or die \"Capture literal output: $!\";",
+      "location": [
+        1240,
+        21,
+        21
+      ],
+      "ordinal": 13954,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_advance_number_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "02c96da2bf05724ce9a0c2794ad7ee0dbea82e4479fa419ab28726e33c687f42"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_advance_text_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "06a216bce5a890ae438ee09bb184631251aaec19ff48ebad58ba50df3d55b543"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_boundary_number_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "cc71b83aaf2a02ad69815245dc995e82f5c834cb44ff9f57e5607e9db74c32c4"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_boundary_text_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ad612f5478fde9238254c5ed43e6f4b960306d1c133d18e10716bc602c78d564"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";",
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 86,
+      "parent": "t/capture_collection_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4f888a72af76a8c6423125826c8ff00cb4d60001ea045b50447e600cd8e8e1d5"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/capture_reset_value_block.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "bec8399ef522d48e702786320875fbc3201f69acdc3e6586219be2e43a0fa4a6"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '>', $path or die $!;",
+      "location": [
+        175,
+        2,
+        2
+      ],
+      "ordinal": 3460,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "30d7448005d174e24725f2ed1bd962702d591ec4d686e5ea3ccc6f39d6fa13e3"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $runner_fh, '>', $runner or die $!;",
+      "location": [
+        182,
+        1,
+        1
+      ],
+      "ordinal": 3534,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "30d7448005d174e24725f2ed1bd962702d591ec4d686e5ea3ccc6f39d6fa13e3"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $output_fh, '<', $output or die $!;",
+      "location": [
+        297,
+        1,
+        1
+      ],
+      "ordinal": 3628,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "30d7448005d174e24725f2ed1bd962702d591ec4d686e5ea3ccc6f39d6fa13e3"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<:encoding(UTF-8)',$path or die \"$path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 87,
+      "parent": "t/computed_selection_functions.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "a635adc7641e141b192c1415c7d44b980df408c1975746a4cb6549936c157421"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";",
+      "location": [
+        11,
+        2,
+        2
+      ],
+      "ordinal": 64,
+      "parent": "t/computed_selection_noncall_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "25107f0c5ee9205fa9bf19a3679288e7193a46023c98bacfc88af980825fca5c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 93,
+      "parent": "t/conditional_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "8c638d77758ba87134563247e6c352ddb49897d09613833c58c845ef3aba5e42"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/constructor_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9c92a96231dcdafb9b1cb3a38aec0d83cee0ef289246e7104390cc975867eba7"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/contains_block_operand_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "05715396781528d7498e3b7bd202b09f688534cd9817be7ff6bfb457110c37b4"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/contains_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "a402b803a47f4fd3f4dd9387aac59742f4837037ef67565035e439d8843b8e61"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_contains_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "397e1d5e0afaae7b5d05ec2ca582709e27194248505a1bbd749e27fdced399ab"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_index_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e8a25ef37c6bd848df577d64b5030031eec9e147db3794636a0a508719a9f4c7"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_presence_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "969c980d38143cc082de6ff60afe0ef45f69e7dfd055750db4207bb43ec3ff2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/copy_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ea4b52737358b2ed53b232a28ccb6113bcf7eb6e3e14a08eafb5b03ccbfab6de"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_block_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "80bb8bcd32cca6e561efe10993315064e98e585559ee6f9f66d777f28e82e089"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_copy_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "d6675519b576d96318bcfc8cf905f2e7bddf72879931155852ed6e5d469ae891"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '>:encoding(UTF-8)', $path or die \"cannot write $path: $!\";",
+      "location": [
+        49,
+        9,
+        9
+      ],
+      "ordinal": 613,
+      "parent": "t/count_copy_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "d6675519b576d96318bcfc8cf905f2e7bddf72879931155852ed6e5d469ae891"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_logical_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "54e24cb68c1177c1b1f6645841b1bad7dfc48a6934b31fafd2e970f1795b95ca"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '>:encoding(UTF-8)', $path or die \"cannot write $path: $!\";",
+      "location": [
+        49,
+        9,
+        9
+      ],
+      "ordinal": 613,
+      "parent": "t/count_logical_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "54e24cb68c1177c1b1f6645841b1bad7dfc48a6934b31fafd2e970f1795b95ca"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/cursor_rewind_result.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "81e12f234075369441c672c1a2e4f3ec50237ba3c24ca944338b5c9303e44ef8"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/cursor_statement_scope.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "894b070d2320cad584c6a3e2640c1ea6c0e8a19270137a728b5bf6d5f4d5b8f4"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<', $path or die \"$path: $!\";",
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 51,
+      "parent": "t/defined_default_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9666b0a94da34c53ff93c3b8f46fa6ce39c752b6983f9e9c7efdac0359b5ad6c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/definedness_native_numeric_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "8d0b18ee166d319573c5c29df4f1f63dea4932b322406b7323e332a5b775bf9f"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/definedness_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "aaf3871a0ee19ecee1b1e0b8a06cd45ea092c3448da90a73ac97cfbbf09533fd"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '>:raw', $path or die $!;",
+      "location": [
+        19,
+        5,
+        5
+      ],
+      "ordinal": 173,
+      "parent": "t/document_history_catalog.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "036c65ae6d3a7a93de3c300142a0028893f75660d124fdf7e583128000c0847c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $_[0] or die $!;",
+      "location": [
+        24,
+        5,
+        5
+      ],
+      "ordinal": 229,
+      "parent": "t/document_history_catalog.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "036c65ae6d3a7a93de3c300142a0028893f75660d124fdf7e583128000c0847c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/emptiness_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "d012dd300b9e9889e60c01ddaedb4ad89cce0e17a35ece6856cae89f30b359e5"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh,'<',$path or die \"$path: $!\";",
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/emptiness_result_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "87b9d48892bb0bc43984004e98025bd0ec6d8bd81860a487563e20bf10e3768a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<', $path or die \"cannot read $path: $!\";",
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/entry_match_number_result_continuations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e8da4196b9ffe7aa08afdbbc0b4c9a6995280f8e231deb4b97197036848de019"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_default_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "128723794bf5cd4c76a2b0cf3ca8ab2237f864353e1adf5f9f1615a0f6e733d1"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_numeric_comparison_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "3411f50b2b96154631c94b7a22fe7bd94d0deec4dedf7e368cf34178d4adc777"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_numeric_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "1509d1257c64a8b9e70055d3f4c45b4cbc362d39718311b3f739409c91082928"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_string_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "fdcedddc78a158241316c5d85618107ad77f4f779c7359e983c4fed44caf08ac"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/gap_slot_record_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "3c6ca1c2df6e7e4041d0ced8a7e35325928c2d11c6690e771800d01dcb89c8d8"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/gap_string_result.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "95c374e15bb2c3a658a260e465c967dd625cc7eaf316262ed2511ead4308cf13"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/has_key_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "b0ed628b9f313e6917b44d1fda573177344b904e892cc81f7914a43cf87faa6d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh,'<',$path or die \"$path: $!\";",
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/has_key_result_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9abb572b6782bf64553456e6855ea6b843a94c2fc609411e65ce5a71bc6b2a90"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/hash_helper_source_isolation.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "bc838df14d41637657546d2da92eeeee12da911fa172168049a5034642002377"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/hash_value_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e7cd5494fadfb61fe865eb48e8a227e72044b1c5b861db674e0e371b6c1bd32a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/hash_view_receiver_source_policy.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ac575ef2f5928b078f30186eb26eaeb884e3242b83f92c8efcabf0534665d04a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/hash_view_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e773d5b5e788c6cdd583eb2e507e37c0cb62ea6df4adf45af5e9807c0f4db9f8"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/index_block_operand_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "eb17deee3bd4a53bf5779eecc2288bf5c36c31f67167846dd4bd99523781576d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/index_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0791e4aed756017dbb18e7c174907405c6d0dae9c86be05a44c1ed8ad6c3896b"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<', 'docs/checkpoints/type-operation-inventory/'.$name.'.json' or die $!;",
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 74,
+      "parent": "t/inline_condition_value_blocks.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "b64a42c4c74bd16450ed6b4aa64f7758b334eed76e967c63c06b0469791f855a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<:encoding(UTF-8)',$path or die \"$path: $!\";",
+      "location": [
+        12,
+        16,
+        16
+      ],
+      "ordinal": 71,
+      "parent": "t/input_cursor_result_continuations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9572f52cbc8a454a7ce3111fc6c02ef0f8ae39662d666729b31cf8728d1627f0"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/input_mark_value_block_statements.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "a4ad055be22a9e1a391b8ebbab95dc504d6f4cae3671a869ddd5c1c85fb3d57a"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_block_source_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "dc749e4abc5842dc8ae69550af733738c6e9acfc29434bab4c516fc62df71435"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_callable_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e16b9f86bf72136315b11b085291f125e2757e08aba05b2aba6eb6a571c23fde"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0f05ccdc5f030f29c8a002ec212694d926229b18dcd6f6c9d5179f057ad1d9c8"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_source_domain.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9bc2ad504b4a530b5deb8497875cb70be3d5c9a23d3558371d6e25b6705bae18"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '>:raw', $_[0] or die \"write $_[0]: $!\";",
+      "location": [
+        44,
+        2,
+        2
+      ],
+      "ordinal": 514,
+      "parent": "t/knowledge_map_header_lists.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "2836c3eb5427ff18bf5782c95ea1dfbea634d12f4953fd5327fc55a3ed4f9076"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $mapping, '<:raw', $ENV{KM_OUTPUT} or die \"read generated map: $!\";",
+      "location": [
+        121,
+        2,
+        2
+      ],
+      "ordinal": 1717,
+      "parent": "t/knowledge_map_header_lists.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "2836c3eb5427ff18bf5782c95ea1dfbea634d12f4953fd5327fc55a3ed4f9076"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/length_count_source_ownership.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "9dd71515ca4fc5a7ea6cec1bad138779b23b2b21d0c33bb86b12a5e650270ee8"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/length_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e54cef89dd3a1a2641ac28b4bf893922410a18ae63f0725bd0550327b1fd3d23"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/lexical_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0e0e5d8687c1b859df98054cd49c1abd059fb17b1edab942541fdc5fd2212bda"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<',$path or die \"$path: $!\";",
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/logical_receiver_method_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "77383ea574298e16e31b9befeddf36e7ece0dcac5a37c98534d5a13689c3f90b"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/logical_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "082a704798c8a21ed8acb75617f6590cadc70fe3f7f7241f7ff6a83a03f5628d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/mark_name_advance_arguments.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e7225c634f8b3a44b22adc1716a6c0b17e57461b0b295a96c4d2d9e98fa29984"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/mark_name_number_arguments.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "48dd9c546f321c5b44d8f4dec170fed857369eca1f58dd030a93a646d30429cd"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/mark_name_text_arguments.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "18f9efde01c88ff3f4cbd4efcf7547bab3095298e2c850323db70284d7e54b8d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/mark_name_write_arguments.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "a3bb6ca5ef7612b82097d159233b81c12f4ea87db8e325d51b75d9fda58456db"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/named_mark_number_results.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0636272e8aba42f840adf9e8e1bad6e407cc0bda45b863ef1cb14836d42114a0"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/named_take_reversed_span.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0fb40df87641a709898ff06489d6bf274874cc506ce6e46172ec2637d2ba68de"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;",
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_blind_scalar_declarations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "247c1c08c5fb3b1bf09814b018c10d87f46b8247e70dc250a44b17ec094011dd"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;",
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_match_local_declarations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "e3ee7c5ddac236f9e4d6bdf2c0656a5124f8d9016a17b3889ef46e487c09411f"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;",
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_or_match_local_declarations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "024cb1fcd55f3abf639942d58de2d08eea7987f14d8cad6e14049353cd638e3d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/perl_sort_scope.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "3ca07601f5c23538992090fe642df50c6220490019302d823b7ad750b5c4b71e"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3208,
+        9,
+        9
+      ],
+      "ordinal": 30994,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create explicit-path spec '$tmp_spec': $!\";",
+      "location": [
+        3530,
+        5,
+        5
+      ],
+      "ordinal": 34413,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create cwd-resolution spec '$tmp_spec': $!\";",
+      "location": [
+        3555,
+        5,
+        5
+      ],
+      "ordinal": 34700,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3815,
+        9,
+        9
+      ],
+      "ordinal": 37719,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3816,
+        9,
+        9
+      ],
+      "ordinal": 37739,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3842,
+        9,
+        9
+      ],
+      "ordinal": 38013,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3843,
+        9,
+        9
+      ],
+      "ordinal": 38033,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3871,
+        9,
+        9
+      ],
+      "ordinal": 38353,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3872,
+        9,
+        9
+      ],
+      "ordinal": 38373,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3904,
+        9,
+        9
+      ],
+      "ordinal": 38751,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3905,
+        9,
+        9
+      ],
+      "ordinal": 38771,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3934,
+        9,
+        9
+      ],
+      "ordinal": 39087,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3935,
+        9,
+        9
+      ],
+      "ordinal": 39107,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        3966,
+        9,
+        9
+      ],
+      "ordinal": 39451,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        3967,
+        9,
+        9
+      ],
+      "ordinal": 39471,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create go-once fallback spec '$tmp_spec': $!\";",
+      "location": [
+        3993,
+        5,
+        5
+      ],
+      "ordinal": 39762,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable-open-failure spec '$tmp_spec': $!\";",
+      "location": [
+        4073,
+        5,
+        5
+      ],
+      "ordinal": 40608,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed spec '$tmp_spec': $!\";",
+      "location": [
+        4099,
+        5,
+        5
+      ],
+      "ordinal": 40871,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed-handler spec '$tmp_spec': $!\";",
+      "location": [
+        4137,
+        5,
+        5
+      ],
+      "ordinal": 41294,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create mixed-action/blind-call spec '$tmp_spec': $!\";",
+      "location": [
+        4202,
+        5,
+        5
+      ],
+      "ordinal": 41893,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT, '>', \\$stdout or die \"open stdout scalar failed: $!\";",
+      "location": [
+        7695,
+        9,
+        9
+      ],
+      "ordinal": 68914,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable parser-factory spec '$tmp_spec': $!\";",
+      "location": [
+        9778,
+        5,
+        5
+      ],
+      "ordinal": 90611,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";",
+      "location": [
+        10120,
+        5,
+        5
+      ],
+      "ordinal": 94929,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";",
+      "location": [
+        10156,
+        5,
+        5
+      ],
+      "ordinal": 95381,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";",
+      "location": [
+        10192,
+        5,
+        5
+      ],
+      "ordinal": 95841,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";",
+      "location": [
+        10229,
+        5,
+        5
+      ],
+      "ordinal": 96304,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";",
+      "location": [
+        10266,
+        5,
+        5
+      ],
+      "ordinal": 96772,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable get_parser spec '$tmp_spec': $!\";",
+      "location": [
+        10977,
+        5,
+        5
+      ],
+      "ordinal": 104092,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid spec '$tmp_spec': $!\";",
+      "location": [
+        11375,
+        5,
+        5
+      ],
+      "ordinal": 108374,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create late-build-failure spec '$tmp_spec': $!\";",
+      "location": [
+        11412,
+        5,
+        5
+      ],
+      "ordinal": 108799,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime handler spec '$tmp_spec': $!\";",
+      "location": [
+        11520,
+        5,
+        5
+      ],
+      "ordinal": 110103,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime parser spec '$tmp_spec': $!\";",
+      "location": [
+        11564,
+        5,
+        5
+      ],
+      "ordinal": 110591,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid input-ref spec '$tmp_spec': $!\";",
+      "location": [
+        11626,
+        5,
+        5
+      ],
+      "ordinal": 111226,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$stderr) or die \"unable to capture STDERR: $!\";",
+      "location": [
+        11724,
+        9,
+        9
+      ],
+      "ordinal": 112139,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$stdout or die \"open scalar stdout capture: $!\";",
+      "location": [
+        42691,
+        5,
+        5
+      ],
+      "ordinal": 337871,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$build_stdout) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        43900,
+        9,
+        9
+      ],
+      "ordinal": 352269,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$build_stderr) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        43901,
+        9,
+        9
+      ],
+      "ordinal": 352289,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $dump_fh, '>', \\$dump_stdout or die \"open scalar stdout: $!\";",
+      "location": [
+        46635,
+        9,
+        9
+      ],
+      "ordinal": 380453,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '<', $path) or die \"Cannot read '$path': $!\";",
+      "location": [
+        49193,
+        5,
+        5
+      ],
+      "ordinal": 404957,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(my $fh, '>', $path) or die \"Cannot write '$path': $!\";",
+      "location": [
+        49200,
+        5,
+        5
+      ],
+      "ordinal": 405016,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        49311,
+        9,
+        9
+      ],
+      "ordinal": 406087,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        49312,
+        9,
+        9
+      ],
+      "ordinal": 406107,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";",
+      "location": [
+        49431,
+        9,
+        9
+      ],
+      "ordinal": 407003,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";",
+      "location": [
+        49432,
+        9,
+        9
+      ],
+      "ordinal": 407023,
+      "parent": "t/phase0_regression.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "4e08e2902f0f1be108b2a120fb04b44247733e7261593a6e4d46838f46f56a2d"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"Could not read '$path': $!\";",
+      "location": [
+        15,
+        2,
+        2
+      ],
+      "ordinal": 83,
+      "parent": "t/punctuation_light_zero_arg_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "799ce2dfbf9d125c7c7a9b46f1fe06ac866a4a5e15849ed1bf06f075add7f7fb"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_payload_values.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ab3857cdf7622896ba2cddb904de48137808e0f1be4202981705f88c1ca13396"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_result_fluent.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "f1e199ed0be8dbeef4a87d66a898cce3c7c89b1faf2d413facda11c82c3b0357"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_result_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "07225b937c8f4f9f932f3a57a0191e95bda72926f4aa1959b227ef2e03ed5d14"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/receiver_string_bridge_guards.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "534eb05c3daa5ad3cd9403cdadf276bc560efd14a0b1f1045779099fd71ad8a6"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<',$path or die \"$path: $!\";",
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/reduction_result_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "3b668b31e06636c311f63f0d79a15eba50284835c5728e10ab47e65b94a9caac"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT,'>',\\$build_stdout or die $!;",
+      "location": [
+        17,
+        4,
+        4
+      ],
+      "ordinal": 172,
+      "parent": "t/referenced_blind_intermediate.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ddf184bc1f325418912d5621d143b351b481ffd956e4ae59c165f88e43790eb6"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDERR,'>',\\$build_stderr or die $!;",
+      "location": [
+        17,
+        45,
+        45
+      ],
+      "ordinal": 187,
+      "parent": "t/referenced_blind_intermediate.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "ddf184bc1f325418912d5621d143b351b481ffd956e4ae59c165f88e43790eb6"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/rule_call_result_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "161570137e68692b32b9d2d928f92c2002c2031baf24151594a36b2fea87b72b"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n or die \"cannot read $contract_path: $!\";",
+      "location": [
+        23,
+        1,
+        1
+      ],
+      "ordinal": 149,
+      "parent": "t/scalar_numeric_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "cba43f77718a3812f45d9488f14a6d73712c16e4770b431f8a9866f7096da62e"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";",
+      "location": [
+        54,
+        9,
+        9
+      ],
+      "ordinal": 493,
+      "parent": "t/scalar_numeric_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "cba43f77718a3812f45d9488f14a6d73712c16e4770b431f8a9866f7096da62e"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";",
+      "location": [
+        69,
+        17,
+        17
+      ],
+      "ordinal": 728,
+      "parent": "t/scalar_numeric_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "cba43f77718a3812f45d9488f14a6d73712c16e4770b431f8a9866f7096da62e"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";",
+      "location": [
+        10,
+        2,
+        2
+      ],
+      "ordinal": 56,
+      "parent": "t/scalar_string_result_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "84400fc046e13cc3f91ae3529edf259384f610dc185f1ba69bf1fa9ab5eec842"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n or die \"cannot read $contract_path: $!\";",
+      "location": [
+        22,
+        1,
+        1
+      ],
+      "ordinal": 141,
+      "parent": "t/scalar_text_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "a53e23ab44377c48656eb2fb0200a073fcf3acfb099862089973abaf0e903e76"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";",
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 93,
+      "parent": "t/set_key_block_operands.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "391a3746c4222443ffef11266e6108f1eeedff5d4d99e17cdf12dfa892716f64"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/set_result_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "507359ec84117dac4f013f785d25fed64c096204ebe0ec00a5c0b7da486b2231"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:raw', $path or die \"Read $path: $!\";",
+      "location": [
+        24,
+        5,
+        5
+      ],
+      "ordinal": 169,
+      "parent": "t/signed_array_selector_perl_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "62cceb449b7ffe46d22fd282426952b1525676995174fba37820d6476d589b5c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $capture, '>', \\$diagnostic or die \"Capture native output: $!\";",
+      "location": [
+        238,
+        17,
+        17
+      ],
+      "ordinal": 3329,
+      "parent": "t/signed_array_selector_perl_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "62cceb449b7ffe46d22fd282426952b1525676995174fba37820d6476d589b5c"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";",
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/string_predicate_result_guard_composition.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "3433a10864b9e4b13467fa06354e4d03268d6a2cd01379e50e9de977eba316fe"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh,'<',$path or die \"$path: $!\";",
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/string_predicate_result_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "f9bb7f983a38ac40bf4576226da4f4f37b3d34f5087c9c6b5d4035d797970dfc"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<',$path or die \"$path: $!\";",
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/tagged_record_producer_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "5ca6ceb62fe7c21baef634a5c73a7affe999bbf4fab26636bc7fd0c83b2ddc18"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $file,'<',$path or die \"$path: $!\";",
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/tagged_record_receiver_contract.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "0bfa63e27a0fd4bee755ea4e1752da3e83884c894e1c16d2330432fbb2d9069b"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open STDOUT,'>:encoding(UTF-8)',\\$build_output or die $!;",
+      "location": [
+        44,
+        19,
+        19
+      ],
+      "ordinal": 522,
+      "parent": "t/unicode_recognition_operands.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "7d07834626da681e5edb3d5484e7e207674d6633fe6379f1d023486352e58225"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh,'<:encoding(UTF-8)',$path or die \"$path: $!\";",
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/unicode_rule_recognition_runtime.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "8811821d5ec34b0f8c98ba9d675dd347057b1aabe8ceefdc7fe80558ecea97e0"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<', $path or die \"cannot read $path: $!\";",
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/with_hash_result_continuations.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "25d66108bbbb1a03a477f9cd5d79fa245df2506dd953920a6050353251d556dc"
+    },
+    {
+      "context_hint": "word candidate; callee/phase/branch/runtime meaning unresolved",
+      "expression": "open my $fh, '<', $path or die \"cannot read $path: $!\";",
+      "location": [
+        16,
+        2,
+        2
+      ],
+      "ordinal": 104,
+      "parent": "t/with_result_selection.t",
+      "role": "unmatched open candidate; variable/scalar/generated/helper/callee meaning requires follow-up",
+      "source_sha256": "d85df1c334de8c6c0465dca620df0b5d96ce817e5985ef72388f88ce2bfbcc00"
+    }
+  ]
+}

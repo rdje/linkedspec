@@ -1,0 +1,9 @@
+{
+  "actual_book_edit": false,
+  "independent_od": "PASS: ASCII92 once; actual two-backslash command is RED against the single-byte oracle at exit0.",
+  "limits": "Only retained source/render paragraph and command bytes. Full native od/renderer/toolchain/OS/first-use/source-origin/physical closure remains4.2/SESSION5.",
+  "refused_attempt": "Actual guard fails at line15 before writes; source and failure retained after use.",
+  "rendered_backslashes": 1,
+  "result": "PASS",
+  "source_backslashes": 1
+}

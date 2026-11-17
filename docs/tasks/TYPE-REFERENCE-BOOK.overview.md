@@ -2108,9 +2108,29 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: Named14/parents3: suites12/libraries2/cold context1; PPI15/current31/old callable11/eight controls PASS. Caller plans/source selections2/2/1 preserved. Three added primary bodies were absent from the old callable-only epoch; prospective capture closes this slice, historical4.2 remains.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1`
-  Status: `pending`
+  Status: `active`
   Goal: Resolve remaining direct literal fixture/source IO candidates across the full145 population.
   Acceptance: Parent contract; distinguish file/memory/output/source-guard roles, explicit source conditions and actual consumer phases; no reached-IO inference.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0`
+  Status: `completed`
+  Goal: Qualify literal open modes/paths over145.
+  Acceptance: Retain145 identities/sites/roles/bytes/modes and unmatched IO. No runtime/output-input/native/semantic admission.
+  Verification tier: `focused`
+  Focused checks: Reader/Git/specimens/REDs; book/memory/history/scope/hooks.
+  Canonical trigger: Admission/push.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0.json`
+  Outcome: Focused PASS; all limits in claim.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1`
+  Status: `pending`
+  Goal: Bind literal variables to IO.
+  Acceptance: Parent scope;145/support/readback.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2`
+  Status: `pending`
+  Goal: Reconcile other literal/non-open IO.
+  Acceptance: Parent scope; support/dynamic/library follow-ups.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2`
   Status: `pending`

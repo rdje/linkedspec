@@ -1,0 +1,42 @@
+{
+  "template": "docs/checkpoints/perl-named-includes-2026-11-17/publish.py",
+  "template_sha256": "b6ebab4d13df2f097adba21bdfdfb7e2ef908d76aff486b2813337bc9163995d",
+  "substitutions": [
+    {
+      "old": "result['current_inputs'] == 31 and result['include_sites'] == 14",
+      "new": "result['current_inputs'] == 189 and result['literal_sites'] == 34"
+    },
+    {
+      "old": "'roles.json'",
+      "new": "'inventory.json'"
+    },
+    {
+      "old": ".linkedspec-data/perl-token-census-commit.log",
+      "new": ".linkedspec-data/perl-named-includes-commit.log"
+    },
+    {
+      "old": ".linkedspec-data/perl-named-includes-capture.log",
+      "new": ".linkedspec-data/perl-literal-open-capture.log"
+    },
+    {
+      "old": ".linkedspec-data/perl-named-includes-review.log",
+      "new": ".linkedspec-data/perl-literal-open-review.log"
+    },
+    {
+      "old": ",\n    ('plan-outer', '.linkedspec-data/perl-named-includes-plan.log')",
+      "new": ""
+    },
+    {
+      "old": "20261117T040019.533023Z",
+      "new": "20261117T044555.567744Z"
+    },
+    {
+      "old": "('publish.py', 'review_publication.py', 'plan.json'",
+      "new": "('publish.py', 'prepare_publication.py', 'review_publication.py', 'plan.json'"
+    }
+  ],
+  "prefix_boundary": "summary = (",
+  "tail": "literal source qualification, no old writer replay",
+  "actual_publisher_sha256": "871a5229bd04b1071d67ac1f9bfbd252aa94a523003e99bf6bb712a50f947048",
+  "limits": "Composition source/input image retained before new publisher use; outer-first-use/native closure remains4.2/SESSION5."
+}

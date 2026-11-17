@@ -1,0 +1,27 @@
+{
+  "MEMORY.md": {
+    "bytes": 2274,
+    "mode": 420,
+    "sha256": "baf18a39533886de71f50aea46a5b0632f8ced13b031ff9b5b356615c81e29c9"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/repair_pressure.py": {
+    "bytes": 4148,
+    "mode": 420,
+    "sha256": "67a43642510edf2a0babe02f86781d6ff028b128553f3eab69494e807f25e496"
+  },
+  "docs/checkpoints/perl-literal-open-qualification-2026-11-17/review_pressure.py": {
+    "bytes": 3920,
+    "mode": 420,
+    "sha256": "f35be85f88538e56ab3cbe0aa857fdd4915152eb65b848873a406c460c0e3d09"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20908,
+    "mode": 420,
+    "sha256": "4d0e79d27cefe13f6cfa68959ea3c8f94ab9eaff6da95c725788de5d62be02d3"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 606572,
+    "mode": 420,
+    "sha256": "93a7d307e36d403540de81c16f53e4c63f64284f1b1c75999b0b173aad1aaea6"
+  }
+}

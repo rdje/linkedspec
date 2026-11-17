@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — qualify literal Perl open paths
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0: The bounded literal-open grammar classifies34 of191 open Word sites across145 Perl sources:32 input reads/32 targets and two declared output writes. All157 unmatched open sites remain explicit. Current189 bodies/modes, five independent source specimens and eight evidence controls pass. Actual changed read-to-write source makes the old oracle RED at lexer exit0. No application test, runtime IO or output production is observed. Evidence: `docs/checkpoints/perl-literal-open-qualification-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — qualify named Perl includes
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0: Fourteen named Perl includes across three parents resolve to twelve suite sources and two probe libraries; one nested cold-child source is retained separately. All fifteen target/context documents round-trip under PPI1.270; current31 bodies/modes, earlier eleven callable edges and eight corruption controls pass. Caller-guarded plans, helper standalone guards, truth/defined load checks and parent source-selection multiplicities2/2/1 remain explicit. No application test or cold child runs. Evidence: `docs/checkpoints/perl-named-includes-2026-11-17/REVIEW.md`.

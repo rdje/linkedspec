@@ -1,0 +1,26 @@
+[
+  {
+    "source": ".linkedspec-data/perl-named-includes-commit.log",
+    "target": "docs/checkpoints/perl-literal-open-qualification-2026-11-17/preceding-normal.log.gz",
+    "bytes": 10693,
+    "sha256": "6d1984bd30305b4c5682581b6c0f6cd1f08b97c4a7a00750810dfabc8f93bb4c",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-literal-open-capture.log",
+    "target": "docs/checkpoints/perl-literal-open-qualification-2026-11-17/capture-outer.log.gz",
+    "bytes": 1016,
+    "sha256": "4617564f0e2bf8a70a74cfa4ec959088e4f5674c09208d38dde5096fcc8bf80e",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-literal-open-review.log",
+    "target": "docs/checkpoints/perl-literal-open-qualification-2026-11-17/review-outer.log.gz",
+    "bytes": 1041,
+    "sha256": "b2999be30d74fce2e372fdae8128074a68aeb7e89df400a0e0c8205b9f5e2799",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  }
+]

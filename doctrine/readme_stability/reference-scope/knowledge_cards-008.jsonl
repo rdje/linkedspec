@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3926,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-postcall-falsey-acceptance.md","sha256":"d0adb17b938a98241cce7d9582ef8b72ae075f23d5b3bf9817fc8fc26c2febe4","type":"member"}
 {"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}
 {"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
 {"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
@@ -109,6 +110,7 @@
 {"bytes":5115,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-legacy-source-producer-partition.md","sha256":"94b67ce72bf97f2769497b28b87543a592deb8e23a50344548b5104a87348b09","type":"member"}
 {"bytes":2311,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.1","path":"docs/knowledge/perl-length-sorted-values-oracle-reconciliation.md","sha256":"2dc749d3cb4878f898bd6050daabcdda8a0a5cf3a4f8e878f2d09b72777cb4cd","type":"member"}
 {"bytes":6932,"lines":81,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-lifecycle-final-value-e-drift.md","sha256":"3b9097211f985ea44670c74e845b489ea41b4fc154327cae474cf231f0b47a39","type":"member"}
+{"bytes":2594,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0","path":"docs/knowledge/perl-literal-open-source-roles.md","sha256":"4966780332d941aba65b96495a0475feaf3ac6d30604e251adbd01b074e3aa22","type":"member"}
 {"bytes":4256,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-local-match-writer-absence-gap.md","sha256":"926d99938c8fa4e8170d9a2efe6feec0bfb3ecb97c7b41422f8e43d71a801e53","type":"member"}
 {"bytes":2611,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-local-match-writer-presence-repair.md","sha256":"c15dff748a16208d979c86cc0f40d7658ec016b9553bdac07f3a7ae86263b5c8","type":"member"}
 {"bytes":4355,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-local-start-named-take-reversed-span-gap.md","sha256":"c6547dc42a9ba8332890afcb62998aa599d37b57e010d3c608ba334fff939b1f","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":9827,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-array-end-capture.md","sha256":"1c5488668f03d7165a669fb38e79aef6ca8977a0cf10f9d232cbb46e8f871b4a","type":"member"}
 {"bytes":10152,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-assignment-capture.md","sha256":"2ad022242ec3a87770d85411a11fda8b6ad115a5a370982762af2c6a8003b211","type":"member"}
 {"bytes":21682,"lines":270,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-call-capture.md","sha256":"7e2d38cef65e808e7b25172498568f56e4936f6a3f6f2274bb26d295dd78686a","type":"member"}
-{"bytes":5389,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-hash-key-capture.md","sha256":"bde93e826ec8762d6d0ac54d9206a75eb851ba4fd9fb484c91181d773e3c1586","type":"member"}
-{"bytes":20671,"lines":252,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-component-capture.md","sha256":"9cf7b153cf75173cdc6b0e94251ac24a32343d5106ede2e2374e4517366c6a65","type":"member"}
