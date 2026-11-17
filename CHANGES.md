@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — prepare the director-authorized canonical checkpoint
+
+TYPE-REFERENCE-BOOK.1.2.23.4.30.2.0: Prepare the exact staged checkpoint and align the public budget paragraph with the received director clarification. Full canonical CI and normal hooks remain mandatory; original discovery/registration/native-admission owners stay open. No push or new test/coverage/wire metric is claimed by preparation. Exact staged-candidate receipt and normal hooks gate this canonical leaf. Actual publication observations belong to push/outcome1. Evidence: `docs/checkpoints/publication-checkpoint-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — retain the dated artifact review and publication-priority handoff
 
 TYPE-REFERENCE-BOOK.1.2.23.4.37: 1322 dated metadata rows agree across the eight published scopes; six evidence controls and a stage-byte source RED pass. All artifacts/caches/proof remain retained; nothing removed. The actual logical Git-index input exactly matches its clean-base tree inverse, avoiding a duplicate large index packet. Director clarifies approximate1.5GB: finish current37, full CI and normal workflow, then checkpoint push; discovery/registration/native admission remains open. The original helper-plan reader refuses the real live-state handoff; default recovery now binds accepted36428fa1 while explicit current mode stays distinct. Old RED/new historical GREEN/current RED and original sources remain retained. Evidence: `docs/checkpoints/artifact-review-2026-11-17/REVIEW.md`.

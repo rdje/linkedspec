@@ -1,0 +1,14 @@
+<p>The command prints the actual committed HEAD/cached origin refs, non-thin pack
+estimate, byte margin and preparation state. It keeps raw diagnostics on the
+repository volume outside Git, with one pack worker and a <code>64m</code> window-memory limit. All
+uncommitted changes are excluded. Start canonical discovery/publication preparation
+around 1,400,000,000 bytes or earlier if the next slice or CI receipts need more
+margin; this 100 MB reserve is advisory. Publish around 1.5 GB even before the batch
+ends. GitHub’s <a href="https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit">single-push limit</a>
+is 2 GiB. Full CI and a clean exact HEAD through normal hooks remain required for
+every push. Current canonical test discovery remains the normal admission prerequisite.
+For the November 17 checkpoint, the director clarifies that 1.5 GB is approximate:
+a little below or above is fine. Finish the current leaf, run full canonical CI
+and normal workflow, then publish the checkpoint while discovery/registration
+and native-admission work remain open. Those owners are not closed by the push;
+resume PNT afterward. Check fresh remote identity before transfer.</p>

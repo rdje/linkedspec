@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "command": "bash tools/run_mdbook_local.sh",
+  "observed_exit": 0,
+  "rendered_note_sha256": "98aed5ba8ec390aa0ba03241d0f827d387acdab6668b4fcb666a2d04b3104c4c",
+  "recording": "Actual after-use combined build log and rendered note; no separate original channels or native/physical closure."
+}

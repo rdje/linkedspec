@@ -1,4 +1,4 @@
-November17 current PNT frontier: Director clarifies approximate1.5GB; finish current retention/reader37, full canonical CI/normal workflow, then checkpoint push. Dated metadata1322/eight scopes/six controls/zero removals and historical reader repair are focused-checked. Discovery/registration/native admission remains open; resume PNT after publication.
+November17 current PNT frontier: Canonical checkpoint preparation aligns the public budget note with the director approximate1.5GB clarification. Full exact-candidate CI/normal workflow precedes push and remote read-back; discovery/registration/native admission remains open. Resume PNT after publication.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

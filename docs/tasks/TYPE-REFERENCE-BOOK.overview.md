@@ -3446,14 +3446,27 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Final qualified checks: Actual rendered CI link/workflow target/command/budgets0 with HTML inputs retained before inspection; CI2048/workflow1013 and both existing budget contracts pass. Knowledge1750/12476 keys; scope1952/17 pages; final mdBook0/known18.2 index warning; memory0/history0/16 recent rows/whitespace0. Unchanged production-parser probe and source/log/mode landing recovery0-three controls confirm both corrections. Normal retry still governs landing; no checker/registry/measurement or SDK change.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.30.2`
-  Status: `pending`
+  Status: `active`
   Goal: Publish the exact clean checkpoint around the director approximate1.5GB target after current37/full canonical CI and normal workflow; keep original source-admission owners open.
   Dependencies: Monitor30.1; completed current37; sufficient shared-host RAM; fully staged exact candidate/canonical receipt/normal commit/clean tree. Director2026-11-17 authorizes this checkpoint before discovery23.4.1/registration closeout; those full-admission owners remain open.
   Acceptance: Recheck fresh remote identity and outgoing serialized size before data transfer, preserve required producer-reuse policy, run full canonical CI for exact staged/committed candidate, push only root main through normal hooks without force/tags/submodule recursion, and observe remote success/local equality/post-push CI status under hosted-disabled policy. Record receipts/ref identities/size uncertainty and resume PNT. Never approach GitHub2GiB or use retired one-off publishers/history rewrites. No duplicated canonical run when an exact receipt is reusable.
-  Planned verification tier: canonical.
-  Planned focused checks: Exact current pack/refs, canonical selection prerequisites and normal hooks, post-push remote/local/status checks.
-  Planned claim verification: Declare actual measured scope and proof legs at activation; never claim negotiated wire bytes from a local estimate.
+  Children: `.0` canonical preparation; `.1` push/outcome (ID suffixes).
   Director clarification: Director2026-11-17 clarifies that1.5GB is approximate and a little below or above is fine. Finish current retention/reader slice37, then run full exact-candidate canonical CI and normal workflow and push the checkpoint. Source discovery/registration/native admission remain open; resume PNT after publication. Exact reply and initial question: docs/checkpoints/artifact-review-2026-11-17/PUBLICATION_QUESTION.md. This checkpoint may publish before original discovery/registration closeout; those owners are not completed by the push.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.30.2.0`
+  Status: `completed`
+  Goal: Prepare the canonical checkpoint and scoped manual clarification.
+  Acceptance: Exact staged receipt; original discovery/registration/native owners stay open.
+  Verification tier: `canonical`
+  Focused checks: Book/scope/memory/history/diff and full canonical gate.
+  Canonical trigger: Authorized clean checkpoint push.
+  Claim verification: none: Preparation publishes no new metric; the canonical receipt gates landing and push/outcome1 owns measured results.
+  Outcome: Preparation only; exact canonical receipt is required before landing. Push/outcome1 remains pending.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.30.2.1`
+  Status: `pending`
+  Goal: Push the prepared checkpoint and record actual refs/receipt.
+  Acceptance: Normal root push and remote read-back; scoped three-leg evidence, no wire-size inference or admission promotion; resume PNT.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.31`
   Status: `completed` / dated focused maintenance; full native custody separate

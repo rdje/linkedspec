@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: director-authorized checkpoint canonical CI/push follows completed retention and historical reader repair.
+PNT: exact canonical checkpoint preparation, then authorized publication.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.37 — Dated1322 rows/eight scopes/six controls and stage-source RED pass; all artifacts retained, zero removals. Historical plan recovery is corrected with actual old RED/new historical GREEN/current RED. Director clarifies approximate1.5GB: finish current37, full CI, then checkpoint push; original discovery/registration/native admission stays open.
+TYPE-REFERENCE-BOOK.1.2.23.4.30.2.0 — Prepare the exact staged checkpoint and align the public budget paragraph with the received director clarification. Full canonical CI and normal hooks remain mandatory; original discovery/registration/native-admission owners stay open. No push or new test/coverage/wire metric is claimed by preparation.
 
 ## Next Action
 
-Activate TYPE-REFERENCE-BOOK.1.2.23.4.30.2 for the director-authorized checkpoint: full exact-candidate canonical CI, normal commit and clean push; then resume source1 after checking task-text capacity.
+After the exact canonical preparation lands, publish the clean checkpoint through normal hooks under TYPE-REFERENCE-BOOK.1.2.23.4.30.2.1, verify remote/local refs and record the receipt/outcome; then resume PNT.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.30.2.0 — canonical preparation and scoped budget note; actual push/outcome remains separate.
 - TYPE-REFERENCE-BOOK.1.2.23.4.37 — retention1322/eight scopes/six controls/source RED/zero removals; director approximate-budget checkpoint clarification recorded.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0 — helper/path work split with full parent/source scope preserved; no new runtime verdict.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2 — IO322/original320/literal34/scalar-output35/process1/unresolved-file122/non-open130/current177; four specimens/source RED/six controls.
@@ -29,7 +30,6 @@ Activate TYPE-REFERENCE-BOOK.1.2.23.4.30.2 for the director-authorized checkpoin
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0 — Julia20/read-sites52/bindings69/targets49/modules14/captures12/qualifications3/current169/thirteen corrected controls and victim oracle; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Lua16/io-sites43/bindings87/targets43/syntax30/support3/current165/fourteen controls and header inverse; no SDK body.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Dart16/read-sites23/bindings46/targets30/qualifications4/inline2/current152/twelve controls; no SDK.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0 — Dart3/fixture-grammar9/support2/optional2/historical11-to9/current130/nine controls; original reader refusal retained, no SDK.
 
 
 ## History

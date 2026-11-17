@@ -1,0 +1,100 @@
+{
+  ".githooks/post-commit": {
+    "blob": "d271713e7a2df1dd12f301a74308bde55c430d28",
+    "bytes": 1016,
+    "mode": "100755",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "207a851f90494bb958f7333151139e35679ddd83dcb846540d4f2f853feedc76"
+  },
+  ".githooks/pre-push": {
+    "blob": "090d6cca4d23191dac29c6c3970a7fb19ae663eb",
+    "bytes": 1107,
+    "mode": "100755",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "6ba05fd269961c9022431887194d28775ca758acbbc807d3f7548039a184b7e4"
+  },
+  "CHANGES.md": {
+    "blob": "5cb6eb5c6e3d00aa6180ab1eabbcbc0c2c19eb06",
+    "bytes": 36842,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "674d39e9fa9657139a3b6d8aeb762e4274395aeb4d4d5717c46cdba049fe72d6"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "blob": "67a2f5447ce60a996d1e4b7112efb9a422b2b069",
+    "bytes": 33725,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "9d3097bc1ebee2882f58eb5375730e8cb5bb47307cc256e8fad4df88b6c395ee"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "blob": "e8ac54ac3e72976ee2b2b25906c2914a96e49c21",
+    "bytes": 4275,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "72c982e49258e2eabde3b19b2b6b57cf1801ccb7d849dafeb9cc6a87199b373b"
+  },
+  "MEMORY.md": {
+    "blob": "2a05f7b8de0aff49882635d1eb60bc934e759af9",
+    "bytes": 2002,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "d9980ad7e5a0d089c8d5dabe17a9fd6f5da74cf803c3d73bfc6d9ffa4a787496"
+  },
+  "ROADMAP.md": {
+    "blob": "97a172d7a9b31cc0ae2641489f5f0e71ad653d74",
+    "bytes": 472717,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "397d69ef4096dadffa934e2081f948d44efa9f3585fed7bc17a393f852b459c4"
+  },
+  "ROADMAP_V2.md": {
+    "blob": "0d8d996d8ecb22993b3362624c643cdafd21d87e",
+    "bytes": 274052,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "3363d7af7f62bf6f75dd60bc0953e6af1b30523c7814d6c7a44a7a8fe7a5ec7c"
+  },
+  "docs/TASK_TREE.md": {
+    "blob": "756575e58b00790aa7e7c8571fdc0ed5983c94f7",
+    "bytes": 347889,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "74044c62d4c86d3c2c30a899154475f7d1aa4b38e90395bf95a610c1afa7e215"
+  },
+  "docs/checkpoints/artifact-review-2026-11-17/PUBLICATION_QUESTION.md": {
+    "blob": "e6af38f44b216716901cab56f2e5ea95973de8f3",
+    "bytes": 2854,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "e5088550dd72b8400de5d6ccdaf328eed2328e91933d525063f63ae51d809bf6"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "blob": "e49eb2eb9670d9f3ed61b676b3f1325148707cba",
+    "bytes": 81576,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "041ef03bc46457a6c0d1f608b860c78f462cd80eada75bdfdbdd62019dac83f4"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "blob": "4e9c135f55588c34b40ed28377d4ca54f486b874",
+    "bytes": 20906,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "efcbc753885a3698fd8e6c1a30955e65731ee14d887e7c98e96903ecfa6221f7"
+  },
+  "tools/run_ci_local.sh": {
+    "blob": "52bf822776f27e87f7ca7cedf93ff8c01d274505",
+    "bytes": 90428,
+    "mode": "100644",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "8dfa284f749f22171167fa3138b2f97763d386c9f96f5f01af7f8f38852b8651"
+  },
+  "tools/verification_receipt.sh": {
+    "blob": "abee5b3d56f7235382ae7df8853401c9382e8ab8",
+    "bytes": 6069,
+    "mode": "100755",
+    "revision": "9b54456a4bf2588526943a2208094de428ef4e28",
+    "sha256": "731a69ecdcd7b44a5fe021629de946b49499e81391505704e1b618335cda67cb"
+  }
+}

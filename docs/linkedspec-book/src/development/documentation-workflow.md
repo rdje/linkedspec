@@ -781,8 +781,13 @@ uncommitted changes are excluded. Start canonical discovery/publication preparat
 around 1,400,000,000 bytes or earlier if the next slice or CI receipts need more
 margin; this 100 MB reserve is advisory. Publish around 1.5 GB even before the batch
 ends. GitHub's [single-push limit](https://docs.github.com/en/get-started/using-git/troubleshooting-the-2-gb-push-limit)
-is 2 GiB. Every push still requires current canonical test discovery, full CI and a
-clean exact HEAD through normal hooks. Check fresh remote identity before transfer.
+is 2 GiB. Full CI and a clean exact HEAD through normal hooks remain required for
+every push. Current canonical test discovery remains the normal admission prerequisite.
+For the November 17 checkpoint, the director clarifies that 1.5 GB is approximate:
+a little below or above is fine. Finish the current leaf, run full canonical CI
+and normal workflow, then publish the checkpoint while discovery/registration
+and native-admission work remain open. Those owners are not closed by the push;
+resume PNT afterward. Check fresh remote identity before transfer.
 
 The estimate concerns a local serialized artifact; remote negotiation and wire
 bytes can differ. Source/config/ref/object metadata and independent validation are
