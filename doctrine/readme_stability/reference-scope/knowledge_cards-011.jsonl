@@ -1,4 +1,7 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":9055,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-coalesce-evaluation-drift.md","sha256":"565c2f71643672c7a38da145650897b51b1e1b6bb791b743f78d1038d8af82df","type":"member"}
+{"bytes":2049,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-constructor-result-guards.md","sha256":"ded3246ddea7c6cca3c9ed7160ab761338016aeb64e50c3314826c1cd4a88aff","type":"member"}
+{"bytes":3387,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-contains-source-guards.md","sha256":"28c9d278ab46688e6215af2495e41248d51210394b02ba8cf8790a4e15d67e1b","type":"member"}
 {"bytes":3197,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-contains.md","sha256":"9fe7e117f7ce6c393ea987b2c2176a2227c4d5b58e9b9d43df7e0edc7fdadb78","type":"member"}
 {"bytes":3138,"lines":17,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-index.md","sha256":"5b879a32fe7c5217f240b3a26889b2125143667a4cfac56dc9a067fd868fb761","type":"member"}
 {"bytes":2634,"lines":15,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-copied-null-presence.md","sha256":"33a696e32b7f5a8e8f01834d8d30c8e93878ffc042e2bb6cfebc240cd47d843d","type":"member"}
@@ -124,6 +127,3 @@
 {"bytes":11275,"lines":104,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-carriers-admission.md","sha256":"28b26e7d472c932f50027f668d9b1f6c8b65ac0aeabd7699eb77c4f0fd01f8cb","type":"member"}
 {"bytes":10929,"lines":118,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-current-depth-authority.md","sha256":"f91ec51f41dc25b93b3db54345f2ef361c4869c96a94f4e06c56ce3b751ab84e","type":"member"}
 {"bytes":6881,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-dormant-red.md","sha256":"429ab7228fc31f0fe860daf0bbe09a079c74be12819250bde84ebe8ead1f516c","type":"member"}
-{"bytes":8296,"lines":87,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-marker-provenance.md","sha256":"4a6e47ca6082f3c6d55a17a46df0c82cac2937a0fd0c9b18c2c609a64c4b9811","type":"member"}
-{"bytes":9194,"lines":102,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-ast-enrichment-recursive-authority.md","sha256":"4038b0cc01dcde2882cb68ad634f8444e91f8065304aba435a125546e1d57397","type":"member"}
-{"bytes":2839,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-staged-call-counter-saturation.md","sha256":"fba75ce2e09988816ab94dadc9480d3bf7b58252dc58c0a91378c71022886831","type":"member"}

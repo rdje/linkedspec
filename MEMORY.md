@@ -1,13 +1,14 @@
 # MEMORY
 
-- activation_commit: `7354d156f40c492e84c7992578a699e2e77ad7ba` — clean helper-plan activation; derive current HEAD from Git.
-- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0` — bounded helper/path plan.
-- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0` (completed); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md.
-- run_state: PNT; continue after each clean leaf.
-- next_action: Qualify nonadjacent fixed literal open bindings under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1; remeasure after each leaf and preserve every unresolved helper/library/generated and admission owner.
+- activation_commit: `36428fa1288d9da3fe00628ca0ab734b940bc023` — clean retention/handoff activation; derive current HEAD from Git.
+- latest_completed_leaf: `TYPE-REFERENCE-BOOK.1.2.23.4.37` — dated retention review and priority handoff.
+- active_work_unit: `TYPE-REFERENCE-BOOK.1.2.23.4.37` (completed); task_owner: docs/tasks/TYPE-REFERENCE-BOOK.overview.md.
+- run_state: PNT; director prioritizes checkpoint publication next, then source work resumes.
+- next_action: Activate TYPE-REFERENCE-BOOK.1.2.23.4.30.2 for the director-authorized checkpoint: full exact-candidate canonical CI, normal commit and clean push; then resume source1 after checking task-text capacity.
 - in_flight_uncommitted: none; no required background job.
-- evidence: docs/checkpoints/perl-helper-path-plan-2026-11-17/REVIEW.md; inherited source proof: docs/checkpoints/perl-other-io-2026-11-17/REVIEW.md. No new source/runtime classification.
-- limits: Full159-source/122 unresolved file operands/130 non-open sites and process role remain. Generated/inline, independent semantics, native/PPI/Perl/outer-first-use/per-read/source-origin/physical4.2/SESSION5 and all registration/publication prerequisites remain.
-- publication: Activation/cached4683555e estimates1,498,460,705 bytes/131 ahead/1,539,295-byte trigger margin, excluding this slice. Selected actual telemetry retained; ignored raw pack and independent size/native gaps remain30/4.2. Remeasure after landing.
-- preceding_normal: .linkedspec-data/perl-other-io-commit-retry.log completes all10/post-pointer for7354d156; first failed/canceled attempt remains distinct.
-- locality: Only this repository writable; submodules black boxes. Same-volume serial/shared24GB. Last cleanup November16 10:59UTC; run due maintenance at the next clean boundary if24h elapses. Normal hooks mandatory.
+- blockers: none requiring user input; director reply is received in docs/checkpoints/artifact-review-2026-11-17/PUBLICATION_QUESTION.md. Source1 awaits prioritized checkpoint, not permission.
+- evidence: docs/checkpoints/artifact-review-2026-11-17/REVIEW.md; dated metadata1322/eight scopes/six controls/stage-source RED/zero removals. Historical plan recovery uses accepted36428fa1; current-boundary mode remains distinct.
+- limits: Full159-source/helper/generated/semantic/native/physical4.2/SESSION5 and registration prerequisites remain open. A checkpoint exception, if authorized, changes no admission claim. Full exact-candidate CI before any push.
+- publication: Activation/cached4683555e estimates1,498,646,045 bytes/132 ahead/1,353,955-byte margin, excluding this slice. Selected telemetry retained; independent size30/native4.2 and fresh-remote/wire/future gaps remain. Remeasure after landing.
+- preceding_normal: .linkedspec-data/perl-helper-path-plan-commit.log completes all10/post-pointer for36428fa1; message brief cleared before activation.
+- locality: Only this repository writable; submodules black boxes. Same-volume serial/shared24GB. Latest retention review 2026-11-17T10:26:54.898807+00:00; nothing removed. Normal hooks mandatory.

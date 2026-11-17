@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "accepted_epoch": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+  "old_default": "RED: actual pending-to-blocked source handoff",
+  "historical_default": "GREEN at accepted epoch",
+  "explicit_current": "RED: original live boundary no longer holds",
+  "old_sha256": "0cd75d42250b47250224a243ff435b02dbf10e8a6ff2c226c87d1e9475822c46",
+  "new_sha256": "4562106ce98713dc712906e9b2651184bb8f5cc6601b3c2525e1d6dec9b7c454",
+  "substitutions": [
+    {
+      "before": "import hashlib\n",
+      "after": "import argparse\nimport hashlib\n"
+    },
+    {
+      "before": "PART = 'docs/tasks/TYPE-REFERENCE-BOOK.overview.md'\n",
+      "after": "PART = 'docs/tasks/TYPE-REFERENCE-BOOK.overview.md'\nEPOCH = '36428fa1288d9da3fe00628ca0ab734b940bc023'\nparser = argparse.ArgumentParser(description=__doc__)\nparser.add_argument('--current', action='store_true', help='Check the original live plan boundary instead of its accepted historical epoch.')\nCURRENT = parser.parse_args().current\n\n\ndef state_text(name):\n    if CURRENT:\n        return Path(name).read_text()\n    return subprocess.check_output(['git', 'show', EPOCH + ':' + name]).decode()\n\n"
+    },
+    {
+      "before": "current = Path(PART).read_text()",
+      "after": "current = state_text(PART)"
+    },
+    {
+      "before": "Path('docs/tasks/TYPE-REFERENCE-BOOK.md').read_text()",
+      "after": "state_text('docs/tasks/TYPE-REFERENCE-BOOK.md')"
+    },
+    {
+      "before": "Path('MEMORY.md').read_text()",
+      "after": "state_text('MEMORY.md')"
+    },
+    {
+      "before": "current_frontier_agrees=True, git_inputs_recover=True,",
+      "after": "state_mode='current-boundary' if CURRENT else 'historical', input_epoch='worktree' if CURRENT else EPOCH,\n    frontier_agrees_in_selected_epoch=True, git_inputs_recover=True,"
+    }
+  ],
+  "limits": "Historical plan input/state qualification only. Original accepted source, checks and claims retained; no runtime/native/publication admission."
+}

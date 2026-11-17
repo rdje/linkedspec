@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "changed": "claims[0].statement only",
+  "reason": "Metadata rederive command supports the metadata/index statement. Reader proof remains in its separate claim; director authority remains in its own record.",
+  "old_statement": "Dated1322 rows/eight scopes/six controls and stage-source RED pass; all artifacts retained, zero removals. Historical plan recovery is corrected with actual old RED/new historical GREEN/current RED. Director clarifies approximate1.5GB: finish current37, full CI, then checkpoint push; original discovery/registration/native admission stays open.",
+  "new_statement": "1322 dated path/suffix/byte rows agree across the eight published scopes. Six evidence controls and an actual stage-byte source RED pass; separate readonly recovery passes and nothing is removed. The actual logical Git-index input matches its retained clean-base tree inverse before scanner interpretation.",
+  "normal_attempt": "Stopped own claim checker before landing for author scope correction; no complete hook credit."
+}

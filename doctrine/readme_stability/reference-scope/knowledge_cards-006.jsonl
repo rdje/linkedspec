@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2817,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-logical-result-source-guards.md","sha256":"bf3df5a0cc174fc250c7869e4a9f6f516345d8297baf0f45535fefc192ef5c37","type":"member"}
+{"bytes":3246,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-lossless-child-carrier-readiness.md","sha256":"0df90b3e0eedb33bd4af41a211e36434dcabd5a92b8c1c76c41b340c28306540","type":"member"}
 {"bytes":14146,"lines":171,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-consumer-reading.md","sha256":"602809e15cd121b991238d9e90dd3d5b727a450655317b9ef72d36850816a6fe","type":"member"}
 {"bytes":4593,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-decoded-server.md","sha256":"64a44a70717184c80b6b2398e9250620d84cc18c01df3dc3239919f9128a9216","type":"member"}
 {"bytes":3785,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-mcp-implementation-admission.md","sha256":"12c454320e480698d7b899478e4930a0faf92ca0cf34529c32124b8d22448581","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":18342,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-spec-ast-loader-reading-and-validation-gaps.md","sha256":"0f5fe39647b41416c1234f0a8a1ad40299da3e123eb84cdb7d0a166a4e19f543","type":"member"}
 {"bytes":3521,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-spec-defined-function-parser.md","sha256":"ce698d12ea38537fd3b1e59c4f61b58684575db15047a7d0f3ff5c637b71023c","type":"member"}
 {"bytes":19597,"lines":192,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-spec-parser-validator-reading-and-lexical-gaps.md","sha256":"b9760704b6329cdde74e34d97679092f209cdbbbd48da87538f49d3483d54a83","type":"member"}
-{"bytes":4606,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-carriers-admission.md","sha256":"e9ed1b80d3c90f4b2f8b88cd8a2078880fb4350ff89415422f7df74f37ddac5e","type":"member"}
-{"bytes":7258,"lines":85,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-current-depth-authority.md","sha256":"561399fcd7829ea438f39ca41f8d2621a1f50cb7e96fa10b18c183c9d4a5b9a7","type":"member"}

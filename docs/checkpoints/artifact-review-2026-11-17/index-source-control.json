@@ -1,0 +1,6 @@
+{
+  "observed": "RED",
+  "healthy_sha256": "b12f7a018dfaa98727023019bfc23973ce1f0ed2723b094cd87742b1aa06ef8f",
+  "altered_sha256": "48b1654c0fcf1d7039ad03d85db17c7beaa040d8697379270160c8879adb83f2",
+  "alteration": "First stage0 byte changed to stage1 in the actual source stream; actual Git index unchanged."
+}

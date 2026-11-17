@@ -48,3 +48,13 @@ The public book explains the staged resolution boundary. Required task index,
 maintained-reference scope, memory/history/whitespace checks and normal hooks
 govern this ordinary focused plan. No shared checker/runner, contract, cap,
 storage default, dependency pin or runtime changes.
+
+November17 handoff qualification: the original reader at accepted36428fa1 checks
+the live task status/frontier/MEMORY and refuses after ordinary pointer movement.
+The actual source/inputs/refusal are retained under
+`docs/checkpoints/artifact-review-2026-11-17/`. Historical recovery now defaults
+to that accepted epoch; optional `--current` checks whether the original live
+boundary still holds. Old default RED/new historical GREEN/current RED remain
+distinct. Original producer, before-images, observations and claim values stay
+unchanged; this is a recovery-reader scope correction, not a new plan/runtime
+verdict. See the later checkpoint's `plan-reader-qualification.json`.

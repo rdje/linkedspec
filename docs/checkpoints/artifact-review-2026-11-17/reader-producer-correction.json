@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "changed": "historical reader actual producer command and explicit replay scope only",
+  "actual_result_matches_retained_outer_output": true,
+  "measured_values_and_proof_legs_unchanged": true
+}

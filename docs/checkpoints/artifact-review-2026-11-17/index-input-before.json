@@ -1,0 +1,19 @@
+{
+  "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+  "bytes": 11159612,
+  "sha256": "b12f7a018dfaa98727023019bfc23973ce1f0ed2723b094cd87742b1aa06ef8f",
+  "index_argv": [
+    "git",
+    "ls-files",
+    "--stage",
+    "-z"
+  ],
+  "tree_argv": [
+    "git",
+    "ls-tree",
+    "-r",
+    "-z",
+    "36428fa1288d9da3fe00628ca0ab734b940bc023"
+  ],
+  "cwd": "."
+}

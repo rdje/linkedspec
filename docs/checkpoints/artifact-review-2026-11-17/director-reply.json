@@ -1,0 +1,8 @@
+{
+  "date": "2026-11-17",
+  "exact_reply": "I meant around 1.5GB, that a little below or above is fine, so finish whatever you are doing then push, see what I mean?",
+  "adopted_action": "Director2026-11-17 clarifies that1.5GB is approximate and a little below or above is fine. Finish current retention/reader slice37, then run full exact-candidate canonical CI and normal workflow and push the checkpoint. Source discovery/registration/native admission remain open; resume PNT after publication.",
+  "permission_pending": false,
+  "full_CI_before_push": true,
+  "discovery_registration_native_admission": "remains open"
+}

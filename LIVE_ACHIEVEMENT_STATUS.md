@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: helper/path obligation split; nonadjacent literal bindings next.
+PNT: director-authorized checkpoint canonical CI/push follows completed retention and historical reader repair.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0 — Split the helper/path obligation into nonadjacent literal bindings, helper/caller targets, library/process/non-open origins and final reconciliation. Parent Goal/Acceptance/Continuation and the full inherited159-source cohort remain binding; generated/inline, independent semantics and native/publication prerequisites stay separate.
+TYPE-REFERENCE-BOOK.1.2.23.4.37 — Dated1322 rows/eight scopes/six controls and stage-source RED pass; all artifacts retained, zero removals. Historical plan recovery is corrected with actual old RED/new historical GREEN/current RED. Director clarifies approximate1.5GB: finish current37, full CI, then checkpoint push; original discovery/registration/native admission stays open.
 
 ## Next Action
 
-Qualify nonadjacent fixed literal open bindings under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1; remeasure after each leaf and preserve every unresolved helper/library/generated and admission owner.
+Activate TYPE-REFERENCE-BOOK.1.2.23.4.30.2 for the director-authorized checkpoint: full exact-candidate canonical CI, normal commit and clean push; then resume source1 after checking task-text capacity.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.37 — retention1322/eight scopes/six controls/source RED/zero removals; director approximate-budget checkpoint clarification recorded.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0 — helper/path work split with full parent/source scope preserved; no new runtime verdict.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2 — IO322/original320/literal34/scalar-output35/process1/unresolved-file122/non-open130/current177; four specimens/source RED/six controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1 — adjacent variable input:159 sources/192 open/one baseline/191 unmatched/current190; six specimens/changed-source RED/seven controls.
@@ -29,7 +30,6 @@ Qualify nonadjacent fixed literal open bindings under TYPE-REFERENCE-BOOK.1.2.23
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Lua16/io-sites43/bindings87/targets43/syntax30/support3/current165/fourteen controls and header inverse; no SDK body.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0 — Dart16/read-sites23/bindings46/targets30/qualifications4/inline2/current152/twelve controls; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.0 — Dart3/fixture-grammar9/support2/optional2/historical11-to9/current130/nine controls; original reader refusal retained, no SDK.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Lua11/direct24/targets14/support2/optional2/historical6/current134/ten controls; no SDK.
 
 
 ## History

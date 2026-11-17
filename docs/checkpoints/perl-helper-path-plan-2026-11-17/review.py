@@ -1,4 +1,5 @@
 """Readonly recovery of the plan's Git inputs and preserved parent obligations."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -10,6 +11,17 @@ import tarfile
 BASE = Path(__file__).resolve().parent.relative_to(Path.cwd())
 PARENT = 'TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2'
 PART = 'docs/tasks/TYPE-REFERENCE-BOOK.overview.md'
+EPOCH = '36428fa1288d9da3fe00628ca0ab734b940bc023'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--current', action='store_true', help='Check the original live plan boundary instead of its accepted historical epoch.')
+CURRENT = parser.parse_args().current
+
+
+def state_text(name):
+    if CURRENT:
+        return Path(name).read_text()
+    return subprocess.check_output(['git', 'show', EPOCH + ':' + name]).decode()
+
 frozen = {}
 with tarfile.open(BASE / 'before.tar.gz') as archive:
     for member in archive:
@@ -36,7 +48,7 @@ def node(text, owner):
     return text[start:end if end >= 0 else None]
 
 
-current = Path(PART).read_text()
+current = state_text(PART)
 for field in ('Goal', 'Acceptance', 'Continuation'):
     expression = r'(?m)^  ' + field + r': (.*)$'
     assert re.findall(expression, node(original[PART].decode(), PARENT)) == re.findall(expression, node(current, PARENT))
@@ -45,11 +57,12 @@ assert '  Status: `active`' in node(current, PARENT)
 assert '  Status: `completed`' in node(current, PARENT + '.0')
 for suffix in ('.1', '.2', '.3', '.4'):
     assert '  Status: `pending`' in node(current, PARENT + suffix)
-assert '| 1 | `' + PARENT + '.1` | `pending`' in Path('docs/tasks/TYPE-REFERENCE-BOOK.md').read_text()
-assert 'latest_completed_leaf: `' + PARENT + '.0`' in Path('MEMORY.md').read_text()
+assert '| 1 | `' + PARENT + '.1` | `pending`' in state_text('docs/tasks/TYPE-REFERENCE-BOOK.md')
+assert 'latest_completed_leaf: `' + PARENT + '.0`' in state_text('MEMORY.md')
 size = json.loads((BASE / 'telemetry/result.json').read_bytes())
 assert size['head'] == '7354d156f40c492e84c7992578a699e2e77ad7ba'
 assert size['early_push_trigger_bytes'] - size['estimated_non_thin_pack_bytes'] == size['remaining_to_trigger_bytes']
 print(json.dumps(dict(result='PASS', parent_obligations_preserved=True, bounded_children_ordered=True,
-    current_frontier_agrees=True, git_inputs_recover=True,
+    state_mode='current-boundary' if CURRENT else 'historical', input_epoch='worktree' if CURRENT else EPOCH,
+    frontier_agrees_in_selected_epoch=True, git_inputs_recover=True,
     limits='Plan and retained telemetry consistency only. No new source/runtime classification, independent pack-size/native/physical closure or admission.'), sort_keys=True))

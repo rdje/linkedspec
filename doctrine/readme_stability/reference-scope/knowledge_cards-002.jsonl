@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2199,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0","path":"docs/knowledge/dart-ordinary-loader-roles.md","sha256":"1fdd63f09e89530d3b8dbd1d921bedaa467421672db529abe9b9a7fc99100bd6","type":"member"}
 {"bytes":2905,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-repetition-minimum-misses.md","sha256":"f568a085419623d42bfe51ce2fa21d85058f6b7a761fb95ec6ed569af38910b1","type":"member"}
 {"bytes":4071,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-perl-blind-postcall-return-gap.md","sha256":"3016f57f71fd8af5327ffb365b82be0610e3092e8959e7042a0ae4c9c57025a9","type":"member"}
 {"bytes":3043,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-presence-result-source-guards.md","sha256":"bd6adabb25b607163c57008f2590dbaff2005fcc8dedcd65b23d5de2127a97f7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":7170,"lines":120,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/finite-engineering-notes-member-0131.md","sha256":"e7244b1e151ac857044deafa3881d540f7a8ad3f845891cc53dc10110770e987","type":"member"}
 {"bytes":3378,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/finite-language-readiness-gap-selection.md","sha256":"fc7b99ef2b15cc0c8ec82533d2cb04fc29bf2ab8b044b78d81c2bddc5ce4571c","type":"member"}
 {"bytes":3128,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/free-default-result-source-guards.md","sha256":"37a221e72901a8a7503e4b37d81197b2a8346117b38db0689029b7b776e0f66a","type":"member"}
-{"bytes":4923,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/free-numeric-result-source-guards.md","sha256":"8e149c7bffc4b205df40565ead6203c30bb6fc7760677b0ec99ba25455983118","type":"member"}

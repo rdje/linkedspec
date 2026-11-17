@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5223,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-index-composition.md","sha256":"53a385b003e46017fec974c36d784453f9009cc048584defdcab0c6faa442cb3","type":"member"}
 {"bytes":5331,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/copied-null-presence-composition.md","sha256":"84e8bd4f6019a57f7f463796768ac38bf786858d77d1b80a75a594c7d460fff1","type":"member"}
 {"bytes":4841,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.5","path":"docs/knowledge/count-copy-source-assessment.md","sha256":"a28524918e7f1994d6fa51d7aa65594260712e6d706375cac309b6023292d8db","type":"member"}
 {"bytes":2839,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.7","path":"docs/knowledge/count-key-source-ownership-peer-preservation.md","sha256":"afac743b89fd58089e3d95c57829009c96af638be9ef1539fac37635cd3523fc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3777,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-offline-generated-callers-require-dependency-free-package.md","sha256":"a7ee540f49939326050ad8f14eef4f2429c2a0ffcbfef97be4ef7ed633aae468","type":"member"}
 {"bytes":3299,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.3","path":"docs/knowledge/dart-open-arity-concat-result-guards.md","sha256":"e4023f03a011b14fca10bfad7970e6f60ddd5f27b4f29093a7506343a7a176eb","type":"member"}
 {"bytes":2158,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/dart-ordinary-blind-progress-authority-boundary.md","sha256":"bbb5903b150bb5379f7a9f71b848390bd5556c0d698a1ecfeb4c774e1abbaa54","type":"member"}
-{"bytes":2199,"lines":31,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.0","path":"docs/knowledge/dart-ordinary-loader-roles.md","sha256":"1fdd63f09e89530d3b8dbd1d921bedaa467421672db529abe9b9a7fc99100bd6","type":"member"}

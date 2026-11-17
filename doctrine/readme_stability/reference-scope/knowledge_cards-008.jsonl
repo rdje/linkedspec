@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6960,"lines":88,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-basic-statement-event-source-provenance.md","sha256":"f71fd04cba4b73cb1637e58975b1b9a74af2238a1feca17a06f519a3498edfad","type":"member"}
+{"bytes":5456,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-basic-statement-source-frames.md","sha256":"809b7a5c029e77c83e8b3ecce63f6ca66f01a213d26f54a3c545a818222a4f22","type":"member"}
 {"bytes":2977,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-latest-child-retv-binding.md","sha256":"cba60931dd56107841b09dfc6cfbbfe760f369b9910edf5f9470715611ed0240","type":"member"}
 {"bytes":3926,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-postcall-falsey-acceptance.md","sha256":"d0adb17b938a98241cce7d9582ef8b72ae075f23d5b3bf9817fc8fc26c2febe4","type":"member"}
 {"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":9233,"lines":120,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-mcp-decoded-server.md","sha256":"34eb9ec7909362b322f35e62321587b47d88b7dc0d66055d2e7d408b8d6e8c64","type":"member"}
 {"bytes":8239,"lines":116,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-mcp-validation-error-order-drift.md","sha256":"37ceeb15a07c3b153191283824d32ef0a1cb7ebb742137b9aeadfd917bdc3cbb","type":"member"}
 {"bytes":27475,"lines":304,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-assignment-required-capture.md","sha256":"f74809dd4d9e93e90f9c8a43bba9d39351e02683e448b3dad3241ba420edc454","type":"member"}
-{"bytes":9827,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-array-end-capture.md","sha256":"1c5488668f03d7165a669fb38e79aef6ca8977a0cf10f9d232cbb46e8f871b4a","type":"member"}
-{"bytes":10152,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-assignment-capture.md","sha256":"2ad022242ec3a87770d85411a11fda8b6ad115a5a370982762af2c6a8003b211","type":"member"}

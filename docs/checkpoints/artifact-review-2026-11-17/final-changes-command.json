@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "perl",
+    "tools/roll_document_history.pl",
+    "--surface",
+    "change_history",
+    "--check"
+  ],
+  "cwd": "."
+}

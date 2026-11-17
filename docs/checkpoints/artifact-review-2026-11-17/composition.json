@@ -1,0 +1,60 @@
+{
+  "activation": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+  "templates": {
+    "docs/checkpoints/artifact-review-2026-11-16/review.py": {
+      "sha256": "8c235da182352fc0b520d6346856563d2ff5d532fe40479289162d4d42d98ba3",
+      "mode": 420
+    },
+    "docs/checkpoints/artifact-review-2026-11-16/run.py": {
+      "sha256": "edec6cec85d0f2d1a70d952b9ddb50c61de065cb91107c782bfe54a84cf38f70",
+      "mode": 420
+    }
+  },
+  "substitutions": [
+    {
+      "old": "import os\n",
+      "new": "import os\nimport re\n"
+    },
+    {
+      "old": "'docs/checkpoints/artifact-review-2026-11-17/run.py')",
+      "new": "'docs/checkpoints/artifact-review-2026-11-17/run.py',\n             'docs/checkpoints/artifact-review-2026-11-17/prepare.py')"
+    },
+    {
+      "old": "def validate(report):\n",
+      "new": "def index_from_tree(revision):\n    assert re.fullmatch(r'(?:[0-9a-f]{40}|[0-9a-f]{64})', revision)\n    raw = subprocess.check_output(['git', 'ls-tree', '-r', '-z', revision], cwd=ROOT)\n    rows = []\n    for row in raw.split(b'\\0'):\n        if not row:\n            continue\n        header, name = row.split(b'\\t', 1)\n        mode, kind, blob = header.split()\n        assert kind in (b'blob', b'commit')\n        rows.append((name, mode + b' ' + blob + b' 0\\t' + name + b'\\0'))\n    return b''.join(row for name, row in sorted(rows))\n\n\ndef validate(report):\n"
+    },
+    {
+      "old": "for image in (*report['producers'].values(), *report['messages'].values(), report['git_index']):",
+      "new": "for image in (*report['producers'].values(), *report['messages'].values()):"
+    },
+    {
+      "old": "        assert packet(base64.b64decode(image['base64'])) == image, 'retained packet identity'",
+      "new": "        assert packet(base64.b64decode(image['base64'])) == image, 'retained packet identity'\n    reference = report['git_index']\n    assert reference['revision'] == report['activation_commit'], 'git index revision'\n    raw_index = index_from_tree(reference['revision'])\n    assert len(raw_index) == reference['bytes'] and hashlib.sha256(raw_index).hexdigest() == reference['sha256'], 'git index reconstruction'\n    assert reference == json.loads((HERE / 'index-input-before.json').read_bytes()), 'git index before-use reference'\n    control = json.loads((HERE / 'index-source-control.json').read_bytes())\n    altered = raw_index.replace(b' 0\\t', b' 1\\t', 1)\n    assert altered != raw_index and hashlib.sha256(altered).hexdigest() == control['altered_sha256']\n    assert control['healthy_sha256'] == reference['sha256'] and control['observed'] == 'RED'\n"
+    },
+    {
+      "old": "('missing-row', 'wrong-size', 'duplicate-row', 'outside-path', 'producer-byte')",
+      "new": "('missing-row', 'wrong-size', 'duplicate-row', 'outside-path', 'producer-byte', 'index-identity')"
+    },
+    {
+      "old": "        else:\n            image = next(iter(changed['producers'].values()))\n            image['sha256'] = '0' * 64",
+      "new": "        elif name == 'producer-byte':\n            image = next(iter(changed['producers'].values()))\n            image['sha256'] = '0' * 64\n        else:\n            changed['git_index']['sha256'] = '0' * 64"
+    },
+    {
+      "old": "('independent metadata mismatch:', 'retained packet identity')",
+      "new": "('independent metadata mismatch:', 'retained packet identity', 'git index reconstruction')"
+    },
+    {
+      "old": "    index = subprocess.check_output(['git', 'ls-files', '--stage', '-z'], cwd=ROOT)\n",
+      "new": ""
+    },
+    {
+      "old": "    spec = importlib.util.spec_from_file_location('artifact_census', ROOT / HELPER)",
+      "new": "    # The exact logical index stream is recoverable from the retained clean base.\n    revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()\n    index = subprocess.check_output(['git', 'ls-files', '--stage', '-z'], cwd=ROOT)\n    recovered = index_from_tree(revision)\n    if recovered != index:\n        (HERE / 'failed-index-input.gz').write_bytes(gzip.compress(index, mtime=0))\n    assert recovered == index, 'actual index stream differs from clean-base tree'\n    index_ref = dict(revision=revision, bytes=len(index), sha256=hashlib.sha256(index).hexdigest(),\n        index_argv=['git', 'ls-files', '--stage', '-z'], tree_argv=['git', 'ls-tree', '-r', '-z', revision], cwd='.')\n    (HERE / 'index-input-before.json').write_text(json.dumps(index_ref, indent=2) + '\\n')\n    altered = index.replace(b' 0\\t', b' 1\\t', 1)\n    assert altered != index and altered != recovered\n    (HERE / 'index-source-control.json').write_text(json.dumps(dict(observed='RED',\n        healthy_sha256=hashlib.sha256(index).hexdigest(), altered_sha256=hashlib.sha256(altered).hexdigest(),\n        alteration='First stage0 byte changed to stage1 in the actual source stream; actual Git index unchanged.'), indent=2) + '\\n')\n    spec = importlib.util.spec_from_file_location('artifact_census', ROOT / HELPER)"
+    },
+    {
+      "old": "'git_index': packet(index),",
+      "new": "'git_index': index_ref,"
+    }
+  ],
+  "limits": "New dated checkpoint format only; original November16 producer/observations unchanged. Git-tree inverse gates actual logical stream; no physical index/native custody."
+}

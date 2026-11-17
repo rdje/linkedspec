@@ -1,0 +1,100 @@
+{
+  "CHANGES.md": {
+    "blob": "820ad263820f1e68f5848e601e4708ff8dbdc8f6",
+    "bytes": 35956,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "b1c9467df879d6f05e79f4c2766ed9f56b896e303d4f6783893ab87e71fa4aee"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "blob": "c569fdb4a7ea3a5442fdf95604ff775aa064c91a",
+    "bytes": 32635,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "b400513ca364a02861f748b109ebfff8a750ae5bda7fb57d64d3f2d7984e5300"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "blob": "d05ba357a3a92de6a8cd81b98cca2f96402e8765",
+    "bytes": 4232,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "8eaca331fc3c6a62f1eac3e04e95dab92306e0dcb52095e9b23e924771ca603a"
+  },
+  "MEMORY.md": {
+    "blob": "93b163c4aea55e03db2b97910f7fd15e635f823b",
+    "bytes": 1836,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "eaa3affc1238cb77e26230e160ace53771caee96943d2ebfc1f25db25f977e9b"
+  },
+  "ROADMAP.md": {
+    "blob": "c12e21d9c46dd6956d63e03a23fe003871de19dc",
+    "bytes": 472662,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "fa895f7ec84bf94d9b71e9e46cab874b26bff55c1d859dd0819cb24b3459adbf"
+  },
+  "ROADMAP_V2.md": {
+    "blob": "6c44c62b873dce56465fb254a2d2cb298595c1b3",
+    "bytes": 273997,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "4d92eecc171514857e31c2fce691e38d24021cbf63501799f935e8d9de93340d"
+  },
+  "docs/ARTIFACT_CLEANUP.md": {
+    "blob": "40ed88ddd0e03ecfc6e346dbd53e882e6b2c5a20",
+    "bytes": 403,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "c40daa92d0622690d9cd5e264b8724168c411b73733ed6ecabe78996bcfead19"
+  },
+  "docs/TASK_TREE.md": {
+    "blob": "6b341ba9ff4d826846f68ddea8565cd404a39f47",
+    "bytes": 347840,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "50ef2505b9f6df7c9603a8a06a3e038220c8a31625d8dce2194ffef6807b7b74"
+  },
+  "docs/checkpoints/perl-helper-path-plan-2026-11-17/REVIEW.md": {
+    "blob": "9db46fde55d03e9b64418a2537b830d3032ff425",
+    "bytes": 2941,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "021bbae878905a2496cad66d8570a63d09a3a59278afc21d16ce19751ddbea82"
+  },
+  "docs/checkpoints/perl-helper-path-plan-2026-11-17/review.py": {
+    "blob": "52fd91d4bc66426225c2d6a30a29db682d9acccc",
+    "bytes": 3111,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "0cd75d42250b47250224a243ff435b02dbf10e8a6ff2c226c87d1e9475822c46"
+  },
+  "docs/knowledge/github-size-safe-publication.md": {
+    "blob": "6c4c357a89a7f1ac91f8fa61e404728ecc6c4a70",
+    "bytes": 10002,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "7b1ee290f89af3057ceef2fac07b12ff71530b7196d4e9954107f551c2ad57d5"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "blob": "447e1f6ca814bb13bbee53ab4fd2953d1aedff8b",
+    "bytes": 80826,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "26bb928fc0c21c1b87525518d04b2f6d66bb340c39f4fbdde31aa9a0251ddde5"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "blob": "744d53ba5472ba93d6683237aec538d58cb75baa",
+    "bytes": 20926,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "48584de84e8f1d40058f6ff45a6d4493787952200a777639ed7700ec86062ee5"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "blob": "e9e1106124dfac280475a92741ecff9156942187",
+    "bytes": 612936,
+    "mode": "100644",
+    "revision": "36428fa1288d9da3fe00628ca0ab734b940bc023",
+    "sha256": "5590642db6511794193a3b6cd6e22421932c35ea826364da5c40c30e4d0a28ac"
+  }
+}

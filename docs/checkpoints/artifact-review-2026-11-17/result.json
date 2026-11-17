@@ -1,0 +1,1 @@
+{"date": "2026-11-17T10:26:54.898807+00:00", "scoped_rows": 1322, "removed": 0, "rejected_controls": ["missing-row", "wrong-size", "duplicate-row", "outside-path", "producer-byte", "index-identity"], "result": "PASS"}

@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — reuse the exact clean-base index input without copying its full packet
+
+TYPE-REFERENCE-BOOK.1.2.23.4.37: Two public Git commands independently supply the actual index stream and the retained clean-base tree. Sorted mode/object/path rows reconstruct the exact stage0 input; bytes/SHA256 agree before the scanner interprets it. An actual stage-byte input alteration is RED, and six evidence controls reject. Historical source inputs remain recoverable through Git; physical index/native/library/kernel closure remains4.2/SESSION5. No artifacts removed. The director reply prioritizes checkpoint publication after current37/full CI, allowing a little below or above1.5GB. Source1 resumes after the checkpoint; original discovery/registration/native admission stays open. The original helper-plan reader refuses the real live-state handoff; default recovery now binds accepted36428fa1 while explicit current mode stays distinct. Old RED/new historical GREEN/current RED and original sources remain retained. Evidence: `docs/checkpoints/artifact-review-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — preserve the full helper-path obligation while splitting work
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.0: The parent remains active and its Goal/Acceptance/Continuation are preserved byte-for-byte as field values. Child source grammars must retain every unqualified site, source condition and target identity; they do not establish evaluated Perl values or callee/alias/phase semantics. Committed inputs are reused through Git revision/blob/SHA256 identities rather than duplicate source archives. Only the newly activated task image and producer need new before-images. Evidence: `docs/checkpoints/perl-helper-path-plan-2026-11-17/REVIEW.md`.

@@ -92,6 +92,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed. Actual observation/source images/modes/index/commands/channels: docs/checkpoints/artifact-review-2026-11-16/. Reverify: bash tools/run_python_project_data.sh docs/checkpoints/artifact-review-2026-11-16/review.py. Normal hooks govern landing. Native/physical custody remains4.2/SESSION5.
   Next: Current canonical discovery4.1, then early publication30.2 after all prerequisites.
 
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.37`
+  Status: `completed`
+  Goal: Complete the roughly daily retention review, historical plan-reader repair and director checkpoint handoff.
+  Acceptance: All eight scopes, independent metadata, retained artifacts/inputs/commands, exact tree-index inverse/source RED, historical/current reader distinction and director checkpoint clarification; no native/registration admission. Full contract/evidence: docs/checkpoints/artifact-review-2026-11-17/REVIEW.md.
+  Verification tier: `focused`
+  Focused checks: Metadata/recovery, index source/evidence REDs, plan RED/GREEN/RED; book/scope/task/history/memory and normal hooks.
+  Canonical trigger: Full exact-candidate CI before checkpoint push; shared mechanisms unchanged.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.37.json`
+  Direct handoff repair: Old live-state RED/new accepted36428 historical GREEN/current RED retained. Original sources/claims remain recoverable; see REVIEW.
+  Outcome: Metadata1322/eight scopes/six controls/stage RED/zero removals and separate recovery PASS; plan reader qualified; director checkpoint directive recorded. Full evidence in REVIEW.
+
 - ID: `TYPE-REFERENCE-BOOK`
   Status: `active`
   Goal: Canonical per-type reference with complete current operation coverage and verified examples.
@@ -2166,9 +2177,10 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: Parent contract and full inherited cohort preserved; nonadjacent1, helper/caller2, library/process/non-open3 and reconciliation4 are ordered. No source classification, runtime or admission promoted. Evidence: docs/checkpoints/perl-helper-path-plan-2026-11-17/.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.1`
-  Status: `pending`
+  Status: `blocked`
   Goal: Qualify nonadjacent fixed literal variable declarations at open operands.
   Acceptance: Full159 sources; exact declaration/use/scope/conditions and intervening-write exclusions, retained target bodies and independent source controls. Preserve adjacent1 and unresolved sites; no evaluated values or reached IO.
+  Blocker: Director prioritizes the clean checkpoint after slice37/full CI. Resume this source leaf after publication, first checking task-text capacity. No implementation started.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2.2`
   Status: `pending`
@@ -3404,6 +3416,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Schedule: From clean Dart102ec3446, complete bounded measurement30.1 first. Monitor after every leaf and before large growth; prepare discovery/full-CI publication with margin and publish around1.5GB regardless PNT/batch cadence. Feature PNT may continue below the preparation boundary; never pivot dirty or wait for cadence when budget requires publication. Existing canonical discovery23.4.1 precedes publication30.2. Old operational measurement/native-custody gaps remain owned until verified or explicitly scoped into the broader4.2/SESSION5 audit.
   Planned verification tier: Select actual tier before changes; mechanical Git/CI/hook changes require canonical proof, documentation/measurement-only work remains scoped under current doctrine.
   Planned claim verification: Declare actual measured-pack scope/producer/input/RED/retention limits before publishing a durable measured claim; native Git/cache/compression/remote negotiation closure must not be implied from a byte estimate.
+  Director clarification2026-11-17: Approximate1.5GB permits a little below or above; finish current37, full canonical CI/normal workflow, then checkpoint push before further PNT source work. Original discovery/registration admission stays open. Exact authority is retained with37.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.30.1`
   Status: `completed` / bounded operational proof; qualified landing repairs
@@ -3434,12 +3447,13 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.30.2`
   Status: `pending`
-  Goal: Publish the exact clean candidate around the director1.5GB outgoing-pack budget after all prerequisites.
-  Dependencies: Monitor30.1; completed current canonical discovery23.4.1 and existing before-push owners; actual sufficient shared-host RAM; fully staged exact candidate/canonical receipt/normal commit/clean tree.
+  Goal: Publish the exact clean checkpoint around the director approximate1.5GB target after current37/full canonical CI and normal workflow; keep original source-admission owners open.
+  Dependencies: Monitor30.1; completed current37; sufficient shared-host RAM; fully staged exact candidate/canonical receipt/normal commit/clean tree. Director2026-11-17 authorizes this checkpoint before discovery23.4.1/registration closeout; those full-admission owners remain open.
   Acceptance: Recheck fresh remote identity and outgoing serialized size before data transfer, preserve required producer-reuse policy, run full canonical CI for exact staged/committed candidate, push only root main through normal hooks without force/tags/submodule recursion, and observe remote success/local equality/post-push CI status under hosted-disabled policy. Record receipts/ref identities/size uncertainty and resume PNT. Never approach GitHub2GiB or use retired one-off publishers/history rewrites. No duplicated canonical run when an exact receipt is reusable.
   Planned verification tier: canonical.
   Planned focused checks: Exact current pack/refs, canonical selection prerequisites and normal hooks, post-push remote/local/status checks.
   Planned claim verification: Declare actual measured scope and proof legs at activation; never claim negotiated wire bytes from a local estimate.
+  Director clarification: Director2026-11-17 clarifies that1.5GB is approximate and a little below or above is fine. Finish current retention/reader slice37, then run full exact-candidate canonical CI and normal workflow and push the checkpoint. Source discovery/registration/native admission remain open; resume PNT after publication. Exact reply and initial question: docs/checkpoints/artifact-review-2026-11-17/PUBLICATION_QUESTION.md. This checkpoint may publish before original discovery/registration closeout; those owners are not completed by the push.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.31`
   Status: `completed` / dated focused maintenance; full native custody separate

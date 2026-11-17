@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4448,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-registry.md","sha256":"a183dc4a2b519aa5a94a4be6bc75d837470dfb0ac8d09f0ad1645a6556126f7c","type":"member"}
+{"bytes":3843,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-user-function-runtime-execution.md","sha256":"effa3c61986406f90b2c2aed0059f8193063dc3ec3a2a395353b53c29b7be51e","type":"member"}
 {"bytes":4216,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/julia-variadic-user-functions.md","sha256":"60e5c3385f01f3bc05eeddcdb90dbbc0cf42c61795f23e77bd5fbd1f06023834","type":"member"}
 {"bytes":6960,"lines":106,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.75.6.3.1","path":"docs/knowledge/key-count-source-and-guard-gaps.md","sha256":"b734fb87270a31d793b6050803a7f9aaaa0139a0cb01a4dbfacf9187fd61d1c2","type":"member"}
 {"bytes":2060,"lines":32,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/knowledge-map-atomic-publication.md","sha256":"149954a325a06801c9ee84c520269322694f864a9bbc298c51806bf2b68d041b","type":"member"}
@@ -125,5 +127,3 @@
 {"bytes":3314,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-live-recognition-progress.md","sha256":"d6ce26412d1d44da161b8a6cf918d420ecb9e3f8707c646a09b46ecfffc10c70","type":"member"}
 {"bytes":2416,"lines":35,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-local-match-writer-presence-compatibility.md","sha256":"1a76904e7b4aaf6f20007f9f906dd89ca603918ee8491dcdbc98974ed580d590","type":"member"}
 {"bytes":4749,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-logical-helper-execution.md","sha256":"daeadf581d83c85d2aa00f499e7fdcdd7a02af15ab91686c69284963ce3d2202","type":"member"}
-{"bytes":2817,"lines":16,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-logical-result-source-guards.md","sha256":"bf3df5a0cc174fc250c7869e4a9f6f516345d8297baf0f45535fefc192ef5c37","type":"member"}
-{"bytes":3246,"lines":38,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-lossless-child-carrier-readiness.md","sha256":"0df90b3e0eedb33bd4af41a211e36434dcabd5a92b8c1c76c41b340c28306540","type":"member"}

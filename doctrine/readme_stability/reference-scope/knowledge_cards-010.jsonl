@@ -1,4 +1,6 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5057,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-user-function-caller-shadowing.md","sha256":"122ce9aede690546f1bce499f32adcb3ab9e8cd87159aa667237cd398f1be6bf","type":"member"}
+{"bytes":3366,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-validation-diagnostic-source-drift.md","sha256":"2312b25002947fb7448e15664297ec92b37d272b44f1cbf1d67f60262fa6de18","type":"member"}
 {"bytes":2763,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-variadic-user-functions.md","sha256":"0fc45642937bb9596b2d9a54cec7a3dd4ef41a005dfda486096a411726e38341","type":"member"}
 {"bytes":6058,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-with-callback-identity-and-snapshot.md","sha256":"ee7e410e3317a6f037aa177640375fd60ffcb877cdfa8561a003f4d35eb6a19f","type":"member"}
 {"bytes":10197,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.0","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"bc902492c194b635e35d009400470c29a657d13377c7fd48a123b5953baf1b7c","type":"member"}
@@ -46,6 +48,7 @@
 {"bytes":2536,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/ptchange-spaced-input-shell-read-defect.md","sha256":"8137594dd642ebed2e2eee3d72c01509420f7586c4dfd2467c13b3bc2547dca7","type":"member"}
 {"bytes":6473,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-call-inventory-independent-coverage.md","sha256":"4a1cf009578bd752640791994c43afc0afdf18a2937e3e4d44869002f72e4fde","type":"member"}
 {"bytes":2778,"lines":28,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/public-readme-gitlink-claim-alias.md","sha256":"e3ac90796810cf55c8c73b7067e320ace64616d96a9017978401bcce2b83125f","type":"member"}
+{"bytes":1671,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.37","path":"docs/knowledge/publication-approximate-budget.md","sha256":"a39efdc1a2d72670855d6a49fe51f1cf586c990104346cdb57600f39e16eadc4","type":"member"}
 {"bytes":4897,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-receiver-arity-calibration.md","sha256":"c62783ddfdccafe6935c879271faabce5e538ec45783a1a7a45b77f598e2fc9e","type":"member"}
 {"bytes":6715,"lines":71,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/punctuation-light-zero-argument-calls.md","sha256":"cc241c8e5bf87d06eb4eed62cf235c72206988169c105afbd0a8bb6c430270b0","type":"member"}
 {"bytes":2723,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/python-replay-traceback-source-binding.md","sha256":"7fd6e4a7cc6d1ac2c147eca0d7126f0008da2d2b7067dd9d12b4289fdaecbed7","type":"member"}
@@ -124,6 +127,3 @@
 {"bytes":4942,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-char-based-offsets.md","sha256":"bc8d5086b1abe43788bf3f72b50c4d4fb2af8280b5a79d7412623fc93cab8025","type":"member"}
 {"bytes":3563,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-ci-pgen-missing-input-rebuilds.md","sha256":"ca64a1d759b87a8780e9757a874aca51c6afa2c84a1ff348df55f5c84bd2b1b8","type":"member"}
 {"bytes":2534,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.25","path":"docs/knowledge/rust-closed-task-narrative-headroom.md","sha256":"6322fa6771dac46a866a265e639b28d41433e29aaa6f9637db1767c52d15b8ad","type":"member"}
-{"bytes":9055,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-coalesce-evaluation-drift.md","sha256":"565c2f71643672c7a38da145650897b51b1e1b6bb791b743f78d1038d8af82df","type":"member"}
-{"bytes":2049,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-constructor-result-guards.md","sha256":"ded3246ddea7c6cca3c9ed7160ab761338016aeb64e50c3314826c1cd4a88aff","type":"member"}
-{"bytes":3387,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-contains-source-guards.md","sha256":"28c9d278ab46688e6215af2495e41248d51210394b02ba8cf8790a4e15d67e1b","type":"member"}
