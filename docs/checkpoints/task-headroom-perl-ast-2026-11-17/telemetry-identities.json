@@ -1,0 +1,262 @@
+{
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/ahead-command.json": {
+    "mode": 420,
+    "sha256": "e12601406ee6c34461a91cfe33533e35c383a07876aacec92040aa7f375a01e5",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/ahead-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/ahead-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/ahead-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/ahead-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/ahead-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/ahead-stdout.gz": {
+    "mode": 420,
+    "sha256": "cf9fa12729c438383aaf219bdfb8be6875506162940946ae9bead2e5e9af9984",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/ahead-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-after-command.json": {
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-after-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-command.json": {
+    "mode": 420,
+    "sha256": "f9836915c8187ff396af47baf52665906df9d7f64c4d8f87b41803b398176db0",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/base-stdout.gz": {
+    "mode": 420,
+    "sha256": "f05bdc9523fb341b9bf426236b30e523a4c768cc798e0dd2ca34bb91db01150e",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/base-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/empty-range-command.json": {
+    "mode": 420,
+    "sha256": "a8c7458c831056025b6a4a17f1f0d380f9db2976db1148821c0c47a07df29f04",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/empty-range-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/empty-range-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/empty-range-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/empty-range-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/empty-range-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/empty-range-stdin.gz": {
+    "mode": 420,
+    "sha256": "26c64d0780568a3736715eaac23e57a7da770fd88947ea2e2a835e1cd35b7596",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/empty-range-stdin.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/empty-range-stdout.gz": {
+    "mode": 420,
+    "sha256": "36879803c6c17f74ace2b0301444f81e19721643a390ee37b4e9fac042003088",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/empty-range-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/git-version-command.json": {
+    "mode": 420,
+    "sha256": "68bf965ed1c5f02859543f848337ec38a65bc542829da97c5f79a9e5ba658110",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/git-version-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/git-version-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/git-version-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/git-version-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/git-version-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/git-version-stdout.gz": {
+    "mode": 420,
+    "sha256": "2e589f867716cadea73db0f153c69e141b8243e0b6630114ef0e559598abf240",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/git-version-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-after-command.json": {
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-after-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "00d3d43be9ff02c16433a690f6f01aa561a09c560686ad0afea67b587cf63d71",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-command.json": {
+    "mode": 420,
+    "sha256": "13068a04db8b802dab54962eafb08a9808d5bb749f593224628a83f17594cab7",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/head-stdout.gz": {
+    "mode": 420,
+    "sha256": "00d3d43be9ff02c16433a690f6f01aa561a09c560686ad0afea67b587cf63d71",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/head-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/memory-command.json": {
+    "mode": 420,
+    "sha256": "9d686b2f4c22b2d9f516bee0b3d65d83d4415ce3855b6ed09ca8332d088112d8",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/memory-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/memory-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/memory-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/memory-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/memory-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/memory-stdout.gz": {
+    "mode": 420,
+    "sha256": "72a459da15f9110b184dd536a9e12eefe339fa0ad8d5e19ba1346982317d8100",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/memory-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/object-format-command.json": {
+    "mode": 420,
+    "sha256": "70eaa4445c5acf4dfea430b97286e3df67286c47b8cd4ac99c6938463713a29c",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/object-format-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/object-format-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/object-format-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/object-format-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/object-format-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/object-format-stdout.gz": {
+    "mode": 420,
+    "sha256": "8a1659bbca4e5f3502b417cfb96df9868ad800f0f9665d0719d18926f0098756",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/object-format-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-command.json": {
+    "mode": 420,
+    "sha256": "4d2ee220c532d9f47861dcdc7841f9a2b6f259a878595a3b03f595fb8db9e50a",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-after-command.json": {
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-after-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-after-exit.txt": {
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-after-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-after-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-after-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-after-stdout.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-after-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-command.json": {
+    "mode": 420,
+    "sha256": "6fccb96693895bd7fd9583b142f660a56686d23006a05eb58ccd9929dfc3026e",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-command.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-exit.txt": {
+    "mode": 420,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-stderr.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-config-stdout.gz": {
+    "mode": 420,
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-config-stdout.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-exit.txt": {
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-exit.txt"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/pack-stderr.gz": {
+    "mode": 420,
+    "sha256": "48b58630e42c5bfb90213e601e85e6a56c755776b9918b14a12bef56119f6a7e",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/pack-stderr.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/producer-input-identities.json": {
+    "mode": 420,
+    "sha256": "f35842131000f72b1875bd8e9910c4c52a27a83c330325e09b6f9d275cf1e8fe",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/producer-input-identities.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/producer-inputs.tar.gz": {
+    "mode": 420,
+    "sha256": "247a51687e8d5d8148db1a5c32d8307700e11909879ce0eb321004f323a64482",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/producer-inputs.tar.gz"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/result.json": {
+    "mode": 420,
+    "sha256": "5cd958658db4104a0d411b3cfd601ed7f9e919c7b19a75a27a112824f90d4001",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/result.json"
+  },
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/telemetry/revisions.txt": {
+    "mode": 420,
+    "sha256": "718d03e0715e1ef648a9fa287c5b470bd814dfeb3895e5a52aa19c1737b6afa2",
+    "source": ".linkedspec-data/push-monitor/20261117T000920.514071Z/revisions.txt"
+  }
+}

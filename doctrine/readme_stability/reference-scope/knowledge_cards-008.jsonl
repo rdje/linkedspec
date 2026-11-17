@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
 {"bytes":14961,"lines":223,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.18.3","path":"docs/knowledge/perl-boundary-phase0-existing-failures.md","sha256":"44dc2cde230d96c129a4c60a9082f3df43412a42af813566d40feef6f845d838","type":"member"}
 {"bytes":1962,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-quoted-marker-current-oracle.md","sha256":"52fbcc0405087b93f5c593c3f3c05555dd7c50c8fde97b37a25cdd6bff039406","type":"member"}
 {"bytes":3970,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.1.42","path":"docs/knowledge/perl-callable-array-transform-intake.md","sha256":"c162c6ce8161aa830d7de9e4f26bb77408cff03ee8b934f0ad91c78cf427253b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5389,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-hash-key-capture.md","sha256":"bde93e826ec8762d6d0ac54d9206a75eb851ba4fd9fb484c91181d773e3c1586","type":"member"}
 {"bytes":20671,"lines":252,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-component-capture.md","sha256":"9cf7b153cf75173cdc6b0e94251ac24a32343d5106ede2e2374e4517366c6a65","type":"member"}
 {"bytes":5004,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-value-capture.md","sha256":"8d83d08a5ae74981cb08e9a4a8ba3dfa2c37b73deb0bc0e59bfc278d95fd0b5a","type":"member"}
-{"bytes":4680,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-default-capture.md","sha256":"10e6c6fa67d9c2e2ea1daf67b4407bff57f229793ad9e57c7571fa4ef9317f65","type":"member"}

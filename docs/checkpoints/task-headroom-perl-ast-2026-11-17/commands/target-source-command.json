@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "git",
+    "show",
+    "08c39a2dfb4be628af24a445a7fdbb98a82e962f:docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md"
+  ],
+  "cwd": "."
+}

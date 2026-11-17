@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: ordinary Rust loaders complete; immediate task headroom35 precedes generated Rust/Perl-transitive/generated Dart qualification.
+PNT: task headroom renewed; generated Rust/Perl-transitive/generated Dart qualification resumes.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21 sources retain38 literal fixtures plus21 embedded grammar dependencies,59 bindings to39 targets,21 filesystem sites, five readbacks/six write-only exports/twelve env sites/seven emitted-string roles/three row selectors/two execution qualifications. Historical61/eleven victim-sensitive controls/current159 and two original reader refusals pass. No Cargo/SDK or admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.35 — Existing epoch preserves28 IDs/all CORE/five unchanged bodies/full52263-byte tail;23 closed pointers reduce88302 to75228 current bytes. All29 public queries/ten controls/current target-manifest identity pass;13074 text bytes renewed. No SDK or physical-reclamation claim.
 
 ## Next Action
 
-Renew task-evidence headroom under TYPE-REFERENCE-BOOK.1.2.23.4.35 using the existing epoch before generated Rust2/remaining Perl-transitive3/generated Dart2/frozen-input3; retain every registration/publication prerequisite.
+Remeasure committed outgoing size; qualify generated Rust manifest/corpus/host roles under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2, then remaining Perl-transitive3/generated Dart2/frozen-input3 before registration4.1.2 and every other publication prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.35 — existing Perl AST epoch:28 IDs/23 pointers/five unchanged bodies/29 queries/ten controls;13074 current bytes renewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21/bindings59/targets39/filesystem21/readbacks5/exports6/current159/historical61/eleven controls/two refusals; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0 — Julia20/read-sites52/bindings69/targets49/modules14/captures12/qualifications3/current169/thirteen corrected controls and victim oracle; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.0 — Lua16/io-sites43/bindings87/targets43/syntax30/support3/current165/fourteen controls and header inverse; no SDK body.
@@ -29,7 +30,6 @@ Renew task-evidence headroom under TYPE-REFERENCE-BOOK.1.2.23.4.35 using the exi
 - TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 - TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
-- TYPE-REFERENCE-BOOK.1.2.23.4.32 —22 rooting IDs/17 closed/five unchanged/full35225-byte tail/40587 bytes renewed/23 public queries/readonly10/current identity; terse refusal recovered-three controls; fresh size then RAM14.
 
 
 ## History

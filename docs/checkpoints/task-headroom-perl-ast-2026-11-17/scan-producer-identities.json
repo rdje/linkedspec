@@ -1,0 +1,26 @@
+{
+  "docs/checkpoints/task-headroom-perl-ast-2026-11-17/scan.py": {
+    "mode": 420,
+    "sha256": "14d12432ae3f6dcd590dbd946460349c58a6140ad612b3b373bb934b309f8e4f"
+  },
+  "tools/migrate_task_narrative.py": {
+    "mode": 420,
+    "sha256": "16c355f4ca32ecd32cb8061f2c1ecb0d63db64bd9eaa73d73d173aa702684d31"
+  },
+  "tools/project_data_env.sh": {
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  },
+  "tools/task_narrative.py": {
+    "mode": 420,
+    "sha256": "4e5e7d88f1d3a6eed8dbd69aeb39feab8268ede07f3aa509cc92644d6ea42ce5"
+  }
+}

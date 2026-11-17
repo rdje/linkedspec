@@ -1,0 +1,161 @@
+{
+  "activation": "08c39a2dfb4be628af24a445a7fdbb98a82e962f",
+  "limits": "Immutable source proposals only; no task mutation, actual capacity renewal, SDK or native/source-origin/physical closure. Production epoch admission and independent preservation still required; full custody remains4.2/SESSION5.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.35",
+  "sources": [
+    {
+      "blob": "ef8f86fcefa93dae0e338399c447c3ac7311d6fa",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 28,
+      "mode": "100644",
+      "path": "docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md",
+      "proposed_saved_bytes": 13074,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 641,
+          "before": 920,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.0",
+          "saved": 279
+        },
+        {
+          "after": 754,
+          "before": 1140,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.1",
+          "saved": 386
+        },
+        {
+          "after": 726,
+          "before": 1353,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.2",
+          "saved": 627
+        },
+        {
+          "after": 814,
+          "before": 892,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3",
+          "saved": 78
+        },
+        {
+          "after": 923,
+          "before": 1460,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.1",
+          "saved": 537
+        },
+        {
+          "after": 828,
+          "before": 1295,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.1",
+          "saved": 467
+        },
+        {
+          "after": 1000,
+          "before": 1603,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.2",
+          "saved": 603
+        },
+        {
+          "after": 724,
+          "before": 1217,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.2.3",
+          "saved": 493
+        },
+        {
+          "after": 776,
+          "before": 1299,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.3",
+          "saved": 523
+        },
+        {
+          "after": 740,
+          "before": 1486,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.3.4",
+          "saved": 746
+        },
+        {
+          "after": 808,
+          "before": 1364,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.1",
+          "saved": 556
+        },
+        {
+          "after": 834,
+          "before": 1338,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.2",
+          "saved": 504
+        },
+        {
+          "after": 788,
+          "before": 1131,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.3",
+          "saved": 343
+        },
+        {
+          "after": 718,
+          "before": 1570,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.1",
+          "saved": 852
+        },
+        {
+          "after": 701,
+          "before": 1404,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.2",
+          "saved": 703
+        },
+        {
+          "after": 698,
+          "before": 1564,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.3",
+          "saved": 866
+        },
+        {
+          "after": 636,
+          "before": 1453,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.4.4.4",
+          "saved": 817
+        },
+        {
+          "after": 1017,
+          "before": 1201,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5",
+          "saved": 184
+        },
+        {
+          "after": 779,
+          "before": 1240,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.1",
+          "saved": 461
+        },
+        {
+          "after": 821,
+          "before": 1492,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.2",
+          "saved": 671
+        },
+        {
+          "after": 951,
+          "before": 1806,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.3.1",
+          "saved": 855
+        },
+        {
+          "after": 824,
+          "before": 1737,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.3.2",
+          "saved": 913
+        },
+        {
+          "after": 813,
+          "before": 1423,
+          "id": "PERL-ACTIONIR-AST-MIGRATION.5.4",
+          "saved": 610
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "99277d2bdf68371abf3f5b59d08923456480873474d30f94d4b174ada7488f36",
+      "tail_bytes": 52263,
+      "tree": "PERL-ACTIONIR-AST-MIGRATION"
+    }
+  ]
+}

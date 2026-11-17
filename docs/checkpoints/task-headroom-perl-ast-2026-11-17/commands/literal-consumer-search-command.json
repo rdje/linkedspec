@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "rg",
+    "-n",
+    "-F",
+    "docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md",
+    "tools",
+    "scripts",
+    "tests",
+    ".githooks",
+    "doctrine"
+  ],
+  "cwd": "."
+}

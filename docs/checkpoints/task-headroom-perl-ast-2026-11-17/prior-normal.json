@@ -1,0 +1,6 @@
+{
+  "source": ".linkedspec-data/rust-loader-commit.log",
+  "sha256": "0a12120b2420e9ffe5992881266e839560b41ebc6a52b92014b1faa71ce02397",
+  "mode": 420,
+  "recording": "after-use complete preceding normal and post-pointer PASS"
+}

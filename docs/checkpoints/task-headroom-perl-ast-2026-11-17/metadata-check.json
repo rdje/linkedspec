@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_task_tree_metadata.sh"
+  ],
+  "cwd": ".",
+  "exit": 0,
+  "sha256": "71e4256badd58dd32c848cfbcae6164a10001dab9ffeecf031718f1333b3f9f4",
+  "mode": 420,
+  "recording": "after-use combined output; rendered book paragraph checked"
+}

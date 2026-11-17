@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2789,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-parity-design-inventory.md","sha256":"fd1db56c208b464c91649068c027f65c3419b85c086cc7d7c96c5299e60dd78d","type":"member"}
 {"bytes":3783,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-runtime-branch-events.md","sha256":"483da84915ccee85e21e5076ca70dad97fe536d8601c2577c7c690208ff08277","type":"member"}
 {"bytes":4132,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-authority-materialization.md","sha256":"b277477547d3f62b26280b2cf516ec37058eace3ec62f97ed0fcb68e0851bea8","type":"member"}
 {"bytes":5801,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-typed-source-compatibility-alias-gap.md","sha256":"4310a0105e77ec153b46f53c7ef2d2c17245d534eb1c4636c9d80b69de4a4a4b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5179,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md","sha256":"248a9c2d2df3297d3610a3932da21abdd99d6b1acfbd25c65d8b4e448993a548","type":"member"}
 {"bytes":2959,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-block-early-return.md","sha256":"172eda68bbb7a6a255e143b77ab712e2b913de29b987e86e42cb8c79452a43d5","type":"member"}
 {"bytes":3632,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-blocks-ground-truth.md","sha256":"2cd546aec1695eb347295a02e2fadecdb52a03a9af611b4e9162b0133bbc7907","type":"member"}
-{"bytes":3739,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-fluent-lifecycle-composability-split.md","sha256":"a64433eae9e26d0605884c595fd3927589248606dd687e1d13fd628b0552b2d4","type":"member"}

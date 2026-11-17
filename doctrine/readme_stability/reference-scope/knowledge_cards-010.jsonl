@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4064,"lines":60,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-compiler-scanner-mock-historical-inverse.md","sha256":"a2579462df2206037c781299d79811facf02762ebd25df0016d0318fcb53e89a","type":"member"}
 {"bytes":10518,"lines":183,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-cursor-source-observation-gap.md","sha256":"86adb2304745c1f9b0a3564a8c6abe6c439f4771a25756bca0c19f56f5feddca","type":"member"}
 {"bytes":4483,"lines":66,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-legacy-pathsearch-generated-tree-scan.md","sha256":"baa1a1629af272953cc4f5f6119ceaebd8cb7d1f1c47c09ea28c85285bed9d77","type":"member"}
 {"bytes":3509,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-num-min-lowering-fixture.md","sha256":"c494221c3ee0a3534ec290b7a239ce2278ae14b76828b68f3836342ad4569753","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4845,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.73.6.2","path":"docs/knowledge/rust-count-result-source-guards.md","sha256":"9cfff01d007b8b3f67026d133f60a1eef28f33734083d3c7f04f64408d077740","type":"member"}
 {"bytes":4403,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-cursor-rewind-number-results.md","sha256":"3de30a20d870138f10d2c57cf2ad33f0e1ca698a538abe44182ba1000e594561","type":"member"}
 {"bytes":5825,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-declare-type-token-rule-scope.md","sha256":"2bc1d9e902563c149be9374d049cd5d2520780ca345a09f09cf80a0be3ce8377","type":"member"}
-{"bytes":3626,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-definedness-result-source-guards.md","sha256":"c6e59a5d93ca05f4bfac6d1d0ec9105204c47f2706c559f9e952e4d2e80a1ebb","type":"member"}

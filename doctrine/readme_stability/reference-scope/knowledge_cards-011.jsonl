@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3626,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-definedness-result-source-guards.md","sha256":"c6e59a5d93ca05f4bfac6d1d0ec9105204c47f2706c559f9e952e4d2e80a1ebb","type":"member"}
 {"bytes":2898,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-dependency-warning-baseline.md","sha256":"09c24cab8b9c19450bac8589375d643c4a4496da98d87439d1ce43993e6c2b8e","type":"member"}
 {"bytes":6640,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-diagnostic-output-events.md","sha256":"495baa4dbd2d949fa0841c8f7d7ddb4657f1829ef806405c48a4c3c9cab12e71","type":"member"}
 {"bytes":2711,"lines":43,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1","path":"docs/knowledge/rust-direct-loader-roles.md","sha256":"53b55b03bab2df5a8e87bd07047cf42a29b01ddfd27a483f5eee21ba5bb695da","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3093,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-tclite-default-mode-repetition-gap.md","sha256":"9661836fc4e22957d677672fc30dba734961ba506d0eb6f22f14ae2134bcfdb8","type":"member"}
 {"bytes":3360,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-compile-spec-parser-events.md","sha256":"3502bcfc91d187b5a7af127dc280721981f1ab80e4997322d642708675834cb9","type":"member"}
 {"bytes":4039,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-controls-sinks.md","sha256":"20673df73e92908238cc1aefb62bf5cb627d613ea29a63017fcb223a1be75e80","type":"member"}
-{"bytes":2789,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-parity-design-inventory.md","sha256":"fd1db56c208b464c91649068c027f65c3419b85c086cc7d7c96c5299e60dd78d","type":"member"}

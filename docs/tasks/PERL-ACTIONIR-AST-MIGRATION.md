@@ -38,13 +38,8 @@ and host-language fallback are migration debt.
   Goal: Adopt text-to-AST as the cross-variant doctrine before code.
   Acceptance: Record an ADR; update the variant-neutral mdBook; add a Knowledge Map fact;
     update live docs and frontier state. No parser/compiler/runtime code changes.
-  Verification: **PASS 2026-07-01.** Wrote ADR `0011`, added Knowledge Map fact
-    `text-to-ast-backend-doctrine`, updated the variant-neutral mdBook backend handoff,
-    compiler pipeline, formal grammar, and architecture chapters, and synced roadmap,
-    task-tree index, and live docs. Regenerated `KNOWLEDGE_MAP.md`. Checks passed:
-    `bash scripts/check_memory_architecture.sh`, `bash knowledge-map/scripts/check_knowledge_map.sh`,
-    `bash scripts/check_doctrines.sh`, `mdbook build docs/linkedspec-book`, and `git diff --check`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.0 - adopt text-to-AST doctrine`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.0`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.1`
   Status: `done` (2026-07-01)
@@ -52,15 +47,8 @@ and host-language fallback are migration debt.
   Acceptance: Enumerate current string-lowering entry points in `ActionIR::*` and
     `RuleIR::EmitContext`; map each supported expression/statement/control shape to an
     AST node; identify behavior-preserving order of replacement. No behavior change.
-  Verification: **PASS 2026-07-01.** Inventoried the raw-string boundaries in
-    `StatementSplit`, `MethodExpr`, scanner rule families, `Contracts`, `CanonicalEvents`,
-    `RewritePipeline`, `MethodLowering`, and `RuleIR::EmitContext`; defined the
-    Rust-aligned AST node set and replacement order; added Knowledge Map fact
-    `perl-actionir-text-to-ast-inventory`; regenerated `KNOWLEDGE_MAP.md`. Checks passed:
-    stale-frontier search, `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`,
-    `mdbook build docs/linkedspec-book`, and `git diff --check`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.1 - inventory Perl ActionIR text lowering`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.2`
   Status: `done` (2026-07-01)
@@ -68,19 +56,8 @@ and host-language fallback are migration debt.
   Acceptance: Add focused parser modules/tests for calls, literals, variables, direct
     access, shape literals, blocks, statements, and receiver-dot chains. The seam must
     preserve existing generated behavior until consumers switch over.
-  Verification: **PASS 2026-07-01.** Added `LinkedSpec::ActionIR::AST`,
-    `LinkedSpec::ActionIR::AST::Parser`, and `t/actionir_ast_parser.t`; wired the focused
-    parser test into `tools/run_ci_local.sh`; updated mdBook architecture/status text and
-    Knowledge Map fact `perl-actionir-ast-parser-seam`; regenerated `KNOWLEDGE_MAP.md`.
-    Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/AST.pm`,
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`, `prove -Iperl t/actionir_ast_parser.t`,
-    `prove -q -Iperl t/phase0_regression.t` (1002 tests),
-    `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`, `bash scripts/check_doctrines.sh`,
-    `mdbook build docs/linkedspec-book`, `git diff --check`,
-    `bash -n tools/run_ci_local.sh`, and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.2 - add Perl ActionIR AST parser seam`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3`
   Status: `done` (2026-07-01)
@@ -90,11 +67,8 @@ and host-language fallback are migration debt.
     and terse oracle fixtures remain green; accidental host-call leakage becomes a
     LinkedSpec diagnostic.
   Children: `.3.1`, `.3.2`, `.3.3`, `.3.4`
-  Verification: **PASS 2026-07-01.** Split the broad value/receiver migration into
-    focused child leaves before code, then completed `.3.1` non-call value AST lowering,
-    `.3.2.1`/`.3.2.2` helper-call AST lowering, `.3.2.3` covered-helper diagnostics,
-    `.3.3` receiver-chain AST lowering, and `.3.4` return-payload AST traversal.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3 - split AST value lowering`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.1`
   Status: `done` (2026-07-01)
@@ -104,16 +78,8 @@ and host-language fallback are migration debt.
     and hash shape literals, and block values from typed nodes. Existing helper-call
     behavior may remain behind an explicit compatibility bridge for this leaf, but these
     supported non-call nodes must no longer depend on fresh source-text rescans.
-  Verification: **PASS 2026-07-01.** Added a `MethodLowering` AST dispatcher for
-    primitive literals, scoped bare scalar reads, direct indexed/nested access with the
-    legacy reserved-segment guard, array/hash shape literals, and block values. Helper
-    calls and statement-level side effects remain behind explicit compatibility bridges.
-    Added focused `t/actionir_ast_parser.t` coverage proving AST parser use and preserved
-    generated output. Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`, `prove -Iperl t/actionir_ast_parser.t`,
-    targeted lowering probes for shapes, blocks, direct access, scalaref key paths, and
-    receiver-chain compatibility, and `prove -q -Iperl t/phase0_regression.t` (1002 tests).
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.1 - lower non-call values from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.2`
   Status: `split` (2026-07-01)
@@ -134,16 +100,8 @@ and host-language fallback are migration debt.
     families consume AST argument nodes recursively before invoking the existing Perl
     helper lowering. Helpers with symbol/aggregate-special slots stay on compatibility
     paths. Focused AST-call composition tests and phase0 remain green.
-  Verification: **PASS 2026-07-01.** Added a `MethodLowering` AST call dispatcher for
-    value-only helper families. Covered call nodes recursively materialize argument ASTs
-    before entering the existing Perl helper catalog through the compatibility bridge:
-    scalar normalization, string predicates/composition, coalesce/concat, scalar-argument
-    numeric helpers, and explicit `num_*` comparisons. Deprecated wrapper aliases
-    (`scalar(...)`/`array(...)`/`hash(...)`), aggregate-wrapper, collection, reducer,
-    hash, symbol-slot, and receiver-chain helpers remain compatibility paths and are not
-    the canonical destination syntax.
-    Focused tests prove fake call-node source text is not reused for covered calls.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.1 - lower value-only helper calls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.2.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.2.2`
   Status: `done` (2026-07-01)
@@ -154,17 +112,8 @@ and host-language fallback are migration debt.
     `hash_copy`, flat helpers, collection reducers, and hash helpers use explicit AST slot
     policy so symbol-name slots and value-expression slots cannot drift. Existing aggregate
     wrapper quoted-name boundaries remain green.
-  Verification: **PASS 2026-07-01.** Added slot-aware AST call dispatch for deprecated
-    scalar/array/hash wrappers, copy helpers, flat helpers, array collection helpers,
-    numeric reducers with aggregate operands, hash helpers, capture-map/group helpers, and
-    hash/array terminal helpers. Covered calls reconstruct helper-call surfaces from typed
-    AST node fields before entering the existing Perl helper catalog, preserving symbol
-    slots such as `array(items)`/`hash(meta)`, quoted-wrapper literal boundaries, and
-    value slots such as counts, keys, delimiters, and nested value-only helper payloads.
-    Focused fake-source tests prove covered aggregate helper calls do not reuse call-node
-    source text; `mdbook build docs/linkedspec-book`, doctrine/Knowledge Map checks, and
-    `bash tools/run_ci_local.sh` remain green with phase0 1002 tests.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.2 - lower aggregate helper calls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.2.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.2.3`
   Status: `done` (2026-07-01)
@@ -172,17 +121,8 @@ and host-language fallback are migration debt.
   Acceptance: Helper families covered by `.3.2.1` and `.3.2.2` no longer fall through as
     generated host-language calls when their AST form is unsupported; they emit a clear
     LinkedSpec diagnostic/telemetry path instead.
-  Verification: **PASS 2026-07-01.** Unsupported AST call forms for helper families
-    already owned by `.3.2.1`/`.3.2.2` now lower to a harmless
-    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` sentinel expression instead of a
-    generated host-language call. `ActionIR::Diagnostics` scans that sentinel into the
-    existing unresolved-helper metadata, so descriptor summaries report
-    `unresolved_helper_count` / `unresolved_helpers` and mark the rule not
-    language-agnostic ready while keeping `raw_perl_dependency_count == 0`. Focused
-    tests cover malformed value-only helpers, malformed aggregate helpers, nested
-    malformed helpers inside a valid covered helper, and descriptor telemetry. Phase0
-    remains green and local CI passes.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.2.3 - diagnose unsupported AST helper calls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.2.3`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.3`
   Status: `done` (2026-07-01)
@@ -191,17 +131,8 @@ and host-language fallback are migration debt.
     receivers, and block-valued receivers lower by traversing `fluent_chain` nodes,
     typed receiver nodes, and typed call-argument nodes, not by splitting receiver-dot
     source text.
-  Verification: **PASS 2026-07-01.** `MethodLowering::_lower_method_value_expr(...)`
-    now dispatches AST `fluent_chain` nodes before the legacy receiver-dot text
-    normalizers. The dispatcher maps typed receiver/call nodes onto the existing helper
-    catalog for the array, hash, string, and number receiver families while preserving
-    legacy wrapper behavior, array pipeline helper names, string/hash bridges to array
-    terminals, block-valued receivers, numeric terminal continuation behavior, and
-    covered-helper diagnostics for unsupported chain forms. Focused fake-source tests
-    prove number, string-to-array, block-array, hash-to-array, invalid numeric terminal,
-    and unsupported `substr` chain cases do not reuse poisoned chain/call/argument source
-    text.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.3 - lower receiver chains from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.3`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.3.4`
   Status: `done` (2026-07-01)
@@ -209,19 +140,8 @@ and host-language fallback are migration debt.
   Acceptance: `_lower_return_payload_expr(...)` walks typed value/call/chain nodes instead
     of regex-substituting helper-looking source spans; accidental generated host-language
     calls on supported surfaces emit a LinkedSpec diagnostic.
-  Verification: **PASS 2026-07-01.** `_lower_return_payload_expr(...)` now parses the
-    trimmed payload through `LinkedSpec::ActionIR::AST` and returns the AST-lowered value
-    directly for typed nodes before the legacy helper-substitution loop. Focused tests
-    poison array/hash/string/call/chain node `source` fields and prove typed return
-    payloads lower from AST fields, unsupported covered chain helpers keep the
-    `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>` diagnostic sentinel, and the narrow
-    raw compatibility payload `\(my $capt = capture_slice())` still uses the legacy
-    fallback. Checks passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`, `perl -Iperl -c perl/LinkedSpec.pm`,
-    `prove -v -Iperl t/actionir_ast_parser.t`, `prove -q -Iperl t/phase0_regression.t`
-    (1002 tests), `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map
-    gates, `git diff --check`, and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.3.4 - lower return payloads from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.3.4`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4`
   Status: `split` (2026-07-01)
@@ -243,18 +163,8 @@ and host-language fallback are migration debt.
     nodes lower from typed target/value/key fields instead of re-reading statement source
     text. Existing assignment target-kind inference, source-slot scalar reads, and
     mutation value-slot behavior remain byte-compatible.
-  Verification: **PASS 2026-07-01.** `MethodLowering` now consumes AST
-    `assign_scalar`, `assign_array_append`, and `assign_hash_index` nodes before the
-    legacy statement regex paths. Focused tests poison the original statement text and
-    AST `source` fields while proving scalar assignment, array append, and hash-index
-    assignment lower from typed target/key/value fields. Checks passed so far:
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`, `perl -Iperl -c perl/LinkedSpec.pm`, and
-    `prove -v -Iperl t/actionir_ast_parser.t`; `prove -q -Iperl t/phase0_regression.t`
-    passed with 1002 tests; `mdbook build docs/linkedspec-book`,
-    memory/doctrine/Knowledge Map gates, `git diff --check`, and `bash tools/run_ci_local.sh`
-    passed.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.1 - lower statement operators from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.2`
   Status: `done` (2026-07-01)
@@ -264,17 +174,8 @@ and host-language fallback are migration debt.
     entering the existing statement helper catalog. Symbol/value slot policies remain
     explicit and unsupported covered helper statements diagnose instead of leaking host
     calls.
-  Verification: **PASS 2026-07-01.** `MethodLowering` now consumes AST `call`
-    nodes for `return`, `return_undef`, `set_key`, `push`, `push_value`, and
-    `push_nonempty`, and AST `fluent_chain` nodes for array end-mutation
-    statements. `DeclareMethod` bridges top-level `set`/`assign` through typed
-    call arguments. Focused tests poison original text and AST `source` fields
-    across the statement helper family, and `push_nonempty(items)` now reports
-    an unresolved-helper sentinel instead of leaking a host call. Checks passed:
-    syntax checks for touched modules, focused AST parser suite, phase0 1002
-    tests, `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map
-    gates, `git diff --check`, and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.2 - lower statement calls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.3`
   Status: `done` (2026-07-01)
@@ -283,15 +184,8 @@ and host-language fallback are migration debt.
     non-final side-effect statements and block-local `return(...)` payloads instead of
     splitting source text inside `_lower_block_value_expr(...)`. Existing block-value
     early-return behavior stays stable.
-  Verification: **PASS 2026-07-01.** `_lower_block_value_expr(...)` now routes
-    parsed `block_value` nodes into the AST value path before legacy splitting.
-    AST block-value lowering consumes `action_stmt.expr` nodes for side effects,
-    block-local return payloads, and final expressions, with legacy source fallback
-    retained for untyped compatibility surfaces. Checks passed: syntax checks,
-    focused AST parser suite with 15 subtests, phase0 1002 tests, `mdbook build
-    docs/linkedspec-book`, memory/doctrine/Knowledge Map gates, `git diff --check`,
-    and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.3 - lower block values from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.3`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4`
   Status: `split` (2026-07-01)
@@ -312,23 +206,8 @@ and host-language fallback are migration debt.
   Acceptance: Attached-block and marker-style control forms parse into typed AST nodes
     carrying condition/source/body/case/default fields as applicable, while existing
     production lowering behavior remains unchanged.
-  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::AST::Parser`
-    now parses attached-block and marker-style structured control forms into typed
-    `control_if`, `control_else`, `control_endif`, `control_while`,
-    `control_switch`, `control_case`, `control_default`, `control_endcase`, and
-    `control_endswitch` nodes. Nodes carry canonical/source keywords, parsed
-    condition/source/match expressions, attached body blocks, body source spans,
-    and parsed switch case/default branches where applicable. Inline value-form
-    `if(...)`/`switch(...)` helpers remain generic `call` nodes so production
-    value lowering stays unchanged. Checks passed:
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/AST/Parser.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`,
-    `prove -v -Iperl t/actionir_ast_parser.t`, `perl -c perl/LinkedSpec.pm`,
-    `perl -c -Iperl t/phase0_regression.t`, and direct
-    `perl -Iperl t/phase0_regression.t` with phase0 1002 tests;
-    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
-    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.1 - parse structured control AST nodes`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.4.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.2`
   Status: `done` (2026-07-01)
@@ -336,21 +215,8 @@ and host-language fallback are migration debt.
   Acceptance: If/elseif/else/endif and when/otherwise forms consume typed condition and
     branch-body nodes before legacy textual marker reconstruction. Existing attached-block
     and fluent-control behavior stays stable.
-  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::ControlFlow`
-    now parses `if`/`i`/`when`, `elseif`/`elif`, `else`/`otherwise`, and
-    `endif` statements through `LinkedSpec::ActionIR::AST`, materializes trusted
-    control statements from typed condition/body nodes, then reuses the existing
-    branch lowerers. Fake-source focused locks prove original statement text and
-    AST `source` fields are not reused for attached if/elseif/else,
-    when/otherwise, or marker if/elseif/else/endif. Checks passed:
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`,
-    `prove -v -Iperl t/actionir_ast_parser.t`, `perl -c perl/LinkedSpec.pm`,
-    `perl -c -Iperl t/phase0_regression.t`, and
-    `prove -q -Iperl t/phase0_regression.t` with phase0 1002 tests;
-    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
-    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.2 - lower if controls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.4.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.3`
   Status: `done` (2026-07-01)
@@ -358,45 +224,16 @@ and host-language fallback are migration debt.
   Acceptance: Switch source expressions, case match values, default branches, and optional
     endcase/endswitch markers consume typed AST fields while preserving existing switch
     state and branch-order behavior.
-  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::ControlFlow`
-    now parses `switch`, `case`, `default`, `endcase`, and `endswitch`
-    statements through `LinkedSpec::ActionIR::AST`, materializes trusted
-    switch source expressions, case match values, attached case/default bodies,
-    and end markers from typed fields, and then reuses the existing switch
-    stack lowerers. Attached `control_switch` nodes prefer parsed `cases` and
-    `default` branch fields over generic body fallback. Fake-source focused
-    locks prove original statement text, fake fallback bodies, and AST `source`
-    fields are not reused for attached or marker switch controls. Checks
-    passed: `perl -Iperl -c perl/LinkedSpec/ActionIR/ControlFlow.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`,
-    `prove -v -Iperl t/actionir_ast_parser.t`, `perl -c perl/LinkedSpec.pm`,
-    `perl -c -Iperl t/phase0_regression.t`, and
-    `prove -q -Iperl t/phase0_regression.t` with phase0 1002 tests;
-    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
-    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.3 - lower switch controls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.4.3`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.4.4.4`
   Status: `done` (2026-07-01)
   Goal: Lower `while` statement forms from AST.
   Acceptance: While conditions and attached/marker body statements consume typed AST fields
     while preserving the existing iteration-safety guard and generated behavior.
-  Verification: **PASS 2026-07-01.** `LinkedSpec::ActionIR::ControlFlow`
-    now parses attached `while(cond) { ... }` statements through
-    `LinkedSpec::ActionIR::AST`, materializes trusted loop conditions and
-    attached body statements from typed `control_while` fields, and then reuses
-    the existing while lowerer with the deterministic 10000-iteration guard.
-    Bodyless `while(...)` marker nodes remain parser shape only because the
-    current DSL has no `endwhile` product syntax. Fake-source focused locks
-    prove original statement text and AST `source` fields are not reused for
-    attached while controls. Checks passed: `perl -Iperl -c
-    perl/LinkedSpec/ActionIR/ControlFlow.pm`, `perl -Iperl -c
-    t/actionir_ast_parser.t`, `prove -v -Iperl t/actionir_ast_parser.t`,
-    `perl -c perl/LinkedSpec.pm`, `perl -c -Iperl t/phase0_regression.t`,
-    and `prove -q -Iperl t/phase0_regression.t` with phase0 1002 tests;
-    `mdbook build docs/linkedspec-book`; memory, doctrine, and Knowledge Map
-    gates; `git diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.4.4.4 - lower while controls from AST`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.4.4.4`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5`
   Status: `done` (2026-07-01)
@@ -408,14 +245,8 @@ and host-language fallback are migration debt.
     permanent `fn <name>(...) { ... }` grammar belongs in `specs/spec.spec`; bootstrap
     parser support, if any, is temporary migration debt to remove after this AST path can
     carry the surface.
-  Verification: **PASS 2026-07-01.** Split before code into fallback
-    boundary audit, AST-covered fallback retirement, user-function AST call
-    handoff, and `specs/spec.spec` grammar/bootstrap-retirement children.
-    Checks passed: `mdbook build docs/linkedspec-book`,
-    `bash scripts/check_memory_architecture.sh`,
-    `bash knowledge-map/scripts/check_knowledge_map.sh`,
-    `bash scripts/check_doctrines.sh`, and `git diff --check`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5 - split fallback retirement and function handoff`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.1`
   Status: `done` (2026-07-01)
@@ -424,16 +255,8 @@ and host-language fallback are migration debt.
     either explicit compatibility debt, supported-surface leakage to retire, or function
     handoff dependency. The audit uses TOOLBOX probes and code reads before code and
     records exact owners/tests for `.5.2`+.
-  Verification: **PASS 2026-07-01.** TOOLBOX `call_spec_handler_subst`,
-    `return_descriptor`, and ActionIR AST parser probes classified malformed covered
-    helpers, raw compatibility statements, retired helpers, all-bare `push(A,B)`,
-    unknown user-function-shaped calls, receiver chains, and `fn` grammar ownership.
-    Code reads covered `CanonicalEvents`, `RewritePipeline`, `RuleIR::EmitContext`,
-    `MethodLowering`, and `ActionIR::AST::Parser`. No parser/compiler/runtime code
-    changed. Checks passed: `mdbook build docs/linkedspec-book`, memory architecture,
-    Knowledge Map, doctrine registry, `git diff --check`, and `bash tools/run_ci_local.sh`
-    with the focused AST suite plus phase0 1002 tests.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.1 - audit fallback boundary`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.2`
   Status: `done` (2026-07-01)
@@ -442,18 +265,8 @@ and host-language fallback are migration debt.
     leak generated host-language calls or raw Perl for supported DSL surfaces; they emit
     clear existing diagnostics or unresolved-helper metadata. Narrow compatibility
     payloads identified by `.5.1` remain intentionally fenced.
-  Verification: **PASS 2026-07-01.** Standalone supported value statements now scan as
-    `VALUE_DROP` events and lower through typed AST value traversal as discarded values
-    (`do { <value>; undef }`) instead of remaining raw host calls. Malformed covered
-    standalone helpers still report `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:*` through
-    unresolved-helper metadata with zero raw fallback. The compatibility value-expression
-    probe for `s(...)`/`a(...)`/`h(...)` still returns expressions rather than dropped
-    statements, and unknown user-function-shaped standalone calls/chains remain raw for
-    `.5.3`. Focused syntax checks passed for all touched ActionIR modules and
-    `perl/LinkedSpec.pm` plus `t/actionir_ast_parser.t`; focused AST suite passed with
-    20 subtests; phase0 passed 1002 tests; mdBook, memory architecture, Knowledge Map,
-    doctrine registry, `git diff --check`, and full local CI passed.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.2 - lower dropped value statements`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3`
   Status: `split` (2026-07-01)
@@ -476,20 +289,8 @@ and host-language fallback are migration debt.
     removed or fenced as explicit compatibility debt with metadata/tests. Existing long
     forms remain supported, and direct shape literals remain the preferred constructor
     surface where applicable.
-  Verification: **PASS 2026-07-01.** Migrated shipped specs, corpus fixtures, phase0
-    source locks, root guides, and mdBook examples/reference pages from short wrappers
-    to canonical wrappers. Perl ActionIR symbol extraction, method/value lowering,
-    flow inference, scanner contracts, and direct compatibility rewrite paths no longer
-    normalize `s`/`a`/`h` into `scalar`/`array`/`hash`; retired short wrappers now report
-    unresolved-helper diagnostics with zero raw-Perl fallback. Rust core/runtime tests
-    and examples now use canonical wrapper names. Checks passed: residual shorthand scan
-    over repo-owned specs/corpora; `perl -Iperl -c` for touched ActionIR modules and
-    phase0/actionir tests; `prove -Iperl t/actionir_ast_parser.t`; `prove -Iperl
-    t/phase0_regression.t` (1003 tests); `cargo test --manifest-path rust/Cargo.toml -p
-    linkedspec-core --lib`; `cargo test --manifest-path rust/Cargo.toml -p
-    linkedspec-runtime --lib`; `mdbook build docs/linkedspec-book`; memory architecture,
-    Knowledge Map, doctrine registry, `git diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.1 - retire short wrapper aliases`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5.3.1`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.3.2`
   Status: `done` (2026-07-01)
@@ -498,22 +299,8 @@ and host-language fallback are migration debt.
     helper calls, preserve receiver-dot chaining and standalone-result discard, and route
     unknown/colliding names through diagnostics rather than textual macro expansion. This
     is the Perl ActionIR handoff needed by `SPEC-FORMAT-TERSE.4.1`/`.4.2`.
-  Verification: **PASS 2026-07-01.** Unknown typed calls and function-call receivers in
-    return/value positions now lower to `LINKEDSPEC_UNSUPPORTED_ACTIONIR_HELPER:<name>`
-    instead of generated host-language calls; descriptor metadata reports unresolved helper
-    `user_fn` and blocks language-agnostic readiness. Existing DSL/compatibility names are
-    fenced as known before unknown-call diagnostics, so declaration aliases, retired return
-    helpers, source-boundary helpers, internal trace calls, and statement-only array
-    mutation methods keep their compatibility behavior instead of being misclassified as
-    future user functions. Standalone unknown function-shaped statements remain raw until
-    the function registry owns discard semantics. Checks passed so far:
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/MethodLowering.pm`,
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/Scanner/PrimitivePipelineRules.pm`,
-    `perl -Iperl -c perl/LinkedSpec/ActionIR/Contracts.pm`,
-    `perl -Iperl -c t/actionir_ast_parser.t`, focused lowering probes,
-    `prove -Iperl t/actionir_ast_parser.t`, and `prove -Iperl t/phase0_regression.t`
-    with phase0 1003 tests.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.3.2 - diagnose unknown AST calls`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5.3.2`.
 
 - ID: `PERL-ACTIONIR-AST-MIGRATION.5.4`
   Status: `done` (2026-07-01)
@@ -522,18 +309,8 @@ and host-language fallback are migration debt.
     `specs/spec.spec`/self-hosted grammar ownership. Any bootstrap parser support for
     that exact function-definition surface is removed or proven absent, and docs/tests
     state that bootstrap support is not the lasting owner.
-  Verification: **PASS 2026-07-01.** `specs/spec.spec` now documents that permanent
-    `fn name(args) { ... }` grammar belongs to the self-hosted grammar surface and that
-    any hardcoded bootstrap bridge is temporary migration debt. Phase0 locks assert that
-    `BootstrapSpec.pm` and `BootstrapSpec/Core.pm` have no `fn name(...)` grammar pattern
-    or named function-definition node support. A direct bootstrap parse probe for
-    `fn`-shaped text returns only generic paragraph content (`1`) and no structured
-    function-definition node or function payload. Checks passed so far:
-    `perl -Iperl -c t/phase0_regression.t`, direct bootstrap parse probe, targeted
-    source `rg`, `prove -Iperl t/phase0_regression.t` with phase0 1004 tests,
-    `mdbook build docs/linkedspec-book`, memory/doctrine/Knowledge Map/diff checks,
-    and `bash tools/run_ci_local.sh`.
   Commit: `PERL-ACTIONIR-AST-MIGRATION.5.4 - lock fn grammar ownership`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.35`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree PERL-ACTIONIR-AST-MIGRATION --epoch TYPE-REFERENCE-BOOK.1.2.23.4.35 --id PERL-ACTIONIR-AST-MIGRATION.5.4`.
 
 ## Current Frontier
 

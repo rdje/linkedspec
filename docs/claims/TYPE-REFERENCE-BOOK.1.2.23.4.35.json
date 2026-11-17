@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.35",
+  "claims": [
+    {
+      "name": "perl-ast-closed-task-narrative-preservation",
+      "statement": "Existing epoch preserves28 IDs/all CORE/five unchanged bodies/full52263-byte tail;23 closed pointers reduce88302 to75228 current bytes. All29 public queries/ten controls/current target-manifest identity pass;13074 text bytes renewed. No SDK or physical-reclamation claim.",
+      "scope": "Finite named task preservation only; original measurements, runtime behavior and code are unchanged. No SDK, whole-project reading, physical reclamation or complete native/source-origin custody claim;4.2/SESSION5 remain.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/task-headroom-perl-ast-2026-11-17/review.py",
+        "granularity": "Every ordered ID/CORE field, complete unselected body, prefix/frontier/tail/mode, exact source proposal and all29 original public query outputs.",
+        "result": "{\"after_bytes\": 75228, \"before_bytes\": 88302, \"controls\": {\"goal\": {\"reason\": \"CORE field:PERL-ACTIONIR-AST-MIGRATION/Goal\", \"result\": \"RED\"}, \"mode\": {\"reason\": \"target mode\", \"result\": \"RED\"}, \"omitted-node\": {\"reason\": \"ordered current IDs\", \"result\": \"RED\"}, \"pointer\": {\"reason\": \"exact selected contract and pointer\", \"result\": \"RED\"}, \"prefix\": {\"reason\": \"complete prefix\", \"result\": \"RED\"}, \"selection\": {\"reason\": \"complete unselected body\", \"result\": \"RED\"}, \"source\": {\"reason\": \"source Git address\", \"result\": \"RED\"}, \"status\": {\"reason\": \"CORE field:PERL-ACTIONIR-AST-MIGRATION/Status\", \"result\": \"RED\"}, \"tail\": {\"reason\": \"complete frontier and trailing bytes\", \"result\": \"RED\"}, \"unselected-body\": {\"reason\": \"complete unselected body\", \"result\": \"RED\"}}, \"current_target_and_manifest\": \"PASS\", \"ids\": 28, \"limits\": \"Finite named task preservation only; original measurements, runtime behavior and code are unchanged. No SDK, whole-project reading, physical reclamation or complete native/source-origin custody claim;4.2/SESSION5 remain.\", \"operational_estimate_bytes\": 1479524364, \"operational_limits\": \"Retained primary output only; independent actual-pack falsification30 and complete raw-artifact/native/physical closure4.2 remain. No remote freshness, actual wire or future-size promise.\", \"public_queries\": 29, \"result\": \"PASS\", \"saved_bytes\": 13074, \"selected\": 23, \"tail_bytes\": 52263, \"unselected\": 5}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An epoch could drop a contract, frontier byte, node, unselected body or exact source pointer while preservation still passed.",
+        "oracle": "Independent line-state field parser/full original-current byte comparison plus actual public whole-source and all stable-ID outputs, separate from production rendering.",
+        "red_control": "Prefix/tail/status/goal/omitted-node/unselected-body/pointer/source/selection/mode mutations each reject with its recorded reason; healthy finite preservation passes."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Original/current task bodies/modes, full task/epoch inputs, actual native command channels, instruments and Git source identities are retained. The unchanged migrator internally verifies output before the separate after-image; earlier self-check/outer-launcher first-use and complete Python/Perl/Git/toolchain/OS/per-read/source-origin/physical custody remain4.2/SESSION5. No SDK or new runtime admission."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,479,524,364 non-thin serialized bytes against cached4683555e;20,475,636 bytes below the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin range; selected original producer/ref/config/command metadata copied without replay.",
+        "result": "{\"ahead\": 122, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.479524364, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1479524364, \"evidence\": \".linkedspec-data/push-monitor/20261117T000920.514071Z\", \"gib\": 1.3779144398868084, \"head\": \"08c39a2dfb4be628af24a445a7fdbb98a82e962f\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 48778, \"pack_footer\": \"575483898211549de8eb3708ea29377aeff8ee9d\", \"pack_sha256\": \"0d82370d7bc68f5d0e9ab4790ff5e982b4ad7ab08d6071f40b79ea221f8178be\", \"packed_objects\": 48778, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 20475636, \"trigger_reached\": false, \"unique_object_ids\": 48778}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Producer stream/stat/footer agree; independent actual-file size falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected original producer/ref/config/command channels retained; raw pack/full object tables remain ignored. Full native/physical/input custody remains4.2/SESSION5; no remote freshness/wire promise."
+      }
+    }
+  ]
+}

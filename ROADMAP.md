@@ -1,4 +1,4 @@
-November17 current PNT frontier: Ordinary Rust21 source loaders TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 are focused-checked with exact capture/plan roles and both reader corrections retained. Task headroom35 precedes generated Rust2/remaining Perl-transitive3 and generated Dart2/frozen-input3 before registration4.1.2/publication30.2; no SDK/admission claim.
+November17 current PNT frontier: Existing-epoch task headroom35 renews13074 current bytes with full contract/frontier recovery. Generated Rust2/remaining Perl-transitive3/generated Dart2/frozen-input3 precede registration4.1.2/publication30.2; native/semantic/other prerequisites stay open.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

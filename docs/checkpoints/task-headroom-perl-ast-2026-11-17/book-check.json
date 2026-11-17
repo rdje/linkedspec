@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "tools/run_mdbook_local.sh"
+  ],
+  "cwd": ".",
+  "exit": 0,
+  "sha256": "1802fe16775796e193fa2a0382a90ab9fc0c429801c030f6a29ecbbfb3aaf90d",
+  "mode": 420,
+  "recording": "after-use combined output; rendered book paragraph checked"
+}

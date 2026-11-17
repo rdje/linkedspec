@@ -1,4 +1,5 @@
-{"member_count":106,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":107,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3739,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-fluent-lifecycle-composability-split.md","sha256":"a64433eae9e26d0605884c595fd3927589248606dd687e1d13fd628b0552b2d4","type":"member"}
 {"bytes":5890,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-hash-receiver-value-chains.md","sha256":"22b1cb64e80bdd81c93e8b4f2ba823b60b02f7aebb759500b0213f7bb76674f5","type":"member"}
 {"bytes":11819,"lines":133,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-helper-rename-lowering-sites.md","sha256":"2d2a692e726d80d0a23acf97e89c111114897245c52273c6d6bd5971dc9da8c7","type":"member"}
 {"bytes":3971,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-helper-retirement-no-drift-closeout.md","sha256":"f77df51114af34747db362746a51bb579716d8275f6d7483a21867e5b066dfb0","type":"member"}

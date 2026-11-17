@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_readme_stability.sh"
+  ],
+  "cwd": ".",
+  "exit": 0,
+  "sha256": "c5232f2749b69319b634ef0b75810f496d3343d5d55f8a32bfdc56a3bea05797",
+  "mode": 420,
+  "recording": "after-use combined output; rendered book paragraph checked"
+}

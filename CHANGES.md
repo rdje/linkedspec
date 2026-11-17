@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — renew closed Perl AST task narrative headroom
+
+TYPE-REFERENCE-BOOK.1.2.23.4.35: Existing epoch preserves28 IDs/all CORE/five unchanged bodies/full52263-byte tail;23 closed pointers reduce88302 to75228 current bytes. All29 public queries/ten controls/current target-manifest identity pass;13074 text bytes renewed. No SDK or physical-reclamation claim. Evidence: `docs/checkpoints/task-headroom-perl-ast-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — qualify ordinary Rust source loaders
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1: Rust21 sources retain38 literal fixtures plus21 embedded grammar dependencies,59 bindings to39 targets,21 filesystem sites, five readbacks/six write-only exports/twelve env sites/seven emitted-string roles/three row selectors/two execution qualifications. Historical61/eleven victim-sensitive controls/current159 and two original reader refusals pass. No Cargo/SDK or admission. Evidence: `docs/checkpoints/rust-loader-qualification-2026-11-16/REVIEW.md`. The first normal hook rejects task bytes1753 over the unchanged ceiling. Exact candidate/diagnostic retention and a bounded new summary restore227-byte headroom; all unselected bodies and contracts persist. Immediate existing-epoch renewal35 precedes continuation.

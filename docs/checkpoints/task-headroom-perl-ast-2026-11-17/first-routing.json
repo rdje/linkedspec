@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "bash",
+    "scripts/check_readme_stability.sh"
+  ],
+  "cwd": ".",
+  "exit": 1,
+  "sha256": "832fada9a58352605830fc1cfb1deb362928127c5cc85b5c43c5e4a46327208c",
+  "mode": 420,
+  "recording": "after-use combined output; new-card derived Knowledge Map index out of sync"
+}

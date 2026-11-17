@@ -118,6 +118,7 @@
 {"bytes":2963,"lines":41,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1","path":"docs/knowledge/perl-array-transform-result-guards.md","sha256":"3c3fc90df829e36dcc9995376f17ccf151ef957ca3ecd9eb208a5136e9db5f35","type":"member"}
 {"bytes":3511,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.78.1.1","path":"docs/knowledge/perl-array-transform-source-preflight.md","sha256":"8722fe880af713e539e390d0ee1d057f80fa053b023cec47b368069e947b4159","type":"member"}
 {"bytes":3642,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-array-tree-traversal-callback-frame.md","sha256":"ec5c2bd6210e5d41b4dfb65f17707a84c74586cdf243d1c6744cc1143d9f0563","type":"member"}
+{"bytes":2032,"lines":30,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.35","path":"docs/knowledge/perl-ast-closed-task-narrative-headroom.md","sha256":"ac22ebd43019d5680fef6f5c04199b7308240d923e47a6af010c5d7fba0d98fa","type":"member"}
 {"bytes":3680,"lines":61,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-bare-explicit-edge-order-drift.md","sha256":"de4af144ef87ddfcd1510e8561ee725436e265f17fdf8f74857895ff2ebf6f2d","type":"member"}
 {"bytes":4108,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-basic-family-mixed-source-provenance.md","sha256":"96625a87e8fdd0ba3f407ddf10c21822420c61ac7c847ffa5975c091552f4d07","type":"member"}
 {"bytes":3736,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-basic-regex-source-provenance.md","sha256":"a2b9294610841934ac8b3f75654bae929e794cd8e6eec03ab03c612ffb1c444d","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":2977,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-latest-child-retv-binding.md","sha256":"cba60931dd56107841b09dfc6cfbbfe760f369b9910edf5f9470715611ed0240","type":"member"}
 {"bytes":3926,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-postcall-falsey-acceptance.md","sha256":"d0adb17b938a98241cce7d9582ef8b72ae075f23d5b3bf9817fc8fc26c2febe4","type":"member"}
 {"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}
-{"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}

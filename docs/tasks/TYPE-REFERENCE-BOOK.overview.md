@@ -2064,9 +2064,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: Eight closed commentary pointers; original contracts and trailing bytes exact. Full original activation and normal log retained; next is qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1. Native/source-origin closure remains4.2/SESSION5.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.35`
-  Status: `pending`
+  Status: `completed`
   Goal: Renew task-evidence headroom.
   Acceptance: Preserve CORE/unselected/frontier bytes via existing epoch; unchanged limits/tools.
+  Verification tier: `focused`
+  Focused checks: Source-bound existing-epoch migration/public queries, independent full-node/CORE/frontier/mode preservation and effective controls; unchanged pressure, book, memory, histories, scope and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no tool, schema, limit or SDK change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.35.json`
+  Evidence: docs/checkpoints/task-headroom-perl-ast-2026-11-17/REVIEW.md.
+  Outcome: 23 closed pointers;28 IDs/CORE/five bodies/tail52263 exact;29 queries/ten controls/current identity;13074 text bytes renewed. Full proof/limits in Evidence.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.2`
   Status: `pending`
