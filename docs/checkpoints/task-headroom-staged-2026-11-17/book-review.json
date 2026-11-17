@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "command": "bash tools/run_mdbook_local.sh",
+  "observed_build_exit": 0,
+  "original_log_sha256": "3b12f8d6d66e980bce5f00d551c1a827367f5a2b0da54886ab8edbb52f737759",
+  "rendered_path": "docs/linkedspec-book/book/development/documentation-workflow.html",
+  "rendered_sha256": "99dbbb9b406e1a53756617aeb77289df48dcb51c7c8d5d3e0053947a04a20184",
+  "limits": "After-use log and exact new paragraph copies only; no full-book/native/first-use/physical closure claim."
+}

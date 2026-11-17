@@ -1,0 +1,37 @@
+{
+  "docs/checkpoints/task-headroom-staged-2026-11-17/capture.py": {
+    "bytes": 7749,
+    "mode": 420,
+    "sha256": "8638a69cb06695afc980554b4fb50f99b7a191f0f8e0f8326e9a19418d644877"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/parent_links.py": {
+    "bytes": 5772,
+    "mode": 420,
+    "sha256": "a79fc6f4e35d6f7b43b55ace032e7c425dc9ce41110a03544412bcf2389aedbf"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.index.jsonl": {
+    "bytes": 1294,
+    "mode": 420,
+    "sha256": "4ded5d05efbd08a4d16cbb92c69e62f70a2bb5accf65bb6cf6e22815cb72c246"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20829,
+    "mode": 420,
+    "sha256": "afa22b21dbad33d783ff3d7272954d7480e9b5515a739ecbd6a1075108a96097"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 606252,
+    "mode": 420,
+    "sha256": "05657277e0102f2f6d49d873d2dd5b2a8110e942b7b75936482403ad0135f9f1"
+  },
+  "tools/lib/LinkedSpec/DocumentHistoryCatalog.pm": {
+    "bytes": 13904,
+    "mode": 420,
+    "sha256": "030ae3044b0f5e7f3420dccc721e7b9f9a1c865f0470cf332f09da33b18b2fef"
+  },
+  "tools/read_task_tree.pl": {
+    "bytes": 5138,
+    "mode": 493,
+    "sha256": "370f3dac2f8252fc87bb958ee2de1592116c64529773ce8a3f5d790df23acf79"
+  }
+}

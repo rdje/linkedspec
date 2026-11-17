@@ -1,0 +1,97 @@
+{
+  "CHANGES.md": {
+    "bytes": 33549,
+    "mode": 420,
+    "sha256": "64d760af9336a1bafda2fce60b8d9b44a395d2ee6bae3cf835837122ba811476"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 56441,
+    "mode": 420,
+    "sha256": "f4a21b3ffc5557b915758db2b20f167be35911f765ba041279444ad41c5ba1d1"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4361,
+    "mode": 420,
+    "sha256": "a07f30a171fba541e28f3f1710223383a1ff7845dcd27b360a5e976f83a02655"
+  },
+  "MEMORY.md": {
+    "bytes": 2321,
+    "mode": 420,
+    "sha256": "35d462a4772e8a8076a71648096876d18fa99236d3a5a07e729e4481a8829efa"
+  },
+  "ROADMAP.md": {
+    "bytes": 472717,
+    "mode": 420,
+    "sha256": "a5aa5415e7cdf713bba7c18f93e115098871c70bd5867a11b32cb64e61b7067f"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 274052,
+    "mode": 420,
+    "sha256": "561f2270e91526fd8d7421bd20845bc15e078ea46c02a62de06e93700b20f4dc"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347827,
+    "mode": 420,
+    "sha256": "a6a06e48810e141ed995b80cadb204524a4800baac26466192636bbe14c5890a"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/commands/review-stdout.gz": {
+    "bytes": 665,
+    "mode": 420,
+    "sha256": "c7564af839b148f612354d6a8fc46a2081b98e95d1ae0de41b281684ead12586"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/parent-review.json": {
+    "bytes": 418,
+    "mode": 420,
+    "sha256": "2a621cf725fbf68447909555a0e023ac9dc6ba13e734d617d561c7cd1916bd22"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/prepare_publication.py": {
+    "bytes": 14987,
+    "mode": 420,
+    "sha256": "bd4e8fa39527c42b201242cd2a1a08b97becac2b0be1054fa1754d3a1dd7f802"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/publication-plan.json": {
+    "bytes": 109,
+    "mode": 420,
+    "sha256": "a2b89b037a7c564d1b37627739f21fd101a8e695b360fa827a35b853a5501b7f"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/publish.py": {
+    "bytes": 15902,
+    "mode": 420,
+    "sha256": "859255f1bf6de73b06fa27482e2f0a44e36dc43150b6502d01dd6962a7679aa4"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/review_publication.py": {
+    "bytes": 3001,
+    "mode": 420,
+    "sha256": "5af4d45aad0933df551ddfa9b3058bbdaaaa7b9aad4aa7c40560f3eec177e4ec"
+  },
+  "docs/checkpoints/task-headroom-staged-2026-11-17/scan.json": {
+    "bytes": 2689,
+    "mode": 420,
+    "sha256": "70be1c9ce297af09bef71c388c58d74090793c8b3835f59084eaa09095c223b2"
+  },
+  "docs/history/task-narrative-epochs/TYPE-REFERENCE-BOOK.1.2.23.4.36.json": {
+    "bytes": 726,
+    "mode": 420,
+    "sha256": "b600d57228671e4fba4f43e22bea78f8afe87718b6369e38d362df63d1c9007e"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 78601,
+    "mode": 420,
+    "sha256": "6d4f134e57a7defc1172ea3db879ec0dc058a301823f42991ec0ec0daac2d8f9"
+  },
+  "docs/tasks/STAGED-LINKED-PARSING.md": {
+    "bytes": 31551,
+    "mode": 420,
+    "sha256": "3dfb8c4d7260de13cf04a32868574b4be5fb87b956a7aae51ec54ae537cf89f0"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20829,
+    "mode": 420,
+    "sha256": "afa22b21dbad33d783ff3d7272954d7480e9b5515a739ecbd6a1075108a96097"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 606252,
+    "mode": 420,
+    "sha256": "05657277e0102f2f6d49d873d2dd5b2a8110e942b7b75936482403ad0135f9f1"
+  }
+}

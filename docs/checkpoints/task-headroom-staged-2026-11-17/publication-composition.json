@@ -1,0 +1,51 @@
+{
+  "template": "docs/checkpoints/perl-literal-open-qualification-2026-11-17/publish.py",
+  "prefix_substitutions": [
+    {
+      "old": "BASE / 'plan.json'",
+      "new": "BASE / 'publication-plan.json'"
+    },
+    {
+      "old": "NEXT = OWNER.rsplit('.', 1)[0] + '.1'",
+      "new": "NEXT = 'TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1'"
+    },
+    {
+      "old": "BOOK = 'docs/linkedspec-book/src/development/documentation-workflow.md'",
+      "new": "TARGET = 'docs/tasks/STAGED-LINKED-PARSING.md'\nMANIFEST = 'docs/history/task-narrative-epochs/' + OWNER + '.json'\nBOOK = 'docs/linkedspec-book/src/development/documentation-workflow.md'"
+    },
+    {
+      "old": "assert result['result'] == 'PASS' and result['current_inputs'] == 189 and result['literal_sites'] == 34",
+      "new": "assert result['result'] == 'PASS' and result['saved_bytes'] == 11972 and result['public_queries'] == 16 and result['current_target_and_manifest'] == 'PASS'"
+    },
+    {
+      "old": "assert len(result['controls']) == 8 and set(result['controls'].values()) == {'RED'}",
+      "new": "assert len(result['controls']) == 10 and all(row['result'] == 'RED' for row in result['controls'].values())"
+    },
+    {
+      "old": "documents = [BOOK,",
+      "new": "documents = [TARGET, MANIFEST, BOOK,"
+    },
+    {
+      "old": "'plan.json', 'inventory.json', 'commands/review-stdout.gz'",
+      "new": "'publication-plan.json', 'scan.json', 'commands/review-stdout.gz', 'parent-review.json'"
+    },
+    {
+      "old": ".linkedspec-data/perl-named-includes-commit.log",
+      "new": ".linkedspec-data/perl-literal-open-commit-retry.log"
+    },
+    {
+      "old": ".linkedspec-data/perl-literal-open-capture.log",
+      "new": ".linkedspec-data/task-headroom-staged-capture.log"
+    },
+    {
+      "old": "('review-outer', '.linkedspec-data/perl-literal-open-review.log')",
+      "new": "('parent-outer', '.linkedspec-data/task-headroom-staged-parent-review.log')"
+    },
+    {
+      "old": "20261117T044555.567744Z",
+      "new": "20261117T053734.081477Z"
+    }
+  ],
+  "actual_publisher_sha256": "859255f1bf6de73b06fa27482e2f0a44e36dc43150b6502d01dd6962a7679aa4",
+  "limits": "Exact template/preparer images before new publisher use; no old writer replay or full outer-first-use/native closure."
+}

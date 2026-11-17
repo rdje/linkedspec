@@ -1,0 +1,13 @@
+[
+  {
+    "claim": "publishing-checker-controls",
+    "input": {
+      "path": "docs/tasks/STAGED-LINKED-PARSING.md",
+      "role": "input",
+      "sha256": "8b831287bc84d1fca9640902d9b224263c8da9026c0572e5b725ac1a8261f1e8"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.2.1.4.1.json",
+    "revision": "e63a20c635ea74981e7476107750fbb1410a1be0"
+  }
+]

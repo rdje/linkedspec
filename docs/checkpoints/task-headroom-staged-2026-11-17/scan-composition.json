@@ -1,0 +1,19 @@
+{
+  "template": "docs/checkpoints/task-headroom-perl-ast-2026-11-17/scan.py",
+  "substitutions": [
+    {
+      "old": "08c39a2dfb4be628af24a445a7fdbb98a82e962f",
+      "new": "873003e8901e2b48fd0a289db2540e94bc4d5039"
+    },
+    {
+      "old": "TYPE-REFERENCE-BOOK.1.2.23.4.35",
+      "new": "TYPE-REFERENCE-BOOK.1.2.23.4.36"
+    },
+    {
+      "old": "names = ['docs/tasks/PERL-ACTIONIR-AST-MIGRATION.md']",
+      "new": "names = ['docs/tasks/STAGED-LINKED-PARSING.md']"
+    }
+  ],
+  "actual_sha256": "8578b74352a36d5594dd93b929d0acf3c5353ff4831545f7015a6176cbb0952b",
+  "limits": "New bounded planner only; old main never replayed. Source images retained before new planner use; full outer-first-use/native/physical closure remains4.2/SESSION5."
+}

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — renew staged closed-task narrative capacity
+
+TYPE-REFERENCE-BOOK.1.2.23.4.36: The existing staged-task epoch preserves15 ordered IDs/all CORE fields, two full unselected bodies and the19108-byte frontier/tail. Thirteen closed pointers reduce current text43523 to31551 bytes, renewing11972 bytes under unchanged limits. All16 public queries/ten corruption controls/current target-manifest identities pass. Parent links35/36 pass three public queries/two controls. No SDK or new runtime/admission credit. Evidence: `docs/checkpoints/task-headroom-staged-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — qualify literal Perl open paths
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0: The bounded literal-open grammar classifies34 of191 open Word sites across145 Perl sources:32 input reads/32 targets and two declared output writes. All157 unmatched open sites remain explicit. Current189 bodies/modes, five independent source specimens and eight evidence controls pass. Actual changed read-to-write source makes the old oracle RED at lexer exit0. No application test, runtime IO or output production is observed. Evidence: `docs/checkpoints/perl-literal-open-qualification-2026-11-17/REVIEW.md`.

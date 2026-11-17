@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "git",
+    "pack-objects",
+    "--revs",
+    "--stdout",
+    "--delta-base-offset",
+    "--no-sparse",
+    "--threads=1",
+    "--window-memory=64m",
+    "--progress"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  },
+  "scope": "Non-thin serialized committed range estimate with explicit no-sparse walking; actual negotiated upload can differ.",
+  "stdin": "revisions.txt"
+}

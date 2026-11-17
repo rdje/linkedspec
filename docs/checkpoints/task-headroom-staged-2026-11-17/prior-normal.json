@@ -1,0 +1,6 @@
+{
+  "source": ".linkedspec-data/perl-literal-open-commit-retry.log",
+  "sha256": "c600b3d2903728fab7683c53eb75b6fe455014f45078a966e8512f70c3b3f637",
+  "mode": 420,
+  "recording": "after-use complete preceding normal and post-pointer PASS"
+}

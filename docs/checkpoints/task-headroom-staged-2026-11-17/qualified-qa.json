@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "recovery": {
+    "controls": {
+      "publication body": "RED",
+      "publication mode": "RED",
+      "publication population": "RED"
+    },
+    "historical_bindings": 216,
+    "limits": "Bounded original publication image and after-use copies only. Full Python/Perl/Git/library/native/outer-first-use/per-read/source-origin/physical/publication closure remains4.2/SESSION5; no LinkedSpec test execution.",
+    "publication_inputs": 19,
+    "result": "PASS"
+  },
+  "log_copies": [
+    {
+      "source": ".linkedspec-data/task-headroom-staged-qualified-publication.log",
+      "target": "docs/checkpoints/task-headroom-staged-2026-11-17/qualified-publication.log.gz",
+      "bytes": 425,
+      "sha256": "6c7ec267b99ba541bead20ae741e128fa159055f0951dfbb96c48be3143ad87f",
+      "recording": "after-use copy"
+    },
+    {
+      "source": ".linkedspec-data/task-headroom-staged-qualified-preparation.log",
+      "target": "docs/checkpoints/task-headroom-staged-2026-11-17/qualified-preparation.log.gz",
+      "bytes": 51,
+      "sha256": "68efa3e160c454feeb7485990606162aa741f384ec4f019070bd6f228447d1e7",
+      "recording": "after-use copy"
+    }
+  ],
+  "producer_identity": "Actual unchanged qualified body matches its pre-use composition SHA; complete after-use body image retained.",
+  "limits": "No after-use image receives first-use credit. Original failed prefix/log/before-images and actual qualified continuation remain separate; full native/outer-first-use/per-read/source-origin/physical closure remains4.2/SESSION5."
+}

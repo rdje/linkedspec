@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "rg",
+    "-n",
+    "-F",
+    "docs/tasks/STAGED-LINKED-PARSING.md",
+    "tools",
+    "scripts",
+    "tests",
+    ".githooks",
+    "doctrine"
+  ],
+  "cwd": "."
+}

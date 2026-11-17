@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — preserve closed staged contracts and parent routing
+
+TYPE-REFERENCE-BOOK.1.2.23.4.36: Independent source planning and actual epoch output agree on13 closed narratives. All CORE fields,15 ordered IDs, two unselected bodies and the complete19108-byte frontier/tail remain exact; all16 original-source public queries and ten effective mutations pass. One prior historical target binding remains unchanged. The current parent field omitted already completed35; links35/36 now match three actual public queries and reject two missing-link controls. Previous literal-open failed/partial and successful normal attempts remain distinct; only the complete retry is reused. No tools, limits, source behavior or original SDK verdicts change. Evidence: `docs/checkpoints/task-headroom-staged-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — keep literal inputs and output declarations distinct
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0: A source Word is first qualified by token context, then by an explicit literal-mode/path grammar. The retained191 open sites partition into34 accepted and157 unmatched; all145 source bodies remain. Thirty-two read targets are captured, while two fixed .linkedspec-data output declarations supply no artifact input or production credit. Variable paths, scalar-backed handles, concatenations and other IO remain follow-ups. Five manual source oracles cover quoting, methods/heredocs, qualified words, scalar references and excluded paths. Actual mode promotion changes classification to two outputs and rejects the old read/write oracle. Complete independent Perl semantics and external/native closure remain3.2/4.2/SESSION5. Evidence: `docs/checkpoints/perl-literal-open-qualification-2026-11-17/REVIEW.md`.

@@ -1,0 +1,12 @@
+{
+  "actual_current_queries": 3,
+  "controls": {
+    ".35": "RED",
+    ".36": "RED"
+  },
+  "current35_and36_links": true,
+  "limits": "Only retained source/current public-query parent links. No runtime/canonical selection or complete tool/library/native/first-use/per-read/source-origin/physical closure;4.2/SESSION5 remain.",
+  "original35_node_present": true,
+  "original35_parent_link": false,
+  "result": "PASS"
+}

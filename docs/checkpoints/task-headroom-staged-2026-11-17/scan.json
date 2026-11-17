@@ -1,0 +1,101 @@
+{
+  "activation": "873003e8901e2b48fd0a289db2540e94bc4d5039",
+  "limits": "Immutable source proposals only; no task mutation, actual capacity renewal, SDK or native/source-origin/physical closure. Production epoch admission and independent preservation still required; full custody remains4.2/SESSION5.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.36",
+  "sources": [
+    {
+      "blob": "7ba1c115b5cd5aa61f95cf234e5cbe6622a47154",
+      "compatible": true,
+      "duplicate_core": [],
+      "ids": 15,
+      "mode": "100644",
+      "path": "docs/tasks/STAGED-LINKED-PARSING.md",
+      "proposed_saved_bytes": 11972,
+      "reason": "qualified source proposal only",
+      "selected": [
+        {
+          "after": 591,
+          "before": 852,
+          "id": "STAGED-LINKED-PARSING.1",
+          "saved": 261
+        },
+        {
+          "after": 555,
+          "before": 1060,
+          "id": "STAGED-LINKED-PARSING.2",
+          "saved": 505
+        },
+        {
+          "after": 607,
+          "before": 1246,
+          "id": "STAGED-LINKED-PARSING.3",
+          "saved": 639
+        },
+        {
+          "after": 619,
+          "before": 1494,
+          "id": "STAGED-LINKED-PARSING.4",
+          "saved": 875
+        },
+        {
+          "after": 734,
+          "before": 1073,
+          "id": "STAGED-LINKED-PARSING.5",
+          "saved": 339
+        },
+        {
+          "after": 780,
+          "before": 1219,
+          "id": "STAGED-LINKED-PARSING.5.1",
+          "saved": 439
+        },
+        {
+          "after": 999,
+          "before": 2375,
+          "id": "STAGED-LINKED-PARSING.5.2",
+          "saved": 1376
+        },
+        {
+          "after": 1176,
+          "before": 2915,
+          "id": "STAGED-LINKED-PARSING.5.3.1",
+          "saved": 1739
+        },
+        {
+          "after": 1215,
+          "before": 3168,
+          "id": "STAGED-LINKED-PARSING.5.3.2",
+          "saved": 1953
+        },
+        {
+          "after": 717,
+          "before": 2033,
+          "id": "STAGED-LINKED-PARSING.5.4",
+          "saved": 1316
+        },
+        {
+          "after": 679,
+          "before": 2243,
+          "id": "STAGED-LINKED-PARSING.5.5",
+          "saved": 1564
+        },
+        {
+          "after": 921,
+          "before": 1879,
+          "id": "STAGED-LINKED-PARSING.5.6",
+          "saved": 958
+        },
+        {
+          "after": 699,
+          "before": 707,
+          "id": "STAGED-LINKED-PARSING.6",
+          "saved": 8
+        }
+      ],
+      "selected_scope_loss": [],
+      "sha256": "8b831287bc84d1fca9640902d9b224263c8da9026c0572e5b725ac1a8261f1e8",
+      "tail_bytes": 19108,
+      "tree": "STAGED-LINKED-PARSING"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "result": "guarded tail ready",
+  "original_documents_unchanged": true,
+  "reused_existing_telemetry": true,
+  "first_prefix_replayed": false,
+  "limits": "Original first prefix/failure and exact images retained. This is a separately named continuation; full native/outer-first-use/per-read/source-origin/physical closure remains4.2/SESSION5."
+}

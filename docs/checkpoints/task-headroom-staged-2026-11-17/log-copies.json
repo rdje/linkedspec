@@ -1,0 +1,26 @@
+[
+  {
+    "source": ".linkedspec-data/perl-literal-open-commit-retry.log",
+    "target": "docs/checkpoints/task-headroom-staged-2026-11-17/preceding-normal.log.gz",
+    "bytes": 15514,
+    "sha256": "c600b3d2903728fab7683c53eb75b6fe455014f45078a966e8512f70c3b3f637",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/task-headroom-staged-capture.log",
+    "target": "docs/checkpoints/task-headroom-staged-2026-11-17/capture-outer.log.gz",
+    "bytes": 1459,
+    "sha256": "3abdf65353f7860d07f2e664c7880fdea1514976d82cf16aeef11ed9252afa2a",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/task-headroom-staged-parent-review.log",
+    "target": "docs/checkpoints/task-headroom-staged-2026-11-17/parent-outer.log.gz",
+    "bytes": 390,
+    "sha256": "3d7290a9c4dae484d92161fb3735c611dc600b9b09cea7467941d1f2d49c4e0d",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  }
+]

@@ -1,0 +1,107 @@
+{
+  "files": {
+    "capture.py": {
+      "template_sha256": "875d3056dfbdad67ab8a17ed3842a56eaa3dd04de30a2ce54b532fd51ba0c5ea",
+      "actual_sha256": "8638a69cb06695afc980554b4fb50f99b7a191f0f8e0f8326e9a19418d644877",
+      "substitutions": [
+        {
+          "old": "08c39a2dfb4be628af24a445a7fdbb98a82e962f",
+          "new": "873003e8901e2b48fd0a289db2540e94bc4d5039",
+          "count": 1
+        },
+        {
+          "old": "TYPE-REFERENCE-BOOK.1.2.23.4.35",
+          "new": "TYPE-REFERENCE-BOOK.1.2.23.4.36",
+          "count": 1
+        },
+        {
+          "old": "PERL-ACTIONIR-AST-MIGRATION",
+          "new": "STAGED-LINKED-PARSING",
+          "count": 1
+        },
+        {
+          "old": "[main 08c39a2df]",
+          "new": "[main 873003e89]",
+          "count": 1
+        },
+        {
+          "old": "PRESSURE = Path('docs/checkpoints/rust-loader-qualification-2026-11-16')",
+          "new": "PRESSURE = Path('docs/checkpoints/perl-literal-open-qualification-2026-11-17')",
+          "count": 1
+        },
+        {
+          "old": "chosen['ids'] == 28 and len(chosen['selected']) == 23 and chosen['proposed_saved_bytes'] == 13074",
+          "new": "chosen['ids'] == 15 and len(chosen['selected']) == 13 and chosen['proposed_saved_bytes'] == 11972",
+          "count": 1
+        },
+        {
+          "old": "    paths = [TARGET,",
+          "new": "    bindings, binding_paths = [], []\n    for record_path in sorted(Path('docs/claims').glob('*.json')):\n        for claim in json.loads(record_path.read_bytes())['claims']:\n            leg = claim['durability']\n            for item in leg.get('inputs', []):\n                if item.get('path') == TARGET:\n                    assert leg.get('mode') == 'historical', 'live target claim requires preservation before migration'\n                    bindings.append(dict(record=str(record_path), claim=claim['name'], input=item, mode=leg['mode'], revision=leg['revision']))\n                    binding_paths.append(str(record_path))\n    (BASE / 'prior-target-bindings.json').write_text(json.dumps(bindings, indent=2, sort_keys=True) + chr(10))\n    paths = [TARGET,",
+          "count": 1
+        },
+        {
+          "old": "    paths += [str(PRESSURE / 'pressure_repair.py')] + [str(path) for path in (PRESSURE / 'pressure').iterdir() if path.is_file()]",
+          "new": "    paths += binding_paths + [str(BASE / 'prior-target-bindings.json')]\n    paths += [str(PRESSURE / name) for name in ('repair_pressure.py', 'review_pressure.py', 'pressure-before.tar.gz', 'pressure-before-identities.json', 'pressure-after.tar.gz', 'pressure-failed-normal.log.gz', 'pressure-repair.json')]\n    paths += [str(path) for path in BASE.glob('*composition*') if path.is_file()]",
+          "count": 1
+        },
+        {
+          "old": ".linkedspec-data/rust-loader-commit.log",
+          "new": ".linkedspec-data/perl-literal-open-commit-retry.log",
+          "count": 1
+        },
+        {
+          "old": "20261117T000920.514071Z",
+          "new": "20261117T053734.081477Z",
+          "count": 1
+        },
+        {
+          "old": "str(PRESSURE / 'pressure_repair.py'), '--review'",
+          "new": "str(PRESSURE / 'review_pressure.py')",
+          "count": 1
+        },
+        {
+          "old": "assert json.loads(old_pressure)['headroom_bytes'] == 227",
+          "new": "assert json.loads(old_pressure)['result'] == 'PASS'",
+          "count": 1
+        }
+      ]
+    },
+    "review.py": {
+      "template_sha256": "9cf330002f5c8ec2cac2c05dee7153c8f78ed928e90d69c0c9e31d4491e321d8",
+      "actual_sha256": "3dce0c87699607a6944fd55804ce5d874ed3dfcd44f3bd04505aea2a36857872",
+      "substitutions": [
+        {
+          "old": "08c39a2dfb4be628af24a445a7fdbb98a82e962f",
+          "new": "873003e8901e2b48fd0a289db2540e94bc4d5039",
+          "count": 2
+        },
+        {
+          "old": "TYPE-REFERENCE-BOOK.1.2.23.4.35",
+          "new": "TYPE-REFERENCE-BOOK.1.2.23.4.36",
+          "count": 1
+        },
+        {
+          "old": "PERL-ACTIONIR-AST-MIGRATION",
+          "new": "STAGED-LINKED-PARSING",
+          "count": 1
+        },
+        {
+          "old": "[main 08c39a2df]",
+          "new": "[main 873003e89]",
+          "count": 1
+        },
+        {
+          "old": "            label = b'  Status: `done`' if kind == 'status' else b'  Goal: '\n            altered = after.replace(label, b'  Status: `pending`' if kind == 'status' else b'  Goal: altered ', 1)",
+          "new": "            key = manifest['selected'][0]\n            label = 'Status' if kind == 'status' else 'Goal'\n            original = fields(split(after)[1][key])[label]\n            replacement = b'  Status: `pending`\\n' if kind == 'status' else b'  Goal: altered\\n'\n            altered = after.replace(original, replacement, 1)",
+          "count": 1
+        },
+        {
+          "old": "    normal = gzip.decompress((BASE / 'prior-normal.log.gz').read_bytes())",
+          "new": "    bindings = json.loads(before_inputs[str(BASE / 'prior-target-bindings.json')][0])\n    for row in bindings:\n        require(row['mode'] == 'historical', 'prior target claim mode')\n        record = json.loads(before_inputs[row['record']][0])\n        claim = next(c for c in record['claims'] if c['name'] == row['claim'])\n        require(claim['durability']['mode'] == row['mode'] and claim['durability']['revision'] == row['revision'] and row['input'] in claim['durability']['inputs'], 'prior target claim preserved')\n    result['prior_historical_target_bindings'] = len(bindings)\n    normal = gzip.decompress((BASE / 'prior-normal.log.gz').read_bytes())",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "limits": "New source-bound capture and reviewer; old writers are never replayed. Actual template and preparer bodies retained before new instrument use. Outer-first-use/native/per-read/physical closure remains4.2/SESSION5."
+}

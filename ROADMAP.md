@@ -1,4 +1,4 @@
-November17 current PNT frontier: Perl literal open0 is focused-checked:34/191 sites,32 input targets/two declared outputs/157 unmatched/current189. Variable literals1/other IO2 and constructed/helper/generated/support roles precede broader reconciliation, generated Dart/frozen-input, registration4.1.2/publication30.2. No runtime or canonical admission.
+November17 current PNT frontier: Existing staged-task epoch36 is focused-checked:15 IDs/13 pointers/two bodies/full tail/11972 text bytes renewed; parent links35/36 repaired. Perl variable literals1/other IO2 and constructed/helper/support/generated roles precede broader reconciliation, generated Dart/frozen-input, registration4.1.2/publication30.2. No runtime admission.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

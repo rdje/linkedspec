@@ -1454,7 +1454,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4`
   Status: `pending`
-  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`, `TYPE-REFERENCE-BOOK.1.2.23.4.29`, `TYPE-REFERENCE-BOOK.1.2.23.4.30`, `TYPE-REFERENCE-BOOK.1.2.23.4.31`, `TYPE-REFERENCE-BOOK.1.2.23.4.32`, `TYPE-REFERENCE-BOOK.1.2.23.4.33`, `TYPE-REFERENCE-BOOK.1.2.23.4.34`; remaining admission leaves split at activation.
+  Children: `TYPE-REFERENCE-BOOK.1.2.23.4.1`, `TYPE-REFERENCE-BOOK.1.2.23.4.2`, `TYPE-REFERENCE-BOOK.1.2.23.4.3`, `TYPE-REFERENCE-BOOK.1.2.23.4.4`, `TYPE-REFERENCE-BOOK.1.2.23.4.5`, `TYPE-REFERENCE-BOOK.1.2.23.4.6`, `TYPE-REFERENCE-BOOK.1.2.23.4.7`, `TYPE-REFERENCE-BOOK.1.2.23.4.8`, `TYPE-REFERENCE-BOOK.1.2.23.4.9`, `TYPE-REFERENCE-BOOK.1.2.23.4.10`, `TYPE-REFERENCE-BOOK.1.2.23.4.11`, `TYPE-REFERENCE-BOOK.1.2.23.4.12`, `TYPE-REFERENCE-BOOK.1.2.23.4.13`, `TYPE-REFERENCE-BOOK.1.2.23.4.14`, `TYPE-REFERENCE-BOOK.1.2.23.4.15`, `TYPE-REFERENCE-BOOK.1.2.23.4.16`, `TYPE-REFERENCE-BOOK.1.2.23.4.17`, `TYPE-REFERENCE-BOOK.1.2.23.4.18`, `TYPE-REFERENCE-BOOK.1.2.23.4.19`, `TYPE-REFERENCE-BOOK.1.2.23.4.20`, `TYPE-REFERENCE-BOOK.1.2.23.4.21`, `TYPE-REFERENCE-BOOK.1.2.23.4.22`, `TYPE-REFERENCE-BOOK.1.2.23.4.23`, `TYPE-REFERENCE-BOOK.1.2.23.4.24`, `TYPE-REFERENCE-BOOK.1.2.23.4.25`, `TYPE-REFERENCE-BOOK.1.2.23.4.26`, `TYPE-REFERENCE-BOOK.1.2.23.4.27`, `TYPE-REFERENCE-BOOK.1.2.23.4.28`, `TYPE-REFERENCE-BOOK.1.2.23.4.29`, `TYPE-REFERENCE-BOOK.1.2.23.4.30`, `TYPE-REFERENCE-BOOK.1.2.23.4.31`, `TYPE-REFERENCE-BOOK.1.2.23.4.32`, `TYPE-REFERENCE-BOOK.1.2.23.4.33`, `TYPE-REFERENCE-BOOK.1.2.23.4.34`, `TYPE-REFERENCE-BOOK.1.2.23.4.35`, `TYPE-REFERENCE-BOOK.1.2.23.4.36`; remaining admission leaves split at activation.
   Count/length prerequisite: Bounded result rollout23.3.3 must land before complete fluent admission; the frozen contract is23.2.2 and bounded implementations23.3.3.1-.5 are targeted-checked; complete context/portable admission remains here.
   Known admission prerequisite: Rust scalar/default and bounded copy-arity implementations are targeted-checked; broad61.3/62.3/.62.4/copy23.3.2.5 remain open. Selected/count result implementations do not establish complete scalar families. Lua declared5.4 runtime/header proof remains LUA-STARTUP-READING.2.2.
   Goal: Independently admit complete fluent families and inter-type chains for the selected scope.
@@ -2167,6 +2167,17 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.34.json`
   Evidence: docs/checkpoints/task-headroom-2026-11-16/REVIEW.md.
   Outcome: Eight closed commentary pointers; original contracts and trailing bytes exact. Full original activation and normal log retained; next is qualification under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1. Native/source-origin closure remains4.2/SESSION5.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.36`
+  Status: `completed`
+  Goal: Renew current task-text capacity using the existing closed-commentary epoch for STAGED-LINKED-PARSING; complete parent links35/36.
+  Acceptance: Preserve every ordered ID/CORE field, complete open/unselected bodies, prefix/frontier/tail and modes. Retain exact source/manifest and prove whole-source/every-ID recovery with effective corruption controls. No scope loss, cap/tool/policy change, SDK or fresh runtime/admission credit.
+  Verification tier: `focused`
+  Focused checks: Independent source plan, before/after body/mode/Git identities, public epoch queries and preservation controls; exact parent links; book/memory/history/scope/normal hooks.
+  Canonical trigger: Final push/shared tool or limit change; existing approved data interface only.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.36.json`
+  Evidence: docs/checkpoints/task-headroom-staged-2026-11-17/REVIEW.md.
+  Outcome: Staged epoch15 IDs/13 pointers/two unchanged bodies/tail19108 exact;43523 to31551/11972 renewed;16 queries/ten controls/current identity PASS. Parent links35/36: three public queries/two REDs; original35 node existed without its parent link. Full proof/limits in Evidence.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.35`
   Status: `completed`

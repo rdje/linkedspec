@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: literal Perl open forms qualified; variable-bound literals and other IO continue.
+PNT: staged closed-task capacity renewed; Perl literal variable IO resumes.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0 — The bounded literal-open grammar classifies34 of191 open Word sites across145 Perl sources:32 input reads/32 targets and two declared output writes. All157 unmatched open sites remain explicit. Current189 bodies/modes, five independent source specimens and eight evidence controls pass. Actual changed read-to-write source makes the old oracle RED at lexer exit0. No application test, runtime IO or output production is observed.
+TYPE-REFERENCE-BOOK.1.2.23.4.36 — The existing staged-task epoch preserves15 ordered IDs/all CORE fields, two full unselected bodies and the19108-byte frontier/tail. Thirteen closed pointers reduce current text43523 to31551 bytes, renewing11972 bytes under unchanged limits. All16 public queries/ten corruption controls/current target-manifest identities pass. Parent links35/36 pass three public queries/two controls. No SDK or new runtime/admission credit.
 
 ## Next Action
 
-Remeasure committed size, then resolve direct literal variable bindings under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1; other literal IO2, constructed/helper and generated/inline roles plus all broader admission/publication prerequisites remain.
+Remeasure committed outgoing size; resume direct literal-variable IO under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1, then other literal IO/helper/support/generated roles and all broader semantic/native/registration/publication prerequisites.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.36 — staged epoch15/13 pointers/two bodies/16 queries/ten controls/11972 text bytes; parent links35/36 repaired.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0 — Perl literal34/input32/output2/unmatched157/current189; five specimens/eight controls/actual mode RED.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0 — Perl named14/suites12/libraries2/child1/current31/eight controls; no execution.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0 — Perl145 PPI roundtrips/current162; lexical groups122/143/84/127/3; four specimens/promoted-source RED/compiler255.
@@ -29,7 +30,6 @@ Remeasure committed size, then resolve direct literal variable bindings under TY
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — native94/source113; conditional6/RED3; ledger7; eleven local Lua routes unresolved, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.34 — helper-purge10 IDs/eight closed/two unchanged/full9605-byte tail/16841 renewed; eleven queries/ten controls; historical pressure/four controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
 
 
 ## History

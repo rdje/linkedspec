@@ -79,6 +79,7 @@
 {"bytes":3528,"lines":74,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-boundary-marker-action-timing.md","sha256":"cc1b932e12c78334ad9c09b12eeb8e17f261710f8f193a287b3b92c77fceb069","type":"member"}
 {"bytes":3563,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/split-marker-cross-backend-semantics.md","sha256":"724833c24f4135ad20f69749c3d5b941819714d578bd8c7fabbeeab4ee67df4e","type":"member"}
 {"bytes":4262,"lines":44,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-ast-enrichment-recurring-gate.md","sha256":"317b1379691b8f783e17c3cf11fa1c62b9cc02d0670e8691aad0a044fc2cdc24","type":"member"}
+{"bytes":2716,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.36","path":"docs/knowledge/staged-closed-task-narrative-headroom.md","sha256":"cc2ff64d476cd43c503dcb37431d25065aab1c5c62f03b854b14181e5820f69c","type":"member"}
 {"bytes":5427,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-consumer-current-projection-lockstep.md","sha256":"c7034874cee3a92d5dbfd598f8b6973a3591c6c32cf444992b14b8448b4d3b80","type":"member"}
 {"bytes":5477,"lines":84,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-linked-parsing-architecture.md","sha256":"961e5cdb6fa30ea6aa8fc5bae978eeebdb12759988455846faca76a4e1bb9898","type":"member"}
 {"bytes":3486,"lines":53,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/staged-parse-job-annotation-contract.md","sha256":"cd524d2b1db839467ed5651898c87c22e9f16ec5e05453d2634b4006a507286a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":4171,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-control-flow-keyword-surface-ground-truth.md","sha256":"d21900db90e1023721e4b8b631bf803011728ef7a867abddf45b26019b100e00","type":"member"}
 {"bytes":2443,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-declaration-helper-compatibility-policy.md","sha256":"65acabb8f6614625dd84aeebd26d3d3947153122b6fd51ff9d1d2dcc30b838da","type":"member"}
 {"bytes":3469,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-declare-retirement-migration.md","sha256":"b00115b5d3178766de0dc5118b14deb50b49da9a35dc58a3a1ca9125e607cf80","type":"member"}
-{"bytes":3036,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-direct-access-bare-path-atoms.md","sha256":"56cf4ef2ea52231dc853ad6c76958a1ba4ec623796ea4155f352da4315ab1354","type":"member"}

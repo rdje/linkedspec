@@ -1,0 +1,6 @@
+{
+  "original_publisher_sha256": "859255f1bf6de73b06fa27482e2f0a44e36dc43150b6502d01dd6962a7679aa4",
+  "actual_qualified_publisher_sha256": "96c7e97b2ace721d8f415285715368ce9ba986a51399c8e71114eebb93ad01bb",
+  "observed_original_exit": 1,
+  "scope": "Reuse only original readonly preamble and exact unperformed summary/document/claim tail. Existing before-images/log copies/telemetry are preserved, never reset. New guards verify every first before-image against current bytes/modes before mutation."
+}

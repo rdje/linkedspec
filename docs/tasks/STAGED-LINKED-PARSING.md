@@ -49,32 +49,16 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Goal: Adopt the staged linked parsing doctrine before implementation.
   Acceptance: Add ADR, task-tree index, mdBook architecture text, Knowledge
     Map fact, live-doc/roadmap/memory updates, and future-leaf split.
-  Verification: **DONE 2026-07-02.** Added ADR `0012`, task-tree index row,
-    roadmap/live-doc/memory entries, mdBook overview/design-rationale/pipeline
-    and backend-handoff updates, and Knowledge Map fact
-    `staged-linked-parsing-architecture`. Checks passed: `mdbook build
-    docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.1 - adopt staged linked parsing doctrine`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.1`.
 
 - ID: `STAGED-LINKED-PARSING.2`
   Status: `done`
   Goal: Design spec-file imports/composition.
   Acceptance: Define import/include semantics, naming, dependency resolution,
     cycle diagnostics, and public syntax before code.
-  Verification: **DONE 2026-07-02.** Added ADR `0013` for the
-    language-neutral import/composition contract: future file-scope
-    `import "path.spec" as alias` and `include "path.spec"` directives,
-    qualified imported references, structured include merges, deterministic
-    resolution, source-aware diagnostics, cycle/collision errors, descriptor
-    fingerprinting, and an explicit not-yet-implemented status. Updated the
-    mdBook, roadmap/live docs, task index, and Knowledge Map. Checks passed:
-    `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.2 - specify spec import composition contract`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.2`.
 
 - ID: `STAGED-LINKED-PARSING.3`
   Status: `done`
@@ -82,20 +66,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Acceptance: Define how a rule/action marks extracted text as a parse job,
     including node kind, parser spec id, top rule, source span, and failure
     policy.
-  Verification: **DONE 2026-07-02.** Added ADR `0014` for the
-    design-only `parse_job(text_expr, options)` annotation contract. The
-    marker produces a stage-N AST value plus neutral sidecar metadata:
-    deterministic job id, parent AST path, node kind, payload kind, exact
-    text, source span/provenance, parser spec id, optional top rule, result
-    policy, and failure policy. Result policies are `replace_marker`,
-    `replace_field`, `sibling_field`, and `append_child`; failure policies are
-    `fail`, `keep_text`, and `diagnostic_node`. Updated the mdBook,
-    roadmap/live docs, task index, and Knowledge Map. Checks passed:
-    `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.3 - specify staged parse-job annotations`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.3`.
 
 - ID: `STAGED-LINKED-PARSING.4`
   Status: `done`
@@ -103,23 +75,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Acceptance: Define deterministic parser lookup/loading, cache keys, version
     boundaries, and how multiple payload kinds in one stage route to different
     next-stage specs.
-  Verification: **DONE 2026-07-02.** Added ADR `0015` for the
-    design-only staged parser registry and dispatch queue contract. The
-    registry exposes neutral `resolve`, `load`, `compile`, and `execute`
-    operations; resolution order covers parent import aliases/composed
-    identities, declaring-spec-relative paths, configured search roots, and
-    registry providers. Cache keys include normalized spec identity, content
-    digest, import/include graph fingerprint, selected top rule, `.spec`
-    language version, helper/action contract version, staged parsing contract
-    version, and backend capabilities. Dispatch uses a stable queue ordered by
-    parent AST path, source span, and job id; active-chain cycles repeat spec
-    identity/top rule/payload digest/source span. Updated the mdBook,
-    roadmap/live docs, task index, and Knowledge Map. Checks passed:
-    `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.4 - specify staged parser registry dispatch`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.4`.
 
 - ID: `STAGED-LINKED-PARSING.5`
   Status: `done`
@@ -128,15 +85,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Acceptance: Pick one self-contained payload family, parse it through a
     staged next-spec path, preserve source provenance, keep the contract 100%
     implementation-language neutral, and prove diagnostics plus parity gates.
-  Verification: **DONE 2026-07-03.** The first prototype payload family is
-    user-function body text. Perl and Rust now consume the spec-defined
-    definition shell AST, preserve exact body payload/source-provenance data,
-    dispatch normalized `body_parse_job` records through the minimal staged
-    registry path, stitch `body_ast`, preserve current user-function runtime
-    behavior, and lock source-provenance diagnostics. General public
-    `parse_job(...)` authoring, import/provider search roots, multiple staged
-    parser families, and recursive queues remain future work.
   Commit: `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5`.
 
 - ID: `STAGED-LINKED-PARSING.5.1`
   Status: `done`
@@ -146,17 +96,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     narrow enough; make backend neutrality a hard acceptance condition for all
     prototype leaves; add/update ADR, task-tree, roadmap, mdBook, live docs,
     memory, and Knowledge Map with no runtime code change.
-  Verification: **DONE 2026-07-02.** Split `.5` into executable leaves
-    `.5.1` through `.5.6`, selected user-function body text as the first
-    staged prototype payload family, added ADR `0016` for the mandatory
-    implementation-language-neutrality rule, added Knowledge Map fact
-    `staged-prototype-function-body-selection`, and synced the mdBook,
-    roadmap/live docs, task index, and memory. No runtime code changed.
-    Checks passed: `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.5.1 - select staged prototype payload family`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.1`.
 
 - ID: `STAGED-LINKED-PARSING.5.2`
   Status: `done`
@@ -168,29 +109,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     matrix that must test the spec rule returning that AST; choose the dedicated
     small spec file/top rule used for focused AST-shape tests; identify the
     minimal next-stage spec/top-rule shape and the exact code seams to touch.
-  Verification: **DONE 2026-07-02.** Read `specs/spec.spec`,
-    `LinkedSpec::UserFunctionRegistry`, Rust parser/compiler/user-function
-    structs, phase0 user-function locks, and Rust user-function parser/runtime
-    tests; ran focused `LinkedSpec::Get` probes for direct-top, wrapper-top,
-    whole-`specs/spec.spec`, named-capture, zero-arg, nested-body, quoted-brace,
-    and regex-brace cases. Findings: (1) a direct top regex rule cannot read
-    its own captures through `entry_group(...)`; the focused harness must use a
-    tiny wrapper top rule that dispatches into a normal `function_definition`
-    rule and collects results in `LX`; (2) the current numbered-capture
-    `specs/spec.spec` rule mis-shapes zero-arg functions because optional
-    captures are compacted, producing `params = "{ ... }"` and `body = null`;
-    (3) the current body regex does not protect regex literals containing `{`
-    or `}`, causing missed or truncated function bodies; (4) the Perl bridge
-    preserves exact inner body text plus byte spans, while Rust trims
-    `body_source` and records line spans only, so staged provenance must be a
-    neutral contract rather than either storage shape. Added ADR `0017`,
-    Knowledge Map fact `function-definition-staged-ast-audit`, mdBook/backend
-    notes, live docs, roadmap, task index, and memory. No runtime code changed.
-    Checks passed: `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1015 green).
   Commit: `STAGED-LINKED-PARSING.5.2 - audit function definition AST shape`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.2`.
 
 - ID: `STAGED-LINKED-PARSING.5.3`
   Status: `active`
@@ -213,34 +133,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     body rules where they make the definition parser easier to read or more
     predictable, while still allowing focused regex rules for local lexical
     tokens.
-  Verification: **DONE 2026-07-02.** Added
-    `specs/user_function_definition.spec` and direct AST-shape tests for
-    zero-arg, whitespace-param, multi-param, multiline, nested-brace,
-    string-brace, regex-brace, direct-shape, assignment, hash-index,
-    adjacent-nested-brace, malformed, and unbalanced-body cases. The new spec
-    uses direct `[...]` / `{ ... }` shapes and receiver/bare-variable forms; it
-    does not use `declare(...)`, `array(...)`, `scalar(...)`, `hash(...)`, or
-    `scalaref(...)`. `LinkedSpec::UserFunctionRegistry` now loads that spec
-    parser, executes it over the source spec, validates the returned AST,
-    post-annotates the source-order parent path, and strips definitions before
-    bootstrap parsing. The previous raw Perl function-definition scanner
-    helpers were removed. Runtime user-function execution remains unchanged
-    after the definition AST is returned and the existing ActionIR body AST is
-    stitched in. The uncommitted Rust raw-parser payload expansion was removed
-    from this slice. A first monolithic-body regex draft was replaced before
-    commit after the focused variation test exposed a runtime hang; the active
-    spec now follows LinkedSpec's existing opener/closer plus linked-body-rule
-    idiom. Generated-handler debug confirmed `body_brace` starts only on `{`
-    and `function_definition[1]` owns the outer `}` close edge; focused tests
-    lock both adjacent nested braces and unbalanced nested-body diagnostics.
-    Checks passed: `perl -Iperl -c perl/LinkedSpec/UserFunctionRegistry.pm`,
-    `perl -Iperl -c t/phase0_regression.t`, direct parser AST probes,
-    generated-handler debug dump, focused descriptor payload probe,
-    `perl -Iperl t/phase0_regression.t` (phase0 1016 green), `mdbook build
-    docs/linkedspec-book`, `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh`.
   Commit: `STAGED-LINKED-PARSING.5.3.1 - consume spec-defined function AST in Perl`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.3.1`.
 
 - ID: `STAGED-LINKED-PARSING.5.3.2`
   Status: `done`
@@ -256,37 +150,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     further grammar simplification is accepted when it improves readability or
     predictability, without treating complex regexes as forbidden when they are
     the cleanest local extractor.
-  Verification: **DONE 2026-07-02.** Rust no longer owns a raw parser for
-    top-level `fn name(params) { body }` shells. The core Rust rule parser
-    rejects leading `fn` source and leaves `SpecFile.functions` empty for
-    rule-only parsing; `linkedspec-runtime::spec_parser` now loads
-    `specs/user_function_definition.spec`, executes it through the Rust
-    runtime, validates the returned neutral `function_definition` /
-    `function_definition_error` AST shape, strips definition spans, and attaches
-    the resulting `FunctionDefinition` records before validation/compile.
-    Rust preserves the returned `body_payload` into `CompiledUserFunction`.
-    Runtime support needed by that spec was locked: PCRE-style named captures
-    and leading inline flag toggles are normalized safely before composed RGX
-    alternations, regex-literal delimiters work in `split`/`split_each`, bare
-    `entry_named(name)` / `match_named(name)` read named capture keys, compact
-    multiline lifecycle fluent chains such as `I.return({ ... })` collect their
-    full argument before lowering, rule-local anonymous capture starts at the
-    child entry end, and self-recursive finalizer edges such as
-    `-> function_definition[1] { return(...) }` execute their block without
-    seeking a later close. Focused Rust tests assert the exact returned AST
-    shape across compact, spaced-param, multiline, nested-brace, string-brace,
-    regex-brace, direct-shape, and malformed variants, plus the minimal
-    edge-only `I.return(...).push(...)` regression. Checks passed:
-    `cargo fmt`; focused Rust tests for `spec_defined_user_function_parser_*`,
-    regex delimiter splitting, inline flag/named-capture normalization,
-    edge-only scanner/child-I-return, `terse_2_3_2_`, named capture helpers,
-    core parser, core user functions, shipped-spec parse/compile, and
-    `cargo test -q -p linkedspec-runtime --test corpus_oracle`. Commit-gate
-    checks also passed: `mdbook build docs/linkedspec-book`,
-    `knowledge-map/scripts/check_knowledge_map.sh`,
-    `scripts/check_memory_architecture.sh`, `scripts/check_doctrines.sh`,
-    `git diff --check`, and `bash tools/run_ci_local.sh` (phase0 1016 green).
   Commit: `STAGED-LINKED-PARSING.5.3.2 - retire Rust raw function parser`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.3.2`.
 
 - ID: `STAGED-LINKED-PARSING.5.4`
   Status: `done`
@@ -295,30 +160,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     with deterministic job id, parser spec identity, top rule, result policy,
     failure policy, and source-aware diagnostics; the observable shape remains
     implementation-language neutral.
-  Verification: **DONE 2026-07-03.** `specs/user_function_definition.spec`
-    now returns `body_parse_job` beside `body_payload` for each
-    `function_definition` AST node. The sidecar is neutral metadata only: it
-    carries `kind = parse_job`, a deterministic job id, parent AST path,
-    `parser_spec_id = actionir-body.spec`, `top_rule = action_block`,
-    `result_policy = replace_field`, `result_field = body_ast`,
-    `failure_policy = fail`, exact body text, source span, and diagnostic
-    owner. The Perl registry and Rust runtime adapter validate the returned
-    sidecar, normalize source-order parent paths and job ids once the function
-    ordinal is known, preserve the sidecar through descriptor / parsed /
-    compiled function state, and continue using the existing ActionIR body AST
-    bridge for execution. No staged parser registry or dispatch queue was
-    implemented in this leaf. Checks passed: `perl -c perl/LinkedSpec.pm`,
-    `perl -c -Iperl t/phase0_regression.t`, direct
-    `specs/user_function_definition.spec` AST probe, Perl descriptor
-    `body_parse_job` probe, `cargo fmt --manifest-path
-    rust/linkedspec-core/Cargo.toml`, `cargo fmt --manifest-path
-    rust/linkedspec-runtime/Cargo.toml`, `RUSTFLAGS=-Awarnings cargo test
-    --manifest-path rust/linkedspec-runtime/Cargo.toml
-    spec_defined_user_function_parser -- --nocapture`,
-    `RUSTFLAGS=-Awarnings cargo test --manifest-path
-    rust/linkedspec-core/Cargo.toml user_function -- --nocapture`, and
-    `prove -v -Iperl t/phase0_regression.t` (phase0 1016 green).
   Commit: `STAGED-LINKED-PARSING.5.4 - add function-body parse-job sidecar`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.4`.
 
 - ID: `STAGED-LINKED-PARSING.5.5`
   Status: `done`
@@ -326,33 +169,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Acceptance: A deterministic registry resolves, loads, compiles, and executes
     the selected function-body parser spec/top rule through a stable queue,
     preserving neutral diagnostics and avoiding backend-specific semantics.
-  Verification: **DONE 2026-07-03.** Added a minimal staged parser registry on
-    Perl and Rust. The first provider resolves the neutral `actionir-body.spec`
-    identity to a built-in provider, loads a fixed adapter contract digest,
-    compiles top rule `action_block`, executes function-body parse jobs in
-    stable parent-path/source-span/job-id order, and stitches the returned
-    `action_block` AST into `body_ast`. Function execution still uses the
-    existing compiled ActionIR body, but parsed/compiled function state now also
-    preserves the dispatched `body_ast`. Focused tests lock queue ordering,
-    cache-key fields, resolve diagnostics, descriptor continuity, Rust parsed
-    and compiled body AST preservation, and existing user-function runtime
-    behavior. Checks passed: `perl -c -Iperl
-    perl/LinkedSpec/StagedParserRegistry.pm`, `perl -c -Iperl
-    perl/LinkedSpec/UserFunctionRegistry.pm`, `perl -c -Iperl
-    t/phase0_regression.t`, `cargo fmt --manifest-path
-    rust/linkedspec-core/Cargo.toml`, `cargo fmt --manifest-path
-    rust/linkedspec-runtime/Cargo.toml`, `RUSTFLAGS=-Awarnings cargo test
-    --manifest-path rust/linkedspec-runtime/Cargo.toml
-    staged_parser_registry_dispatches_function_body_jobs -- --nocapture`,
-    `RUSTFLAGS=-Awarnings cargo test --manifest-path
-    rust/linkedspec-runtime/Cargo.toml spec_defined_user_function_parser --
-    --nocapture`, and `RUSTFLAGS=-Awarnings cargo test --manifest-path
-    rust/linkedspec-core/Cargo.toml user_function -- --nocapture`; `prove -v
-    -Iperl t/phase0_regression.t` (phase0 1017 green); `mdbook build
-    docs/linkedspec-book`; `knowledge-map/scripts/check_knowledge_map.sh`;
-    `scripts/check_memory_architecture.sh`; `scripts/check_doctrines.sh`; `git
-    diff --check`; and `bash tools/run_ci_local.sh`.
   Commit: `STAGED-LINKED-PARSING.5.5 - dispatch function-body parse jobs`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.5`.
 
 - ID: `STAGED-LINKED-PARSING.5.6`
   Status: `done`
@@ -364,24 +182,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
     semantics stay stable, source-provenance diagnostics are locked, public docs
     describe implemented behavior accurately, and Perl/Rust parity plus local
     gates pass.
-  Verification: **DONE 2026-07-03.** Perl phase0 now has
-    `function_body_staged_prototype_end_to_end`, which checks a multi-function
-    descriptor/runtime sample: source-order function registry, normalized
-    `body_payload`/`body_parse_job` parent paths, deterministic job ids over
-    source spans, `actionir-body.spec` / `action_block` parser identity,
-    `replace_field` into `body_ast`, stitched `action_block` body ASTs, stable
-    runtime output, and resolve diagnostics that include phase, parent AST
-    path, source span, and failure policy. Rust integration tests add the same
-    end-to-end proof over parsed `SpecFile.functions`, compiled
-    `CompiledUserFunction` records, runtime output, and dispatch diagnostics.
-    The existing dedicated `specs/user_function_definition.spec` variation
-    tests remain the small-spec AST-shape matrix for zero/multiple params,
-    whitespace, multiline/nested bodies, strings, regex braces, direct shapes,
-    assignments, hash mutations, malformed definitions, and unbalanced bodies.
-    Public mdBook wording now reflects the implemented narrow `body_parse_job`
-    path without presenting general public `parse_job(...)` authoring as
-    shipped.
   Commit: `STAGED-LINKED-PARSING.5.6 - prove function-body staged prototype`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.5.6`.
 
 - ID: `STAGED-LINKED-PARSING.6`
   Status: `done`
@@ -389,11 +191,8 @@ next-stage `.spec` parsers that refine those payloads into deeper AST nodes.
   Acceptance: Mark the tree done, move it from Active to Completed in the central
     index, replace stale PNT routing to already-closed `TOP-RULE-AS-NORMAL.3.2`,
     and update live continuity docs without changing parser/runtime behavior.
-  Verification: **DONE 2026-07-08.** The tree is closed in this file and
-    `docs/TASK_TREE.md`; the prior stale PNT pointer now routes to the active
-    task-tree index. Verification passed: memory/doctrine/task-tree metadata
-    checks and diff checks.
   Commit: `STAGED-LINKED-PARSING.6 - close staged linked parsing tree`
+  Narrative epoch: `TYPE-REFERENCE-BOOK.1.2.23.4.36`; exact accepted source via `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree STAGED-LINKED-PARSING --epoch TYPE-REFERENCE-BOOK.1.2.23.4.36 --id STAGED-LINKED-PARSING.6`.
 
 ## Current Frontier
 
