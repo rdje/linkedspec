@@ -1,0 +1,8 @@
+{
+  "result": "PASS",
+  "segment": "docs/history/development-notes/segment-4923-eb1909ffde2a.md",
+  "source_sha256": "4074a95f10815cc7a0996fae22dbcf1f15ab2e07a40d0c2a99ee1711d04b8b4e",
+  "archived_sha256": "eb1909ffde2a218eabc6ff21e4f38021bd40bb8d308874bd6bf38b59cb4dd88a",
+  "retained_prefix_sha256": "99939382de959cd5a3525506022aeae18c01a43bbc6e41fb5777e29073a26d89",
+  "limits": "Exact current hot suffix/prefix and old immutable member preservation; no new tool/schema/cap or full native/physical custody."
+}

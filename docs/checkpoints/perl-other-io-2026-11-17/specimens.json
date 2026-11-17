@@ -1,0 +1,22 @@
+[
+  {
+    "id": "scalar-versus-path",
+    "source": "open my $out, '>', \\$output or die $!; open my $in, '<:raw', 'tests/input.json' or die $!; open my $fh, '<', $path or die $!;\n",
+    "expected": [["open", "scalar-output-declaration"], ["open", "literal-input-declaration"], ["open", "unresolved-file-input-operand"]]
+  },
+  {
+    "id": "process-and-unsupported",
+    "source": "open(my $child, '-|', @command) or die $!; open my $legacy, $path; open my $fh, $mode, $path;\n",
+    "expected": [["open", "process-pipe-declaration"], ["open", "unqualified-open-arguments"], ["open", "unqualified-open-mode"]]
+  },
+  {
+    "id": "non-open",
+    "source": "opendir(my $dir, $path) or die $!; my @names = readdir $dir; my @files = glob(\"$path/*.json\"); pipe(my $reader,my $writer); my $n = sysread($reader,my $buffer,20); my $text = <$reader>;\n",
+    "expected": [["opendir", "non-open-word-candidate"], ["readdir", "non-open-word-candidate"], ["glob", "non-open-word-candidate"], ["pipe", "non-open-word-candidate"], ["sysread", "non-open-word-candidate"], ["readline-syntax", "readline-syntax-candidate"]]
+  },
+  {
+    "id": "excluded-contexts",
+    "source": "my $expected = q{open my $fh, '<', 'tests/quoted.json'}; # opendir\n$x->open($path); my %x=(open => 1); sub read { return 1 }\n",
+    "expected": [["open", "excluded-member-declaration-or-key"], ["open", "excluded-member-declaration-or-key"], ["read", "excluded-member-declaration-or-key"]]
+  }
+]

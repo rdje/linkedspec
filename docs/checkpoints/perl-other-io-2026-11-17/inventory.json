@@ -1,0 +1,1859 @@
+{
+  "actual_changed_source": "RED at lexer exit0: scalar reference removed",
+  "controls": {
+    "document population": "RED",
+    "open mode": "RED",
+    "open operand": "RED",
+    "site population": "RED",
+    "source role": "RED",
+    "source site": "RED"
+  },
+  "current_inputs": 177,
+  "literal_sites": 34,
+  "non_open": [
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        125,
+        24,
+        24
+      ],
+      "ordinal": 2300,
+      "parent": "t/actionir_legacy_hash_kind_probe.pl",
+      "raw": "<$pipe>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$pipe>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        76,
+        55,
+        55
+      ],
+      "ordinal": 1102,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "raw": "<$legacy_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$legacy_fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        17,
+        31,
+        31
+      ],
+      "ordinal": 169,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "raw": "<$owner_file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$owner_file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        93,
+        40,
+        40
+      ],
+      "ordinal": 1412,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        79,
+        40,
+        40
+      ],
+      "ordinal": 1205,
+      "parent": "t/array_pipeline_callable_arity.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        85,
+        40,
+        40
+      ],
+      "ordinal": 1237,
+      "parent": "t/array_pipeline_callable_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        93,
+        40,
+        40
+      ],
+      "ordinal": 1410,
+      "parent": "t/array_pipeline_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        93,
+        40,
+        40
+      ],
+      "ordinal": 1410,
+      "parent": "t/array_pipeline_source_isolation.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        85,
+        40,
+        40
+      ],
+      "ordinal": 1237,
+      "parent": "t/array_transform_callable_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        19,
+        45,
+        45
+      ],
+      "ordinal": 178,
+      "parent": "t/array_transform_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        19,
+        45,
+        45
+      ],
+      "ordinal": 178,
+      "parent": "t/array_transform_source_isolation.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 115,
+      "parent": "t/boundary_capture_fluent_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        24,
+        5,
+        5
+      ],
+      "ordinal": 163,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$contract_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$contract_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        38,
+        5,
+        5
+      ],
+      "ordinal": 266,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$descriptor_contract_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$descriptor_contract_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        707,
+        62,
+        62
+      ],
+      "ordinal": 6436,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$fixture_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fixture_fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        751,
+        62,
+        62
+      ],
+      "ordinal": 6946,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        907,
+        59,
+        59
+      ],
+      "ordinal": 9028,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        963,
+        62,
+        62
+      ],
+      "ordinal": 9785,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 115,
+      "parent": "t/capture_advance_number_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 115,
+      "parent": "t/capture_advance_text_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        14,
+        23,
+        23
+      ],
+      "ordinal": 114,
+      "parent": "t/capture_boundary_number_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 115,
+      "parent": "t/capture_boundary_text_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        11,
+        31,
+        31
+      ],
+      "ordinal": 86,
+      "parent": "t/capture_endpoint_absence.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 119,
+      "parent": "t/capture_reset_value_block.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        298,
+        41,
+        41
+      ],
+      "ordinal": 3666,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "raw": "<$output_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$output_fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        9,
+        49,
+        49
+      ],
+      "ordinal": 73,
+      "parent": "t/computed_selection_callable_compat.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/constructor_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/contains_block_operand_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/contains_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/contains_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/copied_null_contains_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/copied_null_index_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/copied_null_presence_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        45,
+        45
+      ],
+      "ordinal": 129,
+      "parent": "t/copy_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/count_block_source_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/count_copy_source_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/count_logical_source_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/count_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/cursor_rewind_result.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/cursor_statement_scope.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/definedness_native_numeric_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/definedness_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/definedness_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        64,
+        25,
+        25
+      ],
+      "ordinal": 909,
+      "parent": "t/document_history_catalog.t",
+      "raw": "glob",
+      "role": "non-open-word-candidate",
+      "statement": "my @pages_before = sort glob(\"$directory/catalog/*.jsonl\");",
+      "word": "glob"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        68,
+        17,
+        17
+      ],
+      "ordinal": 971,
+      "parent": "t/document_history_catalog.t",
+      "raw": "glob",
+      "role": "non-open-word-candidate",
+      "statement": "sort glob(\"$directory/catalog/*.jsonl\")",
+      "word": "glob"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        11,
+        31,
+        31
+      ],
+      "ordinal": 86,
+      "parent": "t/emitted_boundary_catalog.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text = <$file>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        27,
+        2,
+        2
+      ],
+      "ordinal": 281,
+      "parent": "t/emitted_rule_progress_guard.t",
+      "raw": "pipe",
+      "role": "non-open-word-candidate",
+      "statement": "pipe(my $reader, my $writer) or die \"pipe: $!\";",
+      "word": "pipe"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        50,
+        14,
+        14
+      ],
+      "ordinal": 560,
+      "parent": "t/emitted_rule_progress_guard.t",
+      "raw": "<$reader>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $bytes = <$reader>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/emptiness_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/emptiness_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        14,
+        13,
+        13
+      ],
+      "ordinal": 108,
+      "parent": "t/entry_match_number_result_continuations.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/free_default_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/free_numeric_comparison_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/free_numeric_comparison_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/free_numeric_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/free_numeric_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/free_string_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/free_string_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/gap_slot_record_selection.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/gap_string_result.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/has_key_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/has_key_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        19,
+        46,
+        46
+      ],
+      "ordinal": 178,
+      "parent": "t/hash_helper_source_isolation.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        19,
+        45,
+        45
+      ],
+      "ordinal": 178,
+      "parent": "t/hash_value_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        45,
+        45
+      ],
+      "ordinal": 129,
+      "parent": "t/hash_view_receiver_source_policy.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        45,
+        45
+      ],
+      "ordinal": 129,
+      "parent": "t/hash_view_result_guard_composition.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/index_block_operand_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/index_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/index_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        13,
+        33,
+        33
+      ],
+      "ordinal": 109,
+      "parent": "t/inline_condition_value_blocks.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 119,
+      "parent": "t/input_mark_value_block_statements.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/key_count_block_source_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/key_count_callable_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/key_count_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/key_count_source_domain.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        34,
+        16,
+        16
+      ],
+      "ordinal": 381,
+      "parent": "t/knowledge_map_header_lists.t",
+      "raw": "sysread",
+      "role": "non-open-word-candidate",
+      "statement": "my $count = sysread($reader, my $buffer, 65536);",
+      "word": "sysread"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        71,
+        43,
+        43
+      ],
+      "ordinal": 902,
+      "parent": "t/knowledge_map_header_lists.t",
+      "raw": "<$old>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$old>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        122,
+        33,
+        33
+      ],
+      "ordinal": 1755,
+      "parent": "t/knowledge_map_header_lists.t",
+      "raw": "<$mapping>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$mapping>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/length_count_source_ownership.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        16,
+        16,
+        16
+      ],
+      "ordinal": 124,
+      "parent": "t/length_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/lexical_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/lexical_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/logical_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/logical_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 121,
+      "parent": "t/mark_name_advance_arguments.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 119,
+      "parent": "t/mark_name_number_arguments.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 121,
+      "parent": "t/mark_name_text_arguments.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 119,
+      "parent": "t/mark_name_write_arguments.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        11,
+        26,
+        26
+      ],
+      "ordinal": 79,
+      "parent": "t/named_capture_endpoint_absence.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text=<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 119,
+      "parent": "t/named_mark_number_results.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        23,
+        23
+      ],
+      "ordinal": 121,
+      "parent": "t/named_take_reversed_span.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        11,
+        26,
+        26
+      ],
+      "ordinal": 79,
+      "parent": "t/named_writer_endpoint_absence.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text=<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        12,
+        26,
+        26
+      ],
+      "ordinal": 86,
+      "parent": "t/nested_handler_error.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text=<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        10,
+        24,
+        24
+      ],
+      "ordinal": 76,
+      "parent": "t/perl_blind_scalar_declarations.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$raw=<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        10,
+        24,
+        24
+      ],
+      "ordinal": 76,
+      "parent": "t/perl_match_local_declarations.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$raw=<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        10,
+        24,
+        24
+      ],
+      "ordinal": 76,
+      "parent": "t/perl_or_match_local_declarations.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$raw=<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/perl_sort_scope.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        45200,
+        5,
+        5
+      ],
+      "ordinal": 365670,
+      "parent": "t/phase0_regression.t",
+      "raw": "pipe",
+      "role": "non-open-word-candidate",
+      "statement": "pipe(my $rd, my $wr) or return ('err', \"pipe: $!\");",
+      "word": "pipe"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        45228,
+        15,
+        15
+      ],
+      "ordinal": 366000,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$rd>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $out = <$rd>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        49149,
+        5,
+        5
+      ],
+      "ordinal": 404674,
+      "parent": "t/phase0_regression.t",
+      "raw": "opendir",
+      "role": "non-open-word-candidate",
+      "statement": "opendir(my $dh, $dir) or die \"Cannot open specs directory '$dir': $!\";",
+      "word": "opendir"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        49150,
+        42,
+        42
+      ],
+      "ordinal": 404708,
+      "parent": "t/phase0_regression.t",
+      "raw": "readdir",
+      "role": "non-open-word-candidate",
+      "statement": "my @specs = sort grep { /\\.spec\\z/ } readdir($dh);",
+      "word": "readdir"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        49230,
+        5,
+        5
+      ],
+      "ordinal": 405302,
+      "parent": "t/phase0_regression.t",
+      "raw": "opendir",
+      "role": "non-open-word-candidate",
+      "statement": "opendir(my $dh, $dir) or die \"Cannot open directory '$dir': $!\";",
+      "word": "opendir"
+    },
+    {
+      "class": "PPI::Token::Word",
+      "location": [
+        49231,
+        47,
+        47
+      ],
+      "ordinal": 405336,
+      "parent": "t/phase0_regression.t",
+      "raw": "readdir",
+      "role": "non-open-word-candidate",
+      "statement": "my @files = sort grep { /\\Q$suffix\\E\\z/ } readdir($dh);",
+      "word": "readdir"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49339,
+        22,
+        22
+      ],
+      "ordinal": 406316,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$out_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$out .= $_ while <$out_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49340,
+        22,
+        22
+      ],
+      "ordinal": 406328,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$err_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$err .= $_ while <$err_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49365,
+        22,
+        22
+      ],
+      "ordinal": 406490,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$out_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$out .= $_ while <$out_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49366,
+        22,
+        22
+      ],
+      "ordinal": 406502,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$err_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$err .= $_ while <$err_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49389,
+        22,
+        22
+      ],
+      "ordinal": 406656,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$out_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$out .= $_ while <$out_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49390,
+        22,
+        22
+      ],
+      "ordinal": 406668,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$err_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$err .= $_ while <$err_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49411,
+        22,
+        22
+      ],
+      "ordinal": 406811,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$out_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$out .= $_ while <$out_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        49412,
+        22,
+        22
+      ],
+      "ordinal": 406823,
+      "parent": "t/phase0_regression.t",
+      "raw": "<$err_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$err .= $_ while <$err_fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        9,
+        27,
+        27
+      ],
+      "ordinal": 72,
+      "parent": "t/pick_keys_operand_isolation.t",
+      "raw": "<$file>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text=<$file>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/push_payload_values.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/push_result_fluent.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/push_result_selection.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/receiver_string_bridge_guards.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/receiver_string_bridge_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        11,
+        24,
+        24
+      ],
+      "ordinal": 79,
+      "parent": "t/referenced_blind_intermediate.t",
+      "raw": "<$f>",
+      "role": "readline-syntax-candidate",
+      "statement": "$raw=<$f>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/rule_call_result_selection.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        26,
+        45,
+        45
+      ],
+      "ordinal": 209,
+      "parent": "t/scalar_numeric_contract.t",
+      "raw": "<$contract_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$contract_fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        55,
+        66,
+        66
+      ],
+      "ordinal": 536,
+      "parent": "t/scalar_numeric_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        25,
+        45,
+        45
+      ],
+      "ordinal": 201,
+      "parent": "t/scalar_text_contract.t",
+      "raw": "<$contract_fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$contract_fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/set_result_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        26,
+        26,
+        26
+      ],
+      "ordinal": 201,
+      "parent": "t/signed_array_selector_perl_contract.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        10,
+        21,
+        21
+      ],
+      "ordinal": 80,
+      "parent": "t/sorted_values_scalar_isolation.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "$text = <$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        15,
+        16,
+        16
+      ],
+      "ordinal": 117,
+      "parent": "t/string_predicate_result_guard_composition.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        27,
+        49,
+        49
+      ],
+      "ordinal": 288,
+      "parent": "t/string_predicate_result_guard_source_fences.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "<$fh>",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        14,
+        17,
+        17
+      ],
+      "ordinal": 102,
+      "parent": "t/unicode_rule_recognition_runtime.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $s=<$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        14,
+        13,
+        13
+      ],
+      "ordinal": 108,
+      "parent": "t/with_hash_result_continuations.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    },
+    {
+      "class": "PPI::Token::QuoteLike::Readline",
+      "location": [
+        17,
+        23,
+        23
+      ],
+      "ordinal": 135,
+      "parent": "t/with_result_selection.t",
+      "raw": "<$fh>",
+      "role": "readline-syntax-candidate",
+      "statement": "my $text = <$fh>;",
+      "word": "readline-syntax"
+    }
+  ],
+  "original_sites": 320,
+  "result": "PASS",
+  "roles": {
+    "literal-input-declaration": 32,
+    "literal-output-declaration": 2,
+    "non-open-word-candidate": 9,
+    "process-pipe-declaration": 1,
+    "readline-syntax-candidate": 121,
+    "scalar-output-declaration": 35,
+    "unresolved-file-input-operand": 96,
+    "unresolved-file-output-operand": 26
+  },
+  "sites": 322,
+  "source_documents": 159,
+  "specimens": 4,
+  "words": {
+    "glob": 2,
+    "open": 192,
+    "opendir": 2,
+    "pipe": 2,
+    "readdir": 2,
+    "readline-syntax": 121,
+    "sysread": 1
+  }
+}

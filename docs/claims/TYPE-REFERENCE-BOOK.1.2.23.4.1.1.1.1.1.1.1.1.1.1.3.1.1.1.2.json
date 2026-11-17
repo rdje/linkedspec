@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2",
+  "claims": [
+    {
+      "name": "remaining-perl-io-source-forms",
+      "statement": "159 retained sources/322 IO sites round-trip under PPI1.270; all320 original sites and34 earlier literal sites reconcile. Open forms:32 literal reads/two literal writes/35 scalar-output declarations/one process pipe/96 unresolved read operands/26 unresolved write operands. Non-open:121 readline syntax sites and nine Word candidates. Four independent specimens, actual scalar-reference removal RED and six evidence controls pass; current177 inputs agree. No application execution.",
+      "scope": "Only bounded lexical IO vocabulary across159 retained original/named sources. Shape roles and unresolved populations do not prove callee, handle origin, alias, phase, reachability, complete graph or runtime execution.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-other-io-2026-11-17/review.py --current",
+        "granularity": "Every159 source and322 source sites; original320 identities, earlier34 literal sites, open roles and130 explicit non-open candidates.",
+        "result": "{\"actual_changed_source\": \"RED at lexer exit0: scalar reference removed\", \"controls\": {\"document population\": \"RED\", \"open mode\": \"RED\", \"open operand\": \"RED\", \"site population\": \"RED\", \"source role\": \"RED\", \"source site\": \"RED\"}, \"current_inputs\": 177, \"literal_sites\": 34, \"original_sites\": 320, \"result\": \"PASS\", \"roles\": {\"literal-input-declaration\": 32, \"literal-output-declaration\": 2, \"non-open-word-candidate\": 9, \"process-pipe-declaration\": 1, \"readline-syntax-candidate\": 121, \"scalar-output-declaration\": 35, \"unresolved-file-input-operand\": 96, \"unresolved-file-output-operand\": 26}, \"sites\": 322, \"source_documents\": 159, \"specimens\": 4, \"words\": {\"glob\": 2, \"open\": 192, \"opendir\": 2, \"pipe\": 2, \"readdir\": 2, \"readline-syntax\": 121, \"sysread\": 1}}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2",
+        "reason": "Four independent source specimens, actual scalar-reference removal RED and six reason-sensitive evidence mutations qualify source shape only. Full independent Perl/callee/alias/scope/phase/interpolation and helper/library semantics remain broader3.2."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Project source/instrument bytes and modes recover through frozen new inputs and hash-gated immutable original/named references; actual source requests are exactly reconstructible and hash-bound to recorded commands/channels. Selected outgoing telemetry copied after use. External PPI/Perl/library/native/OS, outer-first-use/per-read/source-origin/physical and raw-pack closure remain4.2/SESSION5; no application/runtime/canonical admission."
+      }
+    },
+    {
+      "name": "other-io-source-controls",
+      "statement": "Four source specimens pass; removing the scalar reference produces the distinguishing source-role RED at lexer exit0; six evidence corruptions reject.",
+      "scope": "Retained bounded source grammar and explicit evidence validators only.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-other-io-2026-11-17/review.py --current",
+        "granularity": "Each independent specimen expectation and actual changed-source request/output plus six separate evidence victims.",
+        "result": "{\"controls\": {\"document population\": \"RED\", \"open mode\": \"RED\", \"open operand\": \"RED\", \"site population\": \"RED\", \"source role\": \"RED\", \"source site\": \"RED\"}, \"red\": \"RED at lexer exit0: scalar reference removed\", \"specimens\": 4}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "A scalar capture and a variable file operand could receive the same role, or omitted/altered sites and roles could pass recovery.",
+        "oracle": "Independent source expectations; actual removal of the reference operator; original320 and literal34 ledgers.",
+        "red_control": "Removing the reference operator changes the role and rejects the old oracle at lexer exit0. Six document/site/source/role/mode/operand alterations reject their exact expected assertion."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Project source/instrument bytes and modes recover through frozen new inputs and hash-gated immutable original/named references; actual source requests are exactly reconstructible and hash-bound to recorded commands/channels. Selected outgoing telemetry copied after use. External PPI/Perl/library/native/OS, outer-first-use/per-read/source-origin/physical and raw-pack closure remain4.2/SESSION5; no application/runtime/canonical admission."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,497,568,747 non-thin bytes against cached4683555e, leaving2,431,253 before the director1.5GB trigger.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Committed activation/cached-origin serialized pack; selected source/ref/config/command/channels retained after use.",
+        "result": "{\"ahead\": 130, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.497568747, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1497568747, \"evidence\": \".linkedspec-data/push-monitor/20261117T090500.166985Z\", \"gib\": 1.3947195811197162, \"head\": \"3442fcd34318043d67e8523a2db2fd84b44148b6\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 49672, \"pack_footer\": \"cae5923d437fd43437c1cd8ea66138ee27edba02\", \"pack_sha256\": \"88fe17840d06ffd1d7606404905decfab3c11e5c41f64309c7b9937fb275c0b6\", \"packed_objects\": 49672, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 2431253, \"trigger_reached\": false, \"unique_object_ids\": 49672}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Stream/stat/footer agree; full independent actual-file falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Project source/instrument bytes and modes recover through frozen new inputs and hash-gated immutable original/named references; actual source requests are exactly reconstructible and hash-bound to recorded commands/channels. Selected outgoing telemetry copied after use. External PPI/Perl/library/native/OS, outer-first-use/per-read/source-origin/physical and raw-pack closure remain4.2/SESSION5; no application/runtime/canonical admission."
+      }
+    }
+  ]
+}

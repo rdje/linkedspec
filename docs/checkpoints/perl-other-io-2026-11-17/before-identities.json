@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/perl-other-io-2026-11-17/capture.py": {
+    "bytes": 4132,
+    "mode": 420,
+    "sha256": "143c99aa2126d11a7c2ac2a9f7fd71b4ad934c34a18398d7bba131611a3f951c"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/lexer.pl": {
+    "bytes": 4803,
+    "mode": 420,
+    "sha256": "2f27591b1660b1f66eb5645f11836d8878dfbe1be6fc0dbe8adf04412c68b2dc"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/references.json": {
+    "bytes": 1983,
+    "mode": 420,
+    "sha256": "71edb1d5dd7311a76a56c0e665f83080b24bc74d8baf9442d6116f9320f554ac"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/review.py": {
+    "bytes": 9746,
+    "mode": 420,
+    "sha256": "c632999c4667f8844248563467dffd961022a50987f3cf8afb44265c66f780fc"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/specimens.json": {
+    "bytes": 1462,
+    "mode": 420,
+    "sha256": "bf885802e160496a26ba1277cedd59ebd0266c4ac6d41fd9a13656f75622239a"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

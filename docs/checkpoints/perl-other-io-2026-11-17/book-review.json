@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "command": "bash tools/run_mdbook_local.sh",
+  "observed_build_exit": 0,
+  "paragraph_sha256": "da74c8cb179489852944bb35b39d965e3c14158bc0c05d1b1a331e674f3a50df",
+  "limits": "Actual rendered paragraph and after-use combined build log; no full native/physical or outer-first-use claim."
+}

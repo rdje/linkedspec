@@ -1,0 +1,97 @@
+{
+  "CHANGES.md": {
+    "bytes": 34755,
+    "mode": 420,
+    "sha256": "b5b4e0d818357be0dfb61e4e0f8f2058bce9f26cf18c71257a37cb7f5ddad282"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 58220,
+    "mode": 420,
+    "sha256": "a316162ab98623caa412ecec6890475cd6d65aa68e13a8589f0138645d4c1a44"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4310,
+    "mode": 420,
+    "sha256": "c1bf85db8d71efb0e01109cafc7a8bd8a2195777f7acd5e7f2c70332cd95904f"
+  },
+  "MEMORY.md": {
+    "bytes": 2317,
+    "mode": 420,
+    "sha256": "ad805befbf3de4cf923c29167a72d5ef04d28ef705b522fdd50d5ab2fed158bf"
+  },
+  "ROADMAP.md": {
+    "bytes": 472714,
+    "mode": 420,
+    "sha256": "3d75671d184e6025e5e5a436411e07172aa8ab45f7f58730bfe05f2e9e4fc61d"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 274049,
+    "mode": 420,
+    "sha256": "a706551f586aa427c1e179147ea5d9a95f490d9137995e34d783dc2331b6de9b"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347819,
+    "mode": 420,
+    "sha256": "55d13d356621b10fe6c9ea101669a6cab135207c9b38775a5dbb9df7b0919d7d"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/before-identities.json": {
+    "bytes": 1392,
+    "mode": 420,
+    "sha256": "ba126da5f4774c2d6f33faca371eba9898401cdd4600fb584f4167a358ca5ff3"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/capture.py": {
+    "bytes": 4132,
+    "mode": 420,
+    "sha256": "143c99aa2126d11a7c2ac2a9f7fd71b4ad934c34a18398d7bba131611a3f951c"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/inventory.json": {
+    "bytes": 44951,
+    "mode": 420,
+    "sha256": "0e3429ca6cf9b97c7bab18bc6532d768a275a7d1674ea4ba06a959472590f999"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/lexer.pl": {
+    "bytes": 4803,
+    "mode": 420,
+    "sha256": "2f27591b1660b1f66eb5645f11836d8878dfbe1be6fc0dbe8adf04412c68b2dc"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/publication-bindings.json": {
+    "bytes": 89504,
+    "mode": 420,
+    "sha256": "98a66ada80d119e8e0f3d78e944318f259ba406cddf9d53e53396fe43e1bd7ea"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/publish.py": {
+    "bytes": 15468,
+    "mode": 420,
+    "sha256": "4dddb9293b37f58d0aa56d16d95da2e5b9dbc10e45defb183bc3203e5babc69a"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/references.json": {
+    "bytes": 1983,
+    "mode": 420,
+    "sha256": "71edb1d5dd7311a76a56c0e665f83080b24bc74d8baf9442d6116f9320f554ac"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/review.py": {
+    "bytes": 9746,
+    "mode": 420,
+    "sha256": "c632999c4667f8844248563467dffd961022a50987f3cf8afb44265c66f780fc"
+  },
+  "docs/checkpoints/perl-other-io-2026-11-17/specimens.json": {
+    "bytes": 1462,
+    "mode": 420,
+    "sha256": "bf885802e160496a26ba1277cedd59ebd0266c4ac6d41fd9a13656f75622239a"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 79795,
+    "mode": 420,
+    "sha256": "0634c3dc588ce14f827e48d76a327933b2e432207cbf59e070102c7f3206e93e"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20929,
+    "mode": 420,
+    "sha256": "c421992590507f6b5f1668e9cc1921038015c0077fec5e4d04ea9ec4ef441f4a"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 608619,
+    "mode": 420,
+    "sha256": "4fbb3c9a124da5ee6a7fc86d7aa7c7e0d56476ed9fba03129d96ad3ff648b4e5"
+  }
+}

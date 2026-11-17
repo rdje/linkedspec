@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "PERL5OPT=",
+    "perl",
+    "docs/checkpoints/perl-other-io-2026-11-17/lexer.pl"
+  ],
+  "cwd": ".",
+  "stdin_bytes": 298,
+  "stdin_sha256": "5caf936b86f76e779591c407058763b3ea3a51e53facc72c649cd545ccd02bb3"
+}

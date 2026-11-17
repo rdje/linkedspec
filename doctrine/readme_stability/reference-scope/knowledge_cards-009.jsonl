@@ -29,6 +29,7 @@
 {"bytes":3838,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/perl-open-arity-concat-result-guards.md","sha256":"6ef3458baebb05abe62de6c8ea2ae25444d60cd1077de79ceaafbe62d1f2b4fc","type":"member"}
 {"bytes":1939,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-ordered-zero-width-continuation.md","sha256":"abb5207b282c998375cbba1e8f85650cfb6e7c5d1903bd1f4ebdc5bfd6e3b4aa","type":"member"}
 {"bytes":5264,"lines":72,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-original-event-input-grants.md","sha256":"bfc866945dbbc82b8fda1e7b37d62598ccd20c8d490c9e1a12d62b0f555426ce","type":"member"}
+{"bytes":2507,"lines":39,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2","path":"docs/knowledge/perl-other-io-source-forms.md","sha256":"b11a820629b1a9db8a5748acd51669c7d3fad084aee52d3a2d1867b6c4b82400","type":"member"}
 {"bytes":2713,"lines":27,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-outward-descriptor-model-tag-drift.md","sha256":"449c33deb17e874f8b6bae6635f93f51f5616a0cd803e43a72558146c513ca62","type":"member"}
 {"bytes":2732,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.80.1","path":"docs/knowledge/perl-owner-dispatch-runtime-paths.md","sha256":"1a853d04dda7e57626a8b38304a105c82862e709dc281f6ff25b36ea397c236c","type":"member"}
 {"bytes":3111,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-pick-keys-conditional-local-reuse.md","sha256":"9dfac9fbab66bd2c37e72681619288c5c1eec5b327a697284e0414d6bac9654b","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5728,"lines":69,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-uniform-binding-runtime.md","sha256":"c9dd64a353925b8362f02a2a103a554ba54c291f19801df2d8bfbdd4252cd950","type":"member"}
 {"bytes":5057,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-user-function-caller-shadowing.md","sha256":"122ce9aede690546f1bce499f32adcb3ab9e8cd87159aa667237cd398f1be6bf","type":"member"}
 {"bytes":3366,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-validation-diagnostic-source-drift.md","sha256":"2312b25002947fb7448e15664297ec92b37d272b44f1cbf1d67f60262fa6de18","type":"member"}
-{"bytes":2763,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-variadic-user-functions.md","sha256":"0fc45642937bb9596b2d9a54cec7a3dd4ef41a005dfda486096a411726e38341","type":"member"}

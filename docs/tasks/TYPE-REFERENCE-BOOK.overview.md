@@ -2134,14 +2134,25 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: Sources159/open192/binding1/unmatched191/current190; six specimens/actual intervening-write RED/seven controls PASS. Historical comparison baseline and original source-selection2 retained; no runtime verdict. Other forms remain pending.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Reconcile other literal/non-open IO.
   Acceptance: Parent scope; support/dynamic/library follow-ups.
+  Activation: Clean3442fcd34318043d67e8523a2db2fd84b44148b6. Reuse immutable159-source images by hash/mode. Qualify remaining open operand shapes and non-open IO source sites; preserve all unresolved handle/constructed/helper/library/process/generated semantics with existing owners. No application execution or complete IO/native admission.
+  Verification tier: `focused`
+  Focused checks: Retained PPI source requests/observations; independent controlled source expectations and actual changed-source RED; original site reconciliation, current source identities and evidence corruption controls; book, memory, histories and normal hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared runner, test, runtime, toolchain or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2.json`
+  Evidence: docs/checkpoints/perl-other-io-2026-11-17/REVIEW.md.
+  Outcome: Sources159/sites322/original320/literal34/scalar-output35/process1/unresolved-file122/non-open130/current177; four specimens/reference-removal RED/six controls PASS. No new literal input target or runtime verdict. All unresolved sites remain explicit; parent closure is not claimed.
+  Instrument correction: First capture stops before lexer/input freeze on an incorrect expected artifact path. Original source/error retained in failed-first/. Corrected lookup uses the existing literal inventory; successful capture and separate readonly review follow.
+  Landing correction: First normal attempt rejects the omitted maintained-reference refresh. Preserve complete failed-normal.log.gz and landing-before.tar.gz; its remaining claim check was stopped after the known rejection, so it earns no complete hook credit. Existing update_reference_scope.py refreshes this leaf's store before a full normal retry; no checker, limit or authority changes.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2`
   Status: `pending`
   Goal: Resolve constructed/helper-based direct paths and reconcile this edge-expansion lane.
   Acceptance: Parent contract across all145, including custom library/helper loaders beyond the bounded initial vocabulary. Preserve unresolved semantic/native origins and coordinate generated/inline roles with sibling2.
+
+  Continuation: Include all122 unresolved file operands, nonadjacent literal declarations, the process pipe and130 non-open sites from other-io2. Retain all159 sources; library/custom-helper/generated/alias/phase semantics remain explicit rather than treating this bounded lexical reconciliation as closure.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.2`
   Status: `pending`

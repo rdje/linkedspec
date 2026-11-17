@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — reconcile remaining Perl IO source forms
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2: 159 retained sources/322 IO sites round-trip under PPI1.270; all320 original sites and34 earlier literal sites reconcile. Open forms:32 literal reads/two literal writes/35 scalar-output declarations/one process pipe/96 unresolved read operands/26 unresolved write operands. Non-open:121 readline syntax sites and nine Word candidates. Four independent specimens, actual scalar-reference removal RED and six evidence controls pass; current177 inputs agree. No application execution. Evidence: `docs/checkpoints/perl-other-io-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — qualify adjacent Perl literal-variable inputs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1: All159 original/named Perl sources round-trip under PPI1.270:192 open sites, one bounded adjacent literal-variable read and191 unmatched sites. The read supplies the historical scalar-copy comparison baseline, never a new runtime verdict. Current190 input bodies/modes, six independent source specimens, actual intervening-write RED and seven evidence controls pass. No application source executes. Evidence: `docs/checkpoints/perl-variable-literal-qualification-2026-11-17/REVIEW.md`.
