@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0",
+  "claims": [
+    {
+      "name": "bounded-lua-named-route-absence",
+      "statement": "Eleven candidates have zero named local-driver/shared-runner routes and zero literal basename references in1107 regular blobs under the six named project subtrees.",
+      "scope": "Eleven candidates against exact local-driver command blocks, shared-runner dofile vocabulary and scoped literal-reference census. No complete computed/transitive graph, SDK/body execution, actual package/native resolution, registration repair or canonical admission. Literal census excludes nonregular Git boundaries and other roots; no complete computed reachability or intentional-exclusion decision.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-transitive-selection-2026-11-17/review_epoch_qualified.py --current",
+        "granularity": "Each eleven candidate, each named operand/shared dofile site and every regular activation Git blob in the six exact subtrees.",
+        "result": "{\"candidates\": [{\"candidate\": \"lua/test/blind_postcall_results_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/blind_repetition_collection_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/default_blind_generated_family_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/gap_ls_selected_cursor_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/minimum_miss_routes_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/null_return_and_observation_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/raw_error_observation_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/recognition_repetition_progress_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/repeated_and_group_results_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/runtime_unknown_helper_diagnostic_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}, {\"candidate\": \"lua/test/sparse_and_structural_sequence_test.lua\", \"direct_primary\": 0, \"direct_secondary\": 0, \"qualification\": \"Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.\", \"references\": [], \"shared_runner\": false}], \"census\": {\"blobs\": 1107, \"limits\": \"Exact literal basenames in six named root-owned Git subtrees only; no computed names, documentation-generated callers, other roots or actual execution inference. Source bytes are retained in activation Git; selected matching/context bodies are separately archived. Native/per-read/source-origin/physical closure remains4.2/SESSION5.\", \"matching_files\": []}, \"current_inputs\": 23, \"direct_commands\": 44, \"inherited_named\": 16, \"limits\": \"Eleven candidates against exact local-driver command blocks, shared-runner dofile vocabulary and scoped literal-reference census. No complete computed/transitive graph, SDK/body execution, actual package/native resolution, registration repair or canonical admission.\", \"probes\": {\"cases\": 4, \"commands_per_healthy\": 44, \"healthy\": 2, \"limits\": \"Configured secondary test-command block observed in isolation, not proof that its command-v guard passed on a real host.\", \"observed_red\": 2}, \"reader_epoch\": {\"after_use_inputs\": 9, \"controls\": {\"always-empty-locator\": \"RED\", \"changed-command-population-guard\": \"RED\", \"changed-scan\": \"RED\"}, \"missing\": \"The used expanded reader was not captured before that probe import. First failed setup channels were shown by the tool but not retained as original raw files; outer probe-producer exit was not separately recorded. Do not assign retroactive first-use custody or a separately observed outer producer exit. Actual four Bash child exits/inputs/channels survive.\", \"repair_owner\": \"TYPE-REFERENCE-BOOK.1.2.23.4.2\", \"unchanged_helpers\": [\"blocks\", \"command_paths\", \"image\", \"lua_calls\", \"recover\", \"scan\", \"verify_census\"]}, \"result\": \"PASS\", \"retained_inputs\": 23, \"shared_dofile_calls\": 83, \"shared_dynamic_dofile\": []}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An always-empty or disabled literal locator could explain the zero result.",
+        "oracle": "Independent Python byte census agrees with actual Git fixed-string grep; a known selected concat candidate yields lua/test/run.lua through the same actual Git locator.",
+        "red_control": "The positive actual lookup succeeds; a forced-empty locator fails that known selected-source oracle. Candidate identities remain the earlier independent eleven-route population."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Activation Git retains1107 scoped logical source blobs;19 context sources/four original instruments, actual four Bash inputs/channels/exits and the expanded used reader are retained. That expanded reader was captured only after probe import; first failed setup raw channels and separate outer producer exit were not retained. Qualified reader retains seven identical shared helpers and actual observations without retroactive custody credit. Complete Python/Git/Bash/OS/native/outer-first-use/per-read/source-origin/physical/publication closure remains4.2/SESSION5."
+      }
+    },
+    {
+      "name": "actual-isolated-lua-command-selection",
+      "statement": "Two isolated inert Bash command blocks record44 operands each. Actual missing-runner and duplicate-runner variants both exit0 but fail the ordered operand oracle.",
+      "scope": "Only frozen local-driver primary and configured secondary command blocks; no startup/build/syntax loop/SDK/test execution or actual command-v guard result.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-transitive-selection-2026-11-17/review_epoch_qualified.py --current",
+        "granularity": "Each actual Bash stdin/argv/cwd/exit/stdout/stderr and ordered operand, compared with the separate shell-word source interpreter.",
+        "result": "{\"cases\": 4, \"commands_per_healthy\": 44, \"healthy\": 2, \"limits\": \"Configured secondary test-command block observed in isolation, not proof that its command-v guard passed on a real host.\", \"observed_red\": 2}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Successful shell exit alone could establish complete exact operand selection.",
+        "oracle": "Independent ordered shell-word interpretation of the frozen source block versus actual Bash recorder output.",
+        "red_control": "Removing or duplicating the selected run.lua command changes the actual recorded population and rejects despite exit0; both healthy blocks agree."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Activation Git retains1107 scoped logical source blobs;19 context sources/four original instruments, actual four Bash inputs/channels/exits and the expanded used reader are retained. That expanded reader was captured only after probe import; first failed setup raw channels and separate outer producer exit were not retained. Qualified reader retains seven identical shared helpers and actual observations without retroactive custody credit. Complete Python/Git/Bash/OS/native/outer-first-use/per-read/source-origin/physical/publication closure remains4.2/SESSION5."
+      }
+    },
+    {
+      "name": "actual-reader-epoch-qualification",
+      "statement": "Seven shared helpers, including all helpers used by the probe producer, are byte-identical between the frozen original and actual expanded reader. The expanded body and failed support artifacts survive; missing before-use custody remains explicit.",
+      "scope": "Only common helper bytes/module bindings, actual saved Bash records and three reader controls; no complete original first-use or native/outer-producer custody.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/lua-transitive-selection-2026-11-17/review_epoch_qualified.py --current",
+        "granularity": "Both full reader bodies, original shared-function source segments, exact three-edit derivation and original raw Bash observations.",
+        "result": "{\"after_use_inputs\": 9, \"controls\": {\"always-empty-locator\": \"RED\", \"changed-command-population-guard\": \"RED\", \"changed-scan\": \"RED\"}, \"missing\": \"The used expanded reader was not captured before that probe import. First failed setup channels were shown by the tool but not retained as original raw files; outer probe-producer exit was not separately recorded. Do not assign retroactive first-use custody or a separately observed outer producer exit. Actual four Bash child exits/inputs/channels survive.\", \"repair_owner\": \"TYPE-REFERENCE-BOOK.1.2.23.4.2\", \"unchanged_helpers\": [\"blocks\", \"command_paths\", \"image\", \"lua_calls\", \"recover\", \"scan\", \"verify_census\"]}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The after-capture edit could silently change a helper used to select operands.",
+        "oracle": "Independent frozen original function bodies compared byte-for-byte with AST-bounded functions in the actual used body.",
+        "red_control": "Changed scan body and changed command-population guard reject at the exact scan helper; the unmodified seven helpers agree. The always-empty locator control separately rejects."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Activation Git retains1107 scoped logical source blobs;19 context sources/four original instruments, actual four Bash inputs/channels/exits and the expanded used reader are retained. That expanded reader was captured only after probe import; first failed setup raw channels and separate outer producer exit were not retained. Qualified reader retains seven identical shared helpers and actual observations without retroactive custody credit. Complete Python/Git/Bash/OS/native/outer-first-use/per-read/source-origin/physical/publication closure remains4.2/SESSION5."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,484,126,518 non-thin bytes against cached4683555e;15,873,482 bytes below director1.5GB.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin range, selected producer/ref/config/command metadata copied after use.",
+        "result": "{\"ahead\": 124, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.484126518, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1484126518, \"evidence\": \".linkedspec-data/push-monitor/20261117T014942.580797Z\", \"gib\": 1.3822005297988653, \"head\": \"7553dbde0a380fc94d1f150899a91dfd448d74ae\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 48999, \"pack_footer\": \"91689269729c7732322b20d3b5ef80b7db67f0c9\", \"pack_sha256\": \"851b18de3ceaf483ceb5378b44d21d14d4f004ceba9d68c115768920e61ff5f5\", \"packed_objects\": 48999, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 15873482, \"trigger_reached\": false, \"unique_object_ids\": 48999}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Producer stream/stat/footer agree; independent actual-file size falsification stays30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected telemetry retained; raw pack/full object tables ignored on this volume. Native/physical/complete input closure remains4.2/SESSION5; no fresh remote/wire/future guarantee."
+      }
+    }
+  ]
+}

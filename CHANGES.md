@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — qualify bounded Lua named selection
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0: Eleven Lua candidates have no direct configured-driver/shared-runner operands or literal basename references in1107 regular Git blobs under six named project subtrees. Two isolated inert Bash blocks select44 operands each; missing/duplicate runner controls are RED at exit0. Shared source has83 literal dofile calls, no dynamic dofile sites and all16 earlier named candidates. Current23, positive locator and qualified reader proof pass; seven shared helper bodies are unchanged. Actual expanded-reader first-use capture is missing and remains disclosed under4.2; no SDK or complete transitive/admission claim. Evidence: `docs/checkpoints/lua-transitive-selection-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — qualify generated Rust loader inputs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2: Generated Rust source qualification resolves320 bindings/319 targets: manifest plus315 corpus files, three Count macros/two fixtures and one embedded grammar. Three parent tests/two emitted test templates/three Cargo command templates/eleven filesystem sites, 17 Count rows/two trace selectors,442 current inputs/321 historical identities/twelve controls pass. Original duplicate-method refusal remains exact; no Cargo/SDK or admission. Evidence: `docs/checkpoints/rust-generated-loader-qualification-2026-11-17/REVIEW.md`.

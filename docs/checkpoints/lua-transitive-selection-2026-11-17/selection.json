@@ -1,0 +1,542 @@
+{
+  "candidates": [
+    {
+      "candidate": "lua/test/blind_postcall_results_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/blind_repetition_collection_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/default_blind_generated_family_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/gap_ls_selected_cursor_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/minimum_miss_routes_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/null_return_and_observation_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/raw_error_observation_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/recognition_repetition_progress_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/repeated_and_group_results_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/runtime_unknown_helper_diagnostic_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    },
+    {
+      "candidate": "lua/test/sparse_and_structural_sequence_test.lua",
+      "direct_primary": 0,
+      "direct_secondary": 0,
+      "qualification": "Named local-driver and shared-runner selection only; other textual mentions retain exact context without execution credit. Computed/transitive routes remain separately unresolved.",
+      "references": [],
+      "shared_runner": false
+    }
+  ],
+  "limits": "Eleven candidates against exact local-driver command blocks, shared-runner dofile vocabulary and scoped literal-reference census. No complete computed/transitive graph, SDK/body execution, actual package/native resolution, registration repair or canonical admission.",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0",
+  "previously_named": [
+    "lua/test/array_concat_open_arity_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_callable_result_guard_composition_test.lua",
+    "lua/test/array_pipeline_result_guard_composition_test.lua",
+    "lua/test/array_transform_callable_result_guard_composition_test.lua",
+    "lua/test/array_transform_result_guard_composition_test.lua",
+    "lua/test/capture_endpoint_absence_test.lua",
+    "lua/test/count_result_guard_composition_test.lua",
+    "lua/test/count_source_fallback_test.lua",
+    "lua/test/hash_value_result_guard_composition_test.lua",
+    "lua/test/hash_view_result_guard_composition_test.lua",
+    "lua/test/key_count_callable_result_guard_composition_test.lua",
+    "lua/test/key_count_result_guard_composition_test.lua",
+    "lua/test/length_result_guard_composition_test.lua",
+    "lua/test/named_capture_endpoint_absence_test.lua",
+    "lua/test/named_writer_endpoint_absence_test.lua",
+    "lua/test/referenced_blind_targets_test.lua"
+  ],
+  "primary": [
+    "lua/test/mcp_contract_lua_binding_test.lua",
+    "lua/test/mcp_server_lua_dispatch_test.lua",
+    "lua/test/mcp_server_lua_stdio_test.lua",
+    "lua/test/mcp_server_lua_admission_test.lua",
+    "lua/test/semantic_index_source_foundation_test.lua",
+    "lua/test/semantic_index_compilation_foundation_test.lua",
+    "lua/test/semantic_index_static_graph_test.lua",
+    "lua/test/semantic_index_static_remaining_test.lua",
+    "lua/test/semantic_index_call_core_test.lua",
+    "lua/test/semantic_index_call_staged_generated_test.lua",
+    "lua/test/semantic_index_query_kernel_test.lua",
+    "lua/test/semantic_index_runtime_observation_native_test.lua",
+    "lua/test/semantic_index_runtime_projection_test.lua",
+    "lua/test/semantic_index_runtime_observation_generated_routes_test.lua",
+    "lua/test/semantic_introspection_lua_admission_test.lua",
+    "lua/test/unicode_rule_label_classifier_test.lua",
+    "lua/test/unicode_rule_label_routes_test.lua",
+    "lua/test/unicode_rule_label_identity_routes_test.lua",
+    "lua/test/body_fluent_whole_token_test.lua",
+    "lua/test/unicode_rule_label_negative_isolation_test.lua",
+    "lua/test/diagnostic_output_contract_test.lua",
+    "lua/test/sexpr_document_v1_test.lua",
+    "lua/test/logical_helper_contract_test.lua",
+    "lua/test/callable_codeblock_literal_contract_test.lua",
+    "lua/test/root_rule_selection_core_test.lua",
+    "lua/test/root_rule_selection_routes_test.lua",
+    "lua/test/root_rule_selection_admission_test.lua",
+    "lua/test/rule_local_cursor_normalization_test.lua",
+    "lua/test/rule_local_cursor_execution_test.lua",
+    "lua/test/rule_local_cursor_descriptor_test.lua",
+    "lua/test/rule_local_cursor_generated_source_test.lua",
+    "lua/test/rule_local_cursor_option_removal_test.lua",
+    "lua/test/rule_local_cursor_contract_test.lua",
+    "lua/test/source_boundary_compatibility_aliases_test.lua",
+    "lua/test/typed_source_location_contract_test.lua",
+    "lua/test/recursive_observation_contract_test.lua",
+    "lua/test/recognition_transaction_contract_test.lua",
+    "lua/test/staged_ast_enrichment_contract_test.lua",
+    "lua/test/progressive_span_dispatch_contract_test.lua",
+    "lua/test/duplicate_regex_slot_identity_contract_test.lua",
+    "lua/test/repeated_action_result_contract_test.lua",
+    "lua/test/write_vivification_contract_test.lua",
+    "lua/test/map_leaves_mutation_contract_test.lua",
+    "lua/test/run.lua"
+  ],
+  "secondary": [
+    "lua/test/mcp_contract_lua_binding_test.lua",
+    "lua/test/mcp_server_lua_dispatch_test.lua",
+    "lua/test/mcp_server_lua_stdio_test.lua",
+    "lua/test/mcp_server_lua_admission_test.lua",
+    "lua/test/semantic_index_source_foundation_test.lua",
+    "lua/test/semantic_index_compilation_foundation_test.lua",
+    "lua/test/semantic_index_static_graph_test.lua",
+    "lua/test/semantic_index_static_remaining_test.lua",
+    "lua/test/semantic_index_call_core_test.lua",
+    "lua/test/semantic_index_call_staged_generated_test.lua",
+    "lua/test/semantic_index_query_kernel_test.lua",
+    "lua/test/semantic_index_runtime_observation_native_test.lua",
+    "lua/test/semantic_index_runtime_projection_test.lua",
+    "lua/test/semantic_index_runtime_observation_generated_routes_test.lua",
+    "lua/test/semantic_introspection_lua_admission_test.lua",
+    "lua/test/unicode_rule_label_classifier_test.lua",
+    "lua/test/unicode_rule_label_routes_test.lua",
+    "lua/test/unicode_rule_label_identity_routes_test.lua",
+    "lua/test/body_fluent_whole_token_test.lua",
+    "lua/test/unicode_rule_label_negative_isolation_test.lua",
+    "lua/test/diagnostic_output_contract_test.lua",
+    "lua/test/sexpr_document_v1_test.lua",
+    "lua/test/logical_helper_contract_test.lua",
+    "lua/test/callable_codeblock_literal_contract_test.lua",
+    "lua/test/root_rule_selection_core_test.lua",
+    "lua/test/root_rule_selection_routes_test.lua",
+    "lua/test/root_rule_selection_admission_test.lua",
+    "lua/test/rule_local_cursor_normalization_test.lua",
+    "lua/test/rule_local_cursor_execution_test.lua",
+    "lua/test/rule_local_cursor_descriptor_test.lua",
+    "lua/test/rule_local_cursor_generated_source_test.lua",
+    "lua/test/rule_local_cursor_option_removal_test.lua",
+    "lua/test/rule_local_cursor_contract_test.lua",
+    "lua/test/source_boundary_compatibility_aliases_test.lua",
+    "lua/test/typed_source_location_contract_test.lua",
+    "lua/test/recursive_observation_contract_test.lua",
+    "lua/test/recognition_transaction_contract_test.lua",
+    "lua/test/staged_ast_enrichment_contract_test.lua",
+    "lua/test/progressive_span_dispatch_contract_test.lua",
+    "lua/test/duplicate_regex_slot_identity_contract_test.lua",
+    "lua/test/repeated_action_result_contract_test.lua",
+    "lua/test/write_vivification_contract_test.lua",
+    "lua/test/map_leaves_mutation_contract_test.lua",
+    "lua/test/run.lua"
+  ],
+  "secondary_condition": "command -v configured LuaJIT succeeds; declared-host identity remains separate",
+  "shared_dofile_calls": [
+    {
+      "line": 9513,
+      "target": "lua/test/signed_array_selector_test.lua"
+    },
+    {
+      "line": 9517,
+      "target": "lua/test/selected_value_receivers_test.lua"
+    },
+    {
+      "line": 9520,
+      "target": "lua/test/receiver_copy_arity_test.lua"
+    },
+    {
+      "line": 9523,
+      "target": "lua/test/value_copy_test.lua"
+    },
+    {
+      "line": 9526,
+      "target": "lua/test/computed_selection_test.lua"
+    },
+    {
+      "line": 9529,
+      "target": "lua/test/capture_collection_selection_test.lua"
+    },
+    {
+      "line": 9532,
+      "target": "lua/test/conditional_selection_test.lua"
+    },
+    {
+      "line": 9535,
+      "target": "lua/test/input_cursor_results_test.lua"
+    },
+    {
+      "line": 9538,
+      "target": "lua/test/entry_match_number_results_test.lua"
+    },
+    {
+      "line": 9541,
+      "target": "lua/test/capture_boundary_number_results_test.lua"
+    },
+    {
+      "line": 9544,
+      "target": "lua/test/capture_boundary_text_results_test.lua"
+    },
+    {
+      "line": 9547,
+      "target": "lua/test/capture_advance_text_results_test.lua"
+    },
+    {
+      "line": 9550,
+      "target": "lua/test/capture_advance_number_results_test.lua"
+    },
+    {
+      "line": 9553,
+      "target": "lua/test/boundary_capture_fluent_results_test.lua"
+    },
+    {
+      "line": 9556,
+      "target": "lua/test/rule_call_result_selection_test.lua"
+    },
+    {
+      "line": 9559,
+      "target": "lua/test/gap_slot_record_selection_test.lua"
+    },
+    {
+      "line": 9562,
+      "target": "lua/test/gap_string_result_test.lua"
+    },
+    {
+      "line": 9565,
+      "target": "lua/test/push_result_composition_test.lua"
+    },
+    {
+      "line": 9568,
+      "target": "lua/test/set_result_composition_test.lua"
+    },
+    {
+      "line": 9571,
+      "target": "lua/test/free_default_result_composition_test.lua"
+    },
+    {
+      "line": 9574,
+      "target": "lua/test/constructor_result_composition_test.lua"
+    },
+    {
+      "line": 9577,
+      "target": "lua/test/free_string_result_composition_test.lua"
+    },
+    {
+      "line": 9580,
+      "target": "lua/test/receiver_string_bridge_guards_test.lua"
+    },
+    {
+      "line": 9583,
+      "target": "lua/test/free_numeric_result_composition_test.lua"
+    },
+    {
+      "line": 9586,
+      "target": "lua/test/free_numeric_comparison_result_composition_test.lua"
+    },
+    {
+      "line": 9589,
+      "target": "lua/test/logical_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9592,
+      "target": "lua/test/lexical_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9595,
+      "target": "lua/test/definedness_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9598,
+      "target": "lua/test/emptiness_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9601,
+      "target": "lua/test/has_key_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9604,
+      "target": "lua/test/string_predicate_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9607,
+      "target": "lua/test/contains_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9610,
+      "target": "lua/test/index_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9613,
+      "target": "lua/test/count_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9616,
+      "target": "lua/test/length_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9619,
+      "target": "lua/test/key_count_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9622,
+      "target": "lua/test/key_count_callable_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9625,
+      "target": "lua/test/hash_view_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9628,
+      "target": "lua/test/hash_value_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9631,
+      "target": "lua/test/array_transform_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9634,
+      "target": "lua/test/array_transform_callable_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9637,
+      "target": "lua/test/array_concat_open_arity_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9640,
+      "target": "lua/test/array_pipeline_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9643,
+      "target": "lua/test/array_pipeline_callable_result_guard_composition_test.lua"
+    },
+    {
+      "line": 9646,
+      "target": "lua/test/count_source_fallback_test.lua"
+    },
+    {
+      "line": 9649,
+      "target": "lua/test/copied_null_contains_composition_test.lua"
+    },
+    {
+      "line": 9652,
+      "target": "lua/test/copied_null_index_composition_test.lua"
+    },
+    {
+      "line": 9655,
+      "target": "lua/test/copied_null_presence_composition_test.lua"
+    },
+    {
+      "line": 9658,
+      "target": "lua/test/cursor_rewind_result_test.lua"
+    },
+    {
+      "line": 9661,
+      "target": "lua/test/capture_endpoint_absence_test.lua"
+    },
+    {
+      "line": 9664,
+      "target": "lua/test/named_capture_endpoint_absence_test.lua"
+    },
+    {
+      "line": 9667,
+      "target": "lua/test/named_writer_endpoint_absence_test.lua"
+    },
+    {
+      "line": 9670,
+      "target": "lua/test/referenced_blind_targets_test.lua"
+    },
+    {
+      "line": 9673,
+      "target": "lua/test/capture_reset_value_block_test.lua"
+    },
+    {
+      "line": 9676,
+      "target": "lua/test/named_mark_number_results_test.lua"
+    },
+    {
+      "line": 9679,
+      "target": "lua/test/with_hash_results_test.lua"
+    },
+    {
+      "line": 9682,
+      "target": "lua/test/with_result_selection_test.lua"
+    },
+    {
+      "line": 9685,
+      "target": "lua/test/active_edge_body_candidates_test.lua"
+    },
+    {
+      "line": 9688,
+      "target": "lua/test/callback_identity_test.lua"
+    },
+    {
+      "line": 9692,
+      "target": "lua/test/user_function_parser_state_boundary_test.lua"
+    },
+    {
+      "line": 9696,
+      "target": "lua/test/user_function_parser_context_boundary_test.lua"
+    },
+    {
+      "line": 9699,
+      "target": "lua/test/count_length_receivers_test.lua"
+    },
+    {
+      "line": 9702,
+      "target": "lua/test/aggregate_numeric_receivers_test.lua"
+    },
+    {
+      "line": 9705,
+      "target": "lua/test/joined_string_receivers_test.lua"
+    },
+    {
+      "line": 9709,
+      "target": "lua/test/mutable_split_false_delimiter_test.lua"
+    },
+    {
+      "line": 9713,
+      "target": "lua/test/default_selected_receivers_test.lua"
+    },
+    {
+      "line": 9717,
+      "target": "lua/test/index_result_receivers_test.lua"
+    },
+    {
+      "line": 9721,
+      "target": "lua/test/has_key_result_receivers_test.lua"
+    },
+    {
+      "line": 9725,
+      "target": "lua/test/emptiness_result_receivers_test.lua"
+    },
+    {
+      "line": 9729,
+      "target": "lua/test/string_predicate_result_receivers_test.lua"
+    },
+    {
+      "line": 9733,
+      "target": "lua/test/definedness_result_receivers_test.lua"
+    },
+    {
+      "line": 9737,
+      "target": "lua/test/string_comparison_result_receivers_test.lua"
+    },
+    {
+      "line": 9741,
+      "target": "lua/test/contains_result_receivers_test.lua"
+    },
+    {
+      "line": 9745,
+      "target": "lua/test/null_array_keys_test.lua"
+    },
+    {
+      "line": 9749,
+      "target": "lua/test/numeric_comparison_results_test.lua"
+    },
+    {
+      "line": 9753,
+      "target": "lua/test/scalar_arithmetic_results_test.lua"
+    },
+    {
+      "line": 9757,
+      "target": "lua/test/logical_result_receivers_test.lua"
+    },
+    {
+      "line": 9758,
+      "target": "lua/test/logical_receiver_methods_test.lua"
+    },
+    {
+      "line": 9762,
+      "target": "lua/test/defined_default_receivers_test.lua"
+    },
+    {
+      "line": 9766,
+      "target": "lua/test/scalar_string_results_test.lua"
+    },
+    {
+      "line": 9770,
+      "target": "lua/test/substring_optional_arguments_test.lua"
+    },
+    {
+      "line": 9774,
+      "target": "lua/test/reduction_result_receivers_test.lua"
+    },
+    {
+      "line": 9778,
+      "target": "lua/test/tagged_record_receivers_test.lua"
+    }
+  ],
+  "shared_dynamic_dofile": [],
+  "syntax_expression": "assert(loadfile(os.getenv(\"LINKEDSPEC_LUA_CHECK_FILE\")))",
+  "syntax_role": "compile-only source expression; Bash recorder selects filenames but executes no Lua compiler/test body"
+}

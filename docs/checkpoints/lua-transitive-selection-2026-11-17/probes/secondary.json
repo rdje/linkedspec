@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "bash",
+    "--noprofile",
+    "--norc",
+    "-s"
+  ],
+  "cwd": "."
+}

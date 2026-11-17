@@ -1,4 +1,5 @@
-{"member_count":108,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":109,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2959,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-block-early-return.md","sha256":"172eda68bbb7a6a255e143b77ab712e2b913de29b987e86e42cb8c79452a43d5","type":"member"}
 {"bytes":3632,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-blocks-ground-truth.md","sha256":"2cd546aec1695eb347295a02e2fadecdb52a03a9af611b4e9162b0133bbc7907","type":"member"}
 {"bytes":3739,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-fluent-lifecycle-composability-split.md","sha256":"a64433eae9e26d0605884c595fd3927589248606dd687e1d13fd628b0552b2d4","type":"member"}
 {"bytes":5890,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-hash-receiver-value-chains.md","sha256":"22b1cb64e80bdd81c93e8b4f2ba823b60b02f7aebb759500b0213f7bb76674f5","type":"member"}

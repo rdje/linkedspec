@@ -1,0 +1,27 @@
+{
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/complete_review.py": {
+    "bytes": 2157,
+    "mode": 420,
+    "sha256": "a4d7e193b504e0fbdec12283da33b9391d61f494ce1ed6f474f9eac29ddfb196"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/reader-epoch.json": {
+    "bytes": 17192,
+    "mode": 420,
+    "sha256": "a641a2e72a94b7e3a7155b17b04c0742dec23eaf3fd8551a2054403321b624a2"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/repair_reader_epoch.py": {
+    "bytes": 3409,
+    "mode": 420,
+    "sha256": "a5ba3c42a25a11deeadb100cd2c1de19504446c20cc7811c92d33f1651aa2956"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/review_epoch_qualified.py": {
+    "bytes": 5521,
+    "mode": 420,
+    "sha256": "76c52e2a5da98d94005329d0a5438d1ae90d3ba34355b9c399c18ccd24b54e04"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/used_review_expanded.py": {
+    "bytes": 11271,
+    "mode": 420,
+    "sha256": "f8deab8ae3b91e5a588cbd599bdf5cc07d4d713a4c60f2ed127e614c9b613481"
+  }
+}

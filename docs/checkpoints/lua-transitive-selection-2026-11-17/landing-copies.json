@@ -1,0 +1,42 @@
+[
+  {
+    "source": ".linkedspec-data/lua-selection-publication.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/publication-landing.gz",
+    "bytes": 611,
+    "sha256": "cf2819d4c82dbaa8470d2cf2b57585a71273ab90b66cda5e7f7e02fdfe3ad328",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-publication-review.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/publication-review-landing.gz",
+    "bytes": 371,
+    "sha256": "39b43ec05891be899c880ba463355a58b6fb3271f406926746c2aeae796c1917",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-census-binding.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/census-binding-landing.gz",
+    "bytes": 347,
+    "sha256": "0569c0e2018c5d3d7cc1ed5ff368f9be59af35c25d55b4ab297ba6c26d0d92e2",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-book.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/book-command-landing.gz",
+    "bytes": 274,
+    "sha256": "2e3f22d13218a27d05c0b33d22cba3eb3203b629df2a5dfc5f9da53cd34dec9a",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": "docs/linkedspec-book/book/development/documentation-workflow.html",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/rendered-workflow-landing.gz",
+    "bytes": 105541,
+    "sha256": "ecfa427239235a9dc5fa007e3b6e40fbdf0486f5b25f621072521bd61d618af5",
+    "mode": 420,
+    "recording": "after-use copy"
+  }
+]

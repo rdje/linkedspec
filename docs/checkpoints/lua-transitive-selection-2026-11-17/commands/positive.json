@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "git",
+    "grep",
+    "-l",
+    "-z",
+    "-F",
+    "array_concat_open_arity_result_guard_composition_test.lua",
+    "7553dbde0a380fc94d1f150899a91dfd448d74ae",
+    "--",
+    "lua",
+    "tools",
+    "scripts",
+    "t",
+    "tests",
+    "bin"
+  ],
+  "cwd": "."
+}

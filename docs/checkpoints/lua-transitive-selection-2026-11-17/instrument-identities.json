@@ -1,0 +1,22 @@
+{
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/capture.py": {
+    "bytes": 5917,
+    "mode": 420,
+    "sha256": "3e0e121cd41cf1ea8466483f3ca4cb99409ccb71e4724967bccf00668fa8fa09"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/plan.json": {
+    "bytes": 1271,
+    "mode": 420,
+    "sha256": "7f2e2b0b0b60afc242cd8458facfef91c79ba27c6e39d7548a4b39d6db69731d"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/probes.py": {
+    "bytes": 3054,
+    "mode": 420,
+    "sha256": "8c69044aa545061d916c70ec8d3f05ba209f66d3cb13644e582ff8af73b8a53b"
+  },
+  "docs/checkpoints/lua-transitive-selection-2026-11-17/review.py": {
+    "bytes": 8983,
+    "mode": 420,
+    "sha256": "5953b1cc15586c9dfc7b71fc6df96f7614a948c7d418af0bf02bbc55902e85b6"
+  }
+}

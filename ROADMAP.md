@@ -1,4 +1,4 @@
-November17 current PNT frontier: Generated Rust loader2 resolves source corpus/Count/generated-host/trace roles with focused proof and the duplicate-method reader correction retained. Remaining Perl-transitive3/eleven Lua routes/generated Dart2/frozen-input3 precede registration4.1.2/publication30.2; SESSION77/native/semantic/other prerequisites remain open.
+November17 current PNT frontier: Lua named-selection0 is focused-checked: eleven candidates lack named routes in inspected local/shared/literal scopes; computed/transitive/semantic2 remains open. Reader-epoch first-use gap is explicit4.2. Perl145 loader1 is next, followed by remaining reconciliation/generated Dart/frozen-input before registration4.1.2/publication30.2.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":6804,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-marker-provenance.md","sha256":"229e368ec6b6c93dc4b2ed2eb52f208ddcdf23bde6b63b974b3f6d8fb460a768","type":"member"}
 {"bytes":4994,"lines":46,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recomposition.md","sha256":"6f2f9d0ebc2c5da672196fbdf060d315908265b2c208c6c74c1c093da1184f07","type":"member"}
 {"bytes":7407,"lines":79,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-ast-enrichment-recursive-carriers.md","sha256":"f5a6632d29de4bb617f17599e86a3b97271f5487b74f00dc7ce7614b2a6a0d9c","type":"member"}
 {"bytes":35990,"lines":225,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/lua-staged-completion-reading-and-boundary-gaps.md","sha256":"1c52958b65e31dfeb13d4eaf58fed317d44d8fbc50dc54e07d05ccfd60e49efc","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5456,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-basic-statement-source-frames.md","sha256":"809b7a5c029e77c83e8b3ecce63f6ca66f01a213d26f54a3c545a818222a4f22","type":"member"}
 {"bytes":2977,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-latest-child-retv-binding.md","sha256":"cba60931dd56107841b09dfc6cfbbfe760f369b9910edf5f9470715611ed0240","type":"member"}
 {"bytes":3926,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-postcall-falsey-acceptance.md","sha256":"d0adb17b938a98241cce7d9582ef8b72ae075f23d5b3bf9817fc8fc26c2febe4","type":"member"}
-{"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}

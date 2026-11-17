@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":5825,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-declare-type-token-rule-scope.md","sha256":"2bc1d9e902563c149be9374d049cd5d2520780ca345a09f09cf80a0be3ce8377","type":"member"}
 {"bytes":3626,"lines":20,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-definedness-result-source-guards.md","sha256":"c6e59a5d93ca05f4bfac6d1d0ec9105204c47f2706c559f9e952e4d2e80a1ebb","type":"member"}
 {"bytes":2898,"lines":29,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-dependency-warning-baseline.md","sha256":"09c24cab8b9c19450bac8589375d643c4a4496da98d87439d1ce43993e6c2b8e","type":"member"}
 {"bytes":6640,"lines":97,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-diagnostic-output-events.md","sha256":"495baa4dbd2d949fa0841c8f7d7ddb4657f1829ef806405c48a4c3c9cab12e71","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3348,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-string-predicate-source-guards.md","sha256":"d829e20ada2f5648fd269fa61298f109f909523f5972c8fcb2e1c1fedb6e9b38","type":"member"}
 {"bytes":15353,"lines":207,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-symbol-call-newline-boundary.md","sha256":"d632a7284b5d0478437e7544d4fe819fbec896b5bdb01131735d8e1411cb2b73","type":"member"}
 {"bytes":3093,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-tclite-default-mode-repetition-gap.md","sha256":"9661836fc4e22957d677672fc30dba734961ba506d0eb6f22f14ae2134bcfdb8","type":"member"}
-{"bytes":3360,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-compile-spec-parser-events.md","sha256":"3502bcfc91d187b5a7af127dc280721981f1ab80e4997322d642708675834cb9","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3360,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-compile-spec-parser-events.md","sha256":"3502bcfc91d187b5a7af127dc280721981f1ab80e4997322d642708675834cb9","type":"member"}
 {"bytes":4039,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-controls-sinks.md","sha256":"20673df73e92908238cc1aefb62bf5cb627d613ea29a63017fcb223a1be75e80","type":"member"}
 {"bytes":2789,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-parity-design-inventory.md","sha256":"fd1db56c208b464c91649068c027f65c3419b85c086cc7d7c96c5299e60dd78d","type":"member"}
 {"bytes":3783,"lines":56,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-runtime-branch-events.md","sha256":"483da84915ccee85e21e5076ca70dad97fe536d8601c2577c7c690208ff08277","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3507,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-direct-access-split-ground-truth.md","sha256":"fb15142df29bc93248199d8daf20d4d2b02d22126a957589a98b32f58b0b7057","type":"member"}
 {"bytes":4205,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-duck-typed-assignment-perl-reference.md","sha256":"d54863ad1462b5f82097cd9fe505eb1792ee43d7754a1be543e3d14b40efdd51","type":"member"}
 {"bytes":5179,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md","sha256":"248a9c2d2df3297d3610a3932da21abdd99d6b1acfbd25c65d8b4e448993a548","type":"member"}
-{"bytes":2959,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-block-early-return.md","sha256":"172eda68bbb7a6a255e143b77ab712e2b913de29b987e86e42cb8c79452a43d5","type":"member"}

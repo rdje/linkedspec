@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: generated Rust loaders complete; remaining Perl/transitive/Lua/generated Dart qualification continues.
+PNT: bounded Lua named routes complete; Perl145 loaders and remaining reconciliation continue.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Generated Rust source qualification resolves320 bindings/319 targets: manifest plus315 corpus files, three Count macros/two fixtures and one embedded grammar. Three parent tests/two emitted test templates/three Cargo command templates/eleven filesystem sites, 17 Count rows/two trace selectors,442 current inputs/321 historical identities/twelve controls pass. Original duplicate-method refusal remains exact; no Cargo/SDK or admission.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0 — Eleven Lua candidates have no direct configured-driver/shared-runner operands or literal basename references in1107 regular Git blobs under six named project subtrees. Two isolated inert Bash blocks select44 operands each; missing/duplicate runner controls are RED at exit0. Shared source has83 literal dofile calls, no dynamic dofile sites and all16 earlier named candidates. Current23, positive locator and qualified reader proof pass; seven shared helper bodies are unchanged. Actual expanded-reader first-use capture is missing and remains disclosed under4.2; no SDK or complete transitive/admission claim.
 
 ## Next Action
 
-Remeasure committed outgoing size; qualify remaining Perl loaders/support/transitive/excluded roles and eleven unresolved Lua routes under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3, then generated Dart2/frozen-input3 before registration4.1.2 and every publication prerequisite.
+Remeasure committed outgoing size; qualify Perl145 direct loaders under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1, then relevant excluded/dynamic/semantic reconciliation2 and generated Dart/frozen-input work before registration4.1.2/publication30.2 with every other prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0 — Lua eleven named routes absent/1107 scoped blobs;44 commands per ABI block/83 dofile/current23/two Bash REDs; reader epoch gap disclosed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Rust generated:320 bindings/319 targets/three parents/two templates/three commands/current442/historical321/twelve controls; original reader refusal retained, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.35 — existing Perl AST epoch:28 IDs/23 pointers/five unchanged bodies/29 queries/ten controls;13074 current bytes renewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21/bindings59/targets39/filesystem21/readbacks5/exports6/current159/historical61/eleven controls/two refusals; no SDK.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; qualify remaining Perl loaders/support/transi
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
-- TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
 
 
 ## History

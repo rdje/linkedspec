@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "config",
+    "--get-regexp",
+    "^(core\\.compression|pack\\.(window|depth|compression|usesparse|reusedeltas|reuseobjects|windowmemory|threads))$"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  }
+}

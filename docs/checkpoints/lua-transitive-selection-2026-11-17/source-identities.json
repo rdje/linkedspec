@@ -1,0 +1,116 @@
+{
+  "docs/checkpoints/native-consumer-routes-2026-11-16/roles.json": {
+    "bytes": 151069,
+    "mode": 420,
+    "oid": "e36d796db887cc23448c4c790297bea0d86125a4",
+    "sha256": "ffed13602f5ee0bd40ec520727bcd873087166e9a845f4ffea3531cb1c3bb196"
+  },
+  "docs/knowledge/lua-ordinary-loader-roles.md": {
+    "bytes": 2148,
+    "mode": 420,
+    "oid": "7c362f246c05a6406c95eb42ab50fff9e4f71764",
+    "sha256": "f9e91e0987390400b23da469d18519b7d012a64a7d4b585da44804afffb328f2"
+  },
+  "docs/knowledge/native-consumer-source-routes.md": {
+    "bytes": 1910,
+    "mode": 420,
+    "oid": "d186ff3a72e6cf6d205eb470296ed6bb69b8b220",
+    "sha256": "da631fa0cf560a2ff378155894377219744137e87739d7727c27a9832d921f67"
+  },
+  "lua/test/blind_postcall_results_test.lua": {
+    "bytes": 3575,
+    "mode": 420,
+    "oid": "6d724562f611a689c8b2bad6307adfa27f1a251e",
+    "sha256": "10d535e614b888cc1a839b720ef448977e7ba3f190ceeee6665139fa730ba6e2"
+  },
+  "lua/test/blind_repetition_collection_test.lua": {
+    "bytes": 1961,
+    "mode": 420,
+    "oid": "53424275fca8c69548c76bade79f34ed7a41e779",
+    "sha256": "b6f6d8ddea95fad4db1c337cf77b3c916f0ad26d9caeefd9529ce97f6acc7055"
+  },
+  "lua/test/default_blind_generated_family_test.lua": {
+    "bytes": 4083,
+    "mode": 420,
+    "oid": "eb21c90ac689b0c2d26bdc588b4a148275cdde10",
+    "sha256": "a3dc3c2e829d1d43f333eb303b12e0ab7368855a7dae156e18b614cef0359c70"
+  },
+  "lua/test/gap_ls_selected_cursor_test.lua": {
+    "bytes": 3196,
+    "mode": 420,
+    "oid": "530df8a63f7bc3e5988c480e2366e15fcdff31f0",
+    "sha256": "7e03553d66eba29878cf629a61442f254510b0295cd26d7fa53cb45c106da7d7"
+  },
+  "lua/test/minimum_miss_routes_test.lua": {
+    "bytes": 2615,
+    "mode": 420,
+    "oid": "21c3f36983d26dcc39990270d772ef6a97edad93",
+    "sha256": "300d4aff82d65c1c4d5467e11df2242fbdf3dface71a07798969cdd3e810b27c"
+  },
+  "lua/test/null_return_and_observation_test.lua": {
+    "bytes": 2799,
+    "mode": 420,
+    "oid": "d30b4fd3060e374c9bad47e3077d39ba49776c47",
+    "sha256": "2b6c6fd4ecd84a0b0a444e2cd19b53f03dc7799e608670011b54117a30be49e5"
+  },
+  "lua/test/raw_error_observation_test.lua": {
+    "bytes": 4039,
+    "mode": 420,
+    "oid": "7b6275c42a16425366a36212931c8311fc3dbbcc",
+    "sha256": "89da3323e4bd7c0965a0e688c720539ff998308d89379a0b6590edc59b82ac62"
+  },
+  "lua/test/recognition_repetition_progress_test.lua": {
+    "bytes": 3311,
+    "mode": 420,
+    "oid": "a27a04dbbf94be0afb4fbd53ff4ddbebe287897d",
+    "sha256": "009df53b471ab4decf7ea5c35467102b98c2879b339f6a6bf62d78c2891de9e9"
+  },
+  "lua/test/repeated_and_group_results_test.lua": {
+    "bytes": 1917,
+    "mode": 420,
+    "oid": "946b55a715c3c7a49a70d7c537b596a6bf66eb51",
+    "sha256": "c9523082611b8a47cde76fb902ae2ebda9ec56ec4a37e7b59c6d0375d76fbc6f"
+  },
+  "lua/test/run.lua": {
+    "bytes": 406710,
+    "mode": 420,
+    "oid": "c327130bdea4eb867890e93de95c7e973c156fdb",
+    "sha256": "980bd9f598108882015e81c353ca776bc0011effd16fcb88b133203a7c4b5328"
+  },
+  "lua/test/runtime_unknown_helper_diagnostic_test.lua": {
+    "bytes": 2872,
+    "mode": 420,
+    "oid": "0d77c6d60ef01b3c469fe8ed350b38d129307065",
+    "sha256": "b9a20adfb7f04a92d78e8e7071a8ec148cc9783899a56ff62ce72058452facfb"
+  },
+  "lua/test/sparse_and_structural_sequence_test.lua": {
+    "bytes": 4433,
+    "mode": 420,
+    "oid": "bfd741fb504e70723ad8e773c5d0545cda067f2b",
+    "sha256": "63fa8fa42ece83c11364333817ad2c372aabe3cfbb1c965e699d430c326611c3"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "oid": "a805db245e12350fcf44f46541d452b468888905",
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "oid": "ce07a49d326a5cd78c4000e0936b8991a35f39fb",
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_lua_local.sh": {
+    "bytes": 14371,
+    "mode": 493,
+    "oid": "75c3cbf47b308031d91d427bf0bb71076dd96ba9",
+    "sha256": "4713bb8ff741f4340c625f3fbc348f1449965b0dfac44d75e79379a95b4a9ae7"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "oid": "ea064936ca070ebc51ad3013cc4c2bcf281df248",
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "source": ".linkedspec-data/rust-generated-loader-commit.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/preceding-normal.log.gz",
+    "bytes": 12075,
+    "sha256": "69333e8330f1b36cf0657241b31c0ebb974f47ef4e676388fa3f17cc3263a2ea",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-transitive-capture.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/capture-outer.log.gz",
+    "bytes": 87,
+    "sha256": "f177b0a76466b45b68baf456065c86d37e6282f3ff17ac508194db6ed315dd2d",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-transitive-probes.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/probe-outer.log.gz",
+    "bytes": 4465,
+    "sha256": "25b8fc08b13e99fb089335a1407ff2b4298e3a84f979da57bf670a77c05d826c",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-transitive-review.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/failed-support.log.gz",
+    "bytes": 992,
+    "sha256": "5a369d32c41134ab10886aa0b646fdf1ce77ab9c893226a2247de2f8e99527c5",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-reader-epoch-repair.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/reader-epoch-repair.log.gz",
+    "bytes": 464,
+    "sha256": "3bfb5eeb3d676a2e5e79723444acd370c001003fe4fca51e461060de52eceb1a",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-completion.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/qualified-review-outer.log.gz",
+    "bytes": 6271,
+    "sha256": "1c8b98742365925fd85f84f58a66a8ce24bf5a183e1baafcdd97529e54b19d64",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-setup-diagnosis.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/failed-diagnosis.log.gz",
+    "bytes": 789,
+    "sha256": "acdfd62dbc7c0e9630c5a957897d581d7da13982e4d9c6686c2b0c4b1868dc3a",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  },
+  {
+    "source": ".linkedspec-data/lua-selection-setup-qualified.log",
+    "target": "docs/checkpoints/lua-transitive-selection-2026-11-17/qualified-diagnosis.log.gz",
+    "bytes": 1016,
+    "sha256": "053d22059a81a9002c0fc0b8a4cbf526b06a8a955c0f1c41dcf6cc6ed3d9f9a6",
+    "mode": 420,
+    "recording": "after-use copy; first failed setup raw channels and separate outer probe exit remain unavailable"
+  }
+]

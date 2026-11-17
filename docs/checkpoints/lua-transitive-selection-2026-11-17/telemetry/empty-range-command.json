@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "git",
+    "pack-objects",
+    "--revs",
+    "--stdout",
+    "--delta-base-offset",
+    "--no-sparse",
+    "--threads=1",
+    "--window-memory=64m"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  },
+  "stdin": "empty-range-stdin.gz"
+}

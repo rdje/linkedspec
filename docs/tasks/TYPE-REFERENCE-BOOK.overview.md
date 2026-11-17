@@ -1625,6 +1625,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Added ownership30.1: The outgoing-pack operational claim has checked re-derivation/falsification but explicitly lacks full native/physical Git/cache/compressor/toolchain/OS and ignored raw-pack/index artifact custody. Own this named gap with SESSION-STARTUP-READING.5 under the existing P2 after-feature/admission/final-publication schedule. Start from the actual retained producer/config/ref/logical-object/native index/verify packets in docs/checkpoints/publication-size-monitor-2026-11-12/; retain the failed first validator and scoped limits. Do not infer complete native closure from stream/stat/hash or logical Git addresses, and do not replay old captures or inspect dependency implementations.
 
   Added ownership28: The selected Lua field proof retains its SDK/normal/oracle direct inputs, actual channels and opaque native bodies before the new loads. Its source-only initial case-preparation outer channels were not archived, and query-preparation-before-use.tar.gz is actually a late preparer source image. CUSTODY.md in docs/checkpoints/lua-raw-error-observation-2026-11-13/ owns those exact original-origin limits without retroactive first-use credit. Preserve the originals and include these named edges in this existing P2/SESSION5 origin audit before its admission/final-publication closeout; no broader native/source-resolution closure is inferred from the field observations.
+  Added ownership Lua selection3.0: The expanded evidence reader was captured only after probe import; first failed setup raw channels and separate outer probe-producer exit are unavailable. Exact used/frozen bodies, seven common helpers and actual four Bash observations survive in lua-transitive-selection-2026-11-17. Preserve this historical limit; obtain prospective first-use/native proof through this existing before-admission/push schedule, never retroactive credit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `active` / P1 canonical admission prerequisite; bounded children below
@@ -2047,9 +2048,33 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing checks: Qualified current442/twelve controls/original refusal; publication14/215 historical/three controls; scope1973/17, Knowledge1771/12561, book/render0, memory/history/whitespace0. Normal hooks govern landing; no full CI or SDK.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3`
-  Status: `pending`
+  Status: `active`
   Goal: Complete remaining Perl loaders, support/dormant roles, transitive selection and relevant excluded candidates.
   Acceptance: Full inherited population contract, including all eleven unresolved Lua local routes; preserve existing default-literal/repeated ActionIR registration findings and every source-origin/native/semantic owner before frozen-input3.
+  Children: `.0`, `.1`, `.2` (ID suffixes); inherited contract remains binding.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0`
+  Status: `completed`
+  Goal: Qualify named transitive selection for the eleven unresolved Lua candidates.
+  Acceptance: Retain actual project source/caller vocabulary, distinguish syntax-only loadfile from invocation, explicit local/conditional/other driver routes and unresolved dynamic origin. Preserve all candidate identities and existing exclusions; no SDK, repaired registration or complete dynamic-execution claim.
+  Verification tier: `focused`
+  Focused checks: Frozen source/caller census, bounded selection reconstruction, independent named-route/omission controls, historical/current identities; book/memory/history/scope/hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared runner, test, SDK, policy or tool change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0.json`
+  Evidence: docs/checkpoints/lua-transitive-selection-2026-11-17/REVIEW.md.
+  Evidence-tool defect (qualified; historical gap retained): A readonly support addition changed review.py after capture; failed setup then continued into probes because the outer shell did not stop. Preserve the actually imported expanded body and failed support artifacts before restoring the frozen source. Independently qualify unchanged scan helpers/actual Bash channels; disclose missing before-use reader custody under4.2, with no original capture replay.
+  Outcome: Eleven named routes absent in bounded scopes;1107 Git blobs/zero refs,44 operands per isolated ABI block/83 shared dofile/16 older names/current23 PASS. Two actual Bash inverses and positive locator pass; seven helpers exact, three reader controls. Full details and missing epoch custody in Evidence. Computed/excluded/semantic2/native4.2 remain open.
+  Landing checks: Independent census1107/fixed19/three controls; publication14/215 historical/three controls; Knowledge1772/12566, scope1974/17, book/render0, memory/history/whitespace0. Normal hooks govern landing; original first-use gap is explicit4.2.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1`
+  Status: `pending`
+  Goal: Qualify remaining Perl145 direct loaders and support/producer/output roles.
+  Acceptance: Inherited full contract; freeze actual caller vocabulary and every selected body, preserving default-literal/repeated ActionIR findings and all native/source-origin gaps.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2`
+  Status: `pending`
+  Goal: Reconcile relevant excluded/dormant/transitive candidates and independent semantic proof before parent closure.
+  Acceptance: Inherited full population/owner contract and all earlier graph falsification gaps; no execution, native or physical promotion from source metadata.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.2`
   Status: `pending`
