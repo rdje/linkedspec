@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: task headroom renewed; generated Rust/Perl-transitive/generated Dart qualification resumes.
+PNT: generated Rust loaders complete; remaining Perl/transitive/Lua/generated Dart qualification continues.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.35 — Existing epoch preserves28 IDs/all CORE/five unchanged bodies/full52263-byte tail;23 closed pointers reduce88302 to75228 current bytes. All29 public queries/ten controls/current target-manifest identity pass;13074 text bytes renewed. No SDK or physical-reclamation claim.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Generated Rust source qualification resolves320 bindings/319 targets: manifest plus315 corpus files, three Count macros/two fixtures and one embedded grammar. Three parent tests/two emitted test templates/three Cargo command templates/eleven filesystem sites, 17 Count rows/two trace selectors,442 current inputs/321 historical identities/twelve controls pass. Original duplicate-method refusal remains exact; no Cargo/SDK or admission.
 
 ## Next Action
 
-Remeasure committed outgoing size; qualify generated Rust manifest/corpus/host roles under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2, then remaining Perl-transitive3/generated Dart2/frozen-input3 before registration4.1.2 and every other publication prerequisite.
+Remeasure committed outgoing size; qualify remaining Perl loaders/support/transitive/excluded roles and eleven unresolved Lua routes under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3, then generated Dart2/frozen-input3 before registration4.1.2 and every publication prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Rust generated:320 bindings/319 targets/three parents/two templates/three commands/current442/historical321/twelve controls; original reader refusal retained, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.35 — existing Perl AST epoch:28 IDs/23 pointers/five unchanged bodies/29 queries/ten controls;13074 current bytes renewed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.1 — Rust21/bindings59/targets39/filesystem21/readbacks5/exports6/current159/historical61/eleven controls/two refusals; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.0 — Julia20/read-sites52/bindings69/targets49/modules14/captures12/qualifications3/current169/thirteen corrected controls and victim oracle; no SDK.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; qualify generated Rust manifest/corpus/host r
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
 - TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.28 — selected old/current128 records/2896 controls/384 named native blind mutations; each normal128PASS/legacyRED1/rawGREEN0; source204/eight scoped consumers/readonly10; stop after clean commit, discovery/publication remain.
-- TYPE-REFERENCE-BOOK.1.2.23.4.14 — shared RAM snapshot/actual capacity; first canonical1 retained;149-source/four-successor/exact RAM CI inverse and isolated recovery preserve all old fields/714 controls; new canonical required, fresh size then raw28/final discovery.
 
 
 ## History

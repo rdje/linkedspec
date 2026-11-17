@@ -1,0 +1,26 @@
+{
+  "activation": "616714b225313e54f86a5c3595b9ed38dbe29551",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2",
+  "cwd": ".",
+  "consumer": "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs",
+  "manifest": "rust/linkedspec-runtime/tests/corpus/manifest.json",
+  "count_fixtures": [
+    "tests/fixtures/count_result_guard_cases.json",
+    "tests/fixtures/count_result_guard_source_owner_cases.json"
+  ],
+  "grammar": "specs/user_function_definition.spec",
+  "grammar_owner": "rust/linkedspec-runtime/src/spec_parser.rs",
+  "historical": "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/custody.json",
+  "fixed_inputs": [
+    "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/custody.json",
+    "docs/knowledge/rust-count-result-source-guards.md",
+    "docs/knowledge/rust-generated-classifier-child-status-gap.md",
+    "docs/knowledge/rust-generated-source-full-manifest-classification.md",
+    "rust/linkedspec-runtime/src/spec_parser.rs",
+    "rust/linkedspec-runtime/tests/corpus/manifest.json",
+    "specs/user_function_definition.spec",
+    "tests/fixtures/count_result_guard_cases.json",
+    "tests/fixtures/count_result_guard_source_owner_cases.json",
+    "tools/run_cargo_local.sh"
+  ]
+}

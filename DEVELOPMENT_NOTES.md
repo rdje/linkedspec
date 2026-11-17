@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — separate classifier source inputs, child templates and trace outputs
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2: A manifest expands one read helper into315 potential corpus files, without proving successful preparation or generated writes for all105 cases. The generated crate contains child test templates, distinct from three parent tests. Count combines16+1 fixture rows; the trace parent selects two rows and reads Engine-produced traces without launching Cargo. Full-manifest compilation checks status but its host run only counts markers; focused Count requires successful child exit. SESSION77 retains repair ownership. The first reader confused two impl-local new methods; a separate five-substitution reader scopes methods to CaseFailure/TempProject, preserves capture exit1 and reuses every original body. Nine graph-consistency controls are not a complete independent semantic oracle; three historical inverses separately distinguish grammar identity. Evidence: `docs/checkpoints/rust-generated-loader-qualification-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — preserve complete source through an existing task epoch
 
 TYPE-REFERENCE-BOOK.1.2.23.4.35: Fresh immutable-source proposal and actual epoch output agree on23 closed commentary bodies. The independent field-state reader retains every CORE field, five unselected bodies, exact prefix/tail and source/mode identity; all28 ID queries plus whole-source recovery match. Ten effective corruptions reject. Before/after images and actual channels precede public readers, without retroactive internal-self-check or native/OS custody credit. The prior Rust pressure review uses its archived images and remains healthy after current task changes. No tool/schema/limit or SDK changes. Evidence: `docs/checkpoints/task-headroom-perl-ast-2026-11-17/REVIEW.md`.

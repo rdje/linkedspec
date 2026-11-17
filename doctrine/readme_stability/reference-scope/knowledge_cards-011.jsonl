@@ -17,6 +17,7 @@
 {"bytes":2779,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-and-acode-direct.md","sha256":"8e90e5b3e0960853d258afa78deae65e875f426e9f161cd5a7da5a772b336c16","type":"member"}
 {"bytes":2656,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-bcode-direct.md","sha256":"8d4c415fe7893a141d5cf4cabc921044bc3e837cc77bd857f8d73d7d2b4e70a9","type":"member"}
 {"bytes":8480,"lines":130,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-classifier-child-status-gap.md","sha256":"16d9eccbbfc69a4abda5a7fa980257bbaea9e44a99d5997d698a480b3c4aaeb2","type":"member"}
+{"bytes":3349,"lines":48,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2","path":"docs/knowledge/rust-generated-classifier-loader-roles.md","sha256":"25b06e2a640aaf6f830ecbe1064857e6326892b28e402aaf0aa98fc6f5b4955b","type":"member"}
 {"bytes":2767,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-default-or-acode-direct.md","sha256":"2c617cc52bc27c0df2bf1a921ac25bf9b40bc809b2017fcaf0116c2de8f2af91","type":"member"}
 {"bytes":2180,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-nonrep-matrix-closed.md","sha256":"317a543bb7be51f7e6039793d087aac15fd24a59d19cc098c3feb24161f7902f","type":"member"}
 {"bytes":4014,"lines":54,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-generated-recognition-parse-adapter-gap.md","sha256":"14334774768c06009941ee1f3a73aa318586fd7d35c9611b74038d138d63cec7","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":15353,"lines":207,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-symbol-call-newline-boundary.md","sha256":"d632a7284b5d0478437e7544d4fe819fbec896b5bdb01131735d8e1411cb2b73","type":"member"}
 {"bytes":3093,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-tclite-default-mode-repetition-gap.md","sha256":"9661836fc4e22957d677672fc30dba734961ba506d0eb6f22f14ae2134bcfdb8","type":"member"}
 {"bytes":3360,"lines":45,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-compile-spec-parser-events.md","sha256":"3502bcfc91d187b5a7af127dc280721981f1ab80e4997322d642708675834cb9","type":"member"}
-{"bytes":4039,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-trace-controls-sinks.md","sha256":"20673df73e92908238cc1aefb62bf5cb627d613ea29a63017fcb223a1be75e80","type":"member"}

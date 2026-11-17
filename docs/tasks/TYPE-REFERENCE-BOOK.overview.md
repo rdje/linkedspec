@@ -2033,9 +2033,18 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: PASS; counts, repairs and limits in Evidence.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2`
-  Status: `pending`
+  Status: `completed`
   Goal: Interpret Rust generated_source_full_manifest_classifier manifest/corpus/generated-host/process dependencies.
   Acceptance: Separate compile-time literals from runtime filesystem/corpus selection, generated artifacts and actual host/native execution. Retain source identities and origin/per-read limits.
+  Verification tier: `focused`
+  Focused checks: Source-bound manifest/corpus/fixture expansion, parent-versus-generated-template/process/trace roles, historical identities and victim-sensitive controls; book/memory/history/scope/hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no SDK/Cargo, classifier repair, shared-tool or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2.json`
+  Evidence: docs/checkpoints/rust-generated-loader-qualification-2026-11-17/REVIEW.md.
+  Scope note: Known child-status defect remains SESSION-STARTUP-READING.77-owned; source interpretation supplies no current runtime admission.
+  Reader defect (owned/fixed): First capture preserves complete inputs/Git binding then refuses duplicate new methods in CaseFailure and TempProject. Keep original source/channels unchanged; qualify implementation-scoped method names separately before publishing roles.
+  Outcome: 320 bindings/319 targets; parent3/template2/command3/fs11/Count17/trace2/current442/historical321/control12 PASS. Original duplicate-new refusal and scoped correction retained. Full details/limits in Evidence; SESSION77/native4.2 and remaining3 stay open.
+  Landing checks: Qualified current442/twelve controls/original refusal; publication14/215 historical/three controls; scope1973/17, Knowledge1771/12561, book/render0, memory/history/whitespace0. Normal hooks govern landing; no full CI or SDK.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3`
   Status: `pending`

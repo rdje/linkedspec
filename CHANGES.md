@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — qualify generated Rust loader inputs
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2: Generated Rust source qualification resolves320 bindings/319 targets: manifest plus315 corpus files, three Count macros/two fixtures and one embedded grammar. Three parent tests/two emitted test templates/three Cargo command templates/eleven filesystem sites, 17 Count rows/two trace selectors,442 current inputs/321 historical identities/twelve controls pass. Original duplicate-method refusal remains exact; no Cargo/SDK or admission. Evidence: `docs/checkpoints/rust-generated-loader-qualification-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — renew closed Perl AST task narrative headroom
 
 TYPE-REFERENCE-BOOK.1.2.23.4.35: Existing epoch preserves28 IDs/all CORE/five unchanged bodies/full52263-byte tail;23 closed pointers reduce88302 to75228 current bytes. All29 public queries/ten controls/current target-manifest identity pass;13074 text bytes renewed. No SDK or physical-reclamation claim. Evidence: `docs/checkpoints/task-headroom-perl-ast-2026-11-17/REVIEW.md`.

@@ -1,0 +1,72 @@
+{
+  "CHANGES.md": {
+    "bytes": 57093,
+    "mode": 420,
+    "sha256": "5568fbb01f6a0ce659e7eedc68270bbabf85fa657061c31626d5aa7cd47755e7"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 51018,
+    "mode": 420,
+    "sha256": "499b4945ea204c4a19126621732dca41a6005f2953aeec96e160cb07b2946e23"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4401,
+    "mode": 420,
+    "sha256": "0796db328fb9c014aa7098f81efffc59784ec31471acdec4b6e2ec23b032151b"
+  },
+  "MEMORY.md": {
+    "bytes": 2242,
+    "mode": 420,
+    "sha256": "e85d2b9e6f677cf3c590e3ee25929c6cc3b4170902d60499faad33fe2c59488b"
+  },
+  "ROADMAP.md": {
+    "bytes": 472653,
+    "mode": 420,
+    "sha256": "18e41081383830854daea881a07410ef08e2bf89f9d024ef077ef2db82374221"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 273988,
+    "mode": 420,
+    "sha256": "1ad122cd513f1d7432d54b92062c02e9d0b45c7c98ba5649c112bd83dd61459b"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347801,
+    "mode": 420,
+    "sha256": "e6d914a34c5775c7f205582a5ad13145caa05093e860caa656bb88b12a6901c0"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/plan.json": {
+    "bytes": 1287,
+    "mode": 420,
+    "sha256": "99d6b6b6fb9f114b17616686eff84316f1ad6fc30eb7bdea9ff5e19f4a37a3c0"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/publish.py": {
+    "bytes": 17969,
+    "mode": 420,
+    "sha256": "b3c250e44a73e995f236f69ef7657a6561df6d246886e9e051212141c099aeca"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/qualified-exit.txt": {
+    "bytes": 2,
+    "mode": 420,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/qualified-stdout.gz": {
+    "bytes": 3724,
+    "mode": 420,
+    "sha256": "17f281368560add2c8fcf3678d33016b4002f9ccd107837088407f3e394cdbb0"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 73531,
+    "mode": 420,
+    "sha256": "dfd0f17b7eb7338ff505ff6fbf3678f7ad3a2a446d53d5ff69071652803ab8e7"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20930,
+    "mode": 420,
+    "sha256": "5965e0c090887451e1afd90eb7c445beb03067b0acf76d8154fde4ae17de95ee"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 593597,
+    "mode": 420,
+    "sha256": "962b198ac7d8d38dd21fa250a174f1a2f3429f4bce2a290fe6da35143c2efdd1"
+  }
+}

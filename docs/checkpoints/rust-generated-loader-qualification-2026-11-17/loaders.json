@@ -1,0 +1,2208 @@
+{
+  "artifacts": [
+    {
+      "dependency": "compile-time runtime manifest anchor plus serde_json version request",
+      "kind": "generated Cargo.toml",
+      "selection": "each TempProject constructor"
+    },
+    {
+      "child_tests": "direct value, embedded plan validation and compatibility projection before marker",
+      "kind": "generated corpus modules and src/lib.rs",
+      "selection": "successfully prepared subset; never unconditional all105"
+    },
+    {
+      "child_tests": "expected result or expected-error substring assertion",
+      "kind": "generated Count modules and src/lib.rs",
+      "selection": "combined17 fixture rows if all prior preparations succeed"
+    },
+    {
+      "kind": "Cargo target",
+      "origin": "actual cargo/dependency/cache/native resolution unobserved",
+      "selection": "two Cargo-owning parent tests via shared helper"
+    },
+    {
+      "cargo": false,
+      "kind": "runtime trace write/readback",
+      "parent": "count_result_guard_native_trace",
+      "selection": [
+        "free_guard_before_with",
+        "receiver_guard_before_with"
+      ],
+      "source": "Engine.execute_with_trace output"
+    }
+  ],
+  "commands": [
+    {
+      "args": [
+        "--offline",
+        "--quiet",
+        "test",
+        "--no-run"
+      ],
+      "cwd": "${TempProject.root}",
+      "executable": "cargo via PATH",
+      "parent": "classify_all_generated_source_manifest_cases",
+      "status": "compile status required",
+      "target_dir": "${TempProject.root}/target"
+    },
+    {
+      "args": [
+        "--offline",
+        "--quiet",
+        "test",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "${TempProject.root}",
+      "executable": "cargo via PATH",
+      "parent": "classify_all_generated_source_manifest_cases",
+      "status": "markers counted; run status diagnostic only; SESSION-STARTUP-READING.77 open",
+      "target_dir": "${TempProject.root}/target"
+    },
+    {
+      "args": [
+        "--offline",
+        "--quiet",
+        "test",
+        "--lib",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "${TempProject.root}",
+      "executable": "cargo via PATH",
+      "parent": "count_result_guards_in_independently_compiled_emitted_source",
+      "status": "run status required",
+      "target_dir": "${TempProject.root}/target"
+    }
+  ],
+  "consumer": "rust/linkedspec-runtime/tests/generated_source_full_manifest_classifier.rs",
+  "corpus_cases": [
+    "proof_edge_array_literal",
+    "proof_edge_scalar_literal",
+    "autoexist_scalar_no_declare",
+    "autoexist_scalar_declare",
+    "autoexist_array_no_declare",
+    "autoexist_array_declare",
+    "autoexist_undef_literal",
+    "autoexist_scalar_bare_arg",
+    "autoexist_array_bare_arg",
+    "terse_1_2_3_2_array_copy_bare_read",
+    "terse_1_2_3_2_hash_copy_bare_read",
+    "terse_1_2_3_2_copy_bare_array_first",
+    "terse_1_2_3_2_copy_bare_hash",
+    "terse_1_2_3_4_return_bare_scalar",
+    "terse_1_2_3_4_assignment_source_bare_reads",
+    "terse_1_2_3_4_mutation_direct_bare_reads",
+    "terse_1_2_3_5_3_shape_literal_return_values",
+    "terse_1_2_3_5_3_shape_literal_mutation_rhs",
+    "terse_11_3_shape_assignment_value_binding",
+    "terse_11_3_assignment_replacement_and_explicit_targets",
+    "terse_11_4_nested_mixed_value_path_assignment",
+    "terse_15_4_bare_scalar_payload_readback",
+    "terse_1_4_2_set_cat_copy_array",
+    "terse_1_4_2_copy_hash_symbol_empty",
+    "terse_1_3_2_push_alias_array",
+    "terse_1_3_3_set_key_statement_hash",
+    "terse_1_3_4_1_scalar_assignment_operator",
+    "terse_1_3_4_2_array_append_operator",
+    "terse_1_3_4_3_hash_index_assignment_operator",
+    "terse_1_5_2_primitive_literals",
+    "terse_1_5_2_boolean_mutation_flow",
+    "terse_1_5_3_call_spacing",
+    "terse_1_5_4_newline_statements",
+    "terse_1_5_5_1_direct_nested_access",
+    "terse_1_6_array_end_mutation_methods",
+    "terse_2_1_3_expression_valued_blocks",
+    "terse_2_1_4_expression_valued_block_early_return",
+    "terse_2_2_3_attached_if_blocks",
+    "terse_2_2_4_when_otherwise_aliases",
+    "terse_2_2_5_2_attached_switch_blocks",
+    "terse_2_2_6_2_attached_while_blocks",
+    "terse_2_3_4_deep_pure_helper_composition",
+    "terse_2_3_4_1_bare_hash_helper_arg_composition",
+    "terse_2_3_4_1_bare_array_helper_arg_composition",
+    "terse_2_3_4_2_inline_if_value_control",
+    "terse_2_3_4_2_inline_switch_value_control",
+    "terse_15_2_3_bare_value_reads_and_case_labels",
+    "terse_2_3_5_1_array_receiver_value_chains",
+    "terse_2_3_5_2_hash_receiver_value_chains",
+    "terse_2_3_5_3_string_receiver_value_chains",
+    "terse_2_3_5_4_number_receiver_value_chains",
+    "terse_7_3_array_numeric_reducer_receiver_methods",
+    "terse_3_2_1_numeric_word_aliases",
+    "terse_3_2_2_arithmetic_symbol_callees",
+    "terse_3_2_3_2_string_comparison_helpers",
+    "terse_3_2_3_3_numeric_comparison_word_aliases",
+    "terse_3_2_3_4_numeric_comparison_symbol_callees",
+    "terse_3_3_1_scalar_assignment_expressions",
+    "terse_3_3_2_aggregate_assignment_expressions",
+    "terse_3_3_3_mutation_assignment_expressions",
+    "terse_3_3_4_assignment_expression_closure",
+    "terse_4_3_2_user_function_runtime",
+    "terse_2_3_5_5_block_valued_receiver_chains",
+    "terse_14_3_with_helper_trailing_block",
+    "terse_14_4_receiver_with_trailing_block",
+    "terse_12_3_hash_tree_traversal_receiver_blocks",
+    "terse_13_3_array_tree_traversal_receiver_blocks",
+    "terse_2_3_5_6_typed_wrapper_quoted_names",
+    "tclite_command_subst",
+    "tclite_double_quote",
+    "lispish_x_y",
+    "top_rule_body_recursion_sexpr",
+    "top_rule_lx_recursion_nested",
+    "top_rule_lx_recursion_sequence",
+    "hlink_raw_string",
+    "hlink_raw_escaped_brackets",
+    "hlink_curly_brace",
+    "hlink_bracket_body",
+    "hlink_mixed_bracket_brace",
+    "portmap_bare",
+    "portmap_bit",
+    "portmap_slice",
+    "portmap_constant",
+    "portmap_concatenation",
+    "ebnf_expression_rules",
+    "ebnf_logging_annotation",
+    "spec_spec_minimal_rule",
+    "spec_spec_action_edge",
+    "spec_spec_user_function_definition",
+    "spec_spec_comment_skip",
+    "regdef_nested_register_fields",
+    "tablegrep_simple_term",
+    "simenv_multiline_value",
+    "vhdl_library_use",
+    "ds_vhistory_version_entry",
+    "pplugin_empty",
+    "tkgui_empty",
+    "lib_reader_sattribute",
+    "lib_reader_cattribute",
+    "capability_cursor_control_surface",
+    "capability_pure_helper_surface",
+    "capability_position_helper_surface",
+    "capability_control_marker_surface",
+    "capability_capture_anonymous_surface",
+    "capability_capture_named_surface"
+  ],
+  "count_rows": [
+    "primitive_counts",
+    "free_container_guards",
+    "receiver_container_guards",
+    "free_guard_before_with",
+    "receiver_guard_before_with",
+    "free_bridge_rejection",
+    "receiver_bridge_rejection",
+    "compatible_values",
+    "source_consumer_snapshot",
+    "valid_zero_with",
+    "valid_null_with",
+    "valid_empty_with",
+    "with_result_array",
+    "needed_source_error",
+    "function_scope",
+    "valid_array_bridges",
+    "count_results_keep_prior_kind_guard"
+  ],
+  "filesystem_sites": [
+    {
+      "api": "create_dir_all",
+      "line": 74
+    },
+    {
+      "api": "write",
+      "line": 77
+    },
+    {
+      "api": "create_dir_all",
+      "line": 99
+    },
+    {
+      "api": "write",
+      "line": 151
+    },
+    {
+      "api": "write",
+      "line": 155
+    },
+    {
+      "api": "remove_dir_all",
+      "line": 173
+    },
+    {
+      "api": "read_to_string",
+      "line": 182
+    },
+    {
+      "api": "create_dir_all",
+      "line": 375
+    },
+    {
+      "api": "write",
+      "line": 402
+    },
+    {
+      "api": "write",
+      "line": 407
+    },
+    {
+      "api": "read_to_string",
+      "line": 446
+    }
+  ],
+  "generated_test_templates": [
+    "generated_case_matches_oracle",
+    "expected_result"
+  ],
+  "input_edges": [
+    {
+      "role": "runtime corpus manifest",
+      "route": "corpus_dir/load_manifest/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/manifest.json"
+    },
+    {
+      "case": "proof_edge_array_literal",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.spec"
+    },
+    {
+      "case": "proof_edge_array_literal",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/input.txt"
+    },
+    {
+      "case": "proof_edge_array_literal",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_array_literal/expected.json"
+    },
+    {
+      "case": "proof_edge_scalar_literal",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.spec"
+    },
+    {
+      "case": "proof_edge_scalar_literal",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/input.txt"
+    },
+    {
+      "case": "proof_edge_scalar_literal",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/proof_edge_scalar_literal/expected.json"
+    },
+    {
+      "case": "autoexist_scalar_no_declare",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.spec"
+    },
+    {
+      "case": "autoexist_scalar_no_declare",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/input.txt"
+    },
+    {
+      "case": "autoexist_scalar_no_declare",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_no_declare/expected.json"
+    },
+    {
+      "case": "autoexist_scalar_declare",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.spec"
+    },
+    {
+      "case": "autoexist_scalar_declare",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/input.txt"
+    },
+    {
+      "case": "autoexist_scalar_declare",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_declare/expected.json"
+    },
+    {
+      "case": "autoexist_array_no_declare",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.spec"
+    },
+    {
+      "case": "autoexist_array_no_declare",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/input.txt"
+    },
+    {
+      "case": "autoexist_array_no_declare",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_no_declare/expected.json"
+    },
+    {
+      "case": "autoexist_array_declare",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.spec"
+    },
+    {
+      "case": "autoexist_array_declare",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/input.txt"
+    },
+    {
+      "case": "autoexist_array_declare",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_declare/expected.json"
+    },
+    {
+      "case": "autoexist_undef_literal",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.spec"
+    },
+    {
+      "case": "autoexist_undef_literal",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/input.txt"
+    },
+    {
+      "case": "autoexist_undef_literal",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_undef_literal/expected.json"
+    },
+    {
+      "case": "autoexist_scalar_bare_arg",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.spec"
+    },
+    {
+      "case": "autoexist_scalar_bare_arg",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/input.txt"
+    },
+    {
+      "case": "autoexist_scalar_bare_arg",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_scalar_bare_arg/expected.json"
+    },
+    {
+      "case": "autoexist_array_bare_arg",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.spec"
+    },
+    {
+      "case": "autoexist_array_bare_arg",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/input.txt"
+    },
+    {
+      "case": "autoexist_array_bare_arg",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/autoexist_array_bare_arg/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_2_array_copy_bare_read",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_2_array_copy_bare_read",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_2_array_copy_bare_read",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_array_copy_bare_read/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_2_hash_copy_bare_read",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_2_hash_copy_bare_read",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_2_hash_copy_bare_read",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_hash_copy_bare_read/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_array_first",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_array_first",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_array_first",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_array_first/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_hash",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_hash",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_2_copy_bare_hash",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_2_copy_bare_hash/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_4_return_bare_scalar",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_4_return_bare_scalar",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_4_return_bare_scalar",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_return_bare_scalar/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_4_assignment_source_bare_reads",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_4_assignment_source_bare_reads",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_4_assignment_source_bare_reads",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_assignment_source_bare_reads/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_4_mutation_direct_bare_reads",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_4_mutation_direct_bare_reads",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_4_mutation_direct_bare_reads",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_4_mutation_direct_bare_reads/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_return_values",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_return_values",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_return_values",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_return_values/expected.json"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_mutation_rhs",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.spec"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_mutation_rhs",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/input.txt"
+    },
+    {
+      "case": "terse_1_2_3_5_3_shape_literal_mutation_rhs",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_2_3_5_3_shape_literal_mutation_rhs/expected.json"
+    },
+    {
+      "case": "terse_11_3_shape_assignment_value_binding",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.spec"
+    },
+    {
+      "case": "terse_11_3_shape_assignment_value_binding",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/input.txt"
+    },
+    {
+      "case": "terse_11_3_shape_assignment_value_binding",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_shape_assignment_value_binding/expected.json"
+    },
+    {
+      "case": "terse_11_3_assignment_replacement_and_explicit_targets",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.spec"
+    },
+    {
+      "case": "terse_11_3_assignment_replacement_and_explicit_targets",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/input.txt"
+    },
+    {
+      "case": "terse_11_3_assignment_replacement_and_explicit_targets",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_3_assignment_replacement_and_explicit_targets/expected.json"
+    },
+    {
+      "case": "terse_11_4_nested_mixed_value_path_assignment",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.spec"
+    },
+    {
+      "case": "terse_11_4_nested_mixed_value_path_assignment",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/input.txt"
+    },
+    {
+      "case": "terse_11_4_nested_mixed_value_path_assignment",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_11_4_nested_mixed_value_path_assignment/expected.json"
+    },
+    {
+      "case": "terse_15_4_bare_scalar_payload_readback",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.spec"
+    },
+    {
+      "case": "terse_15_4_bare_scalar_payload_readback",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/input.txt"
+    },
+    {
+      "case": "terse_15_4_bare_scalar_payload_readback",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_4_bare_scalar_payload_readback/expected.json"
+    },
+    {
+      "case": "terse_1_4_2_set_cat_copy_array",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.spec"
+    },
+    {
+      "case": "terse_1_4_2_set_cat_copy_array",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/input.txt"
+    },
+    {
+      "case": "terse_1_4_2_set_cat_copy_array",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_set_cat_copy_array/expected.json"
+    },
+    {
+      "case": "terse_1_4_2_copy_hash_symbol_empty",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.spec"
+    },
+    {
+      "case": "terse_1_4_2_copy_hash_symbol_empty",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/input.txt"
+    },
+    {
+      "case": "terse_1_4_2_copy_hash_symbol_empty",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_4_2_copy_hash_symbol_empty/expected.json"
+    },
+    {
+      "case": "terse_1_3_2_push_alias_array",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.spec"
+    },
+    {
+      "case": "terse_1_3_2_push_alias_array",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/input.txt"
+    },
+    {
+      "case": "terse_1_3_2_push_alias_array",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_2_push_alias_array/expected.json"
+    },
+    {
+      "case": "terse_1_3_3_set_key_statement_hash",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.spec"
+    },
+    {
+      "case": "terse_1_3_3_set_key_statement_hash",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/input.txt"
+    },
+    {
+      "case": "terse_1_3_3_set_key_statement_hash",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_3_set_key_statement_hash/expected.json"
+    },
+    {
+      "case": "terse_1_3_4_1_scalar_assignment_operator",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.spec"
+    },
+    {
+      "case": "terse_1_3_4_1_scalar_assignment_operator",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/input.txt"
+    },
+    {
+      "case": "terse_1_3_4_1_scalar_assignment_operator",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_1_scalar_assignment_operator/expected.json"
+    },
+    {
+      "case": "terse_1_3_4_2_array_append_operator",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.spec"
+    },
+    {
+      "case": "terse_1_3_4_2_array_append_operator",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/input.txt"
+    },
+    {
+      "case": "terse_1_3_4_2_array_append_operator",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_2_array_append_operator/expected.json"
+    },
+    {
+      "case": "terse_1_3_4_3_hash_index_assignment_operator",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.spec"
+    },
+    {
+      "case": "terse_1_3_4_3_hash_index_assignment_operator",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/input.txt"
+    },
+    {
+      "case": "terse_1_3_4_3_hash_index_assignment_operator",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_3_4_3_hash_index_assignment_operator/expected.json"
+    },
+    {
+      "case": "terse_1_5_2_primitive_literals",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.spec"
+    },
+    {
+      "case": "terse_1_5_2_primitive_literals",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/input.txt"
+    },
+    {
+      "case": "terse_1_5_2_primitive_literals",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_primitive_literals/expected.json"
+    },
+    {
+      "case": "terse_1_5_2_boolean_mutation_flow",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.spec"
+    },
+    {
+      "case": "terse_1_5_2_boolean_mutation_flow",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/input.txt"
+    },
+    {
+      "case": "terse_1_5_2_boolean_mutation_flow",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_2_boolean_mutation_flow/expected.json"
+    },
+    {
+      "case": "terse_1_5_3_call_spacing",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.spec"
+    },
+    {
+      "case": "terse_1_5_3_call_spacing",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/input.txt"
+    },
+    {
+      "case": "terse_1_5_3_call_spacing",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_3_call_spacing/expected.json"
+    },
+    {
+      "case": "terse_1_5_4_newline_statements",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.spec"
+    },
+    {
+      "case": "terse_1_5_4_newline_statements",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/input.txt"
+    },
+    {
+      "case": "terse_1_5_4_newline_statements",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_4_newline_statements/expected.json"
+    },
+    {
+      "case": "terse_1_5_5_1_direct_nested_access",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.spec"
+    },
+    {
+      "case": "terse_1_5_5_1_direct_nested_access",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/input.txt"
+    },
+    {
+      "case": "terse_1_5_5_1_direct_nested_access",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_5_5_1_direct_nested_access/expected.json"
+    },
+    {
+      "case": "terse_1_6_array_end_mutation_methods",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.spec"
+    },
+    {
+      "case": "terse_1_6_array_end_mutation_methods",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/input.txt"
+    },
+    {
+      "case": "terse_1_6_array_end_mutation_methods",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_1_6_array_end_mutation_methods/expected.json"
+    },
+    {
+      "case": "terse_2_1_3_expression_valued_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.spec"
+    },
+    {
+      "case": "terse_2_1_3_expression_valued_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/input.txt"
+    },
+    {
+      "case": "terse_2_1_3_expression_valued_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_3_expression_valued_blocks/expected.json"
+    },
+    {
+      "case": "terse_2_1_4_expression_valued_block_early_return",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.spec"
+    },
+    {
+      "case": "terse_2_1_4_expression_valued_block_early_return",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/input.txt"
+    },
+    {
+      "case": "terse_2_1_4_expression_valued_block_early_return",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_1_4_expression_valued_block_early_return/expected.json"
+    },
+    {
+      "case": "terse_2_2_3_attached_if_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.spec"
+    },
+    {
+      "case": "terse_2_2_3_attached_if_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/input.txt"
+    },
+    {
+      "case": "terse_2_2_3_attached_if_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_3_attached_if_blocks/expected.json"
+    },
+    {
+      "case": "terse_2_2_4_when_otherwise_aliases",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.spec"
+    },
+    {
+      "case": "terse_2_2_4_when_otherwise_aliases",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/input.txt"
+    },
+    {
+      "case": "terse_2_2_4_when_otherwise_aliases",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_4_when_otherwise_aliases/expected.json"
+    },
+    {
+      "case": "terse_2_2_5_2_attached_switch_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.spec"
+    },
+    {
+      "case": "terse_2_2_5_2_attached_switch_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/input.txt"
+    },
+    {
+      "case": "terse_2_2_5_2_attached_switch_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_5_2_attached_switch_blocks/expected.json"
+    },
+    {
+      "case": "terse_2_2_6_2_attached_while_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.spec"
+    },
+    {
+      "case": "terse_2_2_6_2_attached_while_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/input.txt"
+    },
+    {
+      "case": "terse_2_2_6_2_attached_while_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_2_6_2_attached_while_blocks/expected.json"
+    },
+    {
+      "case": "terse_2_3_4_deep_pure_helper_composition",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.spec"
+    },
+    {
+      "case": "terse_2_3_4_deep_pure_helper_composition",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/input.txt"
+    },
+    {
+      "case": "terse_2_3_4_deep_pure_helper_composition",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_deep_pure_helper_composition/expected.json"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_hash_helper_arg_composition",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.spec"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_hash_helper_arg_composition",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/input.txt"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_hash_helper_arg_composition",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_hash_helper_arg_composition/expected.json"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_array_helper_arg_composition",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.spec"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_array_helper_arg_composition",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/input.txt"
+    },
+    {
+      "case": "terse_2_3_4_1_bare_array_helper_arg_composition",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_1_bare_array_helper_arg_composition/expected.json"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_if_value_control",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.spec"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_if_value_control",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/input.txt"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_if_value_control",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_if_value_control/expected.json"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_switch_value_control",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.spec"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_switch_value_control",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/input.txt"
+    },
+    {
+      "case": "terse_2_3_4_2_inline_switch_value_control",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_4_2_inline_switch_value_control/expected.json"
+    },
+    {
+      "case": "terse_15_2_3_bare_value_reads_and_case_labels",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.spec"
+    },
+    {
+      "case": "terse_15_2_3_bare_value_reads_and_case_labels",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/input.txt"
+    },
+    {
+      "case": "terse_15_2_3_bare_value_reads_and_case_labels",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_15_2_3_bare_value_reads_and_case_labels/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_1_array_receiver_value_chains",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_1_array_receiver_value_chains",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_1_array_receiver_value_chains",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_1_array_receiver_value_chains/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_2_hash_receiver_value_chains",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_2_hash_receiver_value_chains",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_2_hash_receiver_value_chains",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_2_hash_receiver_value_chains/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_3_string_receiver_value_chains",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_3_string_receiver_value_chains",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_3_string_receiver_value_chains",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_3_string_receiver_value_chains/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_4_number_receiver_value_chains",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_4_number_receiver_value_chains",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_4_number_receiver_value_chains",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_4_number_receiver_value_chains/expected.json"
+    },
+    {
+      "case": "terse_7_3_array_numeric_reducer_receiver_methods",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.spec"
+    },
+    {
+      "case": "terse_7_3_array_numeric_reducer_receiver_methods",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/input.txt"
+    },
+    {
+      "case": "terse_7_3_array_numeric_reducer_receiver_methods",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_7_3_array_numeric_reducer_receiver_methods/expected.json"
+    },
+    {
+      "case": "terse_3_2_1_numeric_word_aliases",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.spec"
+    },
+    {
+      "case": "terse_3_2_1_numeric_word_aliases",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/input.txt"
+    },
+    {
+      "case": "terse_3_2_1_numeric_word_aliases",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_1_numeric_word_aliases/expected.json"
+    },
+    {
+      "case": "terse_3_2_2_arithmetic_symbol_callees",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.spec"
+    },
+    {
+      "case": "terse_3_2_2_arithmetic_symbol_callees",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/input.txt"
+    },
+    {
+      "case": "terse_3_2_2_arithmetic_symbol_callees",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_2_arithmetic_symbol_callees/expected.json"
+    },
+    {
+      "case": "terse_3_2_3_2_string_comparison_helpers",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.spec"
+    },
+    {
+      "case": "terse_3_2_3_2_string_comparison_helpers",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/input.txt"
+    },
+    {
+      "case": "terse_3_2_3_2_string_comparison_helpers",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_2_string_comparison_helpers/expected.json"
+    },
+    {
+      "case": "terse_3_2_3_3_numeric_comparison_word_aliases",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.spec"
+    },
+    {
+      "case": "terse_3_2_3_3_numeric_comparison_word_aliases",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/input.txt"
+    },
+    {
+      "case": "terse_3_2_3_3_numeric_comparison_word_aliases",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_3_numeric_comparison_word_aliases/expected.json"
+    },
+    {
+      "case": "terse_3_2_3_4_numeric_comparison_symbol_callees",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.spec"
+    },
+    {
+      "case": "terse_3_2_3_4_numeric_comparison_symbol_callees",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/input.txt"
+    },
+    {
+      "case": "terse_3_2_3_4_numeric_comparison_symbol_callees",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_2_3_4_numeric_comparison_symbol_callees/expected.json"
+    },
+    {
+      "case": "terse_3_3_1_scalar_assignment_expressions",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.spec"
+    },
+    {
+      "case": "terse_3_3_1_scalar_assignment_expressions",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/input.txt"
+    },
+    {
+      "case": "terse_3_3_1_scalar_assignment_expressions",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_1_scalar_assignment_expressions/expected.json"
+    },
+    {
+      "case": "terse_3_3_2_aggregate_assignment_expressions",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.spec"
+    },
+    {
+      "case": "terse_3_3_2_aggregate_assignment_expressions",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/input.txt"
+    },
+    {
+      "case": "terse_3_3_2_aggregate_assignment_expressions",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_2_aggregate_assignment_expressions/expected.json"
+    },
+    {
+      "case": "terse_3_3_3_mutation_assignment_expressions",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.spec"
+    },
+    {
+      "case": "terse_3_3_3_mutation_assignment_expressions",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/input.txt"
+    },
+    {
+      "case": "terse_3_3_3_mutation_assignment_expressions",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_3_mutation_assignment_expressions/expected.json"
+    },
+    {
+      "case": "terse_3_3_4_assignment_expression_closure",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.spec"
+    },
+    {
+      "case": "terse_3_3_4_assignment_expression_closure",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/input.txt"
+    },
+    {
+      "case": "terse_3_3_4_assignment_expression_closure",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_3_3_4_assignment_expression_closure/expected.json"
+    },
+    {
+      "case": "terse_4_3_2_user_function_runtime",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.spec"
+    },
+    {
+      "case": "terse_4_3_2_user_function_runtime",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/input.txt"
+    },
+    {
+      "case": "terse_4_3_2_user_function_runtime",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_4_3_2_user_function_runtime/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_5_block_valued_receiver_chains",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_5_block_valued_receiver_chains",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_5_block_valued_receiver_chains",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_5_block_valued_receiver_chains/expected.json"
+    },
+    {
+      "case": "terse_14_3_with_helper_trailing_block",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.spec"
+    },
+    {
+      "case": "terse_14_3_with_helper_trailing_block",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/input.txt"
+    },
+    {
+      "case": "terse_14_3_with_helper_trailing_block",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_3_with_helper_trailing_block/expected.json"
+    },
+    {
+      "case": "terse_14_4_receiver_with_trailing_block",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.spec"
+    },
+    {
+      "case": "terse_14_4_receiver_with_trailing_block",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/input.txt"
+    },
+    {
+      "case": "terse_14_4_receiver_with_trailing_block",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_14_4_receiver_with_trailing_block/expected.json"
+    },
+    {
+      "case": "terse_12_3_hash_tree_traversal_receiver_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.spec"
+    },
+    {
+      "case": "terse_12_3_hash_tree_traversal_receiver_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/input.txt"
+    },
+    {
+      "case": "terse_12_3_hash_tree_traversal_receiver_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_12_3_hash_tree_traversal_receiver_blocks/expected.json"
+    },
+    {
+      "case": "terse_13_3_array_tree_traversal_receiver_blocks",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.spec"
+    },
+    {
+      "case": "terse_13_3_array_tree_traversal_receiver_blocks",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/input.txt"
+    },
+    {
+      "case": "terse_13_3_array_tree_traversal_receiver_blocks",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_13_3_array_tree_traversal_receiver_blocks/expected.json"
+    },
+    {
+      "case": "terse_2_3_5_6_typed_wrapper_quoted_names",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.spec"
+    },
+    {
+      "case": "terse_2_3_5_6_typed_wrapper_quoted_names",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/input.txt"
+    },
+    {
+      "case": "terse_2_3_5_6_typed_wrapper_quoted_names",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/terse_2_3_5_6_typed_wrapper_quoted_names/expected.json"
+    },
+    {
+      "case": "tclite_command_subst",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.spec"
+    },
+    {
+      "case": "tclite_command_subst",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/input.txt"
+    },
+    {
+      "case": "tclite_command_subst",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_command_subst/expected.json"
+    },
+    {
+      "case": "tclite_double_quote",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.spec"
+    },
+    {
+      "case": "tclite_double_quote",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/input.txt"
+    },
+    {
+      "case": "tclite_double_quote",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tclite_double_quote/expected.json"
+    },
+    {
+      "case": "lispish_x_y",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.spec"
+    },
+    {
+      "case": "lispish_x_y",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lispish_x_y/input.txt"
+    },
+    {
+      "case": "lispish_x_y",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lispish_x_y/expected.json"
+    },
+    {
+      "case": "top_rule_body_recursion_sexpr",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.spec"
+    },
+    {
+      "case": "top_rule_body_recursion_sexpr",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/input.txt"
+    },
+    {
+      "case": "top_rule_body_recursion_sexpr",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_body_recursion_sexpr/expected.json"
+    },
+    {
+      "case": "top_rule_lx_recursion_nested",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.spec"
+    },
+    {
+      "case": "top_rule_lx_recursion_nested",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/input.txt"
+    },
+    {
+      "case": "top_rule_lx_recursion_nested",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_nested/expected.json"
+    },
+    {
+      "case": "top_rule_lx_recursion_sequence",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.spec"
+    },
+    {
+      "case": "top_rule_lx_recursion_sequence",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/input.txt"
+    },
+    {
+      "case": "top_rule_lx_recursion_sequence",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/top_rule_lx_recursion_sequence/expected.json"
+    },
+    {
+      "case": "hlink_raw_string",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.spec"
+    },
+    {
+      "case": "hlink_raw_string",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/input.txt"
+    },
+    {
+      "case": "hlink_raw_string",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_string/expected.json"
+    },
+    {
+      "case": "hlink_raw_escaped_brackets",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.spec"
+    },
+    {
+      "case": "hlink_raw_escaped_brackets",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/input.txt"
+    },
+    {
+      "case": "hlink_raw_escaped_brackets",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_raw_escaped_brackets/expected.json"
+    },
+    {
+      "case": "hlink_curly_brace",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.spec"
+    },
+    {
+      "case": "hlink_curly_brace",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/input.txt"
+    },
+    {
+      "case": "hlink_curly_brace",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_curly_brace/expected.json"
+    },
+    {
+      "case": "hlink_bracket_body",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.spec"
+    },
+    {
+      "case": "hlink_bracket_body",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/input.txt"
+    },
+    {
+      "case": "hlink_bracket_body",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_bracket_body/expected.json"
+    },
+    {
+      "case": "hlink_mixed_bracket_brace",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.spec"
+    },
+    {
+      "case": "hlink_mixed_bracket_brace",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/input.txt"
+    },
+    {
+      "case": "hlink_mixed_bracket_brace",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/hlink_mixed_bracket_brace/expected.json"
+    },
+    {
+      "case": "portmap_bare",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bare/input.spec"
+    },
+    {
+      "case": "portmap_bare",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bare/input.txt"
+    },
+    {
+      "case": "portmap_bare",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bare/expected.json"
+    },
+    {
+      "case": "portmap_bit",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bit/input.spec"
+    },
+    {
+      "case": "portmap_bit",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bit/input.txt"
+    },
+    {
+      "case": "portmap_bit",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_bit/expected.json"
+    },
+    {
+      "case": "portmap_slice",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_slice/input.spec"
+    },
+    {
+      "case": "portmap_slice",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_slice/input.txt"
+    },
+    {
+      "case": "portmap_slice",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_slice/expected.json"
+    },
+    {
+      "case": "portmap_constant",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_constant/input.spec"
+    },
+    {
+      "case": "portmap_constant",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_constant/input.txt"
+    },
+    {
+      "case": "portmap_constant",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_constant/expected.json"
+    },
+    {
+      "case": "portmap_concatenation",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.spec"
+    },
+    {
+      "case": "portmap_concatenation",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/input.txt"
+    },
+    {
+      "case": "portmap_concatenation",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/portmap_concatenation/expected.json"
+    },
+    {
+      "case": "ebnf_expression_rules",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.spec"
+    },
+    {
+      "case": "ebnf_expression_rules",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/input.txt"
+    },
+    {
+      "case": "ebnf_expression_rules",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_expression_rules/expected.json"
+    },
+    {
+      "case": "ebnf_logging_annotation",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.spec"
+    },
+    {
+      "case": "ebnf_logging_annotation",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/input.txt"
+    },
+    {
+      "case": "ebnf_logging_annotation",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ebnf_logging_annotation/expected.json"
+    },
+    {
+      "case": "spec_spec_minimal_rule",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.spec"
+    },
+    {
+      "case": "spec_spec_minimal_rule",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/input.txt"
+    },
+    {
+      "case": "spec_spec_minimal_rule",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_minimal_rule/expected.json"
+    },
+    {
+      "case": "spec_spec_action_edge",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.spec"
+    },
+    {
+      "case": "spec_spec_action_edge",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/input.txt"
+    },
+    {
+      "case": "spec_spec_action_edge",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_action_edge/expected.json"
+    },
+    {
+      "case": "spec_spec_user_function_definition",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.spec"
+    },
+    {
+      "case": "spec_spec_user_function_definition",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/input.txt"
+    },
+    {
+      "case": "spec_spec_user_function_definition",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_user_function_definition/expected.json"
+    },
+    {
+      "case": "spec_spec_comment_skip",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.spec"
+    },
+    {
+      "case": "spec_spec_comment_skip",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/input.txt"
+    },
+    {
+      "case": "spec_spec_comment_skip",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/spec_spec_comment_skip/expected.json"
+    },
+    {
+      "case": "regdef_nested_register_fields",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.spec"
+    },
+    {
+      "case": "regdef_nested_register_fields",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/input.txt"
+    },
+    {
+      "case": "regdef_nested_register_fields",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/regdef_nested_register_fields/expected.json"
+    },
+    {
+      "case": "tablegrep_simple_term",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.spec"
+    },
+    {
+      "case": "tablegrep_simple_term",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/input.txt"
+    },
+    {
+      "case": "tablegrep_simple_term",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tablegrep_simple_term/expected.json"
+    },
+    {
+      "case": "simenv_multiline_value",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.spec"
+    },
+    {
+      "case": "simenv_multiline_value",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/input.txt"
+    },
+    {
+      "case": "simenv_multiline_value",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/simenv_multiline_value/expected.json"
+    },
+    {
+      "case": "vhdl_library_use",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.spec"
+    },
+    {
+      "case": "vhdl_library_use",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/input.txt"
+    },
+    {
+      "case": "vhdl_library_use",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/vhdl_library_use/expected.json"
+    },
+    {
+      "case": "ds_vhistory_version_entry",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.spec"
+    },
+    {
+      "case": "ds_vhistory_version_entry",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/input.txt"
+    },
+    {
+      "case": "ds_vhistory_version_entry",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/ds_vhistory_version_entry/expected.json"
+    },
+    {
+      "case": "pplugin_empty",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.spec"
+    },
+    {
+      "case": "pplugin_empty",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/pplugin_empty/input.txt"
+    },
+    {
+      "case": "pplugin_empty",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/pplugin_empty/expected.json"
+    },
+    {
+      "case": "tkgui_empty",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.spec"
+    },
+    {
+      "case": "tkgui_empty",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tkgui_empty/input.txt"
+    },
+    {
+      "case": "tkgui_empty",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/tkgui_empty/expected.json"
+    },
+    {
+      "case": "lib_reader_sattribute",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.spec"
+    },
+    {
+      "case": "lib_reader_sattribute",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/input.txt"
+    },
+    {
+      "case": "lib_reader_sattribute",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_sattribute/expected.json"
+    },
+    {
+      "case": "lib_reader_cattribute",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.spec"
+    },
+    {
+      "case": "lib_reader_cattribute",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/input.txt"
+    },
+    {
+      "case": "lib_reader_cattribute",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/lib_reader_cattribute/expected.json"
+    },
+    {
+      "case": "capability_cursor_control_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.spec"
+    },
+    {
+      "case": "capability_cursor_control_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/input.txt"
+    },
+    {
+      "case": "capability_cursor_control_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_cursor_control_surface/expected.json"
+    },
+    {
+      "case": "capability_pure_helper_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.spec"
+    },
+    {
+      "case": "capability_pure_helper_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/input.txt"
+    },
+    {
+      "case": "capability_pure_helper_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_pure_helper_surface/expected.json"
+    },
+    {
+      "case": "capability_position_helper_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.spec"
+    },
+    {
+      "case": "capability_position_helper_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/input.txt"
+    },
+    {
+      "case": "capability_position_helper_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_position_helper_surface/expected.json"
+    },
+    {
+      "case": "capability_control_marker_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.spec"
+    },
+    {
+      "case": "capability_control_marker_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/input.txt"
+    },
+    {
+      "case": "capability_control_marker_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_control_marker_surface/expected.json"
+    },
+    {
+      "case": "capability_capture_anonymous_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.spec"
+    },
+    {
+      "case": "capability_capture_anonymous_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/input.txt"
+    },
+    {
+      "case": "capability_capture_anonymous_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_anonymous_surface/expected.json"
+    },
+    {
+      "case": "capability_capture_named_surface",
+      "role": "runtime corpus input.spec",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.spec"
+    },
+    {
+      "case": "capability_capture_named_surface",
+      "role": "runtime corpus input.txt",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/input.txt"
+    },
+    {
+      "case": "capability_capture_named_surface",
+      "role": "runtime corpus expected.json",
+      "route": "prepare_case/read_utf8",
+      "target": "rust/linkedspec-runtime/tests/corpus/capability_capture_named_surface/expected.json"
+    },
+    {
+      "line": 364,
+      "parent": "count_result_guards_in_independently_compiled_emitted_source",
+      "role": "compile-time Count fixture",
+      "rows": 16,
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "line": 368,
+      "parent": "count_result_guards_in_independently_compiled_emitted_source",
+      "role": "compile-time Count fixture",
+      "rows": 1,
+      "target": "tests/fixtures/count_result_guard_source_owner_cases.json"
+    },
+    {
+      "line": 422,
+      "parent": "count_result_guard_native_trace",
+      "role": "compile-time Count fixture",
+      "rows": 16,
+      "target": "tests/fixtures/count_result_guard_cases.json"
+    },
+    {
+      "role": "compile-time embedded function grammar",
+      "route": "rust/linkedspec-runtime/src/spec_parser.rs",
+      "target": "specs/user_function_definition.spec"
+    }
+  ],
+  "limits": "Source-resolved potential dependencies and role distinctions only. No Cargo/SDK, emitted bodies, all-case reads/preparation/writes/passes, actual child executable/dependency/cache/manifest anchor, transitive closure, source-origin/per-read/physical custody or new runtime admission. SESSION77 defect remains open; previous admissions remain historical.",
+  "manifest_metadata": {
+    "generated_by": "tools/gen_oracle_corpus.pl"
+  },
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2",
+  "parent_tests": [
+    {
+      "line": 282,
+      "name": "classify_all_generated_source_manifest_cases"
+    },
+    {
+      "line": 363,
+      "name": "count_result_guards_in_independently_compiled_emitted_source"
+    },
+    {
+      "line": 419,
+      "name": "count_result_guard_native_trace"
+    }
+  ],
+  "temporary_root": {
+    "cleanup": "TempProject Drop remove_dir_all; no cleanup executed by this reader",
+    "source": "std::env::temp_dir plus pid/nanoseconds",
+    "wrapper": "tools/run_cargo_local.sh and project_data_env.sh manage outer routing; actual historical environment unobserved"
+  },
+  "trace_rows": [
+    "free_guard_before_with",
+    "receiver_guard_before_with"
+  ]
+}

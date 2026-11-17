@@ -180,6 +180,16 @@ A Julia generated parser included with `Base.include_string(Module(...), emitted
 
 Rust `include_str!` supplies compile-time source dependencies; verifying the current file is separate from proving bytes embedded in an older binary. An optional readback can check equality without replacing the object passed to compilation. Follow the actual next argument: restoring from `retained` and calling a plan with `serialized` have distinct provenance even when their values agree. Keep observation-only exports and emitted source strings in their actual roles. Historical packet selection must use that producer’s documented schema, such as an exact archive locator.
 
+A generated-source classifier has both a parent program and programs assembled as strings. The Rust full-manifest source has three parent tests; its two child-test templates are written into generated modules. Its manifest names105 cases, each with `input.spec`, `input.txt` and `expected.json`: these315 paths are potential preparation inputs. Only successfully prepared cases reach generated module writing. Extra manifest provenance metadata is not another file dependency.
+
+| Rust parent route | Source inputs and generated artifacts | Child-process check |
+| --- | --- | --- |
+| Full manifest | Runtime manifest/corpus, embedded function grammar, generated crate/modules/index | Compile status required; run markers counted while run status is diagnostic. Known repair: `SESSION-STARTUP-READING.77`. |
+| Focused emitted Count | Two embedded fixtures containing16+1 rows, generated crate/modules/index | Separate `cargo test --lib` requires successful exit. |
+| Native Count trace | Two named rows from the16-row fixture; Engine writes then reads trace files | No Cargo launch in this parent. |
+
+The source-level Cargo helper requests offline/quiet execution, a generated-project cwd and its own target directory. Actual Cargo identity, dependency resolution, effective temporary root, embedded bytes and successful test execution require separate runtime evidence. A current source/fixture identity match with an older ledger supplies none of those execution results.
+
 A closed-tree epoch can renew current text capacity while preserving its full source. One Perl AST migration tree keeps all28 IDs and CORE fields, five complete unselected bodies and its52263-byte frontier/tail;23 closed commentary pointers reduce current text from88302 to75228 bytes. Whole-source and every ID query recover original bytes. That13074-byte reduction is text capacity under existing limits, with original SDK observations still historical.
 
 Closed-task commentary can use the existing explicit epoch interface while every current contract, unselected body and complete frontier stays in place. The helper-purge epoch retains its original source and every stable-ID query; it changes no helper behavior or old delivery date. Historical pressure recovery similarly reads the archived task view, while the original strict current-view reader remains dated. Neither form supplies fresh SDK or canonical-admission credit. For the complete helper-purge source, run `bash tools/run_python_project_data.sh tools/read_task_narrative.py --tree NONCURRENT-HELPER-CODE-PURGE --epoch TYPE-REFERENCE-BOOK.1.2.23.4.34 --all`.

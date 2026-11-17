@@ -1,0 +1,34 @@
+[
+  {
+    "source": ".linkedspec-data/rust-generated-publication.log",
+    "target": "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/publication-command.gz",
+    "bytes": 437,
+    "sha256": "d2368132c0095224f3b1bf28bf3b11de514ef2a297541748febf657cd3c817d0",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/rust-generated-publication-review.log",
+    "target": "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/publication-review.gz",
+    "bytes": 359,
+    "sha256": "966b51ac1b26113868b3aacca7cf18dadb5a789f2f514a0bc51050a7a57ffa72",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/rust-generated-book.log",
+    "target": "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/book-command.gz",
+    "bytes": 274,
+    "sha256": "e4eebee7b39e5384714bd4014069a37bf39b523140ede9f1a571a9a735e64161",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": "docs/linkedspec-book/book/development/documentation-workflow.html",
+    "target": "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/rendered-workflow.gz",
+    "bytes": 104405,
+    "sha256": "b3f454084abe36ed1b071eebde026306f7c083997b6768e2c9a9f36ca6581c2f",
+    "mode": 420,
+    "recording": "after-use copy"
+  }
+]

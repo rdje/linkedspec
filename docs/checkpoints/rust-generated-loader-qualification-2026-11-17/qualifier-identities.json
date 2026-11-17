@@ -1,0 +1,12 @@
+{
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/qualify.py": {
+    "bytes": 3694,
+    "mode": 420,
+    "sha256": "34fc4ada888718dfdcf7a3792d6c64a840c23bd31aa28727cdcbcfb493b8b365"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/review_qualified.py": {
+    "bytes": 2637,
+    "mode": 420,
+    "sha256": "7aee575b974972b28b855d441b17a6a8795db90235fe7d691be8208ef2176b7a"
+  }
+}

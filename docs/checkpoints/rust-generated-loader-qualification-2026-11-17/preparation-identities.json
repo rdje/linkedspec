@@ -1,0 +1,72 @@
+{
+  "docs/checkpoints/array-concat-open-arity-rust-2026-11-12/qualified-direct/custody.json": {
+    "bytes": 188199,
+    "mode": 420,
+    "sha256": "0284d46c055cd42db6cef5f34ff838fc3b181f60ce727e4ec3fb3bfc8a37cd1b"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/capture.py": {
+    "bytes": 3238,
+    "mode": 420,
+    "sha256": "e6cb56d1dcd54358de0082d5ee70c14aeadb7f964ee2eff3300b79511d654b4e"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/plan.json": {
+    "bytes": 1287,
+    "mode": 420,
+    "sha256": "99d6b6b6fb9f114b17616686eff84316f1ad6fc30eb7bdea9ff5e19f4a37a3c0"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/review.py": {
+    "bytes": 19053,
+    "mode": 420,
+    "sha256": "a814f0c15223e7b573f83c1124f55f03750ac570bbd1ede5f8e9b5aa6d335d61"
+  },
+  "docs/checkpoints/rust-generated-loader-qualification-2026-11-17/run_step.py": {
+    "bytes": 1030,
+    "mode": 420,
+    "sha256": "10853929f30925b68b0557e05e354f79d82654889aa0dc377a3b4186c6bb9cb3"
+  },
+  "docs/knowledge/rust-count-result-source-guards.md": {
+    "bytes": 4845,
+    "mode": 420,
+    "sha256": "9cfff01d007b8b3f67026d133f60a1eef28f33734083d3c7f04f64408d077740"
+  },
+  "docs/knowledge/rust-generated-classifier-child-status-gap.md": {
+    "bytes": 8480,
+    "mode": 420,
+    "sha256": "16d9eccbbfc69a4abda5a7fa980257bbaea9e44a99d5997d698a480b3c4aaeb2"
+  },
+  "docs/knowledge/rust-generated-source-full-manifest-classification.md": {
+    "bytes": 4349,
+    "mode": 420,
+    "sha256": "3bdb46eb0b43a861c7e13bfde61514bb0919879fb88f09f53c4256b33a6d0c0b"
+  },
+  "rust/linkedspec-runtime/src/spec_parser.rs": {
+    "bytes": 39214,
+    "mode": 420,
+    "sha256": "d25de1bfd0a36de1979049072431e14c3319cf9297899b9f0be56c321a165560"
+  },
+  "rust/linkedspec-runtime/tests/corpus/manifest.json": {
+    "bytes": 4497,
+    "mode": 420,
+    "sha256": "96404f8aabdcefcba517f229c9c3c2f94c4f51dd4c2a7c8fbee94e6ed27e1d28"
+  },
+  "specs/user_function_definition.spec": {
+    "bytes": 12679,
+    "mode": 420,
+    "sha256": "621f766229cc93c05649a465217223646f765228917d934b6d92365f0e6ecbae"
+  },
+  "tests/fixtures/count_result_guard_cases.json": {
+    "bytes": 8973,
+    "mode": 420,
+    "sha256": "0a41b080e30cc990322d98c82bbfbcfb5db88ff61ba9d4a27bb0f07f27296b93"
+  },
+  "tests/fixtures/count_result_guard_source_owner_cases.json": {
+    "bytes": 290,
+    "mode": 420,
+    "sha256": "63a085f734fb34738ace168c8d36c6a9b086def53b1c87b4214639725f0a93dc"
+  },
+  "tools/run_cargo_local.sh": {
+    "bytes": 494,
+    "mode": 493,
+    "sha256": "d96a53c04e84a1af85652844b2d42caeac542c52a392a7f8b95ca35620485011"
+  }
+}
