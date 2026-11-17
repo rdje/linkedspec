@@ -1,0 +1,217 @@
+{
+  "activation": "5909a0253a4ead9a1a430ba64d0de4836709641f",
+  "context_targets": [
+    "t/actionir_legacy_hash_kind_cold_probe.pl"
+  ],
+  "cwd": ".",
+  "entries": [
+    {
+      "expression": "do File::Spec->catfile(File::Basename::dirname(__FILE__), 'assigned_raw_regex_payload.t')\n        or die $@ || $!;",
+      "location": [
+        1540,
+        5,
+        5
+      ],
+      "ordinal": 16878,
+      "parent": "t/actionir_ast_parser.t",
+      "route": "source parent directory via __FILE__ plus literal name",
+      "source_sha256": "625c157db1f9c566bbf9d1e06a39c688e34919bdd899940fcc6813bfd8122aca",
+      "target": "t/assigned_raw_regex_payload.t"
+    },
+    {
+      "expression": "do './t/actionir_receiver_scalar_copy_probe.pl' or die $@ || $!;",
+      "location": [
+        44,
+        1,
+        1
+      ],
+      "ordinal": 635,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "route": "literal root-cwd-relative operand; source qualifier, not actual resolved-origin proof",
+      "source_sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d",
+      "target": "t/actionir_receiver_scalar_copy_probe.pl"
+    },
+    {
+      "expression": "my $legacy_loaded=do './t/actionir_legacy_hash_kind_probe.pl';",
+      "location": [
+        72,
+        19,
+        19
+      ],
+      "ordinal": 1041,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "route": "literal root-cwd-relative operand; source qualifier, not actual resolved-origin proof",
+      "source_sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d",
+      "target": "t/actionir_legacy_hash_kind_probe.pl"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'deferred_last_contract.t') or die $@ || $!;",
+      "location": [
+        1386,
+        5,
+        5
+      ],
+      "ordinal": 16004,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/deferred_last_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'deferred_with_contract.t') or die $@ || $!;",
+      "location": [
+        1390,
+        5,
+        5
+      ],
+      "ordinal": 16045,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/deferred_with_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'grouped_assignment_value_contract.t') or die $@ || $!;",
+      "location": [
+        1394,
+        5,
+        5
+      ],
+      "ordinal": 16086,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/grouped_assignment_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'filter_match_value_contract.t') or die $@ || $!;",
+      "location": [
+        1398,
+        5,
+        5
+      ],
+      "ordinal": 16127,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/filter_match_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;",
+      "location": [
+        1402,
+        5,
+        5
+      ],
+      "ordinal": 16168,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/array_pipeline_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'selected_scalar_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1406,
+        5,
+        5
+      ],
+      "ordinal": 16209,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/selected_scalar_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'selected_container_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1410,
+        5,
+        5
+      ],
+      "ordinal": 16250,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/selected_container_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'coalesce_nonempty_exhaustion.t') or die $@ || $!;",
+      "location": [
+        1414,
+        5,
+        5
+      ],
+      "ordinal": 16291,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/coalesce_nonempty_exhaustion.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'count_length_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1418,
+        5,
+        5
+      ],
+      "ordinal": 16332,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/count_length_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'aggregate_numeric_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1422,
+        5,
+        5
+      ],
+      "ordinal": 16373,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/aggregate_numeric_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'joined_string_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1426,
+        5,
+        5
+      ],
+      "ordinal": 16414,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/joined_string_receiver_contract.t"
+    }
+  ],
+  "lexer": "docs/checkpoints/perl-loader-token-census-2026-11-17/lexer.pl",
+  "limits": "Fourteen source-derived logical include targets and one nested child context. No actual file resolution, imports, test execution, child launch, complete transitive graph, native/source-origin/per-read/physical closure or canonical admission.",
+  "old_named_ledger": "docs/checkpoints/perl-consumer-roles-2026-11-16/named-includes.json",
+  "old_roles": "docs/checkpoints/perl-consumer-roles-2026-11-16/roles.json",
+  "old_source_identities": "docs/checkpoints/perl-consumer-roles-2026-11-16/identities.json",
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0",
+  "ppi_version": "1.270",
+  "prior_census": "docs/checkpoints/perl-loader-token-census-2026-11-17",
+  "words": [
+    "use",
+    "no",
+    "require",
+    "do",
+    "package",
+    "sub",
+    "caller",
+    "done_testing",
+    "observations",
+    "cases",
+    "open",
+    "print",
+    "system",
+    "exec",
+    "eval",
+    "cold"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0",
+  "claims": [
+    {
+      "name": "named-perl-include-roles",
+      "statement": "Fourteen named Perl includes across three parents resolve to twelve suite sources and two probe libraries; one nested cold-child source is retained separately. All fifteen target/context documents round-trip under PPI1.270; current31 bodies/modes, earlier eleven callable edges and eight corruption controls pass. Caller-guarded plans, helper standalone guards, truth/defined load checks and parent source-selection multiplicities2/2/1 remain explicit. No application test or cold child runs.",
+      "scope": "Fourteen source-derived logical include targets and one nested child context. No actual file resolution, imports, test execution, child launch, complete transitive graph, native/source-origin/per-read/physical closure or canonical admission.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-named-includes-2026-11-17/review.py --current",
+        "granularity": "Each fourteen source site/logical target, fifteen target/context bodies, twelve suite guards, two library guards, child command source and original eleven callable identities/parent selection roles.",
+        "result": "{\"controls\": {\"duplicate include site\": \"RED\", \"historical callable ledger\": \"RED\", \"include site population\": \"RED\", \"input body\": \"RED\", \"input mode\": \"RED\", \"input population\": \"RED\", \"logical target path\": \"RED\", \"target role\": \"RED\"}, \"current_inputs\": 31, \"include_sites\": 14, \"limits\": \"Fourteen source-derived logical include targets and one nested child context. No actual file resolution, imports, test execution, child launch, complete transitive graph, native/source-origin/per-read/physical closure or canonical admission.\", \"logical_targets\": 14, \"nested_child_context\": 1, \"old_callable_ledger\": 11, \"parents\": 3, \"ppi_roundtrips\": 15, \"probe_libraries\": 2, \"result\": \"PASS\", \"retained_inputs\": 31, \"suites\": 12}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2",
+        "reason": "Independent earlier eleven-edge ledger and byte/mode identities plus eight effective consistency mutations qualify bounded source bindings. Complete independent Perl semantics, computed/transitive/caller/phase analysis remains broader reconciliation3.2; no test execution."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Exact current31 source/instrument bodies/modes, activation Git identities, consumed requests and raw PPI/reader observations are retained before target inspection. Original three primary target bodies absent from callable-only epoch gain prospective custody only. External PPI/Perl/core/library/native/OS/outer-first-use/per-read/source-origin/physical and original historical closure remain4.2/SESSION5. Publication/outer log copies are after use; no retroactive credit."
+      }
+    },
+    {
+      "name": "named-include-evidence-controls",
+      "statement": "Eight missing/duplicate/path/role/historical-ledger/input population/body/mode controls reject altered evidence.",
+      "scope": "Only the declared bounded validators and actual retained source observations; no full semantic classifier proof.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-named-includes-2026-11-17/review.py --current",
+        "granularity": "Each changed evidence victim with exact expected assertion and observed RED.",
+        "result": "{\"duplicate include site\": \"RED\", \"historical callable ledger\": \"RED\", \"include site population\": \"RED\", \"input body\": \"RED\", \"input mode\": \"RED\", \"input population\": \"RED\", \"logical target path\": \"RED\", \"target role\": \"RED\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "An omitted or duplicate include, wrong literal target, probe promoted to suite, shortened historical callable ledger or missing/altered cold child could preserve acceptance.",
+        "oracle": "Earlier independent callable ledger and identity map; source-path/body validators and explicit suite/library expectations.",
+        "red_control": "Eight actual in-memory mutations produce the expected distinct assertions, including the cold child as the missing/body/mode victim; healthy observed evidence passes."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Exact current31 source/instrument bodies/modes, activation Git identities, consumed requests and raw PPI/reader observations are retained before target inspection. Original three primary target bodies absent from callable-only epoch gain prospective custody only. External PPI/Perl/core/library/native/OS/outer-first-use/per-read/source-origin/physical and original historical closure remain4.2/SESSION5. Publication/outer log copies are after use; no retroactive credit."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Activation estimates1,488,917,566 non-thin bytes against cached4683555e;11,082,434 bytes below director1.5GB.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin estimate and retained selected metadata copied after use.",
+        "result": "{\"ahead\": 126, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.488917566, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1488917566, \"evidence\": \".linkedspec-data/push-monitor/20261117T040019.533023Z\", \"gib\": 1.3866625409573317, \"head\": \"5909a0253a4ead9a1a430ba64d0de4836709641f\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 49237, \"pack_footer\": \"6dbe4a25923278626644fd3467d9e08584348984\", \"pack_sha256\": \"8354391db92da872d8277ae810b997437aa0ba085cdc38d13bc1a6a1d71a7bf9\", \"packed_objects\": 49237, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 11082434, \"trigger_reached\": false, \"unique_object_ids\": 49237}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Stream/stat/footer agreement; independent actual-file falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected telemetry retained; ignored raw pack/full tables and full native/physical/producer closure remain4.2/SESSION5. No fresh-remote/wire/future guarantee."
+      }
+    }
+  ]
+}

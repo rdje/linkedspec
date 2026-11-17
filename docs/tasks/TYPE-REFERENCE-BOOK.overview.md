@@ -1627,6 +1627,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Added ownership28: The selected Lua field proof retains its SDK/normal/oracle direct inputs, actual channels and opaque native bodies before the new loads. Its source-only initial case-preparation outer channels were not archived, and query-preparation-before-use.tar.gz is actually a late preparer source image. CUSTODY.md in docs/checkpoints/lua-raw-error-observation-2026-11-13/ owns those exact original-origin limits without retroactive first-use credit. Preserve the originals and include these named edges in this existing P2/SESSION5 origin audit before its admission/final-publication closeout; no broader native/source-resolution closure is inferred from the field observations.
   Added ownership Lua selection3.0: The expanded evidence reader was captured only after probe import; first failed setup raw channels and separate outer probe-producer exit are unavailable. Exact used/frozen bodies, seven common helpers and actual four Bash observations survive in lua-transitive-selection-2026-11-17. Preserve this historical limit; obtain prospective first-use/native proof through this existing before-admission/push schedule, never retroactive credit.
   Added ownership Perl-token census: Existing PPI1.270 inspects source without running LinkedSpec tests; actual project inputs/lexer requests/results are retained in perl-loader-token-census-2026-11-17. PPI/Perl/core/dependency/native/OS and outer-first-use/per-read/source-origin/physical bodies are not fully retained. Include this named toolchain edge in this existing before-admission/push audit; no retrospective original custody credit.
+  Added ownership Perl-named includes: The earlier callable-only164-source identities omit assigned_raw_regex_payload.t and both receiver/legacy probe.pl targets; the new perl-named-includes-2026-11-17 captures all three plus nested cold context prospectively. Original archive/results remain unchanged. Audit their actual earlier consumer epochs and repair provenance before admission/push with SESSION5; no retroactive custody or changed runtime verdict.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `active` / P1 canonical admission prerequisite; bounded children below
@@ -2089,10 +2090,32 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing checks: Current162/source145/four specimens/two observed RED distinctions; publication15/215 historical/three controls; history rollover/recovery/six controls/check41; Knowledge1773/12571, scope1975/17, book/render0, memory/history/whitespace0. Normal hooks govern landing; no full CI or LinkedSpec test execution.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1`
-  Status: `pending`
+  Status: `active`
   Goal: Resolve the frozen Perl fixed/constructed fixture and named support edges.
   Acceptance: Parent contract; retain exact caller vocabulary/target bodies and explicit conditional/transitive limits, including named non-callable-suite includes.
   Frozen include context: Nonblock do sites occur in actionir_ast_parser.t (assigned_raw_regex_payload.t), actionir_receiver_scalar_copy.t (two probe.pl targets) and callable_codeblock_literal_contract.t (eleven named includes). Resolve support/suite roles and conditional scope; do not infer execution or count probes as suites.
+  Children: `.0`, `.1`, `.2` (ID suffixes); all145 consumers remain binding.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0`
+  Status: `completed`
+  Goal: Qualify the fourteen named non-block do expressions across three Perl parents.
+  Acceptance: Freeze parent/site identities and exact declared target paths/bodies; distinguish suite, support and compatibility/caller-plan roles and preserve source guards/selection multiplicity. Compare the existing eleven callable include ledger without inferring runtime execution, full dynamic reachability or canonical admission.
+  Verification tier: `focused`
+  Focused checks: Source-bound fourteen-target resolution, retained bodies/modes/Git identities, independent earlier callable ledger and effective omission/role/path controls; book/memory/history/scope/hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared runner, test, runtime, toolchain or policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0.json`
+  Evidence: docs/checkpoints/perl-named-includes-2026-11-17/REVIEW.md.
+  Outcome: Named14/parents3: suites12/libraries2/cold context1; PPI15/current31/old callable11/eight controls PASS. Caller plans/source selections2/2/1 preserved. Three added primary bodies were absent from the old callable-only epoch; prospective capture closes this slice, historical4.2 remains.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1`
+  Status: `pending`
+  Goal: Resolve remaining direct literal fixture/source IO candidates across the full145 population.
+  Acceptance: Parent contract; distinguish file/memory/output/source-guard roles, explicit source conditions and actual consumer phases; no reached-IO inference.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.2`
+  Status: `pending`
+  Goal: Resolve constructed/helper-based direct paths and reconcile this edge-expansion lane.
+  Acceptance: Parent contract across all145, including custom library/helper loaders beyond the bounded initial vocabulary. Preserve unresolved semantic/native origins and coordinate generated/inline roles with sibling2.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.2`
   Status: `pending`

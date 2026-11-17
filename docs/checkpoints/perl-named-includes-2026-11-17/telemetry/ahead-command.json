@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "git",
+    "rev-list",
+    "--count",
+    "4683555ec51f04b8977812ce4e984c5cc6e6f42c..5909a0253a4ead9a1a430ba64d0de4836709641f"
+  ],
+  "cwd": ".",
+  "environment": {
+    "GIT_NO_LAZY_FETCH": "1",
+    "GIT_OPTIONAL_LOCKS": "0",
+    "LC_ALL": "C"
+  }
+}

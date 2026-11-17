@@ -20,7 +20,7 @@ Bounded selected/copy/count/length/aggregate/joined/default/index/has_key/emptin
 
 | Order | Leaf | Status | Why next |
 | --- | --- | --- | --- |
-| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1` | `pending` | Perl145 lexical census complete; expand frozen fixed/constructed/support1 then remaining generated/inline2. All broader semantic/native/registration prerequisites remain. |
+| 1 | `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1` | `pending` | Named includes qualified; resolve remaining literal IO across145, then constructed/helper2 and all admission prerequisites. |
 | 2 | `TYPE-REFERENCE-BOOK.1.2.23.1.42` | `completed` | Own84/66 contract passes/18 terminal-supported concat composition failures;84 module-dump pairs/first readonly14/current126; frozen bounded80, no production change. |
 | 3 | `TYPE-REFERENCE-BOOK.1.2.23.4.28` | `completed` | Selected route-specific raw fields/normal128 per host/legacyRED1/rawGREEN0; historical scope qualified, full admission separate. |
 | 4 | `TYPE-REFERENCE-BOOK.1.2.23.4.18` | `active` | Bounded18.1 canonical/lookup18.3 are committed; broader routing/pressure18.2 follows feature coverage. |

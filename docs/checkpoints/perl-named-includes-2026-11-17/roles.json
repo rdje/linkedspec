@@ -1,0 +1,517 @@
+{
+  "entries": [
+    {
+      "expression": "do File::Spec->catfile(File::Basename::dirname(__FILE__), 'assigned_raw_regex_payload.t')\n        or die $@ || $!;",
+      "location": [
+        1540,
+        5,
+        5
+      ],
+      "ordinal": 16878,
+      "parent": "t/actionir_ast_parser.t",
+      "route": "source parent directory via __FILE__ plus literal name",
+      "source_sha256": "625c157db1f9c566bbf9d1e06a39c688e34919bdd899940fcc6813bfd8122aca",
+      "target": "t/assigned_raw_regex_payload.t"
+    },
+    {
+      "expression": "do './t/actionir_receiver_scalar_copy_probe.pl' or die $@ || $!;",
+      "location": [
+        44,
+        1,
+        1
+      ],
+      "ordinal": 635,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "route": "literal root-cwd-relative operand; source qualifier, not actual resolved-origin proof",
+      "source_sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d",
+      "target": "t/actionir_receiver_scalar_copy_probe.pl"
+    },
+    {
+      "expression": "my $legacy_loaded=do './t/actionir_legacy_hash_kind_probe.pl';",
+      "location": [
+        72,
+        19,
+        19
+      ],
+      "ordinal": 1041,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "route": "literal root-cwd-relative operand; source qualifier, not actual resolved-origin proof",
+      "source_sha256": "582697a27e2900832ab838dbb12e199b5307297171d846e0a30e0e195242320d",
+      "target": "t/actionir_legacy_hash_kind_probe.pl"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'deferred_last_contract.t') or die $@ || $!;",
+      "location": [
+        1386,
+        5,
+        5
+      ],
+      "ordinal": 16004,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/deferred_last_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'deferred_with_contract.t') or die $@ || $!;",
+      "location": [
+        1390,
+        5,
+        5
+      ],
+      "ordinal": 16045,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/deferred_with_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'grouped_assignment_value_contract.t') or die $@ || $!;",
+      "location": [
+        1394,
+        5,
+        5
+      ],
+      "ordinal": 16086,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/grouped_assignment_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'filter_match_value_contract.t') or die $@ || $!;",
+      "location": [
+        1398,
+        5,
+        5
+      ],
+      "ordinal": 16127,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/filter_match_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'array_pipeline_value_contract.t') or die $@ || $!;",
+      "location": [
+        1402,
+        5,
+        5
+      ],
+      "ordinal": 16168,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/array_pipeline_value_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'selected_scalar_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1406,
+        5,
+        5
+      ],
+      "ordinal": 16209,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/selected_scalar_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'selected_container_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1410,
+        5,
+        5
+      ],
+      "ordinal": 16250,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/selected_container_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'coalesce_nonempty_exhaustion.t') or die $@ || $!;",
+      "location": [
+        1414,
+        5,
+        5
+      ],
+      "ordinal": 16291,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/coalesce_nonempty_exhaustion.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'count_length_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1418,
+        5,
+        5
+      ],
+      "ordinal": 16332,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/count_length_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'aggregate_numeric_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1422,
+        5,
+        5
+      ],
+      "ordinal": 16373,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/aggregate_numeric_receiver_contract.t"
+    },
+    {
+      "expression": "do File::Spec->catfile($repo_root, 't', 'joined_string_receiver_contract.t') or die $@ || $!;",
+      "location": [
+        1426,
+        5,
+        5
+      ],
+      "ordinal": 16414,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "route": "source-derived parent repository root plus literal t/name",
+      "source_sha256": "209a3e8d6a9598b9549af122aa215ec9c1f84ee21a15f22e68a6c8985aeda119",
+      "target": "t/joined_string_receiver_contract.t"
+    }
+  ],
+  "nested_process": {
+    "argv": [
+      "perl",
+      "-Iperl",
+      "t/actionir_legacy_hash_kind_cold_probe.pl"
+    ],
+    "function": "cold",
+    "parent": "t/actionir_legacy_hash_kind_probe.pl",
+    "scope": "Declared source command reached through observations/cold; no actual launch, Perl resolution or native dependency closure."
+  },
+  "parent_roles": [
+    {
+      "path": "t/actionir_ast_parser.t",
+      "role": "compatibility-suite",
+      "route": {
+        "kind": "direct-unconditional-selection",
+        "occurrences": 2
+      }
+    },
+    {
+      "path": "t/actionir_receiver_scalar_copy.t",
+      "role": "feature-suite",
+      "route": {
+        "kind": "direct-unconditional-selection",
+        "occurrences": 2
+      }
+    },
+    {
+      "path": "t/callable_codeblock_literal_contract.t",
+      "role": "feature-suite",
+      "route": {
+        "kind": "direct-unconditional-selection",
+        "occurrences": 1
+      }
+    }
+  ],
+  "prior_identity_absent": [
+    "t/actionir_legacy_hash_kind_cold_probe.pl",
+    "t/actionir_legacy_hash_kind_probe.pl",
+    "t/actionir_receiver_scalar_copy_probe.pl",
+    "t/assigned_raw_regex_payload.t"
+  ],
+  "summary": {
+    "controls": {
+      "duplicate include site": "RED",
+      "historical callable ledger": "RED",
+      "include site population": "RED",
+      "input body": "RED",
+      "input mode": "RED",
+      "input population": "RED",
+      "logical target path": "RED",
+      "target role": "RED"
+    },
+    "include_sites": 14,
+    "limits": "Fourteen source-derived logical include targets and one nested child context. No actual file resolution, imports, test execution, child launch, complete transitive graph, native/source-origin/per-read/physical closure or canonical admission.",
+    "logical_targets": 14,
+    "nested_child_context": 1,
+    "old_callable_ledger": 11,
+    "parents": 3,
+    "ppi_roundtrips": 15,
+    "probe_libraries": 2,
+    "result": "PASS",
+    "retained_inputs": 31,
+    "suites": 12
+  },
+  "targets": [
+    {
+      "detail": "Top-level JSON probe source; declared from cold() subprocess only; not launched here.",
+      "path": "t/actionir_legacy_hash_kind_cold_probe.pl",
+      "plan": [],
+      "role": "nested-child-program",
+      "sha256": "5644edfe5d5cb215111f74ed17f15b9a3c6e8ba135899c5f671401ccc60e0216",
+      "test_more": []
+    },
+    {
+      "detail": "LegacyHashKindProbe; definitions used by parent; standalone observe JSON path guarded by unless(caller).",
+      "path": "t/actionir_legacy_hash_kind_probe.pl",
+      "plan": [],
+      "role": "included-probe-library",
+      "sha256": "16fbcf4f397ef2c032fd73bf5abb38d36dc2fbac0b82a61cda75f2ee3733075e",
+      "test_more": []
+    },
+    {
+      "detail": "ReceiverScalarCopyProbe; definitions used by parent; standalone observe JSON path guarded by unless(caller).",
+      "path": "t/actionir_receiver_scalar_copy_probe.pl",
+      "plan": [],
+      "role": "included-probe-library",
+      "sha256": "74aeb01dcb361501c682cecabadb8259bf20d25e6dcf1c55d63957acb4d2903d",
+      "test_more": []
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/aggregate_numeric_receiver_contract.t",
+      "plan": [
+        [
+          46,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "6f9bcb24b2bf9bb193337796ac3d63fd4da518449ac930fc1d067a48da3fcb52",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/array_pipeline_value_contract.t",
+      "plan": [
+        [
+          94,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "f33e814378d84ca2437c83cb025cef44c3c6ed496b02038791cca3c732239cde",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/assigned_raw_regex_payload.t",
+      "plan": [
+        [
+          55,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "8e8ad6b144bfb88fa120bda1387c97154ec34112438b9a6d0605cbdd8bd2af8d",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/coalesce_nonempty_exhaustion.t",
+      "plan": [
+        [
+          55,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "9ddc3b0bb21c227cef9346227d9cbfa94d6c0bb35011c9a71a8b4d166e48ccb8",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/count_length_receiver_contract.t",
+      "plan": [
+        [
+          49,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "61ede485aa1bd44e9b38bf0a4de685dda5fb111b990c30102ce02d9b064f8d41",
+      "test_more": [
+        [
+          4,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/deferred_last_contract.t",
+      "plan": [
+        [
+          45,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "4f1d3202cb241b5d07689ccbaddf6ce4b54ff706abd8aa68914745d4768b7a42",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/deferred_with_contract.t",
+      "plan": [
+        [
+          66,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "c0399de0dabef49b3a9ae483e242a9ce34d5b814d70ba69517f295d659784eb0",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/filter_match_value_contract.t",
+      "plan": [
+        [
+          45,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "94834e253b6929bf4b57791d5be264774af6b7a34065a8c0d6d0fa83e9f27254",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/grouped_assignment_value_contract.t",
+      "plan": [
+        [
+          48,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "621c0587b4170588d81e7f04ee64ff5676781e93b87f974920be975eaaac5226",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/joined_string_receiver_contract.t",
+      "plan": [
+        [
+          48,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "75897d064fe01dd78d20a165ecdbcb9d95e62040da67a36f958654d83ab2ada4",
+      "test_more": [
+        [
+          4,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/selected_container_receiver_contract.t",
+      "plan": [
+        [
+          49,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "a9fffaad38ab8ab5731a551fd9b3f26207b8f36bb99c2eb325801e795f0f90d0",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    },
+    {
+      "detail": "Test::More imported; assertions remain in source; final plan suppressed when caller is present. Runtime execution not observed.",
+      "path": "t/selected_scalar_receiver_contract.t",
+      "plan": [
+        [
+          47,
+          1,
+          1
+        ]
+      ],
+      "role": "suite-with-caller-plan-guard",
+      "sha256": "2711aca42e6ef633571652b10fe6219d5e70399065a5235c9ad6da3e636829ae",
+      "test_more": [
+        [
+          3,
+          1,
+          1
+        ]
+      ]
+    }
+  ]
+}

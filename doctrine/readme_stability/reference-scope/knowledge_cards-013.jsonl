@@ -1,4 +1,5 @@
-{"member_count":110,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":111,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":4205,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-duck-typed-assignment-perl-reference.md","sha256":"d54863ad1462b5f82097cd9fe505eb1792ee43d7754a1be543e3d14b40efdd51","type":"member"}
 {"bytes":5179,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-assignment-and-operator-calls.md","sha256":"248a9c2d2df3297d3610a3932da21abdd99d6b1acfbd25c65d8b4e448993a548","type":"member"}
 {"bytes":2959,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-block-early-return.md","sha256":"172eda68bbb7a6a255e143b77ab712e2b913de29b987e86e42cb8c79452a43d5","type":"member"}
 {"bytes":3632,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-expression-valued-blocks-ground-truth.md","sha256":"2cd546aec1695eb347295a02e2fadecdb52a03a9af611b4e9162b0133bbc7907","type":"member"}

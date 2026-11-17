@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "command": "bash tools/run_mdbook_local.sh",
+  "observed_build_exit": 0,
+  "source_log": ".linkedspec-data/perl-named-includes-book.log",
+  "raw_log_bytes": 274,
+  "raw_log_sha256": "4edcd88c7792409c60e656546ed9e1f76e24d99bcd66aa676ef1cad0a22b5847",
+  "rendered_path": "docs/linkedspec-book/book/development/documentation-workflow.html",
+  "rendered_sha256": "050fe827766333b66bf4b709e339413b007a83d23cfbcb5a651a62c6cd30d713",
+  "claim_owner_correction": "Only new claim follow-up owner changed; actual used publisher/draft retained.",
+  "recording": "After-use log/render copies; no fresh first-use/whole-book semantic/native closure claim."
+}

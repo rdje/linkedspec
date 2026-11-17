@@ -1,4 +1,4 @@
-November17 current PNT frontier: Perl145 lexical census0 is focused-checked with PPI1.270/current162/four specimens/two observed RED distinctions. Frozen edge expansion1 then generated/inline2 precede remaining semantic/excluded, generated Dart/frozen-input, registration4.1.2/publication30.2. Lexical sites gain no runtime or native-custody credit.
+November17 current PNT frontier: Perl named includes1.1.0 are focused-checked:14 edges/12 suites/two libraries/one child context/current31. Remaining literal IO1, constructed/helper2 and generated-inline roles precede broader semantic/native reconciliation, generated Dart/frozen-input, registration4.1.2/publication30.2. No new runtime admission.
 
 October5 BasicRules family closeout: SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.1.2.1 accepts3921-input immutable20-contract recurrence with exact original source/argument/occurrence identities,144 unchanged groups and28 proof/render controls. Exact staged canonical CI receipt gates parent closeout; remaining pipeline provenance .1.2 follows.
 

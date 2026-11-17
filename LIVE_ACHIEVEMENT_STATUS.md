@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: Perl145 lexical census complete; frozen direct-edge expansion continues.
+PNT: named Perl includes qualified; remaining direct fixture IO continues.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0 — All145 Perl source documents round-trip through installed PPI1.270 with no unknown-token qualification or stderr. Overlapping lexical candidate groups are122 IO/readline,143 eval/process,84 named-helper,127 non-Word/heredoc and three nonblock-do files. Four controlled specimens pass; actual promoted-quote source is RED against the old oracle, and the controlled compiler sentinel exits255 while static lexing succeeds. Current162 input bodies/modes pass. These are lexical candidates, not resolved file edges or reached runtime calls; no LinkedSpec test/SDK execution.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0 — Fourteen named Perl includes across three parents resolve to twelve suite sources and two probe libraries; one nested cold-child source is retained separately. All fifteen target/context documents round-trip under PPI1.270; current31 bodies/modes, earlier eleven callable edges and eight corruption controls pass. Caller-guarded plans, helper standalone guards, truth/defined load checks and parent source-selection multiplicities2/2/1 remain explicit. No application test or cold child runs.
 
 ## Next Action
 
-Remeasure committed outgoing size; resolve frozen Perl fixture/constructed/support edges under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1, then generated/inline roles2 and excluded/dynamic/semantic reconciliation before generated Dart/frozen-input/registration and every publication prerequisite.
+Remeasure committed size, then resolve the full145-source remaining literal fixture/source IO under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1; constructed/helper sibling2, generated-inline roles and broader reconciliation precede registration and publication prerequisites.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0 — Perl named14/suites12/libraries2/child1/current31/eight controls; no execution.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0 — Perl145 PPI roundtrips/current162; lexical groups122/143/84/127/3; four specimens/promoted-source RED/compiler255.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0 — Lua eleven named routes absent/1107 scoped blobs;44 commands per ABI block/83 dofile/current23/two Bash REDs; reader epoch gap disclosed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Rust generated:320 bindings/319 targets/three parents/two templates/three commands/current442/historical321/twelve controls; original reader refusal retained, no SDK.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; resolve frozen Perl fixture/constructed/suppo
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
 
 
 ## History

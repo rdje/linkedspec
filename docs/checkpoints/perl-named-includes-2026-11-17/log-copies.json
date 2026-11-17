@@ -1,0 +1,34 @@
+[
+  {
+    "source": ".linkedspec-data/perl-token-census-commit.log",
+    "target": "docs/checkpoints/perl-named-includes-2026-11-17/preceding-normal.log.gz",
+    "bytes": 18188,
+    "sha256": "590d539e2439fa654e132adca36b9690a19552dc3642250e6a611eb0ee11b69d",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-named-includes-capture.log",
+    "target": "docs/checkpoints/perl-named-includes-2026-11-17/capture-outer.log.gz",
+    "bytes": 768,
+    "sha256": "9f2a5b485f8ec88c3620e0054642280ec0f97e71599faedc18df4b4d0ef8e2b4",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-named-includes-review.log",
+    "target": "docs/checkpoints/perl-named-includes-2026-11-17/review-outer.log.gz",
+    "bytes": 792,
+    "sha256": "8abc747df9edc8e126884552a7ee350dcc0be036b5b53eee22d914f7503db574",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-named-includes-plan.log",
+    "target": "docs/checkpoints/perl-named-includes-2026-11-17/plan-outer.log.gz",
+    "bytes": 1042,
+    "sha256": "c65108192ca2917b5f0f59465f6aad8b0b1d4d3121f3aaee074a884c27a3f468",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  }
+]

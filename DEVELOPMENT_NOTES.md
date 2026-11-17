@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — retain named suite and library roles
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0: Named do paths cover three source forms: parent-directory __FILE__, repository-root File::Spec and root-cwd literals. Twelve imported Test::More suites suppress only their final plan when caller is present; their source assertions remain. Two package probe libraries suppress standalone observe output under caller. Legacy observations declares cold(), which opens a Perl child pipe; its source is context, never another selected suite. AST/scalar-copy direct selections remain2 each versus callable1 in the earlier source ledger. Three primary targets absent from the older callable-only identities are captured prospectively; historical custody stays4.2. No source/runtime change or retrospective execution claim. Evidence: `docs/checkpoints/perl-named-includes-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — keep lexical source sites separate from runtime calls
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0: PPI receives immutable JSON source requests rather than loading test files as Perl programs. Document serialization, not concatenated token content, preserves heredoc payloads. Word sites can be method names, fat-comma keys or declarations; strings/regex/heredocs can contain nested/interpolated execution and remain separately unqualified. The first frozen lexer/capture and readonly recovery succeed without a producer correction. Named do candidates include AST/scalar-copy support contexts beyond the earlier callable-only include review. Candidate populations overlap and retain original feature/compatibility/maintenance roles; target/caller resolution and full semantic/native proof remain scheduled. Evidence: `docs/checkpoints/perl-loader-token-census-2026-11-17/REVIEW.md`.

@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — qualify named Perl includes
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0: Fourteen named Perl includes across three parents resolve to twelve suite sources and two probe libraries; one nested cold-child source is retained separately. All fifteen target/context documents round-trip under PPI1.270; current31 bodies/modes, earlier eleven callable edges and eight corruption controls pass. Caller-guarded plans, helper standalone guards, truth/defined load checks and parent source-selection multiplicities2/2/1 remain explicit. No application test or cold child runs. Evidence: `docs/checkpoints/perl-named-includes-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — freeze Perl loader token census
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0: All145 Perl source documents round-trip through installed PPI1.270 with no unknown-token qualification or stderr. Overlapping lexical candidate groups are122 IO/readline,143 eval/process,84 named-helper,127 non-Word/heredoc and three nonblock-do files. Four controlled specimens pass; actual promoted-quote source is RED against the old oracle, and the controlled compiler sentinel exits255 while static lexing succeeds. Current162 input bodies/modes pass. These are lexical candidates, not resolved file edges or reached runtime calls; no LinkedSpec test/SDK execution. Evidence: `docs/checkpoints/perl-loader-token-census-2026-11-17/REVIEW.md`.
