@@ -1,0 +1,365 @@
+[
+  {
+    "claim": "finite-engineering-history-member",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "9a80187ac02126a9af9437a729064f05ed4d203bbab408988da11d5d6b0b8761"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+    "revision": "268891fdf948b1ccf875087416b62100e0ddc059"
+  },
+  {
+    "claim": "finite-engineering-history-member",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+    "revision": "268891fdf948b1ccf875087416b62100e0ddc059"
+  },
+  {
+    "claim": "original-capacity-input-boundary",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "a5efead8f192c785c11f664dcd0a462ff3e6a13043bb7769146890854a0d20d8"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.2.3.json",
+    "revision": "cdc45f9cbddbc53603e885225af2a35688657292"
+  },
+  {
+    "claim": "guarded-ast-finite-change-history-capacity",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "e0e5df8143b8890b6b885d87603386389918414dfa1424e13203659973ecbe1e"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+    "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7"
+  },
+  {
+    "claim": "guarded-ast-finite-change-history-capacity",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "595723d361bb9684bb4be4a1d8a81abf0db56df62554d5d195c5b79f84ec53b7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.3.4.json",
+    "revision": "b0099d9ade78623b38c2213867b84f1e32014fe7"
+  },
+  {
+    "claim": "accepted-admission-publication-recovery",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "3551fb4172778b16e4516f0489b701bf93350b4b4ecaf28d86d28b860d79701b"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+    "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3"
+  },
+  {
+    "claim": "accepted-admission-publication-recovery",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "595723d361bb9684bb4be4a1d8a81abf0db56df62554d5d195c5b79f84ec53b7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.1.json",
+    "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3"
+  },
+  {
+    "claim": "finite-engineering-history-member",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "3551fb4172778b16e4516f0489b701bf93350b4b4ecaf28d86d28b860d79701b"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+    "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3"
+  },
+  {
+    "claim": "finite-engineering-history-member",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "595723d361bb9684bb4be4a1d8a81abf0db56df62554d5d195c5b79f84ec53b7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+    "revision": "d95a25c8b5904bfbc893aee5249dbaf278496eb3"
+  },
+  {
+    "claim": "original-capacity-input-boundary",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "19a55a1a39b8be4a9f9713be16b553e2bd7c6dfb00bed6110287908d24ef49eb"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.6.json",
+    "revision": "d8418423e7461235280e9a34b9d90f4571fc9490"
+  },
+  {
+    "claim": "finite-change-history-with-portable-evidence",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "2d7bde548b76e8a617c484b7497c62192bf5af6738c501c82e092fb70fb100d2"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+    "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae"
+  },
+  {
+    "claim": "finite-change-history-with-portable-evidence",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "a5a587e6b846beade1a76512c6cfb6eeaa5afb6200fc72cafb958947e3d99634"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+    "revision": "557a7d9e533710c6aae211f905ca2f231a8aedae"
+  },
+  {
+    "claim": "original-capacity-input-boundary",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "04684df57f648696782703cb0731833c35838e03e6c1d4a034014c9c851620cd"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+    "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d"
+  },
+  {
+    "claim": "original-capacity-input-boundary",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "595723d361bb9684bb4be4a1d8a81abf0db56df62554d5d195c5b79f84ec53b7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.7.json",
+    "revision": "6392b8a6512a639265d150acb11b0e9a8451ea3d"
+  },
+  {
+    "claim": "finite-engineering-history-member-0135",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "fb6bb25de9881e852f48ba574b7393b8da14b2a6dc0f239c2687cd68cd527ed9"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.1.3.json",
+    "revision": "e2ec1e96bc47633599f0935ed6828c1a0b99e40a"
+  },
+  {
+    "claim": "finite-continuity-capacity-0136",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "5144687086967def18e9ae4eb8e35d6b85c771445a1bd6e0d4ee71928ea7c145"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+    "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534"
+  },
+  {
+    "claim": "finite-continuity-capacity-0136",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "b4edaba12a8a7bfc024a0c0111df908c9316c6d22dbffe75d0b43bf37804100f"
+    },
+    "mode": "historical",
+    "record": "docs/claims/PERL-PRIVATE-FACTORY-CAPTURE.5.8.json",
+    "revision": "e953f69a9934c4ab48e643e69c9efaba0cb1d534"
+  },
+  {
+    "claim": "dated-retained-artifact-review",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "3591be9ca52b85396e266b07533b388ff66907d1afa4ab8e1e29113471cd10bc"
+    },
+    "mode": "historical",
+    "record": "docs/claims/REPO-HYGIENE.13.json",
+    "revision": "997f1cb8f32ff4eaa1ba278e124cbaaac1942780"
+  },
+  {
+    "claim": "dated-retained-artifact-review",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "4580c30c67aac13dcda7372434e9c08ac94c51e64d7b5c9b556cb6561e072f60"
+    },
+    "mode": "historical",
+    "record": "docs/claims/REPO-HYGIENE.14.json",
+    "revision": "476bbd1f916edb4c6593bad3c5a8381447c211b6"
+  },
+  {
+    "claim": "dated-retained-artifact-review-and-current-custody",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "7a355580fbeee8063d95a0657af26a935184a84eb869c9cbc1f8aa300d2cb6e6"
+    },
+    "mode": "historical",
+    "record": "docs/claims/REPO-HYGIENE.18.json",
+    "revision": "a60764c11ae9bc59242b0220b7ef843a4e579b80"
+  },
+  {
+    "claim": "nested-boundary-lexical-repair",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "81bf59977fae27ac86f91f2914f09741f45f1afd5ce3a1dca54a55dbbd58d7e2"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json",
+    "revision": "d52add3e5e070b243eb3a2a532d061b51994a36a"
+  },
+  {
+    "claim": "nested-boundary-lexical-repair",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "2132f7b661e16bf88883cf8fd8196c7dc84ef792f2a295b7407ce2973acec731"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.1.4.0.1.1.json",
+    "revision": "d52add3e5e070b243eb3a2a532d061b51994a36a"
+  },
+  {
+    "claim": "private-original-occurrence-handoff",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "ab5c905206af39cd389dc8987e9a3e71d7476757c807200a0f0e7563288937c2"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.0.json",
+    "revision": "6feff5d40a7e0554425314c120d7ce2b73586a49"
+  },
+  {
+    "claim": "rejected-mapped-interval-candidate",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "ef9d121f25e72c77523189c1180ef3f17ffc906b43511a3bca8cbb9ff4a620f0"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.0.json",
+    "revision": "e7674382295936a1d6d3dbd34272d9c6803a269d"
+  },
+  {
+    "claim": "finite_lossless_change_history_admission",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "b179860bbcebd0a8339a91f5f8ac5e8a21d3ffa48c93819dfcc9caa025b6fbdc"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+    "revision": "60e8ef2ab571bab5d951e0d6f701daf1752df36e"
+  },
+  {
+    "claim": "finite_lossless_change_history_admission",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.0.json",
+    "revision": "60e8ef2ab571bab5d951e0d6f701daf1752df36e"
+  },
+  {
+    "claim": "actual-typed-and-raw-producer-diagnosis",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "903ca973c1de0121aded5f612ffa1e249b9c9a7ab773288773fbbd6cce945ab5"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.1.json",
+    "revision": "58a11ae80cc55f8d19a0a7a4f0203ae491d11383"
+  },
+  {
+    "claim": "finite-three-scalar-engineering-notes-aggregate-admission",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "61767bcb30ba463e62741f503859ef1516f42a3c46f2240fbb6bcf62c84951f7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+    "revision": "31fe4fd3655466018a509d894fc6bca3a331944d"
+  },
+  {
+    "claim": "finite-three-scalar-engineering-notes-aggregate-admission",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.6.json",
+    "revision": "31fe4fd3655466018a509d894fc6bca3a331944d"
+  },
+  {
+    "claim": "exact-historical-capacity-publisher-fixture-inputs",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "61767bcb30ba463e62741f503859ef1516f42a3c46f2240fbb6bcf62c84951f7"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+    "revision": "31fe4fd3655466018a509d894fc6bca3a331944d"
+  },
+  {
+    "claim": "exact-historical-capacity-publisher-fixture-inputs",
+    "input": {
+      "path": "docs/history/changes/manifest.jsonl",
+      "role": "input",
+      "sha256": "8e542adf600f3a164b2b3a77201b08e6bc1931bc2eafae799820273f6908b913"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.1.1.2.1.2.7.json",
+    "revision": "31fe4fd3655466018a509d894fc6bca3a331944d"
+  },
+  {
+    "claim": "finite-composed-engineering-and-decision-capacity",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "b4f7cd2dde29b99dcae81b1d0b56f40527f7b0c6fcc270f5ea93b4dc84b04f4c"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.2.json",
+    "revision": "eb6d0d6ea7b88d13ebe669a507b3126d7508c0eb"
+  },
+  {
+    "claim": "unique-accepted-readme-routing-authority",
+    "input": {
+      "path": "CHANGES.md",
+      "role": "input",
+      "sha256": "21e0bde9818efaa0b5d9312d33900e7618a92319b88a6ed9216f089be3583fdf"
+    },
+    "mode": "historical",
+    "record": "docs/claims/SPEC-LANGUAGE-SELF-CONTAINMENT.1.3.3.0.7.2.2.0.3.1.3.json",
+    "revision": "32169d1282effa083a431b17b11c436fdd862771"
+  }
+]

@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: bounded Lua named routes complete; Perl145 loaders and remaining reconciliation continue.
+PNT: Perl145 lexical census complete; frozen direct-edge expansion continues.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0 — Eleven Lua candidates have no direct configured-driver/shared-runner operands or literal basename references in1107 regular Git blobs under six named project subtrees. Two isolated inert Bash blocks select44 operands each; missing/duplicate runner controls are RED at exit0. Shared source has83 literal dofile calls, no dynamic dofile sites and all16 earlier named candidates. Current23, positive locator and qualified reader proof pass; seven shared helper bodies are unchanged. Actual expanded-reader first-use capture is missing and remains disclosed under4.2; no SDK or complete transitive/admission claim.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0 — All145 Perl source documents round-trip through installed PPI1.270 with no unknown-token qualification or stderr. Overlapping lexical candidate groups are122 IO/readline,143 eval/process,84 named-helper,127 non-Word/heredoc and three nonblock-do files. Four controlled specimens pass; actual promoted-quote source is RED against the old oracle, and the controlled compiler sentinel exits255 while static lexing succeeds. Current162 input bodies/modes pass. These are lexical candidates, not resolved file edges or reached runtime calls; no LinkedSpec test/SDK execution.
 
 ## Next Action
 
-Remeasure committed outgoing size; qualify Perl145 direct loaders under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1, then relevant excluded/dynamic/semantic reconciliation2 and generated Dart/frozen-input work before registration4.1.2/publication30.2 with every other prerequisite.
+Remeasure committed outgoing size; resolve frozen Perl fixture/constructed/support edges under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1, then generated/inline roles2 and excluded/dynamic/semantic reconciliation before generated Dart/frozen-input/registration and every publication prerequisite.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0 — Perl145 PPI roundtrips/current162; lexical groups122/143/84/127/3; four specimens/promoted-source RED/compiler255.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0 — Lua eleven named routes absent/1107 scoped blobs;44 commands per ABI block/83 dofile/current23/two Bash REDs; reader epoch gap disclosed.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.2 — Rust generated:320 bindings/319 targets/three parents/two templates/three commands/current442/historical321/twelve controls; original reader refusal retained, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.35 — existing Perl AST epoch:28 IDs/23 pointers/five unchanged bodies/29 queries/ten controls;13074 current bytes renewed.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; qualify Perl145 direct loaders under TYPE-REF
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.0 — six Dart consumers/ten fixture/six grammar/one support/one output-readback/eight controls; static only, no SDK/admission.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.0 — source952/proposals221/candidate Perl omissions131/five selector+five evidence controls; portable archive226/five controls; no SDK or canonical credit.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.0 — bounded discovery inventory and canonical registration plan; original obligations preserved, no runner/runtime/fixture change.
-- TYPE-REFERENCE-BOOK.1.2.23.4.33 — 1316 dated metadata rows agree in eight named scopes; five altered-evidence controls and separate readonly recovery pass. All artifacts, caches and proof remain retained; nothing removed.
 
 
 ## History

@@ -105,6 +105,7 @@
 {"bytes":3439,"lines":55,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.76.1","path":"docs/knowledge/perl-sorted-values-scalar-host-isolation.md","sha256":"e740c253650a1ca1edc9007571f30770e7eb678134d5ade8cc1a691b9548b43e","type":"member"}
 {"bytes":3818,"lines":51,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-source-location-slice-compatibility.md","sha256":"0e3c35d118acea5112191ff54528ecfd694bad170c449f8172ac9c6f38c5a177","type":"member"}
 {"bytes":6350,"lines":59,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-source-membership-callable-signature-precedence.md","sha256":"17dd611057ca668313a4c0efd102e36a216fae6bb02823b38b73a0e7f4840ab7","type":"member"}
+{"bytes":3184,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0","path":"docs/knowledge/perl-source-token-census.md","sha256":"d87c51ff725a45c0cd47f6e0e49c0ebafb0bfc42449488e05e6d1be8c8d99860","type":"member"}
 {"bytes":3494,"lines":50,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-sparse-and-structural-slots.md","sha256":"a8ec1e7af23de9245e2af160da06593b3965129d8a303090fd61a2737a80c450","type":"member"}
 {"bytes":4946,"lines":65,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-staged-annotation-statement-origins.md","sha256":"9a7c0171cf007704c2b66687946f61d614f5708fe966c757c17b9e83b6dd59d6","type":"member"}
 {"bytes":9686,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-staged-ast-enrichment-carriers-admission.md","sha256":"217d382d2d80ed53d4a348cf9d87e1c87fb1ff9fb6e222d156b07ca44e0bf7a9","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":10197,"lines":185,"owner":"TYPE-REFERENCE-BOOK.1.2.23.3.77.0","path":"docs/knowledge/perl-wrong-kind-collection-host-slot-drift.md","sha256":"bc902492c194b635e35d009400470c29a657d13377c7fd48a123b5953baf1b7c","type":"member"}
 {"bytes":1469,"lines":26,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-all-target-actionir-ready-invariant.md","sha256":"6369b1eb3f16a226c925727f769ede8e36c2a2296593ba5b1384d7b967f4718a","type":"member"}
 {"bytes":6252,"lines":115,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-array-assignment-description-drift.md","sha256":"051ce38c046a2053b7b71fba410bd4b38bd0dbc9f16ffae9b07a2d5fc54808d4","type":"member"}
-{"bytes":3611,"lines":49,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/phase0-behavior-calibration-source-stages.md","sha256":"161415a4dcb2380139b6296023732f9b403244ffd959c3cc70242f41503b5363","type":"member"}

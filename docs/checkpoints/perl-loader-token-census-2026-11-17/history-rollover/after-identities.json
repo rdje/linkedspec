@@ -1,0 +1,27 @@
+{
+  "CHANGES.md": {
+    "bytes": 32254,
+    "mode": 420,
+    "sha256": "bb5630501cee17957ee46a36810d6be21e3256638704a8401dc95f9d2cac6701"
+  },
+  "docs/history/changes/catalog/index-0004-8a28d492bfa4d277e1fde166e4aa7fd494dc82d3f782c7a144025732374f12d5.jsonl": {
+    "bytes": 1346,
+    "mode": 384,
+    "sha256": "8a28d492bfa4d277e1fde166e4aa7fd494dc82d3f782c7a144025732374f12d5"
+  },
+  "docs/history/changes/catalog/segments-0153-c48d93a3aad73d0f10084112907dd140fb4d478ef70be5aae88e75e9f55959d4.jsonl": {
+    "bytes": 717,
+    "mode": 384,
+    "sha256": "c48d93a3aad73d0f10084112907dd140fb4d478ef70be5aae88e75e9f55959d4"
+  },
+  "docs/history/changes/manifest.jsonl": {
+    "bytes": 576,
+    "mode": 384,
+    "sha256": "52843224bf162ff17b151712deebd57d6d2e200eddaa77d093e0f2028ccb99c5"
+  },
+  "docs/history/changes/segment-4927-0fedb38229a1.md": {
+    "bytes": 27023,
+    "mode": 420,
+    "sha256": "0fedb38229a19039371456fa18b5fb1228f78f6115da7591c3dcec024491ebb6"
+  }
+}

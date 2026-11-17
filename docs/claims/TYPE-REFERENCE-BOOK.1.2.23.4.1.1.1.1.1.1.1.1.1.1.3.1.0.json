@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0",
+  "claims": [
+    {
+      "name": "perl-source-token-census",
+      "statement": "All145 Perl source documents round-trip through installed PPI1.270 with no unknown-token qualification or stderr. Overlapping lexical candidate groups are122 IO/readline,143 eval/process,84 named-helper,127 non-Word/heredoc and three nonblock-do files. Four controlled specimens pass; actual promoted-quote source is RED against the old oracle, and the controlled compiler sentinel exits255 while static lexing succeeds. Current162 input bodies/modes pass. These are lexical candidates, not resolved file edges or reached runtime calls; no LinkedSpec test/SDK execution.",
+      "scope": "PPI lexical Word/quote-like sites and context hints only. No assertion that each word is a builtin call, reached path, actual file read, module origin or runtime action. Quoted/interpolated/regex/heredoc nested semantics and full caller/target expansion remain follow-ups1/2 and semantic reconciliation. No LinkedSpec tests or runtime/SDK execution. Population lists overlap and are lexical follow-up candidates, never counts of reached runtime IO or resolved target edges. PPI/runtime/library/native/toolchain/outer-first-use/per-read/physical closure remains4.2/SESSION5. The declared word vocabulary is bounded; custom helper/library loaders and unlisted word forms require follow-up across the full145-source population.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-loader-token-census-2026-11-17/review.py --current",
+        "granularity": "Each145 input source, exact JSON request/digest/order, observed PPI document/token class/site/context, overlapping candidate population and162 current retained bodies/modes.",
+        "result": "{\"consumers\": 145, \"controls\": {\"compiler_sentinel\": {\"actual_exit\": 255, \"distinction\": \"Actual Perl compilation executes BEGIN and rejects the sentinel; PPI lexing the same controlled source succeeds without executing it. No LinkedSpec test source is compiled.\", \"result\": \"RED\"}, \"healthy_specimens\": {\"cases\": [{\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"id\": \"quoted-only\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"id\": \"qualified-word\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 3}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 3}}, \"id\": \"member-key-declaration\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 1, \"includes\": 1, \"quote_io\": 2, \"word_counts\": {\"do\": 2, \"eval\": 1, \"open\": 2, \"require\": 1}}, \"expected\": {\"heredocs\": 1, \"includes\": 1, \"quote_io\": 2, \"word_counts\": {\"do\": 2, \"eval\": 1, \"open\": 2, \"require\": 1}}, \"id\": \"mixed-sentinel\", \"result\": \"PASS\"}], \"result\": \"PASS\"}, \"quote_promoted\": {\"cases\": [{\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"id\": \"quoted-only\", \"result\": \"RED\"}], \"result\": \"RED\"}}, \"current_inputs\": 162, \"lexical_word_totals\": {\"binmode\": 2, \"chdir\": 14, \"close\": 144, \"do\": 67, \"eval\": 1089, \"fork\": 2, \"glob\": 2, \"mkdir\": 6, \"no\": 214, \"open\": 191, \"opendir\": 2, \"pipe\": 2, \"print\": 43, \"readdir\": 2, \"rename\": 4, \"require\": 210, \"sysread\": 1, \"system\": 1, \"unlink\": 8, \"use\": 974}, \"limits\": \"PPI lexical Word/quote-like sites and context hints only. No assertion that each word is a builtin call, reached path, actual file read, module origin or runtime action. Quoted/interpolated/regex/heredoc nested semantics and full caller/target expansion remain follow-ups1/2 and semantic reconciliation. No LinkedSpec tests or runtime/SDK execution. Population lists overlap and are lexical follow-up candidates, never counts of reached runtime IO or resolved target edges. PPI/runtime/library/native/toolchain/outer-first-use/per-read/physical closure remains4.2/SESSION5.\", \"needs_qualification\": [], \"population_counts\": {\"eval_or_process_candidates\": 143, \"io_word_or_readline_candidates\": 122, \"named_helper_candidates\": 84, \"non_word_or_heredoc_contexts\": 127, \"nonblock_do_candidates\": 3}, \"qualified\": 145, \"relex\": false, \"result\": \"PASS\", \"retained_inputs\": 162, \"stderr_bytes\": {\"consumers\": 0, \"quote-promoted\": 0, \"specimens\": 0}}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2",
+        "reason": "Four independent controlled source oracles and actual promoted-code/compiler-sentinel RED distinctions qualify bounded lexical aspects. Complete independent Perl semantic, caller/target/phase and nested/generated/interpolation classification remains the existing broader reconciliation2 owner."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused original164-source archive and four gated references, current145 consumer identities,17 preparation bodies/modes, actual consumed JSON requests, frozen lexer/reviewer/capture source and raw command channels are retained. Existing host PPI1.270/Perl/core/dependency library bodies, native executable/OS/outer-launcher first-use and complete per-read/source-origin/physical/publication closure remain4.2/SESSION5. Public API docs/preflight/outer copies are after-use development inputs, not full toolchain custody. No LinkedSpec test/SDK admission."
+      }
+    },
+    {
+      "name": "controlled-static-lexical-distinction",
+      "statement": "Four controlled specimens pass exact Word/include/heredoc/quote-IO oracles. Promoting a quoted-only specimen to an executable open Word makes the old oracle RED; compiling the controlled mixed specimen executes BEGIN and exits255 while PPI inspection succeeds.",
+      "scope": "Only these retained controlled snippets, actual PPI inputs/results and actual Perl compiler sentinel; no LinkedSpec source is compiled or executed.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-loader-token-census-2026-11-17/review.py --current",
+        "granularity": "Each independent manual specimen oracle, changed executable source, consumed raw stdin/argv/cwd/channels/exit and unchanged source digest.",
+        "result": "{\"compiler_sentinel\": {\"actual_exit\": 255, \"distinction\": \"Actual Perl compilation executes BEGIN and rejects the sentinel; PPI lexing the same controlled source succeeds without executing it. No LinkedSpec test source is compiled.\", \"result\": \"RED\"}, \"healthy_specimens\": {\"cases\": [{\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"id\": \"quoted-only\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"id\": \"qualified-word\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 3}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 3}}, \"id\": \"member-key-declaration\", \"result\": \"PASS\"}, {\"actual\": {\"heredocs\": 1, \"includes\": 1, \"quote_io\": 2, \"word_counts\": {\"do\": 2, \"eval\": 1, \"open\": 2, \"require\": 1}}, \"expected\": {\"heredocs\": 1, \"includes\": 1, \"quote_io\": 2, \"word_counts\": {\"do\": 2, \"eval\": 1, \"open\": 2, \"require\": 1}}, \"id\": \"mixed-sentinel\", \"result\": \"PASS\"}], \"result\": \"PASS\"}, \"quote_promoted\": {\"cases\": [{\"actual\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {\"open\": 1}}, \"expected\": {\"heredocs\": 0, \"includes\": 0, \"quote_io\": 0, \"word_counts\": {}}, \"id\": \"quoted-only\", \"result\": \"RED\"}], \"result\": \"RED\"}}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "Quoted keyword text could count as a source Word, source promotion could leave the old oracle satisfied, or static inspection could execute the sentinel BEGIN.",
+        "oracle": "Independent literal specimen expectations and actual installed Perl compilation behavior, compared with the actual PPI lexical observations.",
+        "red_control": "Promoted open produces actual Word count1 versus expected0 at lexer exit0; actual compiler exits255 with EXECUTION_SENTINEL while PPI inspects the same controlled text successfully. Method/key/declaration and qualified-word controls retain their distinct contexts."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Reused original164-source archive and four gated references, current145 consumer identities,17 preparation bodies/modes, actual consumed JSON requests, frozen lexer/reviewer/capture source and raw command channels are retained. Existing host PPI1.270/Perl/core/dependency library bodies, native executable/OS/outer-launcher first-use and complete per-read/source-origin/physical/publication closure remain4.2/SESSION5. Public API docs/preflight/outer copies are after-use development inputs, not full toolchain custody. No LinkedSpec test/SDK admission."
+      }
+    },
+    {
+      "name": "activation-outgoing-estimate",
+      "statement": "Committed activation estimates1,485,050,242 non-thin bytes against cached4683555e;14,949,758 bytes below director1.5GB.",
+      "scope": "Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/publication-size-monitor-2026-11-12/measure.py",
+        "granularity": "Actual committed activation/cached-origin range with selected original producer/ref/config/command metadata copied after use.",
+        "result": "{\"ahead\": 125, \"cached_origin_main\": \"4683555ec51f04b8977812ce4e984c5cc6e6f42c\", \"decimal_gb\": 1.485050242, \"early_push_trigger_bytes\": 1500000000, \"estimated_non_thin_pack_bytes\": 1485050242, \"evidence\": \".linkedspec-data/push-monitor/20261117T024018.698040Z\", \"gib\": 1.3830608148127794, \"head\": \"83f3ccc5669dff67a823e977fc20455c5c7d863d\", \"largest_outgoing_blob_bytes\": 31374498, \"largest_outgoing_blob_oid\": \"0cfb5a3f83829851cd9c4ac2366b4243ce1e7da1\", \"limits\": \"Committed HEAD against cached origin/main only; all uncommitted changes excluded. No network remote refresh or negotiated wire/server/future-size promise. Source/policy/config/ref/command and logical-object metadata retained before pack use; native/physical Git/cache/compressor/toolchain/OS closure remains4.2/SESSION5. Raw diagnostic pack remains ignored on this volume. Preparation100MB is advisory, not a bound on future work or CI receipt growth.\", \"object_format\": \"sha1\", \"object_rows\": 49111, \"pack_footer\": \"4e17acbf7c1e67a8b1174ea71045ff17dd9fc408\", \"pack_sha256\": \"47c38ae13c5ab57bc88f0696c06093217383553324f7a0c5ae6dada47bcc37f3\", \"packed_objects\": 49111, \"preparation_due\": true, \"preparation_threshold_bytes\": 1400000000, \"remaining_to_trigger_bytes\": 14949758, \"trigger_reached\": false, \"unique_object_ids\": 49111}"
+      },
+      "falsify": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.30",
+        "reason": "Producer stream/stat/footer agree; independent actual-file size falsification remains30."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Selected telemetry retained; raw pack/full object tables stay ignored on this volume. Full native/physical/producer-input closure remains4.2/SESSION5; no fresh-remote/wire/future guarantee."
+      }
+    },
+    {
+      "name": "required-changes-data-rollover",
+      "statement": "Existing public rollover archives27023 bytes and normalizes one hot LF separator, reducing CHANGES59278 to32254 bytes. Exact4978078-byte combined reconstruction and95 unchanged old-store identities pass six corruption controls.",
+      "scope": "Only this required change_history data rollover at activation83f3ccc5. Archive --all excludes the hot root; reconstruction explicitly reinstates the one source LF under the existing EOF contract. Existing tools/schema/caps and original measured runtime claims remain unchanged.",
+      "rederive": {
+        "status": "checked",
+        "command": "bash tools/run_python_project_data.sh docs/checkpoints/perl-loader-token-census-2026-11-17/review_hot_history.py",
+        "granularity": "Exact before/after hot roots, original archive-only streams, new immutable source suffix, permitted separator and all95 before/after existing store byte/mode identities.",
+        "result": "{\"after_bytes\": 32254, \"archived_bytes\": 27023, \"before_bytes\": 59278, \"combined_bytes\": 4978078, \"combined_sha256\": \"eb0a725998e22e671af32dbd74ed0ebfd920938a2297685737328d3155ff85d4\", \"controls\": {\"changed-archive-byte\": \"RED\", \"changed-current-byte\": \"RED\", \"changed-old-body\": \"RED\", \"changed-old-mode\": \"RED\", \"extra-source-separator-LF\": \"RED\", \"lost-old-entry\": \"RED\"}, \"limits\": \"Existing public data rollover only. Archive --all excludes the hot root; exact combined reconstruction reinstates only recorded source LF separator bytes permitted by the existing EOF contract. No source/tool/schema/limit/runtime or old claim/hash change. Full native/outer-first-use/per-read/physical custody remains4.2/SESSION5.\", \"new_files\": [\"docs/history/changes/catalog/index-0004-8a28d492bfa4d277e1fde166e4aa7fd494dc82d3f782c7a144025732374f12d5.jsonl\", \"docs/history/changes/catalog/segments-0153-c48d93a3aad73d0f10084112907dd140fb4d478ef70be5aae88e75e9f55959d4.jsonl\", \"docs/history/changes/segment-4927-0fedb38229a1.md\"], \"old_files_unchanged\": 95, \"omitted_hot_separator_hex\": \"0a\", \"result\": \"PASS\"}"
+      },
+      "falsify": {
+        "status": "checked",
+        "hypothesis": "The required threshold or rollover could permit changed source/archive/separator bytes or altered old-store membership/modes/content.",
+        "oracle": "Actual unchanged public pressure checker and separate byte reconstruction using retained before/after source and archive streams; exact old-store identity comparison.",
+        "red_control": "Before-apply public check rejects59278-byte hot source; after check passes32254. Changed hot/archive bytes, extra separator LF, missing old entry and changed old mode/digest each reject; healthy complete reconstruction agrees."
+      },
+      "durability": {
+        "status": "gap",
+        "repair_owner": "TYPE-REFERENCE-BOOK.1.2.23.4.2",
+        "reason": "Actual public reader/writer/module/project-launcher and checkpoint producer bodies, before/after source/manifest/new files, complete archive streams, old-store identities and actual command channels survive. A preliminary unused reader remains in the before-image; actual first-used reader has a separate before-use self-image. Complete Perl/Git/native/OS/outer-first-use/per-read/physical custody remains4.2/SESSION5. No original claim/hash/result is rewritten."
+      }
+    }
+  ]
+}

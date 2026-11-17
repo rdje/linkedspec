@@ -1,0 +1,87 @@
+{
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/roles.json": {
+    "bytes": 89861,
+    "mode": 420,
+    "sha256": "2c2c36236f21268f5adf8af2b2b77383cd04f1b2743befe5c5133699450706ba"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/capture.py": {
+    "bytes": 5759,
+    "mode": 420,
+    "sha256": "0a0be4dbe7be89ca01f0a96789ed600ec1ac4fdd38cbbd6b3a25551550593907"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/documentation/ppi-document.txt.gz": {
+    "bytes": 3453,
+    "mode": 420,
+    "sha256": "68f0f42f2014230841a15b2e82ada389855430ff76aa29edc3d2582ebd7fe458"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/documentation/ppi-element.txt.gz": {
+    "bytes": 3856,
+    "mode": 420,
+    "sha256": "3891305feb572f3d48dbbca9031994fd46d00ae65b2167fc922cbf874068f712"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/documentation/ppi-heredoc.txt.gz": {
+    "bytes": 1754,
+    "mode": 420,
+    "sha256": "02e725ecd1916c1d52659ff7c5e6529862ff96862fc649bcb38934903741fd78"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/documentation/ppi-include.txt.gz": {
+    "bytes": 1756,
+    "mode": 420,
+    "sha256": "f9921e2f4493a2e17c10e2352369b916efe9706c4831f41cb25f4af39b46e0f9"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/documentation/ppi-quotelike.txt.gz": {
+    "bytes": 728,
+    "mode": 420,
+    "sha256": "a99bcf651a79fa4ff5de190859dc59f1f6b44e6cc388eeb3c6bc0df2c48f9fad"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/lexer.pl": {
+    "bytes": 7113,
+    "mode": 420,
+    "sha256": "0a2db51a195bf466534076351206ea0db4b10595766c85aef04f2d0ccbe9e361"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/plan.json": {
+    "bytes": 7496,
+    "mode": 420,
+    "sha256": "722889b709cae0a278ea1b0bb982d783508b5b42af75e4d8bb751afcad37e390"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/review.py": {
+    "bytes": 12614,
+    "mode": 420,
+    "sha256": "9da265422709335c3410498eae1df6de0d6af51a131e5666a7f351e37f37ca94"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/specimens.json": {
+    "bytes": 1401,
+    "mode": 420,
+    "sha256": "33210814871f1d7c6037cf86848876eca6250ed72778daf1c6e1730e86af85e9"
+  },
+  "docs/knowledge/bootstrapspec-vs-spec-spec-dual-path.md": {
+    "bytes": 2551,
+    "mode": 420,
+    "sha256": "4a25b595f5d2b45dae55f9ca3c0fc1f8fe8a1f5ad74f2af42cff87a5642574a1"
+  },
+  "docs/knowledge/current-supporting-grammar-dependencies.md": {
+    "bytes": 13120,
+    "mode": 420,
+    "sha256": "68e6722ff6b12554ca482ef2ac014591e33778e24d1d7ec4d1e98aeebc284468"
+  },
+  "docs/knowledge/perl-consumer-roles-and-selection.md": {
+    "bytes": 3045,
+    "mode": 420,
+    "sha256": "21e71b02caf9908e1532a86a866a177fb3ea27d106df07aec8d27215a8234f9a"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/run_python_project_data.sh": {
+    "bytes": 1486,
+    "mode": 493,
+    "sha256": "0bc03bb8f4ce550397da9fda086215a1d9f6f452ec413605fbcb8976c06af604"
+  }
+}

@@ -1,0 +1,3403 @@
+{
+  "activation": "83f3ccc5669dff67a823e977fc20455c5c7d863d",
+  "consumers": [
+    "t/actionir_ast_parser.t",
+    "t/actionir_method_value_capture.t",
+    "t/actionir_receiver_scalar_copy.t",
+    "t/array_concat_open_arity_result_guard_composition.t",
+    "t/array_pipeline_callable_arity.t",
+    "t/array_pipeline_callable_result_guard_composition.t",
+    "t/array_pipeline_result_guard_composition.t",
+    "t/array_pipeline_source_isolation.t",
+    "t/array_pipeline_value_contract.t",
+    "t/array_transform_callable_result_guard_composition.t",
+    "t/array_transform_result_guard_composition.t",
+    "t/array_transform_source_isolation.t",
+    "t/blind_child_retv.t",
+    "t/boundary_capture_fluent_results.t",
+    "t/callable_codeblock_literal_contract.t",
+    "t/callback_identity.t",
+    "t/capture_advance_number_results.t",
+    "t/capture_advance_text_results.t",
+    "t/capture_boundary_number_results.t",
+    "t/capture_boundary_text_results.t",
+    "t/capture_collection_selection.t",
+    "t/capture_endpoint_absence.t",
+    "t/capture_reset_value_block.t",
+    "t/closed_named_selector_assignments.t",
+    "t/codeblock_push_composition_perl.t",
+    "t/computed_selection_callable_compat.t",
+    "t/computed_selection_contextual_boundary.t",
+    "t/computed_selection_deferred_boundary.t",
+    "t/computed_selection_functions.t",
+    "t/computed_selection_helper_calls.t",
+    "t/computed_selection_noncall_contract.t",
+    "t/conditional_selection.t",
+    "t/constructor_result_composition.t",
+    "t/contains_block_operand_composition.t",
+    "t/contains_result_guard_composition.t",
+    "t/contains_result_guard_source_fences.t",
+    "t/copied_null_contains_composition.t",
+    "t/copied_null_index_composition.t",
+    "t/copied_null_presence_composition.t",
+    "t/copy_result_guard_composition.t",
+    "t/count_block_source_composition.t",
+    "t/count_copy_source_composition.t",
+    "t/count_logical_source_composition.t",
+    "t/count_result_guard_source_fences.t",
+    "t/cursor_rewind_result.t",
+    "t/cursor_statement_scope.t",
+    "t/default_literal_operand_contract.t",
+    "t/defined_default_receiver_contract.t",
+    "t/definedness_native_numeric_contract.t",
+    "t/definedness_result_guard_composition.t",
+    "t/definedness_result_guard_source_fences.t",
+    "t/document_history_catalog.t",
+    "t/emitted_boundary_catalog.t",
+    "t/emitted_rule_progress_guard.t",
+    "t/emptiness_result_guard_composition.t",
+    "t/emptiness_result_guard_source_fences.t",
+    "t/emptiness_result_receiver_contract.t",
+    "t/entry_match_number_result_continuations.t",
+    "t/free_default_result_composition.t",
+    "t/free_numeric_comparison_result_composition.t",
+    "t/free_numeric_comparison_source_fences.t",
+    "t/free_numeric_result_composition.t",
+    "t/free_numeric_source_fences.t",
+    "t/free_string_result_composition.t",
+    "t/free_string_source_fences.t",
+    "t/gap_slot_record_selection.t",
+    "t/gap_string_result.t",
+    "t/has_key_result_guard_composition.t",
+    "t/has_key_result_guard_source_fences.t",
+    "t/has_key_result_receiver_contract.t",
+    "t/hash_helper_source_isolation.t",
+    "t/hash_value_result_guard_composition.t",
+    "t/hash_view_receiver_source_policy.t",
+    "t/hash_view_result_guard_composition.t",
+    "t/index_block_operand_composition.t",
+    "t/index_result_guard_composition.t",
+    "t/index_result_guard_source_fences.t",
+    "t/inline_condition_value_blocks.t",
+    "t/input_cursor_result_continuations.t",
+    "t/input_mark_value_block_statements.t",
+    "t/key_count_block_source_composition.t",
+    "t/key_count_callable_result_guard_composition.t",
+    "t/key_count_result_guard_composition.t",
+    "t/key_count_source_domain.t",
+    "t/knowledge_map_header_lists.t",
+    "t/length_count_source_ownership.t",
+    "t/length_result_guard_composition.t",
+    "t/lexical_result_guard_composition.t",
+    "t/lexical_result_guard_source_fences.t",
+    "t/logical_receiver_method_contract.t",
+    "t/logical_result_guard_composition.t",
+    "t/logical_result_guard_source_fences.t",
+    "t/mark_name_advance_arguments.t",
+    "t/mark_name_number_arguments.t",
+    "t/mark_name_text_arguments.t",
+    "t/mark_name_write_arguments.t",
+    "t/named_capture_endpoint_absence.t",
+    "t/named_capture_literal_names.t",
+    "t/named_mark_number_results.t",
+    "t/named_take_reversed_span.t",
+    "t/named_writer_endpoint_absence.t",
+    "t/nested_handler_error.t",
+    "t/perl_blind_scalar_declarations.t",
+    "t/perl_match_local_declarations.t",
+    "t/perl_or_match_local_declarations.t",
+    "t/perl_sort_scope.t",
+    "t/phase0_regression.t",
+    "t/pick_keys_operand_isolation.t",
+    "t/punctuation_light_zero_arg_contract.t",
+    "t/push_payload_values.t",
+    "t/push_result_fluent.t",
+    "t/push_result_selection.t",
+    "t/receiver_string_bridge_guards.t",
+    "t/receiver_string_bridge_source_fences.t",
+    "t/reduction_result_receiver_contract.t",
+    "t/referenced_blind_intermediate.t",
+    "t/repeated_and_falsey_group.t",
+    "t/repeated_and_falsey_recognition.t",
+    "t/repeated_blind_falsey_group.t",
+    "t/repeated_blind_parent_acceptance.t",
+    "t/rule_call_result_selection.t",
+    "t/scalar_numeric_contract.t",
+    "t/scalar_string_result_receiver_contract.t",
+    "t/scalar_text_contract.t",
+    "t/set_key_block_operands.t",
+    "t/set_result_composition.t",
+    "t/shared_rule_progress_guard.t",
+    "t/signed_array_selector_perl_contract.t",
+    "t/sorted_values_scalar_isolation.t",
+    "t/sparse_and_single_action.t",
+    "t/string_predicate_result_guard_composition.t",
+    "t/string_predicate_result_guard_source_fences.t",
+    "t/string_predicate_result_receiver_contract.t",
+    "t/tagged_record_producer_contract.t",
+    "t/tagged_record_receiver_contract.t",
+    "t/unicode_recognition_operands.t",
+    "t/unicode_rule_recognition_runtime.t",
+    "t/user_function_parser_context_boundary.t",
+    "t/user_function_parser_state_boundary.t",
+    "t/value_copy_function.t",
+    "t/value_copy_interpreted.t",
+    "t/value_copy_receiver.t",
+    "t/with_callback_snapshot.t",
+    "t/with_hash_result_continuations.t",
+    "t/with_result_selection.t"
+  ],
+  "controls": {
+    "compiler_sentinel": {
+      "actual_exit": 255,
+      "distinction": "Actual Perl compilation executes BEGIN and rejects the sentinel; PPI lexing the same controlled source succeeds without executing it. No LinkedSpec test source is compiled.",
+      "result": "RED"
+    },
+    "healthy_specimens": {
+      "cases": [
+        {
+          "actual": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {}
+          },
+          "expected": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {}
+          },
+          "id": "quoted-only",
+          "result": "PASS"
+        },
+        {
+          "actual": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {
+              "open": 1
+            }
+          },
+          "expected": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {
+              "open": 1
+            }
+          },
+          "id": "qualified-word",
+          "result": "PASS"
+        },
+        {
+          "actual": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {
+              "open": 3
+            }
+          },
+          "expected": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {
+              "open": 3
+            }
+          },
+          "id": "member-key-declaration",
+          "result": "PASS"
+        },
+        {
+          "actual": {
+            "heredocs": 1,
+            "includes": 1,
+            "quote_io": 2,
+            "word_counts": {
+              "do": 2,
+              "eval": 1,
+              "open": 2,
+              "require": 1
+            }
+          },
+          "expected": {
+            "heredocs": 1,
+            "includes": 1,
+            "quote_io": 2,
+            "word_counts": {
+              "do": 2,
+              "eval": 1,
+              "open": 2,
+              "require": 1
+            }
+          },
+          "id": "mixed-sentinel",
+          "result": "PASS"
+        }
+      ],
+      "result": "PASS"
+    },
+    "quote_promoted": {
+      "cases": [
+        {
+          "actual": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {
+              "open": 1
+            }
+          },
+          "expected": {
+            "heredocs": 0,
+            "includes": 0,
+            "quote_io": 0,
+            "word_counts": {}
+          },
+          "id": "quoted-only",
+          "result": "RED"
+        }
+      ],
+      "result": "RED"
+    }
+  },
+  "lexical_word_totals": {
+    "binmode": 2,
+    "chdir": 14,
+    "close": 144,
+    "do": 67,
+    "eval": 1089,
+    "fork": 2,
+    "glob": 2,
+    "mkdir": 6,
+    "no": 214,
+    "open": 191,
+    "opendir": 2,
+    "pipe": 2,
+    "print": 43,
+    "readdir": 2,
+    "rename": 4,
+    "require": 210,
+    "sysread": 1,
+    "system": 1,
+    "unlink": 8,
+    "use": 974
+  },
+  "limits": "PPI lexical Word/quote-like sites and context hints only. No assertion that each word is a builtin call, reached path, actual file read, module origin or runtime action. Quoted/interpolated/regex/heredoc nested semantics and full caller/target expansion remain follow-ups1/2 and semantic reconciliation. No LinkedSpec tests or runtime/SDK execution. Population lists overlap and are lexical follow-up candidates, never counts of reached runtime IO or resolved target edges. PPI/runtime/library/native/toolchain/outer-first-use/per-read/physical closure remains4.2/SESSION5.",
+  "needs_qualification": [],
+  "owner": "TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0",
+  "populations": {
+    "eval_or_process_candidates": [
+      "t/actionir_ast_parser.t",
+      "t/actionir_method_value_capture.t",
+      "t/actionir_receiver_scalar_copy.t",
+      "t/array_concat_open_arity_result_guard_composition.t",
+      "t/array_pipeline_callable_arity.t",
+      "t/array_pipeline_callable_result_guard_composition.t",
+      "t/array_pipeline_result_guard_composition.t",
+      "t/array_pipeline_source_isolation.t",
+      "t/array_pipeline_value_contract.t",
+      "t/array_transform_callable_result_guard_composition.t",
+      "t/array_transform_result_guard_composition.t",
+      "t/array_transform_source_isolation.t",
+      "t/blind_child_retv.t",
+      "t/boundary_capture_fluent_results.t",
+      "t/callable_codeblock_literal_contract.t",
+      "t/callback_identity.t",
+      "t/capture_advance_number_results.t",
+      "t/capture_advance_text_results.t",
+      "t/capture_boundary_number_results.t",
+      "t/capture_boundary_text_results.t",
+      "t/capture_collection_selection.t",
+      "t/capture_endpoint_absence.t",
+      "t/capture_reset_value_block.t",
+      "t/closed_named_selector_assignments.t",
+      "t/codeblock_push_composition_perl.t",
+      "t/computed_selection_callable_compat.t",
+      "t/computed_selection_contextual_boundary.t",
+      "t/computed_selection_deferred_boundary.t",
+      "t/computed_selection_functions.t",
+      "t/computed_selection_helper_calls.t",
+      "t/computed_selection_noncall_contract.t",
+      "t/conditional_selection.t",
+      "t/constructor_result_composition.t",
+      "t/contains_block_operand_composition.t",
+      "t/contains_result_guard_composition.t",
+      "t/contains_result_guard_source_fences.t",
+      "t/copied_null_contains_composition.t",
+      "t/copied_null_index_composition.t",
+      "t/copied_null_presence_composition.t",
+      "t/copy_result_guard_composition.t",
+      "t/count_block_source_composition.t",
+      "t/count_copy_source_composition.t",
+      "t/count_logical_source_composition.t",
+      "t/count_result_guard_source_fences.t",
+      "t/cursor_rewind_result.t",
+      "t/cursor_statement_scope.t",
+      "t/default_literal_operand_contract.t",
+      "t/defined_default_receiver_contract.t",
+      "t/definedness_native_numeric_contract.t",
+      "t/definedness_result_guard_composition.t",
+      "t/definedness_result_guard_source_fences.t",
+      "t/document_history_catalog.t",
+      "t/emitted_boundary_catalog.t",
+      "t/emitted_rule_progress_guard.t",
+      "t/emptiness_result_guard_composition.t",
+      "t/emptiness_result_guard_source_fences.t",
+      "t/emptiness_result_receiver_contract.t",
+      "t/entry_match_number_result_continuations.t",
+      "t/free_default_result_composition.t",
+      "t/free_numeric_comparison_result_composition.t",
+      "t/free_numeric_comparison_source_fences.t",
+      "t/free_numeric_result_composition.t",
+      "t/free_numeric_source_fences.t",
+      "t/free_string_result_composition.t",
+      "t/free_string_source_fences.t",
+      "t/gap_slot_record_selection.t",
+      "t/gap_string_result.t",
+      "t/has_key_result_guard_composition.t",
+      "t/has_key_result_guard_source_fences.t",
+      "t/has_key_result_receiver_contract.t",
+      "t/hash_helper_source_isolation.t",
+      "t/hash_value_result_guard_composition.t",
+      "t/hash_view_receiver_source_policy.t",
+      "t/hash_view_result_guard_composition.t",
+      "t/index_block_operand_composition.t",
+      "t/index_result_guard_composition.t",
+      "t/index_result_guard_source_fences.t",
+      "t/inline_condition_value_blocks.t",
+      "t/input_cursor_result_continuations.t",
+      "t/input_mark_value_block_statements.t",
+      "t/key_count_block_source_composition.t",
+      "t/key_count_callable_result_guard_composition.t",
+      "t/key_count_result_guard_composition.t",
+      "t/key_count_source_domain.t",
+      "t/length_count_source_ownership.t",
+      "t/length_result_guard_composition.t",
+      "t/lexical_result_guard_composition.t",
+      "t/lexical_result_guard_source_fences.t",
+      "t/logical_receiver_method_contract.t",
+      "t/logical_result_guard_composition.t",
+      "t/logical_result_guard_source_fences.t",
+      "t/mark_name_advance_arguments.t",
+      "t/mark_name_number_arguments.t",
+      "t/mark_name_text_arguments.t",
+      "t/mark_name_write_arguments.t",
+      "t/named_capture_endpoint_absence.t",
+      "t/named_capture_literal_names.t",
+      "t/named_mark_number_results.t",
+      "t/named_take_reversed_span.t",
+      "t/named_writer_endpoint_absence.t",
+      "t/nested_handler_error.t",
+      "t/perl_blind_scalar_declarations.t",
+      "t/perl_match_local_declarations.t",
+      "t/perl_or_match_local_declarations.t",
+      "t/perl_sort_scope.t",
+      "t/phase0_regression.t",
+      "t/pick_keys_operand_isolation.t",
+      "t/punctuation_light_zero_arg_contract.t",
+      "t/push_payload_values.t",
+      "t/push_result_fluent.t",
+      "t/push_result_selection.t",
+      "t/receiver_string_bridge_guards.t",
+      "t/receiver_string_bridge_source_fences.t",
+      "t/reduction_result_receiver_contract.t",
+      "t/referenced_blind_intermediate.t",
+      "t/repeated_and_falsey_group.t",
+      "t/repeated_and_falsey_recognition.t",
+      "t/repeated_blind_falsey_group.t",
+      "t/repeated_blind_parent_acceptance.t",
+      "t/rule_call_result_selection.t",
+      "t/scalar_numeric_contract.t",
+      "t/scalar_string_result_receiver_contract.t",
+      "t/set_key_block_operands.t",
+      "t/set_result_composition.t",
+      "t/shared_rule_progress_guard.t",
+      "t/signed_array_selector_perl_contract.t",
+      "t/sorted_values_scalar_isolation.t",
+      "t/sparse_and_single_action.t",
+      "t/string_predicate_result_guard_composition.t",
+      "t/string_predicate_result_guard_source_fences.t",
+      "t/string_predicate_result_receiver_contract.t",
+      "t/tagged_record_producer_contract.t",
+      "t/tagged_record_receiver_contract.t",
+      "t/unicode_recognition_operands.t",
+      "t/unicode_rule_recognition_runtime.t",
+      "t/user_function_parser_context_boundary.t",
+      "t/user_function_parser_state_boundary.t",
+      "t/value_copy_function.t",
+      "t/value_copy_interpreted.t",
+      "t/value_copy_receiver.t",
+      "t/with_callback_snapshot.t",
+      "t/with_hash_result_continuations.t",
+      "t/with_result_selection.t"
+    ],
+    "io_word_or_readline_candidates": [
+      "t/actionir_receiver_scalar_copy.t",
+      "t/array_concat_open_arity_result_guard_composition.t",
+      "t/array_pipeline_callable_arity.t",
+      "t/array_pipeline_callable_result_guard_composition.t",
+      "t/array_pipeline_result_guard_composition.t",
+      "t/array_pipeline_source_isolation.t",
+      "t/array_transform_callable_result_guard_composition.t",
+      "t/array_transform_result_guard_composition.t",
+      "t/array_transform_source_isolation.t",
+      "t/boundary_capture_fluent_results.t",
+      "t/callable_codeblock_literal_contract.t",
+      "t/capture_advance_number_results.t",
+      "t/capture_advance_text_results.t",
+      "t/capture_boundary_number_results.t",
+      "t/capture_boundary_text_results.t",
+      "t/capture_collection_selection.t",
+      "t/capture_endpoint_absence.t",
+      "t/capture_reset_value_block.t",
+      "t/codeblock_push_composition_perl.t",
+      "t/computed_selection_callable_compat.t",
+      "t/computed_selection_functions.t",
+      "t/computed_selection_noncall_contract.t",
+      "t/conditional_selection.t",
+      "t/constructor_result_composition.t",
+      "t/contains_block_operand_composition.t",
+      "t/contains_result_guard_composition.t",
+      "t/contains_result_guard_source_fences.t",
+      "t/copied_null_contains_composition.t",
+      "t/copied_null_index_composition.t",
+      "t/copied_null_presence_composition.t",
+      "t/copy_result_guard_composition.t",
+      "t/count_block_source_composition.t",
+      "t/count_copy_source_composition.t",
+      "t/count_logical_source_composition.t",
+      "t/count_result_guard_source_fences.t",
+      "t/cursor_rewind_result.t",
+      "t/cursor_statement_scope.t",
+      "t/defined_default_receiver_contract.t",
+      "t/definedness_native_numeric_contract.t",
+      "t/definedness_result_guard_composition.t",
+      "t/definedness_result_guard_source_fences.t",
+      "t/document_history_catalog.t",
+      "t/emitted_boundary_catalog.t",
+      "t/emitted_rule_progress_guard.t",
+      "t/emptiness_result_guard_composition.t",
+      "t/emptiness_result_guard_source_fences.t",
+      "t/emptiness_result_receiver_contract.t",
+      "t/entry_match_number_result_continuations.t",
+      "t/free_default_result_composition.t",
+      "t/free_numeric_comparison_result_composition.t",
+      "t/free_numeric_comparison_source_fences.t",
+      "t/free_numeric_result_composition.t",
+      "t/free_numeric_source_fences.t",
+      "t/free_string_result_composition.t",
+      "t/free_string_source_fences.t",
+      "t/gap_slot_record_selection.t",
+      "t/gap_string_result.t",
+      "t/has_key_result_guard_composition.t",
+      "t/has_key_result_guard_source_fences.t",
+      "t/has_key_result_receiver_contract.t",
+      "t/hash_helper_source_isolation.t",
+      "t/hash_value_result_guard_composition.t",
+      "t/hash_view_receiver_source_policy.t",
+      "t/hash_view_result_guard_composition.t",
+      "t/index_block_operand_composition.t",
+      "t/index_result_guard_composition.t",
+      "t/index_result_guard_source_fences.t",
+      "t/inline_condition_value_blocks.t",
+      "t/input_cursor_result_continuations.t",
+      "t/input_mark_value_block_statements.t",
+      "t/key_count_block_source_composition.t",
+      "t/key_count_callable_result_guard_composition.t",
+      "t/key_count_result_guard_composition.t",
+      "t/key_count_source_domain.t",
+      "t/knowledge_map_header_lists.t",
+      "t/length_count_source_ownership.t",
+      "t/length_result_guard_composition.t",
+      "t/lexical_result_guard_composition.t",
+      "t/lexical_result_guard_source_fences.t",
+      "t/logical_receiver_method_contract.t",
+      "t/logical_result_guard_composition.t",
+      "t/logical_result_guard_source_fences.t",
+      "t/mark_name_advance_arguments.t",
+      "t/mark_name_number_arguments.t",
+      "t/mark_name_text_arguments.t",
+      "t/mark_name_write_arguments.t",
+      "t/named_capture_endpoint_absence.t",
+      "t/named_mark_number_results.t",
+      "t/named_take_reversed_span.t",
+      "t/named_writer_endpoint_absence.t",
+      "t/nested_handler_error.t",
+      "t/perl_blind_scalar_declarations.t",
+      "t/perl_match_local_declarations.t",
+      "t/perl_or_match_local_declarations.t",
+      "t/perl_sort_scope.t",
+      "t/phase0_regression.t",
+      "t/pick_keys_operand_isolation.t",
+      "t/punctuation_light_zero_arg_contract.t",
+      "t/push_payload_values.t",
+      "t/push_result_fluent.t",
+      "t/push_result_selection.t",
+      "t/receiver_string_bridge_guards.t",
+      "t/receiver_string_bridge_source_fences.t",
+      "t/reduction_result_receiver_contract.t",
+      "t/referenced_blind_intermediate.t",
+      "t/rule_call_result_selection.t",
+      "t/scalar_numeric_contract.t",
+      "t/scalar_string_result_receiver_contract.t",
+      "t/scalar_text_contract.t",
+      "t/set_key_block_operands.t",
+      "t/set_result_composition.t",
+      "t/signed_array_selector_perl_contract.t",
+      "t/sorted_values_scalar_isolation.t",
+      "t/string_predicate_result_guard_composition.t",
+      "t/string_predicate_result_guard_source_fences.t",
+      "t/string_predicate_result_receiver_contract.t",
+      "t/tagged_record_producer_contract.t",
+      "t/tagged_record_receiver_contract.t",
+      "t/unicode_recognition_operands.t",
+      "t/unicode_rule_recognition_runtime.t",
+      "t/with_hash_result_continuations.t",
+      "t/with_result_selection.t"
+    ],
+    "named_helper_candidates": [
+      "t/array_concat_open_arity_result_guard_composition.t",
+      "t/array_pipeline_callable_arity.t",
+      "t/array_pipeline_callable_result_guard_composition.t",
+      "t/array_pipeline_result_guard_composition.t",
+      "t/array_pipeline_source_isolation.t",
+      "t/array_transform_callable_result_guard_composition.t",
+      "t/array_transform_result_guard_composition.t",
+      "t/array_transform_source_isolation.t",
+      "t/boundary_capture_fluent_results.t",
+      "t/callable_codeblock_literal_contract.t",
+      "t/capture_advance_number_results.t",
+      "t/capture_advance_text_results.t",
+      "t/capture_boundary_number_results.t",
+      "t/capture_boundary_text_results.t",
+      "t/capture_reset_value_block.t",
+      "t/closed_named_selector_assignments.t",
+      "t/computed_selection_functions.t",
+      "t/constructor_result_composition.t",
+      "t/contains_block_operand_composition.t",
+      "t/contains_result_guard_composition.t",
+      "t/copied_null_contains_composition.t",
+      "t/copied_null_index_composition.t",
+      "t/copied_null_presence_composition.t",
+      "t/copy_result_guard_composition.t",
+      "t/count_block_source_composition.t",
+      "t/count_copy_source_composition.t",
+      "t/count_logical_source_composition.t",
+      "t/cursor_rewind_result.t",
+      "t/cursor_statement_scope.t",
+      "t/defined_default_receiver_contract.t",
+      "t/definedness_native_numeric_contract.t",
+      "t/definedness_result_guard_composition.t",
+      "t/document_history_catalog.t",
+      "t/emitted_rule_progress_guard.t",
+      "t/emptiness_result_guard_composition.t",
+      "t/emptiness_result_receiver_contract.t",
+      "t/entry_match_number_result_continuations.t",
+      "t/free_default_result_composition.t",
+      "t/free_numeric_comparison_result_composition.t",
+      "t/free_numeric_result_composition.t",
+      "t/free_string_result_composition.t",
+      "t/gap_slot_record_selection.t",
+      "t/gap_string_result.t",
+      "t/has_key_result_guard_composition.t",
+      "t/has_key_result_receiver_contract.t",
+      "t/hash_helper_source_isolation.t",
+      "t/hash_value_result_guard_composition.t",
+      "t/hash_view_receiver_source_policy.t",
+      "t/hash_view_result_guard_composition.t",
+      "t/index_block_operand_composition.t",
+      "t/index_result_guard_composition.t",
+      "t/input_mark_value_block_statements.t",
+      "t/key_count_block_source_composition.t",
+      "t/key_count_callable_result_guard_composition.t",
+      "t/key_count_result_guard_composition.t",
+      "t/key_count_source_domain.t",
+      "t/knowledge_map_header_lists.t",
+      "t/length_count_source_ownership.t",
+      "t/length_result_guard_composition.t",
+      "t/lexical_result_guard_composition.t",
+      "t/logical_result_guard_composition.t",
+      "t/mark_name_advance_arguments.t",
+      "t/mark_name_number_arguments.t",
+      "t/mark_name_text_arguments.t",
+      "t/mark_name_write_arguments.t",
+      "t/named_capture_literal_names.t",
+      "t/named_mark_number_results.t",
+      "t/named_take_reversed_span.t",
+      "t/perl_sort_scope.t",
+      "t/phase0_regression.t",
+      "t/push_payload_values.t",
+      "t/push_result_fluent.t",
+      "t/push_result_selection.t",
+      "t/receiver_string_bridge_guards.t",
+      "t/rule_call_result_selection.t",
+      "t/scalar_string_result_receiver_contract.t",
+      "t/set_result_composition.t",
+      "t/signed_array_selector_perl_contract.t",
+      "t/string_predicate_result_guard_composition.t",
+      "t/string_predicate_result_receiver_contract.t",
+      "t/unicode_rule_recognition_runtime.t",
+      "t/user_function_parser_state_boundary.t",
+      "t/with_hash_result_continuations.t",
+      "t/with_result_selection.t"
+    ],
+    "non_word_or_heredoc_contexts": [
+      "t/actionir_ast_parser.t",
+      "t/actionir_method_value_capture.t",
+      "t/actionir_receiver_scalar_copy.t",
+      "t/array_concat_open_arity_result_guard_composition.t",
+      "t/array_pipeline_callable_arity.t",
+      "t/array_pipeline_callable_result_guard_composition.t",
+      "t/array_pipeline_result_guard_composition.t",
+      "t/array_pipeline_source_isolation.t",
+      "t/array_pipeline_value_contract.t",
+      "t/array_transform_callable_result_guard_composition.t",
+      "t/array_transform_result_guard_composition.t",
+      "t/array_transform_source_isolation.t",
+      "t/blind_child_retv.t",
+      "t/boundary_capture_fluent_results.t",
+      "t/callable_codeblock_literal_contract.t",
+      "t/callback_identity.t",
+      "t/capture_advance_number_results.t",
+      "t/capture_advance_text_results.t",
+      "t/capture_boundary_number_results.t",
+      "t/capture_boundary_text_results.t",
+      "t/capture_collection_selection.t",
+      "t/capture_endpoint_absence.t",
+      "t/capture_reset_value_block.t",
+      "t/closed_named_selector_assignments.t",
+      "t/codeblock_push_composition_perl.t",
+      "t/computed_selection_callable_compat.t",
+      "t/computed_selection_contextual_boundary.t",
+      "t/computed_selection_deferred_boundary.t",
+      "t/computed_selection_functions.t",
+      "t/computed_selection_helper_calls.t",
+      "t/computed_selection_noncall_contract.t",
+      "t/conditional_selection.t",
+      "t/constructor_result_composition.t",
+      "t/contains_block_operand_composition.t",
+      "t/contains_result_guard_composition.t",
+      "t/copied_null_contains_composition.t",
+      "t/copied_null_index_composition.t",
+      "t/copied_null_presence_composition.t",
+      "t/copy_result_guard_composition.t",
+      "t/count_block_source_composition.t",
+      "t/count_copy_source_composition.t",
+      "t/count_logical_source_composition.t",
+      "t/cursor_rewind_result.t",
+      "t/cursor_statement_scope.t",
+      "t/default_literal_operand_contract.t",
+      "t/defined_default_receiver_contract.t",
+      "t/definedness_native_numeric_contract.t",
+      "t/definedness_result_guard_composition.t",
+      "t/document_history_catalog.t",
+      "t/emitted_rule_progress_guard.t",
+      "t/emptiness_result_guard_composition.t",
+      "t/emptiness_result_receiver_contract.t",
+      "t/entry_match_number_result_continuations.t",
+      "t/free_default_result_composition.t",
+      "t/free_numeric_comparison_result_composition.t",
+      "t/free_numeric_result_composition.t",
+      "t/free_string_result_composition.t",
+      "t/gap_slot_record_selection.t",
+      "t/gap_string_result.t",
+      "t/has_key_result_guard_composition.t",
+      "t/has_key_result_receiver_contract.t",
+      "t/hash_helper_source_isolation.t",
+      "t/hash_value_result_guard_composition.t",
+      "t/hash_view_receiver_source_policy.t",
+      "t/hash_view_result_guard_composition.t",
+      "t/index_block_operand_composition.t",
+      "t/index_result_guard_composition.t",
+      "t/inline_condition_value_blocks.t",
+      "t/input_cursor_result_continuations.t",
+      "t/input_mark_value_block_statements.t",
+      "t/key_count_block_source_composition.t",
+      "t/key_count_callable_result_guard_composition.t",
+      "t/key_count_result_guard_composition.t",
+      "t/key_count_source_domain.t",
+      "t/knowledge_map_header_lists.t",
+      "t/length_count_source_ownership.t",
+      "t/length_result_guard_composition.t",
+      "t/lexical_result_guard_composition.t",
+      "t/logical_receiver_method_contract.t",
+      "t/logical_result_guard_composition.t",
+      "t/mark_name_advance_arguments.t",
+      "t/mark_name_number_arguments.t",
+      "t/mark_name_text_arguments.t",
+      "t/mark_name_write_arguments.t",
+      "t/named_capture_literal_names.t",
+      "t/named_mark_number_results.t",
+      "t/named_take_reversed_span.t",
+      "t/nested_handler_error.t",
+      "t/perl_blind_scalar_declarations.t",
+      "t/perl_match_local_declarations.t",
+      "t/perl_or_match_local_declarations.t",
+      "t/perl_sort_scope.t",
+      "t/phase0_regression.t",
+      "t/pick_keys_operand_isolation.t",
+      "t/punctuation_light_zero_arg_contract.t",
+      "t/push_payload_values.t",
+      "t/push_result_fluent.t",
+      "t/push_result_selection.t",
+      "t/receiver_string_bridge_guards.t",
+      "t/reduction_result_receiver_contract.t",
+      "t/referenced_blind_intermediate.t",
+      "t/repeated_and_falsey_group.t",
+      "t/repeated_and_falsey_recognition.t",
+      "t/repeated_blind_falsey_group.t",
+      "t/repeated_blind_parent_acceptance.t",
+      "t/rule_call_result_selection.t",
+      "t/scalar_numeric_contract.t",
+      "t/scalar_string_result_receiver_contract.t",
+      "t/scalar_text_contract.t",
+      "t/set_key_block_operands.t",
+      "t/set_result_composition.t",
+      "t/shared_rule_progress_guard.t",
+      "t/signed_array_selector_perl_contract.t",
+      "t/sorted_values_scalar_isolation.t",
+      "t/sparse_and_single_action.t",
+      "t/string_predicate_result_guard_composition.t",
+      "t/string_predicate_result_receiver_contract.t",
+      "t/tagged_record_producer_contract.t",
+      "t/tagged_record_receiver_contract.t",
+      "t/user_function_parser_context_boundary.t",
+      "t/user_function_parser_state_boundary.t",
+      "t/value_copy_function.t",
+      "t/value_copy_interpreted.t",
+      "t/value_copy_receiver.t",
+      "t/with_callback_snapshot.t",
+      "t/with_hash_result_continuations.t",
+      "t/with_result_selection.t"
+    ],
+    "nonblock_do_candidates": [
+      "t/actionir_ast_parser.t",
+      "t/actionir_receiver_scalar_copy.t",
+      "t/callable_codeblock_literal_contract.t"
+    ]
+  },
+  "ppi_version": "1.270",
+  "qualified": [
+    "t/actionir_ast_parser.t",
+    "t/actionir_method_value_capture.t",
+    "t/actionir_receiver_scalar_copy.t",
+    "t/array_concat_open_arity_result_guard_composition.t",
+    "t/array_pipeline_callable_arity.t",
+    "t/array_pipeline_callable_result_guard_composition.t",
+    "t/array_pipeline_result_guard_composition.t",
+    "t/array_pipeline_source_isolation.t",
+    "t/array_pipeline_value_contract.t",
+    "t/array_transform_callable_result_guard_composition.t",
+    "t/array_transform_result_guard_composition.t",
+    "t/array_transform_source_isolation.t",
+    "t/blind_child_retv.t",
+    "t/boundary_capture_fluent_results.t",
+    "t/callable_codeblock_literal_contract.t",
+    "t/callback_identity.t",
+    "t/capture_advance_number_results.t",
+    "t/capture_advance_text_results.t",
+    "t/capture_boundary_number_results.t",
+    "t/capture_boundary_text_results.t",
+    "t/capture_collection_selection.t",
+    "t/capture_endpoint_absence.t",
+    "t/capture_reset_value_block.t",
+    "t/closed_named_selector_assignments.t",
+    "t/codeblock_push_composition_perl.t",
+    "t/computed_selection_callable_compat.t",
+    "t/computed_selection_contextual_boundary.t",
+    "t/computed_selection_deferred_boundary.t",
+    "t/computed_selection_functions.t",
+    "t/computed_selection_helper_calls.t",
+    "t/computed_selection_noncall_contract.t",
+    "t/conditional_selection.t",
+    "t/constructor_result_composition.t",
+    "t/contains_block_operand_composition.t",
+    "t/contains_result_guard_composition.t",
+    "t/contains_result_guard_source_fences.t",
+    "t/copied_null_contains_composition.t",
+    "t/copied_null_index_composition.t",
+    "t/copied_null_presence_composition.t",
+    "t/copy_result_guard_composition.t",
+    "t/count_block_source_composition.t",
+    "t/count_copy_source_composition.t",
+    "t/count_logical_source_composition.t",
+    "t/count_result_guard_source_fences.t",
+    "t/cursor_rewind_result.t",
+    "t/cursor_statement_scope.t",
+    "t/default_literal_operand_contract.t",
+    "t/defined_default_receiver_contract.t",
+    "t/definedness_native_numeric_contract.t",
+    "t/definedness_result_guard_composition.t",
+    "t/definedness_result_guard_source_fences.t",
+    "t/document_history_catalog.t",
+    "t/emitted_boundary_catalog.t",
+    "t/emitted_rule_progress_guard.t",
+    "t/emptiness_result_guard_composition.t",
+    "t/emptiness_result_guard_source_fences.t",
+    "t/emptiness_result_receiver_contract.t",
+    "t/entry_match_number_result_continuations.t",
+    "t/free_default_result_composition.t",
+    "t/free_numeric_comparison_result_composition.t",
+    "t/free_numeric_comparison_source_fences.t",
+    "t/free_numeric_result_composition.t",
+    "t/free_numeric_source_fences.t",
+    "t/free_string_result_composition.t",
+    "t/free_string_source_fences.t",
+    "t/gap_slot_record_selection.t",
+    "t/gap_string_result.t",
+    "t/has_key_result_guard_composition.t",
+    "t/has_key_result_guard_source_fences.t",
+    "t/has_key_result_receiver_contract.t",
+    "t/hash_helper_source_isolation.t",
+    "t/hash_value_result_guard_composition.t",
+    "t/hash_view_receiver_source_policy.t",
+    "t/hash_view_result_guard_composition.t",
+    "t/index_block_operand_composition.t",
+    "t/index_result_guard_composition.t",
+    "t/index_result_guard_source_fences.t",
+    "t/inline_condition_value_blocks.t",
+    "t/input_cursor_result_continuations.t",
+    "t/input_mark_value_block_statements.t",
+    "t/key_count_block_source_composition.t",
+    "t/key_count_callable_result_guard_composition.t",
+    "t/key_count_result_guard_composition.t",
+    "t/key_count_source_domain.t",
+    "t/knowledge_map_header_lists.t",
+    "t/length_count_source_ownership.t",
+    "t/length_result_guard_composition.t",
+    "t/lexical_result_guard_composition.t",
+    "t/lexical_result_guard_source_fences.t",
+    "t/logical_receiver_method_contract.t",
+    "t/logical_result_guard_composition.t",
+    "t/logical_result_guard_source_fences.t",
+    "t/mark_name_advance_arguments.t",
+    "t/mark_name_number_arguments.t",
+    "t/mark_name_text_arguments.t",
+    "t/mark_name_write_arguments.t",
+    "t/named_capture_endpoint_absence.t",
+    "t/named_capture_literal_names.t",
+    "t/named_mark_number_results.t",
+    "t/named_take_reversed_span.t",
+    "t/named_writer_endpoint_absence.t",
+    "t/nested_handler_error.t",
+    "t/perl_blind_scalar_declarations.t",
+    "t/perl_match_local_declarations.t",
+    "t/perl_or_match_local_declarations.t",
+    "t/perl_sort_scope.t",
+    "t/phase0_regression.t",
+    "t/pick_keys_operand_isolation.t",
+    "t/punctuation_light_zero_arg_contract.t",
+    "t/push_payload_values.t",
+    "t/push_result_fluent.t",
+    "t/push_result_selection.t",
+    "t/receiver_string_bridge_guards.t",
+    "t/receiver_string_bridge_source_fences.t",
+    "t/reduction_result_receiver_contract.t",
+    "t/referenced_blind_intermediate.t",
+    "t/repeated_and_falsey_group.t",
+    "t/repeated_and_falsey_recognition.t",
+    "t/repeated_blind_falsey_group.t",
+    "t/repeated_blind_parent_acceptance.t",
+    "t/rule_call_result_selection.t",
+    "t/scalar_numeric_contract.t",
+    "t/scalar_string_result_receiver_contract.t",
+    "t/scalar_text_contract.t",
+    "t/set_key_block_operands.t",
+    "t/set_result_composition.t",
+    "t/shared_rule_progress_guard.t",
+    "t/signed_array_selector_perl_contract.t",
+    "t/sorted_values_scalar_isolation.t",
+    "t/sparse_and_single_action.t",
+    "t/string_predicate_result_guard_composition.t",
+    "t/string_predicate_result_guard_source_fences.t",
+    "t/string_predicate_result_receiver_contract.t",
+    "t/tagged_record_producer_contract.t",
+    "t/tagged_record_receiver_contract.t",
+    "t/unicode_recognition_operands.t",
+    "t/unicode_rule_recognition_runtime.t",
+    "t/user_function_parser_context_boundary.t",
+    "t/user_function_parser_state_boundary.t",
+    "t/value_copy_function.t",
+    "t/value_copy_interpreted.t",
+    "t/value_copy_receiver.t",
+    "t/with_callback_snapshot.t",
+    "t/with_hash_result_continuations.t",
+    "t/with_result_selection.t"
+  ],
+  "stderr_bytes": {
+    "consumers": 0,
+    "quote-promoted": 0,
+    "specimens": 0
+  },
+  "summaries": [
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 21,
+      "non_word_mentions": 38,
+      "path": "t/actionir_ast_parser.t",
+      "quote_io_sites": {},
+      "token_count": 16914,
+      "word_sites": {
+        "do": 1,
+        "eval": 8,
+        "no": 12,
+        "require": 2,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 2,
+      "path": "t/actionir_method_value_capture.t",
+      "quote_io_sites": {},
+      "token_count": 6930,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 3,
+      "path": "t/actionir_receiver_scalar_copy.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2322,
+      "word_sites": {
+        "close": 1,
+        "do": 3,
+        "eval": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 10,
+      "non_word_mentions": 3,
+      "path": "t/array_concat_open_arity_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 2
+      },
+      "token_count": 1811,
+      "word_sites": {
+        "close": 2,
+        "do": 2,
+        "eval": 7,
+        "open": 2,
+        "require": 1,
+        "use": 9
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 1,
+      "path": "t/array_pipeline_callable_arity.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1545,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 1,
+      "path": "t/array_pipeline_callable_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1601,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "open": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 3,
+      "path": "t/array_pipeline_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1958,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 1,
+      "path": "t/array_pipeline_source_isolation.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1560,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 1,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/array_pipeline_value_contract.t",
+      "quote_io_sites": {},
+      "token_count": 758,
+      "word_sites": {
+        "eval": 2,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 1,
+      "path": "t/array_transform_callable_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1650,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "open": 1,
+        "print": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 3,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 9,
+      "path": "t/array_transform_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2344,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 3,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 9,
+      "path": "t/array_transform_source_isolation.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2315,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/blind_child_retv.t",
+      "quote_io_sites": {},
+      "token_count": 569,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/boundary_capture_fluent_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1792,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 29,
+      "non_word_mentions": 45,
+      "path": "t/callable_codeblock_literal_contract.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 6
+      },
+      "token_count": 16449,
+      "word_sites": {
+        "close": 6,
+        "do": 17,
+        "eval": 32,
+        "no": 9,
+        "open": 10,
+        "require": 9,
+        "use": 11
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 3,
+      "path": "t/callback_identity.t",
+      "quote_io_sites": {},
+      "token_count": 1192,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/capture_advance_number_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1818,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/capture_advance_text_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1843,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 2,
+      "path": "t/capture_boundary_number_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1717,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/capture_boundary_text_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1736,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 1,
+      "include_statements": 8,
+      "non_word_mentions": 9,
+      "path": "t/capture_collection_selection.t",
+      "quote_io_sites": {},
+      "token_count": 1067,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/capture_endpoint_absence.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 715,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 3,
+      "path": "t/capture_reset_value_block.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1806,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 3,
+      "path": "t/closed_named_selector_assignments.t",
+      "quote_io_sites": {},
+      "token_count": 771,
+      "word_sites": {
+        "eval": 6,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 2,
+      "include_statements": 18,
+      "non_word_mentions": 8,
+      "path": "t/codeblock_push_composition_perl.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 6879,
+      "word_sites": {
+        "close": 3,
+        "do": 1,
+        "eval": 5,
+        "no": 5,
+        "open": 3,
+        "print": 2,
+        "system": 1,
+        "use": 13
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/computed_selection_callable_compat.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 550,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 10,
+      "path": "t/computed_selection_contextual_boundary.t",
+      "quote_io_sites": {},
+      "token_count": 1243,
+      "word_sites": {
+        "eval": 4,
+        "no": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 5,
+      "path": "t/computed_selection_deferred_boundary.t",
+      "quote_io_sites": {},
+      "token_count": 1043,
+      "word_sites": {
+        "eval": 6,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 9,
+      "path": "t/computed_selection_functions.t",
+      "quote_io_sites": {},
+      "token_count": 1361,
+      "word_sites": {
+        "eval": 4,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 5,
+      "path": "t/computed_selection_helper_calls.t",
+      "quote_io_sites": {},
+      "token_count": 1042,
+      "word_sites": {
+        "eval": 5,
+        "no": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 8,
+      "path": "t/computed_selection_noncall_contract.t",
+      "quote_io_sites": {},
+      "token_count": 1268,
+      "word_sites": {
+        "eval": 6,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 5,
+      "path": "t/conditional_selection.t",
+      "quote_io_sites": {},
+      "token_count": 1454,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/constructor_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1918,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/contains_block_operand_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1810,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/contains_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1883,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/contains_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/copied_null_contains_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/copied_null_index_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1845,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/copied_null_presence_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1831,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 7,
+      "path": "t/copy_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1641,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/count_block_source_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1839,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 7,
+      "path": "t/count_copy_source_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1985,
+      "word_sites": {
+        "close": 2,
+        "eval": 6,
+        "open": 2,
+        "print": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 7,
+      "path": "t/count_logical_source_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1985,
+      "word_sites": {
+        "close": 2,
+        "eval": 6,
+        "open": 2,
+        "print": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/count_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/cursor_rewind_result.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1824,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 5,
+      "path": "t/cursor_statement_scope.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1831,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 1,
+      "include_statements": 5,
+      "non_word_mentions": 2,
+      "path": "t/default_literal_operand_contract.t",
+      "quote_io_sites": {},
+      "token_count": 278,
+      "word_sites": {
+        "eval": 2,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 5,
+      "path": "t/defined_default_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 675,
+      "word_sites": {
+        "eval": 6,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/definedness_native_numeric_contract.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1437,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/definedness_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/definedness_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 10,
+      "non_word_mentions": 2,
+      "path": "t/document_history_catalog.t",
+      "quote_io_sites": {},
+      "token_count": 2031,
+      "word_sites": {
+        "close": 1,
+        "eval": 1,
+        "glob": 2,
+        "open": 2,
+        "print": 1,
+        "rename": 4,
+        "unlink": 2,
+        "use": 10
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 0,
+      "path": "t/emitted_boundary_catalog.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 677,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 2,
+      "include_statements": 11,
+      "non_word_mentions": 3,
+      "path": "t/emitted_rule_progress_guard.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2456,
+      "word_sites": {
+        "close": 5,
+        "eval": 6,
+        "fork": 1,
+        "no": 2,
+        "pipe": 1,
+        "print": 1,
+        "use": 9
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/emptiness_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/emptiness_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 3,
+      "path": "t/emptiness_result_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 318,
+      "word_sites": {
+        "eval": 3,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 5,
+      "path": "t/entry_match_number_result_continuations.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 820,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 3,
+      "path": "t/free_default_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1964,
+      "word_sites": {
+        "close": 1,
+        "eval": 7,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/free_numeric_comparison_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1613,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/free_numeric_comparison_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/free_numeric_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1613,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/free_numeric_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 3,
+      "path": "t/free_string_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1891,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 8,
+        "no": 1,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/free_string_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 9,
+      "path": "t/gap_slot_record_selection.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2125,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "require": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 11,
+      "path": "t/gap_string_result.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2458,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "require": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/has_key_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/has_key_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 3,
+      "path": "t/has_key_result_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 318,
+      "word_sites": {
+        "eval": 3,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 3,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 4,
+      "path": "t/hash_helper_source_isolation.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2262,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 3,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 9,
+      "path": "t/hash_value_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2098,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 3,
+      "path": "t/hash_view_receiver_source_policy.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2208,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 7,
+      "path": "t/hash_view_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1686,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 7,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/index_block_operand_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1810,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/index_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1883,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/index_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 4,
+      "path": "t/inline_condition_value_blocks.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 706,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 1,
+      "path": "t/input_cursor_result_continuations.t",
+      "quote_io_sites": {},
+      "token_count": 675,
+      "word_sites": {
+        "eval": 4,
+        "no": 1,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 5,
+      "path": "t/input_mark_value_block_statements.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1588,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 6,
+      "path": "t/key_count_block_source_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1941,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "print": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 1,
+      "path": "t/key_count_callable_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1412,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "print": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 4,
+      "path": "t/key_count_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2449,
+      "word_sites": {
+        "close": 1,
+        "eval": 9,
+        "no": 1,
+        "open": 1,
+        "print": 2,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 4,
+      "path": "t/key_count_source_domain.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2219,
+      "word_sites": {
+        "close": 1,
+        "eval": 9,
+        "no": 1,
+        "open": 1,
+        "print": 2,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 12,
+      "non_word_mentions": 25,
+      "path": "t/knowledge_map_header_lists.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 2
+      },
+      "token_count": 2636,
+      "word_sites": {
+        "close": 4,
+        "do": 2,
+        "open": 3,
+        "print": 2,
+        "require": 1,
+        "sysread": 1,
+        "use": 11
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 6,
+      "path": "t/length_count_source_ownership.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2159,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 8,
+      "path": "t/length_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2445,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/lexical_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/lexical_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 4,
+      "path": "t/logical_receiver_method_contract.t",
+      "quote_io_sites": {},
+      "token_count": 787,
+      "word_sites": {
+        "eval": 5,
+        "no": 2,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/logical_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/logical_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 5,
+      "path": "t/mark_name_advance_arguments.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2414,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 6,
+      "path": "t/mark_name_number_arguments.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2193,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 3,
+      "path": "t/mark_name_text_arguments.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2114,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 5,
+      "path": "t/mark_name_write_arguments.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2072,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/named_capture_endpoint_absence.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 648,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 4,
+      "path": "t/named_capture_literal_names.t",
+      "quote_io_sites": {},
+      "token_count": 783,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 4,
+      "path": "t/named_mark_number_results.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1972,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 5,
+      "path": "t/named_take_reversed_span.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1694,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "no": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/named_writer_endpoint_absence.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 648,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 4,
+      "path": "t/nested_handler_error.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 672,
+      "word_sites": {
+        "close": 1,
+        "eval": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 6,
+      "path": "t/perl_blind_scalar_declarations.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 854,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 2,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 6,
+      "path": "t/perl_match_local_declarations.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 673,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 2,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 6,
+      "path": "t/perl_or_match_local_declarations.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 673,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 2,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/perl_sort_scope.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1598,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 10,
+      "heredocs": 977,
+      "include_statements": 331,
+      "non_word_mentions": 1593,
+      "path": "t/phase0_regression.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 9
+      },
+      "token_count": 407123,
+      "word_sites": {
+        "chdir": 14,
+        "close": 24,
+        "do": 2,
+        "eval": 399,
+        "fork": 1,
+        "mkdir": 6,
+        "no": 124,
+        "open": 44,
+        "opendir": 2,
+        "pipe": 1,
+        "print": 21,
+        "readdir": 2,
+        "require": 194,
+        "unlink": 6,
+        "use": 13
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 4,
+      "path": "t/pick_keys_operand_isolation.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 451,
+      "word_sites": {
+        "do": 1,
+        "eval": 3,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 2,
+      "include_statements": 10,
+      "non_word_mentions": 9,
+      "path": "t/punctuation_light_zero_arg_contract.t",
+      "quote_io_sites": {},
+      "token_count": 2032,
+      "word_sites": {
+        "eval": 5,
+        "no": 1,
+        "open": 1,
+        "use": 9
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/push_payload_values.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1910,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 4,
+      "path": "t/push_result_fluent.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 6,
+      "path": "t/push_result_selection.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1984,
+      "word_sites": {
+        "close": 1,
+        "eval": 7,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/receiver_string_bridge_guards.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1637,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/receiver_string_bridge_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/reduction_result_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 477,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/referenced_blind_intermediate.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 837,
+      "word_sites": {
+        "close": 1,
+        "eval": 4,
+        "open": 3,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/repeated_and_falsey_group.t",
+      "quote_io_sites": {},
+      "token_count": 882,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 1,
+      "path": "t/repeated_and_falsey_recognition.t",
+      "quote_io_sites": {},
+      "token_count": 506,
+      "word_sites": {
+        "eval": 2,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/repeated_blind_falsey_group.t",
+      "quote_io_sites": {},
+      "token_count": 627,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/repeated_blind_parent_acceptance.t",
+      "quote_io_sites": {},
+      "token_count": 627,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 9,
+      "path": "t/rule_call_result_selection.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1841,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "require": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 8,
+      "path": "t/scalar_numeric_contract.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 2
+      },
+      "token_count": 1417,
+      "word_sites": {
+        "close": 2,
+        "do": 2,
+        "eval": 3,
+        "no": 1,
+        "open": 3,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/scalar_string_result_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 424,
+      "word_sites": {
+        "eval": 3,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 2,
+      "path": "t/scalar_text_contract.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 394,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 1,
+      "path": "t/set_key_block_operands.t",
+      "quote_io_sites": {},
+      "token_count": 776,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 4,
+      "path": "t/set_result_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 2135,
+      "word_sites": {
+        "close": 1,
+        "eval": 7,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 1,
+      "path": "t/shared_rule_progress_guard.t",
+      "quote_io_sites": {},
+      "token_count": 1755,
+      "word_sites": {
+        "eval": 2,
+        "no": 2,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 15,
+      "non_word_mentions": 7,
+      "path": "t/signed_array_selector_perl_contract.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 4033,
+      "word_sites": {
+        "binmode": 2,
+        "eval": 7,
+        "no": 1,
+        "open": 2,
+        "use": 14
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 2,
+      "path": "t/sorted_values_scalar_isolation.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 787,
+      "word_sites": {
+        "do": 2,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 2,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/sparse_and_single_action.t",
+      "quote_io_sites": {},
+      "token_count": 1620,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 6,
+      "path": "t/string_predicate_result_guard_composition.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1805,
+      "word_sites": {
+        "close": 1,
+        "eval": 6,
+        "open": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/string_predicate_result_guard_source_fences.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 513,
+      "word_sites": {
+        "close": 1,
+        "do": 1,
+        "eval": 2,
+        "open": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 5,
+      "non_word_mentions": 3,
+      "path": "t/string_predicate_result_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 318,
+      "word_sites": {
+        "eval": 3,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/tagged_record_producer_contract.t",
+      "quote_io_sites": {},
+      "token_count": 664,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 3,
+      "path": "t/tagged_record_receiver_contract.t",
+      "quote_io_sites": {},
+      "token_count": 405,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/unicode_recognition_operands.t",
+      "quote_io_sites": {},
+      "token_count": 1310,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "open": 2,
+        "print": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 7,
+      "non_word_mentions": 0,
+      "path": "t/unicode_rule_recognition_runtime.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1561,
+      "word_sites": {
+        "close": 2,
+        "eval": 7,
+        "open": 2,
+        "print": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 5,
+      "path": "t/user_function_parser_context_boundary.t",
+      "quote_io_sites": {},
+      "token_count": 875,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 4,
+      "path": "t/user_function_parser_state_boundary.t",
+      "quote_io_sites": {},
+      "token_count": 854,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 8,
+      "non_word_mentions": 3,
+      "path": "t/value_copy_function.t",
+      "quote_io_sites": {},
+      "token_count": 1414,
+      "word_sites": {
+        "eval": 5,
+        "no": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 1,
+      "include_statements": 8,
+      "non_word_mentions": 2,
+      "path": "t/value_copy_interpreted.t",
+      "quote_io_sites": {},
+      "token_count": 778,
+      "word_sites": {
+        "eval": 3,
+        "no": 1,
+        "use": 7
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 1,
+      "include_statements": 7,
+      "non_word_mentions": 4,
+      "path": "t/value_copy_receiver.t",
+      "quote_io_sites": {},
+      "token_count": 766,
+      "word_sites": {
+        "eval": 5,
+        "no": 1,
+        "use": 6
+      }
+    },
+    {
+      "helper_candidates": 0,
+      "heredocs": 0,
+      "include_statements": 9,
+      "non_word_mentions": 3,
+      "path": "t/with_callback_snapshot.t",
+      "quote_io_sites": {},
+      "token_count": 1049,
+      "word_sites": {
+        "eval": 4,
+        "no": 1,
+        "use": 8
+      }
+    },
+    {
+      "helper_candidates": 2,
+      "heredocs": 0,
+      "include_statements": 6,
+      "non_word_mentions": 5,
+      "path": "t/with_hash_result_continuations.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1013,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 5
+      }
+    },
+    {
+      "helper_candidates": 1,
+      "heredocs": 0,
+      "include_statements": 10,
+      "non_word_mentions": 6,
+      "path": "t/with_result_selection.t",
+      "quote_io_sites": {
+        "PPI::Token::QuoteLike::Readline": 1
+      },
+      "token_count": 1755,
+      "word_sites": {
+        "close": 1,
+        "eval": 3,
+        "no": 1,
+        "open": 1,
+        "use": 9
+      }
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "claim_record": "docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0.json",
+  "statement": "New uncommitted leaf receives the actual rollover proof; all original claim entries remain value-identical and no CHANGES record is rewritten after rollover."
+}

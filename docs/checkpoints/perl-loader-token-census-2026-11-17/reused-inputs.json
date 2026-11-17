@@ -1,0 +1,18 @@
+{
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/git-tree.json.gz": {
+    "mode": 420,
+    "sha256": "e6177609d3a55a2475af11c171c429611ab549eb1cdfbbb9f1b71727c5643c7f"
+  },
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/identities.json": {
+    "mode": 420,
+    "sha256": "bfd2fb11df495e5e777a96a987e24ed7d68b158336f6371f10e9d8fb0a30c30b"
+  },
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/inputs.tar.gz": {
+    "mode": 420,
+    "sha256": "8a262a24dd0e8e17d7b816950101f75c510b1c67e7b7c12ee311d44e1a594f62"
+  },
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/review.py": {
+    "mode": 420,
+    "sha256": "5881a95e477c7bfb2f8c52907d53d2b2e7ad78256d986c3ae037608439cf3665"
+  }
+}

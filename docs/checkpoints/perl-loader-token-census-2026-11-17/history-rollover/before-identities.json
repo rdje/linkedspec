@@ -1,0 +1,47 @@
+{
+  "CHANGES.md": {
+    "bytes": 59278,
+    "mode": 420,
+    "sha256": "5a204f6a01d6a94bb2e169989e98a64e138d6d4d6c8702f222751787053028ce"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/review_hot_history.py": {
+    "bytes": 4857,
+    "mode": 420,
+    "sha256": "d245ae2645b2cf76c9b8467802842a7df1a467904940cde307af41d79f9e296c"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/roll_hot_history.py": {
+    "bytes": 6839,
+    "mode": 420,
+    "sha256": "be1640425192b547b101e066c7d79e42bf76ae5f11232b8b49bbe443c06c930a"
+  },
+  "docs/history/changes/manifest.jsonl": {
+    "bytes": 576,
+    "mode": 384,
+    "sha256": "5dfca5f309542fe051cbcb568e94e2eb24265659af98a4a2729ffdf6da87f549"
+  },
+  "tools/lib/LinkedSpec/DocumentHistoryCatalog.pm": {
+    "bytes": 13904,
+    "mode": 420,
+    "sha256": "030ae3044b0f5e7f3420dccc721e7b9f9a1c865f0470cf332f09da33b18b2fef"
+  },
+  "tools/project_data_env.sh": {
+    "bytes": 9311,
+    "mode": 493,
+    "sha256": "a389533fd1e80737091a10eeea08ec807c429f9ce212a42f47a4f02c9b4cef73"
+  },
+  "tools/project_data_run.sh": {
+    "bytes": 11043,
+    "mode": 493,
+    "sha256": "65f2b526b3547e00fa57b11dc9ef3d11e719a4ad5dcc383cb5a87e3104e9b82f"
+  },
+  "tools/read_document_history.pl": {
+    "bytes": 2347,
+    "mode": 493,
+    "sha256": "fe06d4689f8eeee79ef947db07fd7c8ce2960ffbdfd719ec4246f38a175a56aa"
+  },
+  "tools/roll_document_history.pl": {
+    "bytes": 14589,
+    "mode": 493,
+    "sha256": "2e7d20efd52fbdb82bcb367c9b8e63686f614b16597df5fca74c1f06108f20e6"
+  }
+}

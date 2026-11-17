@@ -1,0 +1,34 @@
+[
+  {
+    "source": ".linkedspec-data/lua-transitive-selection-commit.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/preceding-normal.log.gz",
+    "bytes": 15749,
+    "sha256": "e8e4a55d21e153e87d5647fffaad61b4740b3d044bd21937295464ffefd438ca",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-capture.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/capture-outer.log.gz",
+    "bytes": 1569,
+    "sha256": "9c009d56ee764e77d99871a343ab5ad8166242053d8faa84dd4d045e4c7baf4b",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-review.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/review-outer.log.gz",
+    "bytes": 4177,
+    "sha256": "627c37421c5e91a466028cebc61c72f0a8e3c7af8cd4f57ee78d34668db1712d",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-loader-ppi-preflight.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/ppi-preflight.log.gz",
+    "bytes": 6,
+    "sha256": "df331e54b4ec54c5f4bb672e5ffa9104e98f1ee7151c000a0804ece3fce39dec",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  }
+]

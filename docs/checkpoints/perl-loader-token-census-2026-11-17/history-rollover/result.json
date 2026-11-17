@@ -1,0 +1,17 @@
+{
+  "activation": "83f3ccc5669dff67a823e977fc20455c5c7d863d",
+  "after_bytes": 32254,
+  "archived_bytes": 27023,
+  "before_bytes": 59278,
+  "combined_bytes": 4978078,
+  "combined_sha256": "eb0a725998e22e671af32dbd74ed0ebfd920938a2297685737328d3155ff85d4",
+  "limits": "Existing public data rollover only. Archive --all excludes the hot root; exact combined reconstruction reinstates only recorded source LF separator bytes permitted by the existing EOF contract. No source/tool/schema/limit/runtime or old claim/hash change. Full native/outer-first-use/per-read/physical custody remains4.2/SESSION5.",
+  "new_files": [
+    "docs/history/changes/catalog/index-0004-8a28d492bfa4d277e1fde166e4aa7fd494dc82d3f782c7a144025732374f12d5.jsonl",
+    "docs/history/changes/catalog/segments-0153-c48d93a3aad73d0f10084112907dd140fb4d478ef70be5aae88e75e9f55959d4.jsonl",
+    "docs/history/changes/segment-4927-0fedb38229a1.md"
+  ],
+  "old_files_unchanged": 95,
+  "omitted_hot_separator_hex": "0a",
+  "result": "PASS"
+}

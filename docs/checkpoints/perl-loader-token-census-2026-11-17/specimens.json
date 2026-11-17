@@ -1,0 +1,43 @@
+[
+  {
+    "id": "quoted-only",
+    "source": "my $quoted = q{open my $fake, '<', 'fake.json'; require Fake::Quoted; do 'missing.t';};\n# open require do\n",
+    "word_counts": {},
+    "includes": 0,
+    "heredocs": 0,
+    "quote_io": 0
+  },
+  {
+    "id": "qualified-word",
+    "source": "CORE::open(my $file, '<', 'input.json');\n",
+    "word_counts": {
+      "open": 1
+    },
+    "includes": 0,
+    "heredocs": 0,
+    "quote_io": 0
+  },
+  {
+    "id": "member-key-declaration",
+    "source": "$object->open(\"ignored\");\nmy $hash = {open => 1};\nsub open {}\n",
+    "word_counts": {
+      "open": 3
+    },
+    "includes": 0,
+    "heredocs": 0,
+    "quote_io": 0
+  },
+  {
+    "id": "mixed-sentinel",
+    "source": "BEGIN { die \"EXECUTION_SENTINEL\\n\"; }\nmy $quoted = q{open my $fake, '<', 'fake.json'; require Fake::Quoted; do 'missing.t';};\nmy $pattern = qr/open|require|do/;\n# open require do\nmy $payload = <<'PAYLOAD';\nopen my $never, '<', 'nested.json'; require Nested::Payload;\nPAYLOAD\nopen my $real, '<', 'real.json';\nopen my $memory, '>', \\$output;\nrequire Actual::Support;\ndo File::Spec->catfile($root, 't', 'included.t');\nmy $content = do { local $/; <$real> };\nmy $command = qx{echo not-executed};\neval $payload;\n",
+    "word_counts": {
+      "open": 2,
+      "require": 1,
+      "do": 2,
+      "eval": 1
+    },
+    "includes": 1,
+    "heredocs": 1,
+    "quote_io": 2
+  }
+]

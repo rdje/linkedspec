@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "PERL5OPT=",
+    "perl",
+    "tools/roll_document_history.pl",
+    "--surface",
+    "change_history",
+    "--check"
+  ],
+  "cwd": "."
+}

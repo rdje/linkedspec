@@ -1626,6 +1626,7 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
 
   Added ownership28: The selected Lua field proof retains its SDK/normal/oracle direct inputs, actual channels and opaque native bodies before the new loads. Its source-only initial case-preparation outer channels were not archived, and query-preparation-before-use.tar.gz is actually a late preparer source image. CUSTODY.md in docs/checkpoints/lua-raw-error-observation-2026-11-13/ owns those exact original-origin limits without retroactive first-use credit. Preserve the originals and include these named edges in this existing P2/SESSION5 origin audit before its admission/final-publication closeout; no broader native/source-resolution closure is inferred from the field observations.
   Added ownership Lua selection3.0: The expanded evidence reader was captured only after probe import; first failed setup raw channels and separate outer probe-producer exit are unavailable. Exact used/frozen bodies, seven common helpers and actual four Bash observations survive in lua-transitive-selection-2026-11-17. Preserve this historical limit; obtain prospective first-use/native proof through this existing before-admission/push schedule, never retroactive credit.
+  Added ownership Perl-token census: Existing PPI1.270 inspects source without running LinkedSpec tests; actual project inputs/lexer requests/results are retained in perl-loader-token-census-2026-11-17. PPI/Perl/core/dependency/native/OS and outer-first-use/per-read/source-origin/physical bodies are not fully retained. Include this named toolchain edge in this existing before-admission/push audit; no retrospective original custody credit.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1`
   Status: `active` / P1 canonical admission prerequisite; bounded children below
@@ -2067,9 +2068,36 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Landing checks: Independent census1107/fixed19/three controls; publication14/215 historical/three controls; Knowledge1772/12566, scope1974/17, book/render0, memory/history/whitespace0. Normal hooks govern landing; original first-use gap is explicit4.2.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1`
-  Status: `pending`
+  Status: `active`
   Goal: Qualify remaining Perl145 direct loaders and support/producer/output roles.
   Acceptance: Inherited full contract; freeze actual caller vocabulary and every selected body, preserving default-literal/repeated ActionIR findings and all native/source-origin gaps.
+  Children: `.0`, `.1`, `.2` (ID suffixes); full inherited qualification remains binding.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0`
+  Status: `completed`
+  Goal: Freeze and qualify the Perl145 source-token loader/caller census before direct-edge expansion.
+  Acceptance: Retain actual consumer and lexer/instrument bodies, source identities and token contexts. Distinguish executable source sites from expected strings/comments and expose constructed/dynamic/inline/generated roles without promoting keyword matches to execution. Freeze bounded follow-up populations; no LinkedSpec test/runtime or backend SDK execution.
+  Verification tier: `focused`
+  Focused checks: Source-directed lexical/input-site census and quoted-versus-executable controls, historical/current identities and exact population; book/memory/history/scope/hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared toolchain/runner/test/runtime/policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0.json`
+  Evidence: docs/checkpoints/perl-loader-token-census-2026-11-17/REVIEW.md.
+  Method: Existing host PPI1.270 public Document/Element/Include/QuoteLike/HereDoc API docs reviewed; no toolchain install/change. Lexical contexts do not establish runtime calls; interpolation/nested payloads remain explicit follow-up2. Preflight/doc copies are after-use development inputs, with native/toolchain custody still4.2.
+  Outcome: PPI1.270 round-trips all145/unknown0/stderr0; current162 PASS. Overlapping candidates IO122/eval143/helpers84/nonWord127/nonblock-do3. Four specimens and actual promoted-source RED/compiler255 distinguish lexical inspection from execution. Source first pass succeeded; full semantics/native/target expansion remain open.
+  Landing preparation: The mandatory changes pressure check requests standard90-percent rollover at385 lines/59278 bytes. Apply the existing public data tool with before/after source/archive evidence and permitted EOF-separator reconstruction; no tool/schema/cap change. Book rendering resumes after this same-leaf maintenance.
+  Required history rollover: Existing data tool0 archives27023 bytes; hot59278 to32254, old95 identities unchanged. Full4978078-byte reconstruction with existing source LF0a and six corruption controls0. Archive-only reader contract/old tool/schema/caps/old claims preserved. Book and normal checks resume.
+  Landing checks: Current162/source145/four specimens/two observed RED distinctions; publication15/215 historical/three controls; history rollover/recovery/six controls/check41; Knowledge1773/12571, scope1975/17, book/render0, memory/history/whitespace0. Normal hooks govern landing; no full CI or LinkedSpec test execution.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1`
+  Status: `pending`
+  Goal: Resolve the frozen Perl fixed/constructed fixture and named support edges.
+  Acceptance: Parent contract; retain exact caller vocabulary/target bodies and explicit conditional/transitive limits, including named non-callable-suite includes.
+  Frozen include context: Nonblock do sites occur in actionir_ast_parser.t (assigned_raw_regex_payload.t), actionir_receiver_scalar_copy.t (two probe.pl targets) and callable_codeblock_literal_contract.t (eleven named includes). Resolve support/suite roles and conditional scope; do not infer execution or count probes as suites.
+
+- ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.2`
+  Status: `pending`
+  Goal: Qualify remaining generated-program, producer/output, inline/module and unresolved direct Perl roles; reconcile all145 consumers.
+  Acceptance: Parent contract; preserve original runtime/exclusion/registration findings and keep full semantic/native origin closure with existing owners.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.2`
   Status: `pending`

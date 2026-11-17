@@ -1,0 +1,58 @@
+[
+  {
+    "source": ".linkedspec-data/perl-token-census-publication.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/publication-landing.gz",
+    "bytes": 571,
+    "sha256": "0eadcb5b97919d7c966f53b546fa93e57a241a3963a4c34ee3bfa04c288a1bbd",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-publication-review.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/publication-review-landing.gz",
+    "bytes": 397,
+    "sha256": "c421e32c3733f2e9b0f1261913ad7c0800293c5ba253e383feb3c8e1eb85bb8c",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-history-rollover.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/rollover-outer-landing.gz",
+    "bytes": 966,
+    "sha256": "2ae17e9da8abba00ccf6a89cc176bda05a87468a0aa44bb738c2a104c4be407e",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-rollover-publication.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/rollover-publication-landing.gz",
+    "bytes": 128,
+    "sha256": "8d0a51fd1146acad781786a7ca5e7630c519f04482995de0f7bb14190b55804c",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-history-check.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/history-check-landing.gz",
+    "bytes": 2140,
+    "sha256": "e7dc75b90a81ef2ac041b2c5860a92993d395e0e48932965be5ed8b5de4af527",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": ".linkedspec-data/perl-token-census-book.log",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/book-command-landing.gz",
+    "bytes": 274,
+    "sha256": "86d046d0427cb50ec6f60bfefaed702b1a9019912911731632f5fcc38a24c2ad",
+    "mode": 420,
+    "recording": "after-use copy"
+  },
+  {
+    "source": "docs/linkedspec-book/book/development/documentation-workflow.html",
+    "target": "docs/checkpoints/perl-loader-token-census-2026-11-17/rendered-workflow-landing.gz",
+    "bytes": 106692,
+    "sha256": "1c0a10c27451353bec20931b0dca7bf12d40b61a8662c38b61daeda122b68941",
+    "mode": 420,
+    "recording": "after-use copy"
+  }
+]

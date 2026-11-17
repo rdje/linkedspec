@@ -1,0 +1,77 @@
+{
+  "CHANGES.md": {
+    "bytes": 58523,
+    "mode": 420,
+    "sha256": "952a177158b5ee9f48c934a05ac838bd8161bfcc573603d2cb8050f17ee50d76"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 53052,
+    "mode": 420,
+    "sha256": "eb5528b1fe2920a67df01e6b03997e747dc46ca2694bf37c8002f9d48f94dcb0"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4669,
+    "mode": 420,
+    "sha256": "ab247c188b646e6032cef141ba830b8d59ef93486e2a6fbb143aec60924988e3"
+  },
+  "MEMORY.md": {
+    "bytes": 2303,
+    "mode": 420,
+    "sha256": "b37b6921a1d4a1ff831a2d15fa298513dd8c2c1cfa6d2ffb253666c5b384c9d1"
+  },
+  "ROADMAP.md": {
+    "bytes": 472733,
+    "mode": 420,
+    "sha256": "6f24c1b102cd53b1773d211aa389e5dc4c8a73d769d7b4a0e288f048a80047d3"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 274068,
+    "mode": 420,
+    "sha256": "0cc5cf91125fff58d29f959959a7186376475b231fae0604be5201a275532d06"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347833,
+    "mode": 420,
+    "sha256": "9bf9ccfa45c9fd9910ac2220387ac1f4aa4a1c213bad68df981b4782a2b104e2"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/census.json": {
+    "bytes": 93163,
+    "mode": 420,
+    "sha256": "0930ce480b6266f27f052d7619e2467c853d71a792fc19d191f0202f4c095c44"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/commands/review-stdout.gz": {
+    "bytes": 1091,
+    "mode": 420,
+    "sha256": "868785eba19b8751945e47a40917b88f27c09d89a3332c2e3ce6bf701133833b"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/plan.json": {
+    "bytes": 7496,
+    "mode": 420,
+    "sha256": "722889b709cae0a278ea1b0bb982d783508b5b42af75e4d8bb751afcad37e390"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/publish.py": {
+    "bytes": 17958,
+    "mode": 420,
+    "sha256": "f2a45560d0dc2aa0653e8a47a63aba88b1445611b81a9ad48bde9fab294a2fec"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/record_review.py": {
+    "bytes": 600,
+    "mode": 420,
+    "sha256": "3a9fb19023b079a93398db74897551405c7e869ef76e5e78b3917d27896afadf"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 76094,
+    "mode": 420,
+    "sha256": "9861a0063250853fcb54040f7a0edf5c9cdca2cdfa7eec3c60e397bdd284b1e8"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20930,
+    "mode": 420,
+    "sha256": "f89f4533144d2c1b423db49822769a86591d39466ea3fb9a401e4e435166f532"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 599605,
+    "mode": 420,
+    "sha256": "611c3869ad845fa7a0f695f15655fa104713c407f25ef9a0bac6796b8aa12ef4"
+  }
+}

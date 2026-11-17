@@ -1,0 +1,1 @@
+The writer before-image retains an unused preliminary reader draft. Before the first reader execution, its extra-LF control label was clarified and a self-image gate added. This separate before-use image retains the actual first-used reader; no measurement or used writer was changed.

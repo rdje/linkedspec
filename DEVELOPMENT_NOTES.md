@@ -10,6 +10,12 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — keep lexical source sites separate from runtime calls
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.0: PPI receives immutable JSON source requests rather than loading test files as Perl programs. Document serialization, not concatenated token content, preserves heredoc payloads. Word sites can be method names, fat-comma keys or declarations; strings/regex/heredocs can contain nested/interpolated execution and remain separately unqualified. The first frozen lexer/capture and readonly recovery succeed without a producer correction. Named do candidates include AST/scalar-copy support contexts beyond the earlier callable-only include review. Candidate populations overlap and retain original feature/compatibility/maintenance roles; target/caller resolution and full semantic/native proof remain scheduled. Evidence: `docs/checkpoints/perl-loader-token-census-2026-11-17/REVIEW.md`.
+
+The mandatory changes pressure check also requires its existing90-percent rollover. The same public data writer archives27023 bytes, retains32254 hot bytes and all95 older store identities; exact4978078-byte reconstruction restores only the recorded source LF separator. Six independent byte/store controls pass. No history tool, schema or cap changes. Full native custody remains4.2.
+
 ## 2026-11-17 — retain actual evidence reader epochs
 
 TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.0: The local command blocks and shared runner give named routes, not complete computed reachability. Git literal census and a positive selected-name control distinguish a real empty result from a disabled locator. A readonly support addition after capture was used by probes after a grouped-shell setup failure. Preserve the used body, original frozen source and exact channels; compare seven common helper bodies before recovering the actual Bash observations. Missing before-use custody cannot be repaired retrospectively. The original draft omitted one separator newline; the following partial gzip archive has an empty decoded payload and is not a valid tar. Both initial refusal and separate qualified diagnosis remain unchanged. No capture/probe writer is replayed. Evidence: `docs/checkpoints/lua-transitive-selection-2026-11-17/REVIEW.md`.
