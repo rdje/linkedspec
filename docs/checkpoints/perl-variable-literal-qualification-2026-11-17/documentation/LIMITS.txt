@@ -1,0 +1,1 @@
+Public installed API docs retained after earlier planning reads; no original first-use or complete PPI/Perl/library/native/physical custody credit. No LinkedSpec source execution.

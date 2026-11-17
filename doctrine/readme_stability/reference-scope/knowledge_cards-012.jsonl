@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2704,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-statement-mutation-helpers.md","sha256":"662b05464a125ef96634e5d9c7cc7bb03bd926f7f3262aa30ced501242c16f73","type":"member"}
 {"bytes":5174,"lines":76,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-strict-syntax-validation.md","sha256":"a247476090b9d21bd228a38bdf1fd5a08affe7497f9d1586063a57c3df7dff1e","type":"member"}
 {"bytes":3348,"lines":18,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-string-predicate-source-guards.md","sha256":"d829e20ada2f5648fd269fa61298f109f909523f5972c8fcb2e1c1fedb6e9b38","type":"member"}
 {"bytes":15353,"lines":207,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/rust-symbol-call-newline-boundary.md","sha256":"d632a7284b5d0478437e7544d4fe819fbec896b5bdb01131735d8e1411cb2b73","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":3967,"lines":58,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-composability-audit-boundaries.md","sha256":"42c1b57f5a4b3394bf5a19b2145195675ecc7687bfafbaa1d97f6e5b2c6cb6d1","type":"member"}
 {"bytes":4171,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-control-flow-keyword-surface-ground-truth.md","sha256":"d21900db90e1023721e4b8b631bf803011728ef7a867abddf45b26019b100e00","type":"member"}
 {"bytes":2443,"lines":33,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-declaration-helper-compatibility-policy.md","sha256":"65acabb8f6614625dd84aeebd26d3d3947153122b6fd51ff9d1d2dcc30b838da","type":"member"}
-{"bytes":3469,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-declare-retirement-migration.md","sha256":"b00115b5d3178766de0dc5118b14deb50b49da9a35dc58a3a1ca9125e607cf80","type":"member"}

@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":21682,"lines":270,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-call-capture.md","sha256":"7e2d38cef65e808e7b25172498568f56e4936f6a3f6f2274bb26d295dd78686a","type":"member"}
 {"bytes":5389,"lines":70,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-hash-key-capture.md","sha256":"bde93e826ec8762d6d0ac54d9206a75eb851ba4fd9fb484c91181d773e3c1586","type":"member"}
 {"bytes":20671,"lines":252,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-component-capture.md","sha256":"9cf7b153cf75173cdc6b0e94251ac24a32343d5106ede2e2374e4517366c6a65","type":"member"}
 {"bytes":5004,"lines":64,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-block-value-capture.md","sha256":"8d83d08a5ae74981cb08e9a4a8ba3dfa2c37b73deb0bc0e59bfc278d95fd0b5a","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":5057,"lines":77,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-user-function-caller-shadowing.md","sha256":"122ce9aede690546f1bce499f32adcb3ab9e8cd87159aa667237cd398f1be6bf","type":"member"}
 {"bytes":3366,"lines":40,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-validation-diagnostic-source-drift.md","sha256":"2312b25002947fb7448e15664297ec92b37d272b44f1cbf1d67f60262fa6de18","type":"member"}
 {"bytes":2763,"lines":34,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-variadic-user-functions.md","sha256":"0fc45642937bb9596b2d9a54cec7a3dd4ef41a005dfda486096a411726e38341","type":"member"}
-{"bytes":6058,"lines":91,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-with-callback-identity-and-snapshot.md","sha256":"ee7e410e3317a6f037aa177640375fd60ffcb877cdfa8561a003f4d35eb6a19f","type":"member"}

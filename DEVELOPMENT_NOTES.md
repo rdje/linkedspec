@@ -10,6 +10,10 @@ immutable and repository-local; new dated records are prepended here and remain 
 - Check rollover pressure: `perl tools/roll_document_history.pl --surface engineering_notes --check`
 - Apply required rollover: `perl tools/roll_document_history.pl --surface engineering_notes --apply`
 
+## 2026-11-17 — bound variable initializer source bindings
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1: Restricted quote contents are source strings, not evaluated Perl values. The grammar accepts an adjacent single lexical-my initializer in the same PPI parent as a guarded three-argument open; all other forms remain explicit. Original145 sources and15 named contexts deduplicate to159. All191 original open identities match the earlier census; the added support supplies one further open site. The qualified legacy_native_path read supplies stored historical JSON/stdout for comparison, while the parent source selection count remains2. Inserting an intervening assignment in a controlled source removes the first binding at lexer exit0, rejecting the old oracle. No test/helper/child body executes and no historical baseline verdict is refreshed. Evidence: `docs/checkpoints/perl-variable-literal-qualification-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — preserve closed staged contracts and parent routing
 
 TYPE-REFERENCE-BOOK.1.2.23.4.36: Independent source planning and actual epoch output agree on13 closed narratives. All CORE fields,15 ordered IDs, two unselected bodies and the complete19108-byte frontier/tail remain exact; all16 original-source public queries and ten effective mutations pass. One prior historical target binding remains unchanged. The current parent field omitted already completed35; links35/36 now match three actual public queries and reject two missing-link controls. Previous literal-open failed/partial and successful normal attempts remain distinct; only the complete retry is reused. No tools, limits, source behavior or original SDK verdicts change. Evidence: `docs/checkpoints/task-headroom-staged-2026-11-17/REVIEW.md`.

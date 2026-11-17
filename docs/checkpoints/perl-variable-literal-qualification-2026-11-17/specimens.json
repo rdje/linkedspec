@@ -1,0 +1,45 @@
+[
+  {
+    "id": "adjacent-read-write",
+    "source": "my $path='tests/input.json'; open my $fh, '<:raw', $path or die $!; my $out='output.json'; open(my $result, '>', $out) or die $!;\n",
+    "open_words": 2,
+    "expected": [
+      {"path": "tests/input.json", "symbol": "$path", "mode": "<:raw", "role": "declared-input-read"},
+      {"path": "output.json", "symbol": "$out", "mode": ">", "role": "declared-output-write"}
+    ]
+  },
+  {
+    "id": "quote-forms",
+    "source": "my $a=q{tests/a.json}; CORE::open my $one, '<', $a or die $!; my $b=qq{tests/b.json}; open my $two, '<', $b or die $!; my $c=\"tests/c.json\"; open my $three, '<', $c or die $!;\n",
+    "open_words": 3,
+    "expected": [
+      {"path": "tests/a.json", "symbol": "$a", "mode": "<", "role": "declared-input-read"},
+      {"path": "tests/b.json", "symbol": "$b", "mode": "<", "role": "declared-input-read"},
+      {"path": "tests/c.json", "symbol": "$c", "mode": "<", "role": "declared-input-read"}
+    ]
+  },
+  {
+    "id": "quoted-only",
+    "source": "my $expected=q{my $path='tests/input.json'; open my $fh, '<', $path or die $!;};\n",
+    "open_words": 0,
+    "expected": []
+  },
+  {
+    "id": "nonadjacent-and-scalar",
+    "source": "my $path='tests/input.json'; $path='tests/other.json'; open my $fh, '<', $path or die $!; my $buffer='tests/not-a-file.json'; open STDOUT, '>', \\$buffer or die $!;\n",
+    "open_words": 2,
+    "expected": []
+  },
+  {
+    "id": "scope-and-interpolation",
+    "source": "my $outer='tests/input.json'; if ($condition) {open my $fh, '<', $outer or die $!;} my $path=\"tests/$name.json\"; open my $other, '<', $path or die $!;\n",
+    "open_words": 2,
+    "expected": []
+  },
+  {
+    "id": "excluded-paths-and-key",
+    "source": "my $a='../escape.json'; open my $one, '<', $a or die $!; my $b='/absolute.json'; open my $two, '<', $b or die $!; my %key=(open=>'value');\n",
+    "open_words": 3,
+    "expected": []
+  }
+]

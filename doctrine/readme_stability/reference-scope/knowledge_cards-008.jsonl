@@ -1,4 +1,5 @@
 {"member_count":128,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":2977,"lines":42,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-latest-child-retv-binding.md","sha256":"cba60931dd56107841b09dfc6cfbbfe760f369b9910edf5f9470715611ed0240","type":"member"}
 {"bytes":3926,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-blind-postcall-falsey-acceptance.md","sha256":"d0adb17b938a98241cce7d9582ef8b72ae075f23d5b3bf9817fc8fc26c2febe4","type":"member"}
 {"bytes":4164,"lines":62,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-call-lexical-serialization.md","sha256":"0ffb4127d61952536acceedd9d5d0ce533ad2f7f81ef0c928074d44247734260","type":"member"}
 {"bytes":2608,"lines":36,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-boundary-fluent-grammar-preservation.md","sha256":"cdfbc047585a7cc898c54196e489868f4977deaa8d3db460eeae89f47a68cb26","type":"member"}
@@ -126,4 +127,3 @@
 {"bytes":27475,"lines":304,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-assignment-required-capture.md","sha256":"f74809dd4d9e93e90f9c8a43bba9d39351e02683e448b3dad3241ba420edc454","type":"member"}
 {"bytes":9827,"lines":124,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-array-end-capture.md","sha256":"1c5488668f03d7165a669fb38e79aef6ca8977a0cf10f9d232cbb46e8f871b4a","type":"member"}
 {"bytes":10152,"lines":107,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-assignment-capture.md","sha256":"2ad022242ec3a87770d85411a11fda8b6ad115a5a370982762af2c6a8003b211","type":"member"}
-{"bytes":21682,"lines":270,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/perl-method-ast-call-capture.md","sha256":"7e2d38cef65e808e7b25172498568f56e4936f6a3f6f2274bb26d295dd78686a","type":"member"}

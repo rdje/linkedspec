@@ -2123,9 +2123,15 @@ Runtime defects discovered by the audit receive their own scheduled repair owner
   Outcome: Focused PASS; all limits in claim.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1`
-  Status: `pending`
-  Goal: Bind literal variables to IO.
-  Acceptance: Parent scope;145/support/readback.
+  Status: `completed`
+  Goal: Qualify adjacent lexical literal initializers bound to open operands across original and named-support Perl sources.
+  Acceptance: Original145 plus named target/context source population with dedup; exact source sites, mode/path/role, current bytes/modes and historical baseline distinctions. Bound the adjacent single-my/literal/same-parent grammar explicitly; nonadjacent, interpolated, constructed/helper/library/process and other IO remain tracked. No reached IO, Perl evaluation or canonical admission.
+  Verification tier: `focused`
+  Focused checks: PPI declaration/open shape, independent source specimens and actual changed-source RED, source/Git/current identities and retained input roles; full original/named population and unmatched sites; book/memory/history/scope/hooks.
+  Canonical trigger: Registration4.1.2/push30.2; no shared tool/runtime/policy change.
+  Claim verification: `docs/claims/TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1.json`
+  Evidence: docs/checkpoints/perl-variable-literal-qualification-2026-11-17/REVIEW.md.
+  Outcome: Sources159/open192/binding1/unmatched191/current190; six specimens/actual intervening-write RED/seven controls PASS. Historical comparison baseline and original source-selection2 retained; no runtime verdict. Other forms remain pending.
 
 - ID: `TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2`
   Status: `pending`

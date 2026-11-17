@@ -1,0 +1,42 @@
+{
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/identities.json": {
+    "bytes": 23895,
+    "mode": 420,
+    "sha256": "bfd2fb11df495e5e777a96a987e24ed7d68b158336f6371f10e9d8fb0a30c30b"
+  },
+  "docs/checkpoints/perl-consumer-roles-2026-11-16/roles.json": {
+    "bytes": 89861,
+    "mode": 420,
+    "sha256": "2c2c36236f21268f5adf8af2b2b77383cd04f1b2743befe5c5133699450706ba"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/commands/consumers-stdin.gz": {
+    "bytes": 436081,
+    "mode": 420,
+    "sha256": "f1883fb5c1ebcd798a271cc36076de840000547f11f0108109fd054d239cbfe6"
+  },
+  "docs/checkpoints/perl-loader-token-census-2026-11-17/commands/consumers-stdout.gz": {
+    "bytes": 250966,
+    "mode": 420,
+    "sha256": "020a084fcdb5a5da491eb9618ed1f63514a5c5514819362d86ddcd9e1e2733f7"
+  },
+  "docs/checkpoints/perl-named-includes-2026-11-17/identities.json": {
+    "bytes": 5420,
+    "mode": 420,
+    "sha256": "5984f1dfc2c2d375e97ade760b52f660414ca714117b45031d2e237a9126bcfa"
+  },
+  "docs/checkpoints/perl-named-includes-2026-11-17/inputs.tar.gz": {
+    "bytes": 757319,
+    "mode": 420,
+    "sha256": "8910b0ed37ef4eb370092dcf8fa4dcb7a89e38e80f52ffb8c7082ba7f13828bd"
+  },
+  "docs/checkpoints/perl-named-includes-2026-11-17/plan.json": {
+    "bytes": 8096,
+    "mode": 420,
+    "sha256": "e74c547feb07d01a6e8175f20db70ad3d875197d73bbd6f911c5cdb70c33755c"
+  },
+  "docs/checkpoints/perl-named-includes-2026-11-17/roles.json": {
+    "bytes": 16164,
+    "mode": 420,
+    "sha256": "ffad2d8e2e02adcda8bb60ef252cd27ff8239b2151da30b6d90e8451e5f12bb0"
+  }
+}

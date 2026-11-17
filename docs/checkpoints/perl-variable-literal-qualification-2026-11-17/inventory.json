@@ -1,0 +1,2317 @@
+{
+  "bindings": [
+    {
+      "declaration": "my $legacy_native_path='docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json';",
+      "declaration_class": "PPI::Statement::Variable",
+      "declaration_location": [
+        74,
+        1,
+        1
+      ],
+      "handle": "$legacy_fh",
+      "location": [
+        75,
+        1,
+        1
+      ],
+      "mode": "<",
+      "ordinal": 1068,
+      "parent": "t/actionir_receiver_scalar_copy.t",
+      "parent_class": "PPI::Document",
+      "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
+      "qualification": "Adjacent significant declaration, same PPI parent, simple source symbol and restricted literal strings only; no runtime or callee proof.",
+      "quote_class": "PPI::Token::Quote::Single",
+      "role": "declared-input-read",
+      "source_path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
+      "statement": "open my $legacy_fh,'<',$legacy_native_path or die \"$legacy_native_path: $!\";",
+      "symbol": "$legacy_native_path"
+    }
+  ],
+  "changed_source": {
+    "result": "RED",
+    "specimens": [
+      {
+        "actual": [
+          {
+            "mode": ">",
+            "path": "output.json",
+            "role": "declared-output-write",
+            "symbol": "$out"
+          }
+        ],
+        "expected": [
+          {
+            "mode": "<:raw",
+            "path": "tests/input.json",
+            "role": "declared-input-read",
+            "symbol": "$path"
+          },
+          {
+            "mode": ">",
+            "path": "output.json",
+            "role": "declared-output-write",
+            "symbol": "$out"
+          }
+        ],
+        "id": "adjacent-read-write",
+        "open_words": 2,
+        "result": "RED"
+      }
+    ]
+  },
+  "historical_baseline": {
+    "limits": "No baseline producer replay or new execution verdict; original native/first-use custody remains4.2/SESSION5.",
+    "path": "docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.1.6.0.1-native.json",
+    "reason": "Parent reads stored JSON and decodes stored stdout for comparison with observation functions. Metadata is an old input, never a new successful runtime observation.",
+    "role": "historical-comparison-baseline"
+  },
+  "parent_source_role": {
+    "path": "t/actionir_receiver_scalar_copy.t",
+    "role": "feature-suite",
+    "route": {
+      "kind": "direct-unconditional-selection",
+      "occurrences": 2
+    }
+  },
+  "remaining": "All unmatched/non-open/nonadjacent/constructed/helper/library/process/generated/interpolated and full semantic/native routes remain otherIO2/helper2/generated-inline/broader reconciliation; no full input graph.",
+  "specimens": {
+    "result": "PASS",
+    "specimens": [
+      {
+        "actual": [
+          {
+            "mode": "<:raw",
+            "path": "tests/input.json",
+            "role": "declared-input-read",
+            "symbol": "$path"
+          },
+          {
+            "mode": ">",
+            "path": "output.json",
+            "role": "declared-output-write",
+            "symbol": "$out"
+          }
+        ],
+        "expected": [
+          {
+            "mode": "<:raw",
+            "path": "tests/input.json",
+            "role": "declared-input-read",
+            "symbol": "$path"
+          },
+          {
+            "mode": ">",
+            "path": "output.json",
+            "role": "declared-output-write",
+            "symbol": "$out"
+          }
+        ],
+        "id": "adjacent-read-write",
+        "open_words": 2,
+        "result": "PASS"
+      },
+      {
+        "actual": [
+          {
+            "mode": "<",
+            "path": "tests/a.json",
+            "role": "declared-input-read",
+            "symbol": "$a"
+          },
+          {
+            "mode": "<",
+            "path": "tests/b.json",
+            "role": "declared-input-read",
+            "symbol": "$b"
+          },
+          {
+            "mode": "<",
+            "path": "tests/c.json",
+            "role": "declared-input-read",
+            "symbol": "$c"
+          }
+        ],
+        "expected": [
+          {
+            "mode": "<",
+            "path": "tests/a.json",
+            "role": "declared-input-read",
+            "symbol": "$a"
+          },
+          {
+            "mode": "<",
+            "path": "tests/b.json",
+            "role": "declared-input-read",
+            "symbol": "$b"
+          },
+          {
+            "mode": "<",
+            "path": "tests/c.json",
+            "role": "declared-input-read",
+            "symbol": "$c"
+          }
+        ],
+        "id": "quote-forms",
+        "open_words": 3,
+        "result": "PASS"
+      },
+      {
+        "actual": [],
+        "expected": [],
+        "id": "quoted-only",
+        "open_words": 0,
+        "result": "PASS"
+      },
+      {
+        "actual": [],
+        "expected": [],
+        "id": "nonadjacent-and-scalar",
+        "open_words": 2,
+        "result": "PASS"
+      },
+      {
+        "actual": [],
+        "expected": [],
+        "id": "scope-and-interpolation",
+        "open_words": 2,
+        "result": "PASS"
+      },
+      {
+        "actual": [],
+        "expected": [],
+        "id": "excluded-paths-and-key",
+        "open_words": 3,
+        "result": "PASS"
+      }
+    ]
+  },
+  "summary": {
+    "actual_changed_source": "RED at lexer exit0: intervening assignment removes the first adjacent binding while retaining the output binding",
+    "bindings": 1,
+    "controlled_specimens": 6,
+    "controls": {
+      "binding input output role": "RED",
+      "binding mode": "RED",
+      "binding population": "RED",
+      "binding source site": "RED",
+      "binding target path": "RED",
+      "input body": "RED",
+      "input population": "RED"
+    },
+    "input_targets": 1,
+    "limits": "Only bounded adjacent single-my/simple quoted ASCII initializer and same-PPI-parent three-argument open bindings. All159 original/named sources and all unmatched sites remain; no evaluation, actual IO reachability, callee/alias/full semantic/native or canonical admission.",
+    "named_sources_added": 14,
+    "original_open_sites": 191,
+    "original_sources": 145,
+    "output_paths": 0,
+    "result": "PASS",
+    "retained_inputs": 190,
+    "reused_artifacts": 8,
+    "source_documents": 159,
+    "total_open_sites": 192,
+    "unmatched_open_sites": 191
+  },
+  "unmatched": [
+    {
+      "location": [
+        124,
+        2,
+        2
+      ],
+      "ordinal": 2270,
+      "parent": "t/actionir_legacy_hash_kind_probe.pl",
+      "reason": "mode is not a supported literal file mode",
+      "statement": "open my $pipe,'-|',@command or die \"cold probe: $!\";"
+    },
+    {
+      "location": [
+        16,
+        1,
+        1
+      ],
+      "ordinal": 139,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $owner_file,'<:raw',$owner or die $!;"
+    },
+    {
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "ordinal": 1381,
+      "parent": "t/array_concat_open_arity_result_guard_composition.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_concat_open_arity_result_guard_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        78,
+        1,
+        1
+      ],
+      "ordinal": 1174,
+      "parent": "t/array_pipeline_callable_arity.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_pipeline_callable_arity_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        84,
+        1,
+        1
+      ],
+      "ordinal": 1206,
+      "parent": "t/array_pipeline_callable_result_guard_composition.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_pipeline_callable_result_guard_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "ordinal": 1379,
+      "parent": "t/array_pipeline_result_guard_composition.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_pipeline_result_guard_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        92,
+        1,
+        1
+      ],
+      "ordinal": 1379,
+      "parent": "t/array_pipeline_source_isolation.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_pipeline_source_isolation_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        84,
+        1,
+        1
+      ],
+      "ordinal": 1206,
+      "parent": "t/array_transform_callable_result_guard_composition.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:raw','tests/fixtures/array_transform_callable_result_guard_perl_cases.json' or die $!;"
+    },
+    {
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/array_transform_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/array_transform_source_isolation.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/boundary_capture_fluent_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        20,
+        1,
+        1
+      ],
+      "ordinal": 126,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n    or die \"Could not read $contract_path: $!\";"
+    },
+    {
+      "location": [
+        34,
+        1,
+        1
+      ],
+      "ordinal": 223,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $descriptor_contract_fh, '<:encoding(UTF-8)', $descriptor_contract_path\n    or die \"Could not read $descriptor_contract_path: $!\";"
+    },
+    {
+      "location": [
+        705,
+        5,
+        5
+      ],
+      "ordinal": 6392,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fixture_fh, '<:raw', $fixture_path\n        or die \"Could not read $fixture_path: $!\";"
+    },
+    {
+      "location": [
+        750,
+        5,
+        5
+      ],
+      "ordinal": 6903,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";"
+    },
+    {
+      "location": [
+        761,
+        17,
+        17
+      ],
+      "ordinal": 7091,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";"
+    },
+    {
+      "location": [
+        825,
+        13,
+        13
+      ],
+      "ordinal": 7853,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";"
+    },
+    {
+      "location": [
+        906,
+        5,
+        5
+      ],
+      "ordinal": 8985,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";"
+    },
+    {
+      "location": [
+        916,
+        17,
+        17
+      ],
+      "ordinal": 9160,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";"
+    },
+    {
+      "location": [
+        962,
+        5,
+        5
+      ],
+      "ordinal": 9742,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";"
+    },
+    {
+      "location": [
+        1240,
+        21,
+        21
+      ],
+      "ordinal": 13954,
+      "parent": "t/callable_codeblock_literal_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$output or die \"Capture literal output: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_advance_number_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_advance_text_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_boundary_number_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 83,
+      "parent": "t/capture_boundary_text_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 86,
+      "parent": "t/capture_collection_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "ordinal": 51,
+      "parent": "t/capture_endpoint_absence.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<:raw', 'tests/fixtures/capture_endpoint_absence.json' or die $!;"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/capture_reset_value_block.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        175,
+        2,
+        2
+      ],
+      "ordinal": 3460,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '>', $path or die $!;"
+    },
+    {
+      "location": [
+        182,
+        1,
+        1
+      ],
+      "ordinal": 3534,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $runner_fh, '>', $runner or die $!;"
+    },
+    {
+      "location": [
+        297,
+        1,
+        1
+      ],
+      "ordinal": 3628,
+      "parent": "t/codeblock_push_composition_perl.t",
+      "reason": "no adjacent variable declaration",
+      "statement": "open my $output_fh, '<', $output or die $!;"
+    },
+    {
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "ordinal": 33,
+      "parent": "t/computed_selection_callable_compat.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file, '<', 'tests/numeric-codeblocks/signed-array-selectors.json' or die $!;"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 87,
+      "parent": "t/computed_selection_functions.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<:encoding(UTF-8)',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        11,
+        2,
+        2
+      ],
+      "ordinal": 64,
+      "parent": "t/computed_selection_noncall_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 93,
+      "parent": "t/conditional_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/constructor_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/contains_block_operand_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/contains_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/contains_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/contains_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_contains_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_index_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/copied_null_presence_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/copy_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_block_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_copy_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        49,
+        9,
+        9
+      ],
+      "ordinal": 613,
+      "parent": "t/count_copy_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '>:encoding(UTF-8)', $path or die \"cannot write $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/count_logical_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        49,
+        9,
+        9
+      ],
+      "ordinal": 613,
+      "parent": "t/count_logical_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '>:encoding(UTF-8)', $path or die \"cannot write $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/count_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/count_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/cursor_rewind_result.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/cursor_statement_scope.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 51,
+      "parent": "t/defined_default_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/definedness_native_numeric_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/definedness_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/definedness_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/definedness_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        19,
+        5,
+        5
+      ],
+      "ordinal": 173,
+      "parent": "t/document_history_catalog.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '>:raw', $path or die $!;"
+    },
+    {
+      "location": [
+        24,
+        5,
+        5
+      ],
+      "ordinal": 229,
+      "parent": "t/document_history_catalog.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $fh, '<:raw', $_[0] or die $!;"
+    },
+    {
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "ordinal": 51,
+      "parent": "t/emitted_boundary_catalog.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file, '<:raw', 'tests/fixtures/emitted_boundary_catalog.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/emptiness_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/emptiness_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/emptiness_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/emptiness_result_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/entry_match_number_result_continuations.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_default_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_numeric_comparison_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/free_numeric_comparison_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/free_numeric_comparison_excluded_source_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_numeric_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/free_numeric_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/free_numeric_excluded_source_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/free_string_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/free_string_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/free_string_excluded_source_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/gap_slot_record_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/gap_string_result.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/has_key_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/has_key_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/has_key_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/has_key_result_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/hash_helper_source_isolation.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        18,
+        5,
+        5
+      ],
+      "ordinal": 139,
+      "parent": "t/hash_value_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/hash_view_receiver_source_policy.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 90,
+      "parent": "t/hash_view_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:raw', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/index_block_operand_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/index_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/index_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/index_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 74,
+      "parent": "t/inline_condition_value_blocks.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $file, '<', 'docs/checkpoints/type-operation-inventory/'.$name.'.json' or die $!;"
+    },
+    {
+      "location": [
+        12,
+        16,
+        16
+      ],
+      "ordinal": 71,
+      "parent": "t/input_cursor_result_continuations.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<:encoding(UTF-8)',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/input_mark_value_block_statements.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_block_source_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_callable_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/key_count_source_domain.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        44,
+        2,
+        2
+      ],
+      "ordinal": 514,
+      "parent": "t/knowledge_map_header_lists.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $file, '>:raw', $_[0] or die \"write $_[0]: $!\";"
+    },
+    {
+      "location": [
+        70,
+        1,
+        1
+      ],
+      "ordinal": 864,
+      "parent": "t/knowledge_map_header_lists.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $old, '<:raw', 'docs/checkpoints/PERL-PRIVATE-FACTORY-CAPTURE.3.2.1.8-headers-census.json' or die $!;"
+    },
+    {
+      "location": [
+        121,
+        2,
+        2
+      ],
+      "ordinal": 1717,
+      "parent": "t/knowledge_map_header_lists.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $mapping, '<:raw', $ENV{KM_OUTPUT} or die \"read generated map: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/length_count_source_ownership.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        5,
+        5
+      ],
+      "ordinal": 92,
+      "parent": "t/length_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/lexical_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/lexical_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/lexical_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/logical_receiver_method_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/logical_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/logical_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/logical_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/mark_name_advance_arguments.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/mark_name_number_arguments.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/mark_name_text_arguments.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/mark_name_write_arguments.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "ordinal": 51,
+      "parent": "t/named_capture_endpoint_absence.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:encoding(UTF-8)','tests/fixtures/named_capture_endpoint_absence.json' or die $!;"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 88,
+      "parent": "t/named_mark_number_results.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 90,
+      "parent": "t/named_take_reversed_span.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "ordinal": 51,
+      "parent": "t/named_writer_endpoint_absence.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:encoding(UTF-8)','tests/fixtures/named_writer_endpoint_absence.json' or die $!;"
+    },
+    {
+      "location": [
+        11,
+        1,
+        1
+      ],
+      "ordinal": 58,
+      "parent": "t/nested_handler_error.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<:encoding(UTF-8)','tests/fixtures/nested_handler_error.json' or die $!;"
+    },
+    {
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "ordinal": 48,
+      "parent": "t/perl_blind_scalar_declarations.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh,'<:raw','tests/fixtures/perl_blind_scalar_declarations.json' or die $!;"
+    },
+    {
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_blind_scalar_declarations.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;"
+    },
+    {
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "ordinal": 48,
+      "parent": "t/perl_match_local_declarations.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh,'<:raw','tests/fixtures/perl_match_local_declarations.json' or die $!;"
+    },
+    {
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_match_local_declarations.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;"
+    },
+    {
+      "location": [
+        9,
+        1,
+        1
+      ],
+      "ordinal": 48,
+      "parent": "t/perl_or_match_local_declarations.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh,'<:raw','tests/fixtures/perl_or_match_local_declarations.json' or die $!;"
+    },
+    {
+      "location": [
+        28,
+        19,
+        19
+      ],
+      "ordinal": 442,
+      "parent": "t/perl_or_match_local_declarations.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT,'>:encoding(UTF-8)',\\$output or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/perl_sort_scope.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        3208,
+        9,
+        9
+      ],
+      "ordinal": 30994,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3530,
+        5,
+        5
+      ],
+      "ordinal": 34413,
+      "parent": "t/phase0_regression.t",
+      "reason": "no adjacent variable declaration",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create explicit-path spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        3555,
+        5,
+        5
+      ],
+      "ordinal": 34700,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create cwd-resolution spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        3815,
+        9,
+        9
+      ],
+      "ordinal": 37719,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3816,
+        9,
+        9
+      ],
+      "ordinal": 37739,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3842,
+        9,
+        9
+      ],
+      "ordinal": 38013,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3843,
+        9,
+        9
+      ],
+      "ordinal": 38033,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3871,
+        9,
+        9
+      ],
+      "ordinal": 38353,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3872,
+        9,
+        9
+      ],
+      "ordinal": 38373,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3904,
+        9,
+        9
+      ],
+      "ordinal": 38751,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3905,
+        9,
+        9
+      ],
+      "ordinal": 38771,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3934,
+        9,
+        9
+      ],
+      "ordinal": 39087,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3935,
+        9,
+        9
+      ],
+      "ordinal": 39107,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3966,
+        9,
+        9
+      ],
+      "ordinal": 39451,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$out) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        3967,
+        9,
+        9
+      ],
+      "ordinal": 39471,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$warn) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        3993,
+        5,
+        5
+      ],
+      "ordinal": 39762,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create go-once fallback spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        4073,
+        5,
+        5
+      ],
+      "ordinal": 40608,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable-open-failure spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        4099,
+        5,
+        5
+      ],
+      "ordinal": 40871,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        4137,
+        5,
+        5
+      ],
+      "ordinal": 41294,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create malformed-handler spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        4202,
+        5,
+        5
+      ],
+      "ordinal": 41893,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create mixed-action/blind-call spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        7695,
+        9,
+        9
+      ],
+      "ordinal": 68914,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT, '>', \\$stdout or die \"open stdout scalar failed: $!\";"
+    },
+    {
+      "location": [
+        9778,
+        5,
+        5
+      ],
+      "ordinal": 90611,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable parser-factory spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10120,
+        5,
+        5
+      ],
+      "ordinal": 94929,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10156,
+        5,
+        5
+      ],
+      "ordinal": 95381,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10192,
+        5,
+        5
+      ],
+      "ordinal": 95841,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10229,
+        5,
+        5
+      ],
+      "ordinal": 96304,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10266,
+        5,
+        5
+      ],
+      "ordinal": 96772,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        10977,
+        5,
+        5
+      ],
+      "ordinal": 104092,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create unreadable get_parser spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11375,
+        5,
+        5
+      ],
+      "ordinal": 108374,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11412,
+        5,
+        5
+      ],
+      "ordinal": 108799,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create late-build-failure spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11520,
+        5,
+        5
+      ],
+      "ordinal": 110103,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime handler spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11564,
+        5,
+        5
+      ],
+      "ordinal": 110591,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create runtime parser spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11626,
+        5,
+        5
+      ],
+      "ordinal": 111226,
+      "parent": "t/phase0_regression.t",
+      "reason": "adjacent declaration names a different symbol",
+      "statement": "open(my $fh, '>', $tmp_spec) or die \"Cannot create invalid input-ref spec '$tmp_spec': $!\";"
+    },
+    {
+      "location": [
+        11724,
+        9,
+        9
+      ],
+      "ordinal": 112139,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$stderr) or die \"unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        42691,
+        5,
+        5
+      ],
+      "ordinal": 337871,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$stdout or die \"open scalar stdout capture: $!\";"
+    },
+    {
+      "location": [
+        43900,
+        9,
+        9
+      ],
+      "ordinal": 352269,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$build_stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        43901,
+        9,
+        9
+      ],
+      "ordinal": 352289,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$build_stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        46635,
+        9,
+        9
+      ],
+      "ordinal": 380453,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $dump_fh, '>', \\$dump_stdout or die \"open scalar stdout: $!\";"
+    },
+    {
+      "location": [
+        49193,
+        5,
+        5
+      ],
+      "ordinal": 404957,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '<', $path) or die \"Cannot read '$path': $!\";"
+    },
+    {
+      "location": [
+        49200,
+        5,
+        5
+      ],
+      "ordinal": 405016,
+      "parent": "t/phase0_regression.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open(my $fh, '>', $path) or die \"Cannot write '$path': $!\";"
+    },
+    {
+      "location": [
+        49311,
+        9,
+        9
+      ],
+      "ordinal": 406087,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        49312,
+        9,
+        9
+      ],
+      "ordinal": 406107,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        49431,
+        9,
+        9
+      ],
+      "ordinal": 407003,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDOUT, '>', \\$stdout) or die \"Unable to capture STDOUT: $!\";"
+    },
+    {
+      "location": [
+        49432,
+        9,
+        9
+      ],
+      "ordinal": 407023,
+      "parent": "t/phase0_regression.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open(STDERR, '>', \\$stderr) or die \"Unable to capture STDERR: $!\";"
+    },
+    {
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "ordinal": 43,
+      "parent": "t/pick_keys_operand_isolation.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $file,'<','tests/fixtures/pick_keys_operand_isolation.json' or die $!;"
+    },
+    {
+      "location": [
+        15,
+        2,
+        2
+      ],
+      "ordinal": 83,
+      "parent": "t/punctuation_light_zero_arg_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"Could not read '$path': $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_payload_values.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_result_fluent.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/push_result_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/receiver_string_bridge_guards.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/receiver_string_bridge_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/receiver_string_bridge_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/reduction_result_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        10,
+        1,
+        1
+      ],
+      "ordinal": 51,
+      "parent": "t/referenced_blind_intermediate.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $f,'<:encoding(UTF-8)','tests/fixtures/referenced_blind_intermediate.json' or die $!;"
+    },
+    {
+      "location": [
+        17,
+        4,
+        4
+      ],
+      "ordinal": 172,
+      "parent": "t/referenced_blind_intermediate.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT,'>',\\$build_stdout or die $!;"
+    },
+    {
+      "location": [
+        17,
+        45,
+        45
+      ],
+      "ordinal": 187,
+      "parent": "t/referenced_blind_intermediate.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDERR,'>',\\$build_stderr or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/rule_call_result_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        23,
+        1,
+        1
+      ],
+      "ordinal": 149,
+      "parent": "t/scalar_numeric_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n or die \"cannot read $contract_path: $!\";"
+    },
+    {
+      "location": [
+        54,
+        9,
+        9
+      ],
+      "ordinal": 493,
+      "parent": "t/scalar_numeric_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:raw', $path or die \"Could not read $path: $!\";"
+    },
+    {
+      "location": [
+        69,
+        17,
+        17
+      ],
+      "ordinal": 728,
+      "parent": "t/scalar_numeric_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$output or die \"Capture diagnostic output: $!\";"
+    },
+    {
+      "location": [
+        10,
+        2,
+        2
+      ],
+      "ordinal": 56,
+      "parent": "t/scalar_string_result_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        22,
+        1,
+        1
+      ],
+      "ordinal": 141,
+      "parent": "t/scalar_text_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $contract_fh, '<:encoding(UTF-8)', $contract_path\n or die \"cannot read $contract_path: $!\";"
+    },
+    {
+      "location": [
+        14,
+        2,
+        2
+      ],
+      "ordinal": 93,
+      "parent": "t/set_key_block_operands.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file, '<:encoding(UTF-8)', $path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/set_result_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        24,
+        5,
+        5
+      ],
+      "ordinal": 169,
+      "parent": "t/signed_array_selector_perl_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:raw', $path or die \"Read $path: $!\";"
+    },
+    {
+      "location": [
+        238,
+        17,
+        17
+      ],
+      "ordinal": 3329,
+      "parent": "t/signed_array_selector_perl_contract.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open my $capture, '>', \\$diagnostic or die \"Capture native output: $!\";"
+    },
+    {
+      "location": [
+        8,
+        1,
+        1
+      ],
+      "ordinal": 45,
+      "parent": "t/sorted_values_scalar_isolation.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/sorted_values_scalar_isolation.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        5,
+        5
+      ],
+      "ordinal": 85,
+      "parent": "t/string_predicate_result_guard_composition.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<:encoding(UTF-8)', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        26,
+        1,
+        1
+      ],
+      "ordinal": 248,
+      "parent": "t/string_predicate_result_guard_source_fences.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh, '<', 'tests/fixtures/string_predicate_result_guard_excluded_ast.json' or die $!;"
+    },
+    {
+      "location": [
+        6,
+        34,
+        34
+      ],
+      "ordinal": 45,
+      "parent": "t/string_predicate_result_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/tagged_record_producer_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        9,
+        2,
+        2
+      ],
+      "ordinal": 49,
+      "parent": "t/tagged_record_receiver_contract.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $file,'<',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        44,
+        19,
+        19
+      ],
+      "ordinal": 522,
+      "parent": "t/unicode_recognition_operands.t",
+      "reason": "not the bounded three-argument open shape",
+      "statement": "open STDOUT,'>:encoding(UTF-8)',\\$build_output or die $!;"
+    },
+    {
+      "location": [
+        89,
+        2,
+        2
+      ],
+      "ordinal": 1255,
+      "parent": "t/unicode_recognition_operands.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh,'>','.linkedspec-data/verification/perl-unicode-operand-observations.json' or die $!;"
+    },
+    {
+      "location": [
+        13,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/unicode_rule_recognition_runtime.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh,'<:encoding(UTF-8)',$path or die \"$path: $!\";"
+    },
+    {
+      "location": [
+        117,
+        2,
+        2
+      ],
+      "ordinal": 1509,
+      "parent": "t/unicode_rule_recognition_runtime.t",
+      "reason": "operand is not a simple source symbol",
+      "statement": "open my $fh,'>:encoding(UTF-8)','.linkedspec-data/verification/perl-unicode-guard-observations.json' or die $!;"
+    },
+    {
+      "location": [
+        12,
+        2,
+        2
+      ],
+      "ordinal": 76,
+      "parent": "t/with_hash_result_continuations.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<', $path or die \"cannot read $path: $!\";"
+    },
+    {
+      "location": [
+        16,
+        2,
+        2
+      ],
+      "ordinal": 104,
+      "parent": "t/with_result_selection.t",
+      "reason": "not a single lexical-my literal initializer",
+      "statement": "open my $fh, '<', $path or die \"cannot read $path: $!\";"
+    }
+  ]
+}

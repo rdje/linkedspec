@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "bash",
+    "tools/project_data_run.sh",
+    "env",
+    "PERL5LIB=",
+    "PERL5OPT=",
+    "perl",
+    "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/lexer.pl"
+  ],
+  "cwd": "."
+}

@@ -1,0 +1,35 @@
+{
+  "template": "docs/checkpoints/perl-literal-open-qualification-2026-11-17/publish.py",
+  "substitutions": [
+    {
+      "old": "NEXT = OWNER.rsplit('.', 1)[0] + '.1'",
+      "new": "NEXT = OWNER.rsplit('.', 1)[0] + '.2'"
+    },
+    {
+      "old": "result['current_inputs'] == 189 and result['literal_sites'] == 34",
+      "new": "result['current_inputs'] == 190 and result['bindings'] == 1"
+    },
+    {
+      "old": "len(result['controls']) == 8",
+      "new": "len(result['controls']) == 7"
+    },
+    {
+      "old": ".linkedspec-data/perl-named-includes-commit.log",
+      "new": ".linkedspec-data/task-headroom-staged-commit.log"
+    },
+    {
+      "old": ".linkedspec-data/perl-literal-open-capture.log",
+      "new": ".linkedspec-data/perl-variable-literal-capture.log"
+    },
+    {
+      "old": "('review-outer', '.linkedspec-data/perl-literal-open-review.log')",
+      "new": "('preparation-outer', '.linkedspec-data/perl-variable-literal-preparation.log')"
+    },
+    {
+      "old": "20261117T044555.567744Z",
+      "new": "20261117T063455.779176Z"
+    }
+  ],
+  "actual_publisher_sha256": "4d3cca158171ac710eff206b7a82fd7a623bbc1093b3b15aeb4baa891ea0cc61",
+  "limits": "Exact original template/preparer images before new publisher use; old writer never replayed. Full outer-first-use/native/physical closure remains4.2/SESSION5."
+}

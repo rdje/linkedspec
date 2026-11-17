@@ -12,6 +12,10 @@ immutable and repository-local; new accepted slices are prepended here as comple
 
 The stale task-tree artifact2 reference was corrected after preserving whole publication2 and its actual readonly0; canonical verification was deliberately superseded143. Publication3 and artifact4 bind the corrected candidate; prior outputs stay frozen.
 
+## 2026-11-17 — qualify adjacent Perl literal-variable inputs
+
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1: All159 original/named Perl sources round-trip under PPI1.270:192 open sites, one bounded adjacent literal-variable read and191 unmatched sites. The read supplies the historical scalar-copy comparison baseline, never a new runtime verdict. Current190 input bodies/modes, six independent source specimens, actual intervening-write RED and seven evidence controls pass. No application source executes. Evidence: `docs/checkpoints/perl-variable-literal-qualification-2026-11-17/REVIEW.md`.
+
 ## 2026-11-17 — renew staged closed-task narrative capacity
 
 TYPE-REFERENCE-BOOK.1.2.23.4.36: The existing staged-task epoch preserves15 ordered IDs/all CORE fields, two full unselected bodies and the19108-byte frontier/tail. Thirteen closed pointers reduce current text43523 to31551 bytes, renewing11972 bytes under unchanged limits. All16 public queries/ten corruption controls/current target-manifest identities pass. Parent links35/36 pass three public queries/two controls. No SDK or new runtime/admission credit. Evidence: `docs/checkpoints/task-headroom-staged-2026-11-17/REVIEW.md`.

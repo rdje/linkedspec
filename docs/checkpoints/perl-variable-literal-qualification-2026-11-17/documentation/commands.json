@@ -1,0 +1,74 @@
+[
+  {
+    "module": "PPI::Statement::Variable",
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "PERL5OPT=",
+      "perldoc",
+      "-T",
+      "-t",
+      "PPI::Statement::Variable"
+    ],
+    "cwd": ".",
+    "exit": 0,
+    "stdout_sha256": "c0b75d4225d5b4c6f5c3e98a1ee9205b54125272e49e04999dc28adcf799a215",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "module": "PPI::Node",
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "PERL5OPT=",
+      "perldoc",
+      "-T",
+      "-t",
+      "PPI::Node"
+    ],
+    "cwd": ".",
+    "exit": 0,
+    "stdout_sha256": "8509043652a6af1b1f913b3be0a3d6bcc7a2708762f6a08bd4e1e39feec81dd9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "module": "PPI::Token::Quote",
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "PERL5OPT=",
+      "perldoc",
+      "-T",
+      "-t",
+      "PPI::Token::Quote"
+    ],
+    "cwd": ".",
+    "exit": 0,
+    "stdout_sha256": "adf77a0db66115da7d1c10183a8cb2ac6050df4a08b20be7a745673fa6392ad9",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "module": "PPI::Token::Quote::Double",
+    "argv": [
+      "bash",
+      "tools/project_data_run.sh",
+      "env",
+      "PERL5LIB=",
+      "PERL5OPT=",
+      "perldoc",
+      "-T",
+      "-t",
+      "PPI::Token::Quote::Double"
+    ],
+    "cwd": ".",
+    "exit": 0,
+    "stdout_sha256": "f5db39ea4c5712f6e44e1f16b2a987dca22fe821e81c2b03d33cc4610465f29b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+]

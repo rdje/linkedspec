@@ -2,18 +2,19 @@
 
 ## Current Activity
 
-PNT: staged closed-task capacity renewed; Perl literal variable IO resumes.
+PNT: adjacent Perl variable literal qualified; remaining other literal/non-open IO continues.
 
 ## Latest Completed Slice
 
-TYPE-REFERENCE-BOOK.1.2.23.4.36 — The existing staged-task epoch preserves15 ordered IDs/all CORE fields, two full unselected bodies and the19108-byte frontier/tail. Thirteen closed pointers reduce current text43523 to31551 bytes, renewing11972 bytes under unchanged limits. All16 public queries/ten corruption controls/current target-manifest identities pass. Parent links35/36 pass three public queries/two controls. No SDK or new runtime/admission credit.
+TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1 — All159 original/named Perl sources round-trip under PPI1.270:192 open sites, one bounded adjacent literal-variable read and191 unmatched sites. The read supplies the historical scalar-copy comparison baseline, never a new runtime verdict. Current190 input bodies/modes, six independent source specimens, actual intervening-write RED and seven evidence controls pass. No application source executes.
 
 ## Next Action
 
-Remeasure committed outgoing size; resume direct literal-variable IO under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1, then other literal IO/helper/support/generated roles and all broader semantic/native/registration/publication prerequisites.
+Remeasure committed size; reconcile other literal/non-open IO under TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.2, then constructed/helper/support/generated and broader semantic/native/registration/publication prerequisites.
 
 ## Recent Completions
 
+- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.1 — adjacent variable input:159 sources/192 open/one baseline/191 unmatched/current190; six specimens/changed-source RED/seven controls.
 - TYPE-REFERENCE-BOOK.1.2.23.4.36 — staged epoch15/13 pointers/two bodies/16 queries/ten controls/11972 text bytes; parent links35/36 repaired.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.1.0 — Perl literal34/input32/output2/unmatched157/current189; five specimens/eight controls/actual mode RED.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.1.1.1.1.3.1.1.0 — Perl named14/suites12/libraries2/child1/current31/eight controls; no execution.
@@ -29,7 +30,6 @@ Remeasure committed outgoing size; resume direct literal-variable IO under TYPE-
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.1.0 — Lua11/direct24/targets14/support2/optional2/historical6/current134/ten controls; no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.1.0 — native94/source113; conditional6/RED3; ledger7; eleven local Lua routes unresolved, no SDK.
 - TYPE-REFERENCE-BOOK.1.2.23.4.34 — helper-purge10 IDs/eight closed/two unchanged/full9605-byte tail/16841 renewed; eleven queries/ten controls; historical pressure/four controls.
-- TYPE-REFERENCE-BOOK.1.2.23.4.1.1.1.1.0 — Perl145 roles/134 feature/nine compatibility/two maintenance; direct12/include1/unresolved132; seven controls/current164, static only.
 
 
 ## History

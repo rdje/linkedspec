@@ -1,0 +1,26 @@
+[
+  {
+    "source": ".linkedspec-data/task-headroom-staged-commit.log",
+    "target": "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/preceding-normal.log.gz",
+    "bytes": 23429,
+    "sha256": "81cf8e6e14f93ff38cb141bc26e2d4fb197d55f950dfd28fd12dd189927e7692",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-variable-literal-capture.log",
+    "target": "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/capture-outer.log.gz",
+    "bytes": 1034,
+    "sha256": "1d0bc6daf1cb30e0cb4b24c9d30a9a8da04f280050ed4222cc4372ec8dc7137b",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  },
+  {
+    "source": ".linkedspec-data/perl-variable-literal-preparation.log",
+    "target": "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/preparation-outer.log.gz",
+    "bytes": 402,
+    "sha256": "bbae0dd6e1053711f784eda5d2232094d75ebafc9979e59d8bfc821e154fe8da",
+    "mode": 420,
+    "recording": "after-use copy; no original first-use credit"
+  }
+]

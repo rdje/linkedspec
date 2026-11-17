@@ -1,4 +1,5 @@
-{"member_count":114,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"member_count":115,"schema_version":1,"surface":"knowledge_cards","type":"reference_scope_page"}
+{"bytes":3469,"lines":37,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-declare-retirement-migration.md","sha256":"b00115b5d3178766de0dc5118b14deb50b49da9a35dc58a3a1ca9125e607cf80","type":"member"}
 {"bytes":3036,"lines":57,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-direct-access-bare-path-atoms.md","sha256":"56cf4ef2ea52231dc853ad6c76958a1ba4ec623796ea4155f352da4315ab1354","type":"member"}
 {"bytes":3259,"lines":47,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-direct-access-explicit-segments.md","sha256":"7e44ee021929d1e74ac18730f479bc9e7f85262e032cd96212a8ee3e4a326631","type":"member"}
 {"bytes":3507,"lines":52,"owner":"TYPE-REFERENCE-BOOK.1.2.20.1.10","path":"docs/knowledge/terse-direct-access-split-ground-truth.md","sha256":"fb15142df29bc93248199d8daf20d4d2b02d22126a957589a98b32f58b0b7057","type":"member"}

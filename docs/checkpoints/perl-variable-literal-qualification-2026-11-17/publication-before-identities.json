@@ -1,0 +1,82 @@
+{
+  "CHANGES.md": {
+    "bytes": 34143,
+    "mode": 420,
+    "sha256": "d7538134ca7981567276c9eae7995d808e32535f5a8b12cd67552c8f2c6e6dd6"
+  },
+  "DEVELOPMENT_NOTES.md": {
+    "bytes": 57263,
+    "mode": 420,
+    "sha256": "dbbb5c94b65c93d9cc82451a7401f97aac056375d1ad6b6159814f5be8286e6d"
+  },
+  "LIVE_ACHIEVEMENT_STATUS.md": {
+    "bytes": 4295,
+    "mode": 420,
+    "sha256": "0ab503bef7bd150b42d61340dd2a2c219ec0f53caf925dbfe34e125ad310fe79"
+  },
+  "MEMORY.md": {
+    "bytes": 2209,
+    "mode": 420,
+    "sha256": "174757f49b314280ae9065755456d92164a2d933bf25528d55cb89f592025436"
+  },
+  "ROADMAP.md": {
+    "bytes": 472736,
+    "mode": 420,
+    "sha256": "f11eb806d2c4c27404488617692d945bf6a79264ca6662c2114ee42cedf07ea0"
+  },
+  "ROADMAP_V2.md": {
+    "bytes": 274071,
+    "mode": 420,
+    "sha256": "1c551ddc10ac13fc9572a4be8a3eeeb046e3bbf47b8e63015ed0e37969cea887"
+  },
+  "docs/TASK_TREE.md": {
+    "bytes": 347803,
+    "mode": 420,
+    "sha256": "f5e78f3a57cdf879170e5bab64c95000726dba81f917ed9271ef5b3dab7f49d7"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/commands/review-stdout.gz": {
+    "bytes": 511,
+    "mode": 420,
+    "sha256": "22136f01fb94cceac76e754d78826864905fda2a8a813dd0e818ffffc45ca8ac"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/inventory.json": {
+    "bytes": 64902,
+    "mode": 420,
+    "sha256": "4b66a0404847fb6c803715f42365ecfc7f412e1ed052ba09fbf02674f2452c2b"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/plan.json": {
+    "bytes": 14663,
+    "mode": 420,
+    "sha256": "853e25efcb227cdc54ef84984990a13a900aa327b30082c61c96f042955cfc53"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/prepare_publication.py": {
+    "bytes": 14102,
+    "mode": 420,
+    "sha256": "140dd74d21d36cfe431bfab9e52def97589ccc81d80a4f83fdace30d72cb49b4"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/publish.py": {
+    "bytes": 15761,
+    "mode": 420,
+    "sha256": "4d3cca158171ac710eff206b7a82fd7a623bbc1093b3b15aeb4baa891ea0cc61"
+  },
+  "docs/checkpoints/perl-variable-literal-qualification-2026-11-17/review_publication.py": {
+    "bytes": 2994,
+    "mode": 420,
+    "sha256": "bbd80a58d955fd99c48d7a49405843dc59074b1222eb31db1ab44a11578f8149"
+  },
+  "docs/linkedspec-book/src/development/documentation-workflow.md": {
+    "bytes": 79169,
+    "mode": 420,
+    "sha256": "0a194fb79b919fddb4bbcf724d26555d48884bdda3531a1ba0dc11b097322142"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.md": {
+    "bytes": 20896,
+    "mode": 420,
+    "sha256": "b375bcd4f0559350d58638dfda895110a7c265a5484f7cabb60c1cb98c0694b1"
+  },
+  "docs/tasks/TYPE-REFERENCE-BOOK.overview.md": {
+    "bytes": 607519,
+    "mode": 420,
+    "sha256": "33619b0740852048b347521d492bf72927c5890427e7ca032b5a49ce7dc30a7a"
+  }
+}
